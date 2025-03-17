@@ -5,9 +5,9 @@ function AboutUs() {
     { name: "Dr. Manu Sudhi", designation: "Chairman", image: "https://via.placeholder.com/150" },
     { name: "Mr. Shreepathy Ranga Bhatta B", designation: "Managing Director", image: "https://via.placeholder.com/150" },
     { name: "Dr. Dasharathraj K", designation: "Mentor", image: "https://via.placeholder.com/150" },
-    { name: "Ms. Anusha Pai", designation: "Director", image: "https://via.placeholder.com/150" },
+    { name: "Ms. Anusha Pai", designation: "Director", image: "src/assets/anu.jpeg" },
     { name: "Mr. Vishnu U Pillai", designation: "Director", image: "https://via.placeholder.com/150" },
-    { name: "Ms. Staissy Salu", designation: "Chief Operating Officer", image: "https://via.placeholder.com/150" },
+    { name: "Ms. Staissy Salu", designation: "Chief Operating Officer", image: "src/assets/stais.jpeg" },
     { name: "Mr. Namesh Malarout", designation: "Chief Marketing Officer", image: "https://via.placeholder.com/150" },
   ];
 
