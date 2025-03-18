@@ -1,5 +1,6 @@
 import React from 'react';
-
+import { motion } from 'framer-motion';
+import Background from './Background';
 const BrandingEcommerce = () => {
   const offerings = [
     {
@@ -85,19 +86,18 @@ const BrandingEcommerce = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Hero Section */}
-      <section className="bg-white py-16 px-4 text-center">
-        <div className="container mx-auto">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-800 mb-4">
+      <section className="relative flex flex-col items-center justify-center h-[400px] text-white text-center px-4 overflow-hidden">
+        <Background />
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-4 z-10">
             Branding & Ecommerce
           </h1>
-          <p className="text-lg sm:text-xl text-gray-600 mb-8">
+          <p className="text-lg sm:text-xl text-white mb-8  z-10">
             Helping Businesses Build, Market, and Sell Their Brands
           </p>
-          <p className="max-w-2xl mx-auto text-gray-700">
+          <p className="max-w-2xl mx-auto text-white  z-10">
             We specialize in building and scaling brands by providing comprehensive support in branding, marketing, and e-commerce management. From crafting a compelling brand identity to optimizing online sales channels, we empower businesses to thrive in competitive markets.
           </p>
-        </div>
+     
       </section>
 
       {/* Why It Matters Section */}

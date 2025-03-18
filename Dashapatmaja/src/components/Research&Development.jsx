@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Background from './Background';
 const ResearchDevelopmentPage = () => {
   const offerings = [
     {
@@ -106,20 +106,22 @@ const ResearchDevelopmentPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Hero Section */}
-      <section className="bg-white py-16 px-4 text-center">
-        <div className="container mx-auto">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-800 mb-4">
-            Research &amp; Development
-          </h1>
-          <p className="text-lg sm:text-xl text-gray-600 mb-8">
-            Advancing Knowledge Through Theoretical and Practical Research
-          </p>
-          <p className="max-w-2xl mx-auto text-gray-700">
-            Our R&amp;D division is dedicated to conducting high-quality research in collaboration with doctors, professors, and students. We focus on producing research that gets published in high-impact international journals, contributing to global scientific advancements.
-          </p>
-        </div>
+
+
+      <section className="relative flex flex-col items-center justify-center h-[400px] text-white text-center px-4 overflow-hidden">
+        <Background />
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white z-100 mb-4">
+          Research &amp; Development
+        </h1>
+        <p className="text-lg sm:text-xl text-white z-10 mb-8">
+          Advancing Knowledge Through Theoretical and Practical Research
+        </p>
+        <p className="max-w-2xl mx-auto text-white z-10">
+          Our R&amp;D division is dedicated to conducting high-quality research in collaboration with doctors, professors, and students. We focus on producing research that gets published in high-impact international journals, contributing to global scientific advancements.
+        </p>
+
       </section>
+
 
       {/* Why It Matters Section */}
       <section className="py-12 bg-gray-100">

@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Background from './Background';
 const EdTechPage = () => {
   const offerings = [
     {
@@ -79,20 +79,20 @@ const EdTechPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Hero Section */}
-      <section className="bg-white py-16 px-4 text-center">
-        <div className="container mx-auto">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-800 mb-4">
+      <section className="relative flex flex-col items-center justify-center h-[400px] text-white text-center px-4 overflow-hidden">
+        <Background />
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white z-10 mb-4">
             Ed-Tech
           </h1>
-          <p className="text-lg sm:text-xl text-gray-600 mb-8">
+          <p className="text-lg sm:text-xl text-white z-10 mb-8">
             Innovative Learning Solutions for the Future of Education
           </p>
-          <p className="max-w-2xl mx-auto text-gray-700">
+          <p className="max-w-2xl mx-auto text-white z-10">
             We develop next-generation educational tools that integrate technology to enhance teaching and learning experiences. Our products are designed for students, professors, and institutions looking to modernize education.
           </p>
-        </div>
+     
       </section>
+
 
       {/* Why It Matters Section */}
       <section className="py-12 bg-gray-100">
