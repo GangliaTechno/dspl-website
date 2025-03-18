@@ -1,4 +1,6 @@
 import React from 'react';
+import { motion } from "framer-motion";
+import Background from "./Background";
 
 function AboutUs() {
   const leaders = [
@@ -13,6 +15,18 @@ function AboutUs() {
 
   return (
     <div>
+      <section className="relative flex flex-col items-center justify-center h-[400px] text-white text-center px-4 overflow-hidden">
+        <Background />
+        <motion.h1
+          className="relative text-4xl md:text-6xl lg:text-8xl font-bold leading-tight text-center z-10"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+        >
+          About Us
+        </motion.h1>
+      </section>
+
       {/* Hero Section for About the Company */}
       <section className="bg-gray-100 py-20 flex flex-col items-center text-center px-4">
         <h1 className="text-5xl font-extrabold mb-4">Dashapatmaja Solutions Pvt. Ltd</h1>
