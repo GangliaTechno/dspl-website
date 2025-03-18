@@ -2,13 +2,13 @@ import React from 'react';
 
 function AboutUs() {
   const leaders = [
-    { name: "Dr. Manu Sudhi", designation: "Chairman", image: "https://via.placeholder.com/150" },
-    { name: "Mr. Shreepathy Ranga Bhatta B", designation: "Managing Director", image: "https://via.placeholder.com/150" },
-    { name: "Dr. Dasharathraj K", designation: "Mentor", image: "https://via.placeholder.com/150" },
+    { name: "Dr. Manu Sudhi", designation: "Chairman", image: "src/assets/manu.png" },
+    { name: "Mr. Shreepathy Ranga Bhatta B", designation: "Managing Director", image: "src/assets/sree.jpeg" },
+    { name: "Dr. Dasharathraj K Shetty", designation: "Mentor", image: "src/assets/dr.jpeg" },
     { name: "Ms. Anusha Pai", designation: "Director", image: "src/assets/anu.jpeg" },
-    { name: "Mr. Vishnu U Pillai", designation: "Director", image: "https://via.placeholder.com/150" },
+    { name: "Mr. Vishnu U Pillai", designation: "Director", image: "src/assets/vishnu.jpeg" },
     { name: "Ms. Staissy Salu", designation: "Chief Operating Officer", image: "src/assets/stais.jpeg" },
-    { name: "Mr. Namesh Malarout", designation: "Chief Marketing Officer", image: "https://via.placeholder.com/150" },
+    { name: "Mr. Namesh Malarout", designation: "Chief Marketing Officer", image: "src/assets/namesh.jpeg" },
   ];
 
   return (
@@ -65,7 +65,7 @@ function AboutUs() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
             </div>
-            <h3 className="text-xl font-semibold mb-2">Edge-Tech</h3>
+            <h3 className="text-xl font-semibold mb-2">Ed-Tech</h3>
           </div>
           {/* Research and Development Card */}
           <div className="w-64 bg-white p-4 border border-gray-300 rounded text-center shadow-sm">

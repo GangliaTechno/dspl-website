@@ -3,6 +3,27 @@ import React from 'react';
 const BrandingEcommerce = () => {
   const offerings = [
     {
+        title: "E-commerce Platform Management",
+        description:
+          "We help businesses set up, optimize, and manage their online stores for seamless operations and growth.",
+        icon: (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-12 w-12 text-green-600"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.5 7H17M7 13h10M16 21a1 1 0 110-2 1 1 0 010 2zm-8 0a1 1 0 110-2 1 1 0 010 2z"
+            />
+          </svg>
+        ),
+      },
+    {
       title: "Brand Development & Strategy",
       description:
         "We create and refine brand identities, ensuring businesses have a strong, consistent presence in their market.",
@@ -23,27 +44,7 @@ const BrandingEcommerce = () => {
         </svg>
       ),
     },
-    {
-      title: "E-commerce Platform Management",
-      description:
-        "We help businesses set up, optimize, and manage their online stores for seamless operations and growth.",
-      icon: (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-12 w-12 text-green-600"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.5 7H17M7 13h10M16 21a1 1 0 110-2 1 1 0 010 2zm-8 0a1 1 0 110-2 1 1 0 010 2z"
-          />
-        </svg>
-      ),
-    },
+   
     {
       title: "Digital Marketing & SEO",
       description:
