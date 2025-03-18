@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGraduationCap, faWrench, faBox, faDollarSign, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
-import pic1 from "../assets/pic1.png";
-import pic2 from "../assets/pic2.png";
-import background from "../assets/background.jpg";
+// import pic1 from "../assets/pic1.png";
+// import pic2 from "../assets/pic2.png";
+// import background from "../assets/background.jpg";
 
 
 export default function ProductService() {
-  const images = [pic1, pic2];
+  const images = ["/assets/pic1.png", "/assets/pic2.png"];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const handlePrev = () => {
