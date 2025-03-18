@@ -1,6 +1,6 @@
 import React from "react";
-import product1 from "../assets/product1.png";
-import product2 from "../assets/product2.png";
+// import product1 from "../assets/product1.png";
+// import product2 from "../assets/product2.png";
 
 export default function OurProducts() {
   return (
@@ -11,11 +11,11 @@ export default function OurProducts() {
       <div className="mt-8 bg-gray-100 py-8 px-6 md:px-20 flex justify-center">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl">
           <ProductCard
-            image={product1}
+            image={"/assets/product1.png"}
             title="GenAlpha Portable Kit"
           />
           <ProductCard
-            image={product2}
+            image={"/assets/product2.png"}
             title="Raw Radicles – Chyawanaprash Candies"
           />
         </div>

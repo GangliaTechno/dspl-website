@@ -10,18 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
-<<<<<<< HEAD
-=======
     "@fortawesome/free-brands-svg-icons": "^6.7.2",
->>>>>>> 4c84d14f835a3a2c95e0be3bee88e560da8725ef
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@tailwindcss/vite": "^4.0.13",
     "framer-motion": "^12.5.0",
-<<<<<<< HEAD
-=======
     "lucide-react": "^0.482.0",
->>>>>>> 4c84d14f835a3a2c95e0be3bee88e560da8725ef
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^7.3.0",

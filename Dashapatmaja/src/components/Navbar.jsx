@@ -8,7 +8,7 @@ import { Link, useLocation } from "react-router-dom";
 const tabs = [
   { name: "Home", path: "/" },
   { name: "About Us", path: "/about", hasDropdown: true },
-  { name: "Product & Service", path: "/ourproducts", hasDropdown: true },
+  { name: "Product & Service", path: "/our-expertise", hasDropdown: true },
   { name: "Contact Us", path: "/contact" },
 ];
 
@@ -40,7 +40,7 @@ const Navbar = () => {
           } else if (productDropDown.some((item) => item.path === location.pathname)) {
             currentTab = tabs.find((tab) => tab.name === "Product & Service");
           }
-          setSelected(currentTab.name);
+          setSelected(currentTab?.name);
     }
   }, [location.pathname]);
 
