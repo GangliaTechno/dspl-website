@@ -5,6 +5,7 @@ import pic1 from "../assets/pic1.png";
 import pic2 from "../assets/pic2.png";
 import background from "../assets/background.jpg";
 
+
 export default function ProductService() {
   const images = [pic1, pic2];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
