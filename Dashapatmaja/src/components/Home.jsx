@@ -1,9 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import brandingImage from "../assets/branding.jpg";
-import edtechImage from "../assets/edtech.jpg";
-import researchImage from "../assets/research.jpg";
 import Background from "./background";
 
 const Home = () => {
@@ -12,7 +9,7 @@ const Home = () => {
   const industries = [
     {
       title: "Branding and Ecommerce",
-      image: brandingImage,
+      image: "assets/branding.jpg",
       description: [
         <>
           We specialize in developing cutting-edge technologies and products
@@ -32,7 +29,7 @@ const Home = () => {
     },
     {
       title: "Ed-Tech",
-      image: edtechImage,
+      image: "assets/edtech.jpg",
       description: [
         <>
           We specialize in <strong>edge computing solutions</strong>, bringing
@@ -52,7 +49,7 @@ const Home = () => {
     },
     {
       title: "Research and Development",
-      image: researchImage,
+      image: "assets/research.jpg",
       description: [
         <>
           Our <strong>R&D division</strong> is the driving force behind our
@@ -204,7 +201,7 @@ const Home = () => {
       </section>
 
       {/* Our Industries of Impact Section */}
-      <section className="mt-16 mx-0 px-4 md:px-20 md:mx-24">
+      <section className="mt-16 mb-20 mx-0 px-4 md:px-20 md:mx-24">
         <h2 className="text-3xl md:text-4xl font-bold text-left mb-8">
           Our Industries of Impact
         </h2>
