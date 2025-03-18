@@ -1,10 +1,13 @@
 import React from "react";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import Background from "./Background";
 
 const Home = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const navigate = useNavigate();
+
 
   const industries = [
     {
@@ -142,6 +145,7 @@ const Home = () => {
               className="border border-white px-6 py-3 font-semibold rounded w-full md:w-auto"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={() => navigate("/contact")}
             >
               CONTACT US
             </motion.button>
@@ -173,7 +177,7 @@ const Home = () => {
             seamlessly integrating these principles, we help businesses thrive
             in a dynamic, technology-driven world.
           </p>
-          <button className="mt-6 bg-blue-600 text-white px-6 py-2 rounded">
+          <button className="mt-6 bg-blue-600 text-white px-6 py-2 rounded" onClick={() => navigate("/contact")}>
             WORK WITH US
           </button>
         </div>
