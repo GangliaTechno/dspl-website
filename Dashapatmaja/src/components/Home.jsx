@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import Background from "./background";
+import Background from "./Background";
 
 const Home = () => {
   const [isVisible, setIsVisible] = useState(false);

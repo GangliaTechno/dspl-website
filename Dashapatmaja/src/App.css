@@ -1,1 +1,8 @@
 @import "tailwindcss";
+@layer utilities {
+    ::selection {
+      background-color: theme('colors.yellow.400'); /* Use Tailwind color */
+      color: theme('colors.black'); /* Use Tailwind color */
+    }
+  }
+  

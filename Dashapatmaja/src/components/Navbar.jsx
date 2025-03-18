@@ -8,7 +8,7 @@ import { Link, useLocation } from "react-router-dom";
 const tabs = [
   { name: "Home", path: "/" },
   { name: "About Us", path: "/about", hasDropdown: true },
-  { name: "Product & Service", path: "/ourproducts", hasDropdown: true },
+  { name: "Product & Service", path: "/our-expertise", hasDropdown: true },
   { name: "Contact Us", path: "/contact" },
 ];
 
