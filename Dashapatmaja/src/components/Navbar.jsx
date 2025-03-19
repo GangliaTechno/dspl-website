@@ -15,7 +15,9 @@ const tabs = [
 const aboutDropdown = [
   { name: "Branding & Ecommerce", path: "/branding" },
   { name: "Ed-Tech", path: "/edtech" },
-  { name: "Research & Development", path: "/research" }
+  { name: "Research & Development", path: "/research" },
+  { name: "Our Leadership Team", path: "/ourteam" }
+
 ];
 
 const productDropDown = [
