@@ -36,16 +36,16 @@ const Footer = () => {
                     <div className="text-lg h-full">
                         <h3 className="font-bold text-xl mb-4">Our Domains</h3>
                         <div className="ml-2 *:hover:text-blue-500">
-                            <p><Link to="/ourservices" onClick={() => setIsOpen(false)}>Branding & Ecommerce</Link></p>
-                            <p><Link to="/ourproducts">Ed-Tech</Link></p>
-                            <p><Link to="/ourproducts">Research & Development</Link></p>
+                            <p><Link to="/branding" onClick={() => setIsOpen(false)}>Branding & Ecommerce</Link></p>
+                            <p><Link to="/edtech">Ed-Tech</Link></p>
+                            <p><Link to="/research">Research & Development</Link></p>
                         </div>
                     </div>
 
                     {/* Social Section */}
                     <div className="mr-6 items-center">
                         <h3 className="text-xl font-bold mb-6">Team Solutions</h3>
-                        <p className="lg:ml-4 mb-4">Phone: +91 9999999999 </p>
+                        <p className="lg:ml-4 mb-4">Phone: +91 6366630202 </p>
                         <div className="flex space-x-6 text-2xl lg:ml-4">
                             <Link to="https://www.facebook.com/people/Ganglia-Technologies-Private-Limited/100093543685978/" target="_blank"><FontAwesomeIcon className="transition hover:scale-125" icon={faFacebook} /></Link>
                             <Link to="https://x.com/Ganglia_in" target="_blank"><FontAwesomeIcon className="transition hover:scale-125" icon={faXTwitter}/></Link>

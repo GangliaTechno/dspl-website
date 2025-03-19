@@ -13,9 +13,9 @@ const tabs = [
 ];
 
 const aboutDropdown = [
-  { name: "Branding & Ecommerce", path: "/branding" },
-  { name: "Ed-Tech", path: "/edtech" },
-  { name: "Research & Development", path: "/research" }
+  { name: "Our Company", path: "/about" },
+  { name: "Our Leadership Team", path: "" },
+  { name: "Our Intern Team", path: "" },
 ];
 
 const productDropDown = [
@@ -41,6 +41,9 @@ const Navbar = () => {
             currentTab = tabs.find((tab) => tab.name === "Product & Service");
           }
           setSelected(currentTab?.name);
+    }
+    if (currentTab) {
+      setSelected(currentTab?.name); 
     }
   }, [location.pathname]);
 
@@ -86,7 +89,7 @@ const Navbar = () => {
 
               {/* Dropdown for About Us */}
               {tab.name === "About Us" && aboutDropdownOpen && (
-                <div className="absolute left-0 w-56 mt-0.5 bg-white shadow-lg rounded border border-gray-600 text-base">
+                <div className="absolute left-0 w-48 mt-0.5 bg-white shadow-lg rounded border border-gray-600 text-base">
                   {aboutDropdown.map((item) => (
                     <Link
                       key={item.name}

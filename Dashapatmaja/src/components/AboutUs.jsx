@@ -1,17 +1,36 @@
 import React from 'react';
 import { motion } from "framer-motion";
 import Background from "./Background";
+import { FaShoppingBag, FaGraduationCap, FaFlask } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 function AboutUs() {
-  const leaders = [
-    { name: "Dr. Manu Sudhi", designation: "Chairman", image: "assets/manu.png" },
-    { name: "Mr. Shreepathy Ranga Bhatta B", designation: "Managing Director", image: "assets/sree.jpeg" },
-    { name: "Dr. Dasharathraj K Shetty", designation: "Mentor", image: "assets/dr.jpeg" },
-    { name: "Ms. Anusha Pai", designation: "Director", image: "assets/anu.jpeg" },
-    { name: "Mr. Vishnu U Pillai", designation: "Director", image: "assets/vishnu.jpeg" },
-    { name: "Ms. Staissy Salu", designation: "Chief Operating Officer", image: "assets/stais.jpeg" },
-    { name: "Mr. Namesh Malarout", designation: "Chief Marketing Officer", image: "assets/namesh.jpeg" },
+  const navigate = useNavigate();
+
+  const industries = [
+    {
+      title: "Branding and Ecommerce",
+      icon: <FaShoppingBag className="text-red-500 text-5xl" />,
+      description:
+        "Innovative solutions to enhance brand presence and optimize online commerce strategies.",
+      path: "/branding",
+    },
+    {
+      title: "Edtech",
+      icon: <FaGraduationCap className="text-yellow-500 text-5xl" />,
+      description:
+        "Advanced learning platforms and smart educational tools for the future of education.",
+      path: "/edtech",
+    },
+    {
+      title: "Research and Development",
+      icon: <FaFlask className="text-green-500 text-5xl" />,
+      description:
+        "Driving innovation with cutting-edge research in AI, healthcare, and smart technologies.",
+      path: "/research",
+    },
   ];
+  
 
   return (
     <div>
@@ -38,62 +57,26 @@ function AboutUs() {
         </p>
       </section>
 
-      {/* Leadership Team Section */}
-      <section className="py-10">
-        <h2 className="text-4xl font-bold mb-6 text-center">Leadership Team</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-7 gap-4 px-4">
-          {leaders.map((leader, index) => (
-            <div key={index} className="bg-white shadow-md rounded p-4 text-center border border-gray-300">
-              <img
-                src={leader.image}
-                alt={leader.name}
-                className="mx-auto mb-4 rounded-full w-24 h-24 object-cover"
-              />
-              <h3 className="text-xl font-semibold">{leader.name}</h3>
-              <p className="text-gray-500">{leader.designation}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
       {/* Our Industries of Impact Section */}
-      <section className="py-10 bg-gray-50">
-        <h2 className="text-4xl font-bold mb-6 text-center">Our Industries of Impact</h2>
-        <p className="text-lg text-gray-700 text-center mb-8">
-          We serve a wide range of sectors, providing innovative solutions that address the unique needs of each:
-        </p>
-        <div className="flex flex-wrap justify-center gap-6 px-4">
-          {/* Health and Wellness Card */}
-          <div className="w-64 bg-white p-4 border border-gray-300 rounded text-center shadow-sm">
-            <div className="flex justify-center mb-2">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-              </svg>
-            </div>
-            <h3 className="text-xl font-semibold mb-2">Health and Wellness</h3>
+      <section className="py-16 bg-gray-50">
+      <h2 className="text-5xl font-bold mb-8 text-center">Our Industries of Impact</h2>
+      <p className="text-lg text-gray-700 text-center mb-12 px-6">
+        We serve a wide range of sectors, delivering innovative solutions tailored to each industry's needs.
+      </p>
+      <div className="flex flex-wrap justify-center gap-8 px-6">
+        {industries.map((industry) => (
+          <div
+            key={industry.title}
+            className="w-80 bg-white p-6 border border-gray-300 rounded-lg text-center shadow-lg cursor-pointer transform transition duration-300 hover:scale-105"
+            onClick={() => navigate(industry.path)}
+          >
+            <div className="flex justify-center mb-4">{industry.icon}</div>
+            <h3 className="text-2xl font-semibold mb-3">{industry.title}</h3>
+            <p className="text-gray-600">{industry.description}</p>
           </div>
-          {/* Edge-Tech Card */}
-          <div className="w-64 bg-white p-4 border border-gray-300 rounded text-center shadow-sm">
-            <div className="flex justify-center mb-2">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-yellow-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-              </svg>
-            </div>
-            <h3 className="text-xl font-semibold mb-2">Ed-Tech</h3>
-          </div>
-          {/* Research and Development Card */}
-          <div className="w-64 bg-white p-4 border border-gray-300 rounded text-center shadow-sm">
-            <div className="flex justify-center mb-2">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5z" />
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l6.16-3.422a12.083 12.083 0 01.84 4.08c0 1.433-.323 2.78-.84 4.08L12 14z" />
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l-6.16-3.422A12.083 12.083 0 004 14c0 1.433.323 2.78.84 4.08L12 14z" />
-              </svg>
-            </div>
-            <h3 className="text-xl font-semibold mb-2">Research and Development</h3>
-          </div>
-        </div>
-      </section>
+        ))}
+      </div>
+    </section>
 
       {/* Our Journey Section */}
       <section className="py-10">

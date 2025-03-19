@@ -96,25 +96,6 @@ function ContactUs() {
             />
           </div>
 
-          {/* Select Field */}
-          <div>
-            <label className="block text-gray-700 font-medium">
-              Select Field <span className="text-red-500">*</span>
-            </label>
-            <select
-              name="field"
-              value={formData.field}
-              onChange={handleChange}
-              required
-              className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
-            >
-              <option value="">Select your option</option>
-              <option value="Health and Wellness solutions">Health and Wellness solutions</option>
-              <option value="Research collaborations">Research collaborations</option>
-              <option value="Edge-Tech services">Edge-Tech services</option>
-            </select>
-          </div>
-
           <button
             type="submit"
             className="w-full bg-yellow-400 text-black font-bold py-3 rounded-lg hover:bg-yellow-500 transition"

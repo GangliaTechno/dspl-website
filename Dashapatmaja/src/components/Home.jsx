@@ -4,10 +4,10 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import Background from "./Background";
 
+
 const Home = () => {
   const [isVisible, setIsVisible] = useState(false);
   const navigate = useNavigate();
-
 
   const industries = [
     {
@@ -29,6 +29,7 @@ const Home = () => {
           data analytics to provide tailored health recommendations.
         </>,
       ],
+      path: "/branding",
     },
     {
       title: "Ed-Tech",
@@ -49,6 +50,7 @@ const Home = () => {
           safeguard edge devices and networks with robust protection measures.
         </>,
       ],
+      path: "/edtech",
     },
     {
       title: "Research and Development",
@@ -68,6 +70,7 @@ const Home = () => {
           academic and industry leaders to accelerate innovation.
         </>,
       ],
+      path: "/research",
     },
   ];
 
@@ -76,25 +79,21 @@ const Home = () => {
       title: "Expertise Across Domains",
       description:
         "Strong foundation in Branding, E-commerce, Ed-Tech, and R&D to cater to diverse business needs.",
-      icon: "📌",
     },
     {
       title: "Innovation-Driven Solutions",
       description:
         "Cutting-edge technology and research to create impactful and future-ready solutions.",
-      icon: "🚀",
     },
     {
       title: "Customized Approach",
       description:
         "Tailored strategies that align with your business goals for maximum success.",
-      icon: "🎯",
     },
     {
       title: "Global Impact",
       description:
         "Helping businesses scale and make a meaningful difference worldwide.",
-      icon: "🌍",
     },
   ];
 
@@ -195,7 +194,7 @@ const Home = () => {
               className="bg-gray-100 p-4 md:p-6 rounded-lg shadow-md hover:shadow-xl transition duration-300"
             >
               <h3 className="text-lg md:text-xl font-semibold flex items-center gap-2">
-                <span className="text-2xl">{item.icon}</span> {item.title}
+                <span className="text-2xl"></span> {item.title}
               </h3>
               <p className="mt-2 text-gray-600 text-sm md:text-base">
                 {item.description}
@@ -207,37 +206,36 @@ const Home = () => {
 
       {/* Our Industries of Impact Section */}
       <section className="mt-16 mb-20 mx-0 px-4 md:px-20 md:mx-24">
-        <h2 className="text-3xl md:text-4xl font-bold text-left mb-8">
-          Our Industries of Impact
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {industries.map((industry, index) => (
-            <motion.div
-              key={index}
-              className="bg-white shadow-lg rounded-lg overflow-hidden"
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
-            >
-              <img
-                src={industry.image}
-                alt={industry.title}
-                className="w-full h-64 object-cover"
-              />
-              <div className="p-6">
-                <h3 className="text-2xl font-bold mb-2">{industry.title}</h3>
-                <div className="text-gray-700">
-                  {industry.description.map((line, idx) => (
-                    <p key={idx} className="mb-4">
-                      {line}
-                    </p>
-                  ))}
-                </div>
+      <h2 className="text-3xl md:text-4xl font-bold text-left mb-8">
+        Our Industries of Impact
+      </h2>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {industries.map((industry, index) => (
+          <motion.div
+            key={index}
+            className="bg-white shadow-lg rounded-lg overflow-hidden cursor-pointer"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: index * 0.2 }}
+            onClick={() => navigate(industry.path)}
+          >
+            <img
+              src={industry.image}
+              alt={industry.title}
+              className="w-full h-64 object-cover"
+            />
+            <div className="p-6">
+              <h3 className="text-2xl font-bold mb-2">{industry.title}</h3>
+              <div className="text-gray-700">
+                {industry.description.map((line, idx) => (
+                  <p key={idx} className="mb-4">{line}</p>
+                ))}
               </div>
-            </motion.div>
-          ))}
-        </div>
-      </section>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </section>
     </div>
   );
 };
