@@ -138,6 +138,7 @@ const Home = () => {
               className="bg-yellow-500 text-black px-6 py-3 font-semibold rounded w-full md:w-auto"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={() => navigate("/our-expertise")}
             >
               OUR PRODUCTS
             </motion.button>
