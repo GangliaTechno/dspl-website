@@ -11,6 +11,7 @@ import Home from './components/Home';
 import BrandingEcommerce from './components/BrandingEcommerce';
 import EdTechPage from './components/EdTech';
 import ResearchDevelopmentPage from './components/Research&Development';
+import OurTeam from './components/OurTeam';
 
 function App() {
 
@@ -30,6 +31,7 @@ function App() {
         <Route path='/research' element={<ResearchDevelopmentPage/>}/>
         <Route path='/contact' element={<ContactUs/>}/>
         <Route path='/raw-radicals' element={<Candies/>}/>
+        <Route path='/ourteam' element={<OurTeam/>}/>
       </Routes>
       </div>
       <Footer/>

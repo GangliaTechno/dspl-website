@@ -74,7 +74,7 @@ export default function ProductService() {
         <div className="w-full bg-gray-100 py-10 flex flex-col items-center relative z-10">
           {/* Key Features Section */}
           <section className="relative w-full max-w-5xl">
-            <div className="relative p-6 bg-red-100 bg-opacity-30 border border-red-100 divide-y divide-white">
+            <div className="relative p-6 m-2 bg-red-100 bg-opacity-30 border border-red-100 divide-y divide-white">
               <h2 className="text-3xl font-bold text-center text-gray-800">Key Features</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
                 <Feature title="Integrated Hardware" description="Combines IC 555 timers, Arduino, and Raspberry Pi for comprehensive electronics learning." />
@@ -88,7 +88,7 @@ export default function ProductService() {
           {/* Benefits Section */}
           <section className="w-full max-w-4xl text-center mt-10">
             <h2 className="text-3xl font-bold text-gray-800">Benefits</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 mr-2 ml-2">
               <Benefit icon={faGraduationCap} title="Empowering Students" description="Offers hands-on STEM learning from basic circuits to IoT applications." />
               <Benefit icon={faWrench} title="Inclusive Design" description="Pin-based breadboards ensure safety for beginners while supporting advanced projects." />
               <Benefit icon={faBox} title="Portability" description="A compact, all-in-one lab for schools, colleges, and remote learners." />

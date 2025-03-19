@@ -14,7 +14,7 @@ const tabs = [
 
 const aboutDropdown = [
   { name: "Our Company", path: "/about" },
-  { name: "Our Leadership Team", path: "" },
+  { name: "Our Leadership Team", path: "/ourteam" },
   { name: "Our Intern Team", path: "" },
 ];
 
@@ -41,6 +41,9 @@ const Navbar = () => {
             currentTab = tabs.find((tab) => tab.name === "Product & Service");
           }
           setSelected(currentTab?.name);
+    }
+    if (currentTab) {
+      setSelected(currentTab?.name); 
     }
     if (currentTab) {
       setSelected(currentTab?.name); 
