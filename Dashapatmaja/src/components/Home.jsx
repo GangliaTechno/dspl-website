@@ -133,14 +133,14 @@ const Home = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.5 }}
           >
-            <motion.button
+            {/* <motion.button
               className="bg-yellow-500 text-black px-6 py-3 font-semibold rounded w-full md:w-auto"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => navigate("/our-expertise")}
             >
               OUR PRODUCTS
-            </motion.button>
+            </motion.button> */}
             <motion.button
               className="border border-white px-6 py-3 font-semibold rounded w-full md:w-auto"
               whileHover={{ scale: 1.05 }}
@@ -157,7 +157,7 @@ const Home = () => {
       <section className="relative min-h-full -mt-32 flex flex-col md:flex-row items-center md:items-start shadow-lg rounded-lg bg-white lg:ml-44 lg:mr-40">
         {/* Left Section */}
         <div
-          className={`min-h-full bg-yellow-400 text-black p-6 md:p-14 md:w-1/2 w-full transition-all duration-1000 ${
+          className={`min-h-full bg-yellow-400 text-black p-6 md:h-[100.5vh] md:p-14 md:w-1/2 w-full transition-all duration-1000 ${
             isVisible
               ? "translate-x-0 opacity-100"
               : "-translate-x-20 opacity-0"
@@ -184,7 +184,7 @@ const Home = () => {
 
         {/* Right Section */}
         <div
-          className={`min-h-full grid grid-cols-1 sm:grid-cols-2 gap-6 p-6 md:p-10 md:w-1/2 w-full bg-white rounded-lg shadow-lg transition-all duration-1000 ${
+          className={`min-h-full grid grid-cols-1 sm:grid-cols-2 gap-6 p-6 md:p-10 md:h-[100.5vh] md:w-1/2 w-full bg-white rounded-lg shadow-lg transition-all duration-1000 ${
             isVisible ? "translate-x-0 opacity-100" : "translate-x-20 opacity-0"
           }`}
         >
