@@ -225,7 +225,7 @@ const Home = () => {
                 <img
                   src={industry.image}
                   alt={industry.title}
-                  className="w-full h-full object-cover rounded-full brightness-70"
+                  className="w-full h-full object-cover rounded-full brightness-85"
                 />
               </div>
 
