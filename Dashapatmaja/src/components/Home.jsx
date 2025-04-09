@@ -12,7 +12,7 @@ const Home = () => {
   const industries = [
     {
       title: "Branding and Ecommerce",
-      image: "assets/branding.jpg",
+      image: "assets/branding.png",
       description: [
         <>
           We specialize in developing cutting-edge technologies and products
@@ -33,7 +33,7 @@ const Home = () => {
     },
     {
       title: "Ed-Tech",
-      image: "assets/edtech.jpg",
+      image: "assets/edtech.png",
       description: [
         <>
           We specialize in <strong>edge computing solutions</strong>, bringing
@@ -54,7 +54,7 @@ const Home = () => {
     },
     {
       title: "Research and Development",
-      image: "assets/research.jpg",
+      image: "assets/research.png",
       description: [
         <>
           Our <strong>R&D division</strong> is the driving force behind our
@@ -212,27 +212,28 @@ const Home = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {industries.map((industry, index) => (
           <motion.div
-            key={index}
-            className="bg-white shadow-lg rounded-lg overflow-hidden cursor-pointer"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: index * 0.2 }}
-            onClick={() => navigate(industry.path)}
-          >
-            <img
-              src={industry.image}
-              alt={industry.title}
-              className="w-full h-64 object-cover"
-            />
-            <div className="p-6">
-              <h3 className="text-2xl font-bold mb-2">{industry.title}</h3>
-              <div className="text-gray-700">
-                {industry.description.map((line, idx) => (
-                  <p key={idx} className="mb-4">{line}</p>
-                ))}
-              </div>
+          key={index}
+          className="bg-white shadow-lg rounded-lg overflow-hidden cursor-pointer"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: index * 0.2 }}
+          onClick={() => navigate(industry.path)}
+        >
+          <img
+            src={industry.image}
+            alt={industry.title}
+            className="w-70 h-70 mx-auto mt-6 object-cover rounded-full"
+          />
+          <div className="p-6">
+            <h3 className="text-2xl font-bold mb-2">{industry.title}</h3>
+            <div className="text-gray-700">
+              {industry.description.map((line, idx) => (
+                <p key={idx} className="mb-4">{line}</p>
+              ))}
             </div>
-          </motion.div>
+          </div>
+        </motion.div>
+        
         ))}
       </div>
     </section>

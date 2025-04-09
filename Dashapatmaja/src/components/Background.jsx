@@ -5,7 +5,7 @@ const Background = () => {
     <div
       className="absolute top-0 left-0 w-full h-full bg-cover bg-center"
       style={{
-        backgroundImage: `url("assets/nature.jpg")`,
+        backgroundImage: `url("assets/homebackground.jpg")`,
         filter: "brightness(35%)",
       }}
     ></div>

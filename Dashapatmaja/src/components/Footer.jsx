@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
     return (
-        <footer className=" text-black w-full bg-white">
+        <footer className=" text-white w-full bg-black">
             <div className="py-6 relative overflow-hidden">
                 <div className="mx-auto justify-between ml-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     <div className="inline text-black">
@@ -63,9 +63,9 @@ const Footer = () => {
             </div>
 
             {/* Copyrights section */}
-            <div className="bg-gray-100 py-1">
+            <div className="bg-black py-1">
                 <div className="container mx-auto flex justify-between items-center">
-                    <p className="text-gray-600 px-3">&copy; 2025 dashapatmaja.in All rights reserved.</p>
+                    <p className="text-white px-3">&copy; 2025 dashapatmaja.in All rights reserved.</p>
                 </div>
             </div>
         </footer>
