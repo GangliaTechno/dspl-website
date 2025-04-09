@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import Background from "./Background";
 
-
 const Home = () => {
   const [isVisible, setIsVisible] = useState(false);
   const navigate = useNavigate();
@@ -105,7 +104,7 @@ const Home = () => {
     <div>
       {/* Hero Section */}
       <div className="relative h-screen md:h-[130vh] text-white flex flex-col justify-center items-center text-center px-4">
-       <Background/>
+        <Background />
         <div className="relative z-10 max-w-6xl px-4 mb-56">
           <motion.h1
             className="text-4xl md:text-6xl lg:text-8xl font-bold leading-tight text-left"
@@ -177,7 +176,10 @@ const Home = () => {
             seamlessly integrating these principles, we help businesses thrive
             in a dynamic, technology-driven world.
           </p>
-          <button className="mt-6 bg-blue-600 text-white px-6 py-2 rounded" onClick={() => navigate("/contact")}>
+          <button
+            className="mt-6 bg-blue-600 text-white px-6 py-2 rounded"
+            onClick={() => navigate("/contact")}
+          >
             WORK WITH US
           </button>
         </div>
@@ -206,37 +208,41 @@ const Home = () => {
 
       {/* Our Industries of Impact Section */}
       <section className="mt-16 mb-20 mx-0 px-4 md:px-20 md:mx-24">
-      <h2 className="text-3xl md:text-4xl font-bold text-left mb-8">
-        Our Industries of Impact
-      </h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {industries.map((industry, index) => (
-          <motion.div
-          key={index}
-          className="bg-white shadow-lg rounded-lg overflow-hidden cursor-pointer"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: index * 0.2 }}
-          onClick={() => navigate(industry.path)}
-        >
-          <img
-            src={industry.image}
-            alt={industry.title}
-            className="w-70 h-70 mx-auto mt-6 object-cover rounded-full"
-          />
-          <div className="p-6">
-            <h3 className="text-2xl font-bold mb-2">{industry.title}</h3>
-            <div className="text-gray-700">
-              {industry.description.map((line, idx) => (
-                <p key={idx} className="mb-4">{line}</p>
-              ))}
-            </div>
-          </div>
-        </motion.div>
-        
-        ))}
-      </div>
-    </section>
+        <h2 className="text-3xl md:text-4xl font-bold text-left mb-8">
+          Our Industries of Impact
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {industries.map((industry, index) => (
+            <motion.div
+              key={index}
+              className="bg-white shadow-lg rounded-lg overflow-hidden cursor-pointer"
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.2 }}
+              onClick={() => navigate(industry.path)}
+            >
+              <div className="relative w-[280px] h-[280px] mx-auto mt-6 overflow-hidden">
+                <img
+                  src={industry.image}
+                  alt={industry.title}
+                  className="w-full h-full object-cover rounded-full brightness-70"
+                />
+              </div>
+
+              <div className="p-6">
+                <h3 className="text-2xl font-bold mb-2">{industry.title}</h3>
+                <div className="text-gray-700">
+                  {industry.description.map((line, idx) => (
+                    <p key={idx} className="mb-4">
+                      {line}
+                    </p>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 };
