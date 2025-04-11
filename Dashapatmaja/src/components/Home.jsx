@@ -219,7 +219,11 @@ const Home = () => {
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.2 }}
-              onClick={() => navigate(industry.path)}
+              onClick={() => {
+                window.scrollTo(0, 0);
+                navigate(industry.path);
+              }}
+              
             >
               <div className="relative w-[280px] h-[280px] mx-auto mt-6 overflow-hidden">
                 <img
