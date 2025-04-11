@@ -30,7 +30,12 @@ function AboutUs() {
       path: "/research",
     },
   ];
-  
+
+  // Animation variant for fade up effect
+  const fadeUp = {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 }
+  };
 
   return (
     <div>
@@ -57,31 +62,23 @@ function AboutUs() {
         </p>
       </section>
 
-      {/* Our Industries of Impact Section */}
-      <section className="py-16 bg-gray-50">
-      <h2 className="text-5xl font-bold mb-8 text-center">Our Industries of Impact</h2>
-      <p className="text-lg text-gray-700 text-center mb-12 px-6">
-        We serve a wide range of sectors, delivering innovative solutions tailored to each industry's needs.
-      </p>
-      <div className="flex flex-wrap justify-center gap-8 px-6">
-        {industries.map((industry) => (
-          <div
-            key={industry.title}
-            className="w-80 bg-white p-6 border border-gray-300 rounded-lg text-center shadow-lg cursor-pointer transform transition duration-300 hover:scale-105"
-            onClick={() => navigate(industry.path)}
-          >
-            <div className="flex justify-center mb-4">{industry.icon}</div>
-            <h3 className="text-2xl font-semibold mb-3">{industry.title}</h3>
-            <p className="text-gray-600">{industry.description}</p>
-          </div>
-        ))}
-      </div>
-    </section>
-
-      {/* Our Journey Section */}
+      {/* Our Journey Section with Animation */}
       <section className="py-10">
-        <h2 className="text-4xl font-bold mb-6 text-center">Our Journey</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-4">
+        <motion.h2 
+          className="text-4xl font-bold mb-6 text-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8 }}
+        >
+          Our Journey
+        </motion.h2>
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 px-4"
+          variants={fadeUp}
+          initial="initial"
+          animate="animate"
+          transition={{ duration: 1 }}
+        >
           {/* 2023 Milestone */}
           <div className="bg-white p-4 border border-gray-300 rounded shadow-sm">
             <div className="flex justify-center mb-2">
@@ -118,7 +115,47 @@ function AboutUs() {
               Selected by GOK Bioincubator, providing us with cutting-edge facilities and expert mentorship.
             </p>
           </div>
-        </div>
+        </motion.div>
+      </section>
+
+      {/* Our Industries of Impact Section with Animation */}
+      <section className="py-16 bg-gray-50">
+        <motion.h2 
+          className="text-5xl font-bold mb-8 text-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+        >
+          Our Industries of Impact
+        </motion.h2>
+        <motion.p 
+          className="text-lg text-gray-700 text-center mb-12 px-6"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+        >
+          We serve a wide range of sectors, delivering innovative solutions tailored to each industry's needs.
+        </motion.p>
+        <motion.div
+          className="flex flex-wrap justify-center gap-8 px-6"
+          variants={fadeUp}
+          initial="initial"
+          animate="animate"
+          transition={{ duration: 1, delay: 0.2 }}
+        >
+          {industries.map((industry) => (
+            <motion.div
+              key={industry.title}
+              className="w-80 bg-white p-6 border border-gray-300 rounded-lg text-center shadow-lg cursor-pointer transform transition duration-300 hover:scale-105"
+              whileHover={{ scale: 1.05 }}
+              onClick={() => navigate(industry.path)}
+            >
+              <div className="flex justify-center mb-4">{industry.icon}</div>
+              <h3 className="text-2xl font-semibold mb-3">{industry.title}</h3>
+              <p className="text-gray-600">{industry.description}</p>
+            </motion.div>
+          ))}
+        </motion.div>
       </section>
     </div>
   );
