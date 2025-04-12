@@ -1,5 +1,6 @@
 import React from 'react';
 import Background from './Background';
+
 const ResearchDevelopmentPage = () => {
   const offerings = [
     {
@@ -103,11 +104,32 @@ const ResearchDevelopmentPage = () => {
       ),
     },
   ];
+  const newCards = [
+    {
+      title: "Card One",
+      description:
+        "Description for card one. It provides additional insight into our service offerings.",
+    },
+    {
+      title: "Card Two",
+      description:
+        "Description for card two. Learn more about our innovative strategies.",
+    },
+    {
+      title: "Card Three",
+      description:
+        "Description for card three. Explore our comprehensive solutions.",
+    },
+    {
+      title: "Card Four",
+      description:
+        "Description for card four. Discover how we can elevate your business.",
+    },
+  ];
 
   return (
     <div className="min-h-screen bg-gray-50">
-
-
+      {/* Hero Section */}
       <section className="relative flex flex-col items-center justify-center h-[400px] text-white text-center px-4 overflow-hidden">
         <Background />
         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white z-100 mb-4">
@@ -119,9 +141,7 @@ const ResearchDevelopmentPage = () => {
         <p className="max-w-2xl mx-auto text-white z-10">
           Our R&amp;D division is dedicated to conducting high-quality research in collaboration with doctors, professors, and students. We focus on producing research that gets published in high-impact international journals, contributing to global scientific advancements.
         </p>
-
       </section>
-
 
       {/* Why It Matters Section */}
       <section className="py-12 bg-gray-100">
@@ -141,17 +161,33 @@ const ResearchDevelopmentPage = () => {
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12">
             What We Offer
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
             {offerings.map((offer, index) => (
-              <div
-                key={index}
-                className="bg-white p-6 rounded-lg shadow-md border border-gray-200 flex flex-col items-center"
-              >
-                <div className="mb-4">{offer.icon}</div>
-                <h3 className="text-xl font-semibold mb-2 text-gray-800 text-center">
-                  {offer.title}
-                </h3>
-                <p className="text-gray-600 text-center">{offer.description}</p>
+              <div key={index} className="flex flex-col items-center">
+                {/* Top Card from "What We Offer" */}
+                <div className="bg-white p-6 rounded-lg shadow-md border border-gray-200 flex flex-col items-center min-h-[330px]">
+                  <div className="mb-4">{offer.icon}</div>
+                  <h3 className="text-xl font-semibold mb-2 text-gray-800 text-center">
+                    {offer.title}
+                  </h3>
+                  <p className="text-gray-600 text-center">{offer.description}</p>
+                </div>
+
+                {/* Connector Line between cards */}
+                <div className="flex flex-col items-center my-4">
+                  {/* Vertical line */}
+                  <div className="w-0.5 h-6 bg-gray-600"></div>
+                  {/* Dot marker at the connection point */}
+                  <div className="w-2 h-2 bg-gray-700 rounded-full -mt-1"></div>
+                </div>
+
+                {/* Bottom Card */}
+                <div className="bg-white p-6 rounded-lg shadow-md border border-gray-200 flex flex-col items-center min-h-[220px]">
+                  <h3 className="text-xl font-semibold mb-2 text-gray-800 text-center">
+                    {newCards[index].title}
+                  </h3>
+                  <p className="text-gray-600 text-center">{newCards[index].description}</p>
+                </div>
               </div>
             ))}
           </div>

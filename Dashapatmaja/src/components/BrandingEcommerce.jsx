@@ -1,29 +1,30 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import Background from './Background';
+
 const BrandingEcommerce = () => {
   const offerings = [
     {
-        title: "E-commerce Platform Management",
-        description:
-          "We help businesses set up, optimize, and manage their online stores for seamless operations and growth.",
-        icon: (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-12 w-12 text-green-600"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.5 7H17M7 13h10M16 21a1 1 0 110-2 1 1 0 010 2zm-8 0a1 1 0 110-2 1 1 0 010 2z"
-            />
-          </svg>
-        ),
-      },
+      title: "E-commerce Platform Management",
+      description:
+        "We help businesses set up, optimize, and manage their online stores for seamless operations and growth.",
+      icon: (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-12 w-12 text-green-600"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.5 7H17M7 13h10M16 21a1 1 0 110-2 1 1 0 010 2zm-8 0a1 1 0 110-2 1 1 0 010 2z"
+          />
+        </svg>
+      ),
+    },
     {
       title: "Brand Development & Strategy",
       description:
@@ -45,7 +46,6 @@ const BrandingEcommerce = () => {
         </svg>
       ),
     },
-   
     {
       title: "Digital Marketing & SEO",
       description:
@@ -84,20 +84,43 @@ const BrandingEcommerce = () => {
     },
   ];
 
+  const newCards = [
+    {
+      title: "Card One",
+      description:
+        "Description for card one. It provides additional insight into our service offerings.",
+    },
+    {
+      title: "Card Two",
+      description:
+        "Description for card two. Learn more about our innovative strategies.",
+    },
+    {
+      title: "Card Three",
+      description:
+        "Description for card three. Explore our comprehensive solutions.",
+    },
+    {
+      title: "Card Four",
+      description:
+        "Description for card four. Discover how we can elevate your business.",
+    },
+  ];
+
   return (
     <div className="min-h-screen bg-gray-50">
+      {/* Hero Section */}
       <section className="relative flex flex-col items-center justify-center h-[400px] text-white text-center px-4 overflow-hidden">
         <Background />
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-4 z-10">
-            Branding & Ecommerce
-          </h1>
-          <p className="text-lg sm:text-xl text-white mb-8  z-10">
-            Helping Businesses Build, Market, and Sell Their Brands
-          </p>
-          <p className="max-w-2xl mx-auto text-white  z-10">
-            We specialize in building and scaling brands by providing comprehensive support in branding, marketing, and e-commerce management. From crafting a compelling brand identity to optimizing online sales channels, we empower businesses to thrive in competitive markets.
-          </p>
-     
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-4 z-10">
+          Branding & Ecommerce
+        </h1>
+        <p className="text-lg sm:text-xl text-white mb-8 z-10">
+          Helping Businesses Build, Market, and Sell Their Brands
+        </p>
+        <p className="max-w-2xl mx-auto text-white z-10">
+          We specialize in building and scaling brands by providing comprehensive support in branding, marketing, and e-commerce management. From crafting a compelling brand identity to optimizing online sales channels, we empower businesses to thrive in competitive markets.
+        </p>
       </section>
 
       {/* Why It Matters Section */}
@@ -112,23 +135,39 @@ const BrandingEcommerce = () => {
         </div>
       </section>
 
-      {/* What We Offer Section */}
+      {/* Combined Cards Section with Vertical Connectors */}
       <section className="py-16">
         <div className="container mx-auto px-4">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12">
             What We Offer
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
             {offerings.map((offer, index) => (
-              <div
-                key={index}
-                className="bg-white p-6 rounded-lg shadow-md border border-gray-200 flex flex-col items-center"
-              >
-                <div className="mb-4">{offer.icon}</div>
-                <h3 className="text-xl font-semibold mb-2 text-gray-800 text-center">
-                  {offer.title}
-                </h3>
-                <p className="text-gray-600 text-center">{offer.description}</p>
+              <div key={index} className="flex flex-col items-center">
+                {/* Top Card from "What We Offer" */}
+                <div className="bg-white p-6 rounded-lg shadow-md border border-gray-200 flex flex-col items-center min-h-[330px]">
+                  <div className="mb-4">{offer.icon}</div>
+                  <h3 className="text-xl font-semibold mb-2 text-gray-800 text-center">
+                    {offer.title}
+                  </h3>
+                  <p className="text-gray-600 text-center">{offer.description}</p>
+                </div>
+
+                {/* Connector Line between cards */}
+                <div className="flex flex-col items-center my-4">
+                  {/* Vertical line */}
+                  <div className="w-0.5 h-6 bg-gray-600"></div>
+                  {/* Dot marker at the connection point */}
+                  <div className="w-2 h-2 bg-gray-700 rounded-full -mt-1"></div>
+                </div>
+
+                {/* Bottom Card */}
+                <div className="bg-white p-6 rounded-lg shadow-md border border-gray-200 flex flex-col items-center min-h-[220px]">
+                  <h3 className="text-xl font-semibold mb-2 text-gray-800 text-center">
+                    {newCards[index].title}
+                  </h3>
+                  <p className="text-gray-600 text-center">{newCards[index].description}</p>
+                </div>
               </div>
             ))}
           </div>
