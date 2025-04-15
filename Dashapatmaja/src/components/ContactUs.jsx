@@ -115,7 +115,7 @@ function ContactUs() {
         {/* Contact Information */}
         <div className="col-span-1 space-y-4">
           <p className="text-lg text-gray-700">
-            We are eager to collaborate and transform your business with innovative solutions.
+          Let us help you scale better.
           </p>
 
           <div>

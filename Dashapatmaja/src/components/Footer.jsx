@@ -23,7 +23,7 @@ const Footer = () => {
                         </h3>
                         <div className="ml-2">
                             <p className="text-base">
-                                Explore how technologies can transform your busnesss operations, enhance efficiency, and create a sustainable future. Let's innovate together!
+                            Explore how the right technology can elevate your business—enhancing efficiency, simplifying everyday operations, and paving the way for a more sustainable future. Together, let’s turn ideas into impact.
                             </p>
                             {/* <p><Link to="/" onClick={() => setIsOpen(false)}>Home</Link></p> */}
                             {/* <p><Link to="/about" onClick={() => setIsOpen(false)}>About Us</Link></p> */}

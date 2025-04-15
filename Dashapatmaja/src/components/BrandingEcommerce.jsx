@@ -144,7 +144,7 @@ const BrandingEcommerce = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
             {offerings.map((offer, index) => (
               <div key={index} className="flex flex-col items-center">
-                {/* Top Card from "What We Offer" */}
+                {/* Top Card */}
                 <div className="bg-white p-6 rounded-lg shadow-md border border-gray-200 flex flex-col items-center min-h-[330px]">
                   <div className="mb-4">{offer.icon}</div>
                   <h3 className="text-xl font-semibold mb-2 text-gray-800 text-center">
@@ -153,12 +153,9 @@ const BrandingEcommerce = () => {
                   <p className="text-gray-600 text-center">{offer.description}</p>
                 </div>
 
-                {/* Connector Line between cards */}
-                <div className="flex flex-col items-center my-4">
-                  {/* Vertical line */}
-                  <div className="w-0.5 h-6 bg-gray-600"></div>
-                  {/* Dot marker at the connection point */}
-                  <div className="w-2 h-2 bg-gray-700 rounded-full -mt-1"></div>
+                {/* Connector Line between cards (line now directly touches cards with no extra margins, dot removed) */}
+                <div className="flex items-center">
+                  <div className="w-0.5 h-10 bg-gray-600"></div>
                 </div>
 
                 {/* Bottom Card */}

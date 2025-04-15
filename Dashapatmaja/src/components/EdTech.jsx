@@ -1,5 +1,6 @@
 import React from 'react';
 import Background from './Background';
+
 const EdTechPage = () => {
   const offerings = [
     {
@@ -76,6 +77,7 @@ const EdTechPage = () => {
       ),
     },
   ];
+
   const newCards = [
     {
       title: "Card One",
@@ -104,17 +106,15 @@ const EdTechPage = () => {
       <section className="relative flex flex-col items-center justify-center h-[400px] text-white text-center px-4 overflow-hidden">
         <Background />
         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white z-10 mb-4">
-            Ed-Tech
-          </h1>
-          <p className="text-lg sm:text-xl text-white z-10 mb-8">
-            Innovative Learning Solutions for the Future of Education
-          </p>
-          <p className="max-w-2xl mx-auto text-white z-10">
-            We develop next-generation educational tools that integrate technology to enhance teaching and learning experiences. Our products are designed for students, professors, and institutions looking to modernize education.
-          </p>
-     
+          Ed-Tech
+        </h1>
+        <p className="text-lg sm:text-xl text-white z-10 mb-8">
+          Innovative Learning Solutions for the Future of Education
+        </p>
+        <p className="max-w-2xl mx-auto text-white z-10">
+          We design innovative educational tools that thoughtfully integrate technology to enhance the learning experience. Whether you're a student, educator, or institution, our solutions support a more engaging, effective, and modern approach to education.
+        </p>
       </section>
-
 
       {/* Why It Matters Section */}
       <section className="py-12 bg-gray-100">
@@ -137,7 +137,7 @@ const EdTechPage = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
             {offerings.map((offer, index) => (
               <div key={index} className="flex flex-col items-center">
-                {/* Top Card from "What We Offer" */}
+                {/* Top Card */}
                 <div className="bg-white p-6 rounded-lg shadow-md border border-gray-200 flex flex-col items-center min-h-[330px]">
                   <div className="mb-4">{offer.icon}</div>
                   <h3 className="text-xl font-semibold mb-2 text-gray-800 text-center">
@@ -146,12 +146,9 @@ const EdTechPage = () => {
                   <p className="text-gray-600 text-center">{offer.description}</p>
                 </div>
 
-                {/* Connector Line between cards */}
-                <div className="flex flex-col items-center my-4">
-                  {/* Vertical line */}
-                  <div className="w-0.5 h-6 bg-gray-600"></div>
-                  {/* Dot marker at the connection point */}
-                  <div className="w-2 h-2 bg-gray-700 rounded-full -mt-1"></div>
+                {/* Connector Line (without extra margin so it touches the cards) */}
+                <div className="flex flex-col items-center">
+                  <div className="w-0.5 h-10 bg-gray-600" />
                 </div>
 
                 {/* Bottom Card */}

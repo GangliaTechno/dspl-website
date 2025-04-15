@@ -14,18 +14,18 @@ const Home = () => {
       image: "assets/branding.png",
       description: [
         <>
-          We specialize in developing cutting-edge technologies and products
-          that enhance both physical and mental well-being. Our focus is on
-          creating solutions that improve healthcare accessibility, promote
-          overall wellness, and integrate seamlessly into daily life.
+          At Dashapatmaja Solutions, we build technology that puts well-being first. 
+          Our mission is to make healthcare more accessible, wellness more achievable, 
+          and smart solutions a seamless part of everyday life. Whether it’s enhancing 
+          physical health or supporting mental balance, our products are designed to 
+          help people live better, every day.
         </>,
         <>
-          Our offerings include <strong>innovative medical devices</strong>{" "}
-          designed for better patient care,{" "}
-          <strong>wellness applications</strong> that support healthy living and
-          mental well-being, and{" "}
-          <strong>personalized healthcare solutions</strong> powered by AI and
-          data analytics to provide tailored health recommendations.
+          From intelligent medical devices that improve patient outcomes to wellness 
+          apps that inspire healthy habits, and AI-powered platforms that deliver 
+          personalized health insights—we offer powerful, easy-to-use tools that drive 
+          real results. Join the future of health and wellness with solutions that 
+          care as much as you do.
         </>,
       ],
       path: "/branding",
@@ -35,18 +35,16 @@ const Home = () => {
       image: "assets/edtech.png",
       description: [
         <>
-          We specialize in <strong>edge computing solutions</strong>, bringing
-          processing power closer to data sources to enhance speed, efficiency,
-          and real-time decision-making. Our expertise ensures seamless
-          integration of smart technologies while optimizing performance for
-          various industries.
+          At Dashapatmaja Solutions, we specialize in advanced computing solutions that 
+          bring processing power closer to your data sources, enhancing speed, efficiency, 
+          and real-time decision-making. Our expertise ensures seamless integration of smart 
+          technologies while optimizing performance across various industries.
         </>,
         <>
-          Our services include <strong>IoT integration</strong> for real-time
-          data processing,
-          <strong> smart device development</strong> to enable efficient edge
-          operations, and <strong>data security solutions</strong> that
-          safeguard edge devices and networks with robust protection measures.
+          We offer a full suite of services, including IoT integration for real-time data 
+          processing, smart device development to enhance operations, and robust data 
+          security solutions that protect your devices and networks from evolving threats. 
+          Let us help you unlock the true potential of modern computing for your business.
         </>,
       ],
       path: "/edtech",
@@ -56,17 +54,16 @@ const Home = () => {
       image: "assets/research.png",
       description: [
         <>
-          Our <strong>R&D division</strong> is the driving force behind our
-          innovation, constantly developing new technologies and enhancing
-          existing solutions. Through continuous research and experimentation,
-          we push the boundaries of advancement across various fields.
+          At Dashapatmaja Solutions, our R&D division fuels our relentless drive for innovation, 
+          constantly developing cutting-edge technologies and improving existing solutions. 
+          Through continuous research and experimentation, we push the limits of what's possible, 
+          delivering results that make a real difference.
         </>,
         <>
-          Our focus areas include <strong>biomedical research</strong> for
-          groundbreaking health solutions,{" "}
-          <strong>technological innovation</strong> in AI, machine learning, and
-          edge computing, and <strong>collaborative projects</strong> with
-          academic and industry leaders to accelerate innovation.
+          Our focus spans groundbreaking biomedical research for transformative health solutions, 
+          advanced technologies in AI, machine learning, and edge computing, and powerful 
+          collaborations with academic and industry leaders to accelerate progress. 
+          Join us at the forefront of innovation and experience the future, today.
         </>,
       ],
       path: "/research",
@@ -120,11 +117,9 @@ const Home = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.3 }}
           >
-            At Dashapatmaja Solutions, we specialize in three core domains –
-            Branding & E-commerce, Ed-Tech, and Research & Development. We
-            empower businesses to establish strong brands, develop innovative
-            educational technology solutions, and drive cutting-edge research
-            that makes a global impact.
+            At Dashapatmaja Solutions, we drive innovation across Branding &amp; E-commerce, Ed-Tech, and Research &amp; Development.
+            We collaborate with businesses to craft distinctive brand experiences, build transformative educational technologies, and pioneer research that shapes industries and inspires global change.
+            Our integrated approach ensures every solution we deliver is thoughtful, future-ready, and rooted in real-world impact.
           </motion.p>
           <motion.div
             className="mt-10 flex flex-col md:flex-row gap-6 md:gap-x-10 items-center"
@@ -132,14 +127,6 @@ const Home = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.5 }}
           >
-            {/* <motion.button
-              className="bg-yellow-500 text-black px-6 py-3 font-semibold rounded w-full md:w-auto"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => navigate("/our-expertise")}
-            >
-              OUR PRODUCTS
-            </motion.button> */}
             <motion.button
               className="border border-white px-6 py-3 font-semibold rounded w-full md:w-auto"
               whileHover={{ scale: 1.05 }}
@@ -213,37 +200,57 @@ const Home = () => {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {industries.map((industry, index) => (
-            <motion.div
-              key={index}
-              className="bg-white shadow-lg rounded-lg overflow-hidden cursor-pointer"
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
-              onClick={() => {
-                window.scrollTo(0, 0);
-                navigate(industry.path);
-              }}
-              
-            >
-              <div className="relative w-[280px] h-[280px] mx-auto mt-6 overflow-hidden">
-                <img
-                  src={industry.image}
-                  alt={industry.title}
-                  className="w-full h-full object-cover rounded-full brightness-85"
-                />
+            // Container wrapping the two cards for each industry with a connecting line
+            <div key={index} className="flex flex-col items-center">
+              {/* First Card: Contains image, title, and first description paragraph */}
+              <motion.div
+                className="bg-white shadow-lg rounded-lg overflow-hidden cursor-pointer w-full"
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+                onClick={() => {
+                  window.scrollTo(0, 0);
+                  navigate(industry.path);
+                }}
+              >
+                <div className="relative w-[280px] h-[280px] mx-auto mt-6 overflow-hidden">
+                  <img
+                    src={industry.image}
+                    alt={industry.title}
+                    className="w-full h-full object-cover rounded-full brightness-85"
+                  />
+                </div>
+                <div className="p-6">
+                  <h3 className="text-2xl font-bold mb-2">{industry.title}</h3>
+                  <p className="mb-4 text-gray-700">
+                    {industry.description[0]}
+                  </p>
+                </div>
+              </motion.div>
+
+              {/* Connecting Line */}
+              <div className="flex justify-center">
+                <div className="w-0.5 h-10 bg-gray-700"></div>
               </div>
 
-              <div className="p-6">
-                <h3 className="text-2xl font-bold mb-2">{industry.title}</h3>
-                <div className="text-gray-700">
-                  {industry.description.map((line, idx) => (
-                    <p key={idx} className="mb-4">
-                      {line}
-                    </p>
-                  ))}
+              {/* Second Card: Contains the second description paragraph */}
+              <motion.div
+                className="bg-white shadow-lg rounded-lg overflow-hidden cursor-pointer w-full"
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.2 + 0.1 }}
+                onClick={() => {
+                  window.scrollTo(0, 0);
+                  navigate(industry.path);
+                }}
+              >
+                <div className="p-6">
+                  <p className="mb-4 text-gray-700">
+                    {industry.description[1]}
+                  </p>
                 </div>
-              </div>
-            </motion.div>
+              </motion.div>
+            </div>
           ))}
         </div>
       </section>
