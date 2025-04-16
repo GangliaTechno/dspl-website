@@ -147,7 +147,7 @@ const BrandingEcommerce = () => {
 
                 {/* Connector Line between cards (line now directly touches cards with no extra margins, dot removed) */}
                 <div className="flex items-center">
-                  <div className="w-0.5 h-10 bg-gray-600"></div>
+                  <div className="w-0.5 h-10 bg-gray-700"></div>
                 </div>
 
                  {/* Bottom Card with fixed width and height */}

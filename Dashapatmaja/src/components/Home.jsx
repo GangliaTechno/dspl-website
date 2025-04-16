@@ -11,7 +11,7 @@ const Home = () => {
   const industries = [
     {
       title: "Branding and Ecommerce",
-      image: "assets/branding.png",
+      image: "assets/branding.jpeg",
       description: [
         <>
           At Dashapatmaja Solutions, we build technology that puts well-being first. 
@@ -32,7 +32,7 @@ const Home = () => {
     },
     {
       title: "Ed-Tech",
-      image: "assets/edtech.png",
+      image: "assets/edtech.jpeg",
       description: [
         <>
           At Dashapatmaja Solutions, we specialize in advanced computing solutions that 
@@ -51,7 +51,7 @@ const Home = () => {
     },
     {
       title: "Research and Development",
-      image: "assets/research.png",
+      image: "assets/r&d.jpeg",
       description: [
         <>
           At Dashapatmaja Solutions, our R&D division fuels our relentless drive for innovation, 
@@ -217,7 +217,7 @@ const Home = () => {
                   <img
                     src={industry.image}
                     alt={industry.title}
-                    className="w-full h-full object-cover rounded-full brightness-85"
+                    className="w-full h-full object-cover rounded-full brightness-95"
                   />
                 </div>
                 <div className="p-6">

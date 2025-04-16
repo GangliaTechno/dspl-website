@@ -140,7 +140,7 @@ const EdTechPage = () => {
 
                 {/* Connector Line */}
                 <div className="flex flex-col items-center">
-                  <div className="w-0.5 h-10 bg-gray-600" />
+                  <div className="w-0.5 h-10 bg-gray-700" />
                 </div>
 
                 {/* Bottom Card with fixed width and height */}

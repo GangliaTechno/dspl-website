@@ -42,7 +42,7 @@ function AboutUs() {
       <section className="relative flex flex-col items-center justify-center h-[400px] text-white text-center px-4 overflow-hidden">
         <Background />
         <motion.h1
-          className="relative text-4xl md:text-6xl lg:text-8xl font-bold leading-tight text-center z-10  font-custom" 
+          className="relative text-4xl md:text-6xl lg:text-8xl font-bold leading-tight text-center z-10" 
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}

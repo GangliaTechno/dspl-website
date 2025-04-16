@@ -137,7 +137,7 @@ const ResearchDevelopmentPage = () => {
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-4">
             Why It Matters
           </h2>
-          <p className="text-base sm:text-lg md:text-xl text-gray-600">
+          <p className="text-base sm:text-lg md:text-xl text-gray-700">
             Groundbreaking research leads to technological advancements and innovation. Our mission is to push the boundaries of knowledge by collaborating with eminent professionals and institutions worldwide.
           </p>
         </div>
