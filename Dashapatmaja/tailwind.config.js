@@ -2,7 +2,7 @@ module.exports = {
     theme: {
       extend: {
         fontFamily: {
-          custom: ['"font-custom"', 'sans-serif'],
+         
         },
       },
     },
