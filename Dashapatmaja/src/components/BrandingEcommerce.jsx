@@ -86,10 +86,10 @@ const BrandingEcommerce = () => {
 
   const newCards = [
     {
-      src: "assets/ecommerce.jpeg",
+      src: "assets/newecommerce.jpeg",
     },
     {
-      src: "assets/band-development.jpeg",
+      src: "assets/newbrand.jpeg",
     },
     {
       src: "assets/seo.jpeg",
@@ -151,7 +151,7 @@ const BrandingEcommerce = () => {
                 </div>
 
                  {/* Bottom Card with fixed width and height */}
-                 <div className="bg-white rounded-lg shadow-md border border-gray-200 flex items-center justify-center w-[300px] h-[220px] p-4">
+                 <div className="bg-white rounded-lg shadow-md border border-gray-200 flex items-center justify-center w-[300px] h-[230px] p-4">
                 <img
                   src={newCards[index].src}
                   alt="Card Visual"
