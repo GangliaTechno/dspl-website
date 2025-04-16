@@ -18,7 +18,7 @@ const Home = () => {
           Our mission is to make healthcare more accessible, wellness more achievable, 
           and smart solutions a seamless part of everyday life. Whether it’s enhancing 
           physical health or supporting mental balance, our products are designed to 
-          help people live better, every day.
+          help people live better.
         </>,
         <>
           From intelligent medical devices that improve patient outcomes to wellness 
