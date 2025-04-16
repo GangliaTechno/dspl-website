@@ -102,16 +102,16 @@ const ResearchDevelopmentPage = () => {
 
   const newCards = [
     {
-      src: "public/assets/theortical.jpeg",
+      src: "assets/theortical.jpeg",
     },
     {
-      src: "public/assets/collabrativresearch.jpeg",
+      src: "assets/collabrativresearch.jpeg",
     },
     {
-      src: "public/assets/publication.jpeg",
+      src: "assets/publication.jpeg",
     },
     {
-      src: "public/assets/patent.jpeg",
+      src: "assets/patent.jpeg",
     },
   ];
 

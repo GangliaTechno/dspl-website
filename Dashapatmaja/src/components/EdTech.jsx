@@ -80,16 +80,16 @@ const EdTechPage = () => {
 
   const newCards = [
     {
-      src: "public/assets/smartlearning.jpeg",
+      src: "assets/smartlearning.jpeg",
     },
     {
-      src: "public/assets/educationplatorm.jpeg",
+      src: "assets/educationplatorm.jpeg",
     },
     {
-      src: "public/assets/aibased.jpeg",
+      src: "assets/aibased.jpeg",
     },
     {
-      src: "public/assets/researchtools.jpeg",
+      src: "assets/researchtools.jpeg",
     },
   ];
 

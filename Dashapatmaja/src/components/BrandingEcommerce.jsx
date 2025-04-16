@@ -86,16 +86,16 @@ const BrandingEcommerce = () => {
 
   const newCards = [
     {
-      src: "public/assets/ecommerce.jpeg",
+      src: "assets/ecommerce.jpeg",
     },
     {
-      src: "public/assets/band-development.jpeg",
+      src: "assets/band-development.jpeg",
     },
     {
-      src: "public/assets/seo.jpeg",
+      src: "assets/seo.jpeg",
     },
     {
-      src: "public/assets/productdevelopment.jpeg",
+      src: "assets/productdevelopment.jpeg",
     },
   ];
 
