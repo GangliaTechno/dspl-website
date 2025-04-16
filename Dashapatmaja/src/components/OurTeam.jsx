@@ -10,7 +10,7 @@ const teamMembers = [
 
 const teamMembers2 = [
   { name: "Mr. Vishnu U Pillai", role: "Director", image: "/assets/vishnu.png" },
-  { name: "Ms. Staissy Salu", role: "Chief Operating Officer (COO)", image: "/assets/newpfp.png" },
+  { name: "Ms. Staissy Salu", role: "Chief Operating Officer", image: "/assets/newpfp.png" },
   { name: "Mr. Namesh Malarout", role: "Chief Marketing Officer", image: "/assets/namesh.png" },
 ];
 
