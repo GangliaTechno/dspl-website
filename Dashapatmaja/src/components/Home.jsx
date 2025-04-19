@@ -14,18 +14,10 @@ const Home = () => {
       image: "assets/branding.jpeg",
       description: [
         <>
-          At Dashapatmaja Solutions, we build technology that puts well-being first. 
-          Our mission is to make healthcare more accessible, wellness more achievable, 
-          and smart solutions a seamless part of everyday life. Whether it’s enhancing 
-          physical health or supporting mental balance, our products are designed to 
-          help people live better.
+         Our mission is to make meaningful innovation more accessible, everyday challenges more manageable, and smart solutions a seamless part of modern life. Whether it’s enhancing performance, enabling balance, or empowering better decisions—our products are designed to help people and businesses thrive.
         </>,
         <>
-          From intelligent medical devices that improve patient outcomes to wellness 
-          apps that inspire healthy habits, and AI-powered platforms that deliver 
-          personalized health insights—we offer powerful, easy-to-use tools that drive 
-          real results. Join the future of health and wellness with solutions that 
-          care as much as you do.
+          From intelligent platforms that drive measurable impact to intuitive tools that simplify complexity, we deliver powerful, easy-to-use solutions rooted in real-world needs. Join the future with technology that’s thoughtful, transformative, and made for those who care.
         </>,
       ],
       path: "/branding",
@@ -36,12 +28,10 @@ const Home = () => {
       description: [
         <>
          At Dashapatmaja Solutions, we build technology that puts people first.
-Our mission is to make meaningful innovation more accessible, everyday challenges more manageable, and smart solutions a seamless part of modern life. Whether it’s enhancing performance, enabling balance, or empowering better decisions—our products are designed to help people and businesses thrive.
+Our mission is to make meaningful innovation more accessible, everyday challenges more manageable, and smart solutions a seamless part of modern life. Whether it’s enhancing performance, enabling balance, or empowering better decisions—our products are designed to help people and businesses thrive.At Dashapatmaja Solutions, we specialize in advanced computing solutions that bring processing power closer to your data sources, enhancing speed, efficiency, and real-time decision-making. Our expertise ensures seamless integration of smart technologies while optimizing performance across various industries.
         </>,
         <>
-        From intelligent platforms that drive measurable impact to intuitive tools that simplify complexity, we deliver powerful, easy-to-use solutions rooted in real-world needs. Join the future with technology that’s thoughtful, transformative, and made for those who care.
-
-
+        We offer a full suite of services, including IoT integration for real-time data processing, smart device development to enhance operations, and robust data security solutions that protect your devices and networks from evolving threats. Let us help you unlock the true potential of modern computing for your business.
         </>,
       ],
       path: "/edtech",
@@ -51,16 +41,13 @@ Our mission is to make meaningful innovation more accessible, everyday challenge
       image: "assets/r&d.jpeg",
       description: [
         <>
-          At Dashapatmaja Solutions, our R&D division fuels our relentless drive for innovation, 
-          constantly developing cutting-edge technologies and improving existing solutions. 
-          Through continuous research and experimentation, we push the limits of what's possible, 
-          delivering results that make a real difference.
+          At Dashapatmaja Solutions, our R&D division powers our commitment to innovation—constantly exploring new frontiers, enhancing existing capabilities, and driving breakthrough solutions.
+Through continuous research, experimentation, and refinement, we turn bold ideas into practical advancements that create meaningful impact.
         </>,
         <>
-          Our focus spans groundbreaking biomedical research for transformative health solutions, 
-          advanced technologies in AI, machine learning, and edge computing, and powerful 
-          collaborations with academic and industry leaders to accelerate progress. 
-          Join us at the forefront of innovation and experience the future, today.
+          Our focus spans emerging technologies, intelligent systems, and scalable solutions designed to solve real-world challenges. We collaborate closely with academic and industry partners to accelerate progress and shape the future across diverse domains.
+
+Join us at the forefront of innovation—and discover what’s next.
         </>,
       ],
       path: "/research",
