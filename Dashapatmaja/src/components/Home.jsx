@@ -173,14 +173,14 @@ const Home = () => {
 
         {/* Right Section */}
         <div
-          className={`min-h-full grid grid-cols-1 sm:grid-cols-2 gap-6 p-6 md:p-10 md:h-[100.5vh] md:w-1/2 w-full bg-white rounded-lg shadow-lg transition-all duration-1000 ${
+          className={`min-h-full grid grid-cols-1 sm:grid-cols-2 gap-6 p-6 cursor-pointer md:p-10 md:h-[100.5vh] md:w-1/2 w-full bg-white rounded-lg shadow-lg transition-all duration-1000 ${
             isVisible ? "translate-x-0 opacity-100" : "translate-x-20 opacity-0"
           }`}
         >
           {whychooseus.map((item, index) => (
             <div
               key={index}
-              className="bg-gray-100 p-4 md:p-6 rounded-lg shadow-md hover:shadow-xl transition duration-300"
+              className="bg-gray-100 p-4 md:p-6 rounded-lg shadow-md cursor-pointer hover:shadow-xl transition duration-300"
             >
               <h3 className="text-lg md:text-xl font-semibold flex items-center gap-2">
                 <span className="text-2xl"></span> {item.title}
