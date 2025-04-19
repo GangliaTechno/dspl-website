@@ -117,9 +117,9 @@ const Home = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.3 }}
           >
-            At Dashapatmaja Solutions, we drive innovation across Branding &amp; E-commerce, Ed-Tech, and Research &amp; Development.
-            We collaborate with businesses to craft distinctive brand experiences, build transformative educational technologies, and pioneer research that shapes industries and inspires global change.
-            Our integrated approach ensures every solution we deliver is thoughtful, future-ready, and rooted in real-world impact.
+          At Dashapatmaja Solutions, we bridge creativity and strategic insight—driving innovation across Branding & E-commerce, Ed-Tech, and Research & Development.
+We partner with businesses not only to craft distinctive brand experiences and transformative educational technologies, but also to deliver high-impact advisory and consulting services.
+Whether it’s shaping go-to-market strategies, enabling digital transformation, or conducting industry-defining research, we bring the analytical rigor and executional excellence typically associated with top-tier firms—while keeping our solutions bold, future-ready, and grounded in real-world impact.
           </motion.p>
           <motion.div
             className="mt-10 flex flex-col md:flex-row gap-6 md:gap-x-10 items-center"
