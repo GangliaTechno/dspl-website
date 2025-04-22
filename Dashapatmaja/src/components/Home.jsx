@@ -27,13 +27,13 @@ const Home = () => {
       image: "assets/edtech.jpeg",
       description: [
         <>
-         At Dashapatmaja Solutions, we build technology that puts people first.
-Our mission is to make meaningful innovation more accessible, everyday challenges more manageable, and smart solutions a seamless part of modern life. Whether it’s enhancing performance, enabling balance, or empowering better decisions—our products are designed to help people and businesses thrive.At Dashapatmaja Solutions, we specialize in advanced computing solutions that bring processing power closer to your data sources, enhancing speed, efficiency, and real-time decision-making. Our expertise ensures seamless integration of smart technologies while optimizing performance across various industries.
+          At Dashapatmaja Solutions, we specialize in advanced computing solutions that bring processing power closer to your data sources, enhancing speed, efficiency, and real-time decision-making. Our expertise ensures seamless integration of smart technologies while optimizing performance across various industries.
         </>,
         <>
         We offer a full suite of services, including IoT integration for real-time data processing, smart device development to enhance operations, and robust data security solutions that protect your devices and networks from evolving threats. Let us help you unlock the true potential of modern computing for your business.
         </>,
       ],
+
       path: "/edtech",
     },
     {
