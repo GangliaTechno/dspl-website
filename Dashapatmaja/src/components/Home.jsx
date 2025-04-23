@@ -27,6 +27,7 @@ const Home = () => {
       image: "assets/edtech.jpeg",
       description: [
         <>
+
           At Dashapatmaja Solutions, we specialize in advanced computing solutions that bring processing power closer to your data sources, enhancing speed, efficiency, and real-time decision-making. Our expertise ensures seamless integration of smart technologies while optimizing performance across various industries.
         </>,
         <>
@@ -179,65 +180,61 @@ Whether it’s shaping go-to-market strategies, enabling digital transformation,
 
       {/* Our Industries of Impact Section */}
       <section className="mt-16 mb-20 mx-0 px-4 md:px-20 md:mx-24">
-        <h2 className="text-3xl md:text-4xl font-bold text-left mb-8">
-          Our Industries of Impact
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {industries.map((industry, index) => (
-            // Container wrapping the two cards for each industry with a connecting line
-            <div key={index} className="flex flex-col items-center">
-              {/* First Card: Contains image, title, and first description paragraph */}
-              <motion.div
-                className="bg-white shadow-lg rounded-lg overflow-hidden cursor-pointer w-full"
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                onClick={() => {
-                  window.scrollTo(0, 0);
-                  navigate(industry.path);
-                }}
-              >
-                <div className="relative w-[280px] h-[280px] mx-auto mt-6 overflow-hidden">
-                  <img
-                    src={industry.image}
-                    alt={industry.title}
-                    className="w-full h-full object-cover rounded-full brightness-95"
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="text-2xl font-bold mb-2">{industry.title}</h3>
-                  <p className="mb-4 text-gray-700">
-                    {industry.description[0]}
-                  </p>
-                </div>
-              </motion.div>
-
-              {/* Connecting Line */}
-              <div className="flex justify-center">
-                <div className="w-0.5 h-10 bg-gray-700"></div>
+      <h2 className="text-3xl md:text-4xl font-bold text-left mb-8">
+        Our Industries of Impact
+      </h2>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {industries.map((industry, index) => (
+          <div key={index} className="flex flex-col items-center">
+            <motion.div
+              className="bg-white shadow-lg rounded-lg overflow-hidden cursor-pointer w-full h-[650px]"
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.2 }}
+              onClick={() => {
+                window.scrollTo(0, 0);
+                navigate(industry.path);
+              }}
+            >
+              <div className="relative w-[280px] h-[280px] mx-auto mt-6 overflow-hidden">
+                <img
+                  src={industry.image}
+                  alt={industry.title}
+                  className="w-full h-full object-cover rounded-full brightness-95"
+                />
               </div>
+              <div className="p-6">
+                <h3 className="text-2xl font-bold mb-2">{industry.title}</h3>
+                <p className="mb-4 text-gray-700">
+                  {industry.description[0]}
+                </p>
+              </div>
+            </motion.div>
 
-              {/* Second Card: Contains the second description paragraph */}
-              <motion.div
-                className="bg-white shadow-lg rounded-lg overflow-hidden cursor-pointer w-full"
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.2 + 0.1 }}
-                onClick={() => {
-                  window.scrollTo(0, 0);
-                  navigate(industry.path);
-                }}
-              >
-                <div className="p-6">
-                  <p className="mb-4 text-gray-700">
-                    {industry.description[1]}
-                  </p>
-                </div>
-              </motion.div>
+            <div className="flex justify-center">
+              <div className="w-0.5 h-10 bg-gray-700"></div>
             </div>
-          ))}
-        </div>
-      </section>
+
+            <motion.div
+              className="bg-white shadow-lg rounded-lg overflow-hidden cursor-pointer w-full h-[270px]"
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.2 + 0.1 }}
+              onClick={() => {
+                window.scrollTo(0, 0);
+                navigate(industry.path);
+              }}
+            >
+              <div className="p-6">
+                <p className="text-gray-700">
+                  {industry.description[1]}
+                </p>
+              </div>
+            </motion.div>
+          </div>
+        ))}
+      </div>
+    </section>
     </div>
   );
 };
