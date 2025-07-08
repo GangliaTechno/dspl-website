@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 
 const teamMembers = [
-  { name: "Dr. Manu Sudhi", role: "Director", image: "/assets/manu.png" },
+  { name: "Dr. Manu Sudhi", role: "Director", image: "/assets/manu_sudhi.png" },
   { name: "Shreepathy Ranga Bhatta", role: "CEO", image: "/assets/sree.jpeg" },
   { name: "Dr. Dasharathraj K Shetty", role: "Mentor", image: "/assets/dr.png" },
   
