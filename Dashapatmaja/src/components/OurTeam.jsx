@@ -11,7 +11,7 @@ const teamMembers = [
 const teamMembers2 = [
 
   { name: "Ms. Staissy Salu", role: "Chief Operating Officer", image: "/assets/staissy.jpg" },
-  { name: "Ms. Anusha Pai", role: "Director", image: "/assets/anu.png" },
+  { name: "Ms. Anusha Pai", role: "Director", image: "/assets/Anusha-mam.png" },
   { name: "Mr. Namesh Malarout", role: "Director", image: "/assets/ceo.png" },
 ];
 
