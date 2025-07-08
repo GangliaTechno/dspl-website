@@ -122,10 +122,10 @@ function AboutUs() {
             </div>
             <h3 className="text-xl font-semibold mb-2 text-center">2025</h3>
             <p className="text-gray-700 text-center">
-              Recieved Grant From MUTBI,MAHE,Manipal under the NIDHI-PRAYAS Scheme.
+             - Recieved Grant From MUTBI,MAHE,Manipal under the NIDHI-PRAYAS Scheme.
             </p>
              <p className="text-gray-700 text-center">
-             Signed a MOU with Amruthanjali Ayurveda for manufacturing and supply of premium Ayurvedic products.
+             - Signed a MOU with Amruthanjali Ayurveda for manufacturing and supply of premium Ayurvedic products.
             </p>
           </div>
           
