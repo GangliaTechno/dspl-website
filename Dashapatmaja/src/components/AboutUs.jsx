@@ -121,6 +121,9 @@ function AboutUs() {
               </svg>
             </div>
             <h3 className="text-xl font-semibold mb-2 text-center">2025</h3>
+             <p className="text-gray-700 text-center">
+    - Incubated at MUTBI,MAHE,Manipal.
+  </p>
             <p className="text-gray-700 text-center">
              - Recieved Grant From MUTBI,MAHE,Manipal under the NIDHI-PRAYAS Scheme.
             </p>
