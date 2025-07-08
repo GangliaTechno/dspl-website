@@ -125,58 +125,56 @@ Whether it’s shaping go-to-market strategies, enabling digital transformation,
       </div>
 
       {/* Why Choose Us Section */}
-      <section className="relative min-h-full -mt-32 flex flex-col md:flex-row items-center md:items-start shadow-lg rounded-lg bg-white lg:ml-44 lg:mr-40">
-        {/* Left Section */}
-        <div
-          className={`min-h-full bg-yellow-400 text-black p-6 md:h-[100.5vh] md:p-14 md:w-1/2 w-full transition-all duration-1000 ${
-            isVisible
-              ? "translate-x-0 opacity-100"
-              : "-translate-x-20 opacity-0"
-          }`}
-        >
-          <h2 className="text-lg font-semibold">Why Choose Us?</h2>
-          <h1 className="text-2xl md:text-4xl font-bold mt-2">
-            Innovate. Educate. Elevate
-          </h1>
-          <p className="mt-4 text-base md:text-lg">
-            At Dashapatmaja Solutions, we believe in innovation as the driving
-            force behind transformation—whether in branding, e-commerce, or
-            technology. Through education, we empower individuals and businesses
-            with cutting-edge Ed-Tech solutions that foster learning and growth.
-            Our commitment to elevation ensures that our research and
-            development initiatives push boundaries, creating global impact. By
-            seamlessly integrating these principles, we help businesses thrive
-            in a dynamic, technology-driven world.
-          </p>
-          <button
-            className="mt-6 bg-blue-600 text-white px-6 py-2 rounded"
-            onClick={() => navigate("/contact")}
-          >
-            WORK WITH US
-          </button>
-        </div>
+      <section className="relative py-16 px-4 md:px-10 lg:ml-44 lg:mr-40 bg-white rounded-lg shadow-lg flex flex-col md:flex-row gap-6">
+  {/* Left Section */}
+  <div
+    className={`bg-yellow-400 text-black p-6 md:p-10 w-full md:w-1/2 transition-all duration-1000 ${
+      isVisible ? "translate-x-0 opacity-100" : "-translate-x-20 opacity-0"
+    }`}
+  >
+    <h2 className="text-lg font-semibold">Why Choose Us?</h2>
+    <h1 className="text-2xl md:text-4xl font-bold mt-2">
+      Innovate. Educate. Elevate
+    </h1>
+    <p className="mt-4 text-base md:text-lg">
+      At Dashapatmaja Solutions, we believe in innovation as the driving
+      force behind transformation—whether in branding, e-commerce, or
+      technology. Through education, we empower individuals and businesses
+      with cutting-edge Ed-Tech solutions that foster learning and growth.
+      Our commitment to elevation ensures that our research and
+      development initiatives push boundaries, creating global impact. By
+      seamlessly integrating these principles, we help businesses thrive
+      in a dynamic, technology-driven world.
+    </p>
+    <button
+      className="mt-6 bg-blue-600 text-white px-6 py-2 rounded"
+      onClick={() => navigate("/contact")}
+    >
+      WORK WITH US
+    </button>
+  </div>
 
-        {/* Right Section */}
-        <div
-          className={`min-h-full grid grid-cols-1 sm:grid-cols-2 gap-6 p-6 cursor-pointer md:p-10 md:h-[100.5vh] md:w-1/2 w-full bg-white rounded-lg shadow-lg transition-all duration-1000 ${
-            isVisible ? "translate-x-0 opacity-100" : "translate-x-20 opacity-0"
-          }`}
-        >
-          {whychooseus.map((item, index) => (
-            <div
-              key={index}
-              className="bg-gray-100 p-4 md:p-6 rounded-lg shadow-md cursor-pointer hover:shadow-xl transition duration-300"
-            >
-              <h3 className="text-lg md:text-xl font-semibold flex items-center gap-2">
-                <span className="text-2xl"></span> {item.title}
-              </h3>
-              <p className="mt-2 text-gray-600 text-sm md:text-base">
-                {item.description}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
+  {/* Right Section */}
+  <div
+    className={`grid grid-cols-1 sm:grid-cols-2 gap-6 p-6 md:p-10 w-full md:w-1/2 bg-white rounded-lg shadow-lg transition-all duration-1000 ${
+      isVisible ? "translate-x-0 opacity-100" : "translate-x-20 opacity-0"
+    }`}
+  >
+    {whychooseus.map((item, index) => (
+      <div
+        key={index}
+        className="bg-gray-100 p-4 md:p-6 rounded-lg shadow-md cursor-pointer hover:shadow-xl transition duration-300"
+      >
+        <h3 className="text-lg md:text-xl font-semibold flex items-center gap-2">
+          {item.title}
+        </h3>
+        <p className="mt-2 text-gray-600 text-sm md:text-base">
+          {item.description}
+        </p>
+      </div>
+    ))}
+  </div>
+</section>
 
       {/* Our Industries of Impact Section */}
       <section className="mt-16 mb-20 mx-0 px-4 md:px-20 md:mx-24">
