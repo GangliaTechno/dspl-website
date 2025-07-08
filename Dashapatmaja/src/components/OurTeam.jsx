@@ -34,7 +34,7 @@ export default function OurTeam() {
     {teamMembers.map((member, index) => (
       <motion.div
         key={index}
-       className="bg-white w-80 h-96 rounded-xl shadow-lg overflow-hidden cursor-pointer flex flex-col items-center p-8"
+        className="bg-white rounded-xl shadow-lg overflow-hidden cursor-pointer flex flex-col items-center p-6"
         whileHover={{ scale: 1.05, boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.2)" }}
         transition={{ duration: 0.3 }}
       >
@@ -56,7 +56,7 @@ export default function OurTeam() {
     {teamMembers2.map((member, index) => (
       <motion.div
         key={index}
-      className="bg-white w-80 h-96 rounded-xl shadow-lg overflow-hidden cursor-pointer flex flex-col items-center p-8"
+        className="bg-white rounded-xl shadow-lg overflow-hidden cursor-pointer flex flex-col items-center p-6"
         whileHover={{ scale: 1.05, boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.2)" }}
         transition={{ duration: 0.3 }}
       >
