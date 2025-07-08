@@ -29,7 +29,7 @@ export default function OurTeam() {
       </div>
 
       {/* Row 1 Centered */}
-<div className="flex justify-center mb-12">
+<div className="flex justify-center mb-5">
   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
     {teamMembers.map((member, index) => (
       <motion.div
