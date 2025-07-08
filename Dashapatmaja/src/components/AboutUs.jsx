@@ -79,20 +79,22 @@ function AboutUs() {
           animate="animate"
           transition={{ duration: 1 }}
         >
-          <div className="bg-white p-4 border border-gray-300 rounded shadow-sm">
-            <div className="flex justify-center mb-2">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3M3 11h18M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
-            </div>
-            <h3 className="text-xl font-semibold mb-2 text-center">2023</h3>
-            <p className="text-gray-700 text-center">
-              Selected by GOK Bioincubator, providing us with cutting-edge facilities and expert mentorship.
-            </p>
-             <p className="text-gray-700 text-center">
-              Launch of flagship projects, including GenAlpha Portable Lab.
-            </p>
-          </div>
+<div className="bg-white p-4 border border-gray-300 rounded shadow-sm">
+  <div className="flex justify-center mb-2">
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3M3 11h18M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+    </svg>
+  </div>
+  <h3 className="text-xl font-semibold mb-2 text-center">2023</h3>
+  <p className="text-gray-700 text-center">
+    - Formed with a vision to innovate at the intersection of technology, education, and research.
+  </p>
+  <p className="text-gray-700 text-center">
+    - Incubated at GOK Bioincubator, Manipal.
+  </p>
+  
+</div>
+
          
           {/* 2024 Milestone */}
           <div className="bg-white p-4 border border-gray-300 rounded shadow-sm">
@@ -102,9 +104,13 @@ function AboutUs() {
               </svg>
             </div>
             <h3 className="text-xl font-semibold mb-2 text-center">2024</h3>
+              <p className="text-gray-700 text-center">
+    - Launch of flagship projects, including the GenAlpha Portable.
+               </p>
             <p className="text-gray-700 text-center">
-              Expansion into AI-driven personalized healthcare solutions.
-            </p>
+    - Launch of premium Ayurvedic brand - Raw Radicles.
+               </p>
+          
           </div>
           {/* Incubation Milestone */}
            {/* 2024 Milestone */}
@@ -116,7 +122,10 @@ function AboutUs() {
             </div>
             <h3 className="text-xl font-semibold mb-2 text-center">2025</h3>
             <p className="text-gray-700 text-center">
-              Recieved Grant From Nidhi-Prayas.
+              Recieved Grant From MUTBI,MAHE,Manipal under the NIDHI-PRAYAS Scheme.
+            </p>
+             <p className="text-gray-700 text-center">
+             Signed a MOU with Amruthanjali Ayurveda for manufacturing and supply of premium Ayurvedic products.
             </p>
           </div>
           
