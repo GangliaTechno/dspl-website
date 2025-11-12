@@ -10,7 +10,7 @@ const teamMembers = [
 
 const teamMembers2 = [
 
-  { name: "Dr. Balakrishna S. Maddodi", role: "Mentor", image: "/assets/staissy.jpg" },
+  { name: "Dr. Balakrishna S. Maddodi", role: "Mentor", image: "/assets/vice_chairman.jpg" },
   { name: "Ms. Anusha Pai", role: "Director", image: "/assets/Anusha-mam.png" },
   { name: "Mr. Namesh Malarout", role: "Director", image: "/assets/ceo.png" },
 ];
