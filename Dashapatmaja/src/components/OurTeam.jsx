@@ -2,15 +2,15 @@ import React from "react";
 import { motion } from "framer-motion";
 
 const teamMembers = [
-  { name: "Dr. Manu Sudhi", role: "Director", image: "/assets/manu_sudhi.png" },
-  { name: "Shreepathy Ranga Bhatta", role: "CEO", image: "/assets/sree.jpeg" },
+  { name: "Dr. Manu Sudhi", role: "Chairman & Director", image: "/assets/manu_sudhi.png" },
+  { name: "Mr. Shreepathy Ranga Bhatta", role: "Managing Director", image: "/assets/sree.jpeg" },
   { name: "Dr. Dasharathraj K Shetty", role: "Mentor", image: "/assets/dr.png" },
   
 ];
 
 const teamMembers2 = [
 
-  { name: "Ms. Staissy Salu", role: "Chief Operating Officer", image: "/assets/staissy.jpg" },
+  { name: "Dr. Balakrishna S. Maddodi", role: "Mentor", image: "/assets/staissy.jpg" },
   { name: "Ms. Anusha Pai", role: "Director", image: "/assets/Anusha-mam.png" },
   { name: "Mr. Namesh Malarout", role: "Director", image: "/assets/ceo.png" },
 ];
