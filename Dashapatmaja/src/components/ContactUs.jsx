@@ -121,7 +121,7 @@ function ContactUs() {
           <div>
             <h2 className="text-xl font-bold text-gray-900">Address:</h2>
             <p className="text-gray-600">
-              IS/CWI/ 002, Manipal GOK Bioincubator, Advanced Research Centre, Madhav Nagar, Manipal – 576104
+              Room No. 12, 4th Floor, MUBTI, Advanced Research Center, Madhava Nagar, Manipal 576104
             </p>
           </div>
 
