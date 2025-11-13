@@ -128,11 +128,12 @@ function ContactUs() {
           <div>
             <h2 className="text-xl font-bold text-gray-900">Phone:</h2>
             <p className="text-gray-600">+91 88619 42440</p>
+            <p className="text-gray-600">+91 90725 56665</p>
           </div>
 
           <div>
             <h2 className="text-xl font-bold text-gray-900">Email:</h2>
-            <p className="text-blue-600 underline">contact@dashapatmaja.in</p>
+            <p className="text-blue-600 underline">dsplmanipal@gmail.com</p>
           </div>
         </div>
 
