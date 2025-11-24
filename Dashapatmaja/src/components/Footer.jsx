@@ -45,6 +45,7 @@ const Footer = () => {
                     {/* Social Section */}
                     <div className="mr-6 items-center">
                         <h3 className="text-xl font-bold mb-6">Team Solutions</h3>
+                        <p className="lg:ml-4 mb-4">Email: director@dashapatmaja.in </p>
                         <p className="lg:ml-4 mb-4">Phone: +91 8861942440 </p>
                         <div className="flex space-x-6 text-2xl lg:ml-4">
                             <Link to="https://www.facebook.com/people/Ganglia-Technologies-Private-Limited/100093543685978/" target="_blank"><FontAwesomeIcon className="transition hover:scale-125" icon={faFacebook} /></Link>
