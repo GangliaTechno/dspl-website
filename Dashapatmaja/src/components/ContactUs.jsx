@@ -121,7 +121,7 @@ function ContactUs() {
           <div>
             <h2 className="text-xl font-bold text-gray-900">Address:</h2>
             <p className="text-gray-600">
-              Room No. 12, 4th Floor, MUBTI, Advanced Research Center, Madhava Nagar, Manipal 576104
+              Room No. 12, 4th Floor, MUTBI, Advanced Research Center, Madhava Nagar, Manipal 576104
             </p>
           </div>
 
@@ -133,7 +133,7 @@ function ContactUs() {
 
           <div>
             <h2 className="text-xl font-bold text-gray-900">Email:</h2>
-            <p className="text-blue-600 underline">dsplmanipal@gmail.com</p>
+            <p className="text-blue-600 underline">director@dashapatmaja.in</p>
           </div>
         </div>
 
