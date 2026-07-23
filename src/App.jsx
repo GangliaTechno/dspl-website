@@ -10,6 +10,7 @@ import Marketing from './pages/Marketing';
 import Branding from './pages/Branding';
 import Ecommerce from './pages/Ecommerce';
 import Contact from './pages/Contact';
+import NotFound from './pages/NotFound';
 import WorkWithUsModal from './components/WorkWithUsModal';
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
             <Route path="/branding" element={<Branding />} />
             <Route path="/ecommerce" element={<Ecommerce />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
         <Footer />
