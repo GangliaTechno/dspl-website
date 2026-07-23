@@ -1,6 +1,6 @@
 import ReactGA from 'react-ga4';
 
-const GA_MEASUREMENT_ID = 'G-QYVQY0Q9KE';
+const GA_MEASUREMENT_ID = import.meta.env.VITE_GA_MEASUREMENT_ID || 'G-QYVQY0Q9KE';
 const IS_DEV = import.meta.env.DEV;
 
 let isInitialized = false;

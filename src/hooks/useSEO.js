@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 const SITE_URL = 'https://dashapatmaja.in';
-const DEFAULT_IMAGE = `${SITE_URL}/src/assets/icon_orange.png`;
+const DEFAULT_IMAGE = `${SITE_URL}/logo.png`;
 
 /**
  * Custom hook to update document title, description, canonical link, OpenGraph, and Twitter tags
@@ -29,7 +29,7 @@ const useSEO = (optsOrTitle, legacyDescription) => {
   useEffect(() => {
     // 1. Document Title
     if (title) {
-      document.title = title.includes('Dashapatmaja') ? title : `${title} | Dashapatmaja Solutions`;
+      document.title = title.includes('Dashapatmaja') || title.includes('Dasha Patmaja') ? title : `${title} | Dasha Patmaja Services`;
     }
 
     const setMetaTag = (selector, nameAttr, nameValue, content) => {

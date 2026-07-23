@@ -311,7 +311,10 @@ const Home = () => {
         .supporter-logo.supporter-logo-1 { height: 48px; }
         .supporter-logo.supporter-logo-2 { height: 210px; }
         .supporter-logo.supporter-logo-dst { height: 60px; }
-        .supporter-logo.supporter-logo-nidhi1 { height: 80px; }
+        .supporter-logo.supporter-logo-nidhi1 {
+          height: 72px;
+          transform: translateY(-6px);
+        }
 
         .supporter-logo:hover {
           opacity: 0.95;
@@ -341,7 +344,10 @@ const Home = () => {
           .supporter-logo.supporter-logo-1 { height: 36px; }
           .supporter-logo.supporter-logo-2 { height: 158px; }
           .supporter-logo.supporter-logo-dst { height: 45px; }
-          .supporter-logo.supporter-logo-nidhi1 { height: 60px; }
+          .supporter-logo.supporter-logo-nidhi1 {
+            height: 54px;
+            transform: translateY(-4px);
+          }
         }
 
         .hero-section .glow-bg {

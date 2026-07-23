@@ -189,7 +189,7 @@ const WorkWithUsModal = () => {
     }
 
     setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    return newErrors;
   };
 
   const categorizeLead = (data) => {
@@ -210,7 +210,10 @@ const WorkWithUsModal = () => {
       return;
     }
 
-    if (validate()) {
+    const validationErrors = validate();
+    const isValid = Object.keys(validationErrors).length === 0;
+
+    if (isValid) {
       const classification = categorizeLead(formData);
       setProcessedLeadInfo(classification);
       
@@ -218,6 +221,11 @@ const WorkWithUsModal = () => {
       setSubmitError('');
 
       const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || '';
+      if (!accessKey) {
+        setSubmitError('Web3Forms access key is missing. Please configure VITE_WEB3FORMS_ACCESS_KEY in environment variables.');
+        setIsSubmitting(false);
+        return;
+      }
 
       const formPayload = new FormData();
       formPayload.append('access_key', accessKey);
@@ -270,10 +278,10 @@ const WorkWithUsModal = () => {
         setIsSubmitting(false);
       }
     } else {
-      const firstErrorKey = Object.keys(errors)[0];
+      const firstErrorKey = Object.keys(validationErrors)[0];
       if (firstErrorKey) {
         const errEl = document.getElementById(`modal-${firstErrorKey}`);
-        if (errEl) {
+        if (errEl && typeof errEl.scrollIntoView === 'function') {
           errEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
       }
