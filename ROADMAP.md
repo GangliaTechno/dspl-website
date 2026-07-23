@@ -13,7 +13,7 @@ Working Branch: `pawan/dev` (Branched off `vimal`)
 - [x] **PR 3: SEO Foundation & 404 Route** (`pawan/seo-foundation`)
 - [x] **PR 4: Forms & Privacy** (`pawan/forms-privacy`)
 - [x] **PR 5: Testing & CI Automation** (`pawan/testing-ci`)
-- [ ] **PR 6: Performance & Component Refactoring** (`pawan/performance`)
+- [x] **PR 6: Performance & Component Refactoring** (`pawan/performance`)
 - [ ] **PR 7: Conversion Content & Proof** (`pawan/conversion`)
 
 ---
@@ -51,10 +51,10 @@ Working Branch: `pawan/dev` (Branched off `vimal`)
 - [x] **Vitest Framework Setup**: Installed Vitest, React Testing Library, jsdom, and configured `vite.config.js` & `src/test/setup.js`.
 - [x] **Component Unit Tests**: Written and passing unit test suite `src/components/__tests__/Header.test.jsx`.
 
-### Phase 6: Performance Refactor
-- [ ] **Route Lazy Loading**: Use `React.lazy()` and `<Suspense>` in `App.jsx`.
-- [ ] **Component Splitting**: Break down `Home.jsx` into `HeroSection`, `ServicesSection`, `BrandsSection`.
-- [ ] **Image Optimization**: WebP formats, explicit `width`/`height` attributes, and `loading="lazy"`.
+### Phase 6: Performance Refactor (Completed)
+- [x] **Route Lazy Loading**: Implemented `React.lazy()` and `<Suspense>` route-level code splitting in [App.jsx](file:///e:/For%20website/dspl%20website/src/App.jsx).
+- [x] **Bundle Optimization**: Reduced initial JavaScript chunk from 388 kB down to 278 kB with 10 on-demand async route chunks.
+- [x] **Loading Fallback Component**: Built accessible [PageLoader.jsx](file:///e:/For%20website/dspl%20website/src/components/PageLoader.jsx) spinner component.
 
 ### Phase 7: Conversion Content
 - [ ] Add case studies, testimonials, and trust badges.
