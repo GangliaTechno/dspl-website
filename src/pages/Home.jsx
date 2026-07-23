@@ -162,6 +162,36 @@ const Home = () => {
         </div>
       </section>
 
+      {/* 3.5. Working Process Section */}
+      <section className="section process-section bg-canvas">
+        <div className="container">
+          <div className="section-header">
+            <span className="section-subtitle">Execution Framework</span>
+            <h2 className="section-title">How We Work With You</h2>
+            <p className="section-title-description">
+              A structured 6-step path to take your brand from initial audit to sustainable growth and market scale.
+            </p>
+          </div>
+
+          <div className="process-grid">
+            {[
+              { num: '01', title: 'Discovery & Audit', text: 'We analyze your current brand positioning, audience data, and market bottlenecks.' },
+              { num: '02', title: 'Strategy & Roadmap', text: 'Define actionable deliverables, timelines, and measurable growth milestones.' },
+              { num: '03', title: 'Branding & Design', text: 'Crafting responsive visual identities, packaging, and high-conversion web UI.' },
+              { num: '04', title: 'Campaign Launch', text: 'Executing multi-channel marketing, performance ads, and customer acquisition.' },
+              { num: '05', title: 'E-Commerce Scale', text: 'Optimizing store conversions, checkout UX, and fulfillment operations.' },
+              { num: '06', title: 'Measurement & Growth', text: 'Tracking key metrics, ROAS, and iteratively improving customer retention.' }
+            ].map((step, idx) => (
+              <div key={idx} className="process-step-card glass">
+                <span className="step-number">{step.num}</span>
+                <h3 className="step-title">{step.title}</h3>
+                <p className="step-text">{step.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* 4. Our Brands Section */}
       <section className="section brands-section">
         <div className="container">
@@ -659,20 +689,55 @@ const Home = () => {
           flex-grow: 1;
         }
 
-        .brand-link {
-          font-family: var(--font-heading);
-          font-size: 0.95rem;
-          font-weight: 700;
-          color: var(--accent);
-          display: inline-flex;
-          align-items: center;
-          gap: 0.5rem;
-          transition: gap 0.2s ease;
-        }
-
         .brand-link:hover {
           gap: 0.75rem;
           color: var(--accent-light);
+        }
+
+        /* Working Process Section Styles */
+        .process-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 2rem;
+        }
+
+        .process-step-card {
+          background: #ffffff;
+          border: 1px solid var(--border-color);
+          padding: 2.5rem 2rem;
+          border-radius: 8px;
+          display: flex;
+          flex-direction: column;
+          position: relative;
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .process-step-card:hover {
+          transform: translateY(-4px);
+          border-color: var(--accent-border-alpha);
+          box-shadow: var(--shadow-lg);
+        }
+
+        .step-number {
+          font-size: 2.5rem;
+          font-weight: 900;
+          color: var(--accent);
+          opacity: 0.85;
+          margin-bottom: 0.75rem;
+          line-height: 1;
+        }
+
+        .step-title {
+          font-size: 1.25rem;
+          font-weight: 800;
+          color: var(--text-heading);
+          margin-bottom: 0.75rem;
+        }
+
+        .step-text {
+          font-size: 0.925rem;
+          color: var(--text-secondary);
+          line-height: 1.6;
         }
 
         /* Responsive Layouts */
