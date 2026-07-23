@@ -17,7 +17,8 @@ const WorkWithUsModal = () => {
     referralSource: '',
     preferredContact: '',
     fileName: '',
-    newsletterOptIn: false
+    newsletterOptIn: false,
+    botcheck: ''
   });
 
   const [errors, setErrors] = useState({});
@@ -111,7 +112,6 @@ const WorkWithUsModal = () => {
     });
   };
 
-  // eslint-disable-next-line no-unused-vars
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -126,7 +126,6 @@ const WorkWithUsModal = () => {
     }
   };
 
-  // eslint-disable-next-line no-unused-vars
   const removeFile = () => {
     setFormData((prev) => ({ ...prev, fileName: '' }));
   };
@@ -164,6 +163,11 @@ const WorkWithUsModal = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (formData.botcheck) {
+      // Silent abort for automated spam bots
+      setSubmitted(true);
+      return;
+    }
     if (validate()) {
       const classification = categorizeLead(formData);
       setProcessedLeadInfo(classification);
@@ -481,6 +485,32 @@ const WorkWithUsModal = () => {
                     ))}
                   </div>
                 </div>
+
+                <div className="form-group">
+                  <label className="form-label">Attach File / Brand Brief (Optional, max 5MB)</label>
+                  {formData.fileName ? (
+                    <div className="file-selected-box" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.75rem 1rem', background: 'rgba(255, 255, 255, 0.05)', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
+                      <span style={{ fontSize: '0.875rem', color: 'var(--text-primary)', wordBreak: 'break-all' }}>📄 {formData.fileName}</span>
+                      <button type="button" onClick={removeFile} style={{ background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer', fontSize: '0.85rem', padding: '0.2rem 0.5rem' }}>Remove</button>
+                    </div>
+                  ) : (
+                    <label className="file-upload-dropzone" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '1.25rem', border: '2px dashed var(--border-color)', borderRadius: '8px', cursor: 'pointer', background: 'rgba(255, 255, 255, 0.02)' }}>
+                      <span style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>Click to attach project brief or document</span>
+                      <input type="file" onChange={handleFileUpload} style={{ display: 'none' }} accept=".pdf,.doc,.docx,.png,.jpg,.jpeg" />
+                    </label>
+                  )}
+                  {errors.file && <span style={{ color: '#ef4444', fontSize: '0.8rem', marginTop: '0.4rem', display: 'block' }}>{errors.file}</span>}
+                </div>
+
+                {/* Honeypot Spam Protection Field */}
+                <input 
+                  type="checkbox" 
+                  name="botcheck" 
+                  className="hidden" 
+                  style={{ display: 'none' }} 
+                  value={formData.botcheck} 
+                  onChange={handleInputChange} 
+                />
               </div>
 
               {submitError && (

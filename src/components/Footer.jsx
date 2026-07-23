@@ -100,9 +100,12 @@ const Footer = () => {
         {/* Bottom copyright */}
         <div className="footer-bottom">
           <p>© 2026 Dashapatmaja Solutions Pvt. Ltd. All rights reserved.</p>
-          <button className="back-to-top" onClick={handleBackToTop}>
-            Back to top
-          </button>
+          <div className="footer-legal-links">
+            <Link to="/privacy" className="legal-link">Privacy Policy & Terms</Link>
+            <button className="back-to-top" onClick={handleBackToTop}>
+              Back to top
+            </button>
+          </div>
         </div>
       </div>
 

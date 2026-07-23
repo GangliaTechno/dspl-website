@@ -108,7 +108,7 @@ const Contact = () => {
           <span className="section-subtitle">Get in Touch</span>
           <h1 className="contact-title">Contact us</h1>
           <p className="contact-description">
-            Have a brand to build, a store to improve, or a campaign to run? Tell us what you need. We reply within two working days.
+            Have a brand to build, a store to improve, or a campaign to run? Tell us what you need. We reply within 24 hours.
           </p>
         </div>
       </section>

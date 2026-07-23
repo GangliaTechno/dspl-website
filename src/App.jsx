@@ -10,6 +10,7 @@ import Marketing from './pages/Marketing';
 import Branding from './pages/Branding';
 import Ecommerce from './pages/Ecommerce';
 import Contact from './pages/Contact';
+import PrivacyPolicy from './pages/PrivacyPolicy';
 import NotFound from './pages/NotFound';
 import WorkWithUsModal from './components/WorkWithUsModal';
 
@@ -29,6 +30,7 @@ function App() {
             <Route path="/branding" element={<Branding />} />
             <Route path="/ecommerce" element={<Ecommerce />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
