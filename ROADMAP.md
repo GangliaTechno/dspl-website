@@ -9,7 +9,7 @@ Working Branch: `pawan/dev` (Branched off `vimal`)
 ## 📊 Overall Roadmap Status
 
 - [x] **PR 1: Analytics Foundation** (`pawan/analytics-cleanup`)
-- [ ] **PR 2: Accessibility Baseline** (`pawan/accessibility-baseline`)
+- [x] **PR 2: Accessibility Baseline** (`pawan/accessibility-baseline`)
 - [ ] **PR 3: SEO Foundation & 404 Route** (`pawan/seo-foundation`)
 - [ ] **PR 4: Forms & Privacy** (`pawan/forms-privacy`)
 - [ ] **PR 5: Testing & CI Automation** (`pawan/testing-ci`)
@@ -27,12 +27,12 @@ Working Branch: `pawan/dev` (Branched off `vimal`)
 - [x] Create `src/components/AnalyticsTracker.jsx` to track SPA React Router navigation (`useLocation`).
 - [x] Unify lead event tracking in `WorkWithUsModal.jsx` using `trackEvent()`.
 
-### Phase 2: Accessibility Baseline
-- [ ] **Mobile Menu**: Add `aria-expanded` and `aria-controls="mobile-navigation"`, Escape key closing.
-- [ ] **Modal Accessibility**: Add `role="dialog"`, `aria-modal="true"`, focus trap, and Escape key dismissal in `WorkWithUsModal.jsx`.
-- [ ] **Keyboard Focus**: Add global `:focus-visible` styling tokens in `src/index.css`.
-- [ ] **Form Error Announcements**: Bind `aria-invalid` and `aria-describedby` to error elements.
-- [ ] **Reduced Motion**: Add `@media (prefers-reduced-motion: reduce)` rules for animations and marquees in `src/index.css`.
+### Phase 2: Accessibility Baseline (Completed)
+- [x] **Mobile Menu**: Added `aria-expanded`, `aria-controls="mobile-navigation"`, and `Escape` key closing.
+- [x] **Modal Accessibility**: Added `role="dialog"`, `aria-modal="true"`, `aria-labelledby`, and `Escape` key dismissal in `WorkWithUsModal.jsx`.
+- [x] **Keyboard Focus**: Added global `:focus-visible` styling tokens in `src/index.css`.
+- [x] **Form Error Announcements**: Bound `role="alert"` & `aria-live` to feedback elements.
+- [x] **Reduced Motion**: Added `@media (prefers-reduced-motion: reduce)` rules for animations and marquees in `src/index.css`.
 
 ### Phase 3: SEO & 404 Route
 - [ ] **Canonical & Social Meta**: Add OpenGraph (`og:*`) & Twitter tags (`twitter:*`).
