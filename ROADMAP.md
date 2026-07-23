@@ -11,7 +11,7 @@ Working Branch: `pawan/dev` (Branched off `vimal`)
 - [x] **PR 1: Analytics Foundation** (`pawan/analytics-cleanup`)
 - [x] **PR 2: Accessibility Baseline** (`pawan/accessibility-baseline`)
 - [x] **PR 3: SEO Foundation & 404 Route** (`pawan/seo-foundation`)
-- [ ] **PR 4: Forms & Privacy** (`pawan/forms-privacy`)
+- [x] **PR 4: Forms & Privacy** (`pawan/forms-privacy`)
 - [ ] **PR 5: Testing & CI Automation** (`pawan/testing-ci`)
 - [ ] **PR 6: Performance & Component Refactoring** (`pawan/performance`)
 - [ ] **PR 7: Conversion Content & Proof** (`pawan/conversion`)
@@ -40,11 +40,11 @@ Working Branch: `pawan/dev` (Branched off `vimal`)
 - [x] **404 Route**: Created `src/pages/NotFound.jsx` with quick links & 404 analytics tracking, wired to `<Route path="*" element={<NotFound />} />` in `App.jsx`.
 - [x] **Sitemap**: Updated `public/sitemap.xml` with `<lastmod>` timestamps and change frequencies.
 
-### Phase 4: Forms & Privacy
-- [ ] **Privacy Policy & Terms**: Create `PrivacyPolicy.jsx` page and footer links.
-- [ ] **Web3Forms Security**: Add honeypot spam protection fields and development submission bypass.
-- [ ] **File Upload**: Implement real file uploading or clean up dummy filename storage.
-- [ ] **Messaging Consistency**: Align response promises ("within 24 hours" vs "2 working days").
+### Phase 4: Forms & Privacy (Completed)
+- [x] **Privacy Policy & Terms**: Created `src/pages/PrivacyPolicy.jsx` page and footer legal links.
+- [x] **Web3Forms Security**: Added honeypot `botcheck` spam protection in lead forms.
+- [x] **File Upload**: Wired up file selector dropzone, filename display, and remove handler in `WorkWithUsModal.jsx`.
+- [x] **Messaging Consistency**: Aligned response promises to 24 hours across Contact and Footer components.
 
 ### Phase 5: Testing & CI
 - [ ] **Vitest & RTL**: Add component tests for form validation and modal behavior.
