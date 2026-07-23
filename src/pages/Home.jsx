@@ -98,20 +98,26 @@ const Home = () => {
         {/* Supported Brand Track (Scrolling Marquee) */}
         <div className="supporter-band">
           <div className="supporter-track">
-            {[...supporterLogos, ...supporterLogos, ...supporterLogos].map((logo, index) => {
-              const isDuplicate = index >= supporterLogos.length;
+            {[...supporterLogos, ...supporterLogos, ...supporterLogos].map(
+              (logo, index) => {
+                const isDuplicate = index >= supporterLogos.length;
 
-              return (
-                <img
-                  key={`${logo.alt}-${index}`}
-                  src={logo.src}
-                  alt={isDuplicate ? '' : logo.alt}
-                  aria-hidden={isDuplicate ? 'true' : undefined}
-                  className={`supporter-logo ${logo.className}`}
-                  loading="lazy"
-                />
-              );
-            })}
+                return (
+                  <div
+                    key={`${logo.alt}-${index}`}
+                    className={`supporter-logo-slot ${logo.className}`}
+                    aria-hidden={isDuplicate ? 'true' : undefined}
+                  >
+                    <img
+                      src={logo.src}
+                      alt={isDuplicate ? '' : logo.alt}
+                      className="supporter-logo"
+                      loading="lazy"
+                    />
+                  </div>
+                );
+              }
+            )}
           </div>
         </div>
       </section>
@@ -286,16 +292,15 @@ const Home = () => {
         .supporter-band {
           width: 100%;
           overflow: hidden;
-          padding: 1rem 0 0 0; /* Removed bottom padding entirely to reduce gap under the track */
+          padding: 1rem 0;
           position: absolute;
-          bottom: -50px; /* Shift down slightly to compensate for empty transparent space at the bottom of logo images */
+          bottom: 0;
           left: 0;
           z-index: 2;
           border-top: none;
-          background: transparent; /* Completely transparent background */
+          background: transparent;
         }
 
-        
         .supporter-track {
           display: flex;
           align-items: center;
@@ -303,27 +308,51 @@ const Home = () => {
           animation: scrollRightToLeft 25s linear infinite;
         }
 
-        .supporter-logo {
-          width: auto;
-          margin: 0 3.5rem;
-          object-fit: contain;
-          filter: brightness(0) invert(1); /* Solid white logos */
-          opacity: 0.45;
-          transition: all 0.3s ease;
+        .supporter-logo-slot {
+          width: 220px;
+          height: 74px;
+          margin: 0 2rem;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          flex: 0 0 auto;
         }
 
-        /* Custom logo heights exactly as requested by user */
-        .supporter-logo.supporter-logo-1 { height: 48px; }
-        .supporter-logo.supporter-logo-2 { height: 210px; }
-        .supporter-logo.supporter-logo-dst { height: 60px; }
-        .supporter-logo.supporter-logo-nidhi1 {
-          height: 72px;
-          transform: translateY(-6px);
+        .supporter-logo {
+          display: block;
+          width: auto;
+          height: auto;
+          max-width: 100%;
+          max-height: 58px;
+          object-fit: contain;
+          object-position: center;
+
+          filter: brightness(0) invert(1);
+          opacity: 0.52;
+          transition: opacity 0.3s ease;
+        }
+
+        .supporter-logo-1 .supporter-logo {
+          max-width: 205px;
+        }
+
+        .supporter-logo-2 .supporter-logo {
+          max-width: 165px;
+        }
+
+        .supporter-logo-dst .supporter-logo {
+          max-width: 180px;
+        }
+
+        .supporter-logo-nidhi1 .supporter-logo {
+          max-width: 130px;
+          transform: translateY(-2px);
         }
 
         .supporter-logo:hover {
           opacity: 0.95;
-          /* Zoom effect not required on hover */
         }
 
         @keyframes scrollRightToLeft {
@@ -338,20 +367,24 @@ const Home = () => {
         /* Mobile Responsive Adjustments */
         @media (max-width: 768px) {
           .hero-section {
-            padding: 7rem 0 10rem; /* Taller mobile padding */
+            padding: 7rem 0 10rem;
           }
           .supporter-band {
-            bottom: -25px; /* Shift down on mobile to offset transparent space */
+            bottom: 0;
+          }
+          .supporter-logo-slot {
+            width: 165px;
+            height: 60px;
+            margin: 0 1rem;
           }
           .supporter-logo {
-            margin: 0 1.5rem;
+            max-height: 44px;
           }
-          .supporter-logo.supporter-logo-1 { height: 36px; }
-          .supporter-logo.supporter-logo-2 { height: 158px; }
-          .supporter-logo.supporter-logo-dst { height: 45px; }
-          .supporter-logo.supporter-logo-nidhi1 {
-            height: 54px;
-            transform: translateY(-4px);
+          .supporter-logo-2 .supporter-logo {
+            max-width: 125px;
+          }
+          .supporter-logo-nidhi1 .supporter-logo {
+            max-width: 105px;
           }
         }
 
