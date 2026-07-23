@@ -13,7 +13,8 @@ const Contact = () => {
     lastName: '',
     email: '',
     helpType: '',
-    message: ''
+    message: '',
+    websiteConfirm: ''
   });
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
@@ -45,6 +46,11 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (formData.websiteConfirm && formData.websiteConfirm.trim() !== '') {
+      setSubmitted(true);
+      return;
+    }
+
     if (validate()) {
       setIsSubmitting(true);
       setSubmitError('');
@@ -175,9 +181,11 @@ const Contact = () => {
                         placeholder="John"
                         value={formData.firstName}
                         onChange={handleChange}
+                        aria-invalid={Boolean(errors.firstName)}
+                        aria-describedby={errors.firstName ? 'firstName-error' : undefined}
                         required
                       />
-                      {errors.firstName && <span className="error-text">{errors.firstName}</span>}
+                      {errors.firstName && <span id="firstName-error" className="error-text" role="alert">{errors.firstName}</span>}
                     </div>
 
                     <div className="form-group half-width">
@@ -190,9 +198,11 @@ const Contact = () => {
                         placeholder="Doe"
                         value={formData.lastName}
                         onChange={handleChange}
+                        aria-invalid={Boolean(errors.lastName)}
+                        aria-describedby={errors.lastName ? 'lastName-error' : undefined}
                         required
                       />
-                      {errors.lastName && <span className="error-text">{errors.lastName}</span>}
+                      {errors.lastName && <span id="lastName-error" className="error-text" role="alert">{errors.lastName}</span>}
                     </div>
                   </div>
 
@@ -206,10 +216,24 @@ const Contact = () => {
                       placeholder="johndoe@gmail.com"
                       value={formData.email}
                       onChange={handleChange}
+                      aria-invalid={Boolean(errors.email)}
+                      aria-describedby={errors.email ? 'email-error' : undefined}
                       required
                     />
-                    {errors.email && <span className="error-text">{errors.email}</span>}
+                    {errors.email && <span id="email-error" className="error-text" role="alert">{errors.email}</span>}
                   </div>
+
+                  {/* Honeypot field */}
+                  <input
+                    type="text"
+                    name="websiteConfirm"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    aria-hidden="true"
+                    value={formData.websiteConfirm}
+                    onChange={handleChange}
+                    style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', opacity: 0 }}
+                  />
 
                   <div className="form-group">
                     <label className="form-label" htmlFor="helpType">What do you need help with?</label>

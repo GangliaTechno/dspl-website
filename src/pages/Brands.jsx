@@ -43,7 +43,7 @@ const Brands = () => {
                     FLAGSHIP CONSUMER BRAND
                   </div>
                   <div className="brand-showcase-logo-wrapper">
-                    <img src={rawRadiclesLogo} alt="Raw Radicles Logo" className="brand-showcase-logo-img" />
+                    <img src={rawRadiclesLogo} alt="Raw Radicles Logo" className="brand-showcase-logo-img" loading="lazy" />
                   </div>
                   <p className="brand-showcase-tagline">Premium chocolate with Ayurveda inside.</p>
                   

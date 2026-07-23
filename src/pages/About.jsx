@@ -189,6 +189,7 @@ const About = () => {
                         src={member.image}
                         alt={member.name}
                         className="team-avatar-image"
+                        loading="lazy"
                         style={{ transform: member.transform || 'none' }}
                       />
                     ) : (

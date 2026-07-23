@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { X, CheckCircle2, AlertCircle } from 'lucide-react';
 import { trackEvent } from '../utils/analytics';
 
 const WorkWithUsModal = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [selectedFile, setSelectedFile] = useState(null);
   const [formData, setFormData] = useState({
     fullName: '',
     companyName: '',
@@ -18,7 +19,7 @@ const WorkWithUsModal = () => {
     preferredContact: '',
     fileName: '',
     newsletterOptIn: false,
-    botcheck: ''
+    websiteConfirm: '' // Honeypot field for bot prevention
   });
 
   const [errors, setErrors] = useState({});
@@ -27,8 +28,12 @@ const WorkWithUsModal = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState('');
 
+  const modalRef = useRef(null);
+  const lastActiveElement = useRef(null);
+
   useEffect(() => {
     const handleOpen = () => {
+      lastActiveElement.current = document.activeElement;
       setIsOpen(true);
     };
 
@@ -53,8 +58,10 @@ const WorkWithUsModal = () => {
       referralSource: '',
       preferredContact: '',
       fileName: '',
-      newsletterOptIn: false
+      newsletterOptIn: false,
+      websiteConfirm: ''
     });
+    setSelectedFile(null);
     setErrors({});
     setSubmitted(false);
     setProcessedLeadInfo(null);
@@ -65,19 +72,51 @@ const WorkWithUsModal = () => {
   const handleClose = () => {
     setIsOpen(false);
     handleResetForm();
+    if (lastActiveElement.current) {
+      lastActiveElement.current.focus();
+    }
   };
 
+  // Keyboard navigation & Focus trap inside modal
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.key === 'Escape' && isOpen) {
+      if (!isOpen) return;
+
+      if (e.key === 'Escape') {
         setIsOpen(false);
         handleResetForm();
+        if (lastActiveElement.current) {
+          lastActiveElement.current.focus();
+        }
+        return;
+      }
+
+      if (e.key === 'Tab' && modalRef.current) {
+        const focusables = modalRef.current.querySelectorAll(
+          'a[href], button, textarea, input, select, [tabindex]:not([tabindex="-1"])'
+        );
+        if (focusables.length === 0) return;
+
+        const firstElement = focusables[0];
+        const lastElement = focusables[focusables.length - 1];
+
+        if (e.shiftKey && document.activeElement === firstElement) {
+          lastElement.focus();
+          e.preventDefault();
+        } else if (!e.shiftKey && document.activeElement === lastElement) {
+          firstElement.focus();
+          e.preventDefault();
+        }
       }
     };
 
     if (isOpen) {
       document.body.style.overflow = 'hidden';
       window.addEventListener('keydown', handleKeyDown);
+      setTimeout(() => {
+        const firstInput = modalRef.current?.querySelector('input[name="fullName"], button');
+        firstInput?.focus();
+      }, 50);
     } else {
       document.body.style.overflow = '';
     }
@@ -119,6 +158,7 @@ const WorkWithUsModal = () => {
         setErrors((prev) => ({ ...prev, file: 'File size exceeds 5MB limit' }));
         return;
       }
+      setSelectedFile(file);
       setFormData((prev) => ({ ...prev, fileName: file.name }));
       if (errors.file) {
         setErrors((prev) => ({ ...prev, file: '' }));
@@ -127,6 +167,7 @@ const WorkWithUsModal = () => {
   };
 
   const removeFile = () => {
+    setSelectedFile(null);
     setFormData((prev) => ({ ...prev, fileName: '' }));
   };
 
@@ -163,11 +204,12 @@ const WorkWithUsModal = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (formData.botcheck) {
+    if (formData.websiteConfirm && formData.websiteConfirm.trim() !== '') {
       // Silent abort for automated spam bots
       setSubmitted(true);
       return;
     }
+
     if (validate()) {
       const classification = categorizeLead(formData);
       setProcessedLeadInfo(classification);
@@ -177,35 +219,32 @@ const WorkWithUsModal = () => {
 
       const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || '';
 
-      const payload = {
-        access_key: accessKey,
-        subject: `New Project Lead: ${formData.fullName} - ${formData.companyName || 'No Company'}`,
-        from_name: formData.fullName,
-        fullName: formData.fullName,
-        companyName: formData.companyName,
-        email: formData.email,
-        phone: formData.phone,
-        website: formData.website,
-        services: formData.services.join(', '),
-        businessDescription: formData.businessDescription,
-        hasOnlinePresence: formData.hasOnlinePresence,
-        projectGoal: formData.projectGoal,
-        referralSource: formData.referralSource,
-        preferredContact: formData.preferredContact,
-        fileName: formData.fileName,
-        newsletterOptIn: formData.newsletterOptIn ? 'Yes' : 'No',
-        priority: classification.priority,
-        priorityReason: classification.priorityReason
-      };
+      const formPayload = new FormData();
+      formPayload.append('access_key', accessKey);
+      formPayload.append('subject', `New Project Lead: ${formData.fullName} - ${formData.companyName || 'No Company'}`);
+      formPayload.append('from_name', formData.fullName);
+      formPayload.append('fullName', formData.fullName);
+      formPayload.append('companyName', formData.companyName || '');
+      formPayload.append('email', formData.email);
+      formPayload.append('phone', formData.phone);
+      formPayload.append('website', formData.website || '');
+      formPayload.append('services', formData.services.join(', '));
+      formPayload.append('businessDescription', formData.businessDescription || '');
+      formPayload.append('hasOnlinePresence', formData.hasOnlinePresence || '');
+      formPayload.append('projectGoal', formData.projectGoal || '');
+      formPayload.append('referralSource', formData.referralSource || '');
+      formPayload.append('preferredContact', formData.preferredContact || '');
+      formPayload.append('newsletterOptIn', formData.newsletterOptIn ? 'Yes' : 'No');
+      formPayload.append('priority', classification.priority);
+
+      if (selectedFile) {
+        formPayload.append('attachment', selectedFile);
+      }
 
       try {
         const response = await fetch('https://api.web3forms.com/submit', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
-          body: JSON.stringify(payload)
+          body: formPayload
         });
 
         const result = await response.json();
@@ -246,13 +285,13 @@ const WorkWithUsModal = () => {
   return (
     <div className="modal-overlay" onClick={handleClose}>
       <div 
+        ref={modalRef}
         className="modal-container glass" 
         onClick={(e) => e.stopPropagation()}
         role="dialog"
         aria-modal="true"
         aria-labelledby="modal-title-id"
       >
-        
         {/* Modal Header */}
         <div className="modal-header">
           <div>
@@ -271,7 +310,7 @@ const WorkWithUsModal = () => {
               <CheckCircle2 className="success-icon" />
               <h3>Thank You!</h3>
               <p className="success-message">
-                Thank you for your response. We appreciate you taking the time to share your project details.
+                Thank you for your response. We appreciate you taking the time to share your project details. We will respond within 24 hours.
               </p>
               
               {processedLeadInfo && processedLeadInfo.priority === 'HIGH' && (
@@ -296,20 +335,24 @@ const WorkWithUsModal = () => {
                 <div className="form-group">
                   <label className="form-label" htmlFor="fullName">Full Name <span className="required-asterisk">*</span></label>
                   <input
+                    id="fullName"
                     type="text"
                     name="fullName"
                     className={`form-input ${errors.fullName ? 'form-input-error' : ''}`}
                     placeholder="Enter your first and last name"
                     value={formData.fullName}
                     onChange={handleInputChange}
+                    aria-invalid={Boolean(errors.fullName)}
+                    aria-describedby={errors.fullName ? 'fullName-error' : undefined}
                     required
                   />
-                  {errors.fullName && <span className="error-text"><AlertCircle size={12} /> {errors.fullName}</span>}
+                  {errors.fullName && <span id="fullName-error" className="error-text" role="alert"><AlertCircle size={12} /> {errors.fullName}</span>}
                 </div>
 
                 <div className="form-group">
                   <label className="form-label" htmlFor="companyName">Company / Brand Name</label>
                   <input
+                    id="companyName"
                     type="text"
                     name="companyName"
                     className="form-input"
@@ -323,35 +366,42 @@ const WorkWithUsModal = () => {
                   <div className="form-group half-width" id="modal-email">
                     <label className="form-label" htmlFor="email">Email Address <span className="required-asterisk">*</span></label>
                     <input
+                      id="email"
                       type="email"
                       name="email"
                       className={`form-input ${errors.email ? 'form-input-error' : ''}`}
                       placeholder="We will never share your email address"
                       value={formData.email}
                       onChange={handleInputChange}
+                      aria-invalid={Boolean(errors.email)}
+                      aria-describedby={errors.email ? 'email-error' : undefined}
                       required
                     />
-                    {errors.email && <span className="error-text"><AlertCircle size={12} /> {errors.email}</span>}
+                    {errors.email && <span id="email-error" className="error-text" role="alert"><AlertCircle size={12} /> {errors.email}</span>}
                   </div>
 
                   <div className="form-group half-width" id="modal-phone">
                     <label className="form-label" htmlFor="phone">Phone / WhatsApp Number <span className="required-asterisk">*</span></label>
                     <input
+                      id="phone"
                       type="tel"
                       name="phone"
                       className={`form-input ${errors.phone ? 'form-input-error' : ''}`}
                       placeholder="Used for direct scheduling and follow-ups"
                       value={formData.phone}
                       onChange={handleInputChange}
+                      aria-invalid={Boolean(errors.phone)}
+                      aria-describedby={errors.phone ? 'phone-error' : undefined}
                       required
                     />
-                    {errors.phone && <span className="error-text"><AlertCircle size={12} /> {errors.phone}</span>}
+                    {errors.phone && <span id="phone-error" className="error-text" role="alert"><AlertCircle size={12} /> {errors.phone}</span>}
                   </div>
                 </div>
 
                 <div className="form-group">
                   <label className="form-label" htmlFor="website">Website or Instagram Handle</label>
                   <input
+                    id="website"
                     type="text"
                     name="website"
                     className="form-input"
@@ -380,6 +430,8 @@ const WorkWithUsModal = () => {
                       <label key={service} className="checkbox-label">
                         <input
                           type="checkbox"
+                          name="services"
+                          value={service}
                           checked={formData.services.includes(service)}
                           onChange={() => handleCheckboxChange(service)}
                         />
@@ -387,54 +439,13 @@ const WorkWithUsModal = () => {
                       </label>
                     ))}
                   </div>
-                  {errors.services && <span className="error-text"><AlertCircle size={12} /> {errors.services}</span>}
-                </div>
-
-                <div className="form-group">
-                  <label className="form-label">What best describes your business?</label>
-                  <div className="radio-grid">
-                    {[
-                      { label: 'New Business', value: 'New Business' },
-                      { label: 'Existing Business', value: 'Existing Business' }
-                    ].map((desc) => (
-                      <label key={desc.value} className="radio-label">
-                        <input
-                          type="radio"
-                          name="businessDescription"
-                          value={desc.value}
-                          checked={formData.businessDescription === desc.value}
-                          onChange={handleInputChange}
-                        />
-                        <span>{desc.label}</span>
-                      </label>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="form-group">
-                  <label className="form-label">Do you have an online presence right now?</label>
-                  <div className="radio-grid">
-                    {[
-                      { label: 'Yes', value: 'Yes' },
-                      { label: 'No', value: 'No' }
-                    ].map((presence) => (
-                      <label key={presence.value} className="radio-label">
-                        <input
-                          type="radio"
-                          name="hasOnlinePresence"
-                          value={presence.value}
-                          checked={formData.hasOnlinePresence === presence.value}
-                          onChange={handleInputChange}
-                        />
-                        <span>{presence.label}</span>
-                      </label>
-                    ))}
-                  </div>
+                  {errors.services && <span className="error-text" role="alert"><AlertCircle size={12} /> {errors.services}</span>}
                 </div>
 
                 <div className="form-group">
                   <label className="form-label" htmlFor="projectGoal">Tell us about your project or goal</label>
                   <textarea
+                    id="projectGoal"
                     name="projectGoal"
                     className="form-input form-textarea"
                     placeholder="What are you trying to achieve? The more detail, the better we can help."
@@ -451,6 +462,7 @@ const WorkWithUsModal = () => {
                 <div className="form-group">
                   <label className="form-label" htmlFor="referralSource">How did you hear about us?</label>
                   <select
+                    id="referralSource"
                     name="referralSource"
                     className="form-input form-select"
                     value={formData.referralSource}
@@ -502,19 +514,21 @@ const WorkWithUsModal = () => {
                   {errors.file && <span style={{ color: '#ef4444', fontSize: '0.8rem', marginTop: '0.4rem', display: 'block' }}>{errors.file}</span>}
                 </div>
 
-                {/* Honeypot Spam Protection Field */}
+                {/* Honeypot Spam Protection Field - Offscreen text input */}
                 <input 
-                  type="checkbox" 
-                  name="botcheck" 
-                  className="hidden" 
-                  style={{ display: 'none' }} 
-                  value={formData.botcheck} 
+                  type="text" 
+                  name="websiteConfirm" 
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                  value={formData.websiteConfirm} 
                   onChange={handleInputChange} 
+                  style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', opacity: 0 }}
                 />
               </div>
 
               {submitError && (
-                <div className="submit-error-banner" style={{ color: '#ff3333', fontSize: '0.85rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <div className="submit-error-banner" role="alert" style={{ color: '#ff3333', fontSize: '0.85rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                   <AlertCircle size={14} /> {submitError}
                 </div>
               )}
@@ -530,384 +544,7 @@ const WorkWithUsModal = () => {
             </form>
           )}
         </div>
-
       </div>
-
-      <style>{`
-        .modal-overlay {
-          position: fixed;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background: rgba(0, 0, 0, 0.45);
-          backdrop-filter: blur(8px);
-          z-index: 1000;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 2rem;
-          animation: modalFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .modal-container {
-          background: #ffffff;
-          border: 1px solid var(--border-color);
-          border-radius: 4px;
-          width: 100%;
-          max-width: 680px;
-          max-height: calc(100vh - 4rem);
-          display: flex;
-          flex-direction: column;
-          box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
-          animation: modalSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .modal-header {
-          display: flex;
-          align-items: flex-start;
-          justify-content: space-between;
-          padding: 2rem 2.5rem 1.5rem;
-          border-bottom: 1px solid var(--border-color);
-        }
-
-        .modal-subtitle {
-          font-size: 0.75rem;
-          font-weight: 700;
-          text-transform: uppercase;
-          color: var(--accent);
-          letter-spacing: 0.05em;
-          display: block;
-          margin-bottom: 0.25rem;
-        }
-
-        .modal-title {
-          font-size: 1.75rem;
-          font-weight: 800;
-          color: var(--text-heading);
-          letter-spacing: -0.02em;
-        }
-
-        .modal-close-btn {
-          background: none;
-          border: none;
-          color: var(--text-secondary);
-          cursor: pointer;
-          padding: 0.5rem;
-          margin: -0.5rem;
-          transition: color 0.2s ease;
-        }
-
-        .modal-close-btn:hover {
-          color: var(--text-heading);
-        }
-
-        .modal-body-scroll {
-          padding: 2rem 2.5rem 2.5rem;
-          overflow-y: auto;
-          flex-grow: 1;
-        }
-
-        .form-intro-text {
-          font-size: 0.925rem;
-          color: var(--text-secondary);
-          margin-bottom: 2rem;
-        }
-
-        /* Form Sections */
-        .form-section {
-          padding-bottom: 2rem;
-          margin-bottom: 2rem;
-          border-bottom: 1px solid var(--border-color);
-        }
-
-        .border-none {
-          border-bottom: none;
-          margin-bottom: 0;
-          padding-bottom: 1rem;
-        }
-
-        .section-header-title {
-          font-size: 0.95rem;
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-          color: var(--accent);
-          font-weight: 700;
-          margin-bottom: 1.5rem;
-        }
-
-        .form-row {
-          display: flex;
-          gap: 1.25rem;
-        }
-
-        .half-width {
-          flex: 1;
-        }
-
-        .required-asterisk {
-          color: #ef4444;
-          font-weight: 700;
-          margin-left: 0.2rem;
-        }
-
-        .helper-text {
-          display: block;
-          font-size: 0.775rem;
-          color: var(--text-secondary);
-          margin-top: 0.35rem;
-        }
-
-        .text-above-control {
-          margin-top: 0;
-          margin-bottom: 0.65rem;
-        }
-
-        .form-textarea {
-          min-height: 100px !important;
-          resize: vertical;
-        }
-
-        /* Checkbox styles */
-        .checkbox-grid {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 0.85rem 1.25rem;
-          margin-top: 0.5rem;
-        }
-
-        .checkbox-label, .radio-label {
-          display: flex;
-          align-items: center;
-          gap: 0.65rem;
-          font-size: 0.9rem;
-          font-weight: 500;
-          color: var(--text-primary);
-          cursor: pointer;
-          user-select: none;
-        }
-
-        .checkbox-label input, .radio-label input {
-          width: 16px;
-          height: 16px;
-          accent-color: var(--accent);
-          cursor: pointer;
-        }
-
-        /* Radio Grid */
-        .radio-grid {
-          display: flex;
-          gap: 1.25rem;
-          flex-wrap: wrap;
-          margin-top: 0.5rem;
-        }
-
-        .grid-2col {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 0.85rem 1.25rem;
-        }
-
-        /* File Upload */
-        .file-upload-zone {
-          display: flex;
-          align-items: center;
-          gap: 1.25rem;
-          margin-top: 0.5rem;
-        }
-
-        .file-hidden-input {
-          display: none;
-        }
-
-        .file-upload-label {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.65rem;
-          padding: 0.65rem 1rem;
-          background: var(--bg-primary);
-          border: 1px dashed var(--border-color);
-          border-radius: 4px;
-          color: var(--text-secondary);
-          font-size: 0.85rem;
-          font-weight: 600;
-          cursor: pointer;
-          transition: all 0.2s ease;
-          flex-grow: 1;
-        }
-
-        .file-upload-label:hover {
-          background: var(--bg-secondary);
-          border-color: var(--accent);
-          color: var(--text-primary);
-        }
-
-        .upload-icon {
-          color: var(--accent);
-        }
-
-        .file-name {
-          color: var(--text-primary);
-          font-weight: 700;
-        }
-
-        .file-remove-btn {
-          background: none;
-          border: none;
-          color: #ef4444;
-          font-size: 0.8rem;
-          font-weight: 600;
-          cursor: pointer;
-          padding: 0.4rem;
-        }
-
-        .file-remove-btn:hover {
-          text-decoration: underline;
-        }
-
-        .newsletter-checkbox {
-          margin-top: 0.75rem;
-        }
-
-        .form-select {
-          appearance: none;
-          background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23F5A800' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-          background-repeat: no-repeat;
-          background-position: right 1.25rem center;
-          background-size: 1rem;
-          padding-right: 3rem;
-          color: var(--text-primary);
-          cursor: pointer;
-        }
-
-        .form-select option {
-          background: #ffffff;
-          color: var(--text-primary);
-        }
-
-        .form-input-error {
-          border-color: #ef4444 !important;
-          box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.05) !important;
-        }
-
-        .error-text {
-          display: flex;
-          align-items: center;
-          gap: 0.35rem;
-          font-size: 0.775rem;
-          color: #ef4444;
-          font-weight: 500;
-          margin-top: 0.35rem;
-        }
-
-        .submit-btn {
-          width: 100%;
-          padding: 0.95rem;
-          font-size: 1rem;
-          margin-top: 1.5rem;
-        }
-
-        /* Success & Priority Styles */
-        .success-state {
-          text-align: center;
-          padding: 1.5rem 0;
-        }
-
-        .success-icon {
-          width: 60px;
-          height: 60px;
-          color: var(--accent);
-          margin-bottom: 1.5rem;
-        }
-
-        .success-message {
-          font-size: 1.05rem;
-          color: var(--text-secondary);
-          margin-bottom: 1.5rem;
-        }
-
-        .priority-notice {
-          background: rgba(245, 168, 0, 0.06);
-          border: 1px solid rgba(245, 168, 0, 0.3);
-          border-radius: 4px;
-          padding: 1.25rem;
-          margin-bottom: 1.5rem;
-          text-align: left;
-        }
-
-        .priority-badge {
-          display: inline-block;
-          font-size: 0.65rem;
-          font-weight: 700;
-          background: var(--accent);
-          color: #111111;
-          padding: 0.2rem 0.5rem;
-          border-radius: 3px;
-          margin-bottom: 0.5rem;
-          letter-spacing: 0.05em;
-        }
-
-        .priority-notice p {
-          font-size: 0.85rem;
-          line-height: 1.4;
-          color: var(--text-primary);
-        }
-
-        .reset-btn {
-          font-size: 0.85rem;
-          padding: 0.5rem 1.25rem;
-        }
-
-        @keyframes modalFadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-
-        @keyframes modalSlideUp {
-          from { transform: translateY(20px); opacity: 0; }
-          to { transform: translateY(0); opacity: 1; }
-        }
-
-        @media (max-width: 768px) {
-          .modal-overlay {
-            padding: 1rem;
-          }
-          .modal-container {
-            max-height: calc(100vh - 2rem);
-          }
-          .modal-header {
-            padding: 1.5rem 1.75rem 1.25rem;
-          }
-          .modal-body-scroll {
-            padding: 1.5rem 1.75rem 2rem;
-          }
-          .checkbox-grid, .grid-2col {
-            grid-template-columns: 1fr;
-          }
-          .form-row {
-            flex-direction: column;
-            gap: 0;
-          }
-        }
-
-        @media (max-width: 480px) {
-          .modal-header {
-            padding: 1.25rem 1.25rem 1rem;
-          }
-          .modal-body-scroll {
-            padding: 1.25rem 1.25rem 1.5rem;
-          }
-          .radio-grid {
-            flex-direction: column;
-            gap: 0.65rem;
-          }
-          .file-upload-zone {
-            flex-direction: column;
-            align-items: stretch;
-            gap: 0.65rem;
-          }
-        }
-      `}</style>
     </div>
   );
 };
