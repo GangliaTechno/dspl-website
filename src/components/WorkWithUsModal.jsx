@@ -38,18 +38,53 @@ const WorkWithUsModal = () => {
     };
   }, []);
 
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-  }, [isOpen]);
+  const handleResetForm = () => {
+    setFormData({
+      fullName: '',
+      companyName: '',
+      email: '',
+      phone: '',
+      website: '',
+      services: [],
+      businessDescription: '',
+      hasOnlinePresence: '',
+      projectGoal: '',
+      referralSource: '',
+      preferredContact: '',
+      fileName: '',
+      newsletterOptIn: false
+    });
+    setErrors({});
+    setSubmitted(false);
+    setProcessedLeadInfo(null);
+    setIsSubmitting(false);
+    setSubmitError('');
+  };
 
   const handleClose = () => {
     setIsOpen(false);
     handleResetForm();
   };
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape' && isOpen) {
+        setIsOpen(false);
+        handleResetForm();
+      }
+    };
+
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+      window.addEventListener('keydown', handleKeyDown);
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen]);
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -202,40 +237,23 @@ const WorkWithUsModal = () => {
     }
   };
 
-  const handleResetForm = () => {
-    setFormData({
-      fullName: '',
-      companyName: '',
-      email: '',
-      phone: '',
-      website: '',
-      services: [],
-      businessDescription: '',
-      hasOnlinePresence: '',
-      projectGoal: '',
-      referralSource: '',
-      preferredContact: '',
-      fileName: '',
-      newsletterOptIn: false
-    });
-    setErrors({});
-    setSubmitted(false);
-    setProcessedLeadInfo(null);
-    setIsSubmitting(false);
-    setSubmitError('');
-  };
-
   if (!isOpen) return null;
 
   return (
     <div className="modal-overlay" onClick={handleClose}>
-      <div className="modal-container glass" onClick={(e) => e.stopPropagation()}>
+      <div 
+        className="modal-container glass" 
+        onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-title-id"
+      >
         
         {/* Modal Header */}
         <div className="modal-header">
           <div>
             <span className="modal-subtitle">Project Planner</span>
-            <h2 className="modal-title">Work with us</h2>
+            <h2 id="modal-title-id" className="modal-title">Work with us</h2>
           </div>
           <button className="modal-close-btn" onClick={handleClose} aria-label="Close modal">
             <X size={24} />
@@ -245,7 +263,7 @@ const WorkWithUsModal = () => {
         {/* Modal Scrollable Body */}
         <div className="modal-body-scroll">
           {submitted ? (
-            <div className="success-state">
+            <div className="success-state" role="alert" aria-live="polite">
               <CheckCircle2 className="success-icon" />
               <h3>Thank You!</h3>
               <p className="success-message">

@@ -32,6 +32,16 @@ const Header = () => {
   }, []);
 
   useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape' && isOpen) {
+        setIsOpen(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen]);
+
+  useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
     } else {
@@ -61,32 +71,32 @@ const Header = () => {
           </Link>
 
           {/* Center: Desktop Navigation Links */}
-          <nav className="desktop-nav">
-            <Link to="/" className={`nav-link ${location.pathname === '/' ? 'nav-link-active' : ''}`}>
+          <nav className="desktop-nav" aria-label="Main Navigation">
+            <Link to="/" className={`nav-link ${location.pathname === '/' ? 'nav-link-active' : ''}`} aria-current={location.pathname === '/' ? 'page' : undefined}>
               Home
             </Link>
 
-            <Link to="/about" className={`nav-link ${location.pathname === '/about' ? 'nav-link-active' : ''}`}>
+            <Link to="/about" className={`nav-link ${location.pathname === '/about' ? 'nav-link-active' : ''}`} aria-current={location.pathname === '/about' ? 'page' : undefined}>
               About
             </Link>
 
-            <Link to="/brands" className={`nav-link ${location.pathname === '/brands' ? 'nav-link-active' : ''}`}>
+            <Link to="/brands" className={`nav-link ${location.pathname === '/brands' ? 'nav-link-active' : ''}`} aria-current={location.pathname === '/brands' ? 'page' : undefined}>
               Brands
             </Link>
 
-            <Link to="/marketing" className={`nav-link ${location.pathname === '/marketing' ? 'nav-link-active' : ''}`}>
+            <Link to="/marketing" className={`nav-link ${location.pathname === '/marketing' ? 'nav-link-active' : ''}`} aria-current={location.pathname === '/marketing' ? 'page' : undefined}>
               Marketing
             </Link>
 
-            <Link to="/branding" className={`nav-link ${location.pathname === '/branding' ? 'nav-link-active' : ''}`}>
+            <Link to="/branding" className={`nav-link ${location.pathname === '/branding' ? 'nav-link-active' : ''}`} aria-current={location.pathname === '/branding' ? 'page' : undefined}>
               Branding
             </Link>
 
-            <Link to="/ecommerce" className={`nav-link ${location.pathname === '/ecommerce' ? 'nav-link-active' : ''}`}>
+            <Link to="/ecommerce" className={`nav-link ${location.pathname === '/ecommerce' ? 'nav-link-active' : ''}`} aria-current={location.pathname === '/ecommerce' ? 'page' : undefined}>
               E-commerce
             </Link>
 
-            <Link to="/contact" className={`nav-link ${location.pathname === '/contact' ? 'nav-link-active' : ''}`}>
+            <Link to="/contact" className={`nav-link ${location.pathname === '/contact' ? 'nav-link-active' : ''}`} aria-current={location.pathname === '/contact' ? 'page' : undefined}>
               Contact
             </Link>
           </nav>
@@ -104,7 +114,9 @@ const Header = () => {
             <button 
               className="mobile-menu-btn" 
               onClick={() => setIsOpen(!isOpen)}
-              aria-label="Toggle menu"
+              aria-label="Toggle navigation menu"
+              aria-expanded={isOpen}
+              aria-controls="mobile-navigation"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -113,15 +125,15 @@ const Header = () => {
       </header>
 
       {/* Mobile Navigation Drawer */}
-      <div className={`mobile-drawer ${isOpen ? 'mobile-drawer-open' : ''}`}>
-        <nav className="mobile-nav">
-          <Link to="/" className="mobile-nav-link" onClick={handleLinkClick}>Home</Link>
-          <Link to="/about" className="mobile-nav-link" onClick={handleLinkClick}>About</Link>
-          <Link to="/brands" className="mobile-nav-link" onClick={handleLinkClick}>Brands</Link>
-          <Link to="/marketing" className="mobile-nav-link" onClick={handleLinkClick}>Marketing</Link>
-          <Link to="/branding" className="mobile-nav-link" onClick={handleLinkClick}>Branding</Link>
-          <Link to="/ecommerce" className="mobile-nav-link" onClick={handleLinkClick}>E-commerce</Link>
-          <Link to="/contact" className="mobile-nav-link" onClick={handleLinkClick}>Contact</Link>
+      <div id="mobile-navigation" className={`mobile-drawer ${isOpen ? 'mobile-drawer-open' : ''}`} aria-hidden={!isOpen}>
+        <nav className="mobile-nav" aria-label="Mobile Navigation">
+          <Link to="/" className="mobile-nav-link" onClick={handleLinkClick} aria-current={location.pathname === '/' ? 'page' : undefined}>Home</Link>
+          <Link to="/about" className="mobile-nav-link" onClick={handleLinkClick} aria-current={location.pathname === '/about' ? 'page' : undefined}>About</Link>
+          <Link to="/brands" className="mobile-nav-link" onClick={handleLinkClick} aria-current={location.pathname === '/brands' ? 'page' : undefined}>Brands</Link>
+          <Link to="/marketing" className="mobile-nav-link" onClick={handleLinkClick} aria-current={location.pathname === '/marketing' ? 'page' : undefined}>Marketing</Link>
+          <Link to="/branding" className="mobile-nav-link" onClick={handleLinkClick} aria-current={location.pathname === '/branding' ? 'page' : undefined}>Branding</Link>
+          <Link to="/ecommerce" className="mobile-nav-link" onClick={handleLinkClick} aria-current={location.pathname === '/ecommerce' ? 'page' : undefined}>E-commerce</Link>
+          <Link to="/contact" className="mobile-nav-link" onClick={handleLinkClick} aria-current={location.pathname === '/contact' ? 'page' : undefined}>Contact</Link>
           <button 
             className="btn btn-primary mobile-cta" 
             onClick={(e) => { handleLinkClick(); handleOpenWorkModal(e); }}
