@@ -1,0 +1,33 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches: [ main, vimal, "pawan/*" ]
+  pull_request:
+    branches: [ main, vimal ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        run: npx eslint .
+
+      - name: Run Vitest Tests
+        run: npm test -- --run
+
+      - name: Run Vite Production Build
+        run: npx vite build
