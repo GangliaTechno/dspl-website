@@ -80,7 +80,7 @@ const NotFound = () => {
           font-size: 6rem;
           font-weight: 900;
           line-height: 1;
-          background: linear-gradient(135deg, var(--accent) 0%, #f97316 100%);
+          background: linear-gradient(135deg, var(--accent) 0%, var(--accent-orange) 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           margin-bottom: 1rem;

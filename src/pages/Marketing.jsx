@@ -398,13 +398,20 @@ const Marketing = () => {
         }
 
         .faq-content-wrapper {
-          max-height: 0;
+          display: grid;
+          grid-template-rows: 0fr;
+          opacity: 0;
+          transition: grid-template-rows 250ms ease, opacity 200ms ease;
+        }
+
+        .faq-content-wrapper > div {
+          min-height: 0;
           overflow: hidden;
-          transition: max-height 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .wrapper-open {
-          max-height: 200px;
+          grid-template-rows: 1fr;
+          opacity: 1;
         }
 
         .faq-content {

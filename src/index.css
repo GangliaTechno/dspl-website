@@ -8,7 +8,8 @@
   --accent: #F5A800;               /* Hero Gold */
   --accent-light: #FFC107;         /* Bright light gold */
   --accent-gold: #F5A800;          /* Hero Gold */
-  --accent-red: #C0392B;           /* Minimal Red Accent */
+  --accent-red: #ef4444;           /* Minimal Red Accent */
+  --accent-orange: #f97316;        /* Orange Accent */
   --accent-gradient: linear-gradient(135deg, #F5A800 0%, #FFC107 100%);
   --accent-gradient-hover: linear-gradient(135deg, #FFC107 0%, #F5A800 100%);
   --border-color: rgba(26, 26, 26, 0.08);
@@ -274,8 +275,11 @@ select:focus-visible,
   }
 
   .supporter-track,
-  .glow-circle {
+  .glow-circle,
+  .mobile-drawer,
+  .faq-content-wrapper {
     animation: none !important;
+    transition: none !important;
   }
 }
 

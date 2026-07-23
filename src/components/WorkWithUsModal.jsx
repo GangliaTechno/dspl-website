@@ -511,7 +511,7 @@ const WorkWithUsModal = () => {
                   {formData.fileName ? (
                     <div className="file-selected-box" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.75rem 1rem', background: 'rgba(255, 255, 255, 0.05)', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
                       <span style={{ fontSize: '0.875rem', color: 'var(--text-primary)', wordBreak: 'break-all' }}>📄 {formData.fileName}</span>
-                      <button type="button" onClick={removeFile} style={{ background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer', fontSize: '0.85rem', padding: '0.2rem 0.5rem' }}>Remove</button>
+                      <button type="button" onClick={removeFile} style={{ background: 'none', border: 'none', color: 'var(--accent-red)', cursor: 'pointer', fontSize: '0.85rem', padding: '0.2rem 0.5rem' }}>Remove</button>
                     </div>
                   ) : (
                     <label className="file-upload-dropzone" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '1.25rem', border: '2px dashed var(--border-color)', borderRadius: '8px', cursor: 'pointer', background: 'rgba(255, 255, 255, 0.02)' }}>
@@ -519,7 +519,7 @@ const WorkWithUsModal = () => {
                       <input type="file" onChange={handleFileUpload} style={{ display: 'none' }} accept=".pdf,.doc,.docx,.png,.jpg,.jpeg" />
                     </label>
                   )}
-                  {errors.file && <span style={{ color: '#ef4444', fontSize: '0.8rem', marginTop: '0.4rem', display: 'block' }}>{errors.file}</span>}
+                  {errors.file && <span style={{ color: 'var(--accent-red)', fontSize: '0.8rem', marginTop: '0.4rem', display: 'block' }}>{errors.file}</span>}
                 </div>
 
                 {/* Honeypot Spam Protection Field - Offscreen text input */}

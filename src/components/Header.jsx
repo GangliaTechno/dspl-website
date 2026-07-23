@@ -175,7 +175,6 @@ const Header = () => {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          transition: padding 0.3s ease;
         }
 
         .header-scrolled .header-container {
@@ -194,7 +193,7 @@ const Header = () => {
           width: auto;
           object-fit: contain;
           filter: drop-shadow(0 2px 8px rgba(255, 255, 255, 0.6));
-          transition: filter 0.3s ease, transform 0.3s ease, height 0.3s ease;
+          transition: filter 0.3s ease, transform 0.3s ease;
         }
 
         .header-scrolled .logo-image {

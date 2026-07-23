@@ -98,15 +98,20 @@ const Home = () => {
         {/* Supported Brand Track (Scrolling Marquee) */}
         <div className="supporter-band">
           <div className="supporter-track">
-            {[...supporterLogos, ...supporterLogos, ...supporterLogos].map((logo, index) => (
-              <img
-                key={index}
-                src={logo.src}
-                alt={logo.alt}
-                className={`supporter-logo ${logo.className}`}
-                loading="lazy"
-              />
-            ))}
+            {[...supporterLogos, ...supporterLogos, ...supporterLogos].map((logo, index) => {
+              const isDuplicate = index >= supporterLogos.length;
+
+              return (
+                <img
+                  key={`${logo.alt}-${index}`}
+                  src={logo.src}
+                  alt={isDuplicate ? '' : logo.alt}
+                  aria-hidden={isDuplicate ? 'true' : undefined}
+                  className={`supporter-logo ${logo.className}`}
+                  loading="lazy"
+                />
+              );
+            })}
           </div>
         </div>
       </section>

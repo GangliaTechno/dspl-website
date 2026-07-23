@@ -292,6 +292,13 @@ const Footer = () => {
           font-weight: 500;
         }
 
+        .footer-legal-links {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+          flex-wrap: wrap;
+        }
+
         .back-to-top {
           background: none;
           border: none;
