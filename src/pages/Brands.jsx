@@ -6,8 +6,8 @@ import upcomingBrandsImg from '../assets/Upcoming_brands.jpeg';
 
 const Brands = () => {
   useSEO(
-    'Our Brands | Dashapatmaja Solutions',
-    'Dashapatmaja Solutions is a house of brands. Raw Radicles, our premium chocolate brand with Ayurveda inside, is the first. More consumer brands are in development.'
+    'Our Brands | Dasha Patmaja Services',
+    'Dasha Patmaja Services is a house of brands. Raw Radicles, our premium chocolate brand with Ayurveda inside, is the first. More consumer brands are in development.'
   );
 
   return (

@@ -4,8 +4,8 @@ import useSEO from '../hooks/useSEO';
 
 const Contact = () => {
   useSEO(
-    'Contact Us | Dashapatmaja Solutions, Manipal',
-    'Talk to Dashapatmaja Solutions about branding, marketing, or e-commerce. Based in Manipal, India. Call +91 88619 42440 or email director@dashapatmaja.in.'
+    'Contact Us | Dasha Patmaja Services, Manipal',
+    'Talk to Dasha Patmaja Services about branding, marketing, or e-commerce. Based in Manipal, India. Call +91 88619 42440 or email director@dashapatmaja.in.'
   );
 
   const [formData, setFormData] = useState({
@@ -161,7 +161,7 @@ const Contact = () => {
                 <div className="success-state">
                   <CheckCircle2 className="success-icon" />
                   <h3>Message Sent!</h3>
-                  <p>Thank you for reaching out to Dashapatmaja Solutions. We will review your message and respond within 24 hours.</p>
+                  <p>Thank you for reaching out to Dasha Patmaja Services. We will review your message and respond within 24 hours.</p>
                   <button className="btn btn-primary" onClick={() => setSubmitted(false)}>
                     Send Another Message
                   </button>

@@ -10,8 +10,8 @@ import './Home.css';
 
 const Home = () => {
   useSEO(
-    'Dashapatmaja Solutions | Branding, Marketing & E-commerce',
-    'Dashapatmaja Solutions helps businesses grow. We build your brand, bring you customers, and sell your products online. We also build and sell our own brand, Raw Radicles, so we know this work from both sides.'
+    'Dasha Patmaja Services | Branding, Marketing & E-commerce',
+    'Dasha Patmaja Services helps businesses grow. We build your brand, bring you customers, and sell your products online. We also build and sell our own brand, Raw Radicles, so we know this work from both sides.'
   );
 
   const supporterLogos = [
@@ -78,11 +78,14 @@ const Home = () => {
           </h1>
 
           <p className="hero-subhead">
-            Dashapatmaja Solutions helps businesses grow. We build your brand, bring you customers, and sell your products online. We also build and sell our own brand, Raw Radicles, so we know this work from both sides.
+            Dasha Patmaja Services helps businesses grow. We build your brand, bring you customers, and sell your products online. We also build and sell our own brand, Raw Radicles, so we know this work from both sides.
           </p>
 
           <div className="hero-ctas">
             <button 
+              type="button"
+              aria-label="Open contact form to work with us"
+              aria-haspopup="dialog"
               onClick={() => window.dispatchEvent(new CustomEvent('open-work-modal'))} 
               className="btn btn-primary hero-btn-primary"
             >
@@ -135,7 +138,7 @@ const Home = () => {
 
           <div className="why-grid">
             {whyUs.map((card, idx) => (
-              <div key={idx} className="why-card glass">
+              <div key={idx} className="why-card">
                 <div className="why-icon-box">
                   {card.icon}
                 </div>
@@ -160,7 +163,7 @@ const Home = () => {
 
           <div className="services-grid">
             {services.map((svc, idx) => (
-              <div key={idx} className="service-card glass">
+              <div key={idx} className="service-card">
                 <h3 className="service-card-title">{svc.title}</h3>
                 <p className="service-card-text">{svc.text}</p>
                 <Link to={svc.link} className="service-card-link">
@@ -192,7 +195,7 @@ const Home = () => {
               { num: '05', title: 'E-Commerce Scale', text: 'Optimizing store conversions, checkout UX, and fulfillment operations.' },
               { num: '06', title: 'Measurement & Growth', text: 'Tracking key metrics, ROAS, and iteratively improving customer retention.' }
             ].map((step, idx) => (
-              <div key={idx} className="process-step-card glass">
+              <div key={idx} className="process-step-card">
                 <span className="step-number">{step.num}</span>
                 <h3 className="step-title">{step.title}</h3>
                 <p className="step-text">{step.text}</p>
@@ -215,7 +218,7 @@ const Home = () => {
 
           <div className="brands-grid">
             {/* Raw Radicles Card */}
-            <div className="brand-showcase-card glass featured-brand">
+            <div className="brand-showcase-card featured-brand">
               <div className="brand-badge-strip">
                 <span className="featured-tag">FLAGSHIP BRAND</span>
               </div>
@@ -232,7 +235,7 @@ const Home = () => {
             </div>
 
             {/* Placeholder Card */}
-            <div className="brand-showcase-card glass placeholder-brand">
+            <div className="brand-showcase-card placeholder-brand">
               <div className="brand-badge-strip">
                 <span className="coming-tag">EXPANSION PATH</span>
               </div>
@@ -242,6 +245,8 @@ const Home = () => {
                 We are building brands for other customer segments. As each one launches, it will appear here. If you want to partner with us on a new brand, get in touch.
               </p>
               <button 
+                type="button"
+                aria-haspopup="dialog"
                 onClick={() => window.dispatchEvent(new CustomEvent('open-work-modal'))} 
                 className="brand-link"
                 style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}

@@ -275,10 +275,10 @@
         }
 
         .why-card {
-          background: #ffffff;
+          background: var(--card-bg);
           border: 1px solid var(--border-color);
           padding: 3rem;
-          border-radius: 4px;
+          border-radius: 8px;
           display: flex;
           flex-direction: column;
           transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -350,10 +350,10 @@
         }
 
         .service-card {
-          background: #ffffff;
+          background: var(--card-bg);
           border: 1px solid var(--border-color);
           padding: 3rem 2.5rem;
-          border-radius: 4px;
+          border-radius: 8px;
           display: flex;
           flex-direction: column;
           height: 100%;
@@ -406,10 +406,10 @@
         }
 
         .brand-showcase-card {
-          background: #ffffff;
+          background: var(--card-bg);
           border: 1px solid var(--border-color);
           padding: 3.5rem;
-          border-radius: 4px;
+          border-radius: 8px;
           display: flex;
           flex-direction: column;
           align-items: flex-start;
@@ -496,7 +496,7 @@
         }
 
         .process-step-card {
-          background: #ffffff;
+          background: var(--card-bg);
           border: 1px solid var(--border-color);
           padding: 2.5rem 2rem;
           border-radius: 8px;
@@ -575,4 +575,38 @@
           .section-title {
             font-size: 2rem;
           }
+        }
+
+        /* Final CTA Section Styles */
+        .final-cta-section {
+          background-color: var(--bg-tertiary);
+          border-top: 1px solid var(--border-color);
+          text-align: center;
+        }
+
+        .final-cta-card {
+          max-width: 600px;
+          margin: 0 auto;
+        }
+
+        .final-cta-title {
+          font-family: var(--font-heading);
+          font-size: 2.5rem;
+          font-weight: 800;
+          color: var(--text-heading);
+          letter-spacing: -0.03em;
+          margin-bottom: 1rem;
+        }
+
+        .final-cta-desc {
+          font-size: 1.05rem;
+          line-height: 1.6;
+          color: var(--text-secondary);
+          margin-bottom: 2.5rem;
+        }
+
+        .final-cta-actions {
+          display: flex;
+          gap: 1rem;
+          justify-content: center;
         }
