@@ -309,50 +309,49 @@ const Home = () => {
         }
 
         .supporter-logo-slot {
-          width: 220px;
-          height: 74px;
-          margin: 0 2rem;
+          width: 230px;
+          height: 82px;
+          margin: 0 1.5rem;
 
           display: flex;
           align-items: center;
           justify-content: center;
 
           flex: 0 0 auto;
+          overflow: visible;
         }
 
         .supporter-logo {
           display: block;
           width: auto;
-          height: auto;
-          max-width: 100%;
-          max-height: 58px;
+          max-width: none;
           object-fit: contain;
-          object-position: center;
 
           filter: brightness(0) invert(1);
           opacity: 0.52;
           transition: opacity 0.3s ease;
         }
 
+        /* Compensate for transparent space inside each source image */
         .supporter-logo-1 .supporter-logo {
-          max-width: 205px;
+          height: 48px;
         }
 
         .supporter-logo-2 .supporter-logo {
-          max-width: 165px;
+          height: 205px;
         }
 
         .supporter-logo-dst .supporter-logo {
-          max-width: 180px;
+          height: 60px;
         }
 
         .supporter-logo-nidhi1 .supporter-logo {
-          max-width: 130px;
-          transform: translateY(-2px);
+          height: 72px;
+          transform: translateY(-3px);
         }
 
         .supporter-logo:hover {
-          opacity: 0.95;
+          opacity: 0.9;
         }
 
         @keyframes scrollRightToLeft {
@@ -373,18 +372,26 @@ const Home = () => {
             bottom: 0;
           }
           .supporter-logo-slot {
-            width: 165px;
-            height: 60px;
-            margin: 0 1rem;
+            width: 175px;
+            height: 64px;
+            margin: 0 0.75rem;
           }
-          .supporter-logo {
-            max-height: 44px;
+
+          .supporter-logo-1 .supporter-logo {
+            height: 36px;
           }
+
           .supporter-logo-2 .supporter-logo {
-            max-width: 125px;
+            height: 158px;
           }
+
+          .supporter-logo-dst .supporter-logo {
+            height: 45px;
+          }
+
           .supporter-logo-nidhi1 .supporter-logo {
-            max-width: 105px;
+            height: 54px;
+            transform: translateY(-2px);
           }
         }
 
