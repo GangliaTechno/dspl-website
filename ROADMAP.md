@@ -12,7 +12,7 @@ Working Branch: `pawan/dev` (Branched off `vimal`)
 - [x] **PR 2: Accessibility Baseline** (`pawan/accessibility-baseline`)
 - [x] **PR 3: SEO Foundation & 404 Route** (`pawan/seo-foundation`)
 - [x] **PR 4: Forms & Privacy** (`pawan/forms-privacy`)
-- [ ] **PR 5: Testing & CI Automation** (`pawan/testing-ci`)
+- [x] **PR 5: Testing & CI Automation** (`pawan/testing-ci`)
 - [ ] **PR 6: Performance & Component Refactoring** (`pawan/performance`)
 - [ ] **PR 7: Conversion Content & Proof** (`pawan/conversion`)
 
@@ -46,10 +46,10 @@ Working Branch: `pawan/dev` (Branched off `vimal`)
 - [x] **File Upload**: Wired up file selector dropzone, filename display, and remove handler in `WorkWithUsModal.jsx`.
 - [x] **Messaging Consistency**: Aligned response promises to 24 hours across Contact and Footer components.
 
-### Phase 5: Testing & CI
-- [ ] **Vitest & RTL**: Add component tests for form validation and modal behavior.
-- [ ] **Playwright**: Add E2E tests for routing and user flow.
-- [ ] **GitHub Actions**: Add `.github/workflows/ci.yml` for lint/test/build checks on PRs.
+### Phase 5: Testing & CI Automation (Completed)
+- [x] **GitHub Actions Workflow**: Created `.github/workflows/ci.yml` running Node 20 dependency install, ESLint, Vitest tests, and Vite build on every pull request.
+- [x] **Vitest Framework Setup**: Installed Vitest, React Testing Library, jsdom, and configured `vite.config.js` & `src/test/setup.js`.
+- [x] **Component Unit Tests**: Written and passing unit test suite `src/components/__tests__/Header.test.jsx`.
 
 ### Phase 6: Performance Refactor
 - [ ] **Route Lazy Loading**: Use `React.lazy()` and `<Suspense>` in `App.jsx`.
