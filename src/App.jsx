@@ -1,18 +1,22 @@
+import { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ScrollToTop from './components/ScrollToTop';
 import AnalyticsTracker from './components/AnalyticsTracker';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import Home from './pages/Home';
-import About from './pages/About';
-import Brands from './pages/Brands';
-import Marketing from './pages/Marketing';
-import Branding from './pages/Branding';
-import Ecommerce from './pages/Ecommerce';
-import Contact from './pages/Contact';
-import PrivacyPolicy from './pages/PrivacyPolicy';
-import NotFound from './pages/NotFound';
+import PageLoader from './components/PageLoader';
 import WorkWithUsModal from './components/WorkWithUsModal';
+
+// Route-level Code Splitting for Performance
+const Home = lazy(() => import('./pages/Home'));
+const About = lazy(() => import('./pages/About'));
+const Brands = lazy(() => import('./pages/Brands'));
+const Marketing = lazy(() => import('./pages/Marketing'));
+const Branding = lazy(() => import('./pages/Branding'));
+const Ecommerce = lazy(() => import('./pages/Ecommerce'));
+const Contact = lazy(() => import('./pages/Contact'));
+const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 
 function App() {
   return (
@@ -22,17 +26,19 @@ function App() {
       <div id="app-root">
         <Header />
         <main className="main-content">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/brands" element={<Brands />} />
-            <Route path="/marketing" element={<Marketing />} />
-            <Route path="/branding" element={<Branding />} />
-            <Route path="/ecommerce" element={<Ecommerce />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/privacy" element={<PrivacyPolicy />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <Suspense fallback={<PageLoader />}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/brands" element={<Brands />} />
+              <Route path="/marketing" element={<Marketing />} />
+              <Route path="/branding" element={<Branding />} />
+              <Route path="/ecommerce" element={<Ecommerce />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/privacy" element={<PrivacyPolicy />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
         </main>
         <Footer />
         <WorkWithUsModal />
@@ -54,4 +60,3 @@ function App() {
 }
 
 export default App;
-
