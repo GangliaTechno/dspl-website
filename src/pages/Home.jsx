@@ -2,10 +2,10 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Layers, Package, Users, TrendingUp } from 'lucide-react';
 import useSEO from '../hooks/useSEO';
 import rawRadiclesLogo from '../assets/RR_logo embossed_tm.png';
-import gangliaLogo1 from '../assets/ganglia_logo1.png';
-import gangliaLogo2 from '../assets/ganglia_logo2.png';
-import dstNidhi from '../assets/DST-NIDHI.png';
-import nidhi1 from '../assets/nidhi_1.png';
+import gangliaLogo1 from '../assets/mutbi-normalized.png';
+import gangliaLogo2 from '../assets/startup-karnataka-normalized.png';
+import dstNidhi from '../assets/dst-nidhi-normalized.png';
+import nidhi1 from '../assets/nidhi-prayas-normalized.png';
 import './Home.css';
 
 const Home = () => {
