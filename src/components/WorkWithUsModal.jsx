@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { X, Send, CheckCircle2, FileUp, Calendar, AlertCircle } from 'lucide-react';
+import { X, CheckCircle2, AlertCircle } from 'lucide-react';
+import { trackEvent } from '../utils/analytics';
 
 const WorkWithUsModal = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,7 +29,6 @@ const WorkWithUsModal = () => {
   useEffect(() => {
     const handleOpen = () => {
       setIsOpen(true);
-      document.body.style.overflow = 'hidden';
     };
 
     window.addEventListener('open-work-modal', handleOpen);
@@ -38,9 +38,16 @@ const WorkWithUsModal = () => {
     };
   }, []);
 
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+  }, [isOpen]);
+
   const handleClose = () => {
     setIsOpen(false);
-    document.body.style.overflow = '';
     handleResetForm();
   };
 
@@ -69,6 +76,7 @@ const WorkWithUsModal = () => {
     });
   };
 
+  // eslint-disable-next-line no-unused-vars
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -83,6 +91,7 @@ const WorkWithUsModal = () => {
     }
   };
 
+  // eslint-disable-next-line no-unused-vars
   const removeFile = () => {
     setFormData((prev) => ({ ...prev, fileName: '' }));
   };
@@ -169,16 +178,15 @@ const WorkWithUsModal = () => {
             modalBody.scrollTop = 0;
           }
           
-          if (window.gtag) {
-            window.gtag('event', 'generate_lead', {
-              event_category: 'work_with_us_modal',
-              event_label: formData.services.join(', ')
-            });
-          }
+          trackEvent({
+            category: 'work_with_us_modal',
+            action: 'generate_lead',
+            label: formData.services.join(', ')
+          });
         } else {
           setSubmitError(result.message || 'Failed to submit form. Please check your access key or try again.');
         }
-      } catch (err) {
+      } catch {
         setSubmitError('Failed to connect to the Web3Forms server. Please check your internet connection.');
       } finally {
         setIsSubmitting(false);

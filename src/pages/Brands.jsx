@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { ArrowRight, Sparkles, Cookie } from 'lucide-react';
 import useSEO from '../hooks/useSEO';
 import rawRadiclesLogo from '../assets/RR_logo embossed_tm.png';

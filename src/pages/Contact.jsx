@@ -86,7 +86,7 @@ const Contact = () => {
         } else {
           setSubmitError(result.message || 'Failed to send message. Please check your access key or try again.');
         }
-      } catch (err) {
+      } catch {
         setSubmitError('Failed to connect to the Web3Forms server. Please check your internet connection.');
       } finally {
         setIsSubmitting(false);
