@@ -10,7 +10,7 @@ Working Branch: `pawan/dev` (Branched off `vimal`)
 
 - [x] **PR 1: Analytics Foundation** (`pawan/analytics-cleanup`)
 - [x] **PR 2: Accessibility Baseline** (`pawan/accessibility-baseline`)
-- [ ] **PR 3: SEO Foundation & 404 Route** (`pawan/seo-foundation`)
+- [x] **PR 3: SEO Foundation & 404 Route** (`pawan/seo-foundation`)
 - [ ] **PR 4: Forms & Privacy** (`pawan/forms-privacy`)
 - [ ] **PR 5: Testing & CI Automation** (`pawan/testing-ci`)
 - [ ] **PR 6: Performance & Component Refactoring** (`pawan/performance`)
@@ -34,11 +34,11 @@ Working Branch: `pawan/dev` (Branched off `vimal`)
 - [x] **Form Error Announcements**: Bound `role="alert"` & `aria-live` to feedback elements.
 - [x] **Reduced Motion**: Added `@media (prefers-reduced-motion: reduce)` rules for animations and marquees in `src/index.css`.
 
-### Phase 3: SEO & 404 Route
-- [ ] **Canonical & Social Meta**: Add OpenGraph (`og:*`) & Twitter tags (`twitter:*`).
-- [ ] **Robots & Assets**: Create `public/robots.txt` and fix logo URLs in schema JSON-LD.
-- [ ] **404 Route**: Create `src/pages/NotFound.jsx` and add `<Route path="*" element={<NotFound />} />` in `App.jsx`.
-- [ ] **Sitemap**: Validate `public/sitemap.xml` with `<lastmod>` timestamps.
+### Phase 3: SEO & 404 Route (Completed)
+- [x] **Canonical & Social Meta**: Added OpenGraph (`og:*`), Twitter Cards (`twitter:*`), and dynamic canonical URL tags in `src/hooks/useSEO.js`.
+- [x] **Robots & Assets**: Created `public/robots.txt` and stable `public/logo.png` schema image.
+- [x] **404 Route**: Created `src/pages/NotFound.jsx` with quick links & 404 analytics tracking, wired to `<Route path="*" element={<NotFound />} />` in `App.jsx`.
+- [x] **Sitemap**: Updated `public/sitemap.xml` with `<lastmod>` timestamps and change frequencies.
 
 ### Phase 4: Forms & Privacy
 - [ ] **Privacy Policy & Terms**: Create `PrivacyPolicy.jsx` page and footer links.
