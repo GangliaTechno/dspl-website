@@ -1,14 +1,15 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Calendar, Award, Star, Compass, Target, Eye } from 'lucide-react';
+import { motion } from 'framer-motion';
 import useSEO from '../hooks/useSEO';
 
-import manuImg from '../assets/manu.jpg';
-import sreeImg from '../assets/sree.jpeg';
-import drImg from '../assets/dr.png';
-import balakrishnaImg from '../assets/vice_chairman.jpg';
-import anushaImg from '../assets/Anusha-mam.png';
-import nameshImg from '../assets/ceo.png';
+import manuImg from '../assets/manu_pro_fixed.jpg';
+import sreeImg from '../assets/sree_pro_fixed.jpg';
+import drImg from '../assets/dr_pro.png';
+import balakrishnaImg from '../assets/vice_chairman_pro.png';
+import anushaImg from '../assets/Anusha-mam_pro.png';
+import nameshImg from '../assets/ceo_pro.png';
 import aboutHeroImg from '../assets/about_dspl.jpeg';
 import teamBgImg from '../assets/linen_concrete_texture.png';
 import dsplImg from '../assets/dspl_img.jpg';
@@ -37,12 +38,12 @@ const About = () => {
   }, [location]);
 
   const team = [
-    { name: 'Dr. Manu Sudhi', role: 'Chairman and Director', initial: 'MS', image: manuImg, linkedin: 'https://www.linkedin.com/in/dr-manu-sudhi-609296167/' },
-    { name: 'Mr. Shreepathy Ranga Bhatta', role: 'Managing Director', initial: 'SR', image: sreeImg, linkedin: 'https://www.linkedin.com/in/shreepathy-ranga-bhatta-b-862a2b24a/' },
-    { name: 'Ms. Anusha Pai', role: 'Director', initial: 'AP', image: anushaImg, transform: 'scale(1.1) translateY(2%)', linkedin: 'https://www.linkedin.com/in/anusha-pai-013b0213/' },
-    { name: 'Dr. Balakrishna S. Maddodi', role: 'Mentor', initial: 'BM', image: balakrishnaImg, linkedin: 'https://www.linkedin.com/in/dr-balakrishna-srinivas-maddodi-68874218/' },
-    { name: 'Mr. Namesh Malarout', role: 'Director', initial: 'NM', image: nameshImg, transform: 'scale(1.6) translateY(5%)', linkedin: 'https://www.linkedin.com/in/namesh-malarout-97375697/' },
-    { name: 'Dr. Dasharathraj K Shetty', role: 'Mentor', initial: 'DS', image: drImg, linkedin: 'https://www.linkedin.com/in/dasharathraj/' }
+    { name: 'Dr. Manu Sudhi', role: 'Chairman and Director', initial: 'MS', image: manuImg, linkedin: 'https://www.linkedin.com/in/dr-manu-sudhi-609296167/', transform: 'scale(1.0)' },
+    { name: 'Mr. Shreepathy Ranga Bhatta', role: 'Managing Director', initial: 'SR', image: sreeImg, linkedin: 'https://www.linkedin.com/in/shreepathy-ranga-bhatta-b-862a2b24a/', transform: 'scale(1.0)' },
+    { name: 'Ms. Anusha Pai', role: 'Director', initial: 'AP', image: anushaImg, linkedin: 'https://www.linkedin.com/in/anusha-pai-013b0213/', transform: 'scale(1.35)', transformOrigin: 'top center' },
+    { name: 'Dr. Balakrishna S. Maddodi', role: 'Mentor', initial: 'BM', image: balakrishnaImg, linkedin: 'https://www.linkedin.com/in/dr-balakrishna-srinivas-maddodi-68874218/', transform: 'scale(1.0)' },
+    { name: 'Mr. Namesh Malarout', role: 'Director', initial: 'NM', image: nameshImg, linkedin: 'https://www.linkedin.com/in/namesh-malarout-97375697/', transform: 'scale(1.35)', transformOrigin: 'top center' },
+    { name: 'Dr. Dasharathraj K Shetty', role: 'Mentor', initial: 'DS', image: drImg, linkedin: 'https://www.linkedin.com/in/dasharathraj/', transform: 'scale(1.0)' }
   ];
 
   return (
@@ -55,7 +56,13 @@ const About = () => {
 
       {/* Story Section */}
       <section id="story" className="section about-hero">
-        <div className="container">
+        <div className="about-hero-bg"></div>
+        <motion.div 
+          className="container"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
           <span className="section-subtitle">Our Corporate Profile</span>
           <h1 className="about-title">About Dasha Patmaja Services</h1>
           <div className="about-intro-grid">
@@ -63,32 +70,46 @@ const About = () => {
               Dasha Patmaja Services Pvt. Ltd. helps businesses grow through branding, marketing, and e-commerce. We were founded in 2023 and are incubated at the Manipal Universal Technology Business Incubator (MUTBI) at MAHE, Manipal. Our team comes from healthcare, engineering, design, and business. We also build and sell our own brand, Raw Radicles, which keeps our methods tested and current.
             </p>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* Mission & Vision Section */}
       <section className="section mission-vision-section bg-alt">
         <div className="container">
           <div className="mission-vision-grid">
-            <div className="mv-card glass">
-              <div className="mv-icon-box">
-                <Target size={24} />
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="mv-card glass">
+                <div className="mv-icon-box">
+                  <Target size={24} />
+                </div>
+                <h3 className="mv-title">Our Mission</h3>
+                <p className="mv-text">
+                  Build brands people trust, and help other businesses do the same.
+                </p>
               </div>
-              <h3 className="mv-title">Our Mission</h3>
-              <p className="mv-text">
-                Build brands people trust, and help other businesses do the same.
-              </p>
-            </div>
+            </motion.div>
 
-            <div className="mv-card glass">
-              <div className="mv-icon-box">
-                <Eye size={24} />
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+            >
+              <div className="mv-card glass">
+                <div className="mv-icon-box">
+                  <Eye size={24} />
+                </div>
+                <h3 className="mv-title">Our Vision</h3>
+                <p className="mv-text">
+                  A group of Indian consumer brands, supported by a services arm that any growing business can hire.
+                </p>
               </div>
-              <h3 className="mv-title">Our Vision</h3>
-              <p className="mv-text">
-                A group of Indian consumer brands, supported by a services arm that any growing business can hire.
-              </p>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -106,64 +127,92 @@ const About = () => {
 
           <div className="timeline-container">
             {/* Year 2023 */}
-            <div className="timeline-item">
-              <div className="timeline-badge">
-                <Calendar size={18} />
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="timeline-item">
+                <div className="timeline-badge">
+                  <Calendar size={18} />
+                </div>
+                <div className="timeline-card glass">
+                  <div className="timeline-year">2023</div>
+                  <h3 className="timeline-milestone-title">Founding and first incubation</h3>
+                  <ul className="timeline-list">
+                    <li>Started with a plan to build consumer brands and the services that grow them.</li>
+                    <li>Incubated at GoK Bioincubator, Manipal, where we set up our base.</li>
+                  </ul>
+                </div>
               </div>
-              <div className="timeline-card glass">
-                <div className="timeline-year">2023</div>
-                <h3 className="timeline-milestone-title">Founding and first incubation</h3>
-                <ul className="timeline-list">
-                  <li>Started with a plan to build consumer brands and the services that grow them.</li>
-                  <li>Incubated at GoK Bioincubator, Manipal, where we set up our base.</li>
-                </ul>
-              </div>
-            </div>
+            </motion.div>
 
             {/* Year 2024 */}
-            <div className="timeline-item">
-              <div className="timeline-badge">
-                <Star size={18} />
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="timeline-item">
+                <div className="timeline-badge">
+                  <Star size={18} />
+                </div>
+                <div className="timeline-card glass">
+                  <div className="timeline-year">2024</div>
+                  <h3 className="timeline-milestone-title">First brand</h3>
+                  <ul className="timeline-list">
+                    <li>Launched Raw Radicles, a premium chocolate brand with Ayurveda inside.</li>
+                    <li>Built the product, packaging, and supply chain from the ground up.</li>
+                  </ul>
+                </div>
               </div>
-              <div className="timeline-card glass">
-                <div className="timeline-year">2024</div>
-                <h3 className="timeline-milestone-title">First brand</h3>
-                <ul className="timeline-list">
-                  <li>Launched Raw Radicles, a premium chocolate brand with Ayurveda inside.</li>
-                  <li>Built the product, packaging, and supply chain from the ground up.</li>
-                </ul>
-              </div>
-            </div>
+            </motion.div>
 
             {/* Year 2025 */}
-            <div className="timeline-item">
-              <div className="timeline-badge">
-                <Award size={18} />
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="timeline-item">
+                <div className="timeline-badge">
+                  <Award size={18} />
+                </div>
+                <div className="timeline-card glass">
+                  <div className="timeline-year">2025</div>
+                  <h3 className="timeline-milestone-title">MUTBI incubation and national grant</h3>
+                  <ul className="timeline-list">
+                    <li>Joined MUTBI at MAHE, Manipal, for technical and academic support.</li>
+                    <li>Won a government grant under the NIDHI-PRAYAS scheme.</li>
+                    <li>Signed a Memorandum of Understanding with Amruthanjali Ayurveda for manufacturing.</li>
+                  </ul>
+                </div>
               </div>
-              <div className="timeline-card glass">
-                <div className="timeline-year">2025</div>
-                <h3 className="timeline-milestone-title">MUTBI incubation and national grant</h3>
-                <ul className="timeline-list">
-                  <li>Joined MUTBI at MAHE, Manipal, for technical and academic support.</li>
-                  <li>Won a government grant under the NIDHI-PRAYAS scheme.</li>
-                  <li>Signed a Memorandum of Understanding with Amruthanjali Ayurveda for manufacturing.</li>
-                </ul>
-              </div>
-            </div>
+            </motion.div>
 
             {/* Year 2026 */}
-            <div className="timeline-item">
-              <div className="timeline-badge">
-                <Compass size={18} />
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="timeline-item">
+                <div className="timeline-badge">
+                  <Compass size={18} />
+                </div>
+                <div className="timeline-card glass">
+                  <div className="timeline-year">2026</div>
+                  <h3 className="timeline-milestone-title">Services arm (new entry)</h3>
+                  <ul className="timeline-list">
+                    <li>Opened our branding, marketing, and e-commerce services to outside clients.</li>
+                  </ul>
+                </div>
               </div>
-              <div className="timeline-card glass">
-                <div className="timeline-year">2026</div>
-                <h3 className="timeline-milestone-title">Services arm (new entry)</h3>
-                <ul className="timeline-list">
-                  <li>Opened our branding, marketing, and e-commerce services to outside clients.</li>
-                </ul>
-              </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -181,8 +230,15 @@ const About = () => {
 
           <div className="team-grid">
             {team.map((member, idx) => (
-              <div key={idx} className="team-card glass">
-                <div className="team-avatar-wrapper">
+              <motion.div 
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+              >
+                <div className="team-card glass">
+                  <div className="team-avatar-wrapper">
                   <div className="team-avatar-container">
                     {member.image ? (
                       <img
@@ -190,7 +246,11 @@ const About = () => {
                         alt={member.name}
                         className="team-avatar-image"
                         loading="lazy"
-                        style={{ transform: member.transform || 'none' }}
+                        decoding="async"
+                        style={{ 
+                          transform: member.transform || 'none',
+                          transformOrigin: member.transformOrigin || 'center center'
+                        }}
                       />
                     ) : (
                       <div className={`team-avatar-gradient`}>
@@ -217,9 +277,10 @@ const About = () => {
                     </a>
                   )}
                 </div>
-                <h3 className="member-name">{member.name}</h3>
-                <p className="member-role">{member.role}</p>
-              </div>
+                  <h3 className="member-name">{member.name}</h3>
+                  <p className="member-role">{member.role}</p>
+                </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -241,12 +302,23 @@ const About = () => {
           text-align: center;
           padding: 8rem 0 6rem;
           position: relative;
+          overflow: hidden;
+          border-bottom: 1px solid var(--border-color);
+        }
+
+        @keyframes subtleZoom {
+          from { transform: scale(1); }
+          to { transform: scale(1.05); }
+        }
+
+        .about-hero-bg {
+          position: absolute;
+          top: 0; left: 0; right: 0; bottom: 0;
           background-image: url(${aboutHeroImg});
           background-size: cover;
           background-position: center 35%;
-          background-repeat: no-repeat;
-          overflow: hidden;
-          border-bottom: 1px solid var(--border-color);
+          animation: subtleZoom 20s infinite alternate ease-in-out;
+          z-index: 0;
         }
 
         .about-hero::before {
@@ -479,11 +551,11 @@ const About = () => {
           box-shadow: var(--shadow-lg);
         }
 
-        .timeline-item:nth-child(odd) .timeline-card {
+        .timeline-container > div:nth-child(odd) .timeline-card {
           margin-left: auto;
         }
 
-        .timeline-item:nth-child(even) .timeline-card {
+        .timeline-container > div:nth-child(even) .timeline-card {
           margin-right: auto;
         }
 
@@ -557,6 +629,11 @@ const About = () => {
           border-radius: 4px;
           text-align: center;
           transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: flex-start;
         }
 
         .team-card:hover {

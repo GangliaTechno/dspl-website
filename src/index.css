@@ -283,3 +283,13 @@ select:focus-visible,
   }
 }
 
+
+
+/* Global Mobile Responsiveness */
+@media (max-width: 768px) {
+  .section { padding: 4rem 1rem !important; }
+  h1 { font-size: 2.25rem !important; }
+  h2 { font-size: 1.875rem !important; }
+  h3 { font-size: 1.5rem !important; }
+  .container { padding: 0 1.25rem !important; }
+}

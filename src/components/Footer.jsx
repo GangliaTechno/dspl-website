@@ -19,6 +19,8 @@ const Footer = () => {
             </p>
           </div>
           <button 
+            type="button"
+            aria-label="Open enquiry form to get in touch"
             onClick={() => window.dispatchEvent(new CustomEvent('open-work-modal'))} 
             className="btn btn-primary banner-btn"
           >
@@ -30,7 +32,7 @@ const Footer = () => {
         <div className="footer-grid">
           <div className="footer-col brand-col">
             <Link to="/" className="footer-logo">
-              <img src={logoImg} alt="Dashapatmaja Logo" className="footer-logo-image" />
+              <img src={logoImg} alt="Dashapatmaja Logo" className="footer-logo-image" loading="lazy" decoding="async" />
             </Link>
             <p className="brand-description">
               Innovating Today for a Smarter Tomorrow. We help businesses grow through branding, marketing, and e-commerce.
@@ -102,7 +104,7 @@ const Footer = () => {
           <p>© 2026 Dasha Patmaja Services Pvt. Ltd. All rights reserved.</p>
           <div className="footer-legal-links">
             <Link to="/privacy" className="legal-link">Privacy Policy & Terms</Link>
-            <button className="back-to-top" onClick={handleBackToTop}>
+            <button type="button" aria-label="Back to top of page" className="back-to-top" onClick={handleBackToTop}>
               Back to top
             </button>
           </div>
@@ -188,13 +190,6 @@ const Footer = () => {
 
         .footer-logo-image:hover {
           transform: scale(1.05);
-        }
-
-        .footer-logo-text {
-          font-family: var(--font-heading);
-          font-weight: 800;
-          font-size: 1.2rem;
-          color: var(--text-heading);
         }
 
         .brand-description {

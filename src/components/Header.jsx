@@ -67,7 +67,7 @@ const Header = () => {
         <div className="header-container">
           {/* Left Side: Logo */}
           <Link to="/" className="logo-link" onClick={handleLinkClick}>
-            <img src={logoImg} alt="Dashapatmaja Logo" className="logo-image" />
+            <img src={logoImg} alt="Dashapatmaja Logo" className="logo-image" loading="eager" decoding="async" />
           </Link>
 
           {/* Center: Desktop Navigation Links */}
@@ -103,7 +103,7 @@ const Header = () => {
 
           {/* Right Side: Action Button */}
           <div className="desktop-right-controls">
-            <button onClick={handleOpenWorkModal} className="btn btn-primary header-cta">
+            <button type="button" onClick={handleOpenWorkModal} className="btn btn-primary header-cta" aria-label="Open Work With Us enquiry form">
               Work With Us
             </button>
           </div>
@@ -135,7 +135,9 @@ const Header = () => {
           <Link to="/ecommerce" className="mobile-nav-link" onClick={handleLinkClick} aria-current={location.pathname === '/ecommerce' ? 'page' : undefined}>E-commerce</Link>
           <Link to="/contact" className="mobile-nav-link" onClick={handleLinkClick} aria-current={location.pathname === '/contact' ? 'page' : undefined}>Contact</Link>
           <button 
+            type="button"
             className="btn btn-primary mobile-cta" 
+            aria-label="Open Work With Us enquiry form"
             onClick={(e) => { handleLinkClick(); handleOpenWorkModal(e); }}
           >
             Work With Us
@@ -205,14 +207,6 @@ const Header = () => {
           filter: drop-shadow(0 4px 12px rgba(255, 255, 255, 0.8));
         }
 
-        .logo-text {
-          font-family: var(--font-heading);
-          font-weight: 800;
-          font-size: 1.25rem;
-          letter-spacing: -0.02em;
-          color: var(--text-heading);
-        }
-
         .desktop-nav {
           display: flex;
           align-items: center;
@@ -239,52 +233,6 @@ const Header = () => {
 
         .nav-link:hover, .nav-link-active {
           color: var(--accent);
-        }
-
-        .dropdown-trigger {
-          user-select: none;
-        }
-
-        .dropdown-arrow {
-          transition: transform 0.2s ease;
-        }
-
-        .nav-dropdown-wrapper:hover .dropdown-arrow {
-          transform: rotate(180deg);
-        }
-
-        /* Dropdown Panel Styling */
-        .nav-dropdown-wrapper {
-          position: relative;
-        }
-
-        .dropdown-panel {
-          position: absolute;
-          top: 100%;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 220px;
-          background: #ffffff;
-          border: 1px solid var(--border-color);
-          border-radius: 6px;
-          padding: 0.75rem 0;
-          box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.1);
-          z-index: 105;
-        }
-
-        .dropdown-item {
-          display: block;
-          padding: 0.6rem 1.25rem;
-          font-size: 0.875rem;
-          font-weight: 500;
-          color: var(--text-secondary);
-          transition: all 0.2s ease;
-        }
-
-        .dropdown-item:hover {
-          color: var(--accent);
-          background: var(--bg-tertiary);
-          padding-left: 1.5rem;
         }
 
         .header-cta {
@@ -340,54 +288,10 @@ const Header = () => {
           color: var(--text-heading);
         }
 
-        .mobile-nav-group {
-          display: flex;
-          flex-direction: column;
-          gap: 0.5rem;
-          border-left: 2px solid var(--border-color);
-          padding-left: 1rem;
-        }
-
-        .mobile-group-title {
-          font-size: 0.85rem;
-          font-weight: 700;
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-          color: var(--accent-light);
-          margin-bottom: 0.25rem;
-        }
-
-        .mobile-group-links {
-          display: flex;
-          flex-direction: column;
-          gap: 0.75rem;
-        }
-
-        .mobile-sub-link {
-          font-size: 0.95rem;
-          font-weight: 500;
-          color: var(--text-secondary);
-        }
-
         .mobile-cta {
           margin-top: 1rem;
           width: 100%;
           text-align: center;
-        }
-
-        @keyframes slideUp {
-          from {
-            opacity: 0;
-            transform: translate(-50%, 8px);
-          }
-          to {
-            opacity: 1;
-            transform: translate(-50%, 0);
-          }
-        }
-
-        .animate-slide-up {
-          animation: slideUp 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
         @media (max-width: 900px) {

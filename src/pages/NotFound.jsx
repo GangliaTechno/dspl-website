@@ -35,6 +35,7 @@ const NotFound = () => {
             <Home size={18} style={{ marginRight: '8px' }} /> Return to Home
           </Link>
           <button 
+            type="button"
             onClick={() => window.history.back()} 
             className="btn btn-secondary"
           >

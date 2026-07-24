@@ -1,0 +1,252 @@
+﻿[
+  {
+    "antipattern": "design-system-color",
+    "name": "Color outside DESIGN.md",
+    "description": "A literal color is outside the DESIGN.md palette and sidecar tonal ramps. This may be legitimate, but it should be an intentional design-system addition rather than drift.",
+    "severity": "advisory",
+    "file": "E:\\For website\\dspl website\\src\\pages\\Home.jsx",
+    "line": 287,
+    "snippet": "Undocumented color rgba(0, 0, 0, 0.65) is outside DESIGN.md colors",
+    "ignoreValue": "rgba(0, 0, 0, 0.65)"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "E:\\For website\\dspl website\\src\\pages\\Home.jsx",
+    "line": 425,
+    "snippet": "font-size: 0.75rem is off the DESIGN.md type ramp",
+    "ignoreValue": "0.75rem"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "E:\\For website\\dspl website\\src\\pages\\Home.jsx",
+    "line": 437,
+    "snippet": "font-size: 4.25rem is off the DESIGN.md type ramp",
+    "ignoreValue": "4.25rem"
+  },
+  {
+    "antipattern": "design-system-color",
+    "name": "Color outside DESIGN.md",
+    "description": "A literal color is outside the DESIGN.md palette and sidecar tonal ramps. This may be legitimate, but it should be an intentional design-system addition rather than drift.",
+    "severity": "advisory",
+    "file": "E:\\For website\\dspl website\\src\\pages\\Home.jsx",
+    "line": 443,
+    "snippet": "Undocumented color rgba(0, 0, 0, 0.4) is outside DESIGN.md colors",
+    "ignoreValue": "rgba(0, 0, 0, 0.4)"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "E:\\For website\\dspl website\\src\\pages\\Home.jsx",
+    "line": 454,
+    "snippet": "font-size: 1.25rem is off the DESIGN.md type ramp",
+    "ignoreValue": "1.25rem"
+  },
+  {
+    "antipattern": "design-system-color",
+    "name": "Color outside DESIGN.md",
+    "description": "A literal color is outside the DESIGN.md palette and sidecar tonal ramps. This may be legitimate, but it should be an intentional design-system addition rather than drift.",
+    "severity": "advisory",
+    "file": "E:\\For website\\dspl website\\src\\pages\\Home.jsx",
+    "line": 459,
+    "snippet": "Undocumented color rgba(0, 0, 0, 0.3) is outside DESIGN.md colors",
+    "ignoreValue": "rgba(0, 0, 0, 0.3)"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "E:\\For website\\dspl website\\src\\pages\\Home.jsx",
+    "line": 512,
+    "snippet": "font-size: 2.5rem is off the DESIGN.md type ramp",
+    "ignoreValue": "2.5rem"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "E:\\For website\\dspl website\\src\\pages\\Home.jsx",
+    "line": 520,
+    "snippet": "font-size: 1.05rem is off the DESIGN.md type ramp",
+    "ignoreValue": "1.05rem"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "E:\\For website\\dspl website\\src\\pages\\Home.jsx",
+    "line": 564,
+    "snippet": "font-size: 1.35rem is off the DESIGN.md type ramp",
+    "ignoreValue": "1.35rem"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "E:\\For website\\dspl website\\src\\pages\\Home.jsx",
+    "line": 571,
+    "snippet": "font-size: 0.95rem is off the DESIGN.md type ramp",
+    "ignoreValue": "0.95rem"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "E:\\For website\\dspl website\\src\\pages\\Home.jsx",
+    "line": 627,
+    "snippet": "font-size: 1.5rem is off the DESIGN.md type ramp",
+    "ignoreValue": "1.5rem"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "E:\\For website\\dspl website\\src\\pages\\Home.jsx",
+    "line": 634,
+    "snippet": "font-size: 0.95rem is off the DESIGN.md type ramp",
+    "ignoreValue": "0.95rem"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "E:\\For website\\dspl website\\src\\pages\\Home.jsx",
+    "line": 687,
+    "snippet": "font-size: 0.7rem is off the DESIGN.md type ramp",
+    "ignoreValue": "0.7rem"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "E:\\For website\\dspl website\\src\\pages\\Home.jsx",
+    "line": 697,
+    "snippet": "font-size: 0.7rem is off the DESIGN.md type ramp",
+    "ignoreValue": "0.7rem"
+  },
+  {
+    "antipattern": "design-system-color",
+    "name": "Color outside DESIGN.md",
+    "description": "A literal color is outside the DESIGN.md palette and sidecar tonal ramps. This may be legitimate, but it should be an intentional design-system addition rather than drift.",
+    "severity": "advisory",
+    "file": "E:\\For website\\dspl website\\src\\pages\\Home.jsx",
+    "line": 700,
+    "snippet": "Undocumented color rgba(141, 147, 101, 0.1) is outside DESIGN.md colors",
+    "ignoreValue": "rgba(141, 147, 101, 0.1)"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "E:\\For website\\dspl website\\src\\pages\\Home.jsx",
+    "line": 707,
+    "snippet": "font-size: 2rem is off the DESIGN.md type ramp",
+    "ignoreValue": "2rem"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "E:\\For website\\dspl website\\src\\pages\\Home.jsx",
+    "line": 729,
+    "snippet": "font-size: 1.05rem is off the DESIGN.md type ramp",
+    "ignoreValue": "1.05rem"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "E:\\For website\\dspl website\\src\\pages\\Home.jsx",
+    "line": 736,
+    "snippet": "font-size: 0.95rem is off the DESIGN.md type ramp",
+    "ignoreValue": "0.95rem"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "E:\\For website\\dspl website\\src\\pages\\Home.jsx",
+    "line": 773,
+    "snippet": "font-size: 2.5rem is off the DESIGN.md type ramp",
+    "ignoreValue": "2.5rem"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "E:\\For website\\dspl website\\src\\pages\\Home.jsx",
+    "line": 782,
+    "snippet": "font-size: 1.25rem is off the DESIGN.md type ramp",
+    "ignoreValue": "1.25rem"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "E:\\For website\\dspl website\\src\\pages\\Home.jsx",
+    "line": 789,
+    "snippet": "font-size: 0.925rem is off the DESIGN.md type ramp",
+    "ignoreValue": "0.925rem"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "E:\\For website\\dspl website\\src\\pages\\Home.jsx",
+    "line": 797,
+    "snippet": "font-size: 3.5rem is off the DESIGN.md type ramp",
+    "ignoreValue": "3.5rem"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "E:\\For website\\dspl website\\src\\pages\\Home.jsx",
+    "line": 817,
+    "snippet": "font-size: 2.75rem is off the DESIGN.md type ramp",
+    "ignoreValue": "2.75rem"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "E:\\For website\\dspl website\\src\\pages\\Home.jsx",
+    "line": 820,
+    "snippet": "font-size: 1.1rem is off the DESIGN.md type ramp",
+    "ignoreValue": "1.1rem"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "file": "E:\\For website\\dspl website\\src\\pages\\Home.jsx",
+    "line": 833,
+    "snippet": "font-size: 2rem is off the DESIGN.md type ramp",
+    "ignoreValue": "2rem"
+  }
+]

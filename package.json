@@ -1,5 +1,5 @@
 {
-  "name": "dashamatpaja-website",
+  "name": "dashapatmaja-website",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -11,13 +11,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "framer-motion": "^12.42.2",
     "lucide-react": "^1.21.0",
-    "ogl": "^1.0.11",
+    "react-router-dom": "^7.18.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
-    "react-ga4": "^3.0.1",
-    "react-router-dom": "^7.18.0",
-    "three": "^0.184.0"
+    "react-ga4": "^3.0.1"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

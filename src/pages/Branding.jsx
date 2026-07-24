@@ -425,6 +425,12 @@ const Branding = () => {
         }
 
         @media (max-width: 768px) {
+          .domain-title {
+            font-size: 2.25rem;
+          }
+          .section-title {
+            font-size: 1.875rem;
+          }
           .offers-grid {
             grid-template-columns: 1fr;
           }

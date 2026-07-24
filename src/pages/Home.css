@@ -11,7 +11,7 @@
 
         /* 1. Hero Block */
         .hero-section {
-          padding: 9.5rem 0 15.5rem; /* Increased padding to make the hero section taller and grander */
+          padding: 9.5rem 0 150px;
           text-align: center;
           position: relative;
           background-image: url('../assets/dspl_banner.png');
@@ -31,118 +31,90 @@
           z-index: 1;
         }
 
-        /* Supporter Band Marquee */
+        /* Premium Scrolling Marquee */
         .supporter-band {
+          position: absolute;
+          right: 0;
+          bottom: 18px;
+          left: 0;
+          z-index: 3;
           width: 100%;
           overflow: hidden;
-          padding: 1rem 0;
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          z-index: 2;
-          border-top: none;
+          padding-block: 12px;
           background: transparent;
+          border: 0;
+          --supporter-gap: 6rem;
         }
 
         .supporter-track {
           display: flex;
           align-items: center;
+          gap: var(--supporter-gap);
+          padding-right: var(--supporter-gap);
           width: max-content;
-          animation: scrollRightToLeft 25s linear infinite;
+          will-change: transform;
         }
 
         .supporter-logo-slot {
-          width: 210px;
-          height: 64px;
-          margin-inline: 1.25rem;
           display: flex;
+          flex: 0 0 auto;
           align-items: center;
           justify-content: center;
-          flex: 0 0 auto;
+          height: 65px;
         }
 
         .supporter-logo {
           display: block;
-          width: var(--supporter-logo-width);
-          height: auto;
-          max-height: var(--supporter-logo-height);
+          width: auto;
+          max-width: 100%;
           object-fit: contain;
-
           filter: brightness(0) invert(1);
-          opacity: 0.52;
+          opacity: 0.5;
+          image-rendering: auto;
+          backface-visibility: hidden;
           transition: opacity 0.3s ease;
         }
 
-        .supporter-logo-1 {
-          --supporter-logo-width: 195px;
-          --supporter-logo-height: 38px;
+        .supporter-logo:hover {
+          opacity: 1;
         }
 
-        .supporter-logo-2 {
-          --supporter-logo-width: 175px;
-          --supporter-logo-height: 44px;
-        }
-
-        .supporter-logo-dst {
-          --supporter-logo-width: 168px;
-          --supporter-logo-height: 44px;
-        }
-
-        .supporter-logo-nidhi1 {
-          --supporter-logo-width: 92px;
-          --supporter-logo-height: 42px;
+        /* Optical Sizing - visually balances square vs wide logos */
+        .supporter-logo-dst .supporter-logo {
+          height: 34px;
         }
 
         .supporter-logo-nidhi1 .supporter-logo {
-          transform: translateY(-1px);
+          height: 46px;
+          transform: translateY(-6px);
         }
 
-        .supporter-logo:hover {
-          opacity: 0.9;
+        .supporter-logo-1 .supporter-logo {
+          height: 36px; 
         }
 
-        @keyframes scrollRightToLeft {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(-33.33%);
-          }
+        .supporter-logo-2 .supporter-logo {
+          height: 28px;
         }
 
-        /* Mobile Responsive Adjustments */
+
+
         @media (max-width: 768px) {
           .hero-section {
             padding: 7rem 0 10rem;
           }
           .supporter-band {
-            bottom: 0;
+            bottom: 10px;
+            padding-block: 8px;
+            --supporter-gap: 2.5rem;
           }
           .supporter-logo-slot {
-            width: 160px;
-            height: 54px;
-            margin-inline: 0.75rem;
+            height: 48px;
           }
-
-          .supporter-logo-1 {
-            --supporter-logo-width: 145px;
-            --supporter-logo-height: 30px;
-          }
-
-          .supporter-logo-2 {
-            --supporter-logo-width: 130px;
-            --supporter-logo-height: 34px;
-          }
-
-          .supporter-logo-dst {
-            --supporter-logo-width: 126px;
-            --supporter-logo-height: 34px;
-          }
-
-          .supporter-logo-nidhi1 {
-            --supporter-logo-width: 72px;
-            --supporter-logo-height: 34px;
-          }
+          .supporter-logo-dst .supporter-logo { height: 28px; }
+          .supporter-logo-nidhi1 .supporter-logo { height: 36px; }
+          .supporter-logo-1 .supporter-logo { height: 30px; }
+          .supporter-logo-2 .supporter-logo { height: 22px; }
         }
 
         .hero-section .glow-bg {
@@ -157,30 +129,6 @@
           flex-direction: column;
           align-items: center;
           margin-top: 2.5rem; /* Pushes the hero content slightly down */
-        }
-
-        .hero-badge-wrapper {
-          margin-bottom: 2rem;
-          animation: fadeIn 0.8s ease-out;
-        }
-
-        .hero-badge {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.5rem;
-          padding: 0.5rem 1rem;
-          background: rgba(245, 168, 0, 0.1);
-          border: 1px solid rgba(245, 168, 0, 0.3);
-          color: var(--accent);
-          font-size: 0.75rem;
-          font-weight: 700;
-          letter-spacing: 0.05em;
-          text-transform: uppercase;
-          border-radius: 4px;
-        }
-
-        .badge-icon {
-          color: var(--accent);
         }
 
         .hero-title {
@@ -560,6 +508,11 @@
             max-width: 600px;
             margin: 0 auto;
           }
+          .process-grid {
+            grid-template-columns: 1fr;
+            max-width: 600px;
+            margin: 0 auto;
+          }
         }
 
         @media (max-width: 768px) {
@@ -582,38 +535,4 @@
           .section-title {
             font-size: 2rem;
           }
-        }
-
-        /* Final CTA Section Styles */
-        .final-cta-section {
-          background-color: var(--bg-tertiary);
-          border-top: 1px solid var(--border-color);
-          text-align: center;
-        }
-
-        .final-cta-card {
-          max-width: 600px;
-          margin: 0 auto;
-        }
-
-        .final-cta-title {
-          font-family: var(--font-heading);
-          font-size: 2.5rem;
-          font-weight: 800;
-          color: var(--text-heading);
-          letter-spacing: -0.03em;
-          margin-bottom: 1rem;
-        }
-
-        .final-cta-desc {
-          font-size: 1.05rem;
-          line-height: 1.6;
-          color: var(--text-secondary);
-          margin-bottom: 2.5rem;
-        }
-
-        .final-cta-actions {
-          display: flex;
-          gap: 1rem;
-          justify-content: center;
         }

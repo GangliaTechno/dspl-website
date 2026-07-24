@@ -162,7 +162,7 @@ const Contact = () => {
                   <CheckCircle2 className="success-icon" />
                   <h3>Message Sent!</h3>
                   <p>Thank you for reaching out to Dasha Patmaja Services. We will review your message and respond within 24 hours.</p>
-                  <button className="btn btn-primary" onClick={() => setSubmitted(false)}>
+                  <button type="button" className="btn btn-primary" onClick={() => setSubmitted(false)}>
                     Send Another Message
                   </button>
                 </div>
@@ -265,8 +265,10 @@ const Contact = () => {
                       value={formData.message}
                       onChange={handleChange}
                       required
+                      aria-invalid={errors.message ? 'true' : 'false'}
+                      aria-describedby={errors.message ? 'message-error' : undefined}
                     />
-                    {errors.message && <span className="error-text">{errors.message}</span>}
+                    {errors.message && <span id="message-error" className="error-text">{errors.message}</span>}
                   </div>
 
                   {submitError && (
@@ -494,6 +496,12 @@ const Contact = () => {
           }
           .form-column {
             padding: 2rem;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .contact-title {
+            font-size: 2.25rem;
           }
         }
       `}</style>

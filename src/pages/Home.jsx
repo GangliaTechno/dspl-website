@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight, Layers, Package, Users, TrendingUp } from 'lucide-react';
+import { motion } from 'framer-motion';
 import useSEO from '../hooks/useSEO';
 import rawRadiclesLogo from '../assets/RR_logo embossed_tm.png';
 import gangliaLogo1 from '../assets/mutbi-normalized.png';
@@ -15,10 +16,26 @@ const Home = () => {
   );
 
   const supporterLogos = [
-    { src: gangliaLogo1, alt: "Manipal Universal Technology Business Incubator", className: "supporter-logo-1" },
-    { src: gangliaLogo2, alt: "Startup Karnataka", className: "supporter-logo-2" },
-    { src: dstNidhi, alt: "DST NIDHI", className: "supporter-logo-dst" },
-    { src: nidhi1, alt: "NIDHI PRAYAS", className: "supporter-logo-nidhi1" }
+    {
+      src: dstNidhi,
+      alt: "DST NIDHI",
+      className: "supporter-logo-dst",
+    },
+    {
+      src: nidhi1,
+      alt: "NIDHI PRAYAS",
+      className: "supporter-logo-nidhi1",
+    },
+    {
+      src: gangliaLogo1,
+      alt: "Manipal Universal Technology Business Incubator",
+      className: "supporter-logo-1",
+    },
+    {
+      src: gangliaLogo2,
+      alt: "Startup Karnataka",
+      className: "supporter-logo-2",
+    },
   ];
 
   const whyUs = [
@@ -98,8 +115,12 @@ const Home = () => {
         </div>
 
         {/* Supported Brand Track (Scrolling Marquee) */}
-        <div className="supporter-band">
-          <div className="supporter-track">
+        <div className="supporter-band" aria-label="Supported by">
+          <motion.div 
+            className="supporter-track"
+            animate={{ x: ["0%", "-33.333333%"] }}
+            transition={{ repeat: Infinity, ease: "linear", duration: 12 }}
+          >
             {[...supporterLogos, ...supporterLogos, ...supporterLogos].map(
               (logo, index) => {
                 const isDuplicate = index >= supporterLogos.length;
@@ -108,19 +129,21 @@ const Home = () => {
                   <div
                     key={`${logo.alt}-${index}`}
                     className={`supporter-logo-slot ${logo.className}`}
-                    aria-hidden={isDuplicate ? 'true' : undefined}
+                    aria-hidden={isDuplicate ? "true" : undefined}
                   >
                     <img
                       src={logo.src}
-                      alt={isDuplicate ? '' : logo.alt}
+                      alt={isDuplicate ? "" : logo.alt}
                       className="supporter-logo"
-                      loading="lazy"
+                      loading="eager"
+                      decoding="async"
+                      draggable="false"
                     />
                   </div>
                 );
               }
             )}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -223,7 +246,7 @@ const Home = () => {
                 <span className="featured-tag">FLAGSHIP BRAND</span>
               </div>
               <div className="brand-card-logo-wrapper">
-                <img src={rawRadiclesLogo} alt="Raw Radicles premium chocolate bar packaging" className="brand-card-logo-img" />
+                <img src={rawRadiclesLogo} alt="Raw Radicles premium chocolate bar packaging" className="brand-card-logo-img" loading="lazy" decoding="async" />
               </div>
               <p className="brand-tagline">Premium chocolate with Ayurveda inside.</p>
               <p className="brand-desc">
@@ -246,6 +269,7 @@ const Home = () => {
               </p>
               <button 
                 type="button"
+                aria-label="Open enquiry form to partner with us on a new brand"
                 aria-haspopup="dialog"
                 onClick={() => window.dispatchEvent(new CustomEvent('open-work-modal'))} 
                 className="brand-link"

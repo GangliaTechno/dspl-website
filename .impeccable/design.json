@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-23T16:53:25Z",
+  "title": "Design System: Dasha Patmaja Growth House",
+  "extensions": {
+    "colorMeta": {
+      "primary": {
+        "role": "primary",
+        "displayName": "Hero Gold",
+        "canonical": "#F5A800"
+      },
+      "neutral-bg": {
+        "role": "neutral",
+        "displayName": "Warm Off-White",
+        "canonical": "#F5F3EE"
+      },
+      "neutral-surface": {
+        "role": "neutral",
+        "displayName": "Cream Tint",
+        "canonical": "#FFF8E7"
+      }
+    },
+    "shadows": [
+      {
+        "name": "ambient-low",
+        "value": "0 10px 30px -10px rgba(0, 0, 0, 0.06)",
+        "purpose": "Soft card elevation"
+      },
+      {
+        "name": "cta-glow",
+        "value": "0 4px 14px 0 rgba(245, 168, 0, 0.15)",
+        "purpose": "Primary gold button glow"
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-smooth",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Smooth entrance and state transitions"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Main conversion action button",
+      "html": "<button class=\"ds-btn-primary\">Work With Us</button>",
+      "css": ".ds-btn-primary { background: #F5A800; color: #111111; padding: 12px 28px; font-weight: 600; font-family: Outfit, sans-serif; border: none; border-radius: 4px; cursor: pointer; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 4px 14px 0 rgba(245, 168, 0, 0.15); } .ds-btn-primary:hover { background: #FFC107; transform: translateY(-2px); box-shadow: 0 6px 20px 0 rgba(245, 168, 0, 0.25); }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Secondary exploration action button",
+      "html": "<button class=\"ds-btn-secondary\">Explore Portfolio</button>",
+      "css": ".ds-btn-secondary { background: #F5EFEB; color: #111111; padding: 12px 28px; font-weight: 600; font-family: Outfit, sans-serif; border: 1px solid rgba(26, 26, 26, 0.08); border-radius: 4px; cursor: pointer; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); } .ds-btn-secondary:hover { background: #FFF8E7; transform: translateY(-2px); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Institutional Warmth House",
+    "overview": "The DSPL design system reflects institutional credibility, editorial warmth, and high-performance growth energy.",
+    "keyCharacteristics": [
+      "Warm Prestige: Sophisticated off-white canvas with restrained gold highlight accents.",
+      "Institutional Weight: Sharp, precise component boundaries paired with modern bold typography.",
+      "Structured Cadence: Clear multi-step execution flows without repetitive eyebrow clutter."
+    ],
+    "rules": [
+      {
+        "name": "The Rarity of Gold Rule",
+        "body": "Hero Gold (#F5A800) is used on <=10% of any page surface.",
+        "section": "colors"
+      },
+      {
+        "name": "The Line Length Rule",
+        "body": "Body paragraphs are capped at 65-75ch.",
+        "section": "typography"
+      },
+      {
+        "name": "The Tonal Layering Rule",
+        "body": "Depth is created through warm background shifts and 1px soft borders.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do maintain body text contrast at >= 4.5:1 against warm neutral backgrounds.",
+      "Do use Outfit font with balanced letter spacing (-0.03em for display).",
+      "Do respect user motion preferences via prefers-reduced-motion."
+    ],
+    "donts": [
+      "Don't use generic 2023-era SaaS template eyebrows or repetitive numbered section headers.",
+      "Don't use over-rounded 32px+ card containers or heavy dark drop shadows.",
+      "Don't apply decorative gradient text or sketchy SVG path filters."
+    ]
+  }
+}
