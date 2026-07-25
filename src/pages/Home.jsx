@@ -244,7 +244,6 @@ const Home = () => {
             <div className="brand-showcase-card featured-brand">
               <div className="featured-visual-panel">
                 <div className="featured-glow" aria-hidden="true"></div>
-                <div className="featured-wordmark" aria-hidden="true">RAW<br/>RADICLES</div>
                 <img src={rawRadiclesLogo} alt="Raw Radicles" className="featured-logo" loading="lazy" decoding="async" />
               </div>
               <div className="featured-content-panel">
@@ -254,7 +253,7 @@ const Home = () => {
                 <h3 className="brand-name">Raw Radicles</h3>
                 <p className="brand-tagline">Chocolate, reimagined through Ayurveda.</p>
                 <p className="brand-desc">
-                  Real cocoa, made in small batches, with herbs chosen to do real work. Built for buyers who want a treat that gives something back.
+                  Real cocoa paired with carefully selected Ayurvedic botanicals, developed as a distinctive chocolate range.
                 </p>
                 <Link to="/brands#raw-radicles" className="brand-link featured-brand-cta">
                   Explore Raw Radicles <ArrowRight size={14} />

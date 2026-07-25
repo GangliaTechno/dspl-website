@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import useSEO from '../hooks/useSEO';
 import rawRadiclesLogo from '../assets/RR_logo embossed_tm.png';
 import brandHeroStudio from '../assets/brands-hero-studio.webp';
-import upcomingBrandsImg from '../assets/Upcoming_brands.jpeg';
+import pipelineBgImg from '../assets/brands_pipeline_bg.jpg';
 
 const Brands = () => {
   useSEO(
@@ -72,7 +72,7 @@ const Brands = () => {
                   
                   <div className="brand-body-paragraphs">
                     <p>
-                      Raw Radicles brings together real cacao, small-batch chocolate making and carefully selected Ayurvedic botanicals.
+                      Raw Radicles brings together real cacao and carefully selected Ayurvedic botanicals.
                     </p>
                     <p>
                       Built end to end by Dasha Patmaja—from formulation and packaging to compliance, storytelling and route to market.
@@ -110,18 +110,14 @@ const Brands = () => {
                 </div>
 
                 <div className="rr-visual-panel">
-                  <div className="rr-background-wordmark" aria-hidden="true">
-                    RAW<br/>RADICLES
-                  </div>
+                  
                   <div className="rr-glow-ring"></div>
                   
                   <div className="brand-showcase-logo-wrapper">
                     <img src={rawRadiclesLogo} alt="Raw Radicles" className="brand-showcase-logo-img" loading="lazy" decoding="async" />
                   </div>
                   
-                  <div className="rr-bottom-descriptor">
-                    CACAO · AYURVEDA · SMALL BATCH
-                  </div>
+                  
                 </div>
 
               </div>
@@ -131,33 +127,43 @@ const Brands = () => {
         </div>
       </section>
 
-      {/* 2. Full-Width Placeholder Pipeline Banner */}
-      <section className="pipeline-card-full-width">
-        <motion.div 
-          className="pipeline-card glass"
-          initial={{ opacity: 0, scale: 0.97 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.7 }}
-        >
-          <div className="pipeline-content">
-            <div className="pipeline-icon-box">
-              <Sparkles size={24} />
+      {/* 2. Pipeline Banner */}
+      <section className="section pipeline-section bg-alt" style={{
+        backgroundImage: `linear-gradient(to right, rgba(255, 248, 231, 0.85), rgba(255, 248, 231, 0.95)), url(${pipelineBgImg})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed'
+      }}>
+        <div className="container">
+          <motion.div 
+            className="pipeline-card"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+          >
+            <div className="pipeline-decorative-shape-1" aria-hidden="true"></div>
+            <div className="pipeline-decorative-shape-2" aria-hidden="true"></div>
+            
+            <div className="pipeline-content">
+              <div className="pipeline-icon-box">
+                <Sparkles size={24} />
+              </div>
+              <h3 className="pipeline-title">More brands in development</h3>
+              <p className="pipeline-text">
+                We are developing consumer brands for additional customer segments. New launches will be added here as they progress.
+              </p>
+              <button 
+                type="button"
+                aria-label="Open enquiry form to discuss a brand partnership"
+                onClick={() => window.dispatchEvent(new CustomEvent('open-work-modal'))} 
+                className="btn btn-primary pipeline-btn"
+              >
+                Discuss a brand partnership <ArrowRight size={16} />
+              </button>
             </div>
-            <h3 className="pipeline-title">More brands coming</h3>
-            <p className="pipeline-text">
-              We are building brands for other customer segments. As each one launches, it will appear here. If you want to partner with us on a new brand, get in touch.
-            </p>
-            <button 
-              type="button"
-              aria-label="Open enquiry form to get in touch"
-              onClick={() => window.dispatchEvent(new CustomEvent('open-work-modal'))} 
-              className="btn btn-secondary pipeline-btn"
-            >
-              Get in Touch <ArrowRight size={16} />
-            </button>
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
       </section>
 
       <style>{`
@@ -172,8 +178,12 @@ const Brands = () => {
           border-bottom: 1px solid var(--border-color);
         }
 
+        #raw-radicles {
+          scroll-margin-top: 7rem;
+        }
+
         .brands-showcase-section {
-          padding-top: 4rem;
+          padding: 4rem 0;
         }
 
         .brands-hero {
@@ -183,7 +193,7 @@ const Brands = () => {
           min-height: 480px;
           padding: 8rem 0;
           overflow: hidden;
-          background-color: #F6F0E4;
+          background-color: var(--bg-tertiary);
         }
 
         .brands-hero-bg {
@@ -208,7 +218,7 @@ const Brands = () => {
           left: 0;
           right: 0;
           bottom: 0;
-          background: linear-gradient(to right, #F6F0E4 0%, rgba(246, 240, 228, 0.4) 30%, transparent 100%);
+          background: linear-gradient(to right, var(--bg-tertiary) 0%, rgba(245, 239, 235, 0.4) 30%, transparent 100%);
         }
 
         .brands-hero .container {
@@ -226,7 +236,7 @@ const Brands = () => {
         }
         
         .brands-hero-content .section-subtitle {
-          color: #C49A3A;
+          color: var(--accent);
           font-weight: 700;
           letter-spacing: 0.1em;
           font-size: 0.85rem;
@@ -240,14 +250,14 @@ const Brands = () => {
           margin-bottom: 1.5rem;
           line-height: 1.1;
           letter-spacing: -0.04em;
-          color: #111A2E !important;
+          color: var(--text-heading) !important;
           text-shadow: none;
         }
 
         .brands-description {
           font-size: 1.25rem;
           line-height: 1.6;
-          color: #211C18;
+          color: var(--text-heading);
           font-weight: 600;
           margin-bottom: 1rem;
         }
@@ -255,7 +265,7 @@ const Brands = () => {
         .brands-sub-description {
           font-size: 1.05rem;
           line-height: 1.6;
-          color: #625B53;
+          color: var(--text-secondary);
           font-weight: 500;
         }
 
@@ -269,8 +279,8 @@ const Brands = () => {
 
         /* Raw Radicles Card Redesign */
         .raw-radicles-card {
-          background: #F6F0E4;
-          border: 1px solid #E5D9C6;
+          background: var(--card-bg);
+          border: 1px solid var(--border-color);
           border-radius: 12px;
           overflow: hidden;
           padding: 0;
@@ -282,11 +292,10 @@ const Brands = () => {
           grid-template-columns: 46% 54%;
           gap: 0;
           align-items: stretch;
-          min-height: 620px;
         }
 
         .brand-info-side {
-          padding: 4.5rem 3.5rem;
+          padding: 3rem 2.5rem;
           display: flex;
           flex-direction: column;
           justify-content: center;
@@ -296,7 +305,7 @@ const Brands = () => {
           display: inline-flex;
           align-items: center;
           gap: 0.5rem;
-          color: #8A5B00;
+          color: var(--accent-dark);
           font-size: 0.7rem;
           font-weight: 700;
           letter-spacing: 0.08em;
@@ -306,14 +315,14 @@ const Brands = () => {
         .brand-showcase-name {
           font-size: 2.75rem;
           font-weight: 800;
-          color: #211C18;
+          color: var(--text-heading);
           margin-bottom: 0.5rem;
         }
 
         .brand-showcase-tagline {
           font-size: 1.2rem;
           font-weight: 600;
-          color: #8A5B00;
+          color: var(--accent-dark);
           margin-bottom: 2rem;
         }
 
@@ -327,7 +336,7 @@ const Brands = () => {
         .brand-body-paragraphs p {
           font-size: 1.05rem;
           line-height: 1.65;
-          color: #625B53;
+          color: var(--text-secondary);
           margin: 0;
         }
 
@@ -335,7 +344,7 @@ const Brands = () => {
           font-size: 0.65rem;
           font-weight: 700;
           letter-spacing: 0.12em;
-          color: #8A5B00;
+          color: var(--accent-dark);
           margin-bottom: 2.5rem;
           text-transform: uppercase;
         }
@@ -348,7 +357,7 @@ const Brands = () => {
         }
 
         .proof-item {
-          border-top: 1px solid rgba(138, 91, 0, 0.15);
+          border-top: 1px solid var(--border-color);
           padding-top: 0.75rem;
         }
 
@@ -357,7 +366,7 @@ const Brands = () => {
           font-size: 0.65rem;
           font-weight: 700;
           letter-spacing: 0.08em;
-          color: #8A5B00;
+          color: var(--accent-dark);
           margin-bottom: 0.25rem;
         }
 
@@ -365,14 +374,14 @@ const Brands = () => {
           display: block;
           font-size: 0.9rem;
           line-height: 1.4;
-          color: #211C18;
+          color: var(--text-heading);
           font-weight: 500;
         }
 
         .rr-cta-btn {
-          background-color: #111A2E;
-          color: #F6F0E4;
-          border: 1px solid #C49A3A;
+          background-color: #111111;
+          color: #ffffff;
+          border: 1px solid #111111;
           padding: 0.85rem 2rem;
           display: inline-flex;
           align-items: center;
@@ -384,40 +393,29 @@ const Brands = () => {
         }
 
         .rr-cta-btn:hover, .rr-cta-btn:focus-visible {
-          background-color: #C49A3A;
-          color: #111A2E;
-          outline: 2px solid #C49A3A;
-          outline-offset: 2px;
+          background-color: var(--accent);
+          color: #111111;
+          border-color: var(--accent);
+        }
+        
+        .rr-cta-btn:focus-visible {
+          outline: 3px solid var(--accent);
+          outline-offset: 3px;
         }
 
         /* Right Visual Panel */
         .rr-visual-panel {
           position: relative;
-          background: linear-gradient(145deg, #172037 0%, #111A2E 52%, #090F1F 100%);
+          background: #111111;
           display: flex;
           flex-direction: column;
           align-items: center;
           justify-content: center;
           overflow: hidden;
-          padding: 3rem;
+          padding: 2rem;
         }
 
-        .rr-background-wordmark {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          font-size: clamp(80px, 12vw, 200px);
-          font-weight: 800;
-          line-height: 0.8;
-          color: #C49A3A;
-          opacity: 0.06;
-          text-align: center;
-          letter-spacing: 0.08em;
-          pointer-events: none;
-          white-space: nowrap;
-          z-index: 1;
-        }
+        
 
         .rr-glow-ring {
           position: absolute;
@@ -427,7 +425,7 @@ const Brands = () => {
           width: 70%;
           padding-bottom: 70%;
           border-radius: 50%;
-          background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, transparent 60%);
+          background: radial-gradient(circle, rgba(245, 168, 0, 0.15) 0%, transparent 60%);
           pointer-events: none;
           z-index: 2;
         }
@@ -436,7 +434,7 @@ const Brands = () => {
           position: relative;
           z-index: 3;
           width: 100%;
-          max-width: 520px;
+          max-width: 460px;
           filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
         }
 
@@ -446,76 +444,53 @@ const Brands = () => {
           display: block;
         }
 
-        .rr-bottom-descriptor {
-          position: absolute;
-          bottom: 2.5rem;
-          left: 0;
-          width: 100%;
-          text-align: center;
-          font-size: 0.7rem;
-          font-weight: 700;
-          letter-spacing: 0.25em;
-          color: rgba(196, 154, 58, 0.7);
-          z-index: 3;
-        }
+        
 
         /* Pipeline Card */
-        .pipeline-card-full-width {
-          width: 100%;
-          overflow: hidden;
-          border-top: 1px solid var(--border-color);
-          border-bottom: 1px solid var(--border-color);
-        }
-
-        .pipeline-card-full-width .pipeline-card {
-          border: none;
-          border-radius: 0;
-          padding: 6rem 2rem;
-          width: 100%;
+        .pipeline-section {
+          padding: 4rem 0;
         }
 
         .pipeline-card {
           position: relative;
+          background: var(--card-bg);
           border: 1px solid var(--border-color);
-          border-radius: 4px;
+          border-radius: 12px;
           padding: 4rem;
           text-align: center;
           transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
           overflow: hidden;
-          background: #0d0d0d;
-        }
-
-        .pipeline-card::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background-image: url(${upcomingBrandsImg});
-          background-size: cover;
-          background-position: center;
-          filter: blur(6px) scale(1.05);
-          opacity: 0.85;
-          z-index: 1;
-          pointer-events: none;
-        }
-
-        .pipeline-card::after {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background: rgba(0, 0, 0, 0.70);
-          z-index: 2;
-          pointer-events: none;
+          max-width: 900px;
+          margin: 0 auto;
         }
 
         .pipeline-card:hover {
           border-color: var(--accent-border-alpha);
           box-shadow: var(--shadow-lg);
+        }
+
+        .pipeline-decorative-shape-1 {
+          position: absolute;
+          top: -50px;
+          right: -50px;
+          width: 200px;
+          height: 200px;
+          border-radius: 50%;
+          background: radial-gradient(circle, rgba(245,168,0,0.05) 0%, transparent 70%);
+          pointer-events: none;
+        }
+
+        .pipeline-decorative-shape-2 {
+          position: absolute;
+          bottom: -50px;
+          left: -50px;
+          width: 150px;
+          height: 150px;
+          border: 2px dashed var(--border-color);
+          opacity: 0.3;
+          border-radius: 12px;
+          transform: rotate(15deg);
+          pointer-events: none;
         }
 
         .pipeline-content {
@@ -532,8 +507,8 @@ const Brands = () => {
           width: 54px;
           height: 54px;
           border-radius: 50%;
-          background: rgba(255, 255, 255, 0.05);
-          border: 1px solid rgba(255, 255, 255, 0.15);
+          background: var(--bg-tertiary);
+          border: 1px solid var(--border-color);
           color: var(--accent-dark);
           display: flex;
           align-items: center;
@@ -542,23 +517,23 @@ const Brands = () => {
         }
 
         .pipeline-title {
-          font-size: 1.75rem;
+          font-size: 2rem;
           font-weight: 800;
-          color: #ffffff;
+          color: var(--text-heading);
           margin-bottom: 0.75rem;
         }
 
         .pipeline-text {
           font-size: 1.05rem;
           line-height: 1.65;
-          color: rgba(255, 255, 255, 0.8);
+          color: var(--text-secondary);
           margin-bottom: 2rem;
         }
 
         .pipeline-btn {
           padding: 0.75rem 1.75rem;
         }
-
+        
         /* Responsive Media Queries */
         @media (max-width: 900px) {
           .brands-hero-bg {
@@ -568,7 +543,7 @@ const Brands = () => {
           }
           
           .brands-hero-overlay {
-            background: linear-gradient(to bottom, rgba(246, 240, 228, 0.9) 0%, rgba(246, 240, 228, 1) 100%);
+            background: linear-gradient(to bottom, rgba(245, 239, 235, 0.9) 0%, rgba(245, 239, 235, 1) 100%);
           }
 
           .brands-hero {
@@ -586,8 +561,8 @@ const Brands = () => {
           }
           
           .rr-visual-panel {
-            aspect-ratio: 4/3;
-            padding: 2rem;
+            padding: 2.5rem;
+            min-height: 300px;
           }
 
           .brand-info-side {
@@ -621,10 +596,7 @@ const Brands = () => {
         }
 
         @media (max-width: 576px) {
-          .pipeline-card-full-width .pipeline-card {
-            padding: 4rem 1.5rem;
-          }
-        }
+          
       `}</style>
     </div>
   );

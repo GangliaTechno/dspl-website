@@ -395,7 +395,7 @@
         .featured-visual-panel {
           width: 100%;
           height: clamp(190px, 24vw, 250px);
-          background: linear-gradient(135deg, #0B1520 0%, #111A2E 100%);
+          background: #111111;
           position: relative;
           display: flex;
           align-items: center;
@@ -411,7 +411,7 @@
           transform: translate(-50%, -50%);
           width: 200px;
           height: 200px;
-          background: radial-gradient(circle, rgba(229,175,34,0.15) 0%, rgba(229,175,34,0) 70%);
+          background: radial-gradient(circle, rgba(245,168,0,0.15) 0%, rgba(245,168,0,0) 70%);
           z-index: 1;
           pointer-events: none;
         }
@@ -469,7 +469,7 @@
         }
 
         .featured-brand-cta:focus-visible {
-          outline: 3px solid #C49A3A;
+          outline: 3px solid var(--accent);
           outline-offset: 3px;
         }
 
