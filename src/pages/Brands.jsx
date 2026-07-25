@@ -131,8 +131,7 @@ const Brands = () => {
       <section className="section pipeline-section bg-alt" style={{
         backgroundImage: `linear-gradient(to right, rgba(255, 248, 231, 0.85), rgba(255, 248, 231, 0.95)), url(${pipelineBgImg})`,
         backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundAttachment: 'fixed'
+        backgroundPosition: 'center'
       }}>
         <div className="container">
           <motion.div 
@@ -305,7 +304,7 @@ const Brands = () => {
           display: inline-flex;
           align-items: center;
           gap: 0.5rem;
-          color: var(--accent-dark);
+          color: var(--accent-text);
           font-size: 0.7rem;
           font-weight: 700;
           letter-spacing: 0.08em;
@@ -322,7 +321,7 @@ const Brands = () => {
         .brand-showcase-tagline {
           font-size: 1.2rem;
           font-weight: 600;
-          color: var(--accent-dark);
+          color: var(--accent-text);
           margin-bottom: 2rem;
         }
 
@@ -344,7 +343,7 @@ const Brands = () => {
           font-size: 0.65rem;
           font-weight: 700;
           letter-spacing: 0.12em;
-          color: var(--accent-dark);
+          color: var(--accent-text);
           margin-bottom: 2.5rem;
           text-transform: uppercase;
         }
@@ -366,7 +365,7 @@ const Brands = () => {
           font-size: 0.65rem;
           font-weight: 700;
           letter-spacing: 0.08em;
-          color: var(--accent-dark);
+          color: var(--accent-text);
           margin-bottom: 0.25rem;
         }
 
@@ -509,7 +508,7 @@ const Brands = () => {
           border-radius: 50%;
           background: var(--bg-tertiary);
           border: 1px solid var(--border-color);
-          color: var(--accent-dark);
+          color: var(--accent-text);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -594,9 +593,6 @@ const Brands = () => {
             gap: 1rem;
           }
         }
-
-        @media (max-width: 576px) {
-          
       `}</style>
     </div>
   );
