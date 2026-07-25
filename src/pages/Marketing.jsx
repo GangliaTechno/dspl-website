@@ -1,7 +1,11 @@
 import { Search, Megaphone, BarChart, FileText } from 'lucide-react';
-import marketingBgImg from '../assets/Marketing_hero_section.webp';
-import marketingBgImgMobile from '../assets/Marketing_hero_section-mobile.webp';
+import marketingHero640 from '../assets/Marketing_hero_section-640.webp';
+import marketingHero960 from '../assets/Marketing_hero_section-960.webp';
+import marketingHero1440 from '../assets/Marketing_hero_section-1440.webp';
+import marketingHero1920 from '../assets/Marketing_hero_section-1920.webp';
+import marketingMobile from '../assets/Marketing_hero_section-mobile.webp';
 import ServicePage from '../components/ServicePage';
+
 
 const Marketing = () => {
 
@@ -43,6 +47,16 @@ const Marketing = () => {
     }
   ];
 
+  const heroImage = {
+    src: marketingHero1440,
+    desktopSrcSet: `${marketingHero640} 640w, ${marketingHero960} 960w, ${marketingHero1440} 1440w, ${marketingHero1920} 1920w`,
+    mobileSrc: marketingMobile,
+    sizes: '100vw',
+    width: 1920,
+    height: 1280,
+    alt: 'Marketing hero'
+  };
+
   return (
     <ServicePage
       seoTitle="Performance Marketing & SEO Agency | Dashapatmaja"
@@ -51,8 +65,7 @@ const Marketing = () => {
       heroTitle="Marketing"
       heroSubtitle="Get found. Get chosen. Get sales."
       heroDesc="We build marketing systems that put your business in front of the people already looking for what you sell. We did this for Raw Radicles. We can do it for you."
-      bgImg={marketingBgImg}
-      bgImgMobile={marketingBgImgMobile}
+      heroImage={heroImage}
       mattersText="Great products fail quietly every day because no one knows they exist. Good marketing changes the math. It turns invisible businesses into obvious choices and casual browsers into paying customers."
       offersTitle="What we offer"
       offersDesc="A full set of marketing work to find your audience and turn them into buyers."

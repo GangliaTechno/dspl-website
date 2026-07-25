@@ -10,6 +10,7 @@ const ServicePage = ({
   heroDesc, 
   bgImg, 
   bgImgMobile,
+  heroImage,
   mattersText, 
   offersTitle, 
   offersDesc, 
@@ -29,7 +30,22 @@ const ServicePage = ({
       </div>
 
       {/* Header Block */}
-      <section className="section domain-hero">
+      <section className={`section domain-hero${heroImage ? ' domain-hero--picture' : ''}`}>
+        {heroImage && (
+          <picture className="domain-hero-picture" aria-hidden="true">
+            <source media="(max-width: 767px)" srcSet={heroImage.mobileSrc} />
+            <source srcSet={heroImage.desktopSrcSet} sizes={heroImage.sizes} />
+            <img
+              className="domain-hero-bg-img"
+              src={heroImage.src}
+              alt=""
+              width={heroImage.width}
+              height={heroImage.height}
+              fetchpriority="high"
+              decoding="async"
+            />
+          </picture>
+        )}
         <div className="container">
           <span className="section-subtitle">Core Service</span>
           <h1 className="domain-title">{heroTitle}</h1>
@@ -134,6 +150,28 @@ const ServicePage = ({
           bottom: 0;
           background: rgba(0, 0, 0, 0.70);
           z-index: 2;
+        }
+
+        .domain-hero--picture::before {
+          display: none;
+        }
+
+        /* New picture/img layer — sits below the overlay */
+        .domain-hero-picture {
+          position: absolute;
+          inset: 0;
+          display: block;
+          overflow: hidden;
+          pointer-events: none;
+          z-index: 0;
+        }
+
+        .domain-hero-bg-img {
+          width: 100%;
+          height: 100%;
+          display: block;
+          object-fit: cover;
+          object-position: center;
         }
 
         .domain-hero .container {
