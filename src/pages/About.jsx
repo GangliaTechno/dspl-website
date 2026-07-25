@@ -38,12 +38,12 @@ const About = () => {
   }, [location]);
 
   const team = [
-    { name: 'Dr. Manu Sudhi', role: 'Chairman and Director', initial: 'MS', image: manuImg, linkedin: 'https://www.linkedin.com/in/dr-manu-sudhi-609296167/', objectPosition: 'center 10%' },
-    { name: 'Mr. Shreepathy Ranga Bhatta', role: 'Managing Director', initial: 'SR', image: sreeImg, linkedin: 'https://www.linkedin.com/in/shreepathy-ranga-bhatta-b-862a2b24a/', objectPosition: 'center 15%' },
-    { name: 'Ms. Anusha Pai', role: 'Director', initial: 'AP', image: anushaImg, linkedin: 'https://www.linkedin.com/in/anusha-pai-013b0213/', objectPosition: 'center 5%' },
-    { name: 'Dr. Balakrishna S. Maddodi', role: 'Mentor', initial: 'BM', image: balakrishnaImg, linkedin: 'https://www.linkedin.com/in/dr-balakrishna-srinivas-maddodi-68874218/', objectPosition: 'center 10%' },
-    { name: 'Mr. Namesh Malarout', role: 'Director', initial: 'NM', image: nameshImg, linkedin: 'https://www.linkedin.com/in/namesh-malarout-97375697/', objectPosition: 'center 5%' },
-    { name: 'Dr. Dasharathraj K Shetty', role: 'Mentor', initial: 'DS', image: drImg, linkedin: 'https://www.linkedin.com/in/dasharathraj/', objectPosition: 'center 10%' }
+    { name: 'Dr. Manu Sudhi', role: 'Chairman and Director', initial: 'MS', image: manuImg, linkedin: 'https://www.linkedin.com/in/dr-manu-sudhi-609296167/', objectPosition: 'center 10%', scale: 1.04 },
+    { name: 'Mr. Shreepathy Ranga Bhatta', role: 'Managing Director', initial: 'SR', image: sreeImg, linkedin: 'https://www.linkedin.com/in/shreepathy-ranga-bhatta-b-862a2b24a/', objectPosition: 'center 20%', scale: 1.0 },
+    { name: 'Ms. Anusha Pai', role: 'Director', initial: 'AP', image: anushaImg, linkedin: 'https://www.linkedin.com/in/anusha-pai-013b0213/', objectPosition: 'center 8%', scale: 1.0 },
+    { name: 'Dr. Balakrishna S. Maddodi', role: 'Mentor', initial: 'BM', image: balakrishnaImg, linkedin: 'https://www.linkedin.com/in/dr-balakrishna-srinivas-maddodi-68874218/', objectPosition: 'center 15%', scale: 1.0 },
+    { name: 'Mr. Namesh Malarout', role: 'Director', initial: 'NM', image: nameshImg, linkedin: 'https://www.linkedin.com/in/namesh-malarout-97375697/', objectPosition: 'center 2%', scale: 1.18 },
+    { name: 'Dr. Dasharathraj K Shetty', role: 'Mentor', initial: 'DS', image: drImg, linkedin: 'https://www.linkedin.com/in/dasharathraj/', objectPosition: 'center 12%', scale: 1.0 }
   ];
 
   return (
@@ -248,7 +248,9 @@ const About = () => {
                         loading="lazy"
                         decoding="async"
                         style={{ 
-                          objectPosition: member.objectPosition || 'center center'
+                          objectPosition: member.objectPosition || 'center center',
+                          transform: member.scale && member.scale !== 1.0 ? `scale(${member.scale})` : undefined,
+                          transformOrigin: 'center center'
                         }}
                       />
                     ) : (
@@ -619,12 +621,13 @@ const About = () => {
           gap: 2.5rem;
           max-width: 1000px;
           margin: 0 auto;
+          align-items: stretch;
         }
 
         .team-card {
           background: #ffffff;
           border: 1px solid var(--border-color);
-          padding: 2.5rem 1.5rem;
+          padding: 40px 24px 32px;
           border-radius: 4px;
           text-align: center;
           transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -643,9 +646,9 @@ const About = () => {
 
         .team-avatar-wrapper {
           position: relative;
-          width: 120px;
-          height: 120px;
-          margin: 0 auto 1.5rem;
+          width: 116px;
+          height: 116px;
+          margin: 0 auto 20px;
         }
 
         .team-avatar-container {
@@ -713,9 +716,8 @@ const About = () => {
           font-weight: 700;
           color: var(--text-heading);
           margin-bottom: 0.25rem;
-          min-height: 3.5rem;
-          display: flex;
-          align-items: center;
+          min-height: 50px;
+          align-items: flex-start;
           justify-content: center;
         }
 
@@ -725,6 +727,7 @@ const About = () => {
           color: var(--accent-dark);
           text-transform: uppercase;
           letter-spacing: 0.05em;
+          margin-top: 8px;
         }
 
         @media (max-width: 900px) {
