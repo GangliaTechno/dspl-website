@@ -7,6 +7,7 @@
   --text-secondary: #555555;       /* Slate Secondary for details */
   --accent: #F5A800;               /* Hero Gold */
   --accent-light: #FFC107;         /* Bright light gold */
+  --accent-dark: #b87c00;          /* High contrast gold for text */
   --accent-gold: #F5A800;          /* Hero Gold */
   --accent-red: #ef4444;           /* Minimal Red Accent */
   --accent-orange: #f97316;        /* Orange Accent */
@@ -287,9 +288,9 @@ select:focus-visible,
 
 /* Global Mobile Responsiveness */
 @media (max-width: 768px) {
-  .section { padding: 4rem 1rem !important; }
-  h1 { font-size: 2.25rem !important; }
-  h2 { font-size: 1.875rem !important; }
-  h3 { font-size: 1.5rem !important; }
-  .container { padding: 0 1.25rem !important; }
+  .section { padding: 4rem 1rem; }
+  h1 { font-size: 2.25rem; }
+  h2 { font-size: 1.875rem; }
+  h3 { font-size: 1.5rem; }
+  .container { padding: 0 1.25rem; }
 }

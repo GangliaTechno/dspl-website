@@ -198,6 +198,11 @@ const WorkWithUsModal = () => {
     let priorityReason = '';
 
     data.services.forEach(service => tags.push(service));
+    
+    if ((data.companyName && data.website) || (data.projectGoal && (data.projectGoal.toLowerCase().includes('urgent') || data.projectGoal.toLowerCase().includes('asap')))) {
+      priority = 'VIP';
+      priorityReason = 'Established business or urgent timeline';
+    }
 
     return { tags, priority, priorityReason };
   };
@@ -306,7 +311,7 @@ const WorkWithUsModal = () => {
             <span className="modal-subtitle">Project Planner</span>
             <h2 id="modal-title-id" className="modal-title">Work with us</h2>
           </div>
-          <button className="modal-close-btn" onClick={handleClose} aria-label="Close modal">
+          <button type="button" className="modal-close-btn" onClick={handleClose} aria-label="Close modal">
             <X size={24} />
           </button>
         </div>
@@ -321,14 +326,14 @@ const WorkWithUsModal = () => {
                 Thank you for your response. We appreciate you taking the time to share your project details. We will respond within 24 hours.
               </p>
               
-              {processedLeadInfo && processedLeadInfo.priority === 'HIGH' && (
+              {processedLeadInfo && processedLeadInfo.priority === 'VIP' && (
                 <div className="priority-notice">
                   <span className="priority-badge">VIP LEAD</span>
                   <p>Your request has been prioritized due to your timeline and scope. We will contact you immediately.</p>
                 </div>
               )}
 
-              <button className="btn btn-secondary reset-btn" onClick={handleResetForm}>
+              <button type="button" className="btn btn-secondary reset-btn" onClick={handleResetForm}>
                 Submit Another Project
               </button>
             </div>
@@ -424,8 +429,8 @@ const WorkWithUsModal = () => {
               <div className="form-section" id="modal-services">
                 <h4 className="section-header-title">SECTION 2: Project Details</h4>
 
-                <div className="form-group">
-                  <label className="form-label">Service Interested In (select all that apply) <span className="required-asterisk">*</span></label>
+                <fieldset className="form-group checkbox-fieldset">
+                  <legend className="form-label">Service Interested In (select all that apply) <span className="required-asterisk">*</span></legend>
                   <div className="checkbox-grid">
                     {[
                       'Branding',
@@ -442,13 +447,15 @@ const WorkWithUsModal = () => {
                           value={service}
                           checked={formData.services.includes(service)}
                           onChange={() => handleCheckboxChange(service)}
+                          aria-invalid={Boolean(errors.services)}
+                          aria-describedby={errors.services ? 'services-error' : undefined}
                         />
                         <span>{service}</span>
                       </label>
                     ))}
                   </div>
-                  {errors.services && <span className="error-text" role="alert"><AlertCircle size={12} /> {errors.services}</span>}
-                </div>
+                  {errors.services && <span id="services-error" className="error-text" role="alert"><AlertCircle size={12} /> {errors.services}</span>}
+                </fieldset>
 
                 <div className="form-group">
                   <label className="form-label" htmlFor="projectGoal">Tell us about your project or goal</label>
@@ -509,17 +516,17 @@ const WorkWithUsModal = () => {
                 <div className="form-group">
                   <label className="form-label">Attach File / Brand Brief (Optional, max 5MB)</label>
                   {formData.fileName ? (
-                    <div className="file-selected-box" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.75rem 1rem', background: 'rgba(255, 255, 255, 0.05)', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
-                      <span style={{ fontSize: '0.875rem', color: 'var(--text-primary)', wordBreak: 'break-all' }}>📄 {formData.fileName}</span>
-                      <button type="button" onClick={removeFile} style={{ background: 'none', border: 'none', color: 'var(--accent-red)', cursor: 'pointer', fontSize: '0.85rem', padding: '0.2rem 0.5rem' }}>Remove</button>
+                    <div className="file-selected-box">
+                      <span className="file-name-text">📄 {formData.fileName}</span>
+                      <button type="button" onClick={removeFile} className="file-remove-btn">Remove</button>
                     </div>
                   ) : (
-                    <label className="file-upload-dropzone" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '1.25rem', border: '2px dashed var(--border-color)', borderRadius: '8px', cursor: 'pointer', background: 'rgba(255, 255, 255, 0.02)' }}>
-                      <span style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>Click to attach project brief or document</span>
-                      <input type="file" onChange={handleFileUpload} style={{ display: 'none' }} accept=".pdf,.doc,.docx,.png,.jpg,.jpeg" />
+                    <label className="file-upload-dropzone">
+                      <span className="file-dropzone-text">Click to attach project brief or document</span>
+                      <input type="file" onChange={handleFileUpload} className="file-input-hidden" accept=".pdf,.doc,.docx,.png,.jpg,.jpeg" />
                     </label>
                   )}
-                  {errors.file && <span style={{ color: 'var(--accent-red)', fontSize: '0.8rem', marginTop: '0.4rem', display: 'block' }}>{errors.file}</span>}
+                  {errors.file && <span className="file-error-text" role="alert">{errors.file}</span>}
                 </div>
 
                 {/* Honeypot Spam Protection Field - Offscreen text input */}
@@ -536,7 +543,7 @@ const WorkWithUsModal = () => {
               </div>
 
               {submitError && (
-                <div className="submit-error-banner" role="alert" style={{ color: '#ff3333', fontSize: '0.85rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <div className="submit-error-banner" role="alert">
                   <AlertCircle size={14} /> {submitError}
                 </div>
               )}
@@ -545,13 +552,77 @@ const WorkWithUsModal = () => {
                 type="submit" 
                 className="btn btn-primary submit-btn" 
                 disabled={isSubmitting}
-                style={{ opacity: isSubmitting ? 0.7 : 1, cursor: isSubmitting ? 'not-allowed' : 'pointer' }}
               >
                 {isSubmitting ? 'Submitting...' : 'Send My Project Details'}
               </button>
             </form>
           )}
         </div>
+        <style>{`
+          .checkbox-fieldset {
+            border: none;
+            padding: 0;
+            margin: 0;
+          }
+          .file-selected-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+          }
+          .file-name-text {
+            font-size: 0.875rem;
+            color: var(--text-primary);
+            word-break: break-all;
+          }
+          .file-remove-btn {
+            background: none;
+            border: none;
+            color: var(--accent-red);
+            cursor: pointer;
+            font-size: 0.85rem;
+            padding: 0.2rem 0.5rem;
+          }
+          .file-upload-dropzone {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1.25rem;
+            border: 2px dashed var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.02);
+          }
+          .file-dropzone-text {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+          }
+          .file-input-hidden {
+            display: none;
+          }
+          .file-error-text {
+            color: var(--accent-red);
+            font-size: 0.8rem;
+            margin-top: 0.4rem;
+            display: block;
+          }
+          .submit-error-banner {
+            color: #ff3333;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+          }
+          .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+          }
+        `}</style>
       </div>
     </div>
   );

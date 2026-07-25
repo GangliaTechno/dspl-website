@@ -56,6 +56,12 @@ const Contact = () => {
       setSubmitError('');
 
       const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || '';
+      
+      if (!accessKey) {
+        setSubmitError('Configuration error: Missing access key.');
+        setIsSubmitting(false);
+        return;
+      }
 
       const payload = {
         access_key: accessKey,
@@ -81,7 +87,7 @@ const Contact = () => {
 
         if (response.ok && result.success) {
           setSubmitted(true);
-          setFormData({ firstName: '', lastName: '', email: '', helpType: '', message: '' });
+          setFormData({ firstName: '', lastName: '', email: '', helpType: '', message: '', websiteConfirm: formData.websiteConfirm });
           
           if (window.gtag) {
             window.gtag('event', 'generate_lead', {
@@ -158,7 +164,7 @@ const Contact = () => {
             {/* Column 2: Form */}
             <div className="form-column glass">
               {submitted ? (
-                <div className="success-state">
+                <div className="success-state" role="status" aria-live="polite">
                   <CheckCircle2 className="success-icon" />
                   <h3>Message Sent!</h3>
                   <p>Thank you for reaching out to Dasha Patmaja Services. We will review your message and respond within 24 hours.</p>
@@ -243,6 +249,8 @@ const Contact = () => {
                       className={`form-input form-select ${errors.helpType ? 'form-input-error' : ''}`}
                       value={formData.helpType}
                       onChange={handleChange}
+                      aria-invalid={Boolean(errors.helpType)}
+                      aria-describedby={errors.helpType ? 'helpType-error' : undefined}
                       required
                     >
                       <option value="" disabled hidden>Select an option...</option>
@@ -252,7 +260,7 @@ const Contact = () => {
                       <option value="New brand">New brand</option>
                       <option value="Other">Other</option>
                     </select>
-                    {errors.helpType && <span className="error-text">{errors.helpType}</span>}
+                    {errors.helpType && <span id="helpType-error" className="error-text" role="alert">{errors.helpType}</span>}
                   </div>
 
                   <div className="form-group">
@@ -272,7 +280,7 @@ const Contact = () => {
                   </div>
 
                   {submitError && (
-                    <div className="submit-error-banner" style={{ color: '#ff3333', fontSize: '0.85rem', marginBottom: '1.2rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <div className="submit-error-banner" role="alert" style={{ color: '#ff3333', fontSize: '0.85rem', marginBottom: '1.2rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                       <AlertCircle size={14} /> {submitError}
                     </div>
                   )}

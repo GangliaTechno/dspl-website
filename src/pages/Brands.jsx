@@ -305,7 +305,7 @@ const Brands = () => {
         .brand-showcase-tagline {
           font-size: 1.25rem;
           font-weight: 600;
-          color: var(--accent-light);
+          color: var(--accent-dark);
           margin-bottom: 2rem;
         }
 
@@ -359,8 +359,8 @@ const Brands = () => {
           top: 50%;
           left: 50%;
           transform: translate(-50%, -50%);
-          width: 350px;
-          height: 350px;
+          width: min(350px, 80vw);
+          height: min(350px, 80vw);
           border-radius: 50%;
           background: radial-gradient(circle, rgba(141, 147, 101, 0.25) 0%, rgba(255, 255, 255, 0) 70%);
           z-index: 1;
@@ -457,7 +457,7 @@ const Brands = () => {
           border-radius: 50%;
           background: rgba(255, 255, 255, 0.05);
           border: 1px solid rgba(255, 255, 255, 0.15);
-          color: var(--accent-light);
+          color: var(--accent-dark);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -510,6 +510,15 @@ const Brands = () => {
           }
           .pipeline-card {
             padding: 2rem;
+          }
+        }
+
+        @media (max-width: 576px) {
+          .pipeline-card-full-width .pipeline-card {
+            padding: 4rem 1.5rem;
+          }
+          .brand-visual-side {
+            min-height: 280px;
           }
         }
       `}</style>

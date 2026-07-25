@@ -2,9 +2,9 @@ name: CI Pipeline
 
 on:
   push:
-    branches: [ main, vimal, "pawan/*" ]
+    branches: [ pawan-main, "pawan/**" ]
   pull_request:
-    branches: [ main, vimal ]
+    branches: [ pawan-main, "pawan/**" ]
 
 jobs:
   build-and-test:

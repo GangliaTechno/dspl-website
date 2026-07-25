@@ -38,12 +38,12 @@ const About = () => {
   }, [location]);
 
   const team = [
-    { name: 'Dr. Manu Sudhi', role: 'Chairman and Director', initial: 'MS', image: manuImg, linkedin: 'https://www.linkedin.com/in/dr-manu-sudhi-609296167/', transform: 'scale(1.0)' },
-    { name: 'Mr. Shreepathy Ranga Bhatta', role: 'Managing Director', initial: 'SR', image: sreeImg, linkedin: 'https://www.linkedin.com/in/shreepathy-ranga-bhatta-b-862a2b24a/', transform: 'scale(1.0)' },
-    { name: 'Ms. Anusha Pai', role: 'Director', initial: 'AP', image: anushaImg, linkedin: 'https://www.linkedin.com/in/anusha-pai-013b0213/', transform: 'scale(1.35)', transformOrigin: 'top center' },
-    { name: 'Dr. Balakrishna S. Maddodi', role: 'Mentor', initial: 'BM', image: balakrishnaImg, linkedin: 'https://www.linkedin.com/in/dr-balakrishna-srinivas-maddodi-68874218/', transform: 'scale(1.0)' },
-    { name: 'Mr. Namesh Malarout', role: 'Director', initial: 'NM', image: nameshImg, linkedin: 'https://www.linkedin.com/in/namesh-malarout-97375697/', transform: 'scale(1.35)', transformOrigin: 'top center' },
-    { name: 'Dr. Dasharathraj K Shetty', role: 'Mentor', initial: 'DS', image: drImg, linkedin: 'https://www.linkedin.com/in/dasharathraj/', transform: 'scale(1.0)' }
+    { name: 'Dr. Manu Sudhi', role: 'Chairman and Director', initial: 'MS', image: manuImg, linkedin: 'https://www.linkedin.com/in/dr-manu-sudhi-609296167/', objectPosition: 'center 10%' },
+    { name: 'Mr. Shreepathy Ranga Bhatta', role: 'Managing Director', initial: 'SR', image: sreeImg, linkedin: 'https://www.linkedin.com/in/shreepathy-ranga-bhatta-b-862a2b24a/', objectPosition: 'center 15%' },
+    { name: 'Ms. Anusha Pai', role: 'Director', initial: 'AP', image: anushaImg, linkedin: 'https://www.linkedin.com/in/anusha-pai-013b0213/', objectPosition: 'center 5%' },
+    { name: 'Dr. Balakrishna S. Maddodi', role: 'Mentor', initial: 'BM', image: balakrishnaImg, linkedin: 'https://www.linkedin.com/in/dr-balakrishna-srinivas-maddodi-68874218/', objectPosition: 'center 10%' },
+    { name: 'Mr. Namesh Malarout', role: 'Director', initial: 'NM', image: nameshImg, linkedin: 'https://www.linkedin.com/in/namesh-malarout-97375697/', objectPosition: 'center 5%' },
+    { name: 'Dr. Dasharathraj K Shetty', role: 'Mentor', initial: 'DS', image: drImg, linkedin: 'https://www.linkedin.com/in/dasharathraj/', objectPosition: 'center 10%' }
   ];
 
   return (
@@ -248,8 +248,7 @@ const About = () => {
                         loading="lazy"
                         decoding="async"
                         style={{ 
-                          transform: member.transform || 'none',
-                          transformOrigin: member.transformOrigin || 'center center'
+                          objectPosition: member.objectPosition || 'center center'
                         }}
                       />
                     ) : (
@@ -353,7 +352,7 @@ const About = () => {
         .about-subtitle {
           font-size: 1.8rem;
           font-weight: 600;
-          color: var(--accent-light); /* Kept gold/yellow */
+          color: var(--accent-dark); /* Kept gold/yellow */
           margin-bottom: 2rem;
           letter-spacing: -0.02em;
           text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
@@ -438,7 +437,7 @@ const About = () => {
           font-weight: 700;
           text-transform: uppercase;
           letter-spacing: 0.15em;
-          color: var(--accent-light);
+          color: var(--accent-dark);
           display: inline-block;
           margin-bottom: 0.75rem;
         }
@@ -625,7 +624,7 @@ const About = () => {
         .team-card {
           background: #ffffff;
           border: 1px solid var(--border-color);
-          padding: 3rem 2rem;
+          padding: 2.5rem 1.5rem;
           border-radius: 4px;
           text-align: center;
           transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -660,8 +659,8 @@ const About = () => {
 
         .team-linkedin-link {
           position: absolute;
-          bottom: 2px;
-          left: 2px;
+          bottom: 4px;
+          right: 4px;
           width: 32px;
           height: 32px;
           background: #ffffff;
@@ -714,12 +713,16 @@ const About = () => {
           font-weight: 700;
           color: var(--text-heading);
           margin-bottom: 0.25rem;
+          min-height: 3.5rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
 
         .member-role {
           font-size: 0.85rem;
           font-weight: 600;
-          color: var(--accent-light);
+          color: var(--accent-dark);
           text-transform: uppercase;
           letter-spacing: 0.05em;
         }

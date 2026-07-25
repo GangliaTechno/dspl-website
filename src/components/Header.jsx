@@ -269,10 +269,12 @@ const Header = () => {
           flex-direction: column;
           box-shadow: -10px 0 30px rgba(0, 0, 0, 0.03);
           overflow-y: auto;
+          visibility: hidden;
         }
 
         .mobile-drawer-open {
           transform: translateX(0);
+          visibility: visible;
         }
 
         .mobile-nav {

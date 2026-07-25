@@ -14,7 +14,7 @@
           padding: 9.5rem 0 150px;
           text-align: center;
           position: relative;
-          background-image: url('../assets/dspl_banner.png');
+          background-image: url('../assets/dspl_banner.webp');
           background-size: cover;
           background-position: center;
           background-repeat: no-repeat;
@@ -101,6 +101,7 @@
 
         @media (max-width: 768px) {
           .hero-section {
+            background-image: url('../assets/dspl_banner-mobile.webp');
             padding: 7rem 0 10rem;
           }
           .supporter-band {
@@ -284,13 +285,19 @@
           left: 0;
           right: 0;
           bottom: 0;
-          background-image: url('../assets/Help_grow.png');
+          background-image: url('../assets/Help_grow.webp');
           background-size: cover;
           background-position: center;
           background-repeat: no-repeat;
           opacity: 0.3;
           z-index: 1;
           pointer-events: none;
+        }
+
+        @media (max-width: 768px) {
+          .services-section::before {
+            background-image: url('../assets/Help_grow-mobile.webp');
+          }
         }
 
         .services-section .container {
@@ -350,7 +357,7 @@
 
         .service-card-link:hover {
           gap: 0.75rem;
-          color: var(--accent-light);
+          color: var(--accent-dark);
         }
 
         /* 5. Brands Section */
@@ -418,15 +425,15 @@
         }
 
         .brand-card-logo-img {
-          height: 182%;
-          max-width: none;
+          width: 100%;
+          max-height: 100%;
           object-fit: contain;
         }
 
         .brand-tagline {
           font-size: 1.05rem;
           font-weight: 600;
-          color: var(--accent-light);
+          color: var(--accent-dark);
           margin-bottom: 1.5rem;
         }
 
@@ -440,7 +447,7 @@
 
         .brand-link:hover {
           gap: 0.75rem;
-          color: var(--accent-light);
+          color: var(--accent-dark);
         }
 
         /* Working Process Section Styles */
@@ -529,10 +536,35 @@
             max-width: 320px;
           }
 
-          .why-card, .service-card, .brand-showcase-card {
-            padding: 2rem;
+          .why-card, .service-card, .brand-showcase-card, .process-step-card {
+            padding: 2rem 1.5rem;
           }
           .section-title {
             font-size: 2rem;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .hero-section {
+            padding: 6rem 0 8rem;
+          }
+          .hero-title {
+            font-size: 2.5rem;
+          }
+          .hero-ctas {
+            flex-direction: column;
+            width: 100%;
+          }
+          .hero-btn-primary, .hero-btn-secondary {
+            width: 100%;
+          }
+          .supporter-band {
+            --supporter-gap: 1.5rem;
+          }
+          .why-card, .service-card {
+            padding: 1.75rem 1.25rem;
+          }
+          .process-step-card, .brand-showcase-card {
+            padding: 1.75rem 1.25rem;
           }
         }
