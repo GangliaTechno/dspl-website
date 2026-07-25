@@ -122,14 +122,18 @@ const Brands = () => {
                 </div>
 
                 <div className="brand-visual-side">
-                  <motion.div 
-                    className="brand-showcase-logo-wrapper"
-                    animate={{ y: [-8, 8, -8] }}
-                    transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
-                  >
-                    <img src={rawRadiclesLogo} alt="Raw Radicles Logo" className="brand-showcase-logo-img" loading="lazy" decoding="async" />
-                  </motion.div>
-                  <div className="brand-visual-backdrop"></div>
+                  <div className="rr-visual-panel">
+                    <div className="rr-glow-ring"></div>
+                    <div className="rr-shimmer"></div>
+                    <motion.div 
+                      className="brand-showcase-logo-wrapper"
+                      animate={{ y: [-10, 10, -10] }}
+                      transition={{ repeat: Infinity, duration: 7, ease: "easeInOut" }}
+                    >
+                      <img src={rawRadiclesLogo} alt="Raw Radicles Logo" className="brand-showcase-logo-img" loading="lazy" decoding="async" />
+                    </motion.div>
+                    <p className="rr-visual-label">Raw Radicles™</p>
+                  </div>
                 </div>
 
               </div>
@@ -248,10 +252,9 @@ const Brands = () => {
         .brand-detail-card {
           background: #ffffff;
           border: 1px solid var(--border-color);
-          border-radius: 4px;
-          padding: 4.5rem;
-          position: relative;
+          border-radius: 12px;
           overflow: hidden;
+          position: relative;
           transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
@@ -274,10 +277,11 @@ const Brands = () => {
         .brand-content-grid {
           display: grid;
           grid-template-columns: 1.1fr 0.9fr;
-          gap: 4rem;
-          align-items: center;
+          gap: 0;
+          align-items: stretch;
           position: relative;
           z-index: 2;
+          min-height: 560px;
         }
 
         .brand-type-badge {
@@ -293,6 +297,10 @@ const Brands = () => {
           letter-spacing: 0.08em;
           border-radius: 4px;
           margin-bottom: 1.5rem;
+        }
+
+        .brand-info-side {
+          padding: 4rem 3.5rem;
         }
 
         .brand-showcase-name {
@@ -345,41 +353,70 @@ const Brands = () => {
 
 
 
+        /* RR luxury visual panel */
         .brand-visual-side {
           position: relative;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 2rem;
-          min-height: 400px;
         }
 
-        .brand-visual-backdrop {
+        .rr-visual-panel {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          min-height: 560px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          background: linear-gradient(155deg, #0e1628 0%, #1a2540 45%, #0a1020 100%);
+          overflow: hidden;
+          gap: 1.25rem;
+        }
+
+        /* golden radial glow behind logo */
+        .rr-glow-ring {
           position: absolute;
           top: 50%;
           left: 50%;
-          transform: translate(-50%, -50%);
-          width: min(350px, 80vw);
-          height: min(350px, 80vw);
+          transform: translate(-50%, -58%);
+          width: 340px;
+          height: 340px;
           border-radius: 50%;
-          background: radial-gradient(circle, rgba(141, 147, 101, 0.25) 0%, rgba(255, 255, 255, 0) 70%);
-          z-index: 1;
+          background: radial-gradient(circle, rgba(212, 175, 55, 0.22) 0%, rgba(212, 175, 55, 0.06) 45%, transparent 70%);
+          pointer-events: none;
+        }
+
+        /* subtle diagonal shimmer stripe */
+        .rr-shimmer {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(135deg, transparent 30%, rgba(255,255,255,0.025) 50%, transparent 70%);
+          pointer-events: none;
         }
 
         .brand-showcase-logo-wrapper {
           position: relative;
           z-index: 2;
-          width: 100%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          filter: drop-shadow(0 20px 30px rgba(0,0,0,0.15));
+          width: 78%;
+          max-width: 340px;
+          filter: drop-shadow(0 0 40px rgba(212, 175, 55, 0.35)) drop-shadow(0 20px 40px rgba(0,0,0,0.5));
         }
 
         .brand-showcase-logo-img {
-          width: 85%;
-          max-width: 400px;
+          width: 100%;
           object-fit: contain;
+          display: block;
+        }
+
+        .rr-visual-label {
+          position: relative;
+          z-index: 2;
+          font-family: var(--font-heading);
+          font-size: 0.72rem;
+          font-weight: 700;
+          letter-spacing: 0.22em;
+          text-transform: uppercase;
+          color: rgba(212, 175, 55, 0.7);
+          margin: 0;
         }
 
         /* Pipeline Card */
@@ -485,13 +522,16 @@ const Brands = () => {
         @media (max-width: 900px) {
           .brand-content-grid {
             grid-template-columns: 1fr;
-            gap: 3rem;
+            gap: 0;
           }
           .brand-visual-side {
             order: -1;
           }
-          .brand-detail-card {
-            padding: 3rem;
+          .rr-visual-panel {
+            min-height: 320px;
+          }
+          .brand-info-side {
+            padding: 3rem 2.5rem;
           }
           .pipeline-card {
             padding: 3rem;
@@ -505,7 +545,7 @@ const Brands = () => {
           .brand-showcase-name {
             font-size: 2rem;
           }
-          .brand-detail-card {
+          .brand-info-side {
             padding: 2rem;
           }
           .pipeline-card {
@@ -517,8 +557,8 @@ const Brands = () => {
           .pipeline-card-full-width .pipeline-card {
             padding: 4rem 1.5rem;
           }
-          .brand-visual-side {
-            min-height: 280px;
+          .rr-visual-panel {
+            min-height: 260px;
           }
         }
       `}</style>

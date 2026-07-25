@@ -242,11 +242,12 @@ const Home = () => {
           <div className="brands-grid">
             {/* Raw Radicles Card */}
             <div className="brand-showcase-card featured-brand">
+              <div className="rr-home-panel">
+                <div className="rr-home-glow"></div>
+                <img src={rawRadiclesLogo} alt="Raw Radicles premium chocolate bar packaging" className="brand-card-logo-img" loading="lazy" decoding="async" />
+              </div>
               <div className="brand-badge-strip">
                 <span className="featured-tag">FLAGSHIP BRAND</span>
-              </div>
-              <div className="brand-card-logo-wrapper">
-                <img src={rawRadiclesLogo} alt="Raw Radicles premium chocolate bar packaging" className="brand-card-logo-img" loading="lazy" decoding="async" />
               </div>
               <p className="brand-tagline">Premium chocolate with Ayurveda inside.</p>
               <p className="brand-desc">
