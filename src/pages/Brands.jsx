@@ -2,7 +2,7 @@ import { ArrowRight, Sparkles, Cookie } from 'lucide-react';
 import { motion } from 'framer-motion';
 import useSEO from '../hooks/useSEO';
 import rawRadiclesLogo from '../assets/RR_logo embossed_tm.png';
-import brandHeroImg from '../assets/brand_hero.jpg';
+import brandHeroStudio from '../assets/brands-hero-studio.webp';
 import upcomingBrandsImg from '../assets/Upcoming_brands.jpeg';
 
 const Brands = () => {
@@ -21,18 +21,27 @@ const Brands = () => {
 
       {/* Intro Section */}
       <section className="section brands-hero">
-        <motion.div 
-          className="container"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-        >
-          <span className="section-subtitle">House of Brands</span>
-          <h1 className="brands-title">Our brands</h1>
-          <p className="brands-description">
-            We build consumer brands and grow them with our own team. We own them end to end, from product to packaging to sales. Raw Radicles is the first. More are in development.
-          </p>
-        </motion.div>
+        <div className="brands-hero-bg">
+          <img src={brandHeroStudio} alt="" className="brands-hero-img" loading="eager" decoding="sync" />
+          <div className="brands-hero-overlay"></div>
+        </div>
+        <div className="container">
+          <motion.div 
+            className="brands-hero-content"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
+            <span className="section-subtitle">HOUSE OF BRANDS</span>
+            <h1 className="brands-title">We build brands from the inside out.</h1>
+            <p className="brands-description">
+              From product development and packaging to compliance, storytelling and route to market.
+            </p>
+            <p className="brands-sub-description">
+              Raw Radicles is our first flagship consumer brand, with more in development.
+            </p>
+          </motion.div>
+        </div>
       </section>
 
       {/* Brands Showcase Grid */}
@@ -40,99 +49,78 @@ const Brands = () => {
         <div className="container">
           <div className="showcase-container">
             {/* 1. Raw Radicles Card */}
-            {/* 1. Raw Radicles Card */}
             <motion.div 
-              className="brand-detail-card glass"
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.7 }}
+              className="brand-detail-card raw-radicles-card"
+              initial={{ opacity: 0, scale: 0.97 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, ease: "easeOut" }}
             >
-              <div className="brand-accent-glow"></div>
               <div className="brand-content-grid">
                 <div className="brand-info-side">
-                  <motion.div 
-                    className="brand-type-badge"
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.2 }}
-                  >
+                  <div className="brand-type-badge">
                     <Cookie size={16} className="badge-icon" />
                     FLAGSHIP CONSUMER BRAND
-                  </motion.div>
-                  <motion.h2 
-                    className="brand-showcase-name"
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.3 }}
-                  >
+                  </div>
+                  
+                  <h2 className="brand-showcase-name">
                     Raw Radicles
-                  </motion.h2>
-                  <motion.p 
-                    className="brand-showcase-tagline"
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.4 }}
-                  >
-                    Premium chocolate with Ayurveda inside.
-                  </motion.p>
+                  </h2>
+                  <p className="brand-showcase-tagline">
+                    Chocolate, reimagined through Ayurveda.
+                  </p>
                   
-                  <motion.div 
-                    className="brand-body-paragraphs"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.7, delay: 0.5 }}
-                  >
+                  <div className="brand-body-paragraphs">
                     <p>
-                      Raw Radicles is chocolate first. Real cocoa, made in small batches, with herbs chosen to do real work. It is built for buyers who want a treat that also gives something back. The range covers three lines and six bars, each a 60 gram bar.
+                      Raw Radicles brings together real cacao, small-batch chocolate making and carefully selected Ayurvedic botanicals.
                     </p>
                     <p>
-                      We built Raw Radicles end to end: the recipe, the packaging, the compliance, the story, and the route to market. Our manufacturing partners are Cacobean Chocolate Factory in Kerala and Ashtanga Vaidyam Ayurvedics in Thrissur.
+                      Built end to end by Dasha Patmaja—from formulation and packaging to compliance, storytelling and route to market.
                     </p>
-                  </motion.div>
+                  </div>
                   
-                  <motion.div 
-                    className="brand-meta-tags"
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.6 }}
-                  >
-                    <span className="brand-meta-tag">60g Standard Bars</span>
-                    <span className="brand-meta-tag">Pure Ayurvedic Herbs</span>
-                    <span className="brand-meta-tag">Kerala Cacobean Partner</span>
-                    <span className="brand-meta-tag">Ashtanga Vaidyam MoU</span>
-                  </motion.div>
+                  <div className="rr-contribution-line">
+                    STRATEGY · PRODUCT DEVELOPMENT · PACKAGING · COMPLIANCE · GO-TO-MARKET
+                  </div>
+                  
+                  <div className="rr-proof-grid">
+                    <div className="proof-item">
+                      <span className="proof-label">PRODUCT</span>
+                      <span className="proof-desc">Six 60 g bars across three collections</span>
+                    </div>
+                    <div className="proof-item">
+                      <span className="proof-label">FORMULATION</span>
+                      <span className="proof-desc">Real cacao with selected Ayurvedic botanicals</span>
+                    </div>
+                    <div className="proof-item">
+                      <span className="proof-label">MANUFACTURING</span>
+                      <span className="proof-desc">Chocolate production partnership in Kerala</span>
+                    </div>
+                    <div className="proof-item">
+                      <span className="proof-label">AYURVEDIC EXPERTISE</span>
+                      <span className="proof-desc">Formulation partnership in Thrissur</span>
+                    </div>
+                  </div>
 
-                  <motion.div 
-                    className="brand-cta-block"
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.7 }}
-                  >
-                    <a href="mailto:director@dashapatmaja.in?subject=Raw%20Radicles%20Inquiry" className="btn btn-primary brand-btn">
-                      Visit Raw Radicles <ArrowRight size={16} />
+                  <div className="brand-cta-block">
+                    <a href="mailto:director@dashapatmaja.in?subject=Raw%20Radicles%20Inquiry" className="btn rr-cta-btn">
+                      Enquire about Raw Radicles <ArrowRight size={16} />
                     </a>
-                  </motion.div>
+                  </div>
                 </div>
 
-                <div className="brand-visual-side">
-                  <div className="rr-visual-panel">
-                    <div className="rr-glow-ring"></div>
-                    <div className="rr-shimmer"></div>
-                    <motion.div 
-                      className="brand-showcase-logo-wrapper"
-                      animate={{ y: [-10, 10, -10] }}
-                      transition={{ repeat: Infinity, duration: 7, ease: "easeInOut" }}
-                    >
-                      <img src={rawRadiclesLogo} alt="Raw Radicles Logo" className="brand-showcase-logo-img" loading="lazy" decoding="async" />
-                    </motion.div>
-                    <p className="rr-visual-label">Raw Radicles™</p>
+                <div className="rr-visual-panel">
+                  <div className="rr-background-wordmark" aria-hidden="true">
+                    RAW<br/>RADICLES
+                  </div>
+                  <div className="rr-glow-ring"></div>
+                  
+                  <div className="brand-showcase-logo-wrapper">
+                    <img src={rawRadiclesLogo} alt="Raw Radicles" className="brand-showcase-logo-img" loading="lazy" decoding="async" />
+                  </div>
+                  
+                  <div className="rr-bottom-descriptor">
+                    CACAO · AYURVEDA · SMALL BATCH
                   </div>
                 </div>
 
@@ -184,60 +172,91 @@ const Brands = () => {
           border-bottom: 1px solid var(--border-color);
         }
 
-        .brands-hero {
-          text-align: center;
-          padding: 8rem 0 6rem;
-          position: relative;
-          overflow: hidden;
-          background-color: var(--bg-primary);
+        .brands-showcase-section {
+          padding-top: 4rem;
         }
 
-        .brands-hero::before {
-          content: '';
+        .brands-hero {
+          position: relative;
+          display: flex;
+          align-items: center;
+          min-height: 480px;
+          padding: 8rem 0;
+          overflow: hidden;
+          background-color: #F6F0E4;
+        }
+
+        .brands-hero-bg {
           position: absolute;
           top: 0;
-          left: 0;
           right: 0;
           bottom: 0;
-          background-image: url(${brandHeroImg});
-          background-size: cover;
-          background-position: center;
+          width: 55%;
           z-index: 1;
         }
 
-        .brands-hero::after {
-          content: '';
+        .brands-hero-img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: left center;
+        }
+
+        .brands-hero-overlay {
           position: absolute;
           top: 0;
           left: 0;
           right: 0;
           bottom: 0;
-          background: rgba(245, 158, 11, 0.65); /* Warm amber overlay at 65% opacity */
-          z-index: 2;
+          background: linear-gradient(to right, #F6F0E4 0%, rgba(246, 240, 228, 0.4) 30%, transparent 100%);
         }
 
         .brands-hero .container {
           position: relative;
           z-index: 3;
-          max-width: 800px;
+          width: 100%;
+          max-width: 1200px;
           margin: 0 auto;
+          display: flex;
+        }
+
+        .brands-hero-content {
+          max-width: 500px;
+          text-align: left;
+        }
+        
+        .brands-hero-content .section-subtitle {
+          color: #C49A3A;
+          font-weight: 700;
+          letter-spacing: 0.1em;
+          font-size: 0.85rem;
+          display: inline-block;
+          margin-bottom: 1rem;
         }
 
         .brands-title {
           font-size: 3.5rem;
           font-weight: 800;
           margin-bottom: 1.5rem;
+          line-height: 1.1;
           letter-spacing: -0.04em;
-          color: #000000 !important; /* Keep heading text in black */
-          text-shadow: 0 1px 3px rgba(255, 255, 255, 0.35); /* Subtle text shadow for crisp legibility */
-          text-transform: capitalize;
+          color: #111A2E !important;
+          text-shadow: none;
         }
 
         .brands-description {
-          font-size: 1.2rem;
-          line-height: 1.75;
-          color: #1a1a1a; /* Dark charcoal/black for strong legibility */
+          font-size: 1.25rem;
+          line-height: 1.6;
+          color: #211C18;
           font-weight: 600;
+          margin-bottom: 1rem;
+        }
+
+        .brands-sub-description {
+          font-size: 1.05rem;
+          line-height: 1.6;
+          color: #625B53;
+          font-weight: 500;
         }
 
         .showcase-container {
@@ -248,72 +267,53 @@ const Brands = () => {
           margin: 0 auto;
         }
 
-        /* Raw Radicles Card */
-        .brand-detail-card {
-          background: #ffffff;
-          border: 1px solid var(--border-color);
+        /* Raw Radicles Card Redesign */
+        .raw-radicles-card {
+          background: #F6F0E4;
+          border: 1px solid #E5D9C6;
           border-radius: 12px;
           overflow: hidden;
+          padding: 0;
           position: relative;
-          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .brand-detail-card:hover {
-          border-color: var(--accent-border-alpha);
-          box-shadow: var(--shadow-lg);
-        }
-
-        .brand-accent-glow {
-          position: absolute;
-          top: -200px;
-          right: -200px;
-          width: 400px;
-          height: 400px;
-          background: radial-gradient(circle, rgba(141, 147, 101, 0.08) 0%, rgba(255, 255, 255, 0) 70%);
-          z-index: 1;
-          pointer-events: none;
         }
 
         .brand-content-grid {
           display: grid;
-          grid-template-columns: 1.1fr 0.9fr;
+          grid-template-columns: 46% 54%;
           gap: 0;
           align-items: stretch;
-          position: relative;
-          z-index: 2;
-          min-height: 560px;
+          min-height: 620px;
+        }
+
+        .brand-info-side {
+          padding: 4.5rem 3.5rem;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
         }
 
         .brand-type-badge {
           display: inline-flex;
           align-items: center;
           gap: 0.5rem;
-          padding: 0.4rem 0.8rem;
-          background: var(--accent-glow);
-          border: 1px solid var(--border-color);
-          color: var(--accent);
+          color: #8A5B00;
           font-size: 0.7rem;
           font-weight: 700;
           letter-spacing: 0.08em;
-          border-radius: 4px;
-          margin-bottom: 1.5rem;
-        }
-
-        .brand-info-side {
-          padding: 4rem 3.5rem;
+          margin-bottom: 1.25rem;
         }
 
         .brand-showcase-name {
           font-size: 2.75rem;
           font-weight: 800;
-          color: var(--text-heading);
-          margin-bottom: 0.25rem;
+          color: #211C18;
+          margin-bottom: 0.5rem;
         }
 
         .brand-showcase-tagline {
-          font-size: 1.25rem;
+          font-size: 1.2rem;
           font-weight: 600;
-          color: var(--accent-dark);
+          color: #8A5B00;
           margin-bottom: 2rem;
         }
 
@@ -321,102 +321,142 @@ const Brands = () => {
           display: flex;
           flex-direction: column;
           gap: 1.25rem;
-          margin-bottom: 2.25rem;
+          margin-bottom: 2rem;
         }
 
         .brand-body-paragraphs p {
           font-size: 1.05rem;
           line-height: 1.65;
-          color: var(--text-secondary);
+          color: #625B53;
+          margin: 0;
         }
 
-        .brand-meta-tags {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 0.75rem;
+        .rr-contribution-line {
+          font-size: 0.65rem;
+          font-weight: 700;
+          letter-spacing: 0.12em;
+          color: #8A5B00;
           margin-bottom: 2.5rem;
+          text-transform: uppercase;
         }
 
-        .brand-meta-tag {
-          font-size: 0.8rem;
-          font-weight: 600;
-          color: var(--text-secondary);
-          background: var(--bg-tertiary);
-          padding: 0.4rem 0.8rem;
-          border-radius: 4px;
-          border: 1px solid var(--border-color);
+        .rr-proof-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 1.5rem;
+          margin-bottom: 3rem;
         }
 
-        .brand-btn {
+        .proof-item {
+          border-top: 1px solid rgba(138, 91, 0, 0.15);
+          padding-top: 0.75rem;
+        }
+
+        .proof-label {
+          display: block;
+          font-size: 0.65rem;
+          font-weight: 700;
+          letter-spacing: 0.08em;
+          color: #8A5B00;
+          margin-bottom: 0.25rem;
+        }
+
+        .proof-desc {
+          display: block;
+          font-size: 0.9rem;
+          line-height: 1.4;
+          color: #211C18;
+          font-weight: 500;
+        }
+
+        .rr-cta-btn {
+          background-color: #111A2E;
+          color: #F6F0E4;
+          border: 1px solid #C49A3A;
           padding: 0.85rem 2rem;
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          font-weight: 600;
+          transition: all 0.3s ease;
+          border-radius: 4px;
+          text-decoration: none;
         }
 
-
-
-        /* RR luxury visual panel */
-        .brand-visual-side {
-          position: relative;
+        .rr-cta-btn:hover, .rr-cta-btn:focus-visible {
+          background-color: #C49A3A;
+          color: #111A2E;
+          outline: 2px solid #C49A3A;
+          outline-offset: 2px;
         }
 
+        /* Right Visual Panel */
         .rr-visual-panel {
           position: relative;
-          width: 100%;
-          height: 100%;
-          min-height: 560px;
+          background: linear-gradient(145deg, #172037 0%, #111A2E 52%, #090F1F 100%);
           display: flex;
           flex-direction: column;
           align-items: center;
           justify-content: center;
-          background: linear-gradient(155deg, #0e1628 0%, #1a2540 45%, #0a1020 100%);
           overflow: hidden;
-          gap: 1.25rem;
+          padding: 3rem;
         }
 
-        /* golden radial glow behind logo */
+        .rr-background-wordmark {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          font-size: clamp(80px, 12vw, 200px);
+          font-weight: 800;
+          line-height: 0.8;
+          color: #C49A3A;
+          opacity: 0.06;
+          text-align: center;
+          letter-spacing: 0.08em;
+          pointer-events: none;
+          white-space: nowrap;
+          z-index: 1;
+        }
+
         .rr-glow-ring {
           position: absolute;
           top: 50%;
           left: 50%;
-          transform: translate(-50%, -58%);
-          width: 340px;
-          height: 340px;
+          transform: translate(-50%, -50%);
+          width: 70%;
+          padding-bottom: 70%;
           border-radius: 50%;
-          background: radial-gradient(circle, rgba(212, 175, 55, 0.22) 0%, rgba(212, 175, 55, 0.06) 45%, transparent 70%);
+          background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, transparent 60%);
           pointer-events: none;
-        }
-
-        /* subtle diagonal shimmer stripe */
-        .rr-shimmer {
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(135deg, transparent 30%, rgba(255,255,255,0.025) 50%, transparent 70%);
-          pointer-events: none;
+          z-index: 2;
         }
 
         .brand-showcase-logo-wrapper {
           position: relative;
-          z-index: 2;
-          width: 78%;
-          max-width: 340px;
-          filter: drop-shadow(0 0 40px rgba(212, 175, 55, 0.35)) drop-shadow(0 20px 40px rgba(0,0,0,0.5));
+          z-index: 3;
+          width: 100%;
+          max-width: 520px;
+          filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
         }
 
         .brand-showcase-logo-img {
           width: 100%;
-          object-fit: contain;
+          height: auto;
           display: block;
         }
 
-        .rr-visual-label {
-          position: relative;
-          z-index: 2;
-          font-family: var(--font-heading);
-          font-size: 0.72rem;
+        .rr-bottom-descriptor {
+          position: absolute;
+          bottom: 2.5rem;
+          left: 0;
+          width: 100%;
+          text-align: center;
+          font-size: 0.7rem;
           font-weight: 700;
-          letter-spacing: 0.22em;
-          text-transform: uppercase;
-          color: rgba(212, 175, 55, 0.7);
-          margin: 0;
+          letter-spacing: 0.25em;
+          color: rgba(196, 154, 58, 0.7);
+          z-index: 3;
         }
 
         /* Pipeline Card */
@@ -468,7 +508,7 @@ const Brands = () => {
           left: 0;
           right: 0;
           bottom: 0;
-          background: rgba(0, 0, 0, 0.70); /* Dark overlay at 70% opacity */
+          background: rgba(0, 0, 0, 0.70);
           z-index: 2;
           pointer-events: none;
         }
@@ -504,14 +544,14 @@ const Brands = () => {
         .pipeline-title {
           font-size: 1.75rem;
           font-weight: 800;
-          color: #ffffff; /* Changed black text to white */
+          color: #ffffff;
           margin-bottom: 0.75rem;
         }
 
         .pipeline-text {
           font-size: 1.05rem;
           line-height: 1.65;
-          color: rgba(255, 255, 255, 0.8); /* Changed dark text to light grey */
+          color: rgba(255, 255, 255, 0.8);
           margin-bottom: 2rem;
         }
 
@@ -519,20 +559,41 @@ const Brands = () => {
           padding: 0.75rem 1.75rem;
         }
 
+        /* Responsive Media Queries */
         @media (max-width: 900px) {
+          .brands-hero-bg {
+            width: 100%;
+            height: 100%;
+            opacity: 0.15;
+          }
+          
+          .brands-hero-overlay {
+            background: linear-gradient(to bottom, rgba(246, 240, 228, 0.9) 0%, rgba(246, 240, 228, 1) 100%);
+          }
+
+          .brands-hero {
+            padding: 6rem 0;
+            min-height: auto;
+          }
+
+          .brands-hero-content {
+            max-width: 100%;
+          }
+
           .brand-content-grid {
             grid-template-columns: 1fr;
-            gap: 0;
+            min-height: auto;
           }
-          .brand-visual-side {
-            order: -1;
-          }
+          
           .rr-visual-panel {
-            min-height: 320px;
+            aspect-ratio: 4/3;
+            padding: 2rem;
           }
+
           .brand-info-side {
-            padding: 3rem 2.5rem;
+            padding: clamp(2rem, 5vw, 4rem);
           }
+          
           .pipeline-card {
             padding: 3rem;
           }
@@ -542,23 +603,26 @@ const Brands = () => {
           .brands-title {
             font-size: 2.25rem;
           }
+          
           .brand-showcase-name {
             font-size: 2rem;
           }
-          .brand-info-side {
-            padding: 2rem;
-          }
+          
           .pipeline-card {
             padding: 2rem;
+          }
+        }
+
+        @media (max-width: 600px) {
+          .rr-proof-grid {
+            grid-template-columns: 1fr;
+            gap: 1rem;
           }
         }
 
         @media (max-width: 576px) {
           .pipeline-card-full-width .pipeline-card {
             padding: 4rem 1.5rem;
-          }
-          .rr-visual-panel {
-            min-height: 260px;
           }
         }
       `}</style>

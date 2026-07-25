@@ -370,18 +370,107 @@
         .brand-showcase-card {
           background: var(--card-bg);
           border: 1px solid var(--border-color);
-          padding: 3.5rem;
           border-radius: 8px;
           display: flex;
           flex-direction: column;
           align-items: flex-start;
           transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+          overflow: hidden;
+        }
+
+        .brand-showcase-card.placeholder-brand {
+          padding: 3.5rem;
+        }
+
+        .brand-showcase-card.featured-brand {
+          padding: 0;
         }
 
         .brand-showcase-card:hover {
           transform: translateY(-5px);
           border-color: var(--accent-border-alpha);
           box-shadow: var(--shadow-lg);
+        }
+
+        .featured-visual-panel {
+          width: 100%;
+          height: clamp(190px, 24vw, 250px);
+          background: linear-gradient(135deg, #0B1520 0%, #111A2E 100%);
+          position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
+          border-bottom: 1px solid rgba(229, 175, 34, 0.2);
+        }
+
+        .featured-glow {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 200px;
+          height: 200px;
+          background: radial-gradient(circle, rgba(229,175,34,0.15) 0%, rgba(229,175,34,0) 70%);
+          z-index: 1;
+          pointer-events: none;
+        }
+
+        .featured-wordmark {
+          position: absolute;
+          font-family: 'Playfair Display', serif;
+          font-size: 5.5rem;
+          font-weight: 900;
+          line-height: 0.85;
+          color: #ffffff;
+          opacity: 0.03;
+          text-align: center;
+          white-space: nowrap;
+          z-index: 1;
+          user-select: none;
+          pointer-events: none;
+        }
+
+        .featured-logo {
+          position: relative;
+          z-index: 2;
+          height: 140px;
+          width: auto;
+          object-fit: contain;
+          filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4));
+        }
+
+        .featured-content-panel {
+          padding: 2.5rem 3.5rem 3.5rem;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          flex-grow: 1;
+          width: 100%;
+        }
+
+        .featured-brand-cta {
+          font-family: var(--font-heading);
+          font-size: 0.9rem;
+          font-weight: 700;
+          color: var(--accent);
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          margin-top: auto;
+          transition: gap 0.2s ease, outline 0.2s ease;
+          white-space: nowrap;
+          border-radius: 4px;
+        }
+
+        .featured-brand-cta:hover {
+          gap: 0.75rem;
+          color: var(--accent-dark);
+        }
+
+        .featured-brand-cta:focus-visible {
+          outline: 3px solid #C49A3A;
+          outline-offset: 3px;
         }
 
         .brand-badge-strip {

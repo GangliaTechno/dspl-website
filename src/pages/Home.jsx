@@ -242,19 +242,24 @@ const Home = () => {
           <div className="brands-grid">
             {/* Raw Radicles Card */}
             <div className="brand-showcase-card featured-brand">
-              <div className="brand-badge-strip">
-                <span className="featured-tag">FLAGSHIP BRAND</span>
+              <div className="featured-visual-panel">
+                <div className="featured-glow" aria-hidden="true"></div>
+                <div className="featured-wordmark" aria-hidden="true">RAW<br/>RADICLES</div>
+                <img src={rawRadiclesLogo} alt="Raw Radicles" className="featured-logo" loading="lazy" decoding="async" />
               </div>
-              <div className="brand-card-logo-wrapper">
-                <img src={rawRadiclesLogo} alt="Raw Radicles premium chocolate bar packaging" className="brand-card-logo-img" loading="lazy" decoding="async" />
+              <div className="featured-content-panel">
+                <div className="brand-badge-strip">
+                  <span className="featured-tag">FLAGSHIP BRAND</span>
+                </div>
+                <h3 className="brand-name">Raw Radicles</h3>
+                <p className="brand-tagline">Chocolate, reimagined through Ayurveda.</p>
+                <p className="brand-desc">
+                  Real cocoa, made in small batches, with herbs chosen to do real work. Built for buyers who want a treat that gives something back.
+                </p>
+                <Link to="/brands#raw-radicles" className="brand-link featured-brand-cta">
+                  Explore Raw Radicles <ArrowRight size={14} />
+                </Link>
               </div>
-              <p className="brand-tagline">Premium chocolate with Ayurveda inside.</p>
-              <p className="brand-desc">
-                Premium chocolate with Ayurveda inside. Real cocoa, made in small batches, with herbs chosen to do real work. Built for buyers who want a treat that gives something back.
-              </p>
-              <Link to="/brands#raw-radicles" className="brand-link">
-                Visit Raw Radicles <ArrowRight size={14} />
-              </Link>
             </div>
 
             {/* Placeholder Card */}
