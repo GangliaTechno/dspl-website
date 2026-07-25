@@ -1,13 +1,8 @@
 import { Sparkles, Compass, BookOpen, ShieldCheck } from 'lucide-react';
-import useSEO from '../hooks/useSEO';
-import brandingBgImg from '../assets/Marketing_img.jpg';
+import brandingBgImg from '../assets/brand_hero.jpg';
 import ServicePage from '../components/ServicePage';
 
 const Branding = () => {
-  useSEO(
-    'Branding Agency | Brand Identity & Strategy | Dashapatmaja',
-    'Build a brand customers remember and trust. Logo, identity, positioning, and brand story for businesses in India. By the team behind Raw Radicles.'
-  );
 
 
   const offers = [

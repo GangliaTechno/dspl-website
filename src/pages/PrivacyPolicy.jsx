@@ -28,9 +28,9 @@ const PrivacyPolicy = () => {
           <p>When you interact with our website, request a consultation, or submit an inquiry through our contact forms or project planner, we may collect the following information:</p>
           <ul>
             <li><strong>Contact Details:</strong> Full Name, Email Address, Phone / WhatsApp number.</li>
-            <li><strong>Business & Project Info:</strong> Company Name, Website URL, project scope, budget range, and timeline preferences.</li>
-            <li><strong>File Attachments:</strong> Brand guidelines or project documents attached to inquiries.</li>
-            <li><strong>Analytics & Technical Data:</strong> Anonymized usage data such as page views and browser information for analytical improvement.</li>
+            <li><strong>Business & Project Info:</strong> Company Name, Website URL, project goal, and services of interest.</li>
+            <li><strong>File Attachments:</strong> Optional brand guidelines or project documents attached to inquiries. These are temporarily processed during submission.</li>
+            <li><strong>Analytics & Technical Data:</strong> Anonymized usage data such as page views, device information, and browser details collected via Google Analytics for performance improvement.</li>
           </ul>
         </section>
 
@@ -41,15 +41,18 @@ const PrivacyPolicy = () => {
             <li>Responding to project proposals and inquiry requests.</li>
             <li>Scheduling discovery consultations and sending service proposals.</li>
             <li>Sending requested newsletters or updates (only if opted in).</li>
-            <li>Improving website usability, performance, and client experiences.</li>
+            <li>Improving website usability, performance, and client experiences through Google Analytics.</li>
           </ul>
-          <p><strong>We never sell, rent, or trade your personal information to third parties.</strong></p>
+          <p><strong>We never sell, rent, or trade your personal information to third parties.</strong> Form submissions are securely processed through our authorized third-party provider, Web3Forms, which handles the secure transmission of your inquiries and any file attachments.</p>
         </section>
 
         <section className="privacy-section">
-          <h2>4. Data Storage & Security</h2>
+          <h2>4. Data Storage, Security & Retention</h2>
           <p>
             We enforce industry-standard security measures to safeguard your personal data against unauthorized access, loss, or misuse. Form submissions are processed securely using encrypted transmission (HTTPS).
+          </p>
+          <p>
+            Inquiry data is retained only for as long as necessary to fulfill the requested service, respond to your inquiry, or comply with legal obligations. File attachments are handled ephemerally by our form processor (Web3Forms) and are not permanently stored on our web servers. You may request the deletion of your personal data at any time.
           </p>
         </section>
 

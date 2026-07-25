@@ -1,14 +1,9 @@
 import { Search, Megaphone, BarChart, FileText } from 'lucide-react';
-import useSEO from '../hooks/useSEO';
 import marketingBgImg from '../assets/Marketing_hero_section.webp';
 import marketingBgImgMobile from '../assets/Marketing_hero_section-mobile.webp';
 import ServicePage from '../components/ServicePage';
 
 const Marketing = () => {
-  useSEO(
-    'Marketing Services | SEO, Paid Ads & Content | Dashapatmaja',
-    'Grow with marketing that pays back. SEO, paid campaigns, analytics, and content for businesses in India. Built by a team that markets its own brands.'
-  );
 
   const offers = [
     {

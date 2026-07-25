@@ -1,14 +1,9 @@
 import { ShoppingCart, HeartHandshake, Layers, CreditCard } from 'lucide-react';
-import useSEO from '../hooks/useSEO';
 import ecomBgImg from '../assets/ecom.webp';
 import ecomBgImgMobile from '../assets/ecom-mobile.webp';
 import ServicePage from '../components/ServicePage';
 
 const Ecommerce = () => {
-  useSEO(
-    'E-commerce Services | Store Setup & CRO | Dashapatmaja',
-    'Sell more online. Fast stores on Shopify and WooCommerce, sharper checkouts, and Amazon and quick commerce integration. By a team that runs its own store.'
-  );
 
   const offers = [
     {
