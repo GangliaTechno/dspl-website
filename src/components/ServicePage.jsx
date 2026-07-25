@@ -1,4 +1,3 @@
-import { Sparkles, Compass, BookOpen, ShieldCheck, Search, Megaphone, BarChart, FileText, ShoppingCart, HeartHandshake, Layers, CreditCard } from 'lucide-react';
 import useSEO from '../hooks/useSEO';
 import FAQAccordion from './FAQAccordion';
 

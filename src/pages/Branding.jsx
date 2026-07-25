@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { Sparkles, Compass, BookOpen, ShieldCheck, ChevronDown } from 'lucide-react';
+import { Sparkles, Compass, BookOpen, ShieldCheck } from 'lucide-react';
 import useSEO from '../hooks/useSEO';
 import brandingBgImg from '../assets/Marketing_img.jpg';
 import ServicePage from '../components/ServicePage';
@@ -10,11 +9,6 @@ const Branding = () => {
     'Build a brand customers remember and trust. Logo, identity, positioning, and brand story for businesses in India. By the team behind Raw Radicles.'
   );
 
-  const [openFaq, setOpenFaq] = useState(null);
-
-  const toggleFaq = (idx) => {
-    setOpenFaq(openFaq === idx ? null : idx);
-  };
 
   const offers = [
     {
