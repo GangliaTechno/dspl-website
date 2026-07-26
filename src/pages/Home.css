@@ -9,7 +9,7 @@
   display: grid;
   align-items: center;
   overflow: hidden;
-  background: #080808;
+  background: var(--bg-dark, #080808);
 }
 
 .home-hero::after {
@@ -64,7 +64,8 @@
 
 .hero-title {
   margin-bottom: 1.75rem;
-  color: #fff;
+  color: #fff; /* white on dark hero image */
+  font-family: var(--font-heading);
   font-size: clamp(3.25rem, 7vw, 6.5rem);
   font-weight: 800;
   letter-spacing: -0.055em;
@@ -99,7 +100,7 @@
 .hero-secondary:hover {
   border-color: rgba(255, 255, 255, 0.5);
   background: rgba(255, 255, 255, 0.12);
-  color: #fff;
+  /* color inherits #fff from base state */
 }
 
 .home-hero-proof {

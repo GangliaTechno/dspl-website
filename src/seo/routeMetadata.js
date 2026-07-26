@@ -1,5 +1,5 @@
 const SITE_URL = 'https://dashapatmaja.in';
-const DEFAULT_IMAGE = `${SITE_URL}/logo.png`;
+const DEFAULT_IMAGE = `${SITE_URL}/og-cover.jpg`; /* 1200×630 landscape for social sharing */
 
 export const PUBLIC_ROUTES = [
   '/',
@@ -14,10 +14,10 @@ export const PUBLIC_ROUTES = [
 
 export const organizationStructuredData = {
   '@context': 'https://schema.org',
-  '@type': 'Organization',
+  '@type': ['Organization', 'LocalBusiness'],
   name: 'Dasha Patmaja Services Pvt. Ltd.',
   url: SITE_URL,
-  logo: DEFAULT_IMAGE,
+  logo: `${SITE_URL}/logo.png`,
   email: 'director@dashapatmaja.in',
   telephone: '+91-88619-42440',
   address: {
@@ -28,6 +28,11 @@ export const organizationStructuredData = {
     addressRegion: 'Karnataka',
     postalCode: '576104',
     addressCountry: 'IN',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 13.3528,
+    longitude: 74.7934,
   },
   sameAs: [
     'https://www.linkedin.com/company/dashapatmaja-solutions-private-limited/',
@@ -44,7 +49,7 @@ const routeMetadata = {
   '/about': {
     title: 'About Dasha Patmaja Services Pvt. Ltd. | Manipal',
     description:
-      'Meet Dasha Patmaja Services Pvt. Ltd., a Manipal-based team building consumer brands and delivering coordinated branding, marketing, and e-commerce services.',
+      'Manipal-based team building consumer brands and delivering coordinated branding, marketing, and e-commerce services for Indian businesses.',
   },
   '/brands': {
     title: 'Our Brands | Dasha Patmaja Services Pvt. Ltd.',

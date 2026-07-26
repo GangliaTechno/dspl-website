@@ -135,8 +135,8 @@
 
 .owned-brand-section {
   overflow: hidden;
-  background: #111;
-  color: #fff;
+  background: var(--bg-dark, #111111); /* Dark canvas for brand showcase */
+  color: #fff; /* White text on dark background */
 }
 
 .owned-brand-layout {
@@ -174,7 +174,7 @@
 }
 
 .owned-brand-content .section-title {
-  color: #fff;
+  color: #fff; /* White text on dark brand section */
   font-size: clamp(2.75rem, 6vw, 5rem);
 }
 
