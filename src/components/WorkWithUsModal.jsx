@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { X, CheckCircle2, AlertCircle } from 'lucide-react';
 import { trackEvent } from '../utils/analytics';
+import { WORK_MODAL_EVENT } from '../utils/workModal';
 
 const WorkWithUsModal = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -37,10 +38,10 @@ const WorkWithUsModal = () => {
       setIsOpen(true);
     };
 
-    window.addEventListener('open-work-modal', handleOpen);
+    window.addEventListener(WORK_MODAL_EVENT, handleOpen);
 
     return () => {
-      window.removeEventListener('open-work-modal', handleOpen);
+      window.removeEventListener(WORK_MODAL_EVENT, handleOpen);
     };
   }, []);
 

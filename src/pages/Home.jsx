@@ -7,6 +7,7 @@ import gangliaLogo1 from '../assets/mutbi-normalized.png';
 import gangliaLogo2 from '../assets/startup-karnataka-normalized.png';
 import dstNidhi from '../assets/dst-nidhi-normalized.png';
 import nidhi1 from '../assets/nidhi-prayas-normalized.png';
+import { openWorkModal } from '../utils/workModal';
 import './Home.css';
 
 const Home = () => {
@@ -103,7 +104,7 @@ const Home = () => {
               type="button"
               aria-label="Open contact form to work with us"
               aria-haspopup="dialog"
-              onClick={() => window.dispatchEvent(new CustomEvent('open-work-modal'))} 
+              onClick={() => openWorkModal('homepage-hero')}
               className="btn btn-primary hero-btn-primary"
             >
               Work With Us <ArrowRight size={16} />
@@ -275,7 +276,7 @@ const Home = () => {
                 type="button"
                 aria-label="Open enquiry form to partner with us on a new brand"
                 aria-haspopup="dialog"
-                onClick={() => window.dispatchEvent(new CustomEvent('open-work-modal'))} 
+                onClick={() => openWorkModal('homepage-owned-brand')}
                 className="brand-link"
                 style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}
               >

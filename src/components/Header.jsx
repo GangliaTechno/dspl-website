@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import logoImg from '../assets/icon_orange.png';
+import { openWorkModal } from '../utils/workModal';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -58,7 +59,7 @@ const Header = () => {
 
   const handleOpenWorkModal = (e) => {
     e.preventDefault();
-    window.dispatchEvent(new CustomEvent('open-work-modal'));
+    openWorkModal('header');
   };
 
   return (

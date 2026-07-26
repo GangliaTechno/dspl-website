@@ -1,6 +1,7 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { act, render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import WorkWithUsModal from '../WorkWithUsModal';
+import { openWorkModal } from '../../utils/workModal';
 
 describe('WorkWithUsModal Component', () => {
   beforeEach(() => {
@@ -12,8 +13,7 @@ describe('WorkWithUsModal Component', () => {
 
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
 
-    // Trigger custom open event
-    fireEvent(window, new CustomEvent('open-work-modal'));
+    act(() => openWorkModal('modal-test'));
     expect(screen.getByRole('dialog')).toBeInTheDocument();
     expect(screen.getByText('Work with us')).toBeInTheDocument();
 
@@ -24,7 +24,7 @@ describe('WorkWithUsModal Component', () => {
 
   it('displays validation errors when required fields are missing', () => {
     render(<WorkWithUsModal />);
-    fireEvent(window, new CustomEvent('open-work-modal'));
+    act(() => openWorkModal('modal-test'));
 
     const submitBtn = screen.getByText('Send My Project Details');
     fireEvent.click(submitBtn);
@@ -37,7 +37,7 @@ describe('WorkWithUsModal Component', () => {
 
   it('silently aborts submission when honeypot field is filled', async () => {
     render(<WorkWithUsModal />);
-    fireEvent(window, new CustomEvent('open-work-modal'));
+    act(() => openWorkModal('modal-test'));
 
     // Fill honeypot field
     const honeypotInput = document.querySelector('input[name="websiteConfirm"]');

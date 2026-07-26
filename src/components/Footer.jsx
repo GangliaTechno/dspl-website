@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Phone, Mail, ArrowUpRight } from 'lucide-react';
 import logoImg from '../assets/icon_orange.png';
+import { openWorkModal } from '../utils/workModal';
 
 const Footer = () => {
   const handleBackToTop = () => {
@@ -21,7 +22,7 @@ const Footer = () => {
           <button 
             type="button"
             aria-label="Open enquiry form to get in touch"
-            onClick={() => window.dispatchEvent(new CustomEvent('open-work-modal'))} 
+            onClick={() => openWorkModal('footer')}
             className="btn btn-primary banner-btn"
           >
             Get in Touch <ArrowUpRight size={18} />

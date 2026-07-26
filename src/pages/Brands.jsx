@@ -4,6 +4,7 @@ import useSEO from '../hooks/useSEO';
 import rawRadiclesLogo from '../assets/RR_logo embossed_tm.png';
 import brandHeroStudio from '../assets/brands-hero-studio.webp';
 import pipelineBgImg from '../assets/brands_pipeline_bg.jpg';
+import { openWorkModal } from '../utils/workModal';
 
 const Brands = () => {
   useSEO(
@@ -155,7 +156,7 @@ const Brands = () => {
               <button 
                 type="button"
                 aria-label="Open enquiry form to discuss a brand partnership"
-                onClick={() => window.dispatchEvent(new CustomEvent('open-work-modal'))} 
+                onClick={() => openWorkModal('brands-page')}
                 className="btn btn-primary pipeline-btn"
               >
                 Discuss a brand partnership <ArrowRight size={16} />
