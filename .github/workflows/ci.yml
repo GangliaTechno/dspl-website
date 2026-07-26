@@ -31,3 +31,6 @@ jobs:
 
       - name: Run Vite Production Build
         run: npx vite build
+
+      - name: Verify prerendered HTML
+        run: npm run verify:html

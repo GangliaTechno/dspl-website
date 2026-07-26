@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "verify:html": "node scripts/verify-prerender.mjs",
     "lint": "eslint .",
     "test": "vitest run",
     "preview": "vite preview"
@@ -13,10 +14,10 @@
   "dependencies": {
     "framer-motion": "^12.42.2",
     "lucide-react": "^1.21.0",
-    "react-router-dom": "^7.18.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
-    "react-ga4": "^3.0.1"
+    "react-ga4": "^3.0.1",
+    "react-router-dom": "^7.18.0"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
@@ -32,6 +33,7 @@
     "jsdom": "^29.1.1",
     "tinyrainbow": "^3.1.0",
     "vite": "^8.0.12",
+    "vite-prerender-plugin": "^0.5.13",
     "vitest": "^4.1.10"
   }
 }
