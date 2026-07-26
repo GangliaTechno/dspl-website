@@ -17,13 +17,14 @@ import { openWorkModal } from '../utils/workModal';
 import './Home.css';
 
 const supporters = [
-  { src: dstNidhiLogo, alt: 'DST NIDHI' },
-  { src: nidhiPrayasLogo, alt: 'NIDHI PRAYAS' },
+  { src: dstNidhiLogo, alt: 'DST NIDHI', className: 'supporter-logo-dst' },
+  { src: nidhiPrayasLogo, alt: 'NIDHI PRAYAS', className: 'supporter-logo-nidhi1' },
   {
     src: mutbiLogo,
     alt: 'Manipal Universal Technology Business Incubator',
+    className: 'supporter-logo-1',
   },
-  { src: startupKarnatakaLogo, alt: 'Startup Karnataka' },
+  { src: startupKarnatakaLogo, alt: 'Startup Karnataka', className: 'supporter-logo-2' },
 ];
 
 const services = [

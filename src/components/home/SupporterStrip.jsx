@@ -20,7 +20,7 @@ const SupporterStrip = ({ supporters }) => (
               <img
                 src={logo.src}
                 alt={isDuplicate ? "" : logo.alt}
-                className={`supporter-logo ${logo.className ? logo.className + '-img' : ''}`}
+                className="supporter-logo"
                 loading="eager"
                 decoding="async"
                 draggable="false"

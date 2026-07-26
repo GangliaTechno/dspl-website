@@ -33,6 +33,8 @@
   display: block;
   width: auto;
   max-width: 100%;
+  height: 40px; /* Fallback height */
+  max-height: 40px;
   object-fit: contain;
   filter: brightness(0) invert(1);
   opacity: 0.5;
