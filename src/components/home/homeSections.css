@@ -1,0 +1,233 @@
+.supporter-proof {
+  position: relative;
+  z-index: 2;
+  background: var(--card-bg);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.supporter-proof-inner {
+  display: grid;
+  grid-template-columns: minmax(8rem, 0.55fr) minmax(0, 2.45fr);
+  align-items: center;
+  gap: 2rem;
+  min-height: 8.5rem;
+  padding-block: 1.5rem;
+}
+
+.supporter-proof-label {
+  color: var(--text-secondary);
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.supporter-proof-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(1rem, 3vw, 3rem);
+}
+
+.supporter-proof-item {
+  display: grid;
+  min-height: 4.25rem;
+  place-items: center;
+}
+
+.supporter-proof-logo {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  max-height: 2.6rem;
+  object-fit: contain;
+  opacity: 0.72;
+}
+
+.supporter-proof-item:nth-child(2) .supporter-proof-logo {
+  max-height: 3.2rem;
+}
+
+.process-section {
+  background: var(--bg-secondary);
+  border-block: 1px solid var(--border-color);
+}
+
+.process-header {
+  text-align: left;
+  margin-inline: 0;
+}
+
+.process-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--border-color);
+  list-style: none;
+}
+
+.process-step {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1.25rem;
+  min-height: 12rem;
+  padding: 2rem;
+  border-right: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.process-step:nth-child(3n) {
+  border-right: 0;
+}
+
+.process-step-number {
+  color: var(--accent);
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.process-step-title {
+  margin-bottom: 0.75rem;
+  color: var(--text-heading);
+  font-size: 1.15rem;
+}
+
+.process-step-description {
+  color: var(--text-secondary);
+  font-size: 0.925rem;
+  line-height: 1.65;
+}
+
+.owned-brand-section {
+  overflow: hidden;
+  background: #111;
+  color: #fff;
+}
+
+.owned-brand-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  align-items: center;
+  gap: clamp(3rem, 8vw, 8rem);
+}
+
+.owned-brand-visual {
+  position: relative;
+  display: grid;
+  min-height: 25rem;
+  place-items: center;
+}
+
+.owned-brand-glow {
+  position: absolute;
+  width: min(25rem, 80%);
+  aspect-ratio: 1;
+  border: 1px solid rgba(229, 175, 34, 0.3);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(229, 175, 34, 0.18),
+    transparent 68%
+  );
+}
+
+.owned-brand-logo {
+  position: relative;
+  width: min(18rem, 70%);
+  height: auto;
+  filter: drop-shadow(0 1.5rem 2rem rgba(0, 0, 0, 0.4));
+}
+
+.owned-brand-content .section-title {
+  color: #fff;
+  font-size: clamp(2.75rem, 6vw, 5rem);
+}
+
+.owned-brand-tagline {
+  margin-bottom: 1.25rem;
+  color: var(--accent);
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.owned-brand-description {
+  max-width: 38rem;
+  margin-bottom: 2rem;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+
+.owned-brand-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.text-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.text-action:hover {
+  color: var(--accent);
+}
+
+@media (max-width: 900px) {
+  .supporter-proof-inner,
+  .owned-brand-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .supporter-proof-inner {
+    gap: 1rem;
+  }
+
+  .process-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .process-step,
+  .process-step:nth-child(3n) {
+    border-right: 1px solid var(--border-color);
+  }
+
+  .process-step:nth-child(2n) {
+    border-right: 0;
+  }
+
+  .owned-brand-visual {
+    min-height: 18rem;
+  }
+}
+
+@media (max-width: 620px) {
+  .supporter-proof-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .process-list {
+    grid-template-columns: 1fr;
+  }
+
+  .process-step,
+  .process-step:nth-child(2n),
+  .process-step:nth-child(3n) {
+    min-height: auto;
+    padding-inline: 0;
+    border-right: 0;
+  }
+}
