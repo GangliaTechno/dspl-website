@@ -47,7 +47,7 @@ const ServicePage = ({
               alt=""
               width={heroImage.width}
               height={heroImage.height}
-              fetchpriority="high"
+              fetchPriority="high"
               decoding="async"
             />
           </picture>
@@ -66,7 +66,7 @@ const ServicePage = ({
       <section className="section why-matters-section glass-top-border">
         <div className="container">
           <div className="matters-box glass">
-            <h3 className="matters-title">Why It Matters</h3>
+            <h2 className="matters-title">Why It Matters</h2>
             <p className="matters-text">
               {mattersText}
             </p>

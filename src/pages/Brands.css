@@ -280,6 +280,13 @@
 /* Pipeline Card */
 .pipeline-section {
   padding: 4rem 0;
+  background-image: linear-gradient(
+    to right,
+    rgba(255, 248, 231, 0.85),
+    rgba(255, 248, 231, 0.95)
+  ), var(--pipeline-bg);
+  background-size: cover;
+  background-position: center;
 }
 
 .pipeline-card {

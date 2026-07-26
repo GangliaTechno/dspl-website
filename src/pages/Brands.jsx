@@ -1,6 +1,6 @@
 import './Brands.css';
 import { ArrowRight, Sparkles, Cookie } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import useSEO from '../hooks/useSEO';
 import { getRouteMetadata } from '../seo/routeMetadata';
 import rawRadiclesLogo from '../assets/RR_logo embossed_tm.png';
@@ -10,6 +10,8 @@ import { openWorkModal } from '../utils/workModal';
 
 const Brands = () => {
   useSEO(getRouteMetadata('/brands'));
+  const prefersReducedMotion = useReducedMotion();
+  const mt = (base) => (prefersReducedMotion ? { duration: 0 } : base);
 
   return (
     <div className="brands-page fade-in">
@@ -22,15 +24,23 @@ const Brands = () => {
       {/* Intro Section */}
       <section className="section brands-hero">
         <div className="brands-hero-bg">
-          <img src={brandHeroStudio} alt="" className="brands-hero-img" loading="eager" decoding="sync" />
+          {/* Decorative background image — hidden from screen readers */}
+          <img
+            src={brandHeroStudio}
+            alt=""
+            aria-hidden="true"
+            className="brands-hero-img"
+            loading="eager"
+            decoding="async"
+          />
           <div className="brands-hero-overlay"></div>
         </div>
         <div className="container">
-          <motion.div 
+          <motion.div
             className="brands-hero-content"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            transition={mt({ duration: 0.8, ease: 'easeOut' })}
           >
             <span className="section-subtitle">HOUSE OF BRANDS</span>
             <h1 className="brands-title">We build brands from the inside out.</h1>
@@ -49,12 +59,12 @@ const Brands = () => {
         <div className="container">
           <div className="showcase-container">
             {/* 1. Raw Radicles Card */}
-            <motion.div 
+            <motion.div
               className="brand-detail-card raw-radicles-card"
               initial={{ opacity: 0, scale: 0.97 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.7, ease: "easeOut" }}
+              transition={mt({ duration: 0.7, ease: 'easeOut' })}
             >
               <div className="brand-content-grid">
                 <div className="brand-info-side">
@@ -62,14 +72,14 @@ const Brands = () => {
                     <Cookie size={16} className="badge-icon" />
                     FLAGSHIP CONSUMER BRAND
                   </div>
-                  
+
                   <h2 className="brand-showcase-name">
                     Raw Radicles
                   </h2>
                   <p className="brand-showcase-tagline">
                     Chocolate, reimagined through Ayurveda.
                   </p>
-                  
+
                   <div className="brand-body-paragraphs">
                     <p>
                       Raw Radicles brings together real cacao and carefully selected Ayurvedic botanicals.
@@ -78,11 +88,11 @@ const Brands = () => {
                       Built end to end by Dasha Patmaja—from formulation and packaging to compliance, storytelling and route to market.
                     </p>
                   </div>
-                  
+
                   <div className="rr-contribution-line">
                     STRATEGY · PRODUCT DEVELOPMENT · PACKAGING · COMPLIANCE · GO-TO-MARKET
                   </div>
-                  
+
                   <div className="rr-proof-grid">
                     <div className="proof-item">
                       <span className="proof-label">PRODUCT</span>
@@ -110,14 +120,10 @@ const Brands = () => {
                 </div>
 
                 <div className="rr-visual-panel">
-                  
                   <div className="rr-glow-ring"></div>
-                  
                   <div className="brand-showcase-logo-wrapper">
                     <img src={rawRadiclesLogo} alt="Raw Radicles" className="brand-showcase-logo-img" loading="lazy" decoding="async" />
                   </div>
-                  
-                  
                 </div>
 
               </div>
@@ -127,23 +133,22 @@ const Brands = () => {
         </div>
       </section>
 
-      {/* 2. Pipeline Banner */}
-      <section className="section pipeline-section bg-alt" style={{
-        backgroundImage: `linear-gradient(to right, rgba(255, 248, 231, 0.85), rgba(255, 248, 231, 0.95)), url(${pipelineBgImg})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center'
-      }}>
+      {/* 2. Pipeline Banner — background via CSS custom property to keep tokens in CSS */}
+      <section
+        className="section pipeline-section bg-alt"
+        style={{ '--pipeline-bg': `url(${pipelineBgImg})` }}
+      >
         <div className="container">
-          <motion.div 
+          <motion.div
             className="pipeline-card"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
+            transition={mt({ duration: 0.7 })}
           >
             <div className="pipeline-decorative-shape-1" aria-hidden="true"></div>
             <div className="pipeline-decorative-shape-2" aria-hidden="true"></div>
-            
+
             <div className="pipeline-content">
               <div className="pipeline-icon-box">
                 <Sparkles size={24} />
@@ -152,7 +157,7 @@ const Brands = () => {
               <p className="pipeline-text">
                 We are developing consumer brands for additional customer segments. New launches will be added here as they progress.
               </p>
-              <button 
+              <button
                 type="button"
                 aria-label="Open enquiry form to discuss a brand partnership"
                 onClick={() => openWorkModal('brands-page')}

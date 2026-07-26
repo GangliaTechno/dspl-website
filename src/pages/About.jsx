@@ -79,9 +79,10 @@ const About = () => {
         </motion.div>
       </section>
 
-      {/* Mission & Vision Section */}
       <section className="section mission-vision-section bg-alt">
         <div className="container">
+          {/* Visually-hidden h2 so heading hierarchy h1→h2→h3 is unbroken */}
+          <h2 className="sr-only">Our Core Values</h2>
           <div className="mission-vision-grid">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}

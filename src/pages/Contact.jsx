@@ -136,7 +136,7 @@ const Contact = () => {
               <div className="contact-detail-card glass">
                 <MapPin className="detail-icon" />
                 <div className="detail-info">
-                  <h4>Address</h4>
+                  <h3>Address</h3>
                   <p>Room No. 12, 4th Floor, MUTBI, Advanced Research Center, Madhava Nagar, Manipal 576104</p>
                 </div>
               </div>
@@ -144,7 +144,7 @@ const Contact = () => {
               <div className="contact-detail-card glass">
                 <Phone className="detail-icon" />
                 <div className="detail-info">
-                  <h4>Phone Call</h4>
+                  <h3>Phone Call</h3>
                   <p><a href="tel:+918861942440">+91 88619 42440</a></p>
                   <p><a href="tel:+919072556665">+91 90725 56665</a></p>
                 </div>
@@ -153,7 +153,7 @@ const Contact = () => {
               <div className="contact-detail-card glass">
                 <Mail className="detail-icon" />
                 <div className="detail-info">
-                  <h4>Email Support</h4>
+                  <h3>Email Support</h3>
                   <p><a href="mailto:director@dashapatmaja.in">director@dashapatmaja.in</a></p>
                   <p><a href="mailto:dsplmanipal@gmail.com">dsplmanipal@gmail.com</a></p>
                 </div>

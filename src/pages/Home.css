@@ -166,7 +166,7 @@
 }
 
 .service-marker {
-  color: var(--accent);
+  color: var(--accent-text); /* #8A5B00 — WCAG AA safe on cream ~5.5:1 */
   font-family: var(--font-heading);
   font-size: 0.75rem;
   font-weight: 800;
