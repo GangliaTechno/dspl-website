@@ -166,7 +166,6 @@
 }
 
 .service-marker {
-  margin-bottom: auto;
   color: var(--accent);
   font-family: var(--font-heading);
   font-size: 0.75rem;
@@ -191,10 +190,11 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  color: var(--accent-dark);
+  color: var(--accent-text);
   font-family: var(--font-heading);
   font-size: 0.9rem;
   font-weight: 800;
+  margin-top: auto;
 }
 
 .service-evidence-card a:hover {

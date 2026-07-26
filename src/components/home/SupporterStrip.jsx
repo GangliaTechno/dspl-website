@@ -1,22 +1,36 @@
+import { motion } from 'framer-motion';
+
 const SupporterStrip = ({ supporters }) => (
-  <section className="supporter-proof" aria-label="Supported by">
-    <div className="container supporter-proof-inner">
-      <p className="supporter-proof-label">Supported by</p>
-      <div className="supporter-proof-grid">
-        {supporters.map((supporter) => (
-          <div className="supporter-proof-item" key={supporter.alt}>
-            <img
-              src={supporter.src}
-              alt={supporter.alt}
-              className="supporter-proof-logo"
-              loading="eager"
-              decoding="async"
-            />
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
+  <div className="supporter-band" aria-label="Supported by">
+    <motion.div 
+      className="supporter-track"
+      animate={{ x: ["0%", "-33.333333%"] }}
+      transition={{ repeat: Infinity, ease: "linear", duration: 12 }}
+    >
+      {[...supporters, ...supporters, ...supporters].map(
+        (logo, index) => {
+          const isDuplicate = index >= supporters.length;
+
+          return (
+            <div
+              key={`${logo.alt}-${index}`}
+              className={`supporter-logo-slot ${logo.className || ''}`}
+              aria-hidden={isDuplicate ? "true" : undefined}
+            >
+              <img
+                src={logo.src}
+                alt={isDuplicate ? "" : logo.alt}
+                className="supporter-proof-logo"
+                loading="eager"
+                decoding="async"
+                draggable="false"
+              />
+            </div>
+          );
+        }
+      )}
+    </motion.div>
+  </div>
 );
 
 export default SupporterStrip;

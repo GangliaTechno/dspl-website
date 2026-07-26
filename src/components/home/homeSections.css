@@ -23,6 +23,25 @@
   text-transform: uppercase;
 }
 
+.supporter-band {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.supporter-track {
+  display: flex;
+  width: max-content;
+  align-items: center;
+}
+
+.supporter-logo-slot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 3rem;
+}
+
 .supporter-proof-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
