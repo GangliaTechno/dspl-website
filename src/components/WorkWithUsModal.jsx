@@ -1,3 +1,4 @@
+import './WorkWithUsModal.css';
 import { useState, useEffect, useRef } from 'react';
 import { X, CheckCircle2, AlertCircle } from 'lucide-react';
 import { trackEvent } from '../utils/analytics';
@@ -464,9 +465,9 @@ const WorkWithUsModal = () => {
                   tabIndex={-1}
                   autoComplete="off"
                   aria-hidden="true"
+                  className="honeypot-field"
                   value={formData.websiteConfirm} 
                   onChange={handleInputChange} 
-                  style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', opacity: 0 }}
                 />
               </div>
 
@@ -486,71 +487,7 @@ const WorkWithUsModal = () => {
             </form>
           )}
         </div>
-        <style>{`
-          .checkbox-fieldset {
-            border: none;
-            padding: 0;
-            margin: 0;
-          }
-          .file-selected-box {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0.75rem 1rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-          }
-          .file-name-text {
-            font-size: 0.875rem;
-            color: var(--text-primary);
-            word-break: break-all;
-          }
-          .file-remove-btn {
-            background: none;
-            border: none;
-            color: var(--accent-red);
-            cursor: pointer;
-            font-size: 0.85rem;
-            padding: 0.2rem 0.5rem;
-          }
-          .file-upload-dropzone {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 1.25rem;
-            border: 2px dashed var(--border-color);
-            border-radius: 8px;
-            cursor: pointer;
-            background: rgba(255, 255, 255, 0.02);
-          }
-          .file-dropzone-text {
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-          }
-          .file-input-hidden {
-            display: none;
-          }
-          .file-error-text {
-            color: var(--accent-red);
-            font-size: 0.8rem;
-            margin-top: 0.4rem;
-            display: block;
-          }
-          .submit-error-banner {
-            color: #ff3333;
-            font-size: 0.85rem;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-          }
-          .submit-btn:disabled {
-            opacity: 0.7;
-            cursor: not-allowed;
-          }
-        `}</style>
+
       </div>
     </div>
   );

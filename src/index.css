@@ -24,9 +24,21 @@
   --accent-shadow: rgba(245, 168, 0, 0.06);
   --accent-shadow-hover: rgba(245, 168, 0, 0.12);
   --shadow-lg: 0 10px 30px -10px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.02);
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2rem;
+  --space-5: 3rem;
+  --space-6: 4.5rem;
+  --radius-control: 4px;
+  --radius-card: 12px;
+  --shadow-surface: 0 10px 30px -10px rgba(0, 0, 0, 0.06),
+    0 1px 3px rgba(0, 0, 0, 0.02);
+  --container-width: 1200px;
+  --focus-ring: 3px solid var(--accent);
   --font-sans: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --max-width: 1200px;
+  --max-width: var(--container-width);
 }
 
 * {
@@ -125,7 +137,7 @@ p {
 }
 
 .section {
-  padding: 6rem 0;
+  padding: var(--space-6) 0;
   position: relative;
 }
 
@@ -144,8 +156,9 @@ p {
   justify-content: center;
   font-family: var(--font-heading);
   font-weight: 600;
+  min-height: 44px;
   padding: 0.75rem 1.75rem;
-  border-radius: 4px;            /* More corporate sharp borders matching Honasa */
+  border-radius: var(--radius-control);
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   font-size: 0.95rem;
@@ -195,6 +208,7 @@ p {
 
 .form-input {
   width: 100%;
+  min-height: 44px;
   padding: 0.875rem 1.25rem;
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.03);
@@ -258,7 +272,7 @@ input:focus-visible,
 textarea:focus-visible,
 select:focus-visible,
 .btn:focus-visible {
-  outline: 3px solid var(--accent);
+  outline: var(--focus-ring);
   outline-offset: 3px;
 }
 

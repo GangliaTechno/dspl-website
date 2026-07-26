@@ -1,3 +1,4 @@
+import './App.css';
 import { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ScrollToTop from './components/ScrollToTop';
@@ -44,17 +45,6 @@ function App() {
         <WorkWithUsModal />
       </div>
 
-      <style>{`
-        #app-root {
-          display: flex;
-          flex-direction: column;
-          min-height: 100vh;
-        }
-
-        .main-content {
-          flex-grow: 1;
-        }
-      `}</style>
     </Router>
   );
 }

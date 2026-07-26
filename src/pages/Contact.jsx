@@ -1,3 +1,4 @@
+import './Contact.css';
 import { useState } from 'react';
 import { Mail, Phone, MapPin, Send, CheckCircle2, AlertCircle } from 'lucide-react';
 import useSEO from '../hooks/useSEO';
@@ -236,9 +237,9 @@ const Contact = () => {
                     tabIndex={-1}
                     autoComplete="off"
                     aria-hidden="true"
+                    className="contact-honeypot"
                     value={formData.websiteConfirm}
                     onChange={handleChange}
-                    style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', opacity: 0 }}
                   />
 
                   <div className="form-group">
@@ -280,7 +281,7 @@ const Contact = () => {
                   </div>
 
                   {submitError && (
-                    <div className="submit-error-banner" role="alert" style={{ color: '#ff3333', fontSize: '0.85rem', marginBottom: '1.2rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <div className="submit-error-banner" role="alert">
                       <AlertCircle size={14} /> {submitError}
                     </div>
                   )}
@@ -289,7 +290,6 @@ const Contact = () => {
                     type="submit" 
                     className="btn btn-primary submit-btn"
                     disabled={isSubmitting}
-                    style={{ opacity: isSubmitting ? 0.7 : 1, cursor: isSubmitting ? 'not-allowed' : 'pointer' }}
                   >
                     {isSubmitting ? 'Sending...' : 'Send Message'} <Send size={16} />
                   </button>
@@ -301,218 +301,6 @@ const Contact = () => {
         </div>
       </section>
 
-      <style>{`
-        .contact-page {
-          padding-top: 5rem;
-          position: relative;
-        }
-
-        .contact-hero {
-          text-align: center;
-          padding: 6rem 0 4rem;
-          max-width: 700px;
-          margin: 0 auto;
-        }
-
-        .contact-title {
-          font-size: 3.5rem;
-          font-weight: 800;
-          margin-bottom: 1.5rem;
-          letter-spacing: -0.04em;
-          color: var(--text-heading);
-        }
-
-        .contact-description {
-          font-size: 1.15rem;
-          line-height: 1.7;
-          color: var(--text-secondary);
-        }
-
-        .glass-top-border {
-          border-top: 1px solid var(--border-color);
-        }
-
-        /* Layout Grid */
-        .contact-layout {
-          display: grid;
-          grid-template-columns: 0.9fr 1.1fr;
-          gap: 4rem;
-          align-items: start;
-          max-width: 1000px;
-          margin: 0 auto;
-        }
-
-        .contact-subheading {
-          font-size: 1.75rem;
-          font-weight: 800;
-          color: var(--text-heading);
-          margin-bottom: 2rem;
-        }
-
-        .details-column {
-          display: flex;
-          flex-direction: column;
-          gap: 1.5rem;
-        }
-
-        .contact-detail-card {
-          background: #ffffff;
-          border: 1px solid var(--border-color);
-          border-radius: 4px;
-          padding: 2.25rem 2.5rem;
-          display: flex;
-          gap: 1.5rem;
-          align-items: flex-start;
-          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .contact-detail-card:hover {
-          transform: translateY(-2px);
-          border-color: var(--accent-border-alpha);
-          box-shadow: var(--shadow-lg);
-        }
-
-        .detail-icon {
-          color: var(--accent);
-          flex-shrink: 0;
-          width: 24px;
-          height: 24px;
-        }
-
-        .detail-info h4 {
-          font-size: 1.1rem;
-          font-weight: 700;
-          margin-bottom: 0.5rem;
-          color: var(--text-heading);
-        }
-
-        .detail-info p {
-          font-size: 0.925rem;
-          line-height: 1.5;
-          color: var(--text-secondary);
-        }
-
-        .detail-info a:hover {
-          color: var(--accent);
-          text-decoration: underline;
-        }
-
-        /* Form Column */
-        .form-column {
-          background: #ffffff;
-          border: 1px solid var(--border-color);
-          border-radius: 4px;
-          padding: 3.5rem;
-          box-shadow: var(--shadow-lg);
-        }
-
-        .form-title {
-          font-size: 1.75rem;
-          font-weight: 800;
-          color: var(--text-heading);
-          margin-bottom: 2rem;
-          border-bottom: 1px solid var(--border-color);
-          padding-bottom: 1rem;
-        }
-
-        .form-row {
-          display: flex;
-          gap: 1.5rem;
-        }
-
-        .half-width {
-          flex: 1;
-        }
-
-        .form-select {
-          appearance: none;
-          background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%238d9365' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-          background-repeat: no-repeat;
-          background-position: right 1.25rem center;
-          background-size: 1rem;
-          padding-right: 3rem;
-          color: var(--text-primary);
-          cursor: pointer;
-        }
-
-        .form-select option {
-          background: #ffffff;
-          color: var(--text-primary);
-        }
-
-        .form-input-error {
-          border-color: #ef4444 !important;
-          box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.05) !important;
-        }
-
-        .error-text {
-          display: block;
-          font-size: 0.8rem;
-          color: #ef4444;
-          font-weight: 500;
-          margin-top: 0.35rem;
-        }
-
-        .submit-btn {
-          width: 100%;
-          padding: 0.875rem;
-          font-size: 1rem;
-          margin-top: 1rem;
-        }
-
-        /* Success State */
-        .success-state {
-          text-align: center;
-          padding: 2rem 0;
-        }
-
-        .success-icon {
-          width: 60px;
-          height: 60px;
-          color: var(--accent-light);
-          margin-bottom: 1.5rem;
-        }
-
-        .success-state h3 {
-          font-size: 1.75rem;
-          font-weight: 800;
-          color: var(--text-heading);
-          margin-bottom: 1rem;
-        }
-
-        .success-state p {
-          font-size: 1rem;
-          color: var(--text-secondary);
-          line-height: 1.6;
-          margin-bottom: 2rem;
-        }
-
-        @media (max-width: 900px) {
-          .contact-layout {
-            grid-template-columns: 1fr;
-            gap: 3rem;
-          }
-          .form-column {
-            padding: 2.5rem;
-          }
-        }
-
-        @media (max-width: 576px) {
-          .form-row {
-            flex-direction: column;
-            gap: 0;
-          }
-          .form-column {
-            padding: 2rem;
-          }
-        }
-
-        @media (max-width: 768px) {
-          .contact-title {
-            font-size: 2.25rem;
-          }
-        }
-      `}</style>
     </div>
   );
 };

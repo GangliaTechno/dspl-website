@@ -1,0 +1,84 @@
+.privacy-page-container {
+  padding: 5rem 1.5rem;
+  background: var(--bg-primary);
+  min-height: 80vh;
+  display: flex;
+  justify-content: center;
+}
+
+.privacy-content {
+  max-width: 800px;
+  width: 100%;
+  padding: 3.5rem 3rem;
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+}
+
+.privacy-title {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.privacy-updated {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 2.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.privacy-section {
+  margin-bottom: 2rem;
+}
+
+.privacy-section h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+}
+
+.privacy-section p, .privacy-section ul {
+  font-size: 0.975rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 0.75rem;
+}
+
+.privacy-section ul {
+  padding-left: 1.5rem;
+}
+
+.privacy-section li {
+  margin-bottom: 0.5rem;
+}
+
+.contact-info-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-color);
+  padding: 1.25rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+
+.contact-info-card p {
+  margin-bottom: 0.3rem;
+  color: var(--text-primary);
+}
+
+.contact-info-card a {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+  .privacy-content {
+    padding: 2rem 1.5rem;
+  }
+
+  .privacy-title {
+    font-size: 1.75rem;
+  }
+}
