@@ -146,9 +146,9 @@ const Home = () => {
             </ul>
           </aside>
         </div>
+        
+        <SupporterStrip supporters={supporters} />
       </section>
-
-      <SupporterStrip supporters={supporters} />
 
       <section
         className="section coordinated-services"

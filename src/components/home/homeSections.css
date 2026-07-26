@@ -1,70 +1,81 @@
-.supporter-proof {
-  position: relative;
-  z-index: 2;
-  background: var(--card-bg);
-  border-bottom: 1px solid var(--border-color);
-}
-
-.supporter-proof-inner {
-  display: grid;
-  grid-template-columns: minmax(8rem, 0.55fr) minmax(0, 2.45fr);
-  align-items: center;
-  gap: 2rem;
-  min-height: 8.5rem;
-  padding-block: 1.5rem;
-}
-
-.supporter-proof-label {
-  color: var(--text-secondary);
-  font-family: var(--font-heading);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
 .supporter-band {
-  overflow: hidden;
-  position: relative;
+  position: absolute;
+  right: 0;
+  bottom: 18px;
+  left: 0;
+  z-index: 3;
   width: 100%;
+  overflow: hidden;
+  padding-block: 12px;
+  background: transparent;
+  border: 0;
+  --supporter-gap: 6rem;
 }
 
 .supporter-track {
   display: flex;
-  width: max-content;
   align-items: center;
+  gap: var(--supporter-gap);
+  padding-right: var(--supporter-gap);
+  width: max-content;
+  will-change: transform;
 }
 
 .supporter-logo-slot {
   display: flex;
+  flex: 0 0 auto;
   align-items: center;
   justify-content: center;
-  padding: 0 3rem;
+  height: 65px;
 }
 
-.supporter-proof-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: clamp(1rem, 3vw, 3rem);
-}
-
-.supporter-proof-item {
-  display: grid;
-  min-height: 4.25rem;
-  place-items: center;
-}
-
-.supporter-proof-logo {
+.supporter-logo {
   display: block;
   width: auto;
   max-width: 100%;
-  max-height: 2.6rem;
   object-fit: contain;
-  opacity: 0.72;
+  filter: brightness(0) invert(1);
+  opacity: 0.5;
+  image-rendering: auto;
+  backface-visibility: hidden;
+  transition: opacity 0.3s ease;
 }
 
-.supporter-proof-item:nth-child(2) .supporter-proof-logo {
-  max-height: 3.2rem;
+.supporter-logo:hover {
+  opacity: 1;
+}
+
+/* Optical Sizing - visually balances square vs wide logos */
+.supporter-logo-dst .supporter-logo {
+  height: 34px;
+}
+
+.supporter-logo-nidhi1 .supporter-logo {
+  height: 46px;
+  transform: translateY(-6px);
+}
+
+.supporter-logo-1 .supporter-logo {
+  height: 36px; 
+}
+
+.supporter-logo-2 .supporter-logo {
+  height: 28px;
+}
+
+@media (max-width: 768px) {
+  .supporter-band {
+    bottom: 10px;
+    padding-block: 8px;
+    --supporter-gap: 2.5rem;
+  }
+  .supporter-logo-slot {
+    height: 48px;
+  }
+  .supporter-logo-dst .supporter-logo { height: 28px; }
+  .supporter-logo-nidhi1 .supporter-logo { height: 36px; }
+  .supporter-logo-1 .supporter-logo { height: 30px; }
+  .supporter-logo-2 .supporter-logo { height: 22px; }
 }
 
 .process-section {
