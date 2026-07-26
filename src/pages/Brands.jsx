@@ -2,16 +2,14 @@ import './Brands.css';
 import { ArrowRight, Sparkles, Cookie } from 'lucide-react';
 import { motion } from 'framer-motion';
 import useSEO from '../hooks/useSEO';
+import { getRouteMetadata } from '../seo/routeMetadata';
 import rawRadiclesLogo from '../assets/RR_logo embossed_tm.png';
 import brandHeroStudio from '../assets/brands-hero-studio.webp';
 import pipelineBgImg from '../assets/brands_pipeline_bg.jpg';
 import { openWorkModal } from '../utils/workModal';
 
 const Brands = () => {
-  useSEO(
-    'Our Brands | Dasha Patmaja Services',
-    'Dasha Patmaja Services is a house of brands. Raw Radicles, our premium chocolate brand with Ayurveda inside, is the first. More consumer brands are in development.'
-  );
+  useSEO(getRouteMetadata('/brands'));
 
   return (
     <div className="brands-page fade-in">

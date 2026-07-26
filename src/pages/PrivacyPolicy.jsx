@@ -1,15 +1,9 @@
 import './PrivacyPolicy.css';
-import { useLocation } from 'react-router-dom';
 import useSEO from '../hooks/useSEO';
+import { getRouteMetadata } from '../seo/routeMetadata';
 
 const PrivacyPolicy = () => {
-  const location = useLocation();
-
-  useSEO({
-    title: 'Privacy Policy & Terms of Use',
-    description: 'Learn how Dasha Patmaja Services Private Limited collects, protects, and handles user data, inquiry forms, and communications.',
-    canonical: location.pathname
-  });
+  useSEO(getRouteMetadata('/privacy'));
 
   return (
     <div className="privacy-page-container">

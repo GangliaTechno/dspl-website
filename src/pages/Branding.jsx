@@ -1,6 +1,7 @@
 import { Sparkles, Compass, BookOpen, ShieldCheck } from 'lucide-react';
 import brandingBgImg from '../assets/brand_hero.jpg';
 import ServicePage from '../components/ServicePage';
+import { getRouteMetadata } from '../seo/routeMetadata';
 
 const Branding = () => {
 
@@ -45,8 +46,7 @@ const Branding = () => {
 
   return (
     <ServicePage
-      seoTitle="Branding Agency | Brand Identity & Strategy | Dashapatmaja"
-      seoDesc="Build a brand customers remember and trust. Logo, identity, positioning, and brand story for businesses in India. By the team behind Raw Radicles."
+      seoMetadata={getRouteMetadata('/branding')}
       pageTypeClass="branding-page"
       heroTitle="Branding"
       heroSubtitle="Build a name customers trust and remember."

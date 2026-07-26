@@ -5,6 +5,7 @@ import marketingHero1440 from '../assets/Marketing_hero_section-1440.webp';
 import marketingHero1920 from '../assets/Marketing_hero_section-1920.webp';
 import marketingMobile from '../assets/Marketing_hero_section-mobile.webp';
 import ServicePage from '../components/ServicePage';
+import { getRouteMetadata } from '../seo/routeMetadata';
 
 
 const Marketing = () => {
@@ -59,8 +60,7 @@ const Marketing = () => {
 
   return (
     <ServicePage
-      seoTitle="Performance Marketing & SEO Agency | Dashapatmaja"
-      seoDesc="Data-driven marketing that gets you found and gets you sales. SEO, Google Ads, Meta Ads, and content strategies. By the team behind Raw Radicles."
+      seoMetadata={getRouteMetadata('/marketing')}
       pageTypeClass="marketing-page"
       heroTitle="Marketing"
       heroSubtitle="Get found. Get chosen. Get sales."

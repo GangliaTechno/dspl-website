@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { Calendar, Award, Star, Compass, Target, Eye } from 'lucide-react';
 import { motion } from 'framer-motion';
 import useSEO from '../hooks/useSEO';
+import { getRouteMetadata } from '../seo/routeMetadata';
 
 import manuImg from '../assets/manu_pro_fixed.jpg';
 import sreeImg from '../assets/sree_pro_fixed.jpg';
@@ -18,10 +19,7 @@ import dsplImg from '../assets/dspl_img.jpg';
 const About = () => {
   const location = useLocation();
 
-  useSEO(
-    'About Us | Dasha Patmaja Services, Manipal',
-    'Dasha Patmaja Services Pvt. Ltd. helps businesses grow through branding, marketing, and e-commerce. We were founded in 2023 and are incubated at the Manipal Universal Technology Business Incubator (MUTBI) at MAHE, Manipal.'
-  );
+  useSEO(getRouteMetadata('/about'));
 
   // Scroll to hash anchor when route hash changes
   useEffect(() => {

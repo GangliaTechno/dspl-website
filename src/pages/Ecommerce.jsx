@@ -2,6 +2,7 @@ import { ShoppingCart, HeartHandshake, Layers, CreditCard } from 'lucide-react';
 import ecomBgImg from '../assets/ecom.webp';
 import ecomBgImgMobile from '../assets/ecom-mobile.webp';
 import ServicePage from '../components/ServicePage';
+import { getRouteMetadata } from '../seo/routeMetadata';
 
 const Ecommerce = () => {
 
@@ -45,8 +46,7 @@ const Ecommerce = () => {
 
   return (
     <ServicePage
-      seoTitle="E-commerce Services | Store Setup & CRO | Dashapatmaja"
-      seoDesc="Sell more online. Fast stores on Shopify and WooCommerce, sharper checkouts, and Amazon and quick commerce integration. By a team that runs its own store."
+      seoMetadata={getRouteMetadata('/ecommerce')}
       pageTypeClass="ecommerce-page"
       heroTitle="E-commerce"
       heroSubtitle="Build a store that loads fast and converts."

@@ -3,8 +3,7 @@ import useSEO from '../hooks/useSEO';
 import FAQAccordion from './FAQAccordion';
 
 const ServicePage = ({ 
-  seoTitle, 
-  seoDesc, 
+  seoMetadata,
   pageTypeClass, 
   heroTitle, 
   heroSubtitle, 
@@ -20,7 +19,7 @@ const ServicePage = ({
   faqsDesc, 
   faqs 
 }) => {
-  useSEO(seoTitle, seoDesc);
+  useSEO(seoMetadata);
 
   return (
     <div

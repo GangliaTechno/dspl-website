@@ -1,36 +1,19 @@
 import { useEffect } from 'react';
-
-const SITE_URL = 'https://dashapatmaja.in';
-const DEFAULT_IMAGE = `${SITE_URL}/logo.png`;
+import { organizationStructuredData } from '../seo/routeMetadata';
 
 /**
  * Custom hook to update document title, description, canonical link, OpenGraph, and Twitter tags
  */
-const useSEO = (optsOrTitle, legacyDescription) => {
-  let title = '';
-  let description = '';
-  let canonical = '';
-  let image = DEFAULT_IMAGE;
-  let type = 'website';
-
-  if (typeof optsOrTitle === 'object' && optsOrTitle !== null) {
-    ({
-      title = '',
-      description = '',
-      canonical = '',
-      image = DEFAULT_IMAGE,
-      type = 'website'
-    } = optsOrTitle);
-  } else {
-    title = optsOrTitle || '';
-    description = legacyDescription || '';
-  }
-
+const useSEO = ({
+  title = '',
+  description = '',
+  canonical = '',
+  image = 'https://dashapatmaja.in/logo.png',
+  type = 'website',
+  structuredData = organizationStructuredData,
+}) => {
   useEffect(() => {
-    // 1. Document Title
-    if (title) {
-      document.title = title.includes('Dashapatmaja') || title.includes('Dasha Patmaja') ? title : `${title} | Dasha Patmaja Services`;
-    }
+    if (title) document.title = title;
 
     const setMetaTag = (selector, nameAttr, nameValue, content) => {
       if (!content) return;
@@ -43,7 +26,9 @@ const useSEO = (optsOrTitle, legacyDescription) => {
       el.setAttribute('content', content);
     };
 
-    const currentUrl = canonical ? `${SITE_URL}${canonical}` : `${SITE_URL}${window.location.pathname}`;
+    const currentUrl = `https://dashapatmaja.in${
+      canonical || window.location.pathname
+    }`;
 
     // 2. Meta Description
     setMetaTag('meta[name="description"]', 'name', 'description', description);
@@ -70,7 +55,15 @@ const useSEO = (optsOrTitle, legacyDescription) => {
     }
     canonicalLink.setAttribute('href', currentUrl);
 
-  }, [title, description, canonical, image, type]);
+    let schema = document.querySelector('script[data-dspl-schema]');
+    if (!schema) {
+      schema = document.createElement('script');
+      document.head.appendChild(schema);
+    }
+    schema.type = 'application/ld+json';
+    schema.dataset.dsplSchema = 'organization';
+    schema.textContent = JSON.stringify(structuredData);
+  }, [title, description, canonical, image, type, structuredData]);
 };
 
 export default useSEO;

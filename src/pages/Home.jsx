@@ -10,6 +10,7 @@ import startupKarnatakaLogo from '../assets/startup-karnataka-normalized.png';
 import dstNidhiLogo from '../assets/dst-nidhi-normalized.png';
 import nidhiPrayasLogo from '../assets/nidhi-prayas-normalized.png';
 import useSEO from '../hooks/useSEO';
+import { getRouteMetadata } from '../seo/routeMetadata';
 import { openWorkModal } from '../utils/workModal';
 import './Home.css';
 
@@ -84,10 +85,7 @@ const processSteps = [
 ];
 
 const Home = () => {
-  useSEO(
-    'Dasha Patmaja Services | Branding, Marketing & E-commerce',
-    'Dasha Patmaja Services helps Indian consumer businesses connect brand strategy, go-to-market execution, and e-commerce.',
-  );
+  useSEO(getRouteMetadata('/'));
 
   return (
     <div className="home-page fade-in">

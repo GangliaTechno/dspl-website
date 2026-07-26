@@ -2,12 +2,10 @@ import './Contact.css';
 import { useState } from 'react';
 import { Mail, Phone, MapPin, Send, CheckCircle2, AlertCircle } from 'lucide-react';
 import useSEO from '../hooks/useSEO';
+import { getRouteMetadata } from '../seo/routeMetadata';
 
 const Contact = () => {
-  useSEO(
-    'Contact Us | Dasha Patmaja Services, Manipal',
-    'Talk to Dasha Patmaja Services about branding, marketing, or e-commerce. Based in Manipal, India. Call +91 88619 42440 or email director@dashapatmaja.in.'
-  );
+  useSEO(getRouteMetadata('/contact'));
 
   const [formData, setFormData] = useState({
     firstName: '',
