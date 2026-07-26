@@ -1,61 +1,96 @@
-# DSPL Website - Development Audit & 7-PR Roadmap
+# DSPL website roadmap
 
-This document serves as the master audit and implementation roadmap for **[dashapatmaja.in](https://dashapatmaja.in/)** (`GangliaTechno/dspl-website`).
+Repository: `GangliaTechno/dspl-website`
 
-Working Branch: `pawan/dev` (Branched off `vimal`)
+Current branch: `pawan/raw-radicles-redesign`
 
----
+Current checkout: `E:\For website\dspl website`
 
-## 📊 Overall Roadmap Status
+The branch names listed for phases 1–7 are historical implementation branches,
+not active worktrees.
 
-- [x] **PR 1: Analytics Foundation** (`pawan/analytics-cleanup`)
-- [x] **PR 2: Accessibility Baseline** (`pawan/accessibility-baseline`)
-- [x] **PR 3: SEO Foundation & 404 Route** (`pawan/seo-foundation`)
-- [x] **PR 4: Forms & Privacy** (`pawan/forms-privacy`)
-- [x] **PR 5: Testing & CI Automation** (`pawan/testing-ci`)
-- [x] **PR 6: Performance & Component Refactoring** (`pawan/performance`)
-- [x] **PR 7: Conversion Content & Proof** (`pawan/conversion`)
+## Historical phases
 
----
+### Phase 1: Analytics foundation — completed
 
-## 🎯 Detailed Action Plan per Phase
+Historical branch: `pawan/analytics-cleanup`
 
-### Phase 1: Analytics Foundation (Completed)
-- [x] Remove duplicate GA script tags from `index.html`.
-- [x] Remove redundant inline `ReactGA.initialize` in `src/main.jsx`.
-- [x] Create `src/utils/analytics.js` with `import.meta.env.DEV` mode checks.
-- [x] Create `src/components/AnalyticsTracker.jsx` to track SPA React Router navigation (`useLocation`).
-- [x] Unify lead event tracking in `WorkWithUsModal.jsx` using `trackEvent()`.
+- Centralized GA4 initialization and SPA page-view tracking.
+- Unified Work With Us lead-event tracking.
 
-### Phase 2: Accessibility Baseline (Completed)
-- [x] **Mobile Menu**: Added `aria-expanded`, `aria-controls="mobile-navigation"`, and `Escape` key closing.
-- [x] **Modal Accessibility**: Added `role="dialog"`, `aria-modal="true"`, `aria-labelledby`, and `Escape` key dismissal in `WorkWithUsModal.jsx`.
-- [x] **Keyboard Focus**: Added global `:focus-visible` styling tokens in `src/index.css`.
-- [x] **Form Error Announcements**: Bound `role="alert"` & `aria-live` to feedback elements.
-- [x] **Reduced Motion**: Added `@media (prefers-reduced-motion: reduce)` rules for animations and marquees in `src/index.css`.
+### Phase 2: Accessibility baseline — completed
 
-### Phase 3: SEO & 404 Route (Completed)
-- [x] **Canonical & Social Meta**: Added OpenGraph (`og:*`), Twitter Cards (`twitter:*`), and dynamic canonical URL tags in `src/hooks/useSEO.js`.
-- [x] **Robots & Assets**: Created `public/robots.txt` and stable `public/logo.png` schema image.
-- [x] **404 Route**: Created `src/pages/NotFound.jsx` with quick links & 404 analytics tracking, wired to `<Route path="*" element={<NotFound />} />` in `App.jsx`.
-- [x] **Sitemap**: Updated `public/sitemap.xml` with `<lastmod>` timestamps and change frequencies.
+Historical branch: `pawan/accessibility-baseline`
 
-### Phase 4: Forms & Privacy (Completed)
-- [x] **Privacy Policy & Terms**: Created `src/pages/PrivacyPolicy.jsx` page and footer legal links.
-- [x] **Web3Forms Security**: Added honeypot `botcheck` spam protection in lead forms.
-- [x] **File Upload**: Wired up file selector dropzone, filename display, and remove handler in `WorkWithUsModal.jsx`.
-- [x] **Messaging Consistency**: Aligned response promises to 24 hours across Contact and Footer components.
+- Added mobile navigation state, Escape handling, focus visibility, modal
+  semantics, form announcements, and reduced-motion support.
 
-### Phase 5: Testing & CI Automation (Completed)
-- [x] **GitHub Actions Workflow**: Created `.github/workflows/ci.yml` running Node 20 dependency install, ESLint, Vitest tests, and Vite build on every pull request.
-- [x] **Vitest Framework Setup**: Installed Vitest, React Testing Library, jsdom, and configured `vite.config.js` & `src/test/setup.js`.
-- [x] **Component Unit Tests**: Written and passing unit test suite `src/components/__tests__/Header.test.jsx`.
+### Phase 3: SEO foundation and 404 route — completed
 
-### Phase 6: Performance Refactor (Completed)
-- [x] **Route Lazy Loading**: Implemented `React.lazy()` and `<Suspense>` route-level code splitting in [App.jsx](file:///e:/For%20website/dspl%20website/src/App.jsx).
-- [x] **Bundle Optimization**: Reduced initial JavaScript chunk from 388 kB down to 278 kB with 10 on-demand async route chunks.
-- [x] **Loading Fallback Component**: Built accessible [PageLoader.jsx](file:///e:/For%20website/dspl%20website/src/components/PageLoader.jsx) spinner component.
+Historical branch: `pawan/seo-foundation`
 
-### Phase 7: Conversion Content & Proof (Completed)
-- [x] **Execution Framework**: Added 6-step working process section ("01. Discovery & Audit -> 02. Strategy -> 03. Design -> 04. Launch -> 05. E-Commerce Scale -> 06. Growth") to [Home.jsx](file:///e:/For%20website/dspl%20website/src/pages/Home.jsx).
-- [x] **Incubation Trust Signals**: Highlighted MUTBI & DST-NIDHI incubator affiliations.
+- Added canonical and social metadata, robots and sitemap files, stable schema
+  imagery, and the tracked 404 route.
+
+### Phase 4: Forms and privacy — completed
+
+Historical branch: `pawan/forms-privacy`
+
+- Added privacy and terms content, Web3Forms submissions, honeypot handling,
+  attachment behavior, and consistent response messaging.
+
+### Phase 5: Testing and CI — completed
+
+Historical branch: `pawan/testing-ci`
+
+- Added Vitest, React Testing Library, jsdom, and the GitHub Actions quality
+  gate.
+
+### Phase 6: Performance and component refactoring — completed
+
+Historical branch: `pawan/performance`
+
+- Added route-level lazy loading, an accessible loading fallback, and initial
+  bundle splitting.
+
+### Phase 7: Conversion content and proof — completed
+
+Historical branch: `pawan/conversion`
+
+- Added the six-step execution framework, institutional support marks, owned
+  brand content, and clearer conversion paths.
+
+## Phase 8: Evidence-led site evolution — current
+
+Branch: `pawan/raw-radicles-redesign`
+
+Approved references:
+
+- [Design specification](docs/superpowers/specs/2026-07-26-evidence-led-site-evolution-design.md)
+- [Implementation plan](docs/superpowers/plans/2026-07-26-dspl-evidence-led-site-evolution.md)
+- [Asset cleanup candidates](docs/ASSET_CLEANUP_CANDIDATES.md)
+
+Completed in this phase:
+
+- [x] Central enquiry-modal action with source attribution.
+- [x] Pure, tested lead-form model and missing-configuration retry behavior.
+- [x] Evidence-first homepage in the approved reading order.
+- [x] Static institutional supporter strip without duplicate marquee images.
+- [x] Owned-brand operating proof for Raw Radicles.
+- [x] Shared spacing, radius, shadow, container, focus, and control tokens.
+- [x] Clear CSS ownership with no embedded static `<style>` blocks.
+- [x] Central metadata for all eight public routes.
+- [x] Singleton canonical and Organization JSON-LD behavior.
+- [x] Route-specific prerendered HTML and CI verification.
+- [x] Responsive, high-priority homepage hero image markup.
+- [x] Deletion-free inventory of all 74 source assets.
+- [x] Repository handoff, environment, and deployment documentation.
+
+Remaining release gate:
+
+- [ ] Full automated verification after all commits.
+- [ ] Desktop and mobile browser QA across every public route.
+- [ ] Console, hydration, keyboard, and modal behavior checks.
+- [ ] Review the installed dependency audit and document any accepted risk.
+- [ ] Rotate the historically tracked Web3Forms key.
+- [ ] Deployment remains a separate, explicitly approved action.
