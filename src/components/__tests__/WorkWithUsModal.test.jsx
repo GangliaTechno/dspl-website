@@ -6,6 +6,7 @@ import { openWorkModal } from '../../utils/workModal';
 describe('WorkWithUsModal Component', () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    vi.stubEnv('VITE_WEB3FORMS_ACCESS_KEY', '');
   });
 
   it('opens when open-work-modal event is dispatched and closes on Escape key', () => {
@@ -48,5 +49,29 @@ describe('WorkWithUsModal Component', () => {
 
     // Should show success state without sending network request
     expect(await screen.findByText('Thank You!')).toBeInTheDocument();
+  });
+
+  it('keeps the form open and reports missing Web3Forms configuration', async () => {
+    render(<WorkWithUsModal />);
+    act(() => openWorkModal('test'));
+
+    fireEvent.change(screen.getByLabelText(/Full Name/i), {
+      target: { value: 'Asha Rao' },
+    });
+    fireEvent.change(screen.getByLabelText(/Email Address/i), {
+      target: { value: 'asha@example.test' },
+    });
+    fireEvent.change(screen.getByLabelText(/Phone \/ WhatsApp Number/i), {
+      target: { value: '9876543210' },
+    });
+    fireEvent.click(screen.getByRole('checkbox', { name: 'Branding' }));
+    fireEvent.click(
+      screen.getByRole('button', { name: 'Send My Project Details' }),
+    );
+
+    expect(
+      await screen.findByText(/Web3Forms access key is missing/i),
+    ).toBeInTheDocument();
+    expect(screen.getByRole('dialog')).toBeInTheDocument();
   });
 });

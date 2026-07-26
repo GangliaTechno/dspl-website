@@ -2,26 +2,18 @@ import { useState, useEffect, useRef } from 'react';
 import { X, CheckCircle2, AlertCircle } from 'lucide-react';
 import { trackEvent } from '../utils/analytics';
 import { WORK_MODAL_EVENT } from '../utils/workModal';
+import {
+  classifyLead,
+  createInitialLeadForm,
+  createLeadPayload,
+  validateAttachment,
+  validateLead,
+} from './work-with-us/formModel';
 
 const WorkWithUsModal = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
-  const [formData, setFormData] = useState({
-    fullName: '',
-    companyName: '',
-    email: '',
-    phone: '',
-    website: '',
-    services: [],
-    businessDescription: '',
-    hasOnlinePresence: '',
-    projectGoal: '',
-    referralSource: '',
-    preferredContact: '',
-    fileName: '',
-    newsletterOptIn: false,
-    websiteConfirm: '' // Honeypot field for bot prevention
-  });
+  const [formData, setFormData] = useState(createInitialLeadForm);
 
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
@@ -46,22 +38,7 @@ const WorkWithUsModal = () => {
   }, []);
 
   const handleResetForm = () => {
-    setFormData({
-      fullName: '',
-      companyName: '',
-      email: '',
-      phone: '',
-      website: '',
-      services: [],
-      businessDescription: '',
-      hasOnlinePresence: '',
-      projectGoal: '',
-      referralSource: '',
-      preferredContact: '',
-      fileName: '',
-      newsletterOptIn: false,
-      websiteConfirm: ''
-    });
+    setFormData(createInitialLeadForm());
     setSelectedFile(null);
     setErrors({});
     setSubmitted(false);
@@ -155,8 +132,9 @@ const WorkWithUsModal = () => {
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
-      if (file.size > 5 * 1024 * 1024) {
-        setErrors((prev) => ({ ...prev, file: 'File size exceeds 5MB limit' }));
+      const attachmentError = validateAttachment(file);
+      if (attachmentError) {
+        setErrors((prev) => ({ ...prev, file: attachmentError }));
         return;
       }
       setSelectedFile(file);
@@ -172,42 +150,6 @@ const WorkWithUsModal = () => {
     setFormData((prev) => ({ ...prev, fileName: '' }));
   };
 
-  const validate = () => {
-    const newErrors = {};
-    if (!formData.fullName.trim()) newErrors.fullName = 'Full Name is required';
-    if (!formData.email.trim()) {
-      newErrors.email = 'Email address is required';
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email address';
-    }
-    if (!formData.phone.trim()) {
-      newErrors.phone = 'Phone / WhatsApp number is required';
-    } else if (formData.phone.replace(/[^0-9]/g, '').length < 8) {
-      newErrors.phone = 'Please enter a valid phone number (minimum 8 digits)';
-    }
-    if (formData.services.length === 0) {
-      newErrors.services = 'Please select at least one service';
-    }
-
-    setErrors(newErrors);
-    return newErrors;
-  };
-
-  const categorizeLead = (data) => {
-    const tags = [];
-    let priority = 'NORMAL';
-    let priorityReason = '';
-
-    data.services.forEach(service => tags.push(service));
-    
-    if ((data.companyName && data.website) || (data.projectGoal && (data.projectGoal.toLowerCase().includes('urgent') || data.projectGoal.toLowerCase().includes('asap')))) {
-      priority = 'VIP';
-      priorityReason = 'Established business or urgent timeline';
-    }
-
-    return { tags, priority, priorityReason };
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (formData.websiteConfirm && formData.websiteConfirm.trim() !== '') {
@@ -216,11 +158,12 @@ const WorkWithUsModal = () => {
       return;
     }
 
-    const validationErrors = validate();
+    const validationErrors = validateLead(formData);
+    setErrors(validationErrors);
     const isValid = Object.keys(validationErrors).length === 0;
 
     if (isValid) {
-      const classification = categorizeLead(formData);
+      const classification = classifyLead(formData);
       setProcessedLeadInfo(classification);
       
       setIsSubmitting(true);
@@ -233,27 +176,11 @@ const WorkWithUsModal = () => {
         return;
       }
 
-      const formPayload = new FormData();
-      formPayload.append('access_key', accessKey);
-      formPayload.append('subject', `New Project Lead: ${formData.fullName} - ${formData.companyName || 'No Company'}`);
-      formPayload.append('from_name', formData.fullName);
-      formPayload.append('fullName', formData.fullName);
-      formPayload.append('companyName', formData.companyName || '');
-      formPayload.append('email', formData.email);
-      formPayload.append('phone', formData.phone);
-      formPayload.append('website', formData.website || '');
-      formPayload.append('services', formData.services.join(', '));
-      formPayload.append('businessDescription', formData.businessDescription || '');
-      formPayload.append('hasOnlinePresence', formData.hasOnlinePresence || '');
-      formPayload.append('projectGoal', formData.projectGoal || '');
-      formPayload.append('referralSource', formData.referralSource || '');
-      formPayload.append('preferredContact', formData.preferredContact || '');
-      formPayload.append('newsletterOptIn', formData.newsletterOptIn ? 'Yes' : 'No');
-      formPayload.append('priority', classification.priority);
-
-      if (selectedFile) {
-        formPayload.append('attachment', selectedFile);
-      }
+      const formPayload = createLeadPayload(
+        formData,
+        accessKey,
+        selectedFile,
+      );
 
       try {
         const response = await fetch('https://api.web3forms.com/submit', {
