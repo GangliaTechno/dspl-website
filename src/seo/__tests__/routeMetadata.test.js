@@ -15,7 +15,10 @@ describe('route metadata', () => {
   });
 
   it('contains only verified organization facts', () => {
-    expect(organizationStructuredData['@type']).toBe('Organization');
+    expect(organizationStructuredData['@type']).toEqual([
+      'Organization',
+      'LocalBusiness',
+    ]);
     expect(organizationStructuredData.url).toBe('https://dashapatmaja.in');
     expect(organizationStructuredData.email).toContain(
       'director@dashapatmaja.in',

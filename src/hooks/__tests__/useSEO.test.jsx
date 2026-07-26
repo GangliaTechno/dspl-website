@@ -34,8 +34,9 @@ describe('useSEO', () => {
       'https://dashapatmaja.in/contact',
     );
     expect(schemaScripts).toHaveLength(1);
-    expect(JSON.parse(schemaScripts[0].textContent)['@type']).toBe(
+    expect(JSON.parse(schemaScripts[0].textContent)['@type']).toEqual([
       'Organization',
-    );
+      'LocalBusiness',
+    ]);
   });
 });

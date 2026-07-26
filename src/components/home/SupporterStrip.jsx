@@ -1,7 +1,11 @@
 import { motion } from 'framer-motion';
 
 const SupporterStrip = ({ supporters }) => (
-  <div className="supporter-band" aria-label="Supported by">
+  <div
+    className="supporter-band"
+    role="region"
+    aria-label="Supported by"
+  >
     <motion.div 
       className="supporter-track"
       animate={{ x: ["0%", "-33.333333%"] }}
