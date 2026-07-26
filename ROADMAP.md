@@ -88,9 +88,42 @@ Completed in this phase:
 
 Remaining release gate:
 
-- [ ] Full automated verification after all commits.
-- [ ] Desktop and mobile browser QA across every public route.
-- [ ] Console, hydration, keyboard, and modal behavior checks.
-- [ ] Review the installed dependency audit and document any accepted risk.
+- [x] Full automated verification after all implementation changes.
+- [x] Desktop and mobile browser QA across every public route.
+- [x] Console, hydration, keyboard, and modal behavior checks.
+- [x] Review the installed dependency audit and document any accepted risk.
 - [ ] Rotate the historically tracked Web3Forms key.
 - [ ] Deployment remains a separate, explicitly approved action.
+
+### Release evidence
+
+- `npm run lint`, `npm test`, `npm run build`, and `npm run verify:html`
+  pass from a clean install. The test suite contains 17 passing tests across
+  nine files, and the build emits verified HTML for all eight public routes.
+- Browser QA covered desktop and mobile route rendering, horizontal overflow,
+  headings, metadata singletons, header navigation, the mobile menu, keyboard
+  focus wrapping and restoration, form validation, back-to-top behavior, and
+  fresh-session hydration. No current console warnings or errors remain.
+- Hydration now preloads only the component for the initial pathname so the
+  client begins with the same page markup as the prerendered HTML. Later route
+  navigation continues to use lazy page chunks.
+- `npm audit --omit=dev` reports two high findings through
+  `react-router-dom` for
+  [GHSA-qwww-vcr4-c8h2](https://github.com/advisories/GHSA-qwww-vcr4-c8h2).
+  The advisory explicitly applies only to unstable React Server Components
+  APIs. This repository is a static Vite SPA using `BrowserRouter` and
+  prerendered HTML, with no RSC APIs, server actions, or React Router server
+  runtime, so the vulnerable execution path is not present. The audit finding
+  is accepted for this release; do not apply npm's suggested downgrade to
+  `react-router-dom@7.11.0`. Reassess when a compatible patched 8.3.x migration
+  is planned.
+
+### Deployment drift
+
+The production site at `https://dashapatmaja.in` was inspected read-only on
+2026-07-26. It still serves the earlier homepage structure (`Why work with us`,
+`Three ways we help you grow`, and `Brands we are building`), repeats supporter
+logos in a marquee, embeds four static `<style>` blocks under `#root`, and has
+no canonical link on the homepage. This branch contains the approved
+evidence-led reading order, one static four-logo supporter strip, extracted CSS,
+and route-specific canonical metadata. No deployment was performed.
