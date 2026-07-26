@@ -5,6 +5,8 @@ import ProcessSteps from '../components/home/ProcessSteps';
 import SupporterStrip from '../components/home/SupporterStrip';
 import '../components/home/homeSections.css';
 import rawRadiclesLogo from '../assets/RR_logo embossed_tm.png';
+import homeHeroDesktop from '../assets/dspl_banner.webp';
+import homeHeroMobile from '../assets/dspl_banner-mobile.webp';
 import mutbiLogo from '../assets/mutbi-normalized.png';
 import startupKarnatakaLogo from '../assets/startup-karnataka-normalized.png';
 import dstNidhiLogo from '../assets/dst-nidhi-normalized.png';
@@ -90,6 +92,18 @@ const Home = () => {
   return (
     <div className="home-page fade-in">
       <section className="home-hero">
+        <picture className="home-hero-media" aria-hidden="true">
+          <source media="(max-width: 768px)" srcSet={homeHeroMobile} />
+          <img
+            src={homeHeroDesktop}
+            alt=""
+            width="1545"
+            height="1018"
+            loading="eager"
+            fetchPriority="high"
+            decoding="async"
+          />
+        </picture>
         <div className="container home-hero-layout">
           <div className="home-hero-content">
             <span className="home-hero-kicker">
