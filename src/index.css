@@ -35,7 +35,7 @@
   --shadow-surface: 0 10px 30px -10px rgba(0, 0, 0, 0.06),
     0 1px 3px rgba(0, 0, 0, 0.02);
   --container-width: 1200px;
-  --focus-ring: 3px solid var(--accent);
+  --focus-ring: 3px solid var(--accent-text);
   --font-sans: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --max-width: var(--container-width);

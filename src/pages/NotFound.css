@@ -44,7 +44,7 @@
   background: rgba(255, 255, 255, 0.08);
   padding: 0.2rem 0.5rem;
   border-radius: 4px;
-  color: var(--accent);
+  color: var(--accent-text);
   font-family: monospace;
 }
 
@@ -94,7 +94,7 @@
 .quick-link-card:hover {
   background: rgba(255, 255, 255, 0.08);
   border-color: var(--accent-border-alpha);
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 @media (max-width: 600px) {

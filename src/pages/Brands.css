@@ -67,7 +67,7 @@
 }
 
 .brands-hero-content .section-subtitle {
-  color: var(--accent);
+  color: var(--accent-text);
   font-weight: 700;
   letter-spacing: 0.1em;
   font-size: 0.85rem;

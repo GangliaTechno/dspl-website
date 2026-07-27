@@ -69,7 +69,7 @@
 }
 
 .detail-icon {
-  color: var(--accent);
+  color: var(--accent-text);
   flex-shrink: 0;
   width: 24px;
   height: 24px;
@@ -89,7 +89,7 @@
 }
 
 .detail-info a:hover {
-  color: var(--accent);
+  color: var(--accent-text);
   text-decoration: underline;
 }
 
@@ -165,7 +165,7 @@
 .success-icon {
   width: 60px;
   height: 60px;
-  color: var(--accent-light);
+  color: var(--accent-text);
   margin-bottom: 1.5rem;
 }
 

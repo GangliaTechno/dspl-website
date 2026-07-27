@@ -36,7 +36,7 @@
 .privacy-section h2 {
   font-size: 1.25rem;
   font-weight: 700;
-  color: var(--accent);
+  color: var(--accent-text);
   margin-bottom: 0.75rem;
 }
 
@@ -69,7 +69,7 @@
 }
 
 .contact-info-card a {
-  color: var(--accent);
+  color: var(--accent-text);
   text-decoration: underline;
 }
 

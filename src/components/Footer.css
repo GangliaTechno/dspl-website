@@ -94,8 +94,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 38px;
-  height: 38px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   background: var(--accent-glow);
   border: 1px solid var(--border-color);
@@ -134,7 +134,7 @@
 }
 
 .footer-links a:hover {
-  color: var(--accent);
+  color: var(--accent-text);
   text-decoration: underline;
 }
 
@@ -155,11 +155,11 @@
 }
 
 .contact-item:hover {
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 .contact-icon {
-  color: var(--accent);
+  color: var(--accent-text);
   flex-shrink: 0;
 }
 
@@ -182,14 +182,16 @@
 
 .back-to-top {
   background: none;
+  min-height: 44px;
+  padding: 0.5rem 0;
   border: none;
-  color: var(--accent);
+  color: var(--accent-text);
   cursor: pointer;
   font-weight: 600;
 }
 
 .back-to-top:hover {
-  color: var(--accent-light);
+  color: var(--text-heading);
   text-decoration: underline;
 }
 

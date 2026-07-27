@@ -1,17 +1,23 @@
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 
-const SupporterStrip = ({ supporters }) => (
-  <div
-    className="supporter-band"
-    role="region"
-    aria-label="Supported by"
-  >
-    <motion.div 
-      className="supporter-track"
-      animate={{ x: ["0%", "-33.333333%"] }}
-      transition={{ repeat: Infinity, ease: "linear", duration: 12 }}
+const SupporterStrip = ({ supporters }) => {
+  const prefersReducedMotion = useReducedMotion();
+  const visibleSupporters = prefersReducedMotion
+    ? supporters
+    : [...supporters, ...supporters, ...supporters];
+
+  return (
+    <div
+      className="supporter-band"
+      role="region"
+      aria-label="Supported by"
     >
-      {[...supporters, ...supporters, ...supporters].map(
+      <motion.div
+        className={`supporter-track${prefersReducedMotion ? ' supporter-track-static' : ''}`}
+        animate={prefersReducedMotion ? undefined : { x: ["0%", "-33.333333%"] }}
+        transition={prefersReducedMotion ? undefined : { repeat: Infinity, ease: "linear", duration: 12 }}
+      >
+        {visibleSupporters.map(
         (logo, index) => {
           const isDuplicate = index >= supporters.length;
 
@@ -32,9 +38,10 @@ const SupporterStrip = ({ supporters }) => (
             </div>
           );
         }
-      )}
-    </motion.div>
-  </div>
-);
+        )}
+      </motion.div>
+    </div>
+  );
+};
 
 export default SupporterStrip;

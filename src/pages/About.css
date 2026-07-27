@@ -49,6 +49,7 @@
 }
 
 .about-hero .section-subtitle {
+  color: var(--accent);
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
 }
 
@@ -116,7 +117,7 @@
   border-radius: 4px;
   background: var(--accent-glow);
   border: 1px solid var(--accent-border-alpha);
-  color: var(--accent);
+  color: var(--accent-text);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -149,7 +150,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.15em;
-  color: var(--accent-dark);
+  color: var(--accent-text);
   display: inline-block;
   margin-bottom: 0.75rem;
 }
@@ -237,7 +238,7 @@
   border-radius: 50%;
   background: var(--bg-primary);
   border: 2px solid var(--accent);
-  color: var(--accent);
+  color: var(--accent-text);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -274,7 +275,7 @@
   font-family: var(--font-heading);
   font-size: 1.5rem;
   font-weight: 800;
-  color: var(--accent);
+  color: var(--accent-text);
   margin-bottom: 0.5rem;
 }
 
@@ -374,8 +375,8 @@
   position: absolute;
   bottom: 4px;
   right: 4px;
-  width: 32px;
-  height: 32px;
+  width: 44px;
+  height: 44px;
   background: #ffffff;
   border-radius: 6px;
   display: flex;
@@ -461,7 +462,7 @@
 .member-role {
   font-size: 0.85rem;
   font-weight: 600;
-  color: var(--accent-dark);
+  color: var(--accent-text);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin-top: 8px;
@@ -477,11 +478,23 @@
 }
 
 @media (max-width: 768px) {
+  .about-hero {
+    padding: 5.5rem 0 4.5rem;
+  }
   .about-title {
-    font-size: 2.75rem;
+    font-size: 2.5rem;
+    line-height: 1.08;
   }
   .about-subtitle {
     font-size: 1.4rem;
+  }
+  .about-intro-grid {
+    max-width: 36rem;
+  }
+  .about-intro-text {
+    font-size: 1.05rem;
+    line-height: 1.65;
+    text-wrap: pretty;
   }
   .timeline-container::after {
     left: 2rem;

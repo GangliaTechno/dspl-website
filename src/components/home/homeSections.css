@@ -18,7 +18,16 @@
   gap: var(--supporter-gap);
   padding-right: var(--supporter-gap);
   width: max-content;
+}
+
+.supporter-track:not(.supporter-track-static) {
   will-change: transform;
+}
+
+.supporter-track-static {
+  width: 100%;
+  justify-content: center;
+  padding-right: 0;
 }
 
 .supporter-logo-slot {
@@ -203,6 +212,7 @@
 
 .text-action {
   display: inline-flex;
+  min-height: 44px;
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem 0;

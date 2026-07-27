@@ -168,7 +168,7 @@
   border-radius: 4px;
   background: var(--accent-glow);
   border: 1px solid var(--accent-border-alpha);
-  color: var(--accent);
+  color: var(--accent-text);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -201,7 +201,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.15em;
-  color: var(--accent-dark);
+  color: var(--accent-text);
   display: inline-block;
   margin-bottom: 0.75rem;
 }
