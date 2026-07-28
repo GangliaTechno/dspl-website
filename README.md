@@ -142,6 +142,8 @@ client-side; this repository does not contain a server-owned secret.
   policy.
 - `docs/superpowers/specs/` contains approved design specifications.
 - `docs/superpowers/plans/` contains their implementation plans.
+- `.github/REPOSITORY_SETTINGS.md` records the organization-admin settings
+  required to finish the GitHub setup.
 
 ## Branch and release workflow
 
