@@ -1,6 +1,8 @@
 import { ShoppingCart, HeartHandshake, Layers, CreditCard } from 'lucide-react';
-import ecomBgImg from '../assets/ecom.webp';
-import ecomBgImgMobile from '../assets/ecom-mobile.webp';
+import ecommerceHero960 from '../assets/dspl-ecommerce-hero-960.webp';
+import ecommerceHero1440 from '../assets/dspl-ecommerce-hero-1440.webp';
+import ecommerceHero1600 from '../assets/dspl-ecommerce-hero-1600.webp';
+import ecommerceHeroMobile from '../assets/dspl-ecommerce-hero-mobile.webp';
 import ServicePage from '../components/ServicePage';
 import { getRouteMetadata } from '../seo/routeMetadata';
 
@@ -44,6 +46,15 @@ const Ecommerce = () => {
     }
   ];
 
+  const heroImage = {
+    src: ecommerceHero1440,
+    desktopSrcSet: `${ecommerceHero960} 960w, ${ecommerceHero1440} 1440w, ${ecommerceHero1600} 1600w`,
+    mobileSrc: ecommerceHeroMobile,
+    sizes: '100vw',
+    width: 1600,
+    height: 901,
+  };
+
   return (
     <ServicePage
       seoMetadata={getRouteMetadata('/ecommerce')}
@@ -51,8 +62,7 @@ const Ecommerce = () => {
       heroTitle="E-commerce"
       heroSubtitle="Build a store that loads fast and converts."
       heroDesc="We build and run online stores that turn visitors into buyers. We set up your store, your payments, and your delivery, then improve the steps that lose sales. We sell our own brand this way, so we know what holds up."
-      bgImg={ecomBgImg}
-      bgImgMobile={ecomBgImgMobile}
+      heroImage={heroImage}
       mattersText="An online store is your salesperson that never sleeps. A fast site, a simple checkout, and reliable delivery raise your sales, bring buyers back, and cut the time you spend fixing orders. A small change to a checkout can add real revenue."
       offersTitle="What we offer"
       offersDesc="End-to-end e-commerce work, built for speed, safe payments, and selling in more than one place."

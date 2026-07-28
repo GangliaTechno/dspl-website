@@ -4,13 +4,13 @@ import OwnedBrandProof from '../components/home/OwnedBrandProof';
 import ProcessSteps from '../components/home/ProcessSteps';
 import SupporterStrip from '../components/home/SupporterStrip';
 import '../components/home/homeSections.css';
-import rawRadiclesLogo from '../assets/RR_logo embossed_tm.png';
+import rawRadiclesLogo from '../assets/raw-radicles-logo-cropped.webp';
 import homeHeroDesktop from '../assets/dspl_banner.webp';
 import homeHeroMobile from '../assets/dspl_banner-mobile.webp';
-import mutbiLogo from '../assets/mutbi-normalized.png';
-import startupKarnatakaLogo from '../assets/startup-karnataka-normalized.png';
-import dstNidhiLogo from '../assets/dst-nidhi-normalized.png';
-import nidhiPrayasLogo from '../assets/nidhi-prayas-normalized.png';
+import dstNidhiLogo from '../assets/supporter-dst-nidhi.webp';
+import nidhiPrayasLogo from '../assets/supporter-nidhi-prayas.webp';
+import mutbiLogo from '../assets/supporter-mutbi.webp';
+import startupKarnatakaLogo from '../assets/supporter-startup-karnataka.webp';
 import useSEO from '../hooks/useSEO';
 import { getRouteMetadata } from '../seo/routeMetadata';
 import { openWorkModal } from '../utils/workModal';
@@ -18,13 +18,17 @@ import './Home.css';
 
 const supporters = [
   { src: dstNidhiLogo, alt: 'DST NIDHI', className: 'supporter-logo-dst' },
-  { src: nidhiPrayasLogo, alt: 'NIDHI PRAYAS', className: 'supporter-logo-nidhi1' },
+  { src: nidhiPrayasLogo, alt: 'NIDHI PRAYAS', className: 'supporter-logo-nidhi' },
   {
     src: mutbiLogo,
     alt: 'Manipal Universal Technology Business Incubator',
-    className: 'supporter-logo-1',
+    className: 'supporter-logo-mutbi',
   },
-  { src: startupKarnatakaLogo, alt: 'Startup Karnataka', className: 'supporter-logo-2' },
+  {
+    src: startupKarnatakaLogo,
+    alt: 'Startup Karnataka',
+    className: 'supporter-logo-startup',
+  },
 ];
 
 const services = [
@@ -189,30 +193,7 @@ const Home = () => {
 
       <ProcessSteps steps={processSteps} />
 
-      <OwnedBrandProof
-        logoSrc={rawRadiclesLogo}
-        onEnquire={() => openWorkModal('homepage-owned-brand')}
-      />
-
-      <section className="section home-enquiry" aria-labelledby="enquiry-title">
-        <div className="container home-enquiry-inner">
-          <div>
-            <span className="section-subtitle">Start with context</span>
-            <h2 className="section-title" id="enquiry-title">
-              Tell us where the business needs to move next.
-            </h2>
-          </div>
-          <button
-            type="button"
-            className="btn btn-primary"
-            onClick={() => openWorkModal('homepage-final-callout')}
-            aria-haspopup="dialog"
-          >
-            Share your project
-            <ArrowRight size={16} aria-hidden="true" />
-          </button>
-        </div>
-      </section>
+      <OwnedBrandProof logoSrc={rawRadiclesLogo} />
     </div>
   );
 };

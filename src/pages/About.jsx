@@ -2,22 +2,30 @@ import './About.css';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Calendar, Award, Star, Compass, Target, Eye } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import useSEO from '../hooks/useSEO';
 import { getRouteMetadata } from '../seo/routeMetadata';
 
 import manuImg from '../assets/manu_pro_fixed.jpg';
-import sreeImg from '../assets/sree_pro_fixed.jpg';
+import sreeImg from '../assets/sree_pro_extended.webp';
 import drImg from '../assets/dr_pro.png';
-import balakrishnaImg from '../assets/vice_chairman_pro.png';
+import balakrishnaImg from '../assets/balakrishna_pro_extended.webp';
 import anushaImg from '../assets/Anusha-mam_pro.png';
 import nameshImg from '../assets/ceo_pro.png';
-import aboutHeroImg from '../assets/about_dspl.jpeg';
+import aboutHero960 from '../assets/dspl-about-hero-960.webp';
+import aboutHero1440 from '../assets/dspl-about-hero-1440.webp';
+import aboutHero1600 from '../assets/dspl-about-hero-1600.webp';
+import aboutHeroMobile from '../assets/dspl-about-hero-mobile.webp';
 import teamBgImg from '../assets/linen_concrete_texture.png';
 import dsplImg from '../assets/dspl_img.jpg';
 
 const About = () => {
   const location = useLocation();
+  const prefersReducedMotion = useReducedMotion();
+  const revealInitial = (y) =>
+    prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y };
+  const revealTransition = (base) =>
+    prefersReducedMotion ? { duration: 0.15, ease: 'easeOut' } : base;
 
   useSEO(getRouteMetadata('/about'));
 
@@ -28,28 +36,96 @@ const About = () => {
       const element = document.getElementById(id);
       if (element) {
         setTimeout(() => {
-          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          element.scrollIntoView({
+            behavior: prefersReducedMotion ? 'auto' : 'smooth',
+            block: 'start',
+          });
         }, 100);
       }
     } else {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({
+        top: 0,
+        behavior: prefersReducedMotion ? 'auto' : 'smooth',
+      });
     }
-  }, [location]);
+  }, [location, prefersReducedMotion]);
 
   const team = [
-    { name: 'Dr. Manu Sudhi', role: 'Chairman and Director', initial: 'MS', image: manuImg, linkedin: 'https://www.linkedin.com/in/dr-manu-sudhi-609296167/', objectPosition: 'center 10%', scale: 1.04 },
-    { name: 'Mr. Shreepathy Ranga Bhatta', role: 'Managing Director', initial: 'SR', image: sreeImg, linkedin: 'https://www.linkedin.com/in/shreepathy-ranga-bhatta-b-862a2b24a/', objectPosition: 'center 20%', scale: 1.0 },
-    { name: 'Ms. Anusha Pai', role: 'Director', initial: 'AP', image: anushaImg, linkedin: 'https://www.linkedin.com/in/anusha-pai-013b0213/', objectPosition: 'center 8%', scale: 1.0 },
-    { name: 'Dr. Balakrishna S. Maddodi', role: 'Mentor', initial: 'BM', image: balakrishnaImg, linkedin: 'https://www.linkedin.com/in/dr-balakrishna-srinivas-maddodi-68874218/', objectPosition: 'center 15%', scale: 1.0 },
-    { name: 'Mr. Namesh Malarout', role: 'Director', initial: 'NM', image: nameshImg, linkedin: 'https://www.linkedin.com/in/namesh-malarout-97375697/', objectPosition: 'center 2%', scale: 1.18 },
-    { name: 'Dr. Dasharathraj K Shetty', role: 'Mentor', initial: 'DS', image: drImg, linkedin: 'https://www.linkedin.com/in/dasharathraj/', objectPosition: 'center 12%', scale: 1.0 }
+    {
+      name: 'Dr. Manu Sudhi',
+      role: 'Chairman and Director',
+      initial: 'MS',
+      image: manuImg,
+      linkedin: 'https://www.linkedin.com/in/dr-manu-sudhi-609296167/',
+      objectPosition: 'center',
+      scale: 1.04,
+      transformOrigin: '50% 42%',
+    },
+    {
+      name: 'Mr. Shreepathy Ranga Bhatta',
+      role: 'Managing Director',
+      initial: 'SR',
+      image: sreeImg,
+      linkedin: 'https://www.linkedin.com/in/shreepathy-ranga-bhatta-b-862a2b24a/',
+      objectPosition: 'center',
+      scale: 1.45,
+      transformOrigin: '50% 43%',
+    },
+    {
+      name: 'Ms. Anusha Pai',
+      role: 'Director',
+      initial: 'AP',
+      image: anushaImg,
+      linkedin: 'https://www.linkedin.com/in/anusha-pai-013b0213/',
+      objectPosition: 'center',
+      scale: 1.08,
+      transformOrigin: '50% 40%',
+    },
+    {
+      name: 'Dr. Balakrishna S. Maddodi',
+      role: 'Mentor',
+      initial: 'BM',
+      image: balakrishnaImg,
+      linkedin: 'https://www.linkedin.com/in/dr-balakrishna-srinivas-maddodi-68874218/',
+      objectPosition: 'center',
+      scale: 1.45,
+      transformOrigin: '50% 37%',
+    },
+    {
+      name: 'Mr. Namesh Malarout',
+      role: 'Director',
+      initial: 'NM',
+      image: nameshImg,
+      linkedin: 'https://www.linkedin.com/in/namesh-malarout-97375697/',
+      objectPosition: 'center',
+      scale: 1.9,
+      transformOrigin: '50% 28%',
+    },
+    {
+      name: 'Dr. Dasharathraj K Shetty',
+      role: 'Mentor',
+      initial: 'DS',
+      image: drImg,
+      linkedin: 'https://www.linkedin.com/in/dasharathraj/',
+      objectPosition: 'center',
+      scale: 1.06,
+      transformOrigin: '50% 40%',
+    },
   ];
+
+  const heroImage = {
+    src: aboutHero1440,
+    desktopSrcSet: `${aboutHero960} 960w, ${aboutHero1440} 1440w, ${aboutHero1600} 1600w`,
+    mobileSrc: aboutHeroMobile,
+    sizes: '100vw',
+    width: 1600,
+    height: 901,
+  };
 
   return (
     <div
       className="about-page fade-in"
       style={{
-        '--about-hero-image': `url("${aboutHeroImg}")`,
         '--about-story-image': `url("${dsplImg}")`,
         '--about-team-image': `url("${teamBgImg}")`,
       }}
@@ -62,12 +138,24 @@ const About = () => {
 
       {/* Story Section */}
       <section id="story" className="section about-hero">
-        <div className="about-hero-bg"></div>
+        <picture className="about-hero-bg" aria-hidden="true">
+          <source media="(max-width: 767px)" srcSet={heroImage.mobileSrc} />
+          <source srcSet={heroImage.desktopSrcSet} sizes={heroImage.sizes} />
+          <img
+            className="about-hero-bg-img"
+            src={heroImage.src}
+            alt=""
+            width={heroImage.width}
+            height={heroImage.height}
+            fetchPriority="high"
+            decoding="async"
+          />
+        </picture>
         <motion.div 
           className="container"
-          initial={{ opacity: 0, y: 30 }}
+          initial={revealInitial(30)}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          transition={revealTransition({ duration: 0.8, ease: 'easeOut' })}
         >
           <span className="section-subtitle">Our Corporate Profile</span>
           <h1 className="about-title">About Dasha Patmaja Services</h1>
@@ -85,10 +173,10 @@ const About = () => {
           <h2 className="sr-only">Our Core Values</h2>
           <div className="mission-vision-grid">
             <motion.div 
-              initial={{ opacity: 0, y: 20 }}
+              initial={revealInitial(20)}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6 }}
+              transition={revealTransition({ duration: 0.6 })}
             >
               <div className="mv-card glass">
                 <div className="mv-icon-box">
@@ -102,10 +190,10 @@ const About = () => {
             </motion.div>
 
             <motion.div 
-              initial={{ opacity: 0, y: 20 }}
+              initial={revealInitial(20)}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: 0.15 }}
+              transition={revealTransition({ duration: 0.6, delay: 0.15 })}
             >
               <div className="mv-card glass">
                 <div className="mv-icon-box">
@@ -135,10 +223,10 @@ const About = () => {
           <div className="timeline-container">
             {/* Year 2023 */}
             <motion.div 
-              initial={{ opacity: 0, y: 30 }}
+              initial={revealInitial(30)}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6 }}
+              transition={revealTransition({ duration: 0.6 })}
             >
               <div className="timeline-item">
                 <div className="timeline-badge">
@@ -157,10 +245,10 @@ const About = () => {
 
             {/* Year 2024 */}
             <motion.div 
-              initial={{ opacity: 0, y: 30 }}
+              initial={revealInitial(30)}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6 }}
+              transition={revealTransition({ duration: 0.6 })}
             >
               <div className="timeline-item">
                 <div className="timeline-badge">
@@ -179,10 +267,10 @@ const About = () => {
 
             {/* Year 2025 */}
             <motion.div 
-              initial={{ opacity: 0, y: 30 }}
+              initial={revealInitial(30)}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6 }}
+              transition={revealTransition({ duration: 0.6 })}
             >
               <div className="timeline-item">
                 <div className="timeline-badge">
@@ -202,10 +290,10 @@ const About = () => {
 
             {/* Year 2026 */}
             <motion.div 
-              initial={{ opacity: 0, y: 30 }}
+              initial={revealInitial(30)}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6 }}
+              transition={revealTransition({ duration: 0.6 })}
             >
               <div className="timeline-item">
                 <div className="timeline-badge">
@@ -239,28 +327,15 @@ const About = () => {
             {team.map((member, idx) => (
               <motion.div 
                 key={idx}
-                initial={{ opacity: 0, y: 20 }}
+                initial={revealInitial(20)}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                transition={revealTransition({
+                  duration: 0.5,
+                  delay: idx * 0.1,
+                })}
               >
                 <div className="team-card glass">
-                  <div className="team-avatar-wrapper">
-                  <div className="team-avatar-container">
-                    {member.image ? (
-                      <img
-                        src={member.image}
-                        alt={member.name}
-                        className={`team-avatar-image team-avatar-image-${idx + 1}`}
-                        loading="lazy"
-                        decoding="async"
-                      />
-                    ) : (
-                      <div className={`team-avatar-gradient`}>
-                        <span className="avatar-initial">{member.initial}</span>
-                      </div>
-                    )}
-                  </div>
                   {member.linkedin && (
                     <a
                       href={member.linkedin}
@@ -279,7 +354,33 @@ const About = () => {
                       </svg>
                     </a>
                   )}
-                </div>
+                  <div className="team-avatar-wrapper">
+                    <div
+                      className="team-avatar-container"
+                      style={{
+                        '--avatar-position': member.objectPosition,
+                        '--avatar-scale': member.scale,
+                        '--avatar-origin': member.transformOrigin,
+                        '--avatar-y': member.offsetY || '0px',
+                        '--avatar-background':
+                          member.background || '#f3f1ec',
+                      }}
+                    >
+                      {member.image ? (
+                        <img
+                          src={member.image}
+                          alt={member.name}
+                          className="team-avatar-image"
+                          loading="lazy"
+                          decoding="async"
+                        />
+                      ) : (
+                        <div className="team-avatar-gradient">
+                          <span className="avatar-initial">{member.initial}</span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
                   <h3 className="member-name">{member.name}</h3>
                   <p className="member-role">{member.role}</p>
                 </div>

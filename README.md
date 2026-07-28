@@ -1,20 +1,27 @@
 # Dasha Patmaja Services website
 
-This repository contains the public website for Dasha Patmaja Services Pvt.
-Ltd. (DSPL). It presents DSPL's branding, marketing, and e-commerce services,
-institutional support, working process, and owned-brand operating evidence
-through Raw Radicles.
+[![CI](https://github.com/GangliaTechno/dspl-website/actions/workflows/ci.yml/badge.svg)](https://github.com/GangliaTechno/dspl-website/actions/workflows/ci.yml)
 
-The current product direction is evidence-led: make verified proof easy to
-find, keep the warm cream/black/gold identity, and avoid unsupported outcome
-claims.
+This repository contains the public website for Dasha Patmaja Services Pvt.
+Ltd. (DSPL), an Indian brand-building company providing branding, marketing,
+and e-commerce services.
+
+The site presents DSPL's institutional support, coordinated working process,
+service capabilities, leadership, and owned-brand operating evidence through
+Raw Radicles. Its current direction is evidence-led: make verified proof easy
+to find, retain the warm cream, black, and gold identity, and avoid unsupported
+outcome claims.
+
+- Website: [dashapatmaja.in](https://dashapatmaja.in)
+- Security reports: see [SECURITY.md](SECURITY.md)
+- Contribution workflow: see [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## Public routes
 
 | Route | Purpose |
 |---|---|
 | `/` | Evidence-led overview, coordinated services, process, and owned-brand proof |
-| `/about` | Company story, milestones, and team |
+| `/about` | Company story, milestones, and leadership |
 | `/brands` | Raw Radicles and the owned-brand pipeline |
 | `/marketing` | Marketing, SEO, paid media, analytics, and content services |
 | `/branding` | Brand strategy, identity, story, and design systems |
@@ -23,24 +30,37 @@ claims.
 | `/privacy` | Privacy policy and terms |
 | all other paths | Accessible 404 page |
 
-The eight public routes are prerendered into route-specific HTML at build time.
-The client then hydrates that markup and continues as a React application.
+The eight public routes are prerendered into route-specific HTML during the
+production build. The client then hydrates that markup and continues as a React
+application.
+
+## Technology
+
+- React 19
+- React Router
+- Vite with route prerendering
+- Vitest and React Testing Library
+- ESLint
+- Framer Motion
+- Web3Forms and Google Analytics 4 integrations
 
 ## Requirements
 
 - Node.js `^20.19.0` or `>=22.12.0`
 - npm
 
-## Local setup
+## Local development
 
 ```powershell
+git clone https://github.com/GangliaTechno/dspl-website.git
+Set-Location dspl-website
 npm ci
 Copy-Item .env.example .env
 npm run dev
 ```
 
-Vite serves the development site on the configured local port (currently
-`5174`).
+Vite serves the development site on the configured local port, currently
+`5174`.
 
 ## Environment variables
 
@@ -50,8 +70,8 @@ Vite serves the development site on the configured local port (currently
 | `VITE_GA_MEASUREMENT_ID` | Google Analytics 4 measurement ID |
 
 Copy `.env.example` to `.env` and set local values there. Never commit `.env`
-or place private server credentials in any `VITE_*` variable: Vite variables
-are compiled into browser-visible JavaScript.
+or place private server credentials in a `VITE_*` variable: Vite variables are
+compiled into browser-visible JavaScript.
 
 Credential note: `.env` was historically tracked in this repository. Removing
 it from current tracking does not erase Git history. Treat the historical
@@ -69,7 +89,7 @@ Web3Forms key as exposed and rotate it in Web3Forms before production use.
 | `npm run verify:html` | Validate headings, unique titles, canonicals, and JSON-LD in built route HTML |
 | `npm run preview` | Preview the production build locally |
 
-Run the production gate with:
+Run the complete local quality gate before review:
 
 ```powershell
 npm run lint
@@ -78,7 +98,9 @@ npm run build
 npm run verify:html
 ```
 
-`verify:html` expects a fresh `dist`, so run it after `npm run build`.
+`verify:html` expects a fresh `dist`, so run it after `npm run build`. GitHub
+Actions runs the same gate for pushes to `main` and `pawan/**`, and for pull
+requests targeting `main`.
 
 ## Architecture
 
@@ -89,7 +111,7 @@ npm run verify:html
   head elements to `vite-prerender-plugin`.
 - `src/seo/routeMetadata.js` is the canonical route-title, description,
   canonical-path, and Organization-schema source.
-- `src/hooks/useSEO.js` updates one canonical link and one JSON-LD script
+- `src/hooks/useSEO.js` maintains a single canonical link and JSON-LD script
   during client navigation.
 - Pages and components import their owning CSS files. Shared tokens and
   controls live in `src/index.css`.
@@ -107,24 +129,34 @@ npm run verify:html
    without a network request.
 
 The contact page has a separate shorter Web3Forms form. Both flows are
-client-side; there is no server-owned secret in this repository.
+client-side; this repository does not contain a server-owned secret.
 
-## Product and design ownership
+## Product and design documentation
 
 - `PRODUCT.md` defines audience, product purpose, positioning, proof, and
   conversion intent.
 - `DESIGN.md` defines the warm institutional visual system and anti-patterns.
-- `docs/superpowers/specs/2026-07-26-evidence-led-site-evolution-design.md`
-  records the approved evidence-led evolution.
-- `docs/superpowers/plans/2026-07-26-dspl-evidence-led-site-evolution.md`
-  is the implementation plan.
-- `docs/ASSET_CLEANUP_CANDIDATES.md` is the deletion-free asset inventory.
+- `ROADMAP.md` records completed phases, current release evidence, and
+  deployment status.
+- `docs/ASSET_CLEANUP_CANDIDATES.md` records the media inventory and cleanup
+  policy.
+- `docs/superpowers/specs/` contains approved design specifications.
+- `docs/superpowers/plans/` contains their implementation plans.
 
-## Deployment assumptions
+## Branch and release workflow
 
-Deploy the generated `dist` directory to a static host at the domain root.
-The host should serve an existing route file such as
-`/about/index.html` before applying the SPA fallback.
+`main` is the approval branch. Changes are developed on a named feature branch,
+verified locally and in CI, reviewed in a pull request, and merged only after
+approval. A merge does not itself authorize deployment.
+
+Do not commit generated `dist`, local `.env`, `node_modules`, Graphify output,
+or local visual-design companion state.
+
+## Deployment
+
+Deploy the generated `dist` directory to a static host at the domain root. The
+host should serve an existing route file such as `/about/index.html` before
+applying the SPA fallback.
 
 `public/_redirects` contains:
 
@@ -132,26 +164,8 @@ The host should serve an existing route file such as
 /* /index.html 200
 ```
 
-That rule supports direct navigation to unknown client routes on hosts using
+This supports direct navigation to unknown client routes on hosts using
 Netlify-style redirects. Confirm equivalent file-first fallback behavior when
-using another host. Canonical metadata assumes
-`https://dashapatmaja.in`.
+using another host. Canonical metadata assumes `https://dashapatmaja.in`.
 
-## Current checkout and worktrees
-
-The active checkout is:
-
-- path: `E:\For website\dspl website`
-- branch: `pawan/raw-radicles-redesign`
-
-Confirm current state with:
-
-```powershell
-git status --short
-git branch --show-current
-git worktree list
-```
-
-Do not create another checkout for this same branch. If isolated work is
-needed later, create a new `codex/`-prefixed branch and worktree after checking
-the current worktree list.
+Deployment remains a separate, explicitly approved action.

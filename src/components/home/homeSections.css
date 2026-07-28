@@ -9,15 +9,41 @@
   padding-block: 12px;
   background: transparent;
   border: 0;
-  --supporter-gap: 6rem;
+  --supporter-gap: 2.25rem;
+  --supporter-logo-height: 2.25rem;
+  --supporter-slot-height: 3.5rem;
+  --supporter-sequence-min-width: max-content;
+  --supporter-edge-fade: clamp(4rem, 8vw, 9rem);
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 var(--supporter-edge-fade),
+    #000 calc(100% - var(--supporter-edge-fade)),
+    transparent
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 var(--supporter-edge-fade),
+    #000 calc(100% - var(--supporter-edge-fade)),
+    transparent
+  );
 }
 
 .supporter-track {
   display: flex;
   align-items: center;
-  gap: var(--supporter-gap);
-  padding-right: var(--supporter-gap);
   width: max-content;
+}
+
+.supporter-sequence {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: flex-start;
+  min-width: var(--supporter-sequence-min-width);
+  gap: var(--supporter-gap);
+  padding-inline: calc(var(--supporter-gap) / 2);
 }
 
 .supporter-track:not(.supporter-track-static) {
@@ -25,6 +51,11 @@
 }
 
 .supporter-track-static {
+  width: 100%;
+  justify-content: center;
+}
+
+.supporter-track-static .supporter-sequence {
   width: 100%;
   justify-content: center;
   padding-right: 0;
@@ -35,18 +66,21 @@
   flex: 0 0 auto;
   align-items: center;
   justify-content: center;
-  height: 65px;
+  width: var(--supporter-slot-width, 12rem);
+  height: var(--supporter-slot-height);
 }
 
 .supporter-logo {
   display: block;
   width: auto;
   max-width: 100%;
-  height: 40px; /* Fallback height */
-  max-height: 40px;
+  height: var(--supporter-logo-height);
+  max-height: none;
   object-fit: contain;
+  object-position: center;
+  transform: translateY(var(--supporter-y, 0));
   filter: brightness(0) invert(1);
-  opacity: 0.5;
+  opacity: var(--supporter-logo-opacity, 0.5);
   image-rendering: auto;
   backface-visibility: hidden;
   transition: opacity 0.3s ease;
@@ -56,37 +90,70 @@
   opacity: 1;
 }
 
-/* Optical Sizing - visually balances square vs wide logos */
-.supporter-logo-dst .supporter-logo {
-  height: 34px;
+.supporter-logo-dst {
+  --supporter-slot-width: 10rem;
+  --supporter-logo-height: 2.5rem;
+  --supporter-y: -3px;
 }
 
-.supporter-logo-nidhi1 .supporter-logo {
-  height: 46px;
-  transform: translateY(-6px);
+.supporter-logo-nidhi {
+  --supporter-slot-width: 6rem;
+  --supporter-logo-height: 3.25rem;
+  --supporter-y: -10px;
 }
 
-.supporter-logo-1 .supporter-logo {
-  height: 36px; 
+.supporter-logo-mutbi {
+  --supporter-slot-width: 16.5rem;
+  --supporter-logo-opacity: 0.65;
 }
 
-.supporter-logo-2 .supporter-logo {
-  height: 28px;
+.supporter-logo-startup {
+  --supporter-slot-width: 16rem;
 }
 
 @media (max-width: 768px) {
   .supporter-band {
     bottom: 2.5rem;
     padding-block: 8px;
-    --supporter-gap: 2.5rem;
+    --supporter-gap: 1.75rem;
+    --supporter-logo-height: 1.75rem;
+    --supporter-slot-height: 3rem;
+    --supporter-sequence-min-width: max-content;
+    --supporter-edge-fade: 2.5rem;
   }
-  .supporter-logo-slot {
-    height: 48px;
+
+  .supporter-sequence {
+    justify-content: flex-start;
   }
-  .supporter-logo-dst .supporter-logo { height: 28px; }
-  .supporter-logo-nidhi1 .supporter-logo { height: 36px; }
-  .supporter-logo-1 .supporter-logo { height: 30px; }
-  .supporter-logo-2 .supporter-logo { height: 22px; }
+
+  .supporter-logo-dst {
+    --supporter-slot-width: 7.25rem;
+    --supporter-logo-height: 2rem;
+  }
+
+  .supporter-logo-nidhi {
+    --supporter-slot-width: 4.5rem;
+    --supporter-logo-height: 2.5rem;
+    --supporter-y: -5px;
+  }
+
+  .supporter-logo-mutbi {
+    --supporter-slot-width: 12.5rem;
+  }
+
+  .supporter-logo-startup {
+    --supporter-slot-width: 12rem;
+  }
+
+  .supporter-track-static .supporter-sequence {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .supporter-track-static .supporter-logo-slot {
+    width: 4.75rem;
+    height: 2rem;
+  }
 }
 
 .process-section {
@@ -144,8 +211,9 @@
 
 .owned-brand-section {
   overflow: hidden;
-  background: var(--bg-dark, #111111); /* Dark canvas for brand showcase */
-  color: #fff; /* White text on dark background */
+  background: var(--bg-secondary);
+  color: var(--text-heading);
+  border-block: 1px solid var(--border-color);
 }
 
 .owned-brand-layout {
@@ -158,38 +226,39 @@
 .owned-brand-visual {
   position: relative;
   display: grid;
-  min-height: 25rem;
+  width: min(28rem, 100%);
+  aspect-ratio: 1;
+  justify-self: center;
   place-items: center;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  background: var(--bg-tertiary);
 }
 
 .owned-brand-glow {
   position: absolute;
-  width: min(25rem, 80%);
+  width: min(25rem, 88%);
   aspect-ratio: 1;
-  border: 1px solid rgba(229, 175, 34, 0.3);
+  border: 1px solid var(--accent-border-alpha);
   border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    rgba(229, 175, 34, 0.18),
-    transparent 68%
-  );
+  background: transparent;
 }
 
 .owned-brand-logo {
   position: relative;
-  width: min(18rem, 70%);
+  width: min(21rem, 76%);
   height: auto;
-  filter: drop-shadow(0 1.5rem 2rem rgba(0, 0, 0, 0.4));
 }
 
 .owned-brand-content .section-title {
-  color: #fff; /* White text on dark brand section */
+  color: var(--text-heading);
   font-size: clamp(2.75rem, 6vw, 5rem);
 }
 
 .owned-brand-tagline {
   margin-bottom: 1.25rem;
-  color: var(--accent);
+  color: var(--accent-text);
   font-family: var(--font-heading);
   font-size: 1.15rem;
   font-weight: 700;
@@ -198,7 +267,7 @@
 .owned-brand-description {
   max-width: 38rem;
   margin-bottom: 2rem;
-  color: rgba(255, 255, 255, 0.72);
+  color: var(--text-secondary);
   font-size: 1.05rem;
   line-height: 1.75;
 }
@@ -218,14 +287,14 @@
   padding: 0.5rem 0;
   border: 0;
   background: transparent;
-  color: #fff;
+  color: var(--text-heading);
   font-family: var(--font-heading);
   font-weight: 700;
   cursor: pointer;
 }
 
 .text-action:hover {
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 @media (max-width: 900px) {
@@ -252,7 +321,7 @@
   }
 
   .owned-brand-visual {
-    min-height: 18rem;
+    width: min(22rem, 100%);
   }
 }
 

@@ -3,7 +3,7 @@ import { ArrowRight, Sparkles, Cookie } from 'lucide-react';
 import { motion, useReducedMotion } from 'framer-motion';
 import useSEO from '../hooks/useSEO';
 import { getRouteMetadata } from '../seo/routeMetadata';
-import rawRadiclesLogo from '../assets/RR_logo embossed_tm.png';
+import rawRadiclesLogo from '../assets/raw-radicles-logo-cropped.webp';
 import brandHeroStudio from '../assets/brands-hero-studio.webp';
 import pipelineBgImg from '../assets/brands_pipeline_bg.jpg';
 import { openWorkModal } from '../utils/workModal';
@@ -113,7 +113,7 @@ const Brands = () => {
                   </div>
 
                   <div className="brand-cta-block">
-                    <a href="mailto:director@dashapatmaja.in?subject=Raw%20Radicles%20Inquiry" className="btn rr-cta-btn">
+                    <a href="mailto:director@dashapatmaja.in?subject=Raw%20Radicles%20Inquiry" className="btn btn-primary rr-cta-btn">
                       Enquire about Raw Radicles <ArrowRight size={16} />
                     </a>
                   </div>

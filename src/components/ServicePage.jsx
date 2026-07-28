@@ -1,6 +1,8 @@
 import './ServicePage.css';
+import { ArrowRight } from 'lucide-react';
 import useSEO from '../hooks/useSEO';
 import FAQAccordion from './FAQAccordion';
+import { openWorkModal } from '../utils/workModal';
 
 const ServicePage = ({ 
   seoMetadata,
@@ -59,6 +61,14 @@ const ServicePage = ({
           <p className="domain-description">
             {heroDesc}
           </p>
+          <button
+            type="button"
+            className="btn btn-primary domain-cta"
+            onClick={() => openWorkModal(`${pageTypeClass}-hero`)}
+          >
+            Discuss your next stage
+            <ArrowRight size={18} aria-hidden="true" />
+          </button>
         </div>
       </section>
 

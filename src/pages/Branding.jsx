@@ -1,5 +1,8 @@
 import { Sparkles, Compass, BookOpen, ShieldCheck } from 'lucide-react';
-import brandingBgImg from '../assets/brand_hero.jpg';
+import brandingHero960 from '../assets/dspl-branding-hero-960.webp';
+import brandingHero1440 from '../assets/dspl-branding-hero-1440.webp';
+import brandingHero1600 from '../assets/dspl-branding-hero-1600.webp';
+import brandingHeroMobile from '../assets/dspl-branding-hero-mobile.webp';
 import ServicePage from '../components/ServicePage';
 import { getRouteMetadata } from '../seo/routeMetadata';
 
@@ -44,6 +47,15 @@ const Branding = () => {
     }
   ];
 
+  const heroImage = {
+    src: brandingHero1440,
+    desktopSrcSet: `${brandingHero960} 960w, ${brandingHero1440} 1440w, ${brandingHero1600} 1600w`,
+    mobileSrc: brandingHeroMobile,
+    sizes: '100vw',
+    width: 1600,
+    height: 901,
+  };
+
   return (
     <ServicePage
       seoMetadata={getRouteMetadata('/branding')}
@@ -51,7 +63,7 @@ const Branding = () => {
       heroTitle="Branding"
       heroSubtitle="Build a name customers trust and remember."
       heroDesc="We build the parts of your brand that make customers choose you: your name, identity, voice, and story. We did this for Raw Radicles. We can do it for you."
-      bgImg={brandingBgImg}
+      heroImage={heroImage}
       mattersText="Anyone can copy your product. No one can copy your brand. A clear brand sets you apart, earns trust fast, and lets you charge a fair price. It is the reason a customer picks you again and tells a friend."
       offersTitle="What we offer"
       offersDesc="A full set of brand work to define your business, from the first logo to the last template."

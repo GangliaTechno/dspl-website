@@ -1,44 +1,107 @@
+import { useLayoutEffect, useRef, useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 
 const SupporterStrip = ({ supporters }) => {
   const prefersReducedMotion = useReducedMotion();
-  const visibleSupporters = prefersReducedMotion
-    ? supporters
-    : [...supporters, ...supporters, ...supporters];
+  const bandRef = useRef(null);
+  const sequenceRef = useRef(null);
+  const [marqueeMetrics, setMarqueeMetrics] = useState({
+    sequenceWidth: 0,
+    sequenceCount: 2,
+  });
+
+  useLayoutEffect(() => {
+    const band = bandRef.current;
+    const sequence = sequenceRef.current;
+
+    if (!band || !sequence) {
+      return undefined;
+    }
+
+    const measure = () => {
+      const bandWidth = band.getBoundingClientRect().width;
+      const sequenceWidth = sequence.getBoundingClientRect().width;
+
+      if (bandWidth <= 0 || sequenceWidth <= 0) {
+        return;
+      }
+
+      const sequenceCount = Math.max(
+        2,
+        Math.ceil(bandWidth / sequenceWidth) + 1,
+      );
+
+      setMarqueeMetrics((current) => {
+        if (
+          current.sequenceWidth === sequenceWidth
+          && current.sequenceCount === sequenceCount
+        ) {
+          return current;
+        }
+
+        return { sequenceWidth, sequenceCount };
+      });
+    };
+
+    measure();
+
+    if (typeof ResizeObserver === 'undefined') {
+      return undefined;
+    }
+
+    const observer = new ResizeObserver(measure);
+    observer.observe(band);
+    observer.observe(sequence);
+
+    return () => observer.disconnect();
+  }, [supporters]);
+
+  const sequenceWidth = marqueeMetrics.sequenceWidth;
+  const sequenceCount = prefersReducedMotion
+    ? 1
+    : marqueeMetrics.sequenceCount;
+  const shouldAnimate = !prefersReducedMotion && sequenceWidth > 0;
 
   return (
     <div
+      ref={bandRef}
       className="supporter-band"
       role="region"
       aria-label="Supported by"
     >
       <motion.div
         className={`supporter-track${prefersReducedMotion ? ' supporter-track-static' : ''}`}
-        animate={prefersReducedMotion ? undefined : { x: ["0%", "-33.333333%"] }}
-        transition={prefersReducedMotion ? undefined : { repeat: Infinity, ease: "linear", duration: 12 }}
-      >
-        {visibleSupporters.map(
-        (logo, index) => {
-          const isDuplicate = index >= supporters.length;
-
-          return (
-            <div
-              key={`${logo.alt}-${index}`}
-              className={`supporter-logo-slot ${logo.className || ''}`}
-              aria-hidden={isDuplicate ? "true" : undefined}
-            >
-              <img
-                src={logo.src}
-                alt={isDuplicate ? "" : logo.alt}
-                className="supporter-logo"
-                loading="eager"
-                decoding="async"
-                draggable="false"
-              />
-            </div>
-          );
+        animate={shouldAnimate ? { x: [0, -sequenceWidth] } : undefined}
+        transition={
+          shouldAnimate
+            ? { repeat: Infinity, ease: "linear", duration: 24 }
+            : undefined
         }
-        )}
+      >
+        {Array.from({ length: sequenceCount }, (_, sequenceIndex) => (
+          <div
+            ref={sequenceIndex === 0 ? sequenceRef : undefined}
+            className="supporter-sequence"
+            key={`supporter-sequence-${sequenceIndex}`}
+            aria-hidden={sequenceIndex > 0 ? 'true' : undefined}
+          >
+            {supporters.map((logo) => (
+              <div
+                className={`supporter-logo-slot ${logo.className || ''}`}
+                key={`${logo.alt}-${sequenceIndex}`}
+              >
+                <img
+                  src={logo.src}
+                  alt={sequenceIndex > 0 ? '' : logo.alt}
+                  className="supporter-logo"
+                  loading="eager"
+                  decoding="async"
+                  draggable="false"
+                />
+              </div>
+            ))}
+          </div>
+        ))}
       </motion.div>
     </div>
   );

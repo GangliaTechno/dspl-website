@@ -5,7 +5,7 @@
 
 .home-hero {
   position: relative;
-  min-height: 42rem;
+  min-height: max(42rem, calc(100svh - 4.5rem));
   display: grid;
   align-items: center;
   overflow: hidden;
@@ -44,7 +44,8 @@
   grid-template-columns: minmax(0, 1.45fr) minmax(17rem, 0.55fr);
   align-items: end;
   gap: clamp(3rem, 8vw, 8rem);
-  padding-block: clamp(6rem, 12vw, 10rem);
+  padding-block: clamp(4.75rem, 9vw, 7.5rem)
+    clamp(7.25rem, 13vw, 10rem);
 }
 
 .home-hero-content {
@@ -64,12 +65,12 @@
 
 .hero-title {
   margin-bottom: 1.75rem;
-  color: #fff; /* white on dark hero image */
+  color: #fff;
   font-family: var(--font-heading);
-  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-size: clamp(3rem, 5.5vw, 4.75rem);
   font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 1.05;
+  letter-spacing: -0.035em;
+  line-height: 1.02;
   text-wrap: balance;
 }
 
@@ -78,11 +79,11 @@
 }
 
 .hero-subhead {
-  max-width: 43rem;
+  max-width: 45rem;
   margin-bottom: 2.5rem;
-  color: rgba(255, 255, 255, 0.76);
-  font-size: clamp(1.05rem, 2vw, 1.25rem);
-  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: clamp(1.1rem, 1.6vw, 1.375rem);
+  line-height: 1.58;
 }
 
 .hero-ctas {
@@ -202,27 +203,25 @@
   color: var(--text-heading);
 }
 
-.home-enquiry {
-  background: var(--card-bg);
-}
+@media (min-width: 1200px) {
+  .home-hero-layout {
+    grid-template-columns: minmax(0, 1fr) 17.5rem;
+    gap: 2.5rem;
+  }
 
-.home-enquiry-inner {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: center;
-  gap: 3rem;
-  padding-block: 1rem;
-}
+  .home-hero-content {
+    max-width: none;
+  }
 
-.home-enquiry .section-title {
-  max-width: 50rem;
-  margin-bottom: 0;
+  .accent-text {
+    display: block;
+    white-space: nowrap;
+  }
 }
 
 @media (max-width: 900px) {
   .home-hero-layout,
-  .services-intro,
-  .home-enquiry-inner {
+  .services-intro {
     grid-template-columns: 1fr;
   }
 
@@ -262,7 +261,7 @@
   }
 
   .home-hero-layout {
-    padding-block: 6rem;
+    padding-block: 4.75rem 7.25rem;
   }
 
   .hero-title {
@@ -272,8 +271,7 @@
 
 @media (max-width: 520px) {
   .hero-ctas,
-  .hero-ctas .btn,
-  .home-enquiry .btn {
+  .hero-ctas .btn {
     width: 100%;
   }
 

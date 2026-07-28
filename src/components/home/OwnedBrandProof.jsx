@@ -1,7 +1,7 @@
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-const OwnedBrandProof = ({ logoSrc, onEnquire }) => (
+const OwnedBrandProof = ({ logoSrc }) => (
   <section
     className="section owned-brand-section"
     aria-labelledby="owned-brand-title"
@@ -34,14 +34,6 @@ const OwnedBrandProof = ({ logoSrc, onEnquire }) => (
           <Link to="/brands#raw-radicles" className="btn btn-primary">
             See the brand <ArrowRight size={16} aria-hidden="true" />
           </Link>
-          <button
-            type="button"
-            className="text-action"
-            onClick={onEnquire}
-            aria-haspopup="dialog"
-          >
-            Build with us <ArrowRight size={15} aria-hidden="true" />
-          </button>
         </div>
       </div>
     </div>

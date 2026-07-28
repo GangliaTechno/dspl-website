@@ -210,23 +210,10 @@
 }
 
 .rr-cta-btn {
-  background-color: #111111;
-  color: #ffffff;
-  border: 1px solid #111111;
-  padding: 0.85rem 2rem;
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  border-radius: 4px;
   text-decoration: none;
-}
-
-.rr-cta-btn:hover, .rr-cta-btn:focus-visible {
-  background-color: var(--accent);
-  color: #111111;
-  border-color: var(--accent);
 }
 
 .rr-cta-btn:focus-visible {
@@ -237,13 +224,14 @@
 /* Right Visual Panel */
 .rr-visual-panel {
   position: relative;
-  background: #111111;
+  background: var(--bg-tertiary);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   padding: 2rem;
+  border-left: 1px solid var(--border-color);
 }
 
 
@@ -255,8 +243,9 @@
   transform: translate(-50%, -50%);
   width: 70%;
   padding-bottom: 70%;
+  border: 1px solid var(--accent-border-alpha);
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(245, 168, 0, 0.15) 0%, transparent 60%);
+  background: transparent;
   pointer-events: none;
   z-index: 2;
 }
@@ -266,7 +255,6 @@
   z-index: 3;
   width: 100%;
   max-width: 460px;
-  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
 }
 
 .brand-showcase-logo-img {
@@ -401,6 +389,8 @@
   .rr-visual-panel {
     padding: 2.5rem;
     min-height: 300px;
+    border-top: 1px solid var(--border-color);
+    border-left: 0;
   }
 
   .brand-info-side {

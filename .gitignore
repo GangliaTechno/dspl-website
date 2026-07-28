@@ -29,3 +29,6 @@ dist-ssr
 # Graphify
 graphify-out/
 
+# Local visual-design companion
+.superpowers/
+
