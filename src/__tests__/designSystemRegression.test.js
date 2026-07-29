@@ -57,6 +57,29 @@ describe('approved design-system corrections', () => {
     );
   });
 
+  it('keeps the shared header geometry stable while scrolling', () => {
+    const header = readSource('src/components/Header.css');
+    const headerPage = readSource('src/components/Header.jsx');
+
+    expect(header).toMatch(
+      /\.header-container\s*{[^}]*min-height:\s*76px;[^}]*padding:\s*0 1\.5rem;/s,
+    );
+    expect(header).toMatch(
+      /\.logo-image\s*{[^}]*height:\s*48px;/s,
+    );
+    expect(header).toMatch(
+      /@media\s*\(max-width:\s*900px\)\s*{[\s\S]*?\.header-container\s*{[^}]*min-height:\s*72px;[\s\S]*?\.logo-image\s*{[^}]*height:\s*44px;/s,
+    );
+    expect(header).not.toContain('.header-scrolled .header-container');
+    expect(header).not.toContain('.header-scrolled .logo-image');
+    expect(header).toMatch(
+      /@media\s*\(prefers-reduced-motion:\s*reduce\)\s*{[\s\S]*?\.header,[\s\S]*?\.logo-image\s*{[^}]*transition:\s*none;/s,
+    );
+    expect(headerPage).toContain(
+      "window.addEventListener('scroll', handleScroll, { passive: true })",
+    );
+  });
+
   it('keeps the desktop Home hero at least one available viewport tall', () => {
     const home = readSource('src/pages/Home.css');
 
