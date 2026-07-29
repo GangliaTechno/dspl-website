@@ -84,7 +84,10 @@ describe('approved design-system corrections', () => {
     const home = readSource('src/pages/Home.css');
 
     expect(home).toMatch(
-      /\.home-hero\s*{[^}]*min-height:\s*max\(42rem,\s*calc\(100svh\s*-\s*4\.5rem\)\);/s,
+      /\.home-page\s*{[^}]*padding-top:\s*4\.75rem;/s,
+    );
+    expect(home).toMatch(
+      /\.home-hero\s*{[^}]*min-height:\s*max\(42rem,\s*calc\(100svh\s*-\s*4\.75rem\)\);/s,
     );
     expect(home).toMatch(
       /@media\s*\(max-width:\s*768px\)\s*{[\s\S]*?\.home-hero\s*{[^}]*min-height:\s*auto;/s,
@@ -124,6 +127,23 @@ describe('approved design-system corrections', () => {
     expect(homePage).not.toContain('Start with context');
     expect(homePage).not.toContain('Share your project');
     expect(home).not.toContain('.home-enquiry');
+  });
+
+  it('uses original responsive editorial imagery for Home and Marketing', () => {
+    const homePage = readSource('src/pages/Home.jsx');
+    const marketingPage = readSource('src/pages/Marketing.jsx');
+
+    expect(homePage).toContain('dspl-home-editorial-960.webp');
+    expect(homePage).toContain('dspl-home-editorial-1440.webp');
+    expect(homePage).toContain('dspl-home-editorial-1920.webp');
+    expect(homePage).toContain('dspl-home-editorial-mobile.webp');
+    expect(homePage).not.toContain('dspl_banner.webp');
+    expect(homePage).not.toContain('dspl_banner-mobile.webp');
+    expect(marketingPage).toContain('dspl-marketing-editorial-960.webp');
+    expect(marketingPage).toContain('dspl-marketing-editorial-1440.webp');
+    expect(marketingPage).toContain('dspl-marketing-editorial-1920.webp');
+    expect(marketingPage).toContain('dspl-marketing-editorial-mobile.webp');
+    expect(marketingPage).not.toContain('Marketing_hero_section');
   });
 
   it('keeps the owned-brand section focused on its distinct brand action', () => {

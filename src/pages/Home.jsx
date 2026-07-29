@@ -5,8 +5,10 @@ import ProcessSteps from '../components/home/ProcessSteps';
 import SupporterStrip from '../components/home/SupporterStrip';
 import '../components/home/homeSections.css';
 import rawRadiclesLogo from '../assets/raw-radicles-logo-cropped.webp';
-import homeHeroDesktop from '../assets/dspl_banner.webp';
-import homeHeroMobile from '../assets/dspl_banner-mobile.webp';
+import homeHero960 from '../assets/dspl-home-editorial-960.webp';
+import homeHero1440 from '../assets/dspl-home-editorial-1440.webp';
+import homeHero1920 from '../assets/dspl-home-editorial-1920.webp';
+import homeHeroMobile from '../assets/dspl-home-editorial-mobile.webp';
 import dstNidhiLogo from '../assets/supporter-dst-nidhi.webp';
 import nidhiPrayasLogo from '../assets/supporter-nidhi-prayas.webp';
 import mutbiLogo from '../assets/supporter-mutbi.webp';
@@ -99,11 +101,15 @@ const Home = () => {
       <section className="home-hero">
         <picture className="home-hero-media" aria-hidden="true">
           <source media="(max-width: 768px)" srcSet={homeHeroMobile} />
+          <source
+            srcSet={`${homeHero960} 960w, ${homeHero1440} 1440w, ${homeHero1920} 1920w`}
+            sizes="100vw"
+          />
           <img
-            src={homeHeroDesktop}
+            src={homeHero1440}
             alt=""
-            width="1545"
-            height="1018"
+            width="1440"
+            height="810"
             loading="eager"
             fetchPriority="high"
             decoding="async"

@@ -1,11 +1,11 @@
 .home-page {
-  padding-top: 4.5rem;
+  padding-top: 4.75rem;
   position: relative;
 }
 
 .home-hero {
   position: relative;
-  min-height: max(42rem, calc(100svh - 4.5rem));
+  min-height: max(42rem, calc(100svh - 4.75rem));
   display: grid;
   align-items: center;
   overflow: hidden;
@@ -163,6 +163,10 @@
 }
 
 @media (max-width: 900px) {
+  .home-page {
+    padding-top: 4.5rem;
+  }
+
   .services-intro {
     grid-template-columns: 1fr;
   }

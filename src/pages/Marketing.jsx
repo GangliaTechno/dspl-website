@@ -1,9 +1,8 @@
 import { Search, Megaphone, BarChart, FileText } from 'lucide-react';
-import marketingHero640 from '../assets/Marketing_hero_section-640.webp';
-import marketingHero960 from '../assets/Marketing_hero_section-960.webp';
-import marketingHero1440 from '../assets/Marketing_hero_section-1440.webp';
-import marketingHero1920 from '../assets/Marketing_hero_section-1920.webp';
-import marketingMobile from '../assets/Marketing_hero_section-mobile.webp';
+import marketingHero960 from '../assets/dspl-marketing-editorial-960.webp';
+import marketingHero1440 from '../assets/dspl-marketing-editorial-1440.webp';
+import marketingHero1920 from '../assets/dspl-marketing-editorial-1920.webp';
+import marketingMobile from '../assets/dspl-marketing-editorial-mobile.webp';
 import ServicePage from '../components/ServicePage';
 import { getRouteMetadata } from '../seo/routeMetadata';
 
@@ -50,12 +49,11 @@ const Marketing = () => {
 
   const heroImage = {
     src: marketingHero1440,
-    desktopSrcSet: `${marketingHero640} 640w, ${marketingHero960} 960w, ${marketingHero1440} 1440w, ${marketingHero1920} 1920w`,
+    desktopSrcSet: `${marketingHero960} 960w, ${marketingHero1440} 1440w, ${marketingHero1920} 1920w`,
     mobileSrc: marketingMobile,
     sizes: '100vw',
-    width: 1920,
-    height: 1280,
-    alt: 'Marketing hero'
+    width: 1440,
+    height: 810,
   };
 
   return (
