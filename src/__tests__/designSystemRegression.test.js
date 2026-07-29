@@ -136,6 +136,28 @@ describe('approved design-system corrections', () => {
     expect(homePage).not.toContain('homepage-owned-brand');
   });
 
+  it('presents the About milestones as a calm editorial ledger', () => {
+    const aboutPage = readSource('src/pages/About.jsx');
+    const aboutCss = readSource('src/pages/About.css');
+
+    expect(aboutPage).not.toContain("import dsplImg from '../assets/dspl_img.jpg'");
+    expect(aboutPage).not.toContain("'--about-story-image'");
+    expect(aboutCss).not.toContain('background-image: var(--about-story-image)');
+    expect(aboutCss).not.toContain('.timeline-section::before');
+    expect(aboutCss).toMatch(
+      /\.timeline-section\s*{[^}]*background:\s*var\(--bg-secondary\);[^}]*border-block:\s*1px solid var\(--border-color\);/s,
+    );
+    expect(aboutCss).toMatch(
+      /\.timeline-item\s*{[^}]*display:\s*grid;[^}]*grid-template-columns:\s*7rem 2\.5rem minmax\(0,\s*1fr\);/s,
+    );
+    expect(aboutCss).toMatch(
+      /@media\s*\(max-width:\s*768px\)\s*{[\s\S]*?\.timeline-item\s*{[^}]*grid-template-columns:\s*2\.5rem minmax\(0,\s*1fr\);/s,
+    );
+    expect(aboutPage).toMatch(
+      /className="timeline-item">[\s\S]*?className="timeline-year">2023<\/div>[\s\S]*?className="timeline-badge"/s,
+    );
+  });
+
   it('aligns supporter logos and uses the approved warm Raw Radicles treatment', () => {
     const supporter = readSource('src/components/home/SupporterStrip.jsx');
     const homeSections = readSource('src/components/home/homeSections.css');

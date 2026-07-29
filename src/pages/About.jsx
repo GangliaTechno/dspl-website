@@ -17,7 +17,6 @@ import aboutHero1440 from '../assets/dspl-about-hero-1440.webp';
 import aboutHero1600 from '../assets/dspl-about-hero-1600.webp';
 import aboutHeroMobile from '../assets/dspl-about-hero-mobile.webp';
 import teamBgImg from '../assets/linen_concrete_texture.png';
-import dsplImg from '../assets/dspl_img.jpg';
 
 const About = () => {
   const location = useLocation();
@@ -126,7 +125,6 @@ const About = () => {
     <div
       className="about-page fade-in"
       style={{
-        '--about-story-image': `url("${dsplImg}")`,
         '--about-team-image': `url("${teamBgImg}")`,
       }}
     >
@@ -229,11 +227,11 @@ const About = () => {
               transition={revealTransition({ duration: 0.6 })}
             >
               <div className="timeline-item">
+                <div className="timeline-year">2023</div>
                 <div className="timeline-badge">
                   <Calendar size={18} />
                 </div>
-                <div className="timeline-card glass">
-                  <div className="timeline-year">2023</div>
+                <div className="timeline-card">
                   <h3 className="timeline-milestone-title">Founding and first incubation</h3>
                   <ul className="timeline-list">
                     <li>Started with a plan to build consumer brands and the services that grow them.</li>
@@ -251,11 +249,11 @@ const About = () => {
               transition={revealTransition({ duration: 0.6 })}
             >
               <div className="timeline-item">
+                <div className="timeline-year">2024</div>
                 <div className="timeline-badge">
                   <Star size={18} />
                 </div>
-                <div className="timeline-card glass">
-                  <div className="timeline-year">2024</div>
+                <div className="timeline-card">
                   <h3 className="timeline-milestone-title">First brand</h3>
                   <ul className="timeline-list">
                     <li>Launched Raw Radicles, a premium chocolate brand with Ayurveda inside.</li>
@@ -273,11 +271,11 @@ const About = () => {
               transition={revealTransition({ duration: 0.6 })}
             >
               <div className="timeline-item">
+                <div className="timeline-year">2025</div>
                 <div className="timeline-badge">
                   <Award size={18} />
                 </div>
-                <div className="timeline-card glass">
-                  <div className="timeline-year">2025</div>
+                <div className="timeline-card">
                   <h3 className="timeline-milestone-title">MUTBI incubation and national grant</h3>
                   <ul className="timeline-list">
                     <li>Joined MUTBI at MAHE, Manipal, for technical and academic support.</li>
@@ -296,11 +294,11 @@ const About = () => {
               transition={revealTransition({ duration: 0.6 })}
             >
               <div className="timeline-item">
+                <div className="timeline-year">2026</div>
                 <div className="timeline-badge">
                   <Compass size={18} />
                 </div>
-                <div className="timeline-card glass">
-                  <div className="timeline-year">2026</div>
+                <div className="timeline-card">
                   <h3 className="timeline-milestone-title">Services arm (new entry)</h3>
                   <ul className="timeline-list">
                     <li>Opened our branding, marketing, and e-commerce services to outside clients.</li>
