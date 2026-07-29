@@ -9,11 +9,16 @@
   padding-block: 12px;
   background: transparent;
   border: 0;
-  --supporter-gap: 3.75rem;
+  --supporter-gap: 4.5rem;
   --supporter-logo-height: 1.75rem;
   --supporter-slot-height: 3rem;
   --supporter-sequence-min-width: max-content;
   --supporter-edge-fade: clamp(4rem, 8vw, 9rem);
+}
+
+.supporter-viewport {
+  width: 100%;
+  overflow: hidden;
   -webkit-mask-image: linear-gradient(
     90deg,
     transparent,
@@ -49,8 +54,13 @@
 }
 
 .supporter-track-running {
-  animation: supporter-marquee 18s linear infinite;
+  animation: supporter-marquee 22s linear infinite;
   will-change: transform;
+}
+
+.supporter-track-paused,
+.supporter-viewport:hover .supporter-track-running {
+  animation-play-state: paused;
 }
 
 @keyframes supporter-marquee {
@@ -105,6 +115,40 @@
   opacity: 1;
 }
 
+.supporter-motion-control {
+  position: absolute;
+  top: 50%;
+  right: clamp(0.75rem, 2vw, 1.5rem);
+  z-index: 2;
+  display: inline-flex;
+  width: 2.25rem;
+  height: 2.25rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transform: translateY(-50%);
+  border: 1px solid rgb(255 255 255 / 24%);
+  border-radius: 50%;
+  background: rgb(8 8 8 / 72%);
+  color: #fff;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease;
+}
+
+.supporter-motion-control:hover,
+.supporter-motion-control:focus-visible {
+  border-color: rgb(255 255 255 / 52%);
+  background: rgb(8 8 8 / 92%);
+}
+
+.supporter-motion-control:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 3px;
+}
+
 .supporter-logo-dst {
   --supporter-slot-width: 8rem;
   --supporter-logo-height: 2rem;
@@ -131,7 +175,7 @@
   .supporter-band {
     bottom: 2.5rem;
     padding-block: 8px;
-    --supporter-gap: 3rem;
+    --supporter-gap: 3.5rem;
     --supporter-logo-height: 1.375rem;
     --supporter-slot-height: 2.25rem;
     --supporter-sequence-min-width: max-content;
@@ -162,6 +206,12 @@
     --supporter-slot-width: 9.5rem;
   }
 
+  .supporter-motion-control {
+    right: 0.75rem;
+    width: 2rem;
+    height: 2rem;
+  }
+
   .supporter-track-static .supporter-sequence {
     flex-wrap: wrap;
     gap: 0.5rem;
@@ -178,6 +228,10 @@
     animation: none;
     transform: none;
     will-change: auto;
+  }
+
+  .supporter-motion-control {
+    transition: none;
   }
 }
 

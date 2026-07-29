@@ -159,7 +159,7 @@ describe('approved design-system corrections', () => {
       /\.supporter-sequence\s*{[^}]*min-width:\s*var\(--supporter-sequence-min-width\);/s,
     );
     expect(homeSections).toMatch(
-      /\.supporter-track-running\s*{[^}]*animation:\s*supporter-marquee 18s linear infinite;[^}]*will-change:\s*transform;/s,
+      /\.supporter-track-running\s*{[^}]*animation:\s*supporter-marquee 22s linear infinite;[^}]*will-change:\s*transform;/s,
     );
     expect(homeSections).toMatch(
       /@keyframes supporter-marquee\s*{[\s\S]*?from\s*{[^}]*transform:\s*translate3d\(0,\s*0,\s*0\);[^}]*}[\s\S]*?to\s*{[^}]*transform:\s*translate3d\(var\(--supporter-shift\),\s*0,\s*0\);/s,
@@ -167,7 +167,7 @@ describe('approved design-system corrections', () => {
     expect(homeSections).toMatch(
       /@media\s*\(prefers-reduced-motion:\s*reduce\)\s*{[\s\S]*?\.supporter-track-running\s*{[^}]*animation:\s*none;/s,
     );
-    expect(homeSections).toContain('--supporter-gap: 3.75rem;');
+    expect(homeSections).toContain('--supporter-gap: 4.5rem;');
     expect(homeSections).toContain('--supporter-logo-height: 1.75rem;');
     expect(homeSections).toMatch(
       /\.supporter-logo-dst\s*{[^}]*--supporter-slot-width:\s*8rem;[^}]*--supporter-logo-height:\s*2rem;[^}]*--supporter-y:\s*-3px;/s,
@@ -194,8 +194,11 @@ describe('approved design-system corrections', () => {
       /\.supporter-logo-slot\s*{[^}]*margin-inline:\s*var\(--supporter-optical-trim,\s*0rem\);/s,
     );
     expect(homeSections).toMatch(
-      /@media\s*\(max-width:\s*768px\)\s*{[\s\S]*?--supporter-gap:\s*3rem;/s,
+      /@media\s*\(max-width:\s*768px\)\s*{[\s\S]*?--supporter-gap:\s*3\.5rem;/s,
     );
+    expect(supporter).toContain('supporter-track-paused');
+    expect(supporter).toContain('Pause supporter logos');
+    expect(supporter).toContain('Resume supporter logos');
     expect(homePage).toContain(
       "alt: 'DST NIDHI', className: 'supporter-logo-dst'",
     );

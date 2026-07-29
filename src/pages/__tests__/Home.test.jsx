@@ -1,4 +1,4 @@
-import { render, screen, within } from '@testing-library/react';
+import { fireEvent, render, screen, within } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { describe, expect, it } from 'vitest';
 import Home from '../Home';
@@ -66,5 +66,29 @@ describe('Home page', () => {
     expect(
       screen.queryByText('Brand strategy and identity'),
     ).not.toBeInTheDocument();
+  });
+
+  it('lets visitors pause and resume the supporter logo motion', () => {
+    render(
+      <BrowserRouter>
+        <Home />
+      </BrowserRouter>,
+    );
+
+    const supporterRegion = screen.getByRole('region', {
+      name: 'Supported by',
+    });
+    const pauseButton = within(supporterRegion).getByRole('button', {
+      name: 'Pause supporter logos',
+    });
+
+    expect(pauseButton).toHaveAttribute('aria-pressed', 'false');
+    fireEvent.click(pauseButton);
+
+    expect(
+      within(supporterRegion).getByRole('button', {
+        name: 'Resume supporter logos',
+      }),
+    ).toHaveAttribute('aria-pressed', 'true');
   });
 });

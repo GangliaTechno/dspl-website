@@ -1,5 +1,6 @@
 import { useLayoutEffect, useRef, useState } from 'react';
 import { useReducedMotion } from 'framer-motion';
+import { Pause, Play } from 'lucide-react';
 
 const SupporterStrip = ({ supporters }) => {
   const prefersReducedMotion = useReducedMotion();
@@ -9,6 +10,7 @@ const SupporterStrip = ({ supporters }) => {
     sequenceWidth: 0,
     sequenceCount: 2,
   });
+  const [isPaused, setIsPaused] = useState(false);
 
   useLayoutEffect(() => {
     const band = bandRef.current;
@@ -65,6 +67,7 @@ const SupporterStrip = ({ supporters }) => {
     'supporter-track',
     prefersReducedMotion ? 'supporter-track-static' : '',
     shouldAnimate ? 'supporter-track-running' : '',
+    isPaused ? 'supporter-track-paused' : '',
   ].filter(Boolean).join(' ');
 
   return (
@@ -74,39 +77,54 @@ const SupporterStrip = ({ supporters }) => {
       role="region"
       aria-label="Supported by"
     >
-      <div
-        className={trackClassName}
-        style={
-          shouldAnimate
-            ? { '--supporter-shift': `${-sequenceWidth}px` }
-            : undefined
-        }
-      >
-        {Array.from({ length: sequenceCount }, (_, sequenceIndex) => (
-          <div
-            ref={sequenceIndex === 0 ? sequenceRef : undefined}
-            className="supporter-sequence"
-            key={`supporter-sequence-${sequenceIndex}`}
-            aria-hidden={sequenceIndex > 0 ? 'true' : undefined}
-          >
-            {supporters.map((logo) => (
-              <div
-                className={`supporter-logo-slot ${logo.className || ''}`}
-                key={`${logo.alt}-${sequenceIndex}`}
-              >
-                <img
-                  src={logo.src}
-                  alt={sequenceIndex > 0 ? '' : logo.alt}
-                  className="supporter-logo"
-                  loading="eager"
-                  decoding="async"
-                  draggable="false"
-                />
-              </div>
-            ))}
-          </div>
-        ))}
+      <div className="supporter-viewport">
+        <div
+          className={trackClassName}
+          style={
+            shouldAnimate
+              ? { '--supporter-shift': `${-sequenceWidth}px` }
+              : undefined
+          }
+        >
+          {Array.from({ length: sequenceCount }, (_, sequenceIndex) => (
+            <div
+              ref={sequenceIndex === 0 ? sequenceRef : undefined}
+              className="supporter-sequence"
+              key={`supporter-sequence-${sequenceIndex}`}
+              aria-hidden={sequenceIndex > 0 ? 'true' : undefined}
+            >
+              {supporters.map((logo) => (
+                <div
+                  className={`supporter-logo-slot ${logo.className || ''}`}
+                  key={`${logo.alt}-${sequenceIndex}`}
+                >
+                  <img
+                    src={logo.src}
+                    alt={sequenceIndex > 0 ? '' : logo.alt}
+                    className="supporter-logo"
+                    loading="eager"
+                    decoding="async"
+                    draggable="false"
+                  />
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
       </div>
+      {!prefersReducedMotion && (
+        <button
+          type="button"
+          className="supporter-motion-control"
+          aria-label={isPaused ? 'Resume supporter logos' : 'Pause supporter logos'}
+          aria-pressed={isPaused}
+          onClick={() => setIsPaused((paused) => !paused)}
+        >
+          {isPaused
+            ? <Play size={16} aria-hidden="true" />
+            : <Pause size={16} aria-hidden="true" />}
+        </button>
+      )}
     </div>
   );
 };
