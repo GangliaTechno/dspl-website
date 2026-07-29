@@ -111,20 +111,15 @@ const Home = () => {
         </picture>
         <div className="container home-hero-layout">
           <div className="home-hero-content">
-            <span className="home-hero-kicker">
-              Brand systems for Indian consumer businesses
-            </span>
             <h1 className="hero-title">
-              We build brands.
-              <br />
-              <span className="accent-text">
-                We help businesses grow.
-              </span>
+              <span>We build brands.</span>{' '}
+              <span className="accent-text">We help businesses grow.</span>
             </h1>
             <p className="hero-subhead">
-              For Indian consumer businesses, Dasha Patmaja Services brings
-              brand strategy, go-to-market execution, and e-commerce under one
-              accountable team.
+              Dashapatmaja Solutions Pvt Ltd helps businesses grow. We build
+              your brand, bring you customers, and sell your products online.
+              We also build and sell our own brand, Raw Radicles, so we know
+              this work from both sides.
             </p>
             <div className="hero-ctas">
               <button
@@ -133,25 +128,16 @@ const Home = () => {
                 onClick={() => openWorkModal('homepage-hero')}
                 className="btn btn-primary"
               >
-                Discuss your next stage
+                Work With Us
                 <ArrowRight size={16} aria-hidden="true" />
               </button>
               <Link to="/brands" className="btn btn-secondary hero-secondary">
-                See our owned brand
+                See Our Brands
               </Link>
             </div>
           </div>
-
-          <aside className="home-hero-proof" aria-label="How DSPL works">
-            <p className="home-hero-proof-label">One accountable team</p>
-            <ul>
-              <li>Brand strategy and identity</li>
-              <li>Go-to-market execution</li>
-              <li>E-commerce systems</li>
-            </ul>
-          </aside>
         </div>
-        
+
         <SupporterStrip supporters={supporters} />
       </section>
 

@@ -31,4 +31,40 @@ describe('Home page', () => {
     ).toBeInTheDocument();
     expect(screen.getByText(/owned-brand proof/i)).toBeInTheDocument();
   });
+
+  it('renders the approved centered hero content and removes the legacy proof panel', () => {
+    render(
+      <BrowserRouter>
+        <Home />
+      </BrowserRouter>,
+    );
+
+    expect(
+      screen.getByRole('heading', {
+        level: 1,
+        name: 'We build brands. We help businesses grow.',
+      }),
+    ).toBeInTheDocument();
+
+    expect(
+      screen.getByText(
+        'Dashapatmaja Solutions Pvt Ltd helps businesses grow. We build your brand, bring you customers, and sell your products online. We also build and sell our own brand, Raw Radicles, so we know this work from both sides.',
+      ),
+    ).toBeInTheDocument();
+
+    expect(
+      screen.getByRole('button', { name: 'Work With Us' }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('link', { name: 'See Our Brands' }),
+    ).toHaveAttribute('href', '/brands');
+
+    expect(
+      screen.queryByText('Brand systems for Indian consumer businesses'),
+    ).not.toBeInTheDocument();
+    expect(screen.queryByText('One accountable team')).not.toBeInTheDocument();
+    expect(
+      screen.queryByText('Brand strategy and identity'),
+    ).not.toBeInTheDocument();
+  });
 });
