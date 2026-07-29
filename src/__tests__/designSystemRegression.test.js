@@ -132,6 +132,7 @@ describe('approved design-system corrections', () => {
   it('uses original responsive editorial imagery for Home and Marketing', () => {
     const homePage = readSource('src/pages/Home.jsx');
     const marketingPage = readSource('src/pages/Marketing.jsx');
+    const pageShell = readSource('index.html');
 
     expect(homePage).toContain('dspl-home-editorial-960.webp');
     expect(homePage).toContain('dspl-home-editorial-1440.webp');
@@ -144,6 +145,10 @@ describe('approved design-system corrections', () => {
     expect(marketingPage).toContain('dspl-marketing-editorial-1920.webp');
     expect(marketingPage).toContain('dspl-marketing-editorial-mobile.webp');
     expect(marketingPage).not.toContain('Marketing_hero_section');
+    expect(pageShell).toContain('dspl-home-editorial-1440.webp');
+    expect(pageShell).toContain('dspl-home-editorial-mobile.webp');
+    expect(pageShell).not.toContain('dspl_banner.webp');
+    expect(pageShell).not.toContain('dspl_banner-mobile.webp');
   });
 
   it('keeps the owned-brand section focused on its distinct brand action', () => {
