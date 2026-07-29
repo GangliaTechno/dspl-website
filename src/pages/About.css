@@ -3,6 +3,12 @@
   position: relative;
 }
 
+#story,
+#timeline,
+#team {
+  scroll-margin-top: 5.25rem;
+}
+
 .bg-alt {
   background-color: var(--bg-secondary);
   border-top: 1px solid var(--border-color);

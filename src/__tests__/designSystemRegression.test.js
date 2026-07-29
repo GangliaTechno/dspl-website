@@ -170,6 +170,9 @@ describe('approved design-system corrections', () => {
     expect(aboutCss).not.toContain('background-image: var(--about-story-image)');
     expect(aboutCss).not.toContain('.timeline-section::before');
     expect(aboutCss).toMatch(
+      /#story,\s*#timeline,\s*#team\s*{[^}]*scroll-margin-top:\s*5\.25rem;/s,
+    );
+    expect(aboutCss).toMatch(
       /\.timeline-section\s*{[^}]*background:\s*var\(--bg-secondary\);[^}]*border-block:\s*1px solid var\(--border-color\);/s,
     );
     expect(aboutCss).toMatch(
