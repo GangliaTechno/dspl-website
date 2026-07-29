@@ -1,5 +1,5 @@
 import { useLayoutEffect, useRef, useState } from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
+import { useReducedMotion } from 'framer-motion';
 
 const SupporterStrip = ({ supporters }) => {
   const prefersReducedMotion = useReducedMotion();
@@ -61,6 +61,11 @@ const SupporterStrip = ({ supporters }) => {
     ? 1
     : marqueeMetrics.sequenceCount;
   const shouldAnimate = !prefersReducedMotion && sequenceWidth > 0;
+  const trackClassName = [
+    'supporter-track',
+    prefersReducedMotion ? 'supporter-track-static' : '',
+    shouldAnimate ? 'supporter-track-running' : '',
+  ].filter(Boolean).join(' ');
 
   return (
     <div
@@ -69,12 +74,11 @@ const SupporterStrip = ({ supporters }) => {
       role="region"
       aria-label="Supported by"
     >
-      <motion.div
-        className={`supporter-track${prefersReducedMotion ? ' supporter-track-static' : ''}`}
-        animate={shouldAnimate ? { x: [0, -sequenceWidth] } : undefined}
-        transition={
+      <div
+        className={trackClassName}
+        style={
           shouldAnimate
-            ? { repeat: Infinity, ease: "linear", duration: 24 }
+            ? { '--supporter-shift': `${-sequenceWidth}px` }
             : undefined
         }
       >
@@ -102,7 +106,7 @@ const SupporterStrip = ({ supporters }) => {
             ))}
           </div>
         ))}
-      </motion.div>
+      </div>
     </div>
   );
 };

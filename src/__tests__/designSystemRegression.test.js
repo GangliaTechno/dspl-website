@@ -53,7 +53,7 @@ describe('approved design-system corrections', () => {
     );
     expect(supporter).toContain('useReducedMotion');
     expect(supporter).toContain(
-      'animate={shouldAnimate ? { x: [0, -sequenceWidth] } : undefined}',
+      "'--supporter-shift': `${-sequenceWidth}px`",
     );
   });
 
@@ -73,20 +73,30 @@ describe('approved design-system corrections', () => {
     const homePage = readSource('src/pages/Home.jsx');
 
     expect(home).toMatch(
-      /\.home-hero-layout\s*{[^}]*padding-block:\s*clamp\(4\.75rem,\s*9vw,\s*7\.5rem\)\s+clamp\(7\.25rem,\s*13vw,\s*10rem\);/s,
+      /\.home-hero::after\s*{[^}]*background:\s*rgba\(8,\s*8,\s*8,\s*0\.72\);/s,
     );
     expect(home).toMatch(
-      /\.hero-subhead\s*{[^}]*font-size:\s*clamp\(1\.1rem,\s*1\.6vw,\s*1\.375rem\);[^}]*line-height:\s*1\.58;/s,
+      /\.home-hero-layout\s*{[^}]*display:\s*flex;[^}]*justify-content:\s*center;[^}]*padding-block:\s*clamp\(4\.5rem,\s*8vw,\s*7rem\)\s+clamp\(7rem,\s*12vw,\s*9\.5rem\);/s,
     );
     expect(home).toMatch(
-      /@media\s*\(max-width:\s*768px\)\s*{[\s\S]*?\.home-hero-layout\s*{[^}]*padding-block:\s*4\.75rem\s+7\.25rem;/s,
+      /\.home-hero-content\s*{[^}]*width:\s*min\(100%,\s*68rem\);[^}]*text-align:\s*center;/s,
     );
     expect(home).toMatch(
-      /@media\s*\(min-width:\s*1200px\)\s*{[\s\S]*?\.home-hero-layout\s*{[^}]*grid-template-columns:\s*minmax\(0,\s*1fr\)\s+17\.5rem;[^}]*gap:\s*2\.5rem;[\s\S]*?\.accent-text\s*{[^}]*display:\s*block;[^}]*white-space:\s*nowrap;/s,
+      /\.hero-title\s*>\s*span\s*{[^}]*display:\s*block;/s,
     );
     expect(home).toMatch(
-      /@media\s*\(min-width:\s*1200px\)\s*{[\s\S]*?\.home-hero-content\s*{[^}]*max-width:\s*none;/s,
+      /\.hero-subhead\s*{[^}]*max-width:\s*66ch;[^}]*margin:\s*0 auto 2\.5rem;[^}]*font-size:\s*clamp\(1\.05rem,\s*1\.45vw,\s*1\.25rem\);[^}]*line-height:\s*1\.65;/s,
     );
+    expect(home).toMatch(
+      /\.hero-ctas\s*{[^}]*justify-content:\s*center;/s,
+    );
+    expect(homePage).toContain('Work With Us');
+    expect(homePage).toContain('See Our Brands');
+    expect(homePage).not.toContain(
+      'Brand systems for Indian consumer businesses',
+    );
+    expect(homePage).not.toContain('One accountable team');
+    expect(homePage).not.toContain('Brand strategy and identity');
     expect(homePage).not.toContain('className="section home-enquiry"');
     expect(homePage).not.toContain('Start with context');
     expect(homePage).not.toContain('Share your project');
@@ -114,8 +124,10 @@ describe('approved design-system corrections', () => {
       'Math.ceil(bandWidth / sequenceWidth) + 1',
     );
     expect(supporter).toContain('new ResizeObserver(measure)');
-    expect(supporter).toContain('x: [0, -sequenceWidth]');
-    expect(supporter).toContain('duration: 24');
+    expect(supporter).toContain(
+      "'--supporter-shift': `${-sequenceWidth}px`",
+    );
+    expect(supporter).toContain('supporter-track-running');
     expect(supporter).toContain('className="supporter-sequence"');
     expect(homeSections).toContain(
       '--supporter-sequence-min-width: max-content;',
@@ -123,22 +135,31 @@ describe('approved design-system corrections', () => {
     expect(homeSections).toMatch(
       /\.supporter-sequence\s*{[^}]*min-width:\s*var\(--supporter-sequence-min-width\);/s,
     );
-    expect(homeSections).toContain('--supporter-gap: 2.25rem;');
-    expect(homeSections).toContain('--supporter-logo-height: 2.25rem;');
     expect(homeSections).toMatch(
-      /\.supporter-logo-dst\s*{[^}]*--supporter-slot-width:\s*10rem;[^}]*--supporter-logo-height:\s*2\.5rem;[^}]*--supporter-y:\s*-3px;/s,
+      /\.supporter-track-running\s*{[^}]*animation:\s*supporter-marquee 18s linear infinite;[^}]*will-change:\s*transform;/s,
     );
     expect(homeSections).toMatch(
-      /\.supporter-logo-nidhi\s*{[^}]*--supporter-slot-width:\s*6rem;[^}]*--supporter-logo-height:\s*3\.25rem;[^}]*--supporter-y:\s*-10px;/s,
+      /@keyframes supporter-marquee\s*{[\s\S]*?from\s*{[^}]*transform:\s*translate3d\(0,\s*0,\s*0\);[^}]*}[\s\S]*?to\s*{[^}]*transform:\s*translate3d\(var\(--supporter-shift\),\s*0,\s*0\);/s,
     );
     expect(homeSections).toMatch(
-      /@media\s*\(max-width:\s*768px\)\s*{[\s\S]*?\.supporter-logo-nidhi\s*{[^}]*--supporter-slot-width:\s*4\.5rem;[^}]*--supporter-logo-height:\s*2\.5rem;[^}]*--supporter-y:\s*-5px;/s,
+      /@media\s*\(prefers-reduced-motion:\s*reduce\)\s*{[\s\S]*?\.supporter-track-running\s*{[^}]*animation:\s*none;/s,
+    );
+    expect(homeSections).toContain('--supporter-gap: 3.75rem;');
+    expect(homeSections).toContain('--supporter-logo-height: 1.75rem;');
+    expect(homeSections).toMatch(
+      /\.supporter-logo-dst\s*{[^}]*--supporter-slot-width:\s*8rem;[^}]*--supporter-logo-height:\s*2rem;[^}]*--supporter-y:\s*-3px;/s,
     );
     expect(homeSections).toMatch(
-      /\.supporter-logo-mutbi\s*{[^}]*--supporter-slot-width:\s*16\.5rem;[^}]*--supporter-logo-opacity:\s*0\.65;/s,
+      /\.supporter-logo-nidhi\s*{[^}]*--supporter-slot-width:\s*5rem;[^}]*--supporter-logo-height:\s*2\.5rem;[^}]*--supporter-y:\s*-7px;/s,
     );
     expect(homeSections).toMatch(
-      /\.supporter-logo-startup\s*{[^}]*--supporter-slot-width:\s*16rem;/s,
+      /@media\s*\(max-width:\s*768px\)\s*{[\s\S]*?\.supporter-logo-nidhi\s*{[^}]*--supporter-slot-width:\s*3\.75rem;[^}]*--supporter-logo-height:\s*1\.875rem;[^}]*--supporter-y:\s*-3px;/s,
+    );
+    expect(homeSections).toMatch(
+      /\.supporter-logo-mutbi\s*{[^}]*--supporter-slot-width:\s*13\.5rem;[^}]*--supporter-optical-trim:\s*-0\.5rem;[^}]*--supporter-logo-opacity:\s*0\.65;/s,
+    );
+    expect(homeSections).toMatch(
+      /\.supporter-logo-startup\s*{[^}]*--supporter-slot-width:\s*13rem;/s,
     );
     expect(homeSections).toMatch(
       /\.supporter-logo\s*{[^}]*width:\s*auto;[^}]*height:\s*var\(--supporter-logo-height\);[^}]*transform:\s*translateY\(var\(--supporter-y,\s*0\)\);/s,
@@ -147,7 +168,10 @@ describe('approved design-system corrections', () => {
       /\.supporter-logo\s*{[^}]*opacity:\s*var\(--supporter-logo-opacity,\s*0\.5\);/s,
     );
     expect(homeSections).toMatch(
-      /@media\s*\(max-width:\s*768px\)\s*{[\s\S]*?--supporter-gap:\s*1\.75rem;/s,
+      /\.supporter-logo-slot\s*{[^}]*margin-inline:\s*var\(--supporter-optical-trim,\s*0rem\);/s,
+    );
+    expect(homeSections).toMatch(
+      /@media\s*\(max-width:\s*768px\)\s*{[\s\S]*?--supporter-gap:\s*3rem;/s,
     );
     expect(homePage).toContain(
       "alt: 'DST NIDHI', className: 'supporter-logo-dst'",
@@ -185,7 +209,7 @@ describe('approved design-system corrections', () => {
       "import balakrishnaImg from '../assets/balakrishna_pro_extended.webp';",
     );
     expect(aboutPage).toMatch(
-      /name:\s*'Mr\. Shreepathy Ranga Bhatta',[\s\S]*?scale:\s*1\.45,[\s\S]*?transformOrigin:\s*'50% 43%'/s,
+      /name:\s*'Dr\. Shreepathy Rangabhatta R',[\s\S]*?scale:\s*1\.45,[\s\S]*?transformOrigin:\s*'50% 43%'/s,
     );
     expect(aboutPage).toMatch(
       /name:\s*'Dr\. Balakrishna S\. Maddodi',[\s\S]*?scale:\s*1\.45,[\s\S]*?transformOrigin:\s*'50% 37%'/s,

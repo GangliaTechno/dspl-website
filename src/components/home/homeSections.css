@@ -9,9 +9,9 @@
   padding-block: 12px;
   background: transparent;
   border: 0;
-  --supporter-gap: 2.25rem;
-  --supporter-logo-height: 2.25rem;
-  --supporter-slot-height: 3.5rem;
+  --supporter-gap: 3.75rem;
+  --supporter-logo-height: 1.75rem;
+  --supporter-slot-height: 3rem;
   --supporter-sequence-min-width: max-content;
   --supporter-edge-fade: clamp(4rem, 8vw, 9rem);
   -webkit-mask-image: linear-gradient(
@@ -34,6 +34,8 @@
   display: flex;
   align-items: center;
   width: max-content;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
 }
 
 .supporter-sequence {
@@ -46,13 +48,25 @@
   padding-inline: calc(var(--supporter-gap) / 2);
 }
 
-.supporter-track:not(.supporter-track-static) {
+.supporter-track-running {
+  animation: supporter-marquee 18s linear infinite;
   will-change: transform;
+}
+
+@keyframes supporter-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(var(--supporter-shift), 0, 0);
+  }
 }
 
 .supporter-track-static {
   width: 100%;
   justify-content: center;
+  transform: none;
 }
 
 .supporter-track-static .supporter-sequence {
@@ -68,6 +82,7 @@
   justify-content: center;
   width: var(--supporter-slot-width, 12rem);
   height: var(--supporter-slot-height);
+  margin-inline: var(--supporter-optical-trim, 0rem);
 }
 
 .supporter-logo {
@@ -91,33 +106,34 @@
 }
 
 .supporter-logo-dst {
-  --supporter-slot-width: 10rem;
-  --supporter-logo-height: 2.5rem;
+  --supporter-slot-width: 8rem;
+  --supporter-logo-height: 2rem;
   --supporter-y: -3px;
 }
 
 .supporter-logo-nidhi {
-  --supporter-slot-width: 6rem;
-  --supporter-logo-height: 3.25rem;
-  --supporter-y: -10px;
+  --supporter-slot-width: 5rem;
+  --supporter-logo-height: 2.5rem;
+  --supporter-y: -7px;
 }
 
 .supporter-logo-mutbi {
-  --supporter-slot-width: 16.5rem;
+  --supporter-slot-width: 13.5rem;
+  --supporter-optical-trim: -0.5rem;
   --supporter-logo-opacity: 0.65;
 }
 
 .supporter-logo-startup {
-  --supporter-slot-width: 16rem;
+  --supporter-slot-width: 13rem;
 }
 
 @media (max-width: 768px) {
   .supporter-band {
     bottom: 2.5rem;
     padding-block: 8px;
-    --supporter-gap: 1.75rem;
-    --supporter-logo-height: 1.75rem;
-    --supporter-slot-height: 3rem;
+    --supporter-gap: 3rem;
+    --supporter-logo-height: 1.375rem;
+    --supporter-slot-height: 2.25rem;
     --supporter-sequence-min-width: max-content;
     --supporter-edge-fade: 2.5rem;
   }
@@ -127,22 +143,23 @@
   }
 
   .supporter-logo-dst {
-    --supporter-slot-width: 7.25rem;
-    --supporter-logo-height: 2rem;
+    --supporter-slot-width: 5.75rem;
+    --supporter-logo-height: 1.625rem;
   }
 
   .supporter-logo-nidhi {
-    --supporter-slot-width: 4.5rem;
-    --supporter-logo-height: 2.5rem;
-    --supporter-y: -5px;
+    --supporter-slot-width: 3.75rem;
+    --supporter-logo-height: 1.875rem;
+    --supporter-y: -3px;
   }
 
   .supporter-logo-mutbi {
-    --supporter-slot-width: 12.5rem;
+    --supporter-slot-width: 9.75rem;
+    --supporter-optical-trim: -0.375rem;
   }
 
   .supporter-logo-startup {
-    --supporter-slot-width: 12rem;
+    --supporter-slot-width: 9.5rem;
   }
 
   .supporter-track-static .supporter-sequence {
@@ -153,6 +170,14 @@
   .supporter-track-static .supporter-logo-slot {
     width: 4.75rem;
     height: 2rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .supporter-track-running {
+    animation: none;
+    transform: none;
+    will-change: auto;
   }
 }
 
