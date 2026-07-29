@@ -34,7 +34,7 @@ const Footer = () => {
         <div className="footer-grid">
           <div className="footer-col brand-col">
             <Link to="/" className="footer-logo">
-              <img src={logoImg} alt="Dashapatmaja Logo" className="footer-logo-image" loading="lazy" decoding="async" />
+              <img src={logoImg} alt="Dashapatmaja Solutions Pvt Ltd logo" className="footer-logo-image" loading="lazy" decoding="async" />
             </Link>
             <p className="brand-description">
               Innovating Today for a Smarter Tomorrow. We help businesses grow through branding, marketing, and e-commerce.
@@ -100,7 +100,7 @@ const Footer = () => {
 
         {/* Bottom copyright */}
         <div className="footer-bottom">
-          <p>© 2026 Dasha Patmaja Services Pvt. Ltd. All rights reserved.</p>
+          <p>© 2026 Dashapatmaja Solutions Pvt Ltd. All rights reserved.</p>
           <div className="footer-legal-links">
             <Link to="/privacy" className="legal-link">Privacy Policy & Terms</Link>
             <button type="button" aria-label="Back to top of page" className="back-to-top" onClick={handleBackToTop}>

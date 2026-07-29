@@ -323,7 +323,7 @@ Use one semantic `<section>` or labelled region per component. Render each suppo
 Keep the hero heading. Replace its supporting paragraph with:
 
 ```text
-For Indian consumer businesses, Dasha Patmaja Services brings brand strategy,
+For Indian consumer businesses, Dashapatmaja Solutions Pvt Ltd brings brand strategy,
 go-to-market execution, and e-commerce under one accountable team.
 ```
 
@@ -472,7 +472,7 @@ Expected: FAIL because the module does not exist.
 
 - [ ] **Step 3: Define the route records**
 
-Include `/`, `/about`, `/brands`, `/marketing`, `/branding`, `/ecommerce`, `/contact`, and `/privacy`. Use the existing page titles and descriptions as the starting source, but remove inconsistent “Solutions” versus “Services” naming in favor of legal name `Dasha Patmaja Services Pvt. Ltd.`.
+Include `/`, `/about`, `/brands`, `/marketing`, `/branding`, `/ecommerce`, `/contact`, and `/privacy`. Use the existing page titles and descriptions as the starting source, with the canonical legal name `Dashapatmaja Solutions Pvt Ltd`.
 
 - [ ] **Step 4: Update `useSEO`**
 

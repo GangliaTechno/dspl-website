@@ -62,7 +62,7 @@ const About = () => {
       transformOrigin: '50% 42%',
     },
     {
-      name: 'Mr. Shreepathy Ranga Bhatta',
+      name: 'Dr. Shreepathy Rangabhatta R',
       role: 'Managing Director',
       initial: 'SR',
       image: sreeImg,
@@ -72,7 +72,7 @@ const About = () => {
       transformOrigin: '50% 43%',
     },
     {
-      name: 'Ms. Anusha Pai',
+      name: 'Dr. Anusha Pai',
       role: 'Director',
       initial: 'AP',
       image: anushaImg,
@@ -158,10 +158,10 @@ const About = () => {
           transition={revealTransition({ duration: 0.8, ease: 'easeOut' })}
         >
           <span className="section-subtitle">Our Corporate Profile</span>
-          <h1 className="about-title">About Dasha Patmaja Services</h1>
+          <h1 className="about-title">About Dashapatmaja Solutions Pvt Ltd</h1>
           <div className="about-intro-grid">
             <p className="about-intro-text">
-              Dasha Patmaja Services Pvt. Ltd. helps businesses grow through branding, marketing, and e-commerce. We were founded in 2023 and are incubated at the Manipal Universal Technology Business Incubator (MUTBI) at MAHE, Manipal. Our team comes from healthcare, engineering, design, and business. We also build and sell our own brand, Raw Radicles, which keeps our methods tested and current.
+              Dashapatmaja Solutions Pvt Ltd helps businesses grow through branding, marketing, and e-commerce. We were founded in 2023 and are incubated at the Manipal Universal Technology Business Incubator (MUTBI) at MAHE, Manipal. Our team comes from healthcare, engineering, design, and business. We also build and sell our own brand, Raw Radicles, which keeps our methods tested and current.
             </p>
           </div>
         </motion.div>

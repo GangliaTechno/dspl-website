@@ -1,9 +1,9 @@
-# Dasha Patmaja Services website
+# Dashapatmaja Solutions Pvt Ltd website
 
 [![CI](https://github.com/GangliaTechno/dspl-website/actions/workflows/ci.yml/badge.svg)](https://github.com/GangliaTechno/dspl-website/actions/workflows/ci.yml)
 
-This repository contains the public website for Dasha Patmaja Services Pvt.
-Ltd. (DSPL), an Indian brand-building company providing branding, marketing,
+This repository contains the public website for Dashapatmaja Solutions Pvt Ltd
+(DSPL), an Indian brand-building company providing branding, marketing,
 and e-commerce services.
 
 The site presents DSPL's institutional support, coordinated working process,

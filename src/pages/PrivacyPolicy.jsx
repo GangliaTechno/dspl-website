@@ -14,7 +14,7 @@ const PrivacyPolicy = () => {
         <section className="privacy-section">
           <h2>1. Introduction</h2>
           <p>
-            Dasha Patmaja Services Private Limited (&quot;DSPL&quot;, &quot;we&quot;, &quot;our&quot;, or &quot;us&quot;) is committed to protecting your privacy and personal data. This Privacy Policy explains how we collect, use, store, and process information submitted via our website (<strong>dashapatmaja.in</strong>) and project inquiry forms.
+            Dashapatmaja Solutions Pvt Ltd (&quot;DSPL&quot;, &quot;we&quot;, &quot;our&quot;, or &quot;us&quot;) is committed to protecting your privacy and personal data. This Privacy Policy explains how we collect, use, store, and process information submitted via our website (<strong>dashapatmaja.in</strong>) and project inquiry forms.
           </p>
         </section>
 
@@ -57,7 +57,7 @@ const PrivacyPolicy = () => {
             If you have questions regarding this Privacy Policy or wish to request data updates, please contact us directly at:
           </p>
           <div className="contact-info-card">
-            <p><strong>Dasha Patmaja Services Pvt. Ltd.</strong></p>
+            <p><strong>Dashapatmaja Solutions Pvt Ltd</strong></p>
             <p>Room No. 12, 4th Floor, MUTBI, Advanced Research Center, Madhava Nagar, Manipal, Karnataka 576104</p>
             <p>Email: <a href="mailto:director@dashapatmaja.in">director@dashapatmaja.in</a> | Phone: <a href="tel:+918861942440">+91 88619 42440</a></p>
           </div>

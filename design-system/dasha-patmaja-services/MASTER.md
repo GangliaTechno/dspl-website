@@ -6,7 +6,7 @@
 
 ---
 
-**Project:** Dasha Patmaja Services
+**Project:** Dashapatmaja Solutions Pvt Ltd
 **Generated:** 2026-07-23 22:46:45
 **Category:** E-commerce Luxury
 

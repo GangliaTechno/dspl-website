@@ -69,7 +69,7 @@ const Header = () => {
         <div className="header-container">
           {/* Left Side: Logo */}
           <Link to="/" className="logo-link" onClick={handleLinkClick}>
-            <img src={logoImg} alt="Dashapatmaja Logo" className="logo-image" loading="eager" decoding="async" />
+            <img src={logoImg} alt="Dashapatmaja Solutions Pvt Ltd logo" className="logo-image" loading="eager" decoding="async" />
           </Link>
 
           {/* Center: Desktop Navigation Links */}

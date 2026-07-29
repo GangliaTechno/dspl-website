@@ -85,7 +85,7 @@ const Brands = () => {
                       Raw Radicles brings together real cacao and carefully selected Ayurvedic botanicals.
                     </p>
                     <p>
-                      Built end to end by Dasha Patmaja—from formulation and packaging to compliance, storytelling and route to market.
+                      Built end to end by Dashapatmaja Solutions Pvt Ltd—from formulation and packaging to compliance, storytelling and route to market.
                     </p>
                   </div>
 

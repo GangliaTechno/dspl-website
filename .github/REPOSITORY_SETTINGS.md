@@ -5,7 +5,7 @@ They are intentionally separate from source changes and deployment.
 
 ## About
 
-- Description: `Public website for Dasha Patmaja Services - branding, marketing, e-commerce, and owned-brand proof.`
+- Description: `Public website for Dashapatmaja Solutions Pvt Ltd - branding, marketing, e-commerce, and owned-brand proof.`
 - Website: `https://dashapatmaja.in`
 - Topics:
   - `react`

@@ -23,5 +23,8 @@ describe('route metadata', () => {
     expect(organizationStructuredData.email).toContain(
       'director@dashapatmaja.in',
     );
+    expect(organizationStructuredData.name).toBe(
+      'Dashapatmaja Solutions Pvt Ltd',
+    );
   });
 });

@@ -11,7 +11,9 @@ describe('Header Component', () => {
       </BrowserRouter>
     );
 
-    expect(screen.getByAltText('Dashapatmaja Logo')).toBeInTheDocument();
+    expect(
+      screen.getByAltText('Dashapatmaja Solutions Pvt Ltd logo'),
+    ).toBeInTheDocument();
     expect(screen.getByRole('navigation', { name: 'Main Navigation' })).toBeInTheDocument();
     expect(screen.getAllByText('Home')[0]).toBeInTheDocument();
     expect(screen.getAllByText('About')[0]).toBeInTheDocument();

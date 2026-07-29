@@ -427,7 +427,15 @@ Expected: all selected tests pass.
 Run:
 
 ```powershell
-rg --hidden -n -S "Dasha Patmaja|Dashapatmaja Services|Private Limited|Pvt\. Ltd\.|Mr\. Shreepathy Ranga Bhatta|Ms\. Anusha Pai" --glob "!node_modules/**" --glob "!dist/**" --glob "!docs/superpowers/specs/2026-07-29-homepage-hero-and-canonical-naming-design.md" .
+$legacyPatterns = @(
+  ('Dasha' + ' Patmaja'),
+  ('Dashapatmaja' + ' Services'),
+  ('Private' + ' Limited'),
+  ('Pvt.' + ' Ltd.'),
+  ('Mr.' + ' Shreepathy Ranga Bhatta'),
+  ('Ms.' + ' Anusha Pai')
+) -join '|'
+rg --hidden -n -S $legacyPatterns --glob "!node_modules/**" --glob "!dist/**" --glob "!docs/superpowers/specs/2026-07-29-homepage-hero-and-canonical-naming-design.md" .
 ```
 
 Expected: no active-product matches. A result is acceptable only if it is a

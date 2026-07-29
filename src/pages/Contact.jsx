@@ -166,7 +166,7 @@ const Contact = () => {
                 <div className="success-state" role="status" aria-live="polite">
                   <CheckCircle2 className="success-icon" />
                   <h3>Message Sent!</h3>
-                  <p>Thank you for reaching out to Dasha Patmaja Services. We will review your message and respond within 24 hours.</p>
+                  <p>Thank you for reaching out to Dashapatmaja Solutions Pvt Ltd. We will review your message and respond within 24 hours.</p>
                   <button type="button" className="btn btn-primary" onClick={() => setSubmitted(false)}>
                     Send Another Message
                   </button>

@@ -3,7 +3,7 @@ import path from 'node:path';
 
 const routes = [
   { route: '', heading: 'We build brands.' },
-  { route: 'about', heading: 'About Dasha Patmaja Services' },
+  { route: 'about', heading: 'About Dashapatmaja Solutions Pvt Ltd' },
   { route: 'brands', heading: 'We build brands from the inside out.' },
   { route: 'marketing', heading: 'Marketing' },
   { route: 'branding', heading: 'Branding' },

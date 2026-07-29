@@ -1,6 +1,6 @@
 # Contributing to the DSPL website
 
-Thank you for helping improve the Dasha Patmaja Services website. This
+Thank you for helping improve the Dashapatmaja Solutions Pvt Ltd website. This
 repository uses short-lived branches and pull requests so that the public site
 changes only after review.
 

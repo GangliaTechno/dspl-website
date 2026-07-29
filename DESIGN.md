@@ -1,5 +1,5 @@
 ---
-name: Dasha Patmaja Growth House
+name: Dashapatmaja Solutions Pvt Ltd
 description: Institutional Brand Building & Incubation Design System
 colors:
   primary: "#F5A800"
@@ -59,7 +59,7 @@ components:
     padding: "12px 28px"
 ---
 
-# Design System: Dasha Patmaja Growth House
+# Design System: Dashapatmaja Solutions Pvt Ltd
 
 ## 1. Overview
 

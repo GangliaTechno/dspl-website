@@ -12,7 +12,7 @@ web
 Founders and D2C Brand Owners in India looking to build, rebrand, launch, and scale consumer e-commerce businesses with end-to-end growth, marketing, and incubation support.
 
 ## Product Purpose
-Dasha Patmaja Services Pvt Ltd (DSPL / dashapatmaja.in) operates as a growth house and incubator backed by MUTBI & DST-NIDHI. It offers strategic discovery, brand design, performance marketing, e-commerce engineering, and venture scaling.
+Dashapatmaja Solutions Pvt Ltd (DSPL / dashapatmaja.in) operates as a growth house and incubator backed by MUTBI & DST-NIDHI. It offers strategic discovery, brand design, performance marketing, e-commerce engineering, and venture scaling.
 
 ## Positioning
 The premier brand incubation and growth house powering India's next generation of category-defining D2C consumer brands.
