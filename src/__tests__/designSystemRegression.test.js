@@ -103,6 +103,33 @@ describe('approved design-system corrections', () => {
     );
   });
 
+  it('presents four alternating About journey stories with original imagery', () => {
+    const aboutPage = readSource('src/pages/About.jsx');
+    const aboutCss = readSource('src/pages/About.css');
+
+    for (const year of ['2023', '2024', '2025', '2026']) {
+      expect(aboutPage).toContain(`about-journey-${year}.webp`);
+    }
+    expect(aboutPage).toContain('const journeyMilestones = [');
+    expect(aboutPage).toContain('journeyMilestones.map((milestone, index)');
+    expect(aboutPage).toContain(
+      "index % 2 === 1 ? 'journey-story--reverse' : ''",
+    );
+    expect(aboutPage).toContain('className="journey-story-media"');
+    expect(aboutPage).toContain('className="journey-story-copy"');
+    expect(aboutPage).not.toContain('timeline-badge');
+    expect(aboutPage).not.toContain('timeline-container');
+    expect(aboutCss).toMatch(
+      /\.journey-story\s*{[^}]*display:\s*grid;[^}]*grid-template-areas:\s*"media copy";/s,
+    );
+    expect(aboutCss).toMatch(
+      /\.journey-story--reverse\s*{[^}]*grid-template-areas:\s*"copy media";/s,
+    );
+    expect(aboutCss).toMatch(
+      /@media\s*\(max-width:\s*768px\)\s*{[\s\S]*?\.journey-story,[\s\S]*?\.journey-story--reverse\s*{[^}]*grid-template-areas:\s*"media"\s*"copy";/s,
+    );
+  });
+
   it('keeps the desktop Home hero at least one available viewport tall', () => {
     const home = readSource('src/pages/Home.css');
 
@@ -184,7 +211,7 @@ describe('approved design-system corrections', () => {
     expect(homePage).not.toContain('homepage-owned-brand');
   });
 
-  it('presents the About milestones as a calm editorial ledger', () => {
+  it('keeps the About journey inside the approved editorial section', () => {
     const aboutPage = readSource('src/pages/About.jsx');
     const aboutCss = readSource('src/pages/About.css');
 
@@ -198,15 +225,7 @@ describe('approved design-system corrections', () => {
     expect(aboutCss).toMatch(
       /\.timeline-section\s*{[^}]*background:\s*var\(--bg-secondary\);[^}]*border-block:\s*1px solid var\(--border-color\);/s,
     );
-    expect(aboutCss).toMatch(
-      /\.timeline-item\s*{[^}]*display:\s*grid;[^}]*grid-template-columns:\s*7rem 2\.5rem minmax\(0,\s*1fr\);/s,
-    );
-    expect(aboutCss).toMatch(
-      /@media\s*\(max-width:\s*768px\)\s*{[\s\S]*?\.timeline-item\s*{[^}]*grid-template-columns:\s*2\.5rem minmax\(0,\s*1fr\);/s,
-    );
-    expect(aboutPage).toMatch(
-      /className="timeline-item">[\s\S]*?className="timeline-year">2023<\/div>[\s\S]*?className="timeline-badge"/s,
-    );
+    expect(aboutPage).toContain('className="journey-stories"');
   });
 
   it('aligns supporter logos and uses the approved warm Raw Radicles treatment', () => {

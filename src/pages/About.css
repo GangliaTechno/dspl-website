@@ -205,110 +205,76 @@
   color: var(--text-secondary);
 }
 
-.timeline-container {
-  position: relative;
-  max-width: 960px;
-  margin: 0 auto;
-  border-top: 1px solid var(--border-color);
-}
-
-.timeline-container::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 8.25rem;
-  width: 1px;
-  background: var(--accent-border-alpha);
-  pointer-events: none;
-}
-
-.timeline-item {
-  position: relative;
+.journey-stories {
   display: grid;
-  grid-template-columns: 7rem 2.5rem minmax(0, 1fr);
-  align-items: start;
-  width: 100%;
-  padding: 1.75rem 0;
-  border-bottom: 1px solid var(--border-color);
+  gap: clamp(4rem, 8vw, 7rem);
+  max-width: 72rem;
+  margin: 0 auto;
 }
 
-.timeline-year {
-  padding-top: 0.2rem;
+.journey-story {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(18rem, 0.95fr);
+  grid-template-areas: "media copy";
+  gap: clamp(2.5rem, 5vw, 5rem);
+  align-items: center;
+}
+
+.journey-story--reverse {
+  grid-template-columns: minmax(18rem, 0.95fr) minmax(0, 1.05fr);
+  grid-template-areas: "copy media";
+}
+
+.journey-story-media {
+  grid-area: media;
+  overflow: hidden;
+  aspect-ratio: 3 / 2;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background: #ffffff;
+}
+
+.journey-story-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.journey-story-copy {
+  grid-area: copy;
+  max-width: 34rem;
+}
+
+.journey-year {
+  margin-bottom: 0.75rem;
   color: var(--accent-text);
   font-family: var(--font-heading);
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 800;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
-.timeline-badge {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  width: 2rem;
-  height: 2rem;
-  align-items: center;
-  justify-content: center;
-  justify-self: center;
-  border: 1px solid var(--accent-border-alpha);
-  border-radius: 50%;
-  background: var(--bg-secondary);
-  color: var(--accent-text);
-}
-
-.timeline-card {
-  min-width: 0;
-  padding: 0 0 0 1.5rem;
-}
-
-.timeline-milestone-title {
-  margin-bottom: 0.75rem;
+.journey-title {
+  margin-bottom: 1rem;
   color: var(--text-heading);
-  font-size: 1.15rem;
-  font-weight: 700;
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  line-height: 1.2;
+  text-wrap: balance;
 }
 
-.timeline-list {
-  display: flex;
-  max-width: 60ch;
-  flex-direction: column;
-  gap: 0.4rem;
+.journey-list {
+  display: grid;
+  gap: 0.65rem;
   padding-left: 1.1rem;
 }
 
-.timeline-list li {
+.journey-list li {
   color: var(--text-secondary);
-  font-size: 0.95rem;
-  line-height: 1.6;
-}
-
-/* The year, marker, and milestone share one baseline-led row. */
-.timeline-container > div {
-  position: relative;
-}
-
-.timeline-container > div:last-child .timeline-item {
-  border-bottom: 0;
-}
-
-/*
- * Keep the timeline deliberately flat: its hierarchy comes from typography,
- * the rule, and the year markers rather than floating cards or photography.
- */
-.timeline-container::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    var(--accent-border-alpha),
-    transparent
-  );
-  opacity: 0.5;
+  font-size: 1rem;
+  line-height: 1.65;
+  text-wrap: pretty;
 }
 
 /* Team Section */
@@ -496,26 +462,19 @@
     line-height: 1.65;
     text-wrap: pretty;
   }
-  .timeline-container::after {
-    left: 1.25rem;
+  .journey-stories {
+    gap: 3.5rem;
   }
-  .timeline-item {
-    grid-template-columns: 2.5rem minmax(0, 1fr);
-    padding-block: 1.5rem;
+  .journey-story,
+  .journey-story--reverse {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "media"
+      "copy";
+    gap: 1.5rem;
   }
-  .timeline-year {
-    grid-column: 2;
-    grid-row: 1;
-    padding: 0 0 0 1rem;
-  }
-  .timeline-badge {
-    grid-column: 1;
-    grid-row: 1 / span 2;
-  }
-  .timeline-card {
-    grid-column: 2;
-    grid-row: 2;
-    padding: 0.5rem 0 0 1rem;
+  .journey-story-copy {
+    max-width: none;
   }
   .team-grid {
     grid-template-columns: 1fr;

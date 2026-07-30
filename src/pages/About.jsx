@@ -1,7 +1,7 @@
 import './About.css';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Calendar, Award, Star, Compass, Target, Eye } from 'lucide-react';
+import { Target, Eye } from 'lucide-react';
 import { motion, useReducedMotion } from 'framer-motion';
 import useSEO from '../hooks/useSEO';
 import { getRouteMetadata } from '../seo/routeMetadata';
@@ -17,6 +17,53 @@ import aboutHero1440 from '../assets/dspl-about-hero-1440.webp';
 import aboutHero1600 from '../assets/dspl-about-hero-1600.webp';
 import aboutHeroMobile from '../assets/dspl-about-hero-mobile.webp';
 import teamBgImg from '../assets/linen_concrete_texture.png';
+import journey2023Img from '../assets/about-journey-2023.webp';
+import journey2024Img from '../assets/about-journey-2024.webp';
+import journey2025Img from '../assets/about-journey-2025.webp';
+import journey2026Img from '../assets/about-journey-2026.webp';
+
+const journeyMilestones = [
+  {
+    year: '2023',
+    title: 'Founding and first incubation',
+    image: journey2023Img,
+    alt: 'Consumer-brand planning materials in an early-stage incubator workspace',
+    items: [
+      'Started with a plan to build consumer brands and the services that grow them.',
+      'Incubated at GoK Bioincubator, Manipal, where we set up our base.',
+    ],
+  },
+  {
+    year: '2024',
+    title: 'First brand',
+    image: journey2024Img,
+    alt: 'Cacao, chocolate, and Ayurvedic botanicals arranged for premium product development',
+    items: [
+      'Launched Raw Radicles, a premium chocolate brand with Ayurveda inside.',
+      'Built the product, packaging, and supply chain from the ground up.',
+    ],
+  },
+  {
+    year: '2025',
+    title: 'MUTBI incubation and national grant',
+    image: journey2025Img,
+    alt: 'Research desk with a consumer-product prototype and measured botanical ingredients',
+    items: [
+      'Joined MUTBI at MAHE, Manipal, for technical and academic support.',
+      'Won a government grant under the NIDHI-PRAYAS scheme.',
+      'Signed a Memorandum of Understanding with Amruthanjali Ayurveda for manufacturing.',
+    ],
+  },
+  {
+    year: '2026',
+    title: 'Services arm',
+    image: journey2026Img,
+    alt: 'Brand and e-commerce operations studio with packaging, photography, and dispatch materials',
+    items: [
+      'Opened our branding, marketing, and e-commerce services to outside clients.',
+    ],
+  },
+];
 
 const About = () => {
   const location = useLocation();
@@ -218,94 +265,41 @@ const About = () => {
             </p>
           </div>
 
-          <div className="timeline-container">
-            {/* Year 2023 */}
-            <motion.div 
-              initial={revealInitial(30)}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={revealTransition({ duration: 0.6 })}
-            >
-              <div className="timeline-item">
-                <div className="timeline-year">2023</div>
-                <div className="timeline-badge">
-                  <Calendar size={18} />
+          <div className="journey-stories">
+            {journeyMilestones.map((milestone, index) => (
+              <motion.article
+                className={[
+                  'journey-story',
+                  index % 2 === 1 ? 'journey-story--reverse' : '',
+                ].filter(Boolean).join(' ')}
+                key={milestone.year}
+                initial={revealInitial(24)}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-50px' }}
+                transition={revealTransition({
+                  duration: 0.55,
+                  delay: index > 0 ? 0.05 : 0,
+                })}
+              >
+                <div className="journey-story-media">
+                  <img
+                    src={milestone.image}
+                    alt={milestone.alt}
+                    loading="lazy"
+                    decoding="async"
+                  />
                 </div>
-                <div className="timeline-card">
-                  <h3 className="timeline-milestone-title">Founding and first incubation</h3>
-                  <ul className="timeline-list">
-                    <li>Started with a plan to build consumer brands and the services that grow them.</li>
-                    <li>Incubated at GoK Bioincubator, Manipal, where we set up our base.</li>
+                <div className="journey-story-copy">
+                  <div className="journey-year">{milestone.year}</div>
+                  <h3 className="journey-title">{milestone.title}</h3>
+                  <ul className="journey-list">
+                    {milestone.items.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
                   </ul>
                 </div>
-              </div>
-            </motion.div>
-
-            {/* Year 2024 */}
-            <motion.div 
-              initial={revealInitial(30)}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={revealTransition({ duration: 0.6 })}
-            >
-              <div className="timeline-item">
-                <div className="timeline-year">2024</div>
-                <div className="timeline-badge">
-                  <Star size={18} />
-                </div>
-                <div className="timeline-card">
-                  <h3 className="timeline-milestone-title">First brand</h3>
-                  <ul className="timeline-list">
-                    <li>Launched Raw Radicles, a premium chocolate brand with Ayurveda inside.</li>
-                    <li>Built the product, packaging, and supply chain from the ground up.</li>
-                  </ul>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Year 2025 */}
-            <motion.div 
-              initial={revealInitial(30)}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={revealTransition({ duration: 0.6 })}
-            >
-              <div className="timeline-item">
-                <div className="timeline-year">2025</div>
-                <div className="timeline-badge">
-                  <Award size={18} />
-                </div>
-                <div className="timeline-card">
-                  <h3 className="timeline-milestone-title">MUTBI incubation and national grant</h3>
-                  <ul className="timeline-list">
-                    <li>Joined MUTBI at MAHE, Manipal, for technical and academic support.</li>
-                    <li>Won a government grant under the NIDHI-PRAYAS scheme.</li>
-                    <li>Signed a Memorandum of Understanding with Amruthanjali Ayurveda for manufacturing.</li>
-                  </ul>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Year 2026 */}
-            <motion.div 
-              initial={revealInitial(30)}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={revealTransition({ duration: 0.6 })}
-            >
-              <div className="timeline-item">
-                <div className="timeline-year">2026</div>
-                <div className="timeline-badge">
-                  <Compass size={18} />
-                </div>
-                <div className="timeline-card">
-                  <h3 className="timeline-milestone-title">Services arm (new entry)</h3>
-                  <ul className="timeline-list">
-                    <li>Opened our branding, marketing, and e-commerce services to outside clients.</li>
-                  </ul>
-                </div>
-              </div>
-            </motion.div>
+              </motion.article>
+            ))}
           </div>
         </div>
       </section>
