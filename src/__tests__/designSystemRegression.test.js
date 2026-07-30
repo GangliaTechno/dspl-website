@@ -5,6 +5,15 @@ import { describe, expect, it } from 'vitest';
 const readSource = (relativePath) =>
   readFileSync(resolve(relativePath), 'utf8');
 
+const readPngSize = (relativePath) => {
+  const image = readFileSync(resolve(relativePath));
+
+  return {
+    width: image.readUInt32BE(16),
+    height: image.readUInt32BE(20),
+  };
+};
+
 describe('approved design-system corrections', () => {
   it('keeps the project planner inside a fixed, bounded modal surface', () => {
     const css = readSource('src/components/WorkWithUsModal.css');
@@ -23,20 +32,48 @@ describe('approved design-system corrections', () => {
     );
   });
 
-  it('uses a readable gold token for text placed on light surfaces', () => {
+  it('uses readable gold tokens for light and dark surfaces', () => {
     const tokens = readSource('src/index.css');
     const brands = readSource('src/pages/Brands.css');
     const privacy = readSource('src/pages/PrivacyPolicy.css');
 
     expect(tokens).toContain('--accent-text: #8A5B00;');
     expect(brands).toMatch(
-      /\.brands-hero-content\s+\.section-subtitle\s*{[^}]*color:\s*var\(--accent-text\);/s,
+      /\.brands-hero-content\s+\.section-subtitle\s*{[^}]*color:\s*var\(--accent\);/s,
     );
     expect(privacy).toMatch(
       /\.privacy-section h2\s*{[^}]*color:\s*var\(--accent-text\);/s,
     );
     expect(privacy).toMatch(
       /\.contact-info-card a\s*{[^}]*color:\s*var\(--accent-text\);/s,
+    );
+  });
+
+  it('uses a centered Brands hero with a flat contrast overlay', () => {
+    const brandsPage = readSource('src/pages/Brands.jsx');
+    const brandsCss = readSource('src/pages/Brands.css');
+
+    expect(brandsPage).not.toContain('brands-hero-overlay');
+    expect(brandsPage).toContain('brands-hero-editorial-1672.webp');
+    expect(brandsPage).toContain('brands-hero-editorial-mobile.webp');
+    expect(brandsCss).toMatch(
+      /\.brands-hero-bg\s*{[^}]*width:\s*100%;/s,
+    );
+    expect(brandsCss).not.toMatch(/\.brands-hero-overlay\s*{/);
+    expect(brandsCss).toMatch(
+      /\.brands-hero\s*{[^}]*text-align:\s*center;[^}]*min-height:\s*32rem;[^}]*padding:\s*8rem 0 6rem;/s,
+    );
+    expect(brandsCss).toMatch(
+      /\.brands-hero::after\s*{[^}]*background:\s*rgba\(8,\s*8,\s*8,\s*0\.68\);/s,
+    );
+    expect(brandsCss).toMatch(
+      /\.brands-hero \.container\s*{[^}]*max-width:\s*50rem;[^}]*justify-content:\s*center;/s,
+    );
+    expect(brandsCss).toMatch(
+      /\.brands-hero-content\s*{[^}]*max-width:\s*50rem;[^}]*margin-inline:\s*auto;[^}]*text-align:\s*center;/s,
+    );
+    expect(brandsCss).toMatch(
+      /@media\s*\(max-width:\s*900px\)\s*{[\s\S]*?\.brands-hero\s*{[^}]*padding:\s*5\.5rem 0 4\.5rem;[\s\S]*?\.brands-hero-img\s*{[^}]*object-position:\s*56% 52%;/s,
     );
   });
 
@@ -259,34 +296,18 @@ describe('approved design-system corrections', () => {
     expect(homeSections).toMatch(
       /@media\s*\(prefers-reduced-motion:\s*reduce\)\s*{[\s\S]*?\.supporter-track-running\s*{[^}]*animation:\s*none;/s,
     );
-    expect(homeSections).toContain('--supporter-gap: 4.5rem;');
-    expect(homeSections).toContain('--supporter-logo-height: 1.75rem;');
+    expect(homeSections).toContain('--supporter-gap: 3.75rem;');
+    expect(homeSections).not.toContain('--supporter-slot-width');
     expect(homeSections).toMatch(
-      /\.supporter-logo-dst\s*{[^}]*--supporter-slot-width:\s*8rem;[^}]*--supporter-logo-height:\s*2rem;[^}]*--supporter-y:\s*-3px;/s,
+      /\.supporter-logo-slot\s*{[^}]*width:\s*auto;[^}]*height:\s*var\(--supporter-slot-height\);/s,
     );
     expect(homeSections).toMatch(
-      /\.supporter-logo-nidhi\s*{[^}]*--supporter-slot-width:\s*5rem;[^}]*--supporter-logo-height:\s*2\.75rem;[^}]*--supporter-y:\s*-5px;/s,
+      /\.supporter-logo\s*{[^}]*width:\s*auto;[^}]*height:\s*100%;[^}]*object-fit:\s*contain;[^}]*transform:\s*none;[^}]*opacity:\s*0\.6;/s,
     );
+    expect(homeSections).not.toMatch(/\.supporter-logo-(?:dst|nidhi|mutbi|startup)\s*{/);
+    expect(homeSections).not.toContain('--supporter-optical-trim');
     expect(homeSections).toMatch(
-      /@media\s*\(max-width:\s*768px\)\s*{[\s\S]*?\.supporter-logo-nidhi\s*{[^}]*--supporter-slot-width:\s*3\.75rem;[^}]*--supporter-logo-height:\s*2rem;[^}]*--supporter-y:\s*-3px;/s,
-    );
-    expect(homeSections).toMatch(
-      /\.supporter-logo-mutbi\s*{[^}]*--supporter-slot-width:\s*13\.5rem;[^}]*--supporter-optical-trim:\s*-0\.5rem;[^}]*--supporter-logo-opacity:\s*0\.65;/s,
-    );
-    expect(homeSections).toMatch(
-      /\.supporter-logo-startup\s*{[^}]*--supporter-slot-width:\s*13rem;/s,
-    );
-    expect(homeSections).toMatch(
-      /\.supporter-logo\s*{[^}]*width:\s*auto;[^}]*height:\s*var\(--supporter-logo-height\);[^}]*transform:\s*translateY\(var\(--supporter-y,\s*0\)\);/s,
-    );
-    expect(homeSections).toMatch(
-      /\.supporter-logo\s*{[^}]*opacity:\s*var\(--supporter-logo-opacity,\s*0\.5\);/s,
-    );
-    expect(homeSections).toMatch(
-      /\.supporter-logo-slot\s*{[^}]*margin-inline:\s*var\(--supporter-optical-trim,\s*0rem\);/s,
-    );
-    expect(homeSections).toMatch(
-      /@media\s*\(max-width:\s*768px\)\s*{[\s\S]*?--supporter-gap:\s*3\.5rem;/s,
+      /@media\s*\(max-width:\s*768px\)\s*{[\s\S]*?--supporter-gap:\s*2\.5rem;/s,
     );
     expect(supporter).not.toContain('supporter-track-paused');
     expect(supporter).not.toContain('Pause supporter logos');
@@ -299,13 +320,28 @@ describe('approved design-system corrections', () => {
     expect(homePage).toContain(
       "alt: 'NIDHI PRAYAS', className: 'supporter-logo-nidhi'",
     );
-    expect(homePage).toContain('supporter-dst-nidhi.webp');
-    expect(homePage).toContain('supporter-nidhi-prayas-padded.webp');
+    const marqueeSupporters = [
+      ['supporter-dst-nidhi-marquee.png', 186],
+      ['supporter-nidhi-prayas-marquee.png', 113],
+      ['supporter-mutbi-marquee.png', 300],
+      ['supporter-startup-karnataka-marquee.png', 260],
+    ];
+    marqueeSupporters.forEach(([asset, width]) => {
+      expect(homePage).toContain(asset);
+      expect(readPngSize(`src/assets/${asset}`)).toEqual({
+        width,
+        height: 96,
+      });
+    });
     expect(homePage).not.toContain(
       "from '../assets/supporter-nidhi-prayas.webp'",
     );
-    expect(homePage).toContain('supporter-mutbi.webp');
-    expect(homePage).toContain('supporter-startup-karnataka.webp');
+    expect(homePage).not.toContain(
+      "from '../assets/supporter-mutbi.webp'",
+    );
+    expect(homePage).not.toContain(
+      "from '../assets/supporter-startup-karnataka.webp'",
+    );
     expect(homeSections).toMatch(
       /\.owned-brand-section\s*{[^}]*background:\s*var\(--bg-secondary\);/s,
     );

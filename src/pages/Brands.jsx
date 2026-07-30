@@ -4,7 +4,10 @@ import { motion, useReducedMotion } from 'framer-motion';
 import useSEO from '../hooks/useSEO';
 import { getRouteMetadata } from '../seo/routeMetadata';
 import rawRadiclesLogo from '../assets/raw-radicles-logo-cropped.webp';
-import brandHeroStudio from '../assets/brands-hero-studio.webp';
+import brandHero768 from '../assets/brands-hero-editorial-768.webp';
+import brandHero1200 from '../assets/brands-hero-editorial-1200.webp';
+import brandHero1672 from '../assets/brands-hero-editorial-1672.webp';
+import brandHeroMobile from '../assets/brands-hero-editorial-mobile.webp';
 import pipelineBgImg from '../assets/brands_pipeline_bg.jpg';
 import { openWorkModal } from '../utils/workModal';
 
@@ -23,18 +26,22 @@ const Brands = () => {
 
       {/* Intro Section */}
       <section className="section brands-hero">
-        <div className="brands-hero-bg">
-          {/* Decorative background image — hidden from screen readers */}
+        <picture className="brands-hero-bg" aria-hidden="true">
+          <source media="(max-width: 600px)" srcSet={brandHeroMobile} />
+          <source
+            srcSet={`${brandHero768} 768w, ${brandHero1200} 1200w, ${brandHero1672} 1672w`}
+            sizes="100vw"
+          />
           <img
-            src={brandHeroStudio}
+            src={brandHero1672}
             alt=""
-            aria-hidden="true"
             className="brands-hero-img"
-            loading="eager"
+            width="1672"
+            height="941"
+            fetchPriority="high"
             decoding="async"
           />
-          <div className="brands-hero-overlay"></div>
-        </div>
+        </picture>
         <div className="container">
           <motion.div
             className="brands-hero-content"
