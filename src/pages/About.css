@@ -107,6 +107,10 @@
   margin: 0 auto;
 }
 
+.mission-vision-grid > div {
+  height: 100%;
+}
+
 .mv-card {
   padding: 3rem 2.5rem;
   border-radius: 4px;
@@ -117,6 +121,8 @@
   align-items: center;
   text-align: center;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  height: 100%;
+  box-sizing: border-box;
 }
 
 .mv-card:hover {

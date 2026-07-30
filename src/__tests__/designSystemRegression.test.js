@@ -92,6 +92,17 @@ describe('approved design-system corrections', () => {
     expect(headerPage).toContain('requestAnimationFrame');
   });
 
+  it('keeps the About mission and vision cards equal in height', () => {
+    const about = readSource('src/pages/About.css');
+
+    expect(about).toMatch(
+      /\.mission-vision-grid\s*>\s*div\s*{[^}]*height:\s*100%;/s,
+    );
+    expect(about).toMatch(
+      /\.mv-card\s*{[^}]*height:\s*100%;[^}]*box-sizing:\s*border-box;/s,
+    );
+  });
+
   it('keeps the desktop Home hero at least one available viewport tall', () => {
     const home = readSource('src/pages/Home.css');
 
