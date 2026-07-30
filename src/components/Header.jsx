@@ -1,5 +1,5 @@
 import './Header.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import logoImg from '../assets/icon_orange.png';
@@ -8,20 +8,48 @@ import { openWorkModal } from '../utils/workModal';
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [isHidden, setIsHidden] = useState(false);
+  const lastScrollYRef = useRef(0);
+  const animationFrameRef = useRef(null);
   const location = useLocation();
 
   useEffect(() => {
+    lastScrollYRef.current = Math.max(window.scrollY, 0);
+
+    const updateHeader = () => {
+      animationFrameRef.current = null;
+
+      const currentScrollY = Math.max(window.scrollY, 0);
+      const scrollDelta = currentScrollY - lastScrollYRef.current;
+
+      setScrolled(currentScrollY > 20);
+
+      if (isOpen || currentScrollY <= 80) {
+        setIsHidden(false);
+      } else if (scrollDelta > 4) {
+        setIsHidden(true);
+      } else if (scrollDelta < -4) {
+        setIsHidden(false);
+      }
+
+      lastScrollYRef.current = currentScrollY;
+    };
+
     const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
+      if (animationFrameRef.current === null) {
+        animationFrameRef.current = window.requestAnimationFrame(updateHeader);
       }
     };
-    handleScroll();
+
+    updateHeader();
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (animationFrameRef.current !== null) {
+        window.cancelAnimationFrame(animationFrameRef.current);
+      }
+    };
+  }, [isOpen]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -65,7 +93,13 @@ const Header = () => {
 
   return (
     <>
-      <header className={`header ${scrolled ? 'header-scrolled' : ''}`}>
+      <header
+        className={[
+          'header',
+          scrolled ? 'header-scrolled' : '',
+          isHidden ? 'header-hidden' : '',
+        ].filter(Boolean).join(' ')}
+      >
         <div className="header-container">
           {/* Left Side: Logo */}
           <Link to="/" className="logo-link" onClick={handleLinkClick}>

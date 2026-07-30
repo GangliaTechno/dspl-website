@@ -10,7 +10,7 @@ import homeHero1440 from '../assets/dspl-home-editorial-1440.webp';
 import homeHero1920 from '../assets/dspl-home-editorial-1920.webp';
 import homeHeroMobile from '../assets/dspl-home-editorial-mobile.webp';
 import dstNidhiLogo from '../assets/supporter-dst-nidhi.webp';
-import nidhiPrayasLogo from '../assets/supporter-nidhi-prayas.webp';
+import nidhiPrayasLogo from '../assets/supporter-nidhi-prayas-padded.webp';
 import mutbiLogo from '../assets/supporter-mutbi.webp';
 import startupKarnatakaLogo from '../assets/supporter-startup-karnataka.webp';
 import useSEO from '../hooks/useSEO';

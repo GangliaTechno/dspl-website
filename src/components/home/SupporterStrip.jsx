@@ -1,6 +1,5 @@
 import { useLayoutEffect, useRef, useState } from 'react';
 import { useReducedMotion } from 'framer-motion';
-import { Pause, Play } from 'lucide-react';
 
 const SupporterStrip = ({ supporters }) => {
   const prefersReducedMotion = useReducedMotion();
@@ -10,7 +9,6 @@ const SupporterStrip = ({ supporters }) => {
     sequenceWidth: 0,
     sequenceCount: 2,
   });
-  const [isPaused, setIsPaused] = useState(false);
 
   useLayoutEffect(() => {
     const band = bandRef.current;
@@ -67,7 +65,6 @@ const SupporterStrip = ({ supporters }) => {
     'supporter-track',
     prefersReducedMotion ? 'supporter-track-static' : '',
     shouldAnimate ? 'supporter-track-running' : '',
-    isPaused ? 'supporter-track-paused' : '',
   ].filter(Boolean).join(' ');
 
   return (
@@ -112,19 +109,6 @@ const SupporterStrip = ({ supporters }) => {
           ))}
         </div>
       </div>
-      {!prefersReducedMotion && (
-        <button
-          type="button"
-          className="supporter-motion-control"
-          aria-label={isPaused ? 'Resume supporter logos' : 'Pause supporter logos'}
-          aria-pressed={isPaused}
-          onClick={() => setIsPaused((paused) => !paused)}
-        >
-          {isPaused
-            ? <Play size={16} aria-hidden="true" />
-            : <Pause size={16} aria-hidden="true" />}
-        </button>
-      )}
     </div>
   );
 };

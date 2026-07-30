@@ -13,6 +13,7 @@
   --supporter-logo-height: 1.75rem;
   --supporter-slot-height: 3rem;
   --supporter-sequence-min-width: max-content;
+  --supporter-edge-guard: clamp(1.5rem, 3vw, 3rem);
   --supporter-edge-fade: clamp(4rem, 8vw, 9rem);
 }
 
@@ -22,15 +23,19 @@
   -webkit-mask-image: linear-gradient(
     90deg,
     transparent,
+    transparent var(--supporter-edge-guard),
     #000 var(--supporter-edge-fade),
     #000 calc(100% - var(--supporter-edge-fade)),
+    transparent calc(100% - var(--supporter-edge-guard)),
     transparent
   );
   mask-image: linear-gradient(
     90deg,
     transparent,
+    transparent var(--supporter-edge-guard),
     #000 var(--supporter-edge-fade),
     #000 calc(100% - var(--supporter-edge-fade)),
+    transparent calc(100% - var(--supporter-edge-guard)),
     transparent
   );
 }
@@ -56,11 +61,6 @@
 .supporter-track-running {
   animation: supporter-marquee 22s linear infinite;
   will-change: transform;
-}
-
-.supporter-track-paused,
-.supporter-viewport:hover .supporter-track-running {
-  animation-play-state: paused;
 }
 
 @keyframes supporter-marquee {
@@ -115,40 +115,6 @@
   opacity: 1;
 }
 
-.supporter-motion-control {
-  position: absolute;
-  top: 50%;
-  right: clamp(0.75rem, 2vw, 1.5rem);
-  z-index: 2;
-  display: inline-flex;
-  width: 2.25rem;
-  height: 2.25rem;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  transform: translateY(-50%);
-  border: 1px solid rgb(255 255 255 / 24%);
-  border-radius: 50%;
-  background: rgb(8 8 8 / 72%);
-  color: #fff;
-  cursor: pointer;
-  backdrop-filter: blur(8px);
-  transition:
-    background-color 180ms ease,
-    border-color 180ms ease;
-}
-
-.supporter-motion-control:hover,
-.supporter-motion-control:focus-visible {
-  border-color: rgb(255 255 255 / 52%);
-  background: rgb(8 8 8 / 92%);
-}
-
-.supporter-motion-control:focus-visible {
-  outline: 2px solid var(--accent-primary);
-  outline-offset: 3px;
-}
-
 .supporter-logo-dst {
   --supporter-slot-width: 8rem;
   --supporter-logo-height: 2rem;
@@ -157,8 +123,8 @@
 
 .supporter-logo-nidhi {
   --supporter-slot-width: 5rem;
-  --supporter-logo-height: 2.5rem;
-  --supporter-y: -7px;
+  --supporter-logo-height: 2.75rem;
+  --supporter-y: -5px;
 }
 
 .supporter-logo-mutbi {
@@ -179,7 +145,8 @@
     --supporter-logo-height: 1.375rem;
     --supporter-slot-height: 2.25rem;
     --supporter-sequence-min-width: max-content;
-    --supporter-edge-fade: 2.5rem;
+    --supporter-edge-guard: 0.75rem;
+    --supporter-edge-fade: 3rem;
   }
 
   .supporter-sequence {
@@ -193,7 +160,7 @@
 
   .supporter-logo-nidhi {
     --supporter-slot-width: 3.75rem;
-    --supporter-logo-height: 1.875rem;
+    --supporter-logo-height: 2rem;
     --supporter-y: -3px;
   }
 
@@ -204,12 +171,6 @@
 
   .supporter-logo-startup {
     --supporter-slot-width: 9.5rem;
-  }
-
-  .supporter-motion-control {
-    right: 0.75rem;
-    width: 2rem;
-    height: 2rem;
   }
 
   .supporter-track-static .supporter-sequence {
@@ -228,10 +189,6 @@
     animation: none;
     transform: none;
     will-change: auto;
-  }
-
-  .supporter-motion-control {
-    transition: none;
   }
 }
 

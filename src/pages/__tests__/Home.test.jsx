@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, within } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { describe, expect, it } from 'vitest';
 import Home from '../Home';
@@ -68,7 +68,7 @@ describe('Home page', () => {
     ).not.toBeInTheDocument();
   });
 
-  it('lets visitors pause and resume the supporter logo motion', () => {
+  it('keeps the supporter marquee decorative without a pause control', () => {
     render(
       <BrowserRouter>
         <Home />
@@ -78,17 +78,8 @@ describe('Home page', () => {
     const supporterRegion = screen.getByRole('region', {
       name: 'Supported by',
     });
-    const pauseButton = within(supporterRegion).getByRole('button', {
-      name: 'Pause supporter logos',
-    });
-
-    expect(pauseButton).toHaveAttribute('aria-pressed', 'false');
-    fireEvent.click(pauseButton);
-
     expect(
-      within(supporterRegion).getByRole('button', {
-        name: 'Resume supporter logos',
-      }),
-    ).toHaveAttribute('aria-pressed', 'true');
+      within(supporterRegion).queryByRole('button'),
+    ).not.toBeInTheDocument();
   });
 });

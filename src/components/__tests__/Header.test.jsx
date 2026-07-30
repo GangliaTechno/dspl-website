@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { describe, it, expect } from 'vitest';
 import Header from '../Header';
@@ -33,5 +33,38 @@ describe('Header Component', () => {
 
     fireEvent.click(toggleBtn);
     expect(toggleBtn).toHaveAttribute('aria-expanded', 'true');
+  });
+
+  it('hides while scrolling down and returns while scrolling up', async () => {
+    const originalAnimationFrame = window.requestAnimationFrame;
+    const originalCancelAnimationFrame = window.cancelAnimationFrame;
+
+    window.requestAnimationFrame = (callback) => window.setTimeout(callback, 0);
+    window.cancelAnimationFrame = (id) => window.clearTimeout(id);
+    Object.defineProperty(window, 'scrollY', {
+      configurable: true,
+      writable: true,
+      value: 0,
+    });
+
+    render(
+      <BrowserRouter>
+        <Header />
+      </BrowserRouter>
+    );
+
+    const header = screen.getByRole('banner');
+
+    window.scrollY = 180;
+    fireEvent.scroll(window);
+    await waitFor(() => expect(header).toHaveClass('header-hidden'));
+
+    window.scrollY = 100;
+    fireEvent.scroll(window);
+    await waitFor(() => expect(header).not.toHaveClass('header-hidden'));
+
+    window.requestAnimationFrame = originalAnimationFrame;
+    window.cancelAnimationFrame = originalCancelAnimationFrame;
+    window.scrollY = 0;
   });
 });

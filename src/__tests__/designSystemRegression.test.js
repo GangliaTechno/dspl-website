@@ -57,7 +57,7 @@ describe('approved design-system corrections', () => {
     );
   });
 
-  it('keeps the shared header geometry stable while scrolling', () => {
+  it('keeps the shared header geometry stable while hiding on downward scroll', () => {
     const header = readSource('src/components/Header.css');
     const headerPage = readSource('src/components/Header.jsx');
 
@@ -73,11 +73,19 @@ describe('approved design-system corrections', () => {
     expect(header).not.toContain('.header-scrolled .header-container');
     expect(header).not.toContain('.header-scrolled .logo-image');
     expect(header).toMatch(
+      /\.header-hidden\s*{[^}]*transform:\s*translate3d\(0,\s*calc\(-100%\s*-\s*1px\),\s*0\);/s,
+    );
+    expect(header).toMatch(
+      /\.header\s*{[^}]*transition:[^}]*transform 280ms cubic-bezier\(0\.16,\s*1,\s*0\.3,\s*1\),/s,
+    );
+    expect(header).toMatch(
       /@media\s*\(prefers-reduced-motion:\s*reduce\)\s*{[\s\S]*?\.header,[\s\S]*?\.logo-image\s*{[^}]*transition:\s*none;/s,
     );
     expect(headerPage).toContain(
       "window.addEventListener('scroll', handleScroll, { passive: true })",
     );
+    expect(headerPage).toContain("isHidden ? 'header-hidden' : ''");
+    expect(headerPage).toContain('requestAnimationFrame');
   });
 
   it('keeps the desktop Home hero at least one available viewport tall', () => {
@@ -223,10 +231,10 @@ describe('approved design-system corrections', () => {
       /\.supporter-logo-dst\s*{[^}]*--supporter-slot-width:\s*8rem;[^}]*--supporter-logo-height:\s*2rem;[^}]*--supporter-y:\s*-3px;/s,
     );
     expect(homeSections).toMatch(
-      /\.supporter-logo-nidhi\s*{[^}]*--supporter-slot-width:\s*5rem;[^}]*--supporter-logo-height:\s*2\.5rem;[^}]*--supporter-y:\s*-7px;/s,
+      /\.supporter-logo-nidhi\s*{[^}]*--supporter-slot-width:\s*5rem;[^}]*--supporter-logo-height:\s*2\.75rem;[^}]*--supporter-y:\s*-5px;/s,
     );
     expect(homeSections).toMatch(
-      /@media\s*\(max-width:\s*768px\)\s*{[\s\S]*?\.supporter-logo-nidhi\s*{[^}]*--supporter-slot-width:\s*3\.75rem;[^}]*--supporter-logo-height:\s*1\.875rem;[^}]*--supporter-y:\s*-3px;/s,
+      /@media\s*\(max-width:\s*768px\)\s*{[\s\S]*?\.supporter-logo-nidhi\s*{[^}]*--supporter-slot-width:\s*3\.75rem;[^}]*--supporter-logo-height:\s*2rem;[^}]*--supporter-y:\s*-3px;/s,
     );
     expect(homeSections).toMatch(
       /\.supporter-logo-mutbi\s*{[^}]*--supporter-slot-width:\s*13\.5rem;[^}]*--supporter-optical-trim:\s*-0\.5rem;[^}]*--supporter-logo-opacity:\s*0\.65;/s,
@@ -246,9 +254,11 @@ describe('approved design-system corrections', () => {
     expect(homeSections).toMatch(
       /@media\s*\(max-width:\s*768px\)\s*{[\s\S]*?--supporter-gap:\s*3\.5rem;/s,
     );
-    expect(supporter).toContain('supporter-track-paused');
-    expect(supporter).toContain('Pause supporter logos');
-    expect(supporter).toContain('Resume supporter logos');
+    expect(supporter).not.toContain('supporter-track-paused');
+    expect(supporter).not.toContain('Pause supporter logos');
+    expect(supporter).not.toContain('Resume supporter logos');
+    expect(homeSections).not.toContain('.supporter-motion-control');
+    expect(homeSections).toContain('--supporter-edge-guard:');
     expect(homePage).toContain(
       "alt: 'DST NIDHI', className: 'supporter-logo-dst'",
     );
@@ -256,7 +266,10 @@ describe('approved design-system corrections', () => {
       "alt: 'NIDHI PRAYAS', className: 'supporter-logo-nidhi'",
     );
     expect(homePage).toContain('supporter-dst-nidhi.webp');
-    expect(homePage).toContain('supporter-nidhi-prayas.webp');
+    expect(homePage).toContain('supporter-nidhi-prayas-padded.webp');
+    expect(homePage).not.toContain(
+      "from '../assets/supporter-nidhi-prayas.webp'",
+    );
     expect(homePage).toContain('supporter-mutbi.webp');
     expect(homePage).toContain('supporter-startup-karnataka.webp');
     expect(homeSections).toMatch(
