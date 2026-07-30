@@ -35,7 +35,7 @@ describe('Header Component', () => {
     expect(toggleBtn).toHaveAttribute('aria-expanded', 'true');
   });
 
-  it('hides while scrolling down and returns while scrolling up', async () => {
+  it('lifts slightly while scrolling down and returns while scrolling up', async () => {
     const originalAnimationFrame = window.requestAnimationFrame;
     const originalCancelAnimationFrame = window.cancelAnimationFrame;
 
@@ -57,11 +57,12 @@ describe('Header Component', () => {
 
     window.scrollY = 180;
     fireEvent.scroll(window);
-    await waitFor(() => expect(header).toHaveClass('header-hidden'));
+    await waitFor(() => expect(header).toHaveClass('header-lifted'));
+    expect(header).not.toHaveClass('header-hidden');
 
     window.scrollY = 100;
     fireEvent.scroll(window);
-    await waitFor(() => expect(header).not.toHaveClass('header-hidden'));
+    await waitFor(() => expect(header).not.toHaveClass('header-lifted'));
 
     window.requestAnimationFrame = originalAnimationFrame;
     window.cancelAnimationFrame = originalCancelAnimationFrame;

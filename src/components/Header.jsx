@@ -8,7 +8,7 @@ import { openWorkModal } from '../utils/workModal';
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [isHidden, setIsHidden] = useState(false);
+  const [isLifted, setIsLifted] = useState(false);
   const lastScrollYRef = useRef(0);
   const animationFrameRef = useRef(null);
   const location = useLocation();
@@ -25,11 +25,11 @@ const Header = () => {
       setScrolled(currentScrollY > 20);
 
       if (isOpen || currentScrollY <= 80) {
-        setIsHidden(false);
+        setIsLifted(false);
       } else if (scrollDelta > 4) {
-        setIsHidden(true);
+        setIsLifted(true);
       } else if (scrollDelta < -4) {
-        setIsHidden(false);
+        setIsLifted(false);
       }
 
       lastScrollYRef.current = currentScrollY;
@@ -97,7 +97,7 @@ const Header = () => {
         className={[
           'header',
           scrolled ? 'header-scrolled' : '',
-          isHidden ? 'header-hidden' : '',
+          isLifted ? 'header-lifted' : '',
         ].filter(Boolean).join(' ')}
       >
         <div className="header-container">

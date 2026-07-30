@@ -57,7 +57,7 @@ describe('approved design-system corrections', () => {
     );
   });
 
-  it('keeps the shared header geometry stable while hiding on downward scroll', () => {
+  it('keeps the shared header visible while lifting slightly on downward scroll', () => {
     const header = readSource('src/components/Header.css');
     const headerPage = readSource('src/components/Header.jsx');
 
@@ -73,8 +73,12 @@ describe('approved design-system corrections', () => {
     expect(header).not.toContain('.header-scrolled .header-container');
     expect(header).not.toContain('.header-scrolled .logo-image');
     expect(header).toMatch(
-      /\.header-hidden\s*{[^}]*transform:\s*translate3d\(0,\s*calc\(-100%\s*-\s*1px\),\s*0\);/s,
+      /\.header-lifted\s*{[^}]*transform:\s*translate3d\(0,\s*-0\.5rem,\s*0\);/s,
     );
+    expect(header).toMatch(
+      /@media\s*\(max-width:\s*768px\)\s*{[\s\S]*?\.header-lifted\s*{[^}]*transform:\s*translate3d\(0,\s*-0\.375rem,\s*0\);/s,
+    );
+    expect(header).not.toContain('pointer-events: none');
     expect(header).toMatch(
       /\.header\s*{[^}]*transition:[^}]*transform 280ms cubic-bezier\(0\.16,\s*1,\s*0\.3,\s*1\),/s,
     );
@@ -84,7 +88,7 @@ describe('approved design-system corrections', () => {
     expect(headerPage).toContain(
       "window.addEventListener('scroll', handleScroll, { passive: true })",
     );
-    expect(headerPage).toContain("isHidden ? 'header-hidden' : ''");
+    expect(headerPage).toContain("isLifted ? 'header-lifted' : ''");
     expect(headerPage).toContain('requestAnimationFrame');
   });
 
