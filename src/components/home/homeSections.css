@@ -9,7 +9,7 @@
   padding-block: 12px;
   background: transparent;
   border: 0;
-  --supporter-gap: 3.75rem;
+  --supporter-gap: 4.5rem;
   --supporter-slot-height: 3rem;
   --supporter-sequence-min-width: max-content;
   --supporter-edge-guard: 0rem;
@@ -116,7 +116,7 @@
   .supporter-band {
     bottom: 2.5rem;
     padding-block: 8px;
-    --supporter-gap: 2.5rem;
+    --supporter-gap: 3rem;
     --supporter-slot-height: 2.25rem;
     --supporter-sequence-min-width: max-content;
     --supporter-edge-guard: 0rem;

@@ -296,7 +296,7 @@ describe('approved design-system corrections', () => {
     expect(homeSections).toMatch(
       /@media\s*\(prefers-reduced-motion:\s*reduce\)\s*{[\s\S]*?\.supporter-track-running\s*{[^}]*animation:\s*none;/s,
     );
-    expect(homeSections).toContain('--supporter-gap: 3.75rem;');
+    expect(homeSections).toContain('--supporter-gap: 4.5rem;');
     expect(homeSections).not.toContain('--supporter-slot-width');
     expect(homeSections).toMatch(
       /\.supporter-logo-slot\s*{[^}]*width:\s*auto;[^}]*height:\s*var\(--supporter-slot-height\);/s,
@@ -307,7 +307,7 @@ describe('approved design-system corrections', () => {
     expect(homeSections).not.toMatch(/\.supporter-logo-(?:dst|nidhi|mutbi|startup)\s*{/);
     expect(homeSections).not.toContain('--supporter-optical-trim');
     expect(homeSections).toMatch(
-      /@media\s*\(max-width:\s*768px\)\s*{[\s\S]*?--supporter-gap:\s*2\.5rem;/s,
+      /@media\s*\(max-width:\s*768px\)\s*{[\s\S]*?--supporter-gap:\s*3rem;/s,
     );
     expect(supporter).not.toContain('supporter-track-paused');
     expect(supporter).not.toContain('Pause supporter logos');
