@@ -132,30 +132,32 @@ const Contact = () => {
             {/* Column 1: Details */}
             <div className="details-column">
               <h2 className="contact-subheading">Our Headquarters</h2>
-              
-              <div className="contact-detail-card glass">
-                <MapPin className="detail-icon" />
-                <div className="detail-info">
-                  <h3>Address</h3>
-                  <p>Room No. 12, 4th Floor, MUTBI, Advanced Research Center, Madhava Nagar, Manipal 576104</p>
-                </div>
-              </div>
 
-              <div className="contact-detail-card glass">
-                <Phone className="detail-icon" />
-                <div className="detail-info">
-                  <h3>Phone Call</h3>
-                  <p><a href="tel:+918861942440">+91 88619 42440</a></p>
-                  <p><a href="tel:+919072556665">+91 90725 56665</a></p>
+              <div className="contact-details-panel">
+                <div className="contact-detail-row">
+                  <MapPin className="detail-icon" aria-hidden="true" />
+                  <div className="detail-info">
+                    <h3>Address</h3>
+                    <p>Room No. 12, 4th Floor, MUTBI, Advanced Research Center, Madhava Nagar, Manipal 576104</p>
+                  </div>
                 </div>
-              </div>
 
-              <div className="contact-detail-card glass">
-                <Mail className="detail-icon" />
-                <div className="detail-info">
-                  <h3>Email Support</h3>
-                  <p><a href="mailto:director@dashapatmaja.in">director@dashapatmaja.in</a></p>
-                  <p><a href="mailto:dsplmanipal@gmail.com">dsplmanipal@gmail.com</a></p>
+                <div className="contact-detail-row">
+                  <Phone className="detail-icon" aria-hidden="true" />
+                  <div className="detail-info">
+                    <h3>Phone Call</h3>
+                    <p><a href="tel:+918861942440">+91 88619 42440</a></p>
+                    <p><a href="tel:+919072556665">+91 90725 56665</a></p>
+                  </div>
+                </div>
+
+                <div className="contact-detail-row">
+                  <Mail className="detail-icon" aria-hidden="true" />
+                  <div className="detail-info">
+                    <h3>Email Support</h3>
+                    <p><a href="mailto:director@dashapatmaja.in">director@dashapatmaja.in</a></p>
+                    <p><a href="mailto:dsplmanipal@gmail.com">dsplmanipal@gmail.com</a></p>
+                  </div>
                 </div>
               </div>
             </div>

@@ -140,6 +140,28 @@ describe('approved design-system corrections', () => {
     );
   });
 
+  it('uses one Contact details panel and prioritizes the form on smaller screens', () => {
+    const contactPage = readSource('src/pages/Contact.jsx');
+    const contactCss = readSource('src/pages/Contact.css');
+
+    expect(contactPage).toContain('className="contact-details-panel"');
+    expect(contactPage.match(/className="contact-detail-row"/g)).toHaveLength(3);
+    expect(contactPage).not.toContain('className="contact-detail-card glass"');
+    expect(contactCss).toMatch(
+      /\.contact-description\s*{[^}]*max-width:\s*58ch;[^}]*margin-inline:\s*auto;/s,
+    );
+    expect(contactCss).toMatch(
+      /\.detail-info h3\s*{[^}]*font-size:\s*1\.1rem;[^}]*margin-bottom:\s*0\.5rem;/s,
+    );
+    expect(contactCss).not.toContain('.detail-info h4');
+    expect(contactCss).toMatch(
+      /@media\s*\(max-width:\s*900px\)\s*{[\s\S]*?\.form-column\s*{[^}]*order:\s*-1;/s,
+    );
+    expect(contactCss).toMatch(
+      /@media\s*\(max-width:\s*768px\)\s*{[\s\S]*?\.contact-hero\s*{[^}]*padding:\s*4\.5rem 0 3rem;/s,
+    );
+  });
+
   it('presents four alternating About journey stories with original imagery', () => {
     const aboutPage = readSource('src/pages/About.jsx');
     const aboutCss = readSource('src/pages/About.css');
