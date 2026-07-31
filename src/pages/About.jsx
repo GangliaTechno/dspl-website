@@ -16,7 +16,7 @@ import aboutHero960 from '../assets/dspl-about-hero-960.webp';
 import aboutHero1440 from '../assets/dspl-about-hero-1440.webp';
 import aboutHero1600 from '../assets/dspl-about-hero-1600.webp';
 import aboutHeroMobile from '../assets/dspl-about-hero-mobile.webp';
-import teamBgImg from '../assets/linen_concrete_texture.png';
+import teamBgImg from '../assets/linen_concrete_texture.webp';
 import journey2023Img from '../assets/about-journey-2023.webp';
 import journey2024Img from '../assets/about-journey-2024.webp';
 import journey2025Img from '../assets/about-journey-2025.webp';

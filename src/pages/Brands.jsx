@@ -8,7 +8,7 @@ import brandHero768 from '../assets/brands-hero-editorial-768.webp';
 import brandHero1200 from '../assets/brands-hero-editorial-1200.webp';
 import brandHero1672 from '../assets/brands-hero-editorial-1672.webp';
 import brandHeroMobile from '../assets/brands-hero-editorial-mobile.webp';
-import pipelineBgImg from '../assets/brands_pipeline_bg.jpg';
+import pipelineBgImg from '../assets/brands_pipeline_bg.webp';
 import { openWorkModal } from '../utils/workModal';
 
 const Brands = () => {
