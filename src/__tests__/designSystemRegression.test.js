@@ -151,6 +151,9 @@ describe('approved design-system corrections', () => {
       /\.contact-description\s*{[^}]*max-width:\s*58ch;[^}]*margin-inline:\s*auto;/s,
     );
     expect(contactCss).toMatch(
+      /\.contact-subheading\s*{[^}]*margin-bottom:\s*0;/s,
+    );
+    expect(contactCss).toMatch(
       /\.detail-info h3\s*{[^}]*font-size:\s*1\.1rem;[^}]*margin-bottom:\s*0\.5rem;/s,
     );
     expect(contactCss).not.toContain('.detail-info h4');

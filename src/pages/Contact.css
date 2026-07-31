@@ -44,7 +44,7 @@
   font-size: 1.75rem;
   font-weight: 800;
   color: var(--text-heading);
-  margin-bottom: 2rem;
+  margin-bottom: 0;
 }
 
 .details-column {
