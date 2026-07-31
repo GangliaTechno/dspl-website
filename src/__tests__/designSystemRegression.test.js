@@ -94,6 +94,14 @@ describe('approved design-system corrections', () => {
     );
   });
 
+  it('keeps shared FAQ controls on the design-system typeface', () => {
+    const faq = readSource('src/components/FAQAccordion.css');
+
+    expect(faq).toMatch(
+      /\.faq-header-btn\s*{[^}]*font-family:\s*var\(--font-heading\);/s,
+    );
+  });
+
   it('keeps the shared header visible while lifting slightly on downward scroll', () => {
     const header = readSource('src/components/Header.css');
     const headerPage = readSource('src/components/Header.jsx');
