@@ -47,37 +47,37 @@ const routeMetadata = {
       'Dashapatmaja Solutions Pvt Ltd helps Indian consumer businesses connect brand strategy, go-to-market execution, and e-commerce.',
   },
   '/about': {
-    title: 'About Dashapatmaja Solutions Pvt Ltd | Manipal',
+    title: 'Dashapatmaja Solutions Pvt Ltd | About Us',
     description:
       'Manipal-based team building consumer brands and delivering coordinated branding, marketing, and e-commerce services for Indian businesses.',
   },
   '/brands': {
-    title: 'Our Brands | Dashapatmaja Solutions Pvt Ltd',
+    title: 'Dashapatmaja Solutions Pvt Ltd | Our Brands',
     description:
       'Explore the consumer brands built by Dashapatmaja Solutions Pvt Ltd, beginning with Raw Radicles and its Ayurveda-inspired premium chocolate range.',
   },
   '/marketing': {
-    title: 'Marketing & SEO Services | Dashapatmaja Solutions Pvt Ltd',
+    title: 'Dashapatmaja Solutions Pvt Ltd | Marketing & SEO',
     description:
       'Build demand with coordinated SEO, paid media, analytics, content, and campaign execution from the team behind the Raw Radicles consumer brand.',
   },
   '/branding': {
-    title: 'Brand Identity & Strategy | Dashapatmaja Solutions Pvt Ltd',
+    title: 'Dashapatmaja Solutions Pvt Ltd | Brand Identity & Strategy',
     description:
       'Create a memorable brand with positioning, identity, visual systems, story, and reusable assets designed for growing Indian consumer businesses.',
   },
   '/ecommerce': {
-    title: 'E-commerce Services & Store Growth | Dashapatmaja Solutions Pvt Ltd',
+    title: 'Dashapatmaja Solutions Pvt Ltd | E-commerce Services',
     description:
       'Build and improve online stores, checkout journeys, marketplace operations, payments, and delivery systems with an operator-led e-commerce team.',
   },
   '/contact': {
-    title: 'Contact Dashapatmaja Solutions Pvt Ltd | Manipal',
+    title: 'Dashapatmaja Solutions Pvt Ltd | Contact',
     description:
       'Talk with Dashapatmaja Solutions Pvt Ltd in Manipal about branding, marketing, e-commerce, or a new consumer brand and share your project context.',
   },
   '/privacy': {
-    title: 'Privacy Policy & Terms | Dashapatmaja Solutions Pvt Ltd',
+    title: 'Dashapatmaja Solutions Pvt Ltd | Privacy & Terms',
     description:
       'Read how Dashapatmaja Solutions Pvt Ltd collects, uses, protects, and handles data submitted through website visits, enquiries, and communications.',
   },

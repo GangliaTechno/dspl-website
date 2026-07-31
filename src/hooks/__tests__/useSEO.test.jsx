@@ -1,7 +1,12 @@
 import { render } from '@testing-library/react';
 import { StrictMode } from 'react';
 import { describe, expect, it } from 'vitest';
-import { getRouteMetadata } from '../../seo/routeMetadata';
+import { MemoryRouter } from 'react-router-dom';
+import NotFound from '../../pages/NotFound';
+import {
+  getRouteMetadata,
+  PUBLIC_ROUTES,
+} from '../../seo/routeMetadata';
 import useSEO from '../useSEO';
 
 const SEOProbe = ({ metadata }) => {
@@ -10,6 +15,26 @@ const SEOProbe = ({ metadata }) => {
 };
 
 describe('useSEO', () => {
+  it('keeps the canonical company name visible first in every public page title', () => {
+    for (const route of PUBLIC_ROUTES) {
+      expect(getRouteMetadata(route).title).toMatch(
+        /^Dashapatmaja Solutions Pvt Ltd(?: \||$)/,
+      );
+    }
+  });
+
+  it('keeps the canonical company name visible first on the fallback page', () => {
+    render(
+      <MemoryRouter initialEntries={['/missing-page']}>
+        <NotFound />
+      </MemoryRouter>,
+    );
+
+    expect(document.title).toBe(
+      'Dashapatmaja Solutions Pvt Ltd | Page Not Found',
+    );
+  });
+
   it('keeps one canonical link and one schema script across navigation', () => {
     const { rerender } = render(
       <StrictMode>
