@@ -134,7 +134,7 @@ Create an original premium editorial photograph for a corporate About-page miles
 Save the generated source outside the repository as:
 
 ```text
-C:\Users\Pawan\AppData\Local\Temp\dspl-about-journey\2023.png
+<temporary-output>/dspl-about-journey/2023.png
 ```
 
 - [ ] **Step 2: Generate the 2024 first-brand image**
@@ -148,7 +148,7 @@ Create an original premium editorial product-development photograph for a corpor
 Save as:
 
 ```text
-C:\Users\Pawan\AppData\Local\Temp\dspl-about-journey\2024.png
+<temporary-output>/dspl-about-journey/2024.png
 ```
 
 - [ ] **Step 3: Generate the 2025 incubation and grant image**
@@ -162,7 +162,7 @@ Create an original premium editorial photograph for an Indian innovation-incubat
 Save as:
 
 ```text
-C:\Users\Pawan\AppData\Local\Temp\dspl-about-journey\2025.png
+<temporary-output>/dspl-about-journey/2025.png
 ```
 
 - [ ] **Step 4: Generate the 2026 services image**
@@ -176,7 +176,7 @@ Create an original premium editorial photograph for a branding, marketing, and e
 Save as:
 
 ```text
-C:\Users\Pawan\AppData\Local\Temp\dspl-about-journey\2026.png
+<temporary-output>/dspl-about-journey/2026.png
 ```
 
 - [ ] **Step 5: Visually inspect all four source images**
@@ -198,8 +198,8 @@ Run this mechanical Pillow conversion:
 from pathlib import Path
 from PIL import Image, ImageOps
 
-source_dir = Path(r"C:\Users\Pawan\AppData\Local\Temp\dspl-about-journey")
-target_dir = Path(r"E:\For website\dspl website\src\assets")
+source_dir = Path("<temporary-output>/dspl-about-journey")
+target_dir = Path("<project-root>/src/assets")
 
 for year in ("2023", "2024", "2025", "2026"):
     source = source_dir / f"{year}.png"

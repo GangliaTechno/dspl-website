@@ -46,7 +46,7 @@ application.
 
 ## Requirements
 
-- Node.js `^20.19.0` or `>=22.12.0`
+- Node.js `>=22.22.0`
 - npm
 
 ## Local development

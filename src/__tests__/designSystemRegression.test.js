@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 
@@ -100,6 +100,48 @@ describe('approved design-system corrections', () => {
     expect(faq).toMatch(
       /\.faq-header-btn\s*{[^}]*font-family:\s*var\(--font-heading\);/s,
     );
+  });
+
+  it('uses the patched React Router package and supported runtime baseline', () => {
+    const packageJson = JSON.parse(readSource('package.json'));
+    const routerConsumers = [
+      'src/App.jsx',
+      'src/AppRoutes.jsx',
+      'src/entry-prerender.jsx',
+      'src/components/AnalyticsTracker.jsx',
+      'src/components/Footer.jsx',
+      'src/components/Header.jsx',
+      'src/components/ScrollToTop.jsx',
+      'src/components/home/OwnedBrandProof.jsx',
+      'src/components/__tests__/Header.test.jsx',
+      'src/hooks/__tests__/useSEO.test.jsx',
+      'src/pages/About.jsx',
+      'src/pages/Home.jsx',
+      'src/pages/NotFound.jsx',
+      'src/pages/__tests__/Home.test.jsx',
+      'src/pages/__tests__/NotFound.test.jsx',
+    ];
+
+    expect(packageJson.dependencies).not.toHaveProperty('react-router-dom');
+    expect(packageJson.dependencies['react-router']).toBe('^8.3.0');
+    expect(packageJson.dependencies.react).toBe('^19.2.8');
+    expect(packageJson.dependencies['react-dom']).toBe('^19.2.8');
+    expect(packageJson.engines.node).toBe('>=22.22.0');
+
+    routerConsumers.forEach((sourcePath) => {
+      expect(readSource(sourcePath)).not.toContain('react-router-dom');
+    });
+  });
+
+  it('keeps unreachable WebGL experiments out of the production repository', () => {
+    [
+      'src/components/Lightfall.jsx',
+      'src/components/Lightfall.css',
+      'src/components/LiquidEther.jsx',
+      'src/components/LiquidEther.css',
+    ].forEach((sourcePath) => {
+      expect(existsSync(resolve(sourcePath))).toBe(false);
+    });
   });
 
   it('keeps the shared header visible while lifting slightly on downward scroll', () => {
@@ -321,7 +363,7 @@ describe('approved design-system corrections', () => {
       /\.supporter-sequence\s*{[^}]*min-width:\s*var\(--supporter-sequence-min-width\);/s,
     );
     expect(homeSections).toMatch(
-      /\.supporter-track-running\s*{[^}]*animation:\s*supporter-marquee 22s linear infinite;[^}]*will-change:\s*transform;/s,
+      /\.supporter-track-running\s*{[^}]*animation:\s*supporter-marquee 28s linear infinite;[^}]*will-change:\s*transform;/s,
     );
     expect(homeSections).toMatch(
       /@keyframes supporter-marquee\s*{[\s\S]*?from\s*{[^}]*transform:\s*translate3d\(0,\s*0,\s*0\);[^}]*}[\s\S]*?to\s*{[^}]*transform:\s*translate3d\(var\(--supporter-shift\),\s*0,\s*0\);/s,
@@ -329,7 +371,7 @@ describe('approved design-system corrections', () => {
     expect(homeSections).toMatch(
       /@media\s*\(prefers-reduced-motion:\s*reduce\)\s*{[\s\S]*?\.supporter-track-running\s*{[^}]*animation:\s*none;/s,
     );
-    expect(homeSections).toContain('--supporter-gap: 4.5rem;');
+    expect(homeSections).toContain('--supporter-gap: 7rem;');
     expect(homeSections).not.toContain('--supporter-slot-width');
     expect(homeSections).toMatch(
       /\.supporter-logo-slot\s*{[^}]*width:\s*auto;[^}]*height:\s*var\(--supporter-slot-height\);/s,
@@ -340,7 +382,7 @@ describe('approved design-system corrections', () => {
     expect(homeSections).not.toMatch(/\.supporter-logo-(?:dst|nidhi|mutbi|startup)\s*{/);
     expect(homeSections).not.toContain('--supporter-optical-trim');
     expect(homeSections).toMatch(
-      /@media\s*\(max-width:\s*768px\)\s*{[\s\S]*?--supporter-gap:\s*3rem;/s,
+      /@media\s*\(max-width:\s*768px\)\s*{[\s\S]*?--supporter-gap:\s*5rem;/s,
     );
     expect(supporter).not.toContain('supporter-track-paused');
     expect(supporter).not.toContain('Pause supporter logos');

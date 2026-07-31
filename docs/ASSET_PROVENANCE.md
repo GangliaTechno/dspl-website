@@ -8,6 +8,9 @@ opinion.
 | --- | --- | --- | --- | --- | --- | --- |
 | `dspl-home-editorial-{960,1440,1920}.webp`, `dspl-home-editorial-mobile.webp` | Generated original; responsive derivatives created locally from `dspl-home-editorial-source.png` | OpenAI built-in image generation | 2026-07-29 | Prompt recorded below | Reviewed: no recognizable people or third-party trademarks; packaging is generic; faint non-readable decorative marks only; no watermark | Approved for branch review |
 | `dspl-marketing-editorial-{960,1440,1920}.webp`, `dspl-marketing-editorial-mobile.webp` | Generated original; responsive derivatives created locally from `dspl-marketing-editorial-source.png` | OpenAI built-in image generation | 2026-07-29 | Prompt recorded below | Reviewed: no people, trademarks, recognizable brands, billboards, or watermark; charts and planning sheets contain abstract non-readable shapes | Approved for branch review |
+| `brands-hero-editorial-{768,1200,1672}.webp`, `brands-hero-editorial-mobile.webp` | Generated original; locally cropped and optimized responsive family | OpenAI built-in image generation | 2026-07-30 | Premium brand-development studio with center-safe composition and generic packaging | Reviewed: no people, readable brand names, third-party trademarks, or watermark | Approved for branch review |
+| `about-journey-{2023,2024,2025,2026}.webp` | Four generated originals; locally fitted and optimized to a shared editorial ratio | OpenAI built-in image generation | 2026-07-30 | Milestone briefs in the About mission and journey design record | Reviewed: no recognizable people, copied marks, readable text, or watermark | Approved for branch review |
+| `supporter-*-marquee.png` | Optically normalized derivatives made from supplied institutional source marks; transparent canvases and visual baselines standardized without redrawing logos | Local image processing | 2026-07-30 | DSPL-supplied Startup Karnataka, DST NIDHI, NIDHI-PRAYAS, and MUTBI/MAHE marks | Identity artwork preserved; only whitespace, scale, and canvas placement changed | Approved for branch review |
 
 ## Homepage editorial source prompt
 
@@ -49,3 +52,5 @@ Constraints: no people; no hands; no text; no letters; no numbers; no logos; no 
 - Resampling: Lanczos.
 - Source PNG files remain in `src/assets` for future recropping.
 
+The detailed About milestone briefs are recorded in
+`docs/superpowers/specs/2026-07-30-about-mission-journey-design.md`.

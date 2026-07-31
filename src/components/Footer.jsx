@@ -1,5 +1,5 @@
 import './Footer.css';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { Phone, Mail, ArrowUpRight } from 'lucide-react';
 import logoImg from '../assets/icon_orange.png';
 import { openWorkModal } from '../utils/workModal';

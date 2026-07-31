@@ -1,4 +1,4 @@
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router';
 import AppRoutes from './AppRoutes';
 
 const App = ({ pages }) => (

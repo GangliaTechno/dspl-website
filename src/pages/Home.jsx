@@ -1,5 +1,5 @@
 import { ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import OwnedBrandProof from '../components/home/OwnedBrandProof';
 import ProcessSteps from '../components/home/ProcessSteps';
 import SupporterStrip from '../components/home/SupporterStrip';

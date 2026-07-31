@@ -1,5 +1,5 @@
 import { renderToString } from 'react-dom/server';
-import { StaticRouter } from 'react-router-dom';
+import { StaticRouter } from 'react-router';
 import AppRoutes from './AppRoutes';
 import About from './pages/About';
 import Branding from './pages/Branding';

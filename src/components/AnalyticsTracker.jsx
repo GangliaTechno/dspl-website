@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router';
 import { initGA, trackPageView } from '../utils/analytics';
 
 const AnalyticsTracker = () => {

@@ -406,8 +406,8 @@ name, while retaining genuinely historical Git evidence.
 
 - [ ] **Step 5: Coordinate the excluded portrait assertion**
 
-Wait for task `019fad8a-5155-7e43-8074-ba777442b968` to report that its owned
-`src/__tests__/designSystemRegression.test.js` expectation now uses
+Wait for the separate supporter-marquee task to report that its owned
+`src/__tests__/designSystemRegression.test.js` expectation uses
 `Dr. Shreepathy Rangabhatta R`.
 
 Do not edit that file in this task.

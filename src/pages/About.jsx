@@ -1,6 +1,6 @@
 import './About.css';
 import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router';
 import { Target, Eye } from 'lucide-react';
 import { motion, useReducedMotion } from 'framer-motion';
 import useSEO from '../hooks/useSEO';

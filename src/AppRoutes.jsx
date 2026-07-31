@@ -1,6 +1,6 @@
 import './App.css';
 import { lazy, Suspense } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router';
 import AnalyticsTracker from './components/AnalyticsTracker';
 import Footer from './components/Footer';
 import Header from './components/Header';

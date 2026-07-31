@@ -1,6 +1,6 @@
 import './NotFound.css';
 import { useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router';
 import { Home, ArrowLeft, Mail } from 'lucide-react';
 import useSEO from '../hooks/useSEO';
 import { trackEvent } from '../utils/analytics';

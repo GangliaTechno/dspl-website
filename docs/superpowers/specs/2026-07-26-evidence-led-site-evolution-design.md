@@ -2,7 +2,7 @@
 
 Date: 2026-07-26
 Status: Approved direction; implementation planning pending
-Repository: `E:\For website\dspl website`
+Repository: this checkout
 Worktree branch: `pawan/raw-radicles-redesign`
 Baseline commit: `8bd45627c4e1be8c60280dc5c277e22d36e3c7d9`
 
@@ -14,12 +14,12 @@ The redesign will be evidence-led. It may present only claims supported by repos
 
 ## Worktree Boundary
 
-All work belongs to the current `E:\For website\dspl website` worktree on `pawan/raw-radicles-redesign`.
+All work belongs to the active project worktree on `pawan/raw-radicles-redesign`.
 
 The following existing Orca worktrees are explicitly outside scope:
 
-- `C:\Users\Pawan\orca\workspaces\dspl website\pawan-dev`
-- `C:\Users\Pawan\orca\workspaces\dspl website\pawan-main-2`
+- the historical `pawan-dev` worktree
+- the historical `pawan-main-2` worktree
 
 Implementation must begin by confirming a clean status in the current worktree. It must not merge, rebase, modify, or remove either Orca worktree. A separate worktree should be created only if the implementation plan identifies a concrete isolation need and the user approves it.
 

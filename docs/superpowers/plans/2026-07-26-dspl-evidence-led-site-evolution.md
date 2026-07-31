@@ -282,7 +282,7 @@ git commit -m "refactor: isolate lead form rules"
 
 ```jsx
 import { render, screen, within } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router';
 import { describe, expect, it } from 'vitest';
 import Home from '../Home';
 
@@ -552,7 +552,7 @@ Expected: FAIL because only the SPA `dist/index.html` exists.
 Move the shell and `<Routes>` from `App.jsx` into `AppRoutes.jsx`. Keep lazy route imports there. `App.jsx` becomes:
 
 ```jsx
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router';
 import AppRoutes from './AppRoutes';
 
 export default function App() {

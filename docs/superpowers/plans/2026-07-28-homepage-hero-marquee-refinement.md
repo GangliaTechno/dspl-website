@@ -378,9 +378,9 @@ Expected at every viewport:
 Capture:
 
 ```text
-C:\Users\Pawan\AppData\Local\Temp\dspl-home-refined-390.png
-C:\Users\Pawan\AppData\Local\Temp\dspl-home-refined-1920.png
-C:\Users\Pawan\AppData\Local\Temp\dspl-home-refined-3840.png
+<temporary-output>/dspl-home-refined-390.png
+<temporary-output>/dspl-home-refined-1920.png
+<temporary-output>/dspl-home-refined-3840.png
 ```
 
 Inspect for:

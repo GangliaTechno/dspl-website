@@ -195,8 +195,8 @@ other pages.
 
 ### Supporter marquee exclusion
 
-The following files are owned by the separate supporter-marquee task
-`019fad8a-5155-7e43-8074-ba777442b968` and are excluded from this task:
+The following files were owned by the separate supporter-marquee task and were
+excluded from this historical task:
 
 - `src/components/home/SupporterStrip.jsx`
 - `src/components/home/homeSections.css`

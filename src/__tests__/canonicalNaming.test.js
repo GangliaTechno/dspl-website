@@ -1,5 +1,5 @@
 import { execFileSync } from 'node:child_process';
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { extname } from 'node:path';
 import { describe, expect, it } from 'vitest';
 
@@ -34,6 +34,7 @@ function trackedTextFiles() {
   })
     .split('\0')
     .filter(Boolean)
+    .filter((file) => existsSync(file))
     .filter((file) => trackedTextExtensions.has(extname(file)))
     .filter((file) => !intentionalLegacyDiscussion.has(file));
 }
