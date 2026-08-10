@@ -44,7 +44,7 @@ const routeMetadata = {
     title:
       'Dashapatmaja Solutions Pvt Ltd | Branding, Marketing & E-commerce',
     description:
-      'Dashapatmaja Solutions Pvt Ltd helps Indian consumer businesses connect brand strategy, go-to-market execution, and e-commerce.',
+      'Dashapatmaja Solutions Pvt Ltd develops consumer brands and provides branding, marketing, and e-commerce services.',
   },
   '/about': {
     title: 'Dashapatmaja Solutions Pvt Ltd | About Us',

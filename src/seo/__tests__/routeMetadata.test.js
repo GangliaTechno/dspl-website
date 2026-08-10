@@ -35,4 +35,11 @@ describe('route metadata', () => {
         'Read how Dashapatmaja Solutions Pvt Ltd handles information submitted through website enquiries, project-planning forms, and analytics.',
     });
   });
+
+  it('defines the approved Home description without a geographic qualifier', () => {
+    expect(getRouteMetadata('/')).toMatchObject({
+      description:
+        'Dashapatmaja Solutions Pvt Ltd develops consumer brands and provides branding, marketing, and e-commerce services.',
+    });
+  });
 });

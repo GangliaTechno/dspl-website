@@ -360,10 +360,18 @@ describe('approved design-system corrections', () => {
     const marketingPage = readSource('src/pages/Marketing.jsx');
     const pageShell = readSource('index.html');
 
+    expect(homePage).toContain('<picture className="home-hero-media"');
     expect(homePage).toContain('dspl-home-editorial-960.webp');
     expect(homePage).toContain('dspl-home-editorial-1440.webp');
     expect(homePage).toContain('dspl-home-editorial-1920.webp');
     expect(homePage).toContain('dspl-home-editorial-mobile.webp');
+    expect(homePage).toContain(
+      '<source media="(max-width: 768px)" srcSet={homeHeroMobile} />',
+    );
+    expect(homePage).toContain('sizes="100vw"');
+    expect(homePage).toContain('width="1440"');
+    expect(homePage).toContain('height="810"');
+    expect(homePage).toContain('fetchPriority="high"');
     expect(homePage).not.toContain('dspl_banner.webp');
     expect(homePage).not.toContain('dspl_banner-mobile.webp');
     expect(marketingPage).toContain('dspl-marketing-editorial-960.webp');
@@ -371,8 +379,12 @@ describe('approved design-system corrections', () => {
     expect(marketingPage).toContain('dspl-marketing-editorial-1920.webp');
     expect(marketingPage).toContain('dspl-marketing-editorial-mobile.webp');
     expect(marketingPage).not.toContain('Marketing_hero_section');
-    expect(pageShell).toContain('dspl-home-editorial-1440.webp');
-    expect(pageShell).toContain('dspl-home-editorial-mobile.webp');
+    expect(pageShell).toContain(
+      'Dashapatmaja Solutions Pvt Ltd develops consumer brands and provides branding, marketing, and e-commerce services.',
+    );
+    expect(pageShell).not.toContain('Indian consumer businesses');
+    expect(pageShell).not.toContain('dspl-home-editorial-1440.webp');
+    expect(pageShell).not.toContain('dspl-home-editorial-mobile.webp');
     expect(pageShell).not.toContain('dspl_banner.webp');
     expect(pageShell).not.toContain('dspl_banner-mobile.webp');
   });
