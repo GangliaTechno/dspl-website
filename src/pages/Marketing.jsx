@@ -6,73 +6,76 @@ import marketingMobile from '../assets/dspl-marketing-editorial-mobile.webp';
 import ServicePage from '../components/ServicePage';
 import { getRouteMetadata } from '../seo/routeMetadata';
 
-
-const Marketing = () => {
-
-  const offers = [
-    {
-      title: 'Search Engine Optimisation (SEO)',
-      text: 'We help the right people find you on Google. We fix your site, target the words your buyers use, and build content that ranks and brings free traffic month after month.',
-      icon: <Search size={22} />
-    },
-    {
-      title: 'Paid Campaign Management',
-      text: 'We plan and run paid ads on Google, Meta, and quick commerce platforms. We review spend daily and move budget to what works, so you get more leads and sales for less.',
-      icon: <Megaphone size={22} />
-    },
-    {
-      title: 'Analytics and Performance Tracking',
-      text: 'We set up clean tracking across your site and ads. You get clear reports on traffic, cost per customer, and return, so every decision rests on real numbers.',
-      icon: <BarChart size={22} />
-    },
-    {
-      title: 'Content and Copywriting',
-      text: 'We write landing pages, blogs, and product copy that read well and sell. Each piece is built to rank on search and move readers to act.',
-      icon: <FileText size={22} />
-    }
-  ];
-
-  const faqs = [
-    {
-      q: 'How soon will I see results?',
-      a: 'SEO builds over three to six months. Paid ads can bring leads in the first week. We usually run both, so you get early wins while the long-term traffic grows.'
-    },
-    {
-      q: 'Do I need a large budget?',
-      a: 'No. We start at a level that fits you and raise spend only as the numbers improve.'
-    },
-    {
-      q: 'Will I know what I am paying for?',
-      a: 'Yes. You get a monthly report with traffic, leads, cost per customer, and return.'
-    }
-  ];
-
-  const heroImage = {
-    src: marketingHero1440,
-    desktopSrcSet: `${marketingHero960} 960w, ${marketingHero1440} 1440w, ${marketingHero1920} 1920w`,
-    mobileSrc: marketingMobile,
-    sizes: '100vw',
-    width: 1440,
-    height: 810,
-  };
-
-  return (
-    <ServicePage
-      seoMetadata={getRouteMetadata('/marketing')}
-      pageTypeClass="marketing-page"
-      heroTitle="Marketing"
-      heroSubtitle="Get found. Get chosen. Get sales."
-      heroDesc="We build marketing systems that put your business in front of the people already looking for what you sell. We did this for Raw Radicles. We can do it for you."
-      heroImage={heroImage}
-      mattersText="Great products fail quietly every day because no one knows they exist. Good marketing changes the math. It turns invisible businesses into obvious choices and casual browsers into paying customers."
-      offersTitle="What we offer"
-      offersDesc="A full set of marketing work to find your audience and turn them into buyers."
-      offers={offers}
-      faqsTitle="Frequently Asked Questions"
-      faqsDesc="Common questions about our marketing, SEO, and paid ad strategies."
-      faqs={faqs}
-    />
-  );
+const marketingCopy = {
+  contextLabel: 'Marketing services',
+  heroTagline: 'Marketing built around clear audiences, disciplined execution, and measurable decisions.',
+  heroDescription: 'We plan search, paid media, content, and measurement as one programme, with scope and priorities defined against your audience, objectives, and available evidence.',
+  heroCtaLabel: 'Discuss a marketing project',
+  scopeTitle: 'A coordinated marketing programme',
+  scopeText: 'Engagements begin with the current market position, audience, channel performance, and measurement setup. From there, we agree channel responsibilities, campaign cadence, reporting measures, and the work required to improve performance over time.',
+  offersTitle: 'Marketing capabilities',
+  offersDescription: 'The mix is selected against the brief; it is not a fixed package.',
 };
+
+const offers = [
+  {
+    title: 'Search Engine Optimisation (SEO)',
+    text: 'Technical review, search-intent research, on-page structure, and content planning designed to improve qualified organic visibility over time.',
+    icon: <Search size={22} />,
+  },
+  {
+    title: 'Paid Campaign Management',
+    text: 'Campaign planning and management across Google, Meta, and relevant commerce channels, with budgets reviewed against agreed performance measures.',
+    icon: <Megaphone size={22} />,
+  },
+  {
+    title: 'Analytics and Performance Tracking',
+    text: 'Tracking and reporting for traffic, campaign spend, enquiries, and commercial outcomes, with measurement definitions agreed before launch.',
+    icon: <BarChart size={22} />,
+  },
+  {
+    title: 'Content and Copywriting',
+    text: "Landing pages, articles, product copy, and campaign messaging aligned with search intent and the brand's voice.",
+    icon: <FileText size={22} />,
+  },
+];
+
+const faqs = [
+  {
+    q: 'How is the scope defined?',
+    a: 'We begin with your objectives, audience, current channels, available data, and budget. The proposal then sets out priorities, responsibilities, deliverables, and reporting cadence.',
+  },
+  {
+    q: 'How are results assessed?',
+    a: 'We agree the measures that fit the work before launch. These may include qualified traffic, enquiry volume, campaign efficiency, or sales data where reliable tracking is available.',
+  },
+  {
+    q: 'Can you work with existing teams or agencies?',
+    a: 'Yes. Roles, access, review responsibilities, and hand-offs are documented so strategy, creative, media, and reporting remain coordinated.',
+  },
+];
+
+const heroImage = {
+  src: marketingHero1440,
+  desktopSrcSet: `${marketingHero960} 960w, ${marketingHero1440} 1440w, ${marketingHero1920} 1920w`,
+  mobileSrc: marketingMobile,
+  sizes: '100vw',
+  width: 1440,
+  height: 810,
+};
+
+const Marketing = () => (
+  <ServicePage
+    seoMetadata={getRouteMetadata('/marketing')}
+    pageTypeClass="marketing-page"
+    heroTitle="Marketing"
+    heroImage={heroImage}
+    {...marketingCopy}
+    offers={offers}
+    faqsTitle="Frequently Asked Questions"
+    faqsDescription="Common questions about our marketing, SEO, and paid ad strategies."
+    faqs={faqs}
+  />
+);
 
 export default Marketing;

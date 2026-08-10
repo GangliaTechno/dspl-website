@@ -11,41 +11,20 @@
 
 .domain-hero {
   text-align: center;
-  padding: 8rem 0 6rem;
+  padding: 6rem 0 4.5rem;
   position: relative;
   overflow: hidden;
   background-color: var(--bg-primary);
 }
 
-.domain-hero::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image: var(--service-hero-image);
-  background-size: cover;
-  background-position: center;
-  z-index: 1;
-}
-
 .domain-hero::after {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   background: rgba(0, 0, 0, 0.70);
   z-index: 2;
 }
 
-.domain-hero--picture::before {
-  display: none;
-}
-
-/* New picture/img layer — sits below the overlay */
 .domain-hero-picture {
   position: absolute;
   inset: 0;
@@ -99,48 +78,35 @@
   margin-top: 2rem;
 }
 
-.glass-top-border {
-  border-top: 1px solid var(--border-color);
+.service-scope-section {
+  border-bottom: 1px solid var(--border-color);
 }
 
-.why-matters-section {
-  padding-bottom: 2rem;
+.service-scope-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: var(--space-5);
+  align-items: start;
+  max-width: 900px;
 }
 
-.offers-section {
-  padding-top: 2rem;
-}
-
-/* Why it Matters */
-.matters-box {
-  padding: 3rem;
-  border-radius: 4px;
-  text-align: center;
-  max-width: 800px;
-  margin: 0 auto;
-  background: #ffffff;
-  border: 1px solid var(--border-color);
-  transition: border-color 0.3s ease;
-}
-
-.matters-box:hover {
-  border-color: var(--accent-border-alpha);
-}
-
-.matters-title {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
+.service-scope-title {
+  margin: 0;
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
   color: var(--text-heading);
-  font-weight: 700;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
 }
 
-.matters-text {
+.service-scope-text {
+  margin: 0;
   font-size: 1.075rem;
   line-height: 1.75;
   color: var(--text-secondary);
+  text-wrap: pretty;
 }
 
-/* What We Offer Grid */
 .offers-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -155,15 +121,8 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   border: 1px solid var(--border-color);
   background: #ffffff;
-}
-
-.offer-card:hover {
-  transform: translateY(-4px);
-  border-color: var(--accent-border-alpha);
-  box-shadow: var(--shadow-lg);
 }
 
 .offer-icon-wrapper {
@@ -193,16 +152,20 @@
 }
 
 @media (max-width: 768px) {
-  .domain-hero::before {
-    background-image: var(--service-hero-mobile-image);
+  .domain-hero {
+    padding: 4rem 0 3rem;
   }
+
   .domain-title {
     font-size: 2.25rem;
   }
+
+  .service-scope-layout {
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+  }
+
   .offers-grid {
     grid-template-columns: 1fr;
-  }
-  .matters-box {
-    padding: 2rem;
   }
 }

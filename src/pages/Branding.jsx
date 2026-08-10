@@ -1,4 +1,4 @@
-import { Sparkles, Compass, BookOpen, ShieldCheck } from 'lucide-react';
+import { Palette, Compass, BookOpen, LayoutTemplate } from 'lucide-react';
 import brandingHero960 from '../assets/dspl-branding-hero-960.webp';
 import brandingHero1440 from '../assets/dspl-branding-hero-1440.webp';
 import brandingHero1600 from '../assets/dspl-branding-hero-1600.webp';
@@ -6,73 +6,76 @@ import brandingHeroMobile from '../assets/dspl-branding-hero-mobile.webp';
 import ServicePage from '../components/ServicePage';
 import { getRouteMetadata } from '../seo/routeMetadata';
 
-const Branding = () => {
-
-
-  const offers = [
-    {
-      title: 'Brand Identity and Visual Systems',
-      text: 'We design your logo, colours, type, and style rules. You get one clear look that works on your packaging, your site, and your ads.',
-      icon: <Sparkles size={22} />
-    },
-    {
-      title: 'Market Positioning',
-      text: 'We study your buyers and your rivals, then find the gap only you can own. You get a clear reason for people to choose you.',
-      icon: <Compass size={22} />
-    },
-    {
-      title: 'Brand Story and Voice',
-      text: 'We write your story and the way you speak. We give you a message map so your words stay the same across every page, post, and pack.',
-      icon: <BookOpen size={22} />
-    },
-    {
-      title: 'Design Systems and Brand Assets',
-      text: 'We hand you an organised set of templates and files your team can reuse. Your brand stays consistent as you grow.',
-      icon: <ShieldCheck size={22} />
-    }
-  ];
-
-  const faqs = [
-    {
-      q: 'How long does a brand identity take?',
-      a: 'A full identity takes four to six weeks, depending on scope.'
-    },
-    {
-      q: 'Do you only design logos?',
-      a: 'No. We build the logo, the rules, the voice, and the story, so your brand holds together everywhere.'
-    },
-    {
-      q: 'Can you refresh an existing brand?',
-      a: 'Yes. We can update a tired brand without losing what your customers already know.'
-    }
-  ];
-
-  const heroImage = {
-    src: brandingHero1440,
-    desktopSrcSet: `${brandingHero960} 960w, ${brandingHero1440} 1440w, ${brandingHero1600} 1600w`,
-    mobileSrc: brandingHeroMobile,
-    sizes: '100vw',
-    width: 1600,
-    height: 901,
-  };
-
-  return (
-    <ServicePage
-      seoMetadata={getRouteMetadata('/branding')}
-      pageTypeClass="branding-page"
-      heroTitle="Branding"
-      heroSubtitle="Build a name customers trust and remember."
-      heroDesc="We build the parts of your brand that make customers choose you: your name, identity, voice, and story. We did this for Raw Radicles. We can do it for you."
-      heroImage={heroImage}
-      mattersText="Anyone can copy your product. No one can copy your brand. A clear brand sets you apart, earns trust fast, and lets you charge a fair price. It is the reason a customer picks you again and tells a friend."
-      offersTitle="What we offer"
-      offersDesc="A full set of brand work to define your business, from the first logo to the last template."
-      offers={offers}
-      faqsTitle="Frequently Asked Questions"
-      faqsDesc="Common questions about our brand identity design and visual strategies."
-      faqs={faqs}
-    />
-  );
+const brandingCopy = {
+  contextLabel: 'Branding services',
+  heroTagline: 'Positioning, identity, and brand systems designed for consistent use.',
+  heroDescription: 'We translate business context into a usable brand system: positioning, identity, voice, and the assets required for consistent execution.',
+  heroCtaLabel: 'Discuss a branding project',
+  scopeTitle: 'A brand system built for application',
+  scopeText: 'The work starts with the business, audience, category, and competitive context. The resulting system connects positioning and language with visual identity, application rules, and assets that internal and external teams can use consistently.',
+  offersTitle: 'Branding capabilities',
+  offersDescription: 'The scope is shaped around the decisions and applications the business needs.',
 };
+
+const offers = [
+  {
+    title: 'Brand Identity and Visual Systems',
+    text: 'Logo, colour, typography, packaging and application rules, with a practical system for consistent use across priority touchpoints.',
+    icon: <Palette size={22} />,
+  },
+  {
+    title: 'Market Positioning',
+    text: 'Audience, category, competitor, and offer analysis used to define a clear market position and decision framework.',
+    icon: <Compass size={22} />,
+  },
+  {
+    title: 'Brand Story and Voice',
+    text: 'A messaging framework covering the brand narrative, voice, core messages, and examples for common customer-facing contexts.',
+    icon: <BookOpen size={22} />,
+  },
+  {
+    title: 'Design Systems and Brand Assets',
+    text: 'Reusable templates, organised source files, and guidance that support day-to-day implementation by internal and partner teams.',
+    icon: <LayoutTemplate size={22} />,
+  },
+];
+
+const faqs = [
+  {
+    q: 'What can a branding engagement include?',
+    a: 'Scope can include positioning, naming, identity, voice, packaging or application guidelines, and reusable assets. The proposal identifies which are required.',
+  },
+  {
+    q: 'Can you work with an existing brand?',
+    a: 'Yes. We first identify what should be retained, clarified, or replaced, then define the refresh scope against current business needs.',
+  },
+  {
+    q: 'What is included in the handover?',
+    a: 'We provide the agreed source files, usage guidance, and templates, together with a handover for the people responsible for implementation.',
+  },
+];
+
+const heroImage = {
+  src: brandingHero1440,
+  desktopSrcSet: `${brandingHero960} 960w, ${brandingHero1440} 1440w, ${brandingHero1600} 1600w`,
+  mobileSrc: brandingHeroMobile,
+  sizes: '100vw',
+  width: 1600,
+  height: 901,
+};
+
+const Branding = () => (
+  <ServicePage
+    seoMetadata={getRouteMetadata('/branding')}
+    pageTypeClass="branding-page"
+    heroTitle="Branding"
+    heroImage={heroImage}
+    {...brandingCopy}
+    offers={offers}
+    faqsTitle="Frequently Asked Questions"
+    faqsDescription="Common questions about our brand identity design and visual strategies."
+    faqs={faqs}
+  />
+);
 
 export default Branding;

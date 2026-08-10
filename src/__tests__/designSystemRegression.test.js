@@ -513,13 +513,26 @@ describe('approved design-system corrections', () => {
       "import { openWorkModal } from '../utils/workModal';",
     );
     expect(servicePage).toContain('className="btn btn-primary domain-cta"');
-    expect(servicePage).toContain('Discuss your next stage');
+    expect(servicePage).toContain('{heroCtaLabel}');
     expect(servicePage).toContain(
       "openWorkModal(`${pageTypeClass}-hero`)",
     );
+    expect(servicePage).toContain('className="domain-subtitle"');
+    expect(servicePage).toContain('className="container service-scope-layout"');
+    expect(servicePage).toContain('<article key={offer.title} className="offer-card">');
+    expect(servicePage).not.toContain('className="glow-bg"');
+    expect(servicePage).not.toContain('matters-box');
+    expect(servicePage).not.toContain('offer-card glass');
     expect(serviceCss).toMatch(
       /\.domain-cta\s*{[^}]*margin-top:\s*2rem;/s,
     );
+    expect(serviceCss).toMatch(
+      /\.domain-hero\s*{[^}]*padding:\s*6rem 0 4\.5rem;/s,
+    );
+    expect(serviceCss).toMatch(
+      /@media\s*\(max-width:\s*768px\)\s*{[\s\S]*?\.domain-hero\s*{[^}]*padding:\s*4rem 0 3rem;/s,
+    );
+    expect(serviceCss).not.toContain('.offer-card:hover');
   });
 
   it('tiers About page motion for reduced-motion visitors', () => {

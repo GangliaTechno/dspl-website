@@ -20,7 +20,7 @@ const FAQAccordion = ({ faqs }) => {
             key={idx} 
             className={`faq-item glass ${isOpen ? 'faq-open' : ''}`}
           >
-            <h4 className="faq-heading">
+            <h3 className="faq-heading">
               <button
                 type="button"
                 className="faq-header-btn"
@@ -32,7 +32,7 @@ const FAQAccordion = ({ faqs }) => {
                 <span className="faq-q">{faq.q}</span>
                 <ChevronDown size={20} className="faq-arrow" aria-hidden="true" />
               </button>
-            </h4>
+            </h3>
             <div 
               id={`${faqId}-answer`}
               className="faq-a"

@@ -4,40 +4,28 @@ import useSEO from '../hooks/useSEO';
 import FAQAccordion from './FAQAccordion';
 import { openWorkModal } from '../utils/workModal';
 
-const ServicePage = ({ 
+const ServicePage = ({
   seoMetadata,
-  pageTypeClass, 
-  heroTitle, 
-  heroSubtitle, 
-  heroDesc, 
-  bgImg, 
-  bgImgMobile,
+  pageTypeClass,
+  contextLabel,
+  heroTitle,
+  heroTagline,
+  heroDescription,
+  heroCtaLabel,
   heroImage,
-  mattersText, 
-  offersTitle, 
-  offersDesc, 
-  offers, 
-  faqsTitle, 
-  faqsDesc, 
-  faqs 
+  scopeTitle,
+  scopeText,
+  offersTitle,
+  offersDescription,
+  offers,
+  faqsTitle,
+  faqsDescription,
+  faqs,
 }) => {
   useSEO(seoMetadata);
 
   return (
-    <div
-      className={`${pageTypeClass} service-page fade-in`}
-      style={{
-        '--service-hero-image': `url("${bgImg}")`,
-        '--service-hero-mobile-image': `url("${bgImgMobile || bgImg}")`,
-      }}
-    >
-      {/* Background Glows */}
-      <div className="glow-bg">
-        <div className="glow-circle glow-circle-1"></div>
-        <div className="glow-circle glow-circle-2"></div>
-      </div>
-
-      {/* Header Block */}
+    <div className={`${pageTypeClass} service-page fade-in`}>
       <section className={`section domain-hero${heroImage ? ' domain-hero--picture' : ''}`}>
         {heroImage && (
           <picture className="domain-hero-picture" aria-hidden="true">
@@ -55,75 +43,67 @@ const ServicePage = ({
           </picture>
         )}
         <div className="container">
-          <span className="section-subtitle">Core Service</span>
+          <span className="section-subtitle">{contextLabel}</span>
           <h1 className="domain-title">{heroTitle}</h1>
-          <h2 className="domain-subtitle">{heroSubtitle}</h2>
+          <p className="domain-subtitle">{heroTagline}</p>
           <p className="domain-description">
-            {heroDesc}
+            {heroDescription}
           </p>
           <button
             type="button"
             className="btn btn-primary domain-cta"
             onClick={() => openWorkModal(`${pageTypeClass}-hero`)}
           >
-            Discuss your next stage
+            {heroCtaLabel}
             <ArrowRight size={18} aria-hidden="true" />
           </button>
         </div>
       </section>
 
-      {/* Why It Matters */}
-      <section className="section why-matters-section glass-top-border">
-        <div className="container">
-          <div className="matters-box glass">
-            <h2 className="matters-title">Why It Matters</h2>
-            <p className="matters-text">
-              {mattersText}
-            </p>
-          </div>
+      <section className="section service-scope-section" aria-labelledby={`${pageTypeClass}-scope-title`}>
+        <div className="container service-scope-layout">
+          <h2 id={`${pageTypeClass}-scope-title`} className="service-scope-title">{scopeTitle}</h2>
+          <p className="service-scope-text">{scopeText}</p>
         </div>
       </section>
 
-      {/* What We Offer */}
       <section className="section offers-section">
         <div className="container">
           <div className="section-header">
             <span className="section-subtitle">Services</span>
             <h2 className="section-title">{offersTitle}</h2>
             <p className="section-title-description">
-              {offersDesc}
+              {offersDescription}
             </p>
           </div>
 
           <div className="offers-grid">
-            {offers.map((offer, idx) => (
-              <div key={idx} className="offer-card glass">
+            {offers.map((offer) => (
+              <article key={offer.title} className="offer-card">
                 <div className="offer-icon-wrapper">
                   {offer.icon}
                 </div>
                 <h3 className="offer-card-title">{offer.title}</h3>
                 <p className="offer-card-text">{offer.text}</p>
-              </div>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
-      {/* FAQ Section */}
       <section className="section faq-section bg-alt">
         <div className="container">
           <div className="section-header">
             <span className="section-subtitle">Questions & Answers</span>
             <h2 className="section-title">{faqsTitle}</h2>
             <p className="section-title-description">
-              {faqsDesc}
+              {faqsDescription}
             </p>
           </div>
 
           <FAQAccordion faqs={faqs} />
         </div>
       </section>
-
     </div>
   );
 };
