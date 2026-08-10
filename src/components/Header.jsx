@@ -5,6 +5,8 @@ import { Menu, X } from 'lucide-react';
 import logoImg from '../assets/icon_orange.png';
 import { openWorkModal } from '../utils/workModal';
 
+const DESKTOP_NAV_MIN_WIDTH = 1040;
+
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -53,7 +55,7 @@ const Header = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth > 900) {
+      if (window.innerWidth >= DESKTOP_NAV_MIN_WIDTH) {
         setIsOpen(false);
       }
     };

@@ -155,7 +155,7 @@ describe('approved design-system corrections', () => {
       /\.logo-image\s*{[^}]*height:\s*48px;/s,
     );
     expect(header).toMatch(
-      /@media\s*\(max-width:\s*900px\)\s*{[\s\S]*?\.header-container\s*{[^}]*min-height:\s*72px;[\s\S]*?\.logo-image\s*{[^}]*height:\s*44px;/s,
+      /@media\s*\(max-width:\s*1039px\)\s*{[\s\S]*?\.header-container\s*{[^}]*min-height:\s*72px;[\s\S]*?\.logo-image\s*{[^}]*height:\s*44px;/s,
     );
     expect(header).not.toContain('.header-scrolled .header-container');
     expect(header).not.toContain('.header-scrolled .logo-image');
@@ -177,6 +177,17 @@ describe('approved design-system corrections', () => {
     );
     expect(headerPage).toContain("isLifted ? 'header-lifted' : ''");
     expect(headerPage).toContain('requestAnimationFrame');
+  });
+
+  it('uses one 1040px header navigation breakpoint in JavaScript and CSS', () => {
+    const header = readSource('src/components/Header.css');
+    const headerPage = readSource('src/components/Header.jsx');
+
+    expect(headerPage).toContain('const DESKTOP_NAV_MIN_WIDTH = 1040;');
+    expect(headerPage).toContain('window.innerWidth >= DESKTOP_NAV_MIN_WIDTH');
+    expect(header).toMatch(
+      /@media\s*\(max-width:\s*1039px\)\s*{[\s\S]*?\.desktop-nav,\s*\.desktop-right-controls\s*{[^}]*display:\s*none;[\s\S]*?\.mobile-controls\s*{[^}]*display:\s*flex;/s,
+    );
   });
 
   it('keeps the About mission and vision cards equal in height', () => {

@@ -35,6 +35,25 @@ describe('Header Component', () => {
     expect(toggleBtn).toHaveAttribute('aria-expanded', 'true');
   });
 
+  it('keeps the drawer open through 1039px and closes it at 1040px', () => {
+    render(
+      <BrowserRouter>
+        <Header />
+      </BrowserRouter>
+    );
+
+    const menuButton = screen.getByLabelText('Toggle navigation menu');
+    fireEvent.click(menuButton);
+
+    window.innerWidth = 1039;
+    fireEvent(window, new Event('resize'));
+    expect(menuButton).toHaveAttribute('aria-expanded', 'true');
+
+    window.innerWidth = 1040;
+    fireEvent(window, new Event('resize'));
+    expect(menuButton).toHaveAttribute('aria-expanded', 'false');
+  });
+
   it('lifts slightly while scrolling down and returns while scrolling up', async () => {
     const originalAnimationFrame = window.requestAnimationFrame;
     const originalCancelAnimationFrame = window.cancelAnimationFrame;

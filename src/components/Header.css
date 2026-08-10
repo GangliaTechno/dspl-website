@@ -152,7 +152,7 @@
   text-align: center;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1039px) {
   .desktop-nav, .desktop-right-controls {
     display: none;
   }
