@@ -159,6 +159,20 @@
   margin-bottom: 2rem;
 }
 
+@media (min-width: 901px) {
+  .contact-hero {
+    padding: 1.5rem 0 1rem;
+  }
+
+  .contact-title {
+    margin-bottom: 1rem;
+  }
+
+  .contact-grid-section {
+    padding-top: 1.25rem;
+  }
+}
+
 @media (max-width: 900px) {
   .contact-layout {
     grid-template-columns: 1fr;

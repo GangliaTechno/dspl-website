@@ -264,6 +264,9 @@ describe('approved design-system corrections', () => {
     expect(contactCss).toMatch(
       /@media\s*\(max-width:\s*900px\)\s*{[\s\S]*?\.contact-hero\s*{[^}]*padding:\s*3rem 0 2rem;/s,
     );
+    expect(contactCss).toMatch(
+      /@media\s*\(min-width:\s*901px\)\s*{[\s\S]*?\.contact-hero\s*{[^}]*padding:\s*1\.5rem 0 1rem;[\s\S]*?\.contact-title\s*{[^}]*margin-bottom:\s*1rem;[\s\S]*?\.contact-grid-section\s*{[^}]*padding-top:\s*1\.25rem;/s,
+    );
   });
 
   it('uses route-owned form layout and state class names', () => {
