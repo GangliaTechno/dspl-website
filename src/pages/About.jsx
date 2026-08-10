@@ -1,7 +1,6 @@
 import './About.css';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router';
-import { Target, Eye } from 'lucide-react';
 import { motion, useReducedMotion } from 'framer-motion';
 import useSEO from '../hooks/useSEO';
 import { getRouteMetadata } from '../seo/routeMetadata';
@@ -62,6 +61,24 @@ const journeyMilestones = [
     items: [
       'Opened our branding, marketing, and e-commerce services to outside clients.',
     ],
+  },
+];
+
+const directionCards = [
+  {
+    number: '01',
+    title: 'Vision',
+    text: 'To build an enduring portfolio of consumer brands defined by quality, relevance, and responsible growth.',
+  },
+  {
+    number: '02',
+    title: 'Mission',
+    text: 'We develop our own brands and help businesses strengthen their branding, marketing, and e-commerce capabilities through practical, accountable execution.',
+  },
+  {
+    number: '03',
+    title: 'Values',
+    text: 'Evidence before claims. Clarity in decisions. Care in execution.',
   },
 ];
 
@@ -175,12 +192,6 @@ const About = () => {
         '--about-team-image': `url("${teamBgImg}")`,
       }}
     >
-      {/* Background Glows */}
-      <div className="glow-bg">
-        <div className="glow-circle glow-circle-1"></div>
-        <div className="glow-circle glow-circle-2"></div>
-      </div>
-
       {/* Story Section */}
       <section id="story" className="section about-hero">
         <picture className="about-hero-bg" aria-hidden="true">
@@ -206,50 +217,30 @@ const About = () => {
           <h1 className="about-title">About Dashapatmaja Solutions Pvt Ltd</h1>
           <div className="about-intro-grid">
             <p className="about-intro-text">
-              Dashapatmaja Solutions Pvt Ltd helps businesses grow through branding, marketing, and e-commerce. We were founded in 2023 and are incubated at the Manipal Universal Technology Business Incubator (MUTBI) at MAHE, Manipal. Our team comes from healthcare, engineering, design, and business. We also build and sell our own brand, Raw Radicles, which keeps our methods tested and current.
+              Founded in 2023, Dashapatmaja Solutions Pvt Ltd develops consumer brands and provides branding, marketing, and e-commerce services. Based at MUTBI, MAHE, Manipal, our team combines healthcare, engineering, design, management, and technology experience.
             </p>
           </div>
         </motion.div>
       </section>
 
-      <section className="section mission-vision-section bg-alt">
+      <section className="section direction-section bg-alt" aria-labelledby="direction-title">
         <div className="container">
-          {/* Visually-hidden h2 so heading hierarchy h1→h2→h3 is unbroken */}
-          <h2 className="sr-only">Our Core Values</h2>
-          <div className="mission-vision-grid">
-            <motion.div 
-              initial={revealInitial(20)}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={revealTransition({ duration: 0.6 })}
-            >
-              <div className="mv-card glass">
-                <div className="mv-icon-box">
-                  <Target size={24} />
-                </div>
-                <h3 className="mv-title">Our Mission</h3>
-                <p className="mv-text">
-                  Build brands people trust, and help other businesses do the same.
-                </p>
-              </div>
-            </motion.div>
-
-            <motion.div 
-              initial={revealInitial(20)}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={revealTransition({ duration: 0.6, delay: 0.15 })}
-            >
-              <div className="mv-card glass">
-                <div className="mv-icon-box">
-                  <Eye size={24} />
-                </div>
-                <h3 className="mv-title">Our Vision</h3>
-                <p className="mv-text">
-                  A group of Indian consumer brands, supported by a services arm that any growing business can hire.
-                </p>
-              </div>
-            </motion.div>
+          <h2 id="direction-title" className="section-title">What guides our work</h2>
+          <div className="direction-grid">
+            {directionCards.map((card, index) => (
+              <motion.article
+                key={card.title}
+                className="direction-card"
+                initial={revealInitial(20)}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-50px' }}
+                transition={revealTransition({ duration: 0.6, delay: index * 0.1 })}
+              >
+                <span className="direction-number" aria-hidden="true">{card.number}</span>
+                <h3 className="direction-title">{card.title}</h3>
+                <p className="direction-text">{card.text}</p>
+              </motion.article>
+            ))}
           </div>
         </div>
       </section>

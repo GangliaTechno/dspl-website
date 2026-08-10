@@ -190,15 +190,25 @@ describe('approved design-system corrections', () => {
     );
   });
 
-  it('keeps the About mission and vision cards equal in height', () => {
-    const about = readSource('src/pages/About.css');
+  it('uses a responsive, text-led direction framework on About', () => {
+    const aboutPage = readSource('src/pages/About.jsx');
+    const aboutCss = readSource('src/pages/About.css');
 
-    expect(about).toMatch(
-      /\.mission-vision-grid\s*>\s*div\s*{[^}]*height:\s*100%;/s,
+    expect(aboutPage).toContain('const directionCards = [');
+    expect(aboutPage).toContain("number: '01'");
+    expect(aboutPage).toContain("title: 'Vision'");
+    expect(aboutPage).toContain(
+      'To build an enduring portfolio of consumer brands defined by quality, relevance, and responsible growth.',
     );
-    expect(about).toMatch(
-      /\.mv-card\s*{[^}]*height:\s*100%;[^}]*box-sizing:\s*border-box;/s,
+    expect(aboutPage).toContain('directionCards.map((card, index)');
+    expect(aboutPage).not.toContain("from 'lucide-react'");
+    expect(aboutCss).toMatch(
+      /\.direction-grid\s*{[^}]*grid-template-columns:\s*repeat\(3,\s*1fr\);/s,
     );
+    expect(aboutCss).toMatch(
+      /@media\s*\(max-width:\s*900px\)\s*{[\s\S]*?\.direction-grid\s*{[^}]*grid-template-columns:\s*1fr;/s,
+    );
+    expect(aboutCss).not.toContain('.direction-card:hover');
   });
 
   it('uses one Contact details panel and prioritizes the form on smaller screens', () => {
@@ -480,11 +490,12 @@ describe('approved design-system corrections', () => {
     expect(aboutPage).toMatch(
       /className="team-card glass">[\s\S]*?\{member\.linkedin[\s\S]*?className="team-linkedin-link"[\s\S]*?<div className="team-avatar-wrapper">/s,
     );
-    expect(aboutCss).toMatch(
-      /\.team-card\s*{[^}]*position:\s*relative;[^}]*transition:\s*transform 180ms ease-out,\s*border-color 180ms ease-out,\s*box-shadow 180ms ease-out;/s,
-    );
+    expect(aboutCss).not.toMatch(/\.team-card:hover\s*{/);
     expect(aboutCss).toMatch(
       /\.team-linkedin-link\s*{[^}]*top:\s*1rem;[^}]*right:\s*1rem;[^}]*width:\s*2\.25rem;[^}]*height:\s*2\.25rem;/s,
+    );
+    expect(aboutCss).toMatch(
+      /\.team-linkedin-link:hover,\s*\.team-linkedin-link:focus-visible\s*{[^}]*transform:\s*translateY\(-2px\);/s,
     );
     expect(aboutCss).toMatch(
       /\.team-avatar-image\s*{[^}]*border-radius:\s*50%;[^}]*object-position:\s*var\(--avatar-position,\s*center\);[^}]*transform:\s*translateY\(var\(--avatar-y,\s*0\)\)\s*scale\(var\(--avatar-scale,\s*1\)\);[^}]*transform-origin:\s*var\(--avatar-origin,\s*center\);/s,
