@@ -192,47 +192,12 @@
   color: var(--text-secondary);
 }
 
-/* Section Headers */
-.section-header {
-  text-align: center;
-  max-width: 650px;
-  margin: 0 auto 4rem;
-}
-
-.section-subtitle {
-  font-family: var(--font-heading);
-  font-size: 0.85rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  color: var(--accent-text);
-  display: inline-block;
-  margin-bottom: 0.75rem;
-}
-
-.section-title {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  letter-spacing: -0.03em;
-  color: var(--text-heading);
-  font-weight: 800;
-}
-
-.section-title-description {
-  font-size: 1.05rem;
-  line-height: 1.6;
-  color: var(--text-secondary);
-}
-
 @media (max-width: 768px) {
   .domain-hero::before {
     background-image: var(--service-hero-mobile-image);
   }
   .domain-title {
     font-size: 2.25rem;
-  }
-  .section-title {
-    font-size: 1.875rem;
   }
   .offers-grid {
     grid-template-columns: 1fr;

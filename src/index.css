@@ -141,6 +141,39 @@ p {
   position: relative;
 }
 
+.section-header {
+  max-width: 650px;
+  margin: 0 auto 4rem;
+  text-align: center;
+}
+
+.section-subtitle {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  color: var(--accent-text);
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.section-title {
+  margin-bottom: 1rem;
+  color: var(--text-heading);
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+.section-title-description {
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
 /* Glassmorphism */
 .glass {
   background: var(--glass-bg);
@@ -231,6 +264,35 @@ textarea.form-input {
   resize: vertical;
 }
 
+select.form-input {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%238d9365' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 1.25rem center;
+  background-size: 1rem;
+  padding-right: 3rem;
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+select.form-input option {
+  background: #ffffff;
+  color: var(--text-primary);
+}
+
+.form-input[aria-invalid='true'] {
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.05) !important;
+}
+
+.form-error-text {
+  display: block;
+  margin-top: 0.35rem;
+  color: #ef4444;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
 /* Background Gradients/Glows */
 .glow-bg {
   position: absolute;
@@ -303,7 +365,8 @@ select:focus-visible,
 
 /* Global Mobile Responsiveness */
 @media (max-width: 768px) {
-  .section { padding: 4rem 1rem; }
+  .section { padding: 4rem 0; }
+  .section-title { font-size: 1.875rem; }
   h1 { font-size: 2.25rem; }
   h2 { font-size: 1.875rem; }
   h3 { font-size: 1.5rem; }

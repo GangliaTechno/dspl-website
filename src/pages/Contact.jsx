@@ -165,8 +165,8 @@ const Contact = () => {
             {/* Column 2: Form */}
             <div className="form-column glass">
               {submitted ? (
-                <div className="success-state" role="status" aria-live="polite">
-                  <CheckCircle2 className="success-icon" />
+                <div className="contact-success-state" role="status" aria-live="polite">
+                  <CheckCircle2 className="contact-success-icon" />
                   <h3>Message Sent!</h3>
                   <p>Thank you for reaching out to Dashapatmaja Solutions Pvt Ltd. We will review your message and respond within 24 hours.</p>
                   <button type="button" className="btn btn-primary" onClick={() => setSubmitted(false)}>
@@ -175,16 +175,16 @@ const Contact = () => {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} noValidate>
-                  <h3 className="form-title">Send a Message</h3>
+                  <h3 className="contact-form-title">Send a Message</h3>
                   
-                  <div className="form-row">
-                    <div className="form-group half-width">
+                  <div className="contact-form-row">
+                    <div className="form-group">
                       <label className="form-label" htmlFor="firstName">First Name</label>
                       <input
                         type="text"
                         id="firstName"
                         name="firstName"
-                        className={`form-input ${errors.firstName ? 'form-input-error' : ''}`}
+                        className="form-input"
                         placeholder="John"
                         value={formData.firstName}
                         onChange={handleChange}
@@ -192,16 +192,16 @@ const Contact = () => {
                         aria-describedby={errors.firstName ? 'firstName-error' : undefined}
                         required
                       />
-                      {errors.firstName && <span id="firstName-error" className="error-text" role="alert">{errors.firstName}</span>}
+                      {errors.firstName && <span id="firstName-error" className="form-error-text" role="alert">{errors.firstName}</span>}
                     </div>
 
-                    <div className="form-group half-width">
+                    <div className="form-group">
                       <label className="form-label" htmlFor="lastName">Last Name</label>
                       <input
                         type="text"
                         id="lastName"
                         name="lastName"
-                        className={`form-input ${errors.lastName ? 'form-input-error' : ''}`}
+                        className="form-input"
                         placeholder="Doe"
                         value={formData.lastName}
                         onChange={handleChange}
@@ -209,7 +209,7 @@ const Contact = () => {
                         aria-describedby={errors.lastName ? 'lastName-error' : undefined}
                         required
                       />
-                      {errors.lastName && <span id="lastName-error" className="error-text" role="alert">{errors.lastName}</span>}
+                      {errors.lastName && <span id="lastName-error" className="form-error-text" role="alert">{errors.lastName}</span>}
                     </div>
                   </div>
 
@@ -219,7 +219,7 @@ const Contact = () => {
                       type="email"
                       id="email"
                       name="email"
-                      className={`form-input ${errors.email ? 'form-input-error' : ''}`}
+                      className="form-input"
                       placeholder="johndoe@gmail.com"
                       value={formData.email}
                       onChange={handleChange}
@@ -227,7 +227,7 @@ const Contact = () => {
                       aria-describedby={errors.email ? 'email-error' : undefined}
                       required
                     />
-                    {errors.email && <span id="email-error" className="error-text" role="alert">{errors.email}</span>}
+                    {errors.email && <span id="email-error" className="form-error-text" role="alert">{errors.email}</span>}
                   </div>
 
                   {/* Honeypot field */}
@@ -247,7 +247,7 @@ const Contact = () => {
                     <select
                       id="helpType"
                       name="helpType"
-                      className={`form-input form-select ${errors.helpType ? 'form-input-error' : ''}`}
+                      className="form-input"
                       value={formData.helpType}
                       onChange={handleChange}
                       aria-invalid={Boolean(errors.helpType)}
@@ -261,7 +261,7 @@ const Contact = () => {
                       <option value="New brand">New brand</option>
                       <option value="Other">Other</option>
                     </select>
-                    {errors.helpType && <span id="helpType-error" className="error-text" role="alert">{errors.helpType}</span>}
+                    {errors.helpType && <span id="helpType-error" className="form-error-text" role="alert">{errors.helpType}</span>}
                   </div>
 
                   <div className="form-group">
@@ -269,7 +269,7 @@ const Contact = () => {
                     <textarea
                       id="message"
                       name="message"
-                      className={`form-input ${errors.message ? 'form-input-error' : ''}`}
+                      className="form-input"
                       placeholder="Enter your message here..."
                       value={formData.message}
                       onChange={handleChange}
@@ -277,18 +277,18 @@ const Contact = () => {
                       aria-invalid={errors.message ? 'true' : 'false'}
                       aria-describedby={errors.message ? 'message-error' : undefined}
                     />
-                    {errors.message && <span id="message-error" className="error-text">{errors.message}</span>}
+                    {errors.message && <span id="message-error" className="form-error-text">{errors.message}</span>}
                   </div>
 
                   {submitError && (
-                    <div className="submit-error-banner" role="alert">
+                    <div className="contact-submit-error-banner" role="alert">
                       <AlertCircle size={14} /> {submitError}
                     </div>
                   )}
 
                   <button 
                     type="submit" 
-                    className="btn btn-primary submit-btn"
+                    className="btn btn-primary contact-submit-btn"
                     disabled={isSubmitting}
                   >
                     {isSubmitting ? 'Sending...' : 'Send Message'} <Send size={16} />

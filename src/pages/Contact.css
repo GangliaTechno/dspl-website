@@ -107,7 +107,7 @@
   box-shadow: var(--shadow-lg);
 }
 
-.form-title {
+.contact-form-title {
   font-size: 1.75rem;
   font-weight: 800;
   color: var(--text-heading);
@@ -116,45 +116,13 @@
   padding-bottom: 1rem;
 }
 
-.form-row {
-  display: flex;
+.contact-form-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1.5rem;
 }
 
-.half-width {
-  flex: 1;
-}
-
-.form-select {
-  appearance: none;
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%238d9365' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-  background-repeat: no-repeat;
-  background-position: right 1.25rem center;
-  background-size: 1rem;
-  padding-right: 3rem;
-  color: var(--text-primary);
-  cursor: pointer;
-}
-
-.form-select option {
-  background: #ffffff;
-  color: var(--text-primary);
-}
-
-.form-input-error {
-  border-color: #ef4444 !important;
-  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.05) !important;
-}
-
-.error-text {
-  display: block;
-  font-size: 0.8rem;
-  color: #ef4444;
-  font-weight: 500;
-  margin-top: 0.35rem;
-}
-
-.submit-btn {
+.contact-submit-btn {
   width: 100%;
   padding: 0.875rem;
   font-size: 1rem;
@@ -162,26 +130,26 @@
 }
 
 /* Success State */
-.success-state {
+.contact-success-state {
   text-align: center;
   padding: 2rem 0;
 }
 
-.success-icon {
+.contact-success-icon {
   width: 60px;
   height: 60px;
   color: var(--accent-text);
   margin-bottom: 1.5rem;
 }
 
-.success-state h3 {
+.contact-success-state h3 {
   font-size: 1.75rem;
   font-weight: 800;
   color: var(--text-heading);
   margin-bottom: 1rem;
 }
 
-.success-state p {
+.contact-success-state p {
   font-size: 1rem;
   color: var(--text-secondary);
   line-height: 1.6;
@@ -201,8 +169,8 @@
 }
 
 @media (max-width: 576px) {
-  .form-row {
-    flex-direction: column;
+  .contact-form-row {
+    grid-template-columns: 1fr;
     gap: 0;
   }
   .form-column {
@@ -232,7 +200,7 @@
   opacity: 0;
 }
 
-.submit-error-banner {
+.contact-submit-error-banner {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -241,7 +209,7 @@
   font-size: 0.85rem;
 }
 
-.submit-btn:disabled {
+.contact-submit-btn:disabled {
   cursor: not-allowed;
   opacity: 0.7;
 }

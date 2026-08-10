@@ -89,45 +89,45 @@
   scrollbar-gutter: stable;
 }
 
-.form-intro-text {
+.work-modal-form-intro-text {
   margin-bottom: 1.75rem;
   color: var(--text-secondary);
   text-wrap: pretty;
 }
 
-.form-section {
+.work-modal-form-section {
   padding-bottom: 1.75rem;
   margin-bottom: 1.75rem;
   border-bottom: 1px solid var(--border-color);
 }
 
-.form-section.border-none {
+.work-modal-form-section--borderless {
   padding-bottom: 0;
   border-bottom: 0;
 }
 
-.section-header-title {
+.work-modal-section-header-title {
   margin-bottom: 1.25rem;
   color: var(--text-heading);
   font-size: 0.875rem;
   letter-spacing: 0.05em;
 }
 
-.modal-container .form-row {
+.modal-container .work-modal-form-row {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
 }
 
-.checkbox-grid,
-.radio-grid {
+.work-modal-checkbox-grid,
+.work-modal-radio-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.75rem;
 }
 
-.checkbox-label,
-.radio-label {
+.work-modal-checkbox-label,
+.work-modal-radio-label {
   display: flex;
   min-height: 44px;
   align-items: center;
@@ -140,24 +140,24 @@
   cursor: pointer;
 }
 
-.checkbox-label input,
-.radio-label input {
+.work-modal-checkbox-label input,
+.work-modal-radio-label input {
   width: 1rem;
   height: 1rem;
   accent-color: var(--accent-text);
 }
 
-.required-asterisk {
+.work-modal-required-asterisk {
   color: #c0392b;
 }
 
-.modal-container .error-text {
+.modal-container .work-modal-form-error {
   display: flex;
   align-items: center;
   gap: 0.35rem;
 }
 
-.success-state {
+.work-modal-success-state {
   min-height: 24rem;
   display: flex;
   flex-direction: column;
@@ -166,16 +166,16 @@
   padding: 2rem 1rem;
 }
 
-.success-icon {
+.work-modal-success-icon {
   color: var(--accent-text);
 }
 
-.success-message {
+.work-modal-success-message {
   max-width: 36rem;
   text-wrap: pretty;
 }
 
-.priority-notice {
+.work-modal-priority-notice {
   margin-bottom: 1.5rem;
   padding: 1rem;
   border: 1px solid var(--accent-border-alpha);
@@ -183,7 +183,7 @@
   background: var(--bg-secondary);
 }
 
-.priority-badge {
+.work-modal-priority-badge {
   display: inline-block;
   margin-bottom: 0.5rem;
   color: var(--accent-text);
@@ -192,12 +192,12 @@
   letter-spacing: 0.08em;
 }
 
-.checkbox-fieldset {
+.work-modal-checkbox-fieldset {
   border: none;
   padding: 0;
   margin: 0;
 }
-.file-selected-box {
+.work-modal-file-selected-box {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -206,12 +206,12 @@
   border-radius: 8px;
   border: 1px solid var(--border-color);
 }
-.file-name-text {
+.work-modal-file-name-text {
   font-size: 0.875rem;
   color: var(--text-primary);
   word-break: break-all;
 }
-.file-remove-btn {
+.work-modal-file-remove-btn {
   background: none;
   min-height: 44px;
   border: none;
@@ -220,7 +220,7 @@
   font-size: 0.85rem;
   padding: 0.2rem 0.5rem;
 }
-.file-upload-dropzone {
+.work-modal-file-upload-dropzone {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -232,24 +232,24 @@
   background: rgba(255, 255, 255, 0.02);
 }
 
-.file-upload-dropzone:focus-within {
+.work-modal-file-upload-dropzone:focus-within {
   outline: var(--focus-ring);
   outline-offset: 3px;
 }
-.file-dropzone-text {
+.work-modal-file-dropzone-text {
   font-size: 0.875rem;
   color: var(--text-secondary);
 }
-.file-input-hidden {
+.work-modal-file-input-hidden {
   display: none;
 }
-.file-error-text {
+.work-modal-file-error-text {
   color: var(--accent-red);
   font-size: 0.8rem;
   margin-top: 0.4rem;
   display: block;
 }
-.submit-error-banner {
+.work-modal-submit-error-banner {
   color: #ff3333;
   font-size: 0.85rem;
   margin-bottom: 1rem;
@@ -257,11 +257,11 @@
   align-items: center;
   gap: 0.5rem;
 }
-.submit-btn:disabled {
+.work-modal-submit-btn:disabled {
   opacity: 0.7;
   cursor: not-allowed;
 }
-.honeypot-field {
+.work-modal-honeypot-field {
   position: absolute;
   left: -9999px;
   width: 1px;
@@ -289,9 +289,9 @@
     padding-inline: 1rem;
   }
 
-  .modal-container .form-row,
-  .checkbox-grid,
-  .radio-grid {
+  .modal-container .work-modal-form-row,
+  .work-modal-checkbox-grid,
+  .work-modal-radio-grid {
     grid-template-columns: 1fr;
   }
 }

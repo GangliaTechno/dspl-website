@@ -215,6 +215,16 @@ describe('approved design-system corrections', () => {
     );
   });
 
+  it('uses route-owned form layout and state class names', () => {
+    const contactPage = readSource('src/pages/Contact.jsx');
+    const modalPage = readSource('src/components/WorkWithUsModal.jsx');
+
+    expect(contactPage).toContain('contact-form-row');
+    expect(contactPage).toContain('contact-submit-btn');
+    expect(modalPage).toContain('work-modal-form-row');
+    expect(modalPage).toContain('work-modal-submit-btn');
+  });
+
   it('presents four alternating About journey stories with original imagery', () => {
     const aboutPage = readSource('src/pages/About.jsx');
     const aboutCss = readSource('src/pages/About.css');

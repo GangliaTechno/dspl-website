@@ -248,16 +248,16 @@ const WorkWithUsModal = () => {
         {/* Modal Scrollable Body */}
         <div className="modal-body-scroll">
           {submitted ? (
-            <div className="success-state" role="alert" aria-live="polite">
-              <CheckCircle2 className="success-icon" />
+            <div className="work-modal-success-state" role="alert" aria-live="polite">
+              <CheckCircle2 className="work-modal-success-icon" />
               <h3>Thank You!</h3>
-              <p className="success-message">
+              <p className="work-modal-success-message">
                 Thank you for your response. We appreciate you taking the time to share your project details. We will respond within 24 hours.
               </p>
               
               {processedLeadInfo && processedLeadInfo.priority === 'VIP' && (
-                <div className="priority-notice">
-                  <span className="priority-badge">VIP LEAD</span>
+                <div className="work-modal-priority-notice">
+                  <span className="work-modal-priority-badge">VIP LEAD</span>
                   <p>Your request has been prioritized due to your timeline and scope. We will contact you immediately.</p>
                 </div>
               )}
@@ -268,19 +268,19 @@ const WorkWithUsModal = () => {
             </div>
           ) : (
             <form onSubmit={handleSubmit} noValidate>
-              <p className="form-intro-text">Please fill out all the sections below. Required fields are marked with *</p>
+              <p className="work-modal-form-intro-text">Please fill out all the sections below. Required fields are marked with *</p>
               
               {/* SECTION 1 – Basic Info */}
-              <div className="form-section" id="modal-fullName">
-                <h4 className="section-header-title">SECTION 1: Basic Info</h4>
+              <div className="work-modal-form-section" id="modal-fullName">
+                <h4 className="work-modal-section-header-title">SECTION 1: Basic Info</h4>
                 
                 <div className="form-group">
-                  <label className="form-label" htmlFor="fullName">Full Name <span className="required-asterisk">*</span></label>
+                  <label className="form-label" htmlFor="fullName">Full Name <span className="work-modal-required-asterisk">*</span></label>
                   <input
                     id="fullName"
                     type="text"
                     name="fullName"
-                    className={`form-input ${errors.fullName ? 'form-input-error' : ''}`}
+                    className="form-input"
                     placeholder="Enter your first and last name"
                     value={formData.fullName}
                     onChange={handleInputChange}
@@ -288,7 +288,7 @@ const WorkWithUsModal = () => {
                     aria-describedby={errors.fullName ? 'fullName-error' : undefined}
                     required
                   />
-                  {errors.fullName && <span id="fullName-error" className="error-text" role="alert"><AlertCircle size={12} /> {errors.fullName}</span>}
+                  {errors.fullName && <span id="fullName-error" className="form-error-text work-modal-form-error" role="alert"><AlertCircle size={12} /> {errors.fullName}</span>}
                 </div>
 
                 <div className="form-group">
@@ -304,14 +304,14 @@ const WorkWithUsModal = () => {
                   />
                 </div>
 
-                <div className="form-row">
-                  <div className="form-group half-width" id="modal-email">
-                    <label className="form-label" htmlFor="email">Email Address <span className="required-asterisk">*</span></label>
+                <div className="work-modal-form-row">
+                  <div className="form-group" id="modal-email">
+                    <label className="form-label" htmlFor="email">Email Address <span className="work-modal-required-asterisk">*</span></label>
                     <input
                       id="email"
                       type="email"
                       name="email"
-                      className={`form-input ${errors.email ? 'form-input-error' : ''}`}
+                      className="form-input"
                       placeholder="We will never share your email address"
                       value={formData.email}
                       onChange={handleInputChange}
@@ -319,16 +319,16 @@ const WorkWithUsModal = () => {
                       aria-describedby={errors.email ? 'email-error' : undefined}
                       required
                     />
-                    {errors.email && <span id="email-error" className="error-text" role="alert"><AlertCircle size={12} /> {errors.email}</span>}
+                    {errors.email && <span id="email-error" className="form-error-text work-modal-form-error" role="alert"><AlertCircle size={12} /> {errors.email}</span>}
                   </div>
 
-                  <div className="form-group half-width" id="modal-phone">
-                    <label className="form-label" htmlFor="phone">Phone / WhatsApp Number <span className="required-asterisk">*</span></label>
+                  <div className="form-group" id="modal-phone">
+                    <label className="form-label" htmlFor="phone">Phone / WhatsApp Number <span className="work-modal-required-asterisk">*</span></label>
                     <input
                       id="phone"
                       type="tel"
                       name="phone"
-                      className={`form-input ${errors.phone ? 'form-input-error' : ''}`}
+                      className="form-input"
                       placeholder="Used for direct scheduling and follow-ups"
                       value={formData.phone}
                       onChange={handleInputChange}
@@ -336,7 +336,7 @@ const WorkWithUsModal = () => {
                       aria-describedby={errors.phone ? 'phone-error' : undefined}
                       required
                     />
-                    {errors.phone && <span id="phone-error" className="error-text" role="alert"><AlertCircle size={12} /> {errors.phone}</span>}
+                    {errors.phone && <span id="phone-error" className="form-error-text work-modal-form-error" role="alert"><AlertCircle size={12} /> {errors.phone}</span>}
                   </div>
                 </div>
 
@@ -355,12 +355,12 @@ const WorkWithUsModal = () => {
               </div>
 
               {/* SECTION 2 – Project Details */}
-              <div className="form-section" id="modal-services">
-                <h4 className="section-header-title">SECTION 2: Project Details</h4>
+              <div className="work-modal-form-section" id="modal-services">
+                <h4 className="work-modal-section-header-title">SECTION 2: Project Details</h4>
 
-                <fieldset className="form-group checkbox-fieldset">
-                  <legend className="form-label">Service Interested In (select all that apply) <span className="required-asterisk">*</span></legend>
-                  <div className="checkbox-grid">
+                <fieldset className="form-group work-modal-checkbox-fieldset">
+                  <legend className="form-label">Service Interested In (select all that apply) <span className="work-modal-required-asterisk">*</span></legend>
+                  <div className="work-modal-checkbox-grid">
                     {[
                       'Branding',
                       'Marketing',
@@ -369,7 +369,7 @@ const WorkWithUsModal = () => {
                       'E-commerce',
                       'Other'
                     ].map((service) => (
-                      <label key={service} className="checkbox-label">
+                      <label key={service} className="work-modal-checkbox-label">
                         <input
                           type="checkbox"
                           name="services"
@@ -383,7 +383,7 @@ const WorkWithUsModal = () => {
                       </label>
                     ))}
                   </div>
-                  {errors.services && <span id="services-error" className="error-text" role="alert"><AlertCircle size={12} /> {errors.services}</span>}
+                  {errors.services && <span id="services-error" className="form-error-text work-modal-form-error" role="alert"><AlertCircle size={12} /> {errors.services}</span>}
                 </fieldset>
 
                 <div className="form-group">
@@ -400,15 +400,15 @@ const WorkWithUsModal = () => {
               </div>
 
               {/* SECTION 3 – Additional Info */}
-              <div className="form-section border-none">
-                <h4 className="section-header-title">SECTION 3: Additional Info</h4>
+              <div className="work-modal-form-section work-modal-form-section--borderless">
+                <h4 className="work-modal-section-header-title">SECTION 3: Additional Info</h4>
 
                 <div className="form-group">
                   <label className="form-label" htmlFor="referralSource">How did you hear about us?</label>
                   <select
                     id="referralSource"
                     name="referralSource"
-                    className="form-input form-select"
+                    className="form-input"
                     value={formData.referralSource}
                     onChange={handleInputChange}
                   >
@@ -422,13 +422,13 @@ const WorkWithUsModal = () => {
 
                 <div className="form-group">
                   <label className="form-label">Preferred Contact Method</label>
-                  <div className="radio-grid">
+                  <div className="work-modal-radio-grid">
                     {[
                       { label: 'Call', value: 'Call' },
                       { label: 'WhatsApp', value: 'WhatsApp' },
                       { label: 'Email', value: 'Email' }
                     ].map((method) => (
-                      <label key={method.value} className="radio-label">
+                      <label key={method.value} className="work-modal-radio-label">
                         <input
                           type="radio"
                           name="preferredContact"
@@ -445,17 +445,17 @@ const WorkWithUsModal = () => {
                 <div className="form-group">
                   <label className="form-label">Attach File / Brand Brief (Optional, max 5MB)</label>
                   {formData.fileName ? (
-                    <div className="file-selected-box">
-                      <span className="file-name-text">📄 {formData.fileName}</span>
-                      <button type="button" onClick={removeFile} className="file-remove-btn">Remove</button>
+                    <div className="work-modal-file-selected-box">
+                      <span className="work-modal-file-name-text">📄 {formData.fileName}</span>
+                      <button type="button" onClick={removeFile} className="work-modal-file-remove-btn">Remove</button>
                     </div>
                   ) : (
-                    <label className="file-upload-dropzone">
-                      <span className="file-dropzone-text">Click to attach project brief or document</span>
-                      <input type="file" onChange={handleFileUpload} className="file-input-hidden" accept=".pdf,.doc,.docx,.png,.jpg,.jpeg" />
+                    <label className="work-modal-file-upload-dropzone">
+                      <span className="work-modal-file-dropzone-text">Click to attach project brief or document</span>
+                      <input type="file" onChange={handleFileUpload} className="work-modal-file-input-hidden" accept=".pdf,.doc,.docx,.png,.jpg,.jpeg" />
                     </label>
                   )}
-                  {errors.file && <span className="file-error-text" role="alert">{errors.file}</span>}
+                  {errors.file && <span className="work-modal-file-error-text" role="alert">{errors.file}</span>}
                 </div>
 
                 {/* Honeypot Spam Protection Field - Offscreen text input */}
@@ -465,21 +465,21 @@ const WorkWithUsModal = () => {
                   tabIndex={-1}
                   autoComplete="off"
                   aria-hidden="true"
-                  className="honeypot-field"
+                  className="work-modal-honeypot-field"
                   value={formData.websiteConfirm} 
                   onChange={handleInputChange} 
                 />
               </div>
 
               {submitError && (
-                <div className="submit-error-banner" role="alert">
+                <div className="work-modal-submit-error-banner" role="alert">
                   <AlertCircle size={14} /> {submitError}
                 </div>
               )}
 
               <button 
                 type="submit" 
-                className="btn btn-primary submit-btn" 
+                className="btn btn-primary work-modal-submit-btn"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? 'Submitting...' : 'Send My Project Details'}
