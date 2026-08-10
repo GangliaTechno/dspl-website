@@ -2,9 +2,9 @@ import './WorkWithUsModal.css';
 import { useState, useEffect, useRef } from 'react';
 import { X, CheckCircle2, AlertCircle } from 'lucide-react';
 import { trackEvent } from '../utils/analytics';
+import { FORM_SUBMISSION_ERROR } from '../utils/formMessages';
 import { WORK_MODAL_EVENT } from '../utils/workModal';
 import {
-  classifyLead,
   createInitialLeadForm,
   createLeadPayload,
   validateAttachment,
@@ -18,7 +18,6 @@ const WorkWithUsModal = () => {
 
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
-  const [processedLeadInfo, setProcessedLeadInfo] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState('');
 
@@ -43,7 +42,6 @@ const WorkWithUsModal = () => {
     setSelectedFile(null);
     setErrors({});
     setSubmitted(false);
-    setProcessedLeadInfo(null);
     setIsSubmitting(false);
     setSubmitError('');
   };
@@ -164,15 +162,12 @@ const WorkWithUsModal = () => {
     const isValid = Object.keys(validationErrors).length === 0;
 
     if (isValid) {
-      const classification = classifyLead(formData);
-      setProcessedLeadInfo(classification);
-      
       setIsSubmitting(true);
       setSubmitError('');
 
       const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || '';
       if (!accessKey) {
-        setSubmitError('Web3Forms access key is missing. Please configure VITE_WEB3FORMS_ACCESS_KEY in environment variables.');
+        setSubmitError(FORM_SUBMISSION_ERROR);
         setIsSubmitting(false);
         return;
       }
@@ -204,10 +199,10 @@ const WorkWithUsModal = () => {
             label: formData.services.join(', ')
           });
         } else {
-          setSubmitError(result.message || 'Failed to submit form. Please check your access key or try again.');
+          setSubmitError(FORM_SUBMISSION_ERROR);
         }
       } catch {
-        setSubmitError('Failed to connect to the Web3Forms server. Please check your internet connection.');
+        setSubmitError(FORM_SUBMISSION_ERROR);
       } finally {
         setIsSubmitting(false);
       }
@@ -250,17 +245,10 @@ const WorkWithUsModal = () => {
           {submitted ? (
             <div className="work-modal-success-state" role="alert" aria-live="polite">
               <CheckCircle2 className="work-modal-success-icon" />
-              <h3>Thank You!</h3>
+              <h3>Project details received</h3>
               <p className="work-modal-success-message">
-                Thank you for your response. We appreciate you taking the time to share your project details. We will respond within 24 hours.
+                Thank you. We have received your project details and will review them before contacting you.
               </p>
-              
-              {processedLeadInfo && processedLeadInfo.priority === 'VIP' && (
-                <div className="work-modal-priority-notice">
-                  <span className="work-modal-priority-badge">VIP LEAD</span>
-                  <p>Your request has been prioritized due to your timeline and scope. We will contact you immediately.</p>
-                </div>
-              )}
 
               <button type="button" className="btn btn-secondary work-modal-reset-btn" onClick={handleResetForm}>
                 Submit Another Project
@@ -272,7 +260,7 @@ const WorkWithUsModal = () => {
               
               {/* SECTION 1 – Basic Info */}
               <div className="work-modal-form-section" id="modal-fullName">
-                <h4 className="work-modal-section-header-title">SECTION 1: Basic Info</h4>
+                <h4 className="work-modal-section-header-title">Contact details</h4>
                 
                 <div className="form-group">
                   <label className="form-label" htmlFor="fullName">Full Name <span className="work-modal-required-asterisk">*</span></label>
@@ -356,7 +344,7 @@ const WorkWithUsModal = () => {
 
               {/* SECTION 2 – Project Details */}
               <div className="work-modal-form-section" id="modal-services">
-                <h4 className="work-modal-section-header-title">SECTION 2: Project Details</h4>
+                <h4 className="work-modal-section-header-title">Project details</h4>
 
                 <fieldset className="form-group work-modal-checkbox-fieldset">
                   <legend className="form-label">Service Interested In (select all that apply) <span className="work-modal-required-asterisk">*</span></legend>
@@ -401,7 +389,7 @@ const WorkWithUsModal = () => {
 
               {/* SECTION 3 – Additional Info */}
               <div className="work-modal-form-section work-modal-form-section--borderless">
-                <h4 className="work-modal-section-header-title">SECTION 3: Additional Info</h4>
+                <h4 className="work-modal-section-header-title">Preferences</h4>
 
                 <div className="form-group">
                   <label className="form-label" htmlFor="referralSource">How did you hear about us?</label>

@@ -175,23 +175,6 @@
   text-wrap: pretty;
 }
 
-.work-modal-priority-notice {
-  margin-bottom: 1.5rem;
-  padding: 1rem;
-  border: 1px solid var(--accent-border-alpha);
-  border-radius: var(--radius-control);
-  background: var(--bg-secondary);
-}
-
-.work-modal-priority-badge {
-  display: inline-block;
-  margin-bottom: 0.5rem;
-  color: var(--accent-text);
-  font-size: 0.75rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-}
-
 .work-modal-checkbox-fieldset {
   border: none;
   padding: 0;
