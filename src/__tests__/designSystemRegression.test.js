@@ -622,4 +622,36 @@ describe('approved design-system corrections', () => {
       "{ route: 'brands', heading: 'We develop and operate consumer brands.' }",
     );
   });
+
+  it('keeps the global footer as compact corporate information without a duplicate CTA', () => {
+    const footer = readSource('src/components/Footer.jsx');
+    const footerCss = readSource('src/components/Footer.css');
+
+    expect(footer).not.toContain('footer-banner');
+    expect(footer).not.toContain('Ready to build something that lasts?');
+    expect(footer).not.toContain('Innovating Today for a Smarter Tomorrow');
+    expect(footer).not.toContain('ArrowUpRight');
+    expect(footer).not.toContain('openWorkModal');
+    expect(footer).not.toContain('Get in Touch');
+    expect(footer).toContain(
+      'Dashapatmaja Solutions Pvt Ltd develops consumer brands and provides branding, marketing, and e-commerce services.',
+    );
+    expect(footer).toContain('>Services</h4>');
+    expect(footer).toContain('>Contact</h4>');
+    expect(footer).toContain('>Privacy Policy</Link>');
+    expect(footerCss).not.toContain('.footer-banner');
+    expect(footerCss).not.toContain('.banner-content');
+    expect(footerCss).not.toContain('.banner-title');
+    expect(footerCss).not.toContain('.banner-text');
+    expect(footerCss).not.toContain('.banner-btn');
+    expect(footerCss).toMatch(
+      /\.footer\s*{[^}]*padding:\s*4rem 0 2rem;/s,
+    );
+    expect(footerCss).toMatch(
+      /\.footer-grid\s*{[^}]*padding-bottom:\s*3rem;/s,
+    );
+    expect(footerCss).toMatch(
+      /@media\s*\(max-width:\s*576px\)\s*{[\s\S]*?\.footer-bottom\s*{[^}]*flex-direction:\s*column;[^}]*align-items:\s*flex-start;[^}]*gap:\s*1rem;/s,
+    );
+  });
 });

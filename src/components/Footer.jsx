@@ -1,8 +1,7 @@
 import './Footer.css';
 import { Link } from 'react-router';
-import { Phone, Mail, ArrowUpRight } from 'lucide-react';
+import { Phone, Mail } from 'lucide-react';
 import logoImg from '../assets/icon_orange.png';
-import { openWorkModal } from '../utils/workModal';
 
 const Footer = () => {
   const handleBackToTop = () => {
@@ -12,24 +11,6 @@ const Footer = () => {
   return (
     <footer className="footer">
       <div className="container">
-        {/* Banner Section */}
-        <div className="footer-banner">
-          <div className="banner-content">
-            <h3 className="banner-title">Ready to build something that lasts?</h3>
-            <p className="banner-text">
-              Tell us what you are working on. A new brand, a brand that needs a refresh, or a store that should sell more. We will show you a clear way forward.
-            </p>
-          </div>
-          <button 
-            type="button"
-            aria-label="Open enquiry form to get in touch"
-            onClick={() => openWorkModal('footer')}
-            className="btn btn-primary banner-btn"
-          >
-            Get in Touch <ArrowUpRight size={18} />
-          </button>
-        </div>
-
         {/* Links & Details Section */}
         <div className="footer-grid">
           <div className="footer-col brand-col">
@@ -37,7 +18,7 @@ const Footer = () => {
               <img src={logoImg} alt="Dashapatmaja Solutions Pvt Ltd logo" className="footer-logo-image" loading="lazy" decoding="async" />
             </Link>
             <p className="brand-description">
-              Innovating Today for a Smarter Tomorrow. We help businesses grow through branding, marketing, and e-commerce.
+              Dashapatmaja Solutions Pvt Ltd develops consumer brands and provides branding, marketing, and e-commerce services.
             </p>
             <div className="social-links">
               <a href="https://www.linkedin.com/company/dashapatmaja-solutions-private-limited/" target="_blank" rel="noopener noreferrer" className="social-link" aria-label="LinkedIn">
@@ -47,7 +28,7 @@ const Footer = () => {
           </div>
 
           <div className="footer-col">
-            <h4 className="footer-title">Our Domains</h4>
+            <h4 className="footer-title">Services</h4>
             <ul className="footer-links">
               <li>
                 <Link to="/marketing">Marketing</Link>
@@ -68,7 +49,7 @@ const Footer = () => {
           </div>
 
           <div className="footer-col">
-            <h4 className="footer-title">Contact Solutions</h4>
+            <h4 className="footer-title">Contact</h4>
             <ul className="footer-contact-list">
               <li>
                 <a href="mailto:director@dashapatmaja.in" className="contact-item">
@@ -102,7 +83,7 @@ const Footer = () => {
         <div className="footer-bottom">
           <p>© 2026 Dashapatmaja Solutions Pvt Ltd. All rights reserved.</p>
           <div className="footer-legal-links">
-            <Link to="/privacy" className="legal-link">Privacy Policy & Terms</Link>
+            <Link to="/privacy" className="legal-link">Privacy Policy</Link>
             <button type="button" aria-label="Back to top of page" className="back-to-top" onClick={handleBackToTop}>
               Back to top
             </button>
