@@ -36,19 +36,19 @@ const supporters = [
 const services = [
   {
     title: 'Branding',
-    text: 'We shape your name, identity, voice, and story so customers remember you and trust you. You stand apart on a crowded shelf.',
+    text: 'Positioning, identity, voice, and reusable brand assets designed for consistent use across customer-facing channels.',
     link: '/branding',
     marker: '01',
   },
   {
     title: 'Marketing',
-    text: 'We bring you customers through search, paid media, and content. You see the cost to acquire each customer and the return on every rupee.',
+    text: 'Search, paid media, content, measurement, and reporting planned around defined audiences and commercial priorities.',
     link: '/marketing',
     marker: '02',
   },
   {
     title: 'E-commerce',
-    text: 'We build and run online stores that load fast and convert. You sell across your own site, Amazon, and quick commerce, all from one place.',
+    text: 'Storefront, marketplace, payment, and delivery systems scoped around the selected platform and operating workflow.',
     link: '/ecommerce',
     marker: '03',
   },
@@ -118,14 +118,16 @@ const Home = () => {
         <div className="container home-hero-layout">
           <div className="home-hero-content">
             <h1 className="hero-title">
-              <span>We build brands.</span>{' '}
-              <span className="accent-text">We help businesses grow.</span>
+              <span>We develop brands.</span>{' '}
+              <span className="accent-text">
+                We strengthen how businesses go to market.
+              </span>
             </h1>
             <p className="hero-subhead">
-              Dashapatmaja Solutions Pvt Ltd helps businesses grow. We build
-              your brand, bring you customers, and sell your products online.
-              We also build and sell our own brand, Raw Radicles, so we know
-              this work from both sides.
+              Dashapatmaja Solutions Pvt Ltd brings branding, marketing, and
+              e-commerce into one coordinated system. We apply the same
+              disciplines to Raw Radicles, the consumer brand we develop and
+              operate.
             </p>
             <div className="hero-ctas">
               <button

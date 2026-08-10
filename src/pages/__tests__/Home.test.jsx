@@ -14,7 +14,7 @@ describe('Home page', () => {
     expect(
       screen.getByRole('heading', {
         level: 1,
-        name: /we build brands.*we help businesses grow/i,
+        name: /we develop brands.*we strengthen how businesses go to market/i,
       }),
     ).toBeInTheDocument();
 
@@ -29,7 +29,7 @@ describe('Home page', () => {
     expect(
       screen.getByRole('heading', { name: 'Raw Radicles' }),
     ).toBeInTheDocument();
-    expect(screen.getByText(/owned-brand proof/i)).toBeInTheDocument();
+    expect(screen.getByText('Built and operated by DSPL')).toBeInTheDocument();
   });
 
   it('renders the approved centered hero content and removes the legacy proof panel', () => {
@@ -42,13 +42,14 @@ describe('Home page', () => {
     expect(
       screen.getByRole('heading', {
         level: 1,
-        name: 'We build brands. We help businesses grow.',
+        name:
+          'We develop brands. We strengthen how businesses go to market.',
       }),
     ).toBeInTheDocument();
 
     expect(
       screen.getByText(
-        'Dashapatmaja Solutions Pvt Ltd helps businesses grow. We build your brand, bring you customers, and sell your products online. We also build and sell our own brand, Raw Radicles, so we know this work from both sides.',
+        'Dashapatmaja Solutions Pvt Ltd brings branding, marketing, and e-commerce into one coordinated system. We apply the same disciplines to Raw Radicles, the consumer brand we develop and operate.',
       ),
     ).toBeInTheDocument();
 
@@ -66,6 +67,9 @@ describe('Home page', () => {
     expect(
       screen.queryByText('Brand strategy and identity'),
     ).not.toBeInTheDocument();
+    expect(screen.queryByText(/return on every rupee/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/convert/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/all from one place/i)).not.toBeInTheDocument();
   });
 
   it('keeps the supporter marquee decorative without a pause control', () => {

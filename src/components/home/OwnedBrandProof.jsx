@@ -19,7 +19,7 @@ const OwnedBrandProof = ({ logoSrc }) => (
       </div>
 
       <div className="owned-brand-content">
-        <span className="section-subtitle">Owned-brand proof</span>
+        <span className="section-subtitle">Built and operated by DSPL</span>
         <h2 className="section-title" id="owned-brand-title">
           Raw Radicles
         </h2>
