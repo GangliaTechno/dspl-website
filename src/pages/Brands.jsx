@@ -1,5 +1,5 @@
 import './Brands.css';
-import { ArrowRight, Sparkles, Cookie } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { motion, useReducedMotion } from 'framer-motion';
 import useSEO from '../hooks/useSEO';
 import { getRouteMetadata } from '../seo/routeMetadata';
@@ -8,7 +8,6 @@ import brandHero768 from '../assets/brands-hero-editorial-768.webp';
 import brandHero1200 from '../assets/brands-hero-editorial-1200.webp';
 import brandHero1672 from '../assets/brands-hero-editorial-1672.webp';
 import brandHeroMobile from '../assets/brands-hero-editorial-mobile.webp';
-import pipelineBgImg from '../assets/brands_pipeline_bg.webp';
 import { openWorkModal } from '../utils/workModal';
 
 const Brands = () => {
@@ -18,12 +17,6 @@ const Brands = () => {
 
   return (
     <div className="brands-page fade-in">
-      {/* Background Glows */}
-      <div className="glow-bg">
-        <div className="glow-circle glow-circle-1"></div>
-        <div className="glow-circle glow-circle-2"></div>
-      </div>
-
       {/* Intro Section */}
       <section className="section brands-hero">
         <picture className="brands-hero-bg" aria-hidden="true">
@@ -49,13 +42,10 @@ const Brands = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={mt({ duration: 0.8, ease: 'easeOut' })}
           >
-            <span className="section-subtitle">HOUSE OF BRANDS</span>
-            <h1 className="brands-title">We build brands from the inside out.</h1>
+            <span className="section-subtitle">DSPL Brands</span>
+            <h1 className="brands-title">We develop and operate consumer brands.</h1>
             <p className="brands-description">
-              From product development and packaging to compliance, storytelling and route to market.
-            </p>
-            <p className="brands-sub-description">
-              Raw Radicles is our first flagship consumer brand, with more in development.
+              We work across product development, packaging, compliance, market positioning, and commerce. Raw Radicles is our first flagship consumer brand, with additional concepts in development.
             </p>
           </motion.div>
         </div>
@@ -75,10 +65,7 @@ const Brands = () => {
             >
               <div className="brand-content-grid">
                 <div className="brand-info-side">
-                  <div className="brand-type-badge">
-                    <Cookie size={16} className="badge-icon" />
-                    FLAGSHIP CONSUMER BRAND
-                  </div>
+                  <div className="brand-type-badge">FLAGSHIP CONSUMER BRAND</div>
 
                   <h2 className="brand-showcase-name">
                     Raw Radicles
@@ -127,7 +114,6 @@ const Brands = () => {
                 </div>
 
                 <div className="rr-visual-panel">
-                  <div className="rr-glow-ring"></div>
                   <div className="brand-showcase-logo-wrapper">
                     <img src={rawRadiclesLogo} alt="Raw Radicles" className="brand-showcase-logo-img" loading="lazy" decoding="async" />
                   </div>
@@ -141,38 +127,27 @@ const Brands = () => {
       </section>
 
       {/* 2. Pipeline Banner — background via CSS custom property to keep tokens in CSS */}
-      <section
-        className="section pipeline-section bg-alt"
-        style={{ '--pipeline-bg': `url(${pipelineBgImg})` }}
-      >
+      <section className="section pipeline-section bg-alt">
         <div className="container">
           <motion.div
-            className="pipeline-card"
+            className="pipeline-content"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={mt({ duration: 0.7 })}
           >
-            <div className="pipeline-decorative-shape-1" aria-hidden="true"></div>
-            <div className="pipeline-decorative-shape-2" aria-hidden="true"></div>
-
-            <div className="pipeline-content">
-              <div className="pipeline-icon-box">
-                <Sparkles size={24} />
-              </div>
-              <h3 className="pipeline-title">More brands in development</h3>
-              <p className="pipeline-text">
-                We are developing consumer brands for additional customer segments. New launches will be added here as they progress.
-              </p>
-              <button
-                type="button"
-                aria-label="Open enquiry form to discuss a brand partnership"
-                onClick={() => openWorkModal('brands-page')}
-                className="btn btn-primary pipeline-btn"
-              >
-                Discuss a brand partnership <ArrowRight size={16} />
-              </button>
-            </div>
+            <h2 className="pipeline-title">Portfolio in development</h2>
+            <p className="pipeline-text">
+              Additional consumer-brand concepts are being evaluated and developed. We will publish them here when they are ready for market.
+            </p>
+            <button
+              type="button"
+              aria-label="Open enquiry form to discuss a brand partnership"
+              onClick={() => openWorkModal('brands-page')}
+              className="btn btn-primary pipeline-btn"
+            >
+              Discuss a brand partnership <ArrowRight size={16} />
+            </button>
           </motion.div>
         </div>
       </section>

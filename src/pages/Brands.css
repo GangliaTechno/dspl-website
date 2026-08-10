@@ -97,13 +97,6 @@
   margin-bottom: 1rem;
 }
 
-.brands-sub-description {
-  font-size: 1.05rem;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.76);
-  font-weight: 500;
-}
-
 .showcase-container {
   display: flex;
   flex-direction: column;
@@ -240,20 +233,6 @@
 
 
 
-.rr-glow-ring {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 70%;
-  padding-bottom: 70%;
-  border: 1px solid var(--accent-border-alpha);
-  border-radius: 50%;
-  background: transparent;
-  pointer-events: none;
-  z-index: 2;
-}
-
 .brand-showcase-logo-wrapper {
   position: relative;
   z-index: 3;
@@ -269,81 +248,21 @@
 
 
 
-/* Pipeline Card */
 .pipeline-section {
   padding: 4rem 0;
-  background-image: linear-gradient(
-    to right,
-    rgba(255, 248, 231, 0.85),
-    rgba(255, 248, 231, 0.95)
-  ), var(--pipeline-bg);
-  background-size: cover;
-  background-position: center;
-}
-
-.pipeline-card {
-  position: relative;
-  background: var(--card-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
-  padding: 4rem;
-  text-align: center;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  overflow: hidden;
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.pipeline-card:hover {
-  border-color: var(--accent-border-alpha);
-  box-shadow: var(--shadow-lg);
-}
-
-.pipeline-decorative-shape-1 {
-  position: absolute;
-  top: -50px;
-  right: -50px;
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(245,168,0,0.05) 0%, transparent 70%);
-  pointer-events: none;
-}
-
-.pipeline-decorative-shape-2 {
-  position: absolute;
-  bottom: -50px;
-  left: -50px;
-  width: 150px;
-  height: 150px;
-  border: 2px dashed var(--border-color);
-  opacity: 0.3;
-  border-radius: 12px;
-  transform: rotate(15deg);
-  pointer-events: none;
 }
 
 .pipeline-content {
-  position: relative;
-  z-index: 3;
-  max-width: 600px;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: clamp(2rem, 5vw, 3.5rem);
+  text-align: center;
+  max-width: 46rem;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.pipeline-icon-box {
-  width: 54px;
-  height: 54px;
-  border-radius: 50%;
-  background: var(--bg-tertiary);
-  border: 1px solid var(--border-color);
-  color: var(--accent-text);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1.5rem;
 }
 
 .pipeline-title {
@@ -399,7 +318,7 @@
     padding: clamp(2rem, 5vw, 4rem);
   }
 
-  .pipeline-card {
+  .pipeline-content {
     padding: 3rem;
   }
 }
@@ -413,7 +332,7 @@
     font-size: 2rem;
   }
 
-  .pipeline-card {
+  .pipeline-content {
     padding: 2rem;
   }
 }

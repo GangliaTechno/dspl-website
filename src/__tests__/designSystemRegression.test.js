@@ -553,4 +553,30 @@ describe('approved design-system corrections', () => {
       /\.about-intro-grid\s*{[^}]*max-width:\s*72ch;/s,
     );
   });
+
+  it('presents Brands as a restrained portfolio in development', () => {
+    const brandsPage = readSource('src/pages/Brands.jsx');
+    const brandsCss = readSource('src/pages/Brands.css');
+    const prerenderVerification = readSource('scripts/verify-prerender.mjs');
+
+    expect(brandsPage).toContain('DSPL Brands');
+    expect(brandsPage).toContain('We develop and operate consumer brands.');
+    expect(brandsPage).toContain(
+      'We work across product development, packaging, compliance, market positioning, and commerce. Raw Radicles is our first flagship consumer brand, with additional concepts in development.',
+    );
+    expect(brandsPage).toContain('Portfolio in development');
+    expect(brandsPage).toContain(
+      'Additional consumer-brand concepts are being evaluated and developed. We will publish them here when they are ready for market.',
+    );
+    expect(brandsPage).not.toContain('Sparkles');
+    expect(brandsPage).not.toContain('Cookie');
+    expect(brandsPage).not.toContain('HOUSE OF BRANDS');
+    expect(brandsPage).not.toContain('inside out');
+    expect(brandsPage).not.toContain('glow-bg');
+    expect(brandsPage).not.toContain('pipeline-decorative-shape');
+    expect(brandsCss).not.toContain('.pipeline-card:hover');
+    expect(prerenderVerification).toContain(
+      "{ route: 'brands', heading: 'We develop and operate consumer brands.' }",
+    );
+  });
 });
