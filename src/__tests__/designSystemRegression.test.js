@@ -651,8 +651,8 @@ describe('approved design-system corrections', () => {
     expect(footer).toContain(
       'Dashapatmaja Solutions Pvt Ltd develops consumer brands and provides branding, marketing, and e-commerce services.',
     );
-    expect(footer).toContain('>Services</h4>');
-    expect(footer).toContain('>Contact</h4>');
+    expect(footer).toContain('>Services</h2>');
+    expect(footer).toContain('>Contact</h2>');
     expect(footer).toContain('>Privacy Policy</Link>');
     expect(footerCss).not.toContain('.footer-banner');
     expect(footerCss).not.toContain('.banner-content');
