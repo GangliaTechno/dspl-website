@@ -270,7 +270,7 @@ const Contact = () => {
                       aria-invalid={errors.message ? 'true' : 'false'}
                       aria-describedby={errors.message ? 'message-error' : undefined}
                     />
-                    {errors.message && <span id="message-error" className="form-error-text">{errors.message}</span>}
+                    {errors.message && <span id="message-error" className="form-error-text" role="alert">{errors.message}</span>}
                   </div>
 
                   {submitError && (

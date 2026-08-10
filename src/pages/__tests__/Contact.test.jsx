@@ -101,6 +101,20 @@ describe('Contact', () => {
       .toHaveAttribute('type', 'submit');
   });
 
+  it('announces a Message validation error with a linked alert', () => {
+    render(<Contact />);
+
+    fireEvent.click(screen.getByRole('button', { name: /Send Message/i }));
+
+    const message = screen.getByLabelText('Message');
+    const error = screen.getByText('Message is required');
+
+    expect(message).toHaveAttribute('aria-invalid', 'true');
+    expect(message).toHaveAttribute('aria-describedby', 'message-error');
+    expect(error).toHaveAttribute('id', 'message-error');
+    expect(error).toHaveAttribute('role', 'alert');
+  });
+
   it('uses a safe shared error when the contact configuration is unavailable', async () => {
     vi.stubEnv('VITE_WEB3FORMS_ACCESS_KEY', '');
     render(<Contact />);
@@ -150,5 +164,34 @@ describe('Contact', () => {
     fireEvent.click(screen.getByRole('button', { name: /Send Message/i }));
 
     await expectSafeSubmissionError();
+  });
+
+  it('shows the success state after a successful provider response and resets the form for another message', async () => {
+    vi.stubEnv('VITE_WEB3FORMS_ACCESS_KEY', 'test-access-key');
+    const gtag = vi.fn();
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({ success: true }),
+    }));
+    vi.stubGlobal('gtag', gtag);
+    render(<Contact />);
+    fillValidForm();
+
+    fireEvent.click(screen.getByRole('button', { name: /Send Message/i }));
+
+    expect(await screen.findByRole('heading', { name: 'Message received' })).toBeInTheDocument();
+    expect(screen.getByText('Thank you. We have received your message and will review it before contacting you.')).toBeInTheDocument();
+    expect(gtag).toHaveBeenCalledWith('event', 'generate_lead', {
+      event_category: 'contact_form',
+      event_label: 'Branding',
+    });
+
+    fireEvent.click(screen.getByRole('button', { name: 'Send Another Message' }));
+
+    expect(screen.getByLabelText('First Name')).toHaveValue('');
+    expect(screen.getByLabelText('Last Name')).toHaveValue('');
+    expect(screen.getByLabelText('Email Address')).toHaveValue('');
+    expect(screen.getByLabelText('What do you need help with?')).toHaveValue('');
+    expect(screen.getByLabelText('Message')).toHaveValue('');
   });
 });

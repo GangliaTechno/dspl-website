@@ -28,9 +28,9 @@ describe('WorkWithUsModal Component', () => {
     render(<WorkWithUsModal />);
     act(() => openWorkModal('modal-copy-test'));
 
-    expect(screen.getByRole('heading', { level: 4, name: 'Contact details' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { level: 4, name: 'Project details' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { level: 4, name: 'Preferences' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 3, name: 'Contact details' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 3, name: 'Project details' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 3, name: 'Preferences' })).toBeInTheDocument();
     expect(screen.queryByText(/VIP LEAD|prioritized|contact you immediately|24 hours/i)).not.toBeInTheDocument();
   });
 
@@ -121,5 +121,33 @@ describe('WorkWithUsModal Component', () => {
 
     expect(await screen.findByText(FORM_SUBMISSION_ERROR)).toBeInTheDocument();
     expect(screen.queryByText(/access key|environment|Web3Forms/i)).not.toBeInTheDocument();
+  });
+
+  it('keeps the form open and hides provider details when the provider returns success false', async () => {
+    vi.stubEnv('VITE_WEB3FORMS_ACCESS_KEY', 'test-access-key');
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({ success: false, message: 'Provider response with internal detail.' }),
+    }));
+
+    render(<WorkWithUsModal />);
+    act(() => openWorkModal('modal-provider-rejection-test'));
+
+    fireEvent.change(screen.getByLabelText(/Full Name/i), {
+      target: { value: 'Asha Rao' },
+    });
+    fireEvent.change(screen.getByLabelText(/Email Address/i), {
+      target: { value: 'asha@example.test' },
+    });
+    fireEvent.change(screen.getByLabelText(/Phone \/ WhatsApp Number/i), {
+      target: { value: '9876543210' },
+    });
+    fireEvent.click(screen.getByRole('checkbox', { name: 'Branding' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Send My Project Details' }));
+
+    expect(await screen.findByText(FORM_SUBMISSION_ERROR)).toBeInTheDocument();
+    expect(screen.getByRole('dialog')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Send My Project Details' })).toBeInTheDocument();
+    expect(screen.queryByText('Provider response with internal detail.')).not.toBeInTheDocument();
   });
 });

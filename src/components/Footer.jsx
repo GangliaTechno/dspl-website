@@ -28,7 +28,7 @@ const Footer = () => {
           </div>
 
           <div className="footer-col">
-            <h4 className="footer-title">Services</h4>
+            <h2 className="footer-title">Services</h2>
             <ul className="footer-links">
               <li>
                 <Link to="/marketing">Marketing</Link>
@@ -49,7 +49,7 @@ const Footer = () => {
           </div>
 
           <div className="footer-col">
-            <h4 className="footer-title">Contact</h4>
+            <h2 className="footer-title">Contact</h2>
             <ul className="footer-contact-list">
               <li>
                 <a href="mailto:director@dashapatmaja.in" className="contact-item">

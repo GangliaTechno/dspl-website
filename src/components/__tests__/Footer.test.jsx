@@ -30,8 +30,8 @@ describe('Footer', () => {
         'Dashapatmaja Solutions Pvt Ltd develops consumer brands and provides branding, marketing, and e-commerce services.',
       ),
     ).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'Services' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'Contact' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 2, name: 'Services' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 2, name: 'Contact' })).toBeInTheDocument();
 
     expect(
       screen.getByAltText('Dashapatmaja Solutions Pvt Ltd logo'),

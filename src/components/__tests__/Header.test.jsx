@@ -1,7 +1,13 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { BrowserRouter } from 'react-router';
-import { describe, it, expect } from 'vitest';
+import { afterEach, describe, it, expect } from 'vitest';
 import Header from '../Header';
+
+const originalInnerWidth = window.innerWidth;
+
+afterEach(() => {
+  window.innerWidth = originalInnerWidth;
+});
 
 describe('Header Component', () => {
   it('renders logo and main navigation links', () => {

@@ -260,7 +260,7 @@ const WorkWithUsModal = () => {
               
               {/* SECTION 1 – Basic Info */}
               <div className="work-modal-form-section" id="modal-fullName">
-                <h4 className="work-modal-section-header-title">Contact details</h4>
+                <h3 className="work-modal-section-header-title">Contact details</h3>
                 
                 <div className="form-group">
                   <label className="form-label" htmlFor="fullName">Full Name <span className="work-modal-required-asterisk">*</span></label>
@@ -344,7 +344,7 @@ const WorkWithUsModal = () => {
 
               {/* SECTION 2 – Project Details */}
               <div className="work-modal-form-section" id="modal-services">
-                <h4 className="work-modal-section-header-title">Project details</h4>
+                <h3 className="work-modal-section-header-title">Project details</h3>
 
                 <fieldset className="form-group work-modal-checkbox-fieldset">
                   <legend className="form-label">Service Interested In (select all that apply) <span className="work-modal-required-asterisk">*</span></legend>
@@ -389,7 +389,7 @@ const WorkWithUsModal = () => {
 
               {/* SECTION 3 – Additional Info */}
               <div className="work-modal-form-section work-modal-form-section--borderless">
-                <h4 className="work-modal-section-header-title">Preferences</h4>
+                <h3 className="work-modal-section-header-title">Preferences</h3>
 
                 <div className="form-group">
                   <label className="form-label" htmlFor="referralSource">How did you hear about us?</label>
