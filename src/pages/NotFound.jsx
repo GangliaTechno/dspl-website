@@ -45,7 +45,7 @@ const NotFound = () => {
         </div>
 
         <div className="quick-links-section">
-          <h3>Explore Popular Sections:</h3>
+          <h2>Explore popular sections</h2>
           <div className="quick-links-grid">
             <Link to="/about" className="quick-link-card">About Us</Link>
             <Link to="/brands" className="quick-link-card">Our Brands</Link>
@@ -53,7 +53,7 @@ const NotFound = () => {
             <Link to="/branding" className="quick-link-card">Branding</Link>
             <Link to="/ecommerce" className="quick-link-card">E-Commerce</Link>
             <Link to="/contact" className="quick-link-card">
-              <Mail size={14} className="not-found-support-icon" /> Contact Support
+              <Mail size={14} className="not-found-support-icon" /> Contact us
             </Link>
           </div>
         </div>
