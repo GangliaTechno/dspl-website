@@ -1,10 +1,31 @@
-import { render, screen } from '@testing-library/react';
-import { describe, expect, it, vi } from 'vitest';
+import { fireEvent, render, screen } from '@testing-library/react';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import Contact from '../Contact';
+import { FORM_SUBMISSION_ERROR } from '../../utils/formMessages';
 
 vi.mock('../../hooks/useSEO', () => ({
   default: vi.fn(),
 }));
+
+const fillValidForm = () => {
+  fireEvent.change(screen.getByLabelText('First Name'), { target: { value: 'Jane' } });
+  fireEvent.change(screen.getByLabelText('Last Name'), { target: { value: 'Doe' } });
+  fireEvent.change(screen.getByLabelText('Email Address'), { target: { value: 'jane@example.com' } });
+  fireEvent.change(screen.getByLabelText('What do you need help with?'), { target: { value: 'Branding' } });
+  fireEvent.change(screen.getByLabelText('Message'), { target: { value: 'Please contact me about a brand project.' } });
+};
+
+const expectSafeSubmissionError = async () => {
+  const alert = await screen.findByRole('alert');
+
+  expect(alert).toHaveTextContent(FORM_SUBMISSION_ERROR);
+  expect(alert).not.toHaveTextContent(/access key|Web3Forms|environment/i);
+};
+
+afterEach(() => {
+  vi.unstubAllEnvs();
+  vi.unstubAllGlobals();
+});
 
 describe('Contact', () => {
   it('keeps one headquarters panel with the verified contact routes', () => {
@@ -22,6 +43,38 @@ describe('Contact', () => {
       .toHaveAttribute('href', 'mailto:director@dashapatmaja.in');
     expect(screen.getByRole('link', { name: 'dsplmanipal@gmail.com' }))
       .toHaveAttribute('href', 'mailto:dsplmanipal@gmail.com');
+  });
+
+  it('presents Contact as peer enquiry columns with approved visitor-facing copy', () => {
+    const { container } = render(<Contact />);
+    const hero = container.querySelector('.contact-hero');
+    const layout = container.querySelector('.contact-layout');
+    const columns = Array.from(layout.children);
+    const headings = screen.getAllByRole('heading', { level: 2 });
+
+    expect(hero).toHaveTextContent('Contact');
+    expect(hero).toHaveTextContent('Contact us');
+    expect(hero).toHaveTextContent(
+      'Tell us about your brand, campaign, or e-commerce requirements. We will review the details and respond using the contact information you provide.',
+    );
+    expect(headings.map((heading) => heading.textContent)).toEqual([
+      'Headquarters',
+      'Send a message',
+    ]);
+    expect(columns).toHaveLength(2);
+    expect(columns[0]).toHaveClass('contact-column', 'contact-details-column');
+    expect(columns[1]).toHaveClass('contact-column', 'contact-form-column');
+    columns.forEach((column, index) => {
+      expect(column.firstElementChild).toBe(headings[index]);
+      expect(column.children).toHaveLength(2);
+    });
+    expect(columns[0].lastElementChild).toHaveClass('contact-details-panel');
+    expect(columns[1].lastElementChild).toHaveClass('contact-form-panel');
+    expect(screen.getByRole('heading', { name: 'Address', level: 3 })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Phone', level: 3 })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Email', level: 3 })).toBeInTheDocument();
+    expect(container.querySelector('.contact-form-title')).not.toBeInTheDocument();
+    expect(container.querySelector('.glow-bg')).not.toBeInTheDocument();
   });
 
   it('preserves the primary enquiry fields and choices', () => {
@@ -46,5 +99,56 @@ describe('Contact', () => {
     ]);
     expect(screen.getByRole('button', { name: /Send Message/i }))
       .toHaveAttribute('type', 'submit');
+  });
+
+  it('uses a safe shared error when the contact configuration is unavailable', async () => {
+    vi.stubEnv('VITE_WEB3FORMS_ACCESS_KEY', '');
+    render(<Contact />);
+    fillValidForm();
+
+    fireEvent.click(screen.getByRole('button', { name: /Send Message/i }));
+
+    await expectSafeSubmissionError();
+  });
+
+  it('keeps rejected submission details private while preserving the request payload', async () => {
+    vi.stubEnv('VITE_WEB3FORMS_ACCESS_KEY', 'test-access-key');
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: false,
+      json: async () => ({ success: false, message: 'Provider response with internal detail.' }),
+    });
+    vi.stubGlobal('fetch', fetchMock);
+    render(<Contact />);
+    fillValidForm();
+
+    fireEvent.click(screen.getByRole('button', { name: /Send Message/i }));
+
+    await expectSafeSubmissionError();
+    expect(fetchMock).toHaveBeenCalledWith(
+      'https://api.web3forms.com/submit',
+      expect.objectContaining({
+        method: 'POST',
+        body: JSON.stringify({
+          access_key: 'test-access-key',
+          subject: 'New Contact Message: Jane Doe',
+          from_name: 'Jane Doe',
+          fullName: 'Jane Doe',
+          email: 'jane@example.com',
+          helpType: 'Branding',
+          message: 'Please contact me about a brand project.',
+        }),
+      }),
+    );
+  });
+
+  it('uses the same safe error when the submission request cannot connect', async () => {
+    vi.stubEnv('VITE_WEB3FORMS_ACCESS_KEY', 'test-access-key');
+    vi.stubGlobal('fetch', vi.fn().mockRejectedValue(new Error('Network failure')));
+    render(<Contact />);
+    fillValidForm();
+
+    fireEvent.click(screen.getByRole('button', { name: /Send Message/i }));
+
+    await expectSafeSubmissionError();
   });
 });

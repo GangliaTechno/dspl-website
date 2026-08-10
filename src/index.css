@@ -115,15 +115,6 @@ p {
   }
 }
 
-@keyframes pulseSlow {
-  0%, 100% {
-    opacity: 0.15;
-  }
-  50% {
-    opacity: 0.25;
-  }
-}
-
 .fade-in {
   animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
@@ -293,40 +284,6 @@ select.form-input option {
   font-weight: 500;
 }
 
-/* Background Gradients/Glows */
-.glow-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  overflow: hidden;
-  z-index: -1;
-  pointer-events: none;
-}
-
-.glow-circle {
-  position: absolute;
-  width: 600px;
-  height: 600px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(234, 179, 8, 0.05) 0%, rgba(249, 115, 22, 0.005) 70%);
-  filter: blur(80px);
-  animation: pulseSlow 10s infinite ease-in-out;
-}
-
-.glow-circle-1 {
-  top: -200px;
-  right: -200px;
-  background: radial-gradient(circle, rgba(234, 179, 8, 0.05) 0%, rgba(234, 179, 8, 0) 70%);
-}
-
-.glow-circle-2 {
-  bottom: -200px;
-  left: -200px;
-  background: radial-gradient(circle, rgba(249, 115, 22, 0.04) 0%, rgba(249, 115, 22, 0) 70%);
-}
-
 /* Accessibility Focus Visible */
 a:focus-visible,
 button:focus-visible,
@@ -353,7 +310,6 @@ select:focus-visible,
   }
 
   .supporter-track,
-  .glow-circle,
   .mobile-drawer,
   .faq-content-wrapper {
     animation: none !important;

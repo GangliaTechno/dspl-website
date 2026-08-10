@@ -211,18 +211,48 @@ describe('approved design-system corrections', () => {
     expect(aboutCss).not.toContain('.direction-card:hover');
   });
 
-  it('uses one Contact details panel and prioritizes the form on smaller screens', () => {
+  it('uses aligned Contact enquiry columns and prioritizes the form on smaller screens', () => {
     const contactPage = readSource('src/pages/Contact.jsx');
     const contactCss = readSource('src/pages/Contact.css');
+    const formMessages = readSource('src/utils/formMessages.js');
+    const indexCss = readSource('src/index.css');
 
     expect(contactPage).toContain('className="contact-details-panel"');
     expect(contactPage.match(/className="contact-detail-row"/g)).toHaveLength(3);
     expect(contactPage).not.toContain('className="contact-detail-card glass"');
+    expect(contactPage).toContain('className="contact-column contact-details-column"');
+    expect(contactPage).toContain('className="contact-column contact-form-column"');
+    expect(contactPage).toContain('>Headquarters</h2>');
+    expect(contactPage).toContain('>Send a message</h2>');
+    expect(contactPage).toContain('>Phone</h3>');
+    expect(contactPage).toContain('>Email</h3>');
+    expect(contactPage).toContain('Message received');
+    expect(contactPage).toContain('FORM_SUBMISSION_ERROR');
+    expect(contactPage).not.toContain('className="glow-bg"');
+    expect(formMessages).toContain(
+      "'We could not send your message right now. Please try again or contact us by email.'",
+    );
+    expect(formMessages).not.toMatch(/access key|Web3Forms|environment/i);
+    expect(indexCss).not.toContain('.glow-bg');
+    expect(indexCss).not.toContain('.glow-circle');
+    expect(indexCss).not.toContain('pulseSlow');
     expect(contactCss).toMatch(
       /\.contact-description\s*{[^}]*max-width:\s*58ch;[^}]*margin-inline:\s*auto;/s,
     );
     expect(contactCss).toMatch(
-      /\.contact-subheading\s*{[^}]*margin-bottom:\s*0;/s,
+      /\.contact-hero\s*{[^}]*padding:\s*2\.5rem 0 2rem;/s,
+    );
+    expect(contactCss).toMatch(
+      /\.contact-grid-section\s*{[^}]*padding-top:\s*2rem;/s,
+    );
+    expect(contactCss).toMatch(
+      /\.contact-layout\s*{[^}]*gap:\s*1\.5rem;/s,
+    );
+    expect(contactCss).toMatch(
+      /\.contact-column\s*{[^}]*display:\s*flex;[^}]*flex-direction:\s*column;[^}]*gap:\s*1\.5rem;/s,
+    );
+    expect(contactCss).toMatch(
+      /\.contact-form-panel\s*{[^}]*padding:\s*2rem;/s,
     );
     expect(contactCss).toMatch(
       /\.contact-detail-info h3\s*{[^}]*font-size:\s*1\.1rem;[^}]*margin-bottom:\s*0\.5rem;/s,
@@ -232,7 +262,7 @@ describe('approved design-system corrections', () => {
       /@media\s*\(max-width:\s*900px\)\s*{[\s\S]*?\.contact-form-column\s*{[^}]*order:\s*-1;/s,
     );
     expect(contactCss).toMatch(
-      /@media\s*\(max-width:\s*768px\)\s*{[\s\S]*?\.contact-hero\s*{[^}]*padding:\s*4\.5rem 0 3rem;/s,
+      /@media\s*\(max-width:\s*900px\)\s*{[\s\S]*?\.contact-hero\s*{[^}]*padding:\s*3rem 0 2rem;/s,
     );
   });
 

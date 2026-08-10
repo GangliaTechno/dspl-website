@@ -5,7 +5,7 @@
 
 .contact-hero {
   text-align: center;
-  padding: 6rem 0 4rem;
+  padding: 2.5rem 0 2rem;
   max-width: 700px;
   margin: 0 auto;
 }
@@ -30,27 +30,31 @@
   border-top: 1px solid var(--border-color);
 }
 
+.contact-grid-section {
+  padding-top: 2rem;
+}
+
 /* Layout Grid */
 .contact-layout {
   display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
-  gap: 4rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
   align-items: start;
-  max-width: 1000px;
+  max-width: 1120px;
   margin: 0 auto;
 }
 
-.contact-subheading {
+.contact-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.contact-column-heading {
   font-size: 1.75rem;
   font-weight: 800;
   color: var(--text-heading);
   margin-bottom: 0;
-}
-
-.contact-details-column {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
 }
 
 .contact-details-panel {
@@ -98,28 +102,27 @@
   text-decoration: underline;
 }
 
-/* Form Column */
-.contact-form-column {
+/* Form Panel */
+.contact-form-panel {
   background: #ffffff;
   border: 1px solid var(--border-color);
   border-radius: 4px;
-  padding: 3.5rem;
+  padding: 2rem;
   box-shadow: var(--shadow-lg);
 }
 
-.contact-form-title {
-  font-size: 1.75rem;
-  font-weight: 800;
-  color: var(--text-heading);
-  margin-bottom: 2rem;
-  border-bottom: 1px solid var(--border-color);
-  padding-bottom: 1rem;
+.contact-form-panel .form-group {
+  margin-bottom: 1rem;
 }
 
 .contact-form-row {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1.5rem;
+}
+
+.contact-form-panel textarea.form-input {
+  min-height: 96px;
 }
 
 .contact-submit-btn {
@@ -162,9 +165,12 @@
     gap: 3rem;
   }
 
+  .contact-hero {
+    padding: 3rem 0 2rem;
+  }
+
   .contact-form-column {
     order: -1;
-    padding: 2.5rem;
   }
 }
 
@@ -173,7 +179,7 @@
     grid-template-columns: 1fr;
     gap: 0;
   }
-  .contact-form-column {
+  .contact-form-panel {
     padding: 2rem;
   }
 
@@ -184,10 +190,6 @@
 }
 
 @media (max-width: 768px) {
-  .contact-hero {
-    padding: 4.5rem 0 3rem;
-  }
-
   .contact-title {
     font-size: 2.25rem;
   }

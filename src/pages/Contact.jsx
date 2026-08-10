@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Mail, Phone, MapPin, Send, CheckCircle2, AlertCircle } from 'lucide-react';
 import useSEO from '../hooks/useSEO';
 import { getRouteMetadata } from '../seo/routeMetadata';
+import { FORM_SUBMISSION_ERROR } from '../utils/formMessages';
 
 const Contact = () => {
   useSEO(getRouteMetadata('/contact'));
@@ -57,7 +58,7 @@ const Contact = () => {
       const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || '';
       
       if (!accessKey) {
-        setSubmitError('Configuration error: Missing access key.');
+        setSubmitError(FORM_SUBMISSION_ERROR);
         setIsSubmitting(false);
         return;
       }
@@ -95,10 +96,10 @@ const Contact = () => {
             });
           }
         } else {
-          setSubmitError(result.message || 'Failed to send message. Please check your access key or try again.');
+          setSubmitError(FORM_SUBMISSION_ERROR);
         }
       } catch {
-        setSubmitError('Failed to connect to the Web3Forms server. Please check your internet connection.');
+        setSubmitError(FORM_SUBMISSION_ERROR);
       } finally {
         setIsSubmitting(false);
       }
@@ -107,19 +108,13 @@ const Contact = () => {
 
   return (
     <div className="contact-page fade-in">
-      {/* Background Glows */}
-      <div className="glow-bg">
-        <div className="glow-circle glow-circle-1"></div>
-        <div className="glow-circle glow-circle-2"></div>
-      </div>
-
       {/* Header Block */}
       <section className="section contact-hero">
         <div className="container">
-          <span className="section-subtitle">Get in Touch</span>
+          <span className="section-subtitle">Contact</span>
           <h1 className="contact-title">Contact us</h1>
           <p className="contact-description">
-            Have a brand to build, a store to improve, or a campaign to run? Tell us what you need. We reply within 24 hours.
+            Tell us about your brand, campaign, or e-commerce requirements. We will review the details and respond using the contact information you provide.
           </p>
         </div>
       </section>
@@ -129,9 +124,8 @@ const Contact = () => {
         <div className="container">
           <div className="contact-layout">
             
-            {/* Column 1: Details */}
-            <div className="contact-details-column">
-              <h2 className="contact-subheading">Our Headquarters</h2>
+            <div className="contact-column contact-details-column">
+              <h2 className="contact-column-heading">Headquarters</h2>
 
               <div className="contact-details-panel">
                 <div className="contact-detail-row">
@@ -145,7 +139,7 @@ const Contact = () => {
                 <div className="contact-detail-row">
                   <Phone className="contact-detail-icon" aria-hidden="true" />
                   <div className="contact-detail-info">
-                    <h3>Phone Call</h3>
+                    <h3>Phone</h3>
                     <p><a href="tel:+918861942440">+91 88619 42440</a></p>
                     <p><a href="tel:+919072556665">+91 90725 56665</a></p>
                   </div>
@@ -154,7 +148,7 @@ const Contact = () => {
                 <div className="contact-detail-row">
                   <Mail className="contact-detail-icon" aria-hidden="true" />
                   <div className="contact-detail-info">
-                    <h3>Email Support</h3>
+                    <h3>Email</h3>
                     <p><a href="mailto:director@dashapatmaja.in">director@dashapatmaja.in</a></p>
                     <p><a href="mailto:dsplmanipal@gmail.com">dsplmanipal@gmail.com</a></p>
                   </div>
@@ -162,21 +156,20 @@ const Contact = () => {
               </div>
             </div>
 
-            {/* Column 2: Form */}
-            <div className="contact-form-column glass">
-              {submitted ? (
-                <div className="contact-success-state" role="status" aria-live="polite">
-                  <CheckCircle2 className="contact-success-icon" />
-                  <h3>Message Sent!</h3>
-                  <p>Thank you for reaching out to Dashapatmaja Solutions Pvt Ltd. We will review your message and respond within 24 hours.</p>
-                  <button type="button" className="btn btn-primary" onClick={() => setSubmitted(false)}>
-                    Send Another Message
-                  </button>
-                </div>
-              ) : (
+            <div className="contact-column contact-form-column">
+              <h2 className="contact-column-heading">Send a message</h2>
+              <div className="contact-form-panel">
+                {submitted ? (
+                  <div className="contact-success-state" role="status" aria-live="polite">
+                    <CheckCircle2 className="contact-success-icon" />
+                    <h3>Message received</h3>
+                    <p>Thank you. We have received your message and will review it before contacting you.</p>
+                    <button type="button" className="btn btn-primary" onClick={() => setSubmitted(false)}>
+                      Send Another Message
+                    </button>
+                  </div>
+                ) : (
                 <form onSubmit={handleSubmit} noValidate>
-                  <h3 className="contact-form-title">Send a Message</h3>
-                  
                   <div className="contact-form-row">
                     <div className="form-group">
                       <label className="form-label" htmlFor="firstName">First Name</label>
@@ -294,7 +287,8 @@ const Contact = () => {
                     {isSubmitting ? 'Sending...' : 'Send Message'} <Send size={16} />
                   </button>
                 </form>
-              )}
+                )}
+              </div>
             </div>
 
           </div>
