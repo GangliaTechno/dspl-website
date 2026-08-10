@@ -42,4 +42,14 @@ describe('route metadata', () => {
         'Dashapatmaja Solutions Pvt Ltd develops consumer brands and provides branding, marketing, and e-commerce services.',
     });
   });
+
+  it('keeps public-route descriptions free of India geographic qualifiers', () => {
+    const descriptions = PUBLIC_ROUTES.map(
+      (route) => getRouteMetadata(route).description,
+    );
+
+    expect(descriptions.every((description) => !/\b(?:india|indian)\b/i.test(description))).toBe(
+      true,
+    );
+  });
 });

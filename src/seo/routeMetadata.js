@@ -49,7 +49,7 @@ const routeMetadata = {
   '/about': {
     title: 'Dashapatmaja Solutions Pvt Ltd | About Us',
     description:
-      'Manipal-based team building consumer brands and delivering coordinated branding, marketing, and e-commerce services for Indian businesses.',
+      'Meet the Manipal-based team developing consumer brands and delivering coordinated branding, marketing, and e-commerce services.',
   },
   '/brands': {
     title: 'Dashapatmaja Solutions Pvt Ltd | Our Brands',
@@ -64,7 +64,7 @@ const routeMetadata = {
   '/branding': {
     title: 'Dashapatmaja Solutions Pvt Ltd | Brand Identity & Strategy',
     description:
-      'Create a memorable brand with positioning, identity, visual systems, story, and reusable assets designed for growing Indian consumer businesses.',
+      'Develop a clear brand system through positioning, identity, voice, guidelines, and reusable assets designed for consistent application.',
   },
   '/ecommerce': {
     title: 'Dashapatmaja Solutions Pvt Ltd | E-commerce Services',
