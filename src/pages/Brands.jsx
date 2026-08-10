@@ -126,7 +126,7 @@ const Brands = () => {
         </div>
       </section>
 
-      {/* 2. Pipeline Banner — background via CSS custom property to keep tokens in CSS */}
+      {/* Portfolio in development */}
       <section className="section pipeline-section bg-alt">
         <div className="container">
           <motion.div
