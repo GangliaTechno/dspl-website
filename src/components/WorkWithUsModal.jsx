@@ -300,7 +300,7 @@ const WorkWithUsModal = () => {
                       type="email"
                       name="email"
                       className="form-input"
-                      placeholder="We will never share your email address"
+                      placeholder="name@example.com"
                       value={formData.email}
                       onChange={handleInputChange}
                       aria-invalid={Boolean(errors.email)}

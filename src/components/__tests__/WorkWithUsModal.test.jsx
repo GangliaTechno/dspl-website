@@ -34,6 +34,15 @@ describe('WorkWithUsModal Component', () => {
     expect(screen.queryByText(/VIP LEAD|prioritized|contact you immediately|24 hours/i)).not.toBeInTheDocument();
   });
 
+  it('uses a neutral email placeholder without an absolute sharing claim', () => {
+    render(<WorkWithUsModal />);
+    act(() => openWorkModal('modal-email-placeholder-test'));
+
+    const emailInput = screen.getByLabelText(/Email Address/i);
+    expect(emailInput).toHaveAttribute('placeholder', 'name@example.com');
+    expect(screen.queryByPlaceholderText(/never share/i)).not.toBeInTheDocument();
+  });
+
   it('displays validation errors when required fields are missing', () => {
     render(<WorkWithUsModal />);
     act(() => openWorkModal('modal-test'));
