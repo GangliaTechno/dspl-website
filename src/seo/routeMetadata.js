@@ -77,9 +77,9 @@ const routeMetadata = {
       'Talk with Dashapatmaja Solutions Pvt Ltd in Manipal about branding, marketing, e-commerce, or a new consumer brand and share your project context.',
   },
   '/privacy': {
-    title: 'Dashapatmaja Solutions Pvt Ltd | Privacy & Terms',
+    title: 'Dashapatmaja Solutions Pvt Ltd | Privacy Policy',
     description:
-      'Read how Dashapatmaja Solutions Pvt Ltd collects, uses, protects, and handles data submitted through website visits, enquiries, and communications.',
+      'Read how Dashapatmaja Solutions Pvt Ltd handles information submitted through website enquiries, project-planning forms, and analytics.',
   },
 };
 

@@ -27,4 +27,12 @@ describe('route metadata', () => {
       'Dashapatmaja Solutions Pvt Ltd',
     );
   });
+
+  it('defines the exact privacy policy metadata', () => {
+    expect(getRouteMetadata('/privacy')).toMatchObject({
+      title: 'Dashapatmaja Solutions Pvt Ltd | Privacy Policy',
+      description:
+        'Read how Dashapatmaja Solutions Pvt Ltd handles information submitted through website enquiries, project-planning forms, and analytics.',
+    });
+  });
 });

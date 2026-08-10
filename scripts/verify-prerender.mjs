@@ -9,7 +9,7 @@ const routes = [
   { route: 'branding', heading: 'Branding' },
   { route: 'ecommerce', heading: 'E-commerce' },
   { route: 'contact', heading: 'Contact us' },
-  { route: 'privacy', heading: 'Privacy Policy & Terms of Use' },
+  { route: 'privacy', heading: 'Privacy Policy' },
 ];
 
 const titles = [];
