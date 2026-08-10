@@ -193,7 +193,7 @@ const WorkWithUsModal = () => {
 
         if (response.ok && result.success) {
           setSubmitted(true);
-          const modalBody = document.querySelector('.modal-body-scroll');
+          const modalBody = document.querySelector('.work-modal-body-scroll');
           if (modalBody) {
             modalBody.scrollTop = 0;
           }
@@ -225,28 +225,28 @@ const WorkWithUsModal = () => {
   if (!isOpen) return null;
 
   return (
-    <div className="modal-overlay" onClick={handleClose}>
+    <div className="work-modal-overlay" onClick={handleClose}>
       <div 
         ref={modalRef}
-        className="modal-container glass" 
+        className="work-modal-container glass"
         onClick={(e) => e.stopPropagation()}
         role="dialog"
         aria-modal="true"
         aria-labelledby="modal-title-id"
       >
         {/* Modal Header */}
-        <div className="modal-header">
+        <div className="work-modal-header">
           <div>
-            <span className="modal-subtitle">Project Planner</span>
-            <h2 id="modal-title-id" className="modal-title">Work with us</h2>
+            <span className="work-modal-subtitle">Project Planner</span>
+            <h2 id="modal-title-id" className="work-modal-title">Work with us</h2>
           </div>
-          <button type="button" className="modal-close-btn" onClick={handleClose} aria-label="Close modal">
+          <button type="button" className="work-modal-close-btn" onClick={handleClose} aria-label="Close modal">
             <X size={24} />
           </button>
         </div>
 
         {/* Modal Scrollable Body */}
-        <div className="modal-body-scroll">
+        <div className="work-modal-body-scroll">
           {submitted ? (
             <div className="work-modal-success-state" role="alert" aria-live="polite">
               <CheckCircle2 className="work-modal-success-icon" />
@@ -262,7 +262,7 @@ const WorkWithUsModal = () => {
                 </div>
               )}
 
-              <button type="button" className="btn btn-secondary reset-btn" onClick={handleResetForm}>
+              <button type="button" className="btn btn-secondary work-modal-reset-btn" onClick={handleResetForm}>
                 Submit Another Project
               </button>
             </div>

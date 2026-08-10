@@ -125,26 +125,26 @@ const Contact = () => {
       </section>
 
       {/* Main Grid */}
-      <section className="section contact-grid-section glass-top-border">
+      <section className="section contact-grid-section contact-glass-top-border">
         <div className="container">
           <div className="contact-layout">
             
             {/* Column 1: Details */}
-            <div className="details-column">
+            <div className="contact-details-column">
               <h2 className="contact-subheading">Our Headquarters</h2>
 
               <div className="contact-details-panel">
                 <div className="contact-detail-row">
-                  <MapPin className="detail-icon" aria-hidden="true" />
-                  <div className="detail-info">
+                  <MapPin className="contact-detail-icon" aria-hidden="true" />
+                  <div className="contact-detail-info">
                     <h3>Address</h3>
                     <p>Room No. 12, 4th Floor, MUTBI, Advanced Research Center, Madhava Nagar, Manipal 576104</p>
                   </div>
                 </div>
 
                 <div className="contact-detail-row">
-                  <Phone className="detail-icon" aria-hidden="true" />
-                  <div className="detail-info">
+                  <Phone className="contact-detail-icon" aria-hidden="true" />
+                  <div className="contact-detail-info">
                     <h3>Phone Call</h3>
                     <p><a href="tel:+918861942440">+91 88619 42440</a></p>
                     <p><a href="tel:+919072556665">+91 90725 56665</a></p>
@@ -152,8 +152,8 @@ const Contact = () => {
                 </div>
 
                 <div className="contact-detail-row">
-                  <Mail className="detail-icon" aria-hidden="true" />
-                  <div className="detail-info">
+                  <Mail className="contact-detail-icon" aria-hidden="true" />
+                  <div className="contact-detail-info">
                     <h3>Email Support</h3>
                     <p><a href="mailto:director@dashapatmaja.in">director@dashapatmaja.in</a></p>
                     <p><a href="mailto:dsplmanipal@gmail.com">dsplmanipal@gmail.com</a></p>
@@ -163,7 +163,7 @@ const Contact = () => {
             </div>
 
             {/* Column 2: Form */}
-            <div className="form-column glass">
+            <div className="contact-form-column glass">
               {submitted ? (
                 <div className="contact-success-state" role="status" aria-live="polite">
                   <CheckCircle2 className="contact-success-icon" />

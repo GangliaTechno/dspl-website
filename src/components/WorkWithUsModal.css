@@ -1,4 +1,4 @@
-.modal-overlay {
+.work-modal-overlay {
   position: fixed;
   inset: 0;
   display: flex;
@@ -13,7 +13,7 @@
   background: rgba(17, 17, 17, 0.68);
 }
 
-.modal-container {
+.work-modal-container {
   display: flex;
   width: min(100%, 46rem);
   max-width: 46rem;
@@ -25,13 +25,13 @@
   box-shadow: 0 24px 70px rgba(17, 17, 17, 0.24);
 }
 
-.modal-container.glass {
+.work-modal-container.glass {
   background: #ffffff;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
 }
 
-.modal-header {
+.work-modal-header {
   display: flex;
   flex: 0 0 auto;
   align-items: center;
@@ -41,7 +41,7 @@
   border-bottom: 1px solid var(--border-color);
 }
 
-.modal-subtitle {
+.work-modal-subtitle {
   display: block;
   margin-bottom: 0.25rem;
   color: var(--accent-text);
@@ -51,14 +51,14 @@
   text-transform: uppercase;
 }
 
-.modal-title {
+.work-modal-title {
   color: var(--text-heading);
   font-size: clamp(1.75rem, 4vw, 2.25rem);
   line-height: 1.1;
   text-wrap: balance;
 }
 
-.modal-close-btn {
+.work-modal-close-btn {
   display: inline-flex;
   min-width: 44px;
   min-height: 44px;
@@ -75,12 +75,12 @@
     background-color 180ms ease-out;
 }
 
-.modal-close-btn:hover {
+.work-modal-close-btn:hover {
   border-color: var(--accent-text);
   background: var(--bg-secondary);
 }
 
-.modal-body-scroll {
+.work-modal-body-scroll {
   min-height: 0;
   flex: 1 1 auto;
   overflow-y: auto;
@@ -113,7 +113,7 @@
   letter-spacing: 0.05em;
 }
 
-.modal-container .work-modal-form-row {
+.work-modal-container .work-modal-form-row {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
@@ -151,7 +151,7 @@
   color: #c0392b;
 }
 
-.modal-container .work-modal-form-error {
+.work-modal-container .work-modal-form-error {
   display: flex;
   align-items: center;
   gap: 0.35rem;
@@ -270,7 +270,7 @@
 }
 
 @media (max-width: 600px) {
-  .modal-overlay {
+  .work-modal-overlay {
     align-items: stretch;
     padding:
       max(0.5rem, env(safe-area-inset-top))
@@ -279,17 +279,17 @@
       max(0.5rem, env(safe-area-inset-left));
   }
 
-  .modal-container {
+  .work-modal-container {
     width: 100%;
     max-height: calc(100dvh - 1rem);
   }
 
-  .modal-header,
-  .modal-body-scroll {
+  .work-modal-header,
+  .work-modal-body-scroll {
     padding-inline: 1rem;
   }
 
-  .modal-container .work-modal-form-row,
+  .work-modal-container .work-modal-form-row,
   .work-modal-checkbox-grid,
   .work-modal-radio-grid {
     grid-template-columns: 1fr;

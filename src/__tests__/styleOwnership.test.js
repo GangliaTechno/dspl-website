@@ -4,6 +4,11 @@ import { describe, expect, it } from 'vitest';
 
 const readSource = (relativePath) => readFileSync(resolve(relativePath), 'utf8');
 
+const unownedTopLevelClasses = (css, ownerPrefix) =>
+  [...css.matchAll(/^\s*\.([a-z][\w-]*)/gm)]
+    .map(([, className]) => className)
+    .filter((className) => !className.startsWith(ownerPrefix));
+
 describe('eager stylesheet ownership', () => {
   it('owns shared section primitives in the eager stylesheet', () => {
     const indexCss = readSource('src/index.css');
@@ -55,5 +60,13 @@ describe('eager stylesheet ownership', () => {
       expect(contactCss).not.toMatch(new RegExp(`^\\.${selector}\\b`, 'm'));
       expect(modalCss).not.toMatch(new RegExp(`^\\.${selector}\\b`, 'm'));
     }
+  });
+
+  it('prefixes every Contact and Work With Us component-only CSS root', () => {
+    const contactCss = readSource('src/pages/Contact.css');
+    const modalCss = readSource('src/components/WorkWithUsModal.css');
+
+    expect(unownedTopLevelClasses(contactCss, 'contact-')).toEqual([]);
+    expect(unownedTopLevelClasses(modalCss, 'work-modal-')).toEqual([]);
   });
 });

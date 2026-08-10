@@ -19,16 +19,16 @@ describe('approved design-system corrections', () => {
     const css = readSource('src/components/WorkWithUsModal.css');
 
     expect(css).toMatch(
-      /\.modal-overlay\s*{[^}]*position:\s*fixed;[^}]*inset:\s*0;[^}]*display:\s*flex;/s,
+      /\.work-modal-overlay\s*{[^}]*position:\s*fixed;[^}]*inset:\s*0;[^}]*display:\s*flex;/s,
     );
     expect(css).toMatch(
-      /\.modal-container\s*{[^}]*max-width:[^;]+;[^}]*max-height:[^;]+;[^}]*overflow:\s*hidden;/s,
+      /\.work-modal-container\s*{[^}]*max-width:[^;]+;[^}]*max-height:[^;]+;[^}]*overflow:\s*hidden;/s,
     );
     expect(css).toMatch(
-      /\.modal-body-scroll\s*{[^}]*overflow-y:\s*auto;[^}]*overscroll-behavior:\s*contain;/s,
+      /\.work-modal-body-scroll\s*{[^}]*overflow-y:\s*auto;[^}]*overscroll-behavior:\s*contain;/s,
     );
     expect(css).toMatch(
-      /\.modal-container\.glass\s*{[^}]*background:\s*#ffffff;[^}]*backdrop-filter:\s*none;/s,
+      /\.work-modal-container\.glass\s*{[^}]*background:\s*#ffffff;[^}]*backdrop-filter:\s*none;/s,
     );
   });
 
@@ -204,11 +204,11 @@ describe('approved design-system corrections', () => {
       /\.contact-subheading\s*{[^}]*margin-bottom:\s*0;/s,
     );
     expect(contactCss).toMatch(
-      /\.detail-info h3\s*{[^}]*font-size:\s*1\.1rem;[^}]*margin-bottom:\s*0\.5rem;/s,
+      /\.contact-detail-info h3\s*{[^}]*font-size:\s*1\.1rem;[^}]*margin-bottom:\s*0\.5rem;/s,
     );
-    expect(contactCss).not.toContain('.detail-info h4');
+    expect(contactCss).not.toContain('.contact-detail-info h4');
     expect(contactCss).toMatch(
-      /@media\s*\(max-width:\s*900px\)\s*{[\s\S]*?\.form-column\s*{[^}]*order:\s*-1;/s,
+      /@media\s*\(max-width:\s*900px\)\s*{[\s\S]*?\.contact-form-column\s*{[^}]*order:\s*-1;/s,
     );
     expect(contactCss).toMatch(
       /@media\s*\(max-width:\s*768px\)\s*{[\s\S]*?\.contact-hero\s*{[^}]*padding:\s*4\.5rem 0 3rem;/s,
