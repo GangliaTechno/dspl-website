@@ -8,7 +8,7 @@
 
 **Design basis:** current branch at `bf724e2` plus live desktop and mobile review
 
-**Status:** Structure and scope approved; exact copy proposed for user review before implementation planning
+**Status:** Approved for implementation planning
 
 ## Goal
 
@@ -120,7 +120,7 @@ Preserve the page composition. It is the strongest existing example of the desir
 
 Keep the headline:
 
-> We build brands. We help businesses grow.
+> We develop brands. We strengthen how businesses go to market.
 
 Replace the supporting paragraph with:
 
@@ -155,17 +155,17 @@ Create three equal desktop cards in this order:
 
 1. **Vision**
 
-   `To build enduring Indian consumer brands and the capabilities that help them grow responsibly.`
+   `To build an enduring portfolio of consumer brands defined by quality, relevance, and responsible growth.`
 
 2. **Mission**
 
-   `We develop our own brands and help businesses strengthen branding, marketing, and e-commerce through practical, accountable execution.`
+   `We develop our own brands and help businesses strengthen their branding, marketing, and e-commerce capabilities through practical, accountable execution.`
 
 3. **Values**
 
    `Evidence before claims. Clarity in decisions. Care in execution.`
 
-These are the exact proposed strings for the review gate. They must not be treated as formally approved corporate values until the user approves this document.
+These are the approved strings for implementation. The Vision statement intentionally avoids geographic qualifiers so the direction remains relevant as the portfolio grows.
 
 ### Presentation
 
@@ -217,7 +217,7 @@ The introduction should be part of the page flow rather than a floating white ca
 
 ### Marketing messaging
 
-- Tagline: `Marketing built around clear audiences, accountable channels, and measurable decisions.`
+- Tagline: `Marketing built around clear audiences, disciplined execution, and measurable decisions.`
 - CTA: `Discuss a marketing project`.
 - Describe discovery, channel planning, search, paid media, content, measurement, reporting cadence, and optimisation.
 - Remove claims such as free traffic month after month, more sales for less, guaranteed timing, or universal daily review unless DSPL confirms them as contractual commitments.
@@ -231,7 +231,7 @@ The introduction should be part of the page flow rather than a floating white ca
 
 ### E-commerce messaging
 
-- Tagline: `Storefront, marketplace, payment, and fulfilment support for practical online growth.`
+- Tagline: `Storefront, marketplace, payment, and fulfilment systems designed for reliable day-to-day operation.`
 - CTA: `Discuss an e-commerce project`.
 - Distinguish setup, integration, optimisation, and ongoing operational support.
 - Remove `salesperson that never sleeps`, guaranteed revenue implications, and claims that operations require no manual work.
@@ -244,7 +244,7 @@ Retain a light, image-free hero but reduce its vertical padding. Use:
 
 - Context label: `Contact`
 - H1: `Contact us`
-- Paragraph: `Tell us about the brand, campaign, or e-commerce requirement you are working through. We will review the details and respond using the contact information you provide.`
+- Paragraph: `Tell us about your brand, campaign, or e-commerce requirements. We will review the details and respond using the contact information you provide.`
 
 Do not publish a 24-hour response promise unless DSPL confirms it as an operating commitment.
 
