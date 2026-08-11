@@ -1,4 +1,4 @@
-# DSPL Hero, About Spacing, and Contact Redesign
+# DSPL Hero Imagery, About Spacing, and Contact Redesign
 
 **Date:** 2026-08-11
 **Baseline commit:** `4c66983`
@@ -8,33 +8,60 @@
 
 Give the public website more visual breathing room without changing its established warm editorial identity. The work covers three connected corrections:
 
-1. Taller cinematic heroes on About, Brands, Marketing, Branding, and E-commerce.
+1. Richer, fixed hero imagery across Home, About, Brands, Marketing, Branding, and E-commerce, with taller cinematic framing on the five interior routes.
 2. More deliberate spacing between the About heading “What guides our work” and the Vision / Mission / Values cards.
 3. A genuinely vertical Contact page that no longer attempts to fit all information and the complete form into one desktop viewport.
 
 ## Design principles
 
 - Preserve the warm off-white, cream, charcoal, white, and restrained-gold palette.
+- Use one stable, curated hero image per route. Do not randomise imagery or introduce a slideshow.
 - Gold remains a deliberate hero emphasis, not a general text colour.
-- Keep the existing editorial imagery and responsive image sources.
+- Preserve the responsive `<picture>` contract while allowing the underlying hero artwork and crops to be replaced.
 - Use white cards for bounded information or interaction; use open cream sections for narrative content.
 - Do not add decorative icon boxes, numbered capability cards, gradients, glows, or heavy shadows.
 - Normal page scrolling is acceptable and preferred over compressed spacing.
 - Preserve verified business copy and contact details unless this specification explicitly moves it.
 
-## 1. Taller cinematic hero system
+## 1. Richer static imagery and taller cinematic heroes
 
 ### Pages
 
+- `/`
 - `/about`
 - `/brands`
 - `/marketing`
 - `/branding`
 - `/ecommerce`
 
+### Image behaviour
+
+- Each route receives one fixed hero image with its own subject and focal point.
+- Images do not change randomly between visits.
+- Do not add a carousel, automatic crossfade, pagination controls, or timer state.
+- Replace or colour-refine the current muted artwork where necessary; do not reuse visibly dated or low-resolution legacy images merely because they existed in the first site version.
+- Produce responsive `960px`, `1440px`, `1920px`, and mobile crops for every replaced image family.
+- Retain `<picture>`, intrinsic image dimensions, eager loading, `fetchPriority="high"`, and asynchronous decoding.
+- Maintain a consistent premium photographic treatment: warm natural light, deeper colour, realistic materials, controlled contrast, and no synthetic text or logos inside generated artwork.
+
+### Page-specific art direction
+
+| Route | Hero subject | Colour direction |
+| --- | --- | --- |
+| Home | A premium brand-development worktable combining packaging, campaign planning, and commerce execution | Warm ochre, cacao, restrained teal, charcoal |
+| About | A multidisciplinary studio table showing research, strategy, design, and product-development materials | Warm timber, burgundy, deep green, cream |
+| Brands | Consumer-product and packaging prototypes presented as an active portfolio-development environment | Cacao, saffron, muted red, dark neutral |
+| Marketing | Search, paid-media, content, and measurement artefacts arranged as one coordinated programme | Gold, cobalt accents, warm neutral, charcoal |
+| Branding | Identity boards, packaging studies, typography, and material swatches in a disciplined design workspace | Saffron, forest green, burgundy, cream |
+| E-commerce | Product, storefront, order, fulfilment, and measurement cues in one operational commerce workspace | Deep teal, gold, warm white, charcoal |
+
+The six images must be visibly distinct while sharing the same photographic quality and warm DSPL palette.
+
 ### Content hierarchy
 
-Each hero keeps the four approved content levels in this order:
+Home retains its approved two-line headline, supporting paragraph, and existing actions. Its full-viewport composition remains structurally unchanged; only the artwork and crop are revised.
+
+Each interior hero keeps the four approved content levels in this order:
 
 1. Context label
 2. Gold H1
@@ -55,15 +82,15 @@ The descriptions remain inside the hero. Congestion is corrected through height,
 
 ### Image framing
 
-- Continue using the existing `<picture>` sources and mobile-specific images.
+- Continue using responsive `<picture>` sources and mobile-specific images.
 - Continue using `object-fit: cover` so heroes have no empty bands.
 - Keep About and service artwork centred; keep the current Brands focal position at `center 54%`. The taller frame supplies the additional visible image area.
-- Do not enlarge raster assets beyond the responsive sources already provided.
+- Do not enlarge a raster source beyond its exported dimensions.
 - Remove the continuous About image zoom; the hero should feel composed rather than restless.
 
 ### Mobile presentation
 
-- Use the existing mobile hero assets.
+- Use a dedicated mobile crop from each route's approved replacement image.
 - Keep the content centred and naturally wrapped.
 - Use a `34rem` mobile minimum height rather than reverting to a shallow auto-height block.
 - Reduce type size responsively while retaining clear separation between all four content levels.
@@ -211,7 +238,7 @@ git diff --check
 
 ### Live browser review
 
-Check About, Brands, Marketing, Branding, E-commerce, and Contact at:
+Check Home, About, Brands, Marketing, Branding, E-commerce, and Contact at:
 
 - `390x844`
 - `768px` wide
@@ -221,6 +248,8 @@ Check About, Brands, Marketing, Branding, E-commerce, and Contact at:
 Verify:
 
 - No clipped hero copy.
+- Every route uses its assigned stable image after reload and navigation.
+- No carousel, random image selection, or automatic crossfade is present.
 - Hero images retain meaningful focal areas.
 - No horizontal overflow.
 - The About heading-to-card gap is visibly intentional.
@@ -229,9 +258,9 @@ Verify:
 
 ## Non-goals
 
-- No Home-page redesign.
+- No Home-page layout or copy redesign beyond its hero artwork and crop.
 - No changes to the supporter marquee.
-- No new hero artwork.
+- No random hero imagery or rotating slideshow.
 - No new Contact backend or CMS.
 - No changes to Privacy or 404 behaviour.
 - No reintroduction of service capability icon cards.
