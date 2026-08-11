@@ -1,0 +1,26 @@
+.rotating-hero-media {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.rotating-hero-layer {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  display: block;
+  opacity: 0;
+  transition: opacity var(--hero-transition-duration, 800ms) ease;
+}
+
+.rotating-hero-layer.is-active {
+  z-index: 1;
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rotating-hero-layer {
+    transition: none;
+  }
+}
