@@ -524,6 +524,9 @@ describe('approved design-system corrections', () => {
     expect(brandsPage).toContain(
       'className="btn btn-primary rr-cta-btn"',
     );
+    expect(brandsPage).toContain('to="/contact"');
+    expect(brandsPage).toContain('Contact us about Raw Radicles');
+    expect(brandsPage).not.toContain('Raw%20Radicles%20Inquiry');
   });
 
   it('normalizes leadership portraits without covering faces', () => {

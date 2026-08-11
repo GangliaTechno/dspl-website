@@ -1,6 +1,7 @@
 import './Brands.css';
 import { ArrowRight } from 'lucide-react';
 import { motion, useReducedMotion } from 'framer-motion';
+import { Link } from 'react-router';
 import useSEO from '../hooks/useSEO';
 import { getRouteMetadata } from '../seo/routeMetadata';
 import rawRadiclesLogo from '../assets/raw-radicles-logo-cropped.webp';
@@ -107,9 +108,9 @@ const Brands = () => {
                   </div>
 
                   <div className="brand-cta-block">
-                    <a href="mailto:director@dashapatmaja.in?subject=Raw%20Radicles%20Inquiry" className="btn btn-primary rr-cta-btn">
-                      Enquire about Raw Radicles <ArrowRight size={16} />
-                    </a>
+                    <Link to="/contact" className="btn btn-primary rr-cta-btn">
+                      Contact us about Raw Radicles <ArrowRight size={16} aria-hidden="true" />
+                    </Link>
                   </div>
                 </div>
 

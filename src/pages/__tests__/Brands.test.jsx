@@ -57,11 +57,10 @@ describe('Brands page', () => {
     expect(brandBadge).toHaveTextContent('FLAGSHIP CONSUMER BRAND');
     expect(brandBadge.querySelector('svg')).not.toBeInTheDocument();
 
-    expect(screen.getByRole('link', { name: 'Enquire about Raw Radicles' }))
-      .toHaveAttribute(
-        'href',
-        'mailto:director@dashapatmaja.in?subject=Raw%20Radicles%20Inquiry',
-      );
+    expect(screen.getByRole('link', { name: 'Contact us about Raw Radicles' }))
+      .toHaveAttribute('href', '/contact');
+    expect(container.querySelector('.rr-cta-btn[href^="mailto:"]'))
+      .not.toBeInTheDocument();
     fireEvent.click(screen.getByRole('button', {
       name: 'Open enquiry form to discuss a brand partnership',
     }));
