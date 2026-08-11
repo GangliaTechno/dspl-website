@@ -265,13 +265,19 @@ describe('approved design-system corrections', () => {
       /\.contact-intro\s*{[^}]*grid-template-columns:\s*minmax\(0,\s*1\.1fr\) minmax\(0,\s*0\.9fr\);/s,
     );
     expect(contactCss).toMatch(
-      /\.contact-enquiry-surface\s*{[^}]*grid-template-columns:\s*minmax\(0,\s*2fr\) minmax\(0,\s*3fr\);[^}]*grid-template-areas:\s*"details form";[^}]*background:\s*#ffffff;/s,
+      /\.contact-enquiry-surface\s*{[^}]*grid-template-columns:\s*minmax\(0,\s*2fr\) minmax\(0,\s*3fr\);[^}]*grid-template-areas:\s*"details form";[^}]*column-gap:\s*3rem;[^}]*align-items:\s*start;/s,
+    );
+    expect(contactCss).not.toMatch(
+      /\.contact-enquiry-surface\s*{[^}]*(?:background|border|box-shadow):/s,
     );
     expect(contactCss).toMatch(
       /\.contact-main-section\s*{[^}]*padding:\s*1\.5rem 0 2rem;/s,
     );
     expect(contactCss).toMatch(
-      /\.contact-form-column\s*{[^}]*grid-area:\s*form;[^}]*border-left:\s*1px solid var\(--border-color\);/s,
+      /\.contact-form-column\s*{[^}]*grid-area:\s*form;/s,
+    );
+    expect(contactCss).toMatch(
+      /\.contact-form-panel\s*{[^}]*padding:\s*1\.5rem;[^}]*border:\s*1px solid var\(--border-color\);[^}]*background:\s*#ffffff;[^}]*box-shadow:\s*var\(--shadow-sm\);/s,
     );
     expect(contactCss).toMatch(
       /\.contact-details-column\s*{[^}]*grid-area:\s*details;/s,
