@@ -2,6 +2,9 @@ import ecommerceHero960 from '../assets/dspl-ecommerce-hero-960.webp';
 import ecommerceHero1440 from '../assets/dspl-ecommerce-hero-1440.webp';
 import ecommerceHero1600 from '../assets/dspl-ecommerce-hero-1600.webp';
 import ecommerceHeroMobile from '../assets/dspl-ecommerce-hero-mobile.webp';
+import ecommerceRotation02960 from '../assets/ecommerce-rotation-02-960.webp';
+import ecommerceRotation021440 from '../assets/ecommerce-rotation-02-1440.webp';
+import ecommerceRotation02Mobile from '../assets/ecommerce-rotation-02-mobile.webp';
 import ServicePage from '../components/ServicePage';
 import { getRouteMetadata } from '../seo/routeMetadata';
 
@@ -49,21 +52,33 @@ const faqs = [
   },
 ];
 
-const heroImage = {
-  src: ecommerceHero1440,
-  desktopSrcSet: `${ecommerceHero960} 960w, ${ecommerceHero1440} 1440w, ${ecommerceHero1600} 1600w`,
-  mobileSrc: ecommerceHeroMobile,
-  sizes: '100vw',
-  width: 1600,
-  height: 901,
-};
+const heroImages = [
+  {
+    id: 'ecommerce-primary',
+    src: ecommerceHero1440,
+    desktopSrcSet: `${ecommerceHero960} 960w, ${ecommerceHero1440} 1440w, ${ecommerceHero1600} 1600w`,
+    mobileSrc: ecommerceHeroMobile,
+    sizes: '100vw',
+    width: 1600,
+    height: 900,
+  },
+  {
+    id: 'ecommerce-02',
+    src: ecommerceRotation021440,
+    desktopSrcSet: `${ecommerceRotation02960} 960w, ${ecommerceRotation021440} 1440w`,
+    mobileSrc: ecommerceRotation02Mobile,
+    sizes: '100vw',
+    width: 1440,
+    height: 810,
+  },
+];
 
 const Ecommerce = () => (
   <ServicePage
     seoMetadata={getRouteMetadata('/ecommerce')}
     pageTypeClass="ecommerce-page"
     heroTitle="E-commerce"
-    heroImage={heroImage}
+    heroImages={heroImages}
     {...ecommerceCopy}
     offers={offers}
     faqsTitle="E-commerce engagement questions"

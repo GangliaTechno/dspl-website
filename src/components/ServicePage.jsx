@@ -1,6 +1,7 @@
 import './ServicePage.css';
 import useSEO from '../hooks/useSEO';
 import FAQAccordion from './FAQAccordion';
+import RotatingHeroMedia from './RotatingHeroMedia';
 
 const ServicePage = ({
   seoMetadata,
@@ -9,7 +10,7 @@ const ServicePage = ({
   heroTitle,
   heroTagline,
   heroDescription,
-  heroImage,
+  heroImages,
   scopeTitle,
   scopeText,
   offersTitle,
@@ -23,21 +24,14 @@ const ServicePage = ({
 
   return (
     <div className={`${pageTypeClass} service-page fade-in`}>
-      <section className={`section domain-hero${heroImage ? ' domain-hero--picture' : ''}`}>
-        {heroImage && (
-          <picture className="domain-hero-picture" aria-hidden="true">
-            <source media="(max-width: 767px)" srcSet={heroImage.mobileSrc} />
-            <source srcSet={heroImage.desktopSrcSet} sizes={heroImage.sizes} />
-            <img
-              className="domain-hero-bg-img"
-              src={heroImage.src}
-              alt=""
-              width={heroImage.width}
-              height={heroImage.height}
-              fetchPriority="high"
-              decoding="async"
-            />
-          </picture>
+      <section className={`section domain-hero${heroImages?.length ? ' domain-hero--picture' : ''}`}>
+        {heroImages?.length > 0 && (
+          <RotatingHeroMedia
+            images={heroImages}
+            className="domain-hero-picture"
+            imageClassName="domain-hero-bg-img"
+            mobileBreakpoint={767}
+          />
         )}
         <div className="container">
           <span className="section-subtitle">{contextLabel}</span>

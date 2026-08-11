@@ -2,6 +2,9 @@ import marketingHero960 from '../assets/dspl-marketing-editorial-960.webp';
 import marketingHero1440 from '../assets/dspl-marketing-editorial-1440.webp';
 import marketingHero1920 from '../assets/dspl-marketing-editorial-1920.webp';
 import marketingMobile from '../assets/dspl-marketing-editorial-mobile.webp';
+import marketingRotation02960 from '../assets/marketing-rotation-02-960.webp';
+import marketingRotation021440 from '../assets/marketing-rotation-02-1440.webp';
+import marketingRotation02Mobile from '../assets/marketing-rotation-02-mobile.webp';
 import ServicePage from '../components/ServicePage';
 import { getRouteMetadata } from '../seo/routeMetadata';
 
@@ -49,21 +52,33 @@ const faqs = [
   },
 ];
 
-const heroImage = {
-  src: marketingHero1440,
-  desktopSrcSet: `${marketingHero960} 960w, ${marketingHero1440} 1440w, ${marketingHero1920} 1920w`,
-  mobileSrc: marketingMobile,
-  sizes: '100vw',
-  width: 1440,
-  height: 810,
-};
+const heroImages = [
+  {
+    id: 'marketing-primary',
+    src: marketingHero1440,
+    desktopSrcSet: `${marketingHero960} 960w, ${marketingHero1440} 1440w, ${marketingHero1920} 1920w`,
+    mobileSrc: marketingMobile,
+    sizes: '100vw',
+    width: 1440,
+    height: 810,
+  },
+  {
+    id: 'marketing-02',
+    src: marketingRotation021440,
+    desktopSrcSet: `${marketingRotation02960} 960w, ${marketingRotation021440} 1440w`,
+    mobileSrc: marketingRotation02Mobile,
+    sizes: '100vw',
+    width: 1440,
+    height: 810,
+  },
+];
 
 const Marketing = () => (
   <ServicePage
     seoMetadata={getRouteMetadata('/marketing')}
     pageTypeClass="marketing-page"
     heroTitle="Marketing"
-    heroImage={heroImage}
+    heroImages={heroImages}
     {...marketingCopy}
     offers={offers}
     faqsTitle="Marketing engagement questions"

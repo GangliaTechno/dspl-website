@@ -1,4 +1,4 @@
-import { render, screen, within } from '@testing-library/react';
+import { act, render, screen, within } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import ServicePage from '../ServicePage';
 
@@ -13,14 +13,26 @@ const props = {
   heroTitle: 'Test service',
   heroTagline: 'A precise service positioning statement.',
   heroDescription: 'One concise service context paragraph.',
-  heroImage: {
-    src: '/service-1440.webp',
-    desktopSrcSet: '/service-960.webp 960w, /service-1440.webp 1440w',
-    mobileSrc: '/service-mobile.webp',
-    sizes: '100vw',
-    width: 1440,
-    height: 810,
-  },
+  heroImages: [
+    {
+      id: 'service-primary',
+      src: '/service-1440.webp',
+      desktopSrcSet: '/service-960.webp 960w, /service-1440.webp 1440w',
+      mobileSrc: '/service-mobile.webp',
+      sizes: '100vw',
+      width: 1440,
+      height: 810,
+    },
+    {
+      id: 'service-02',
+      src: '/service-02-1440.webp',
+      desktopSrcSet: '/service-02-960.webp 960w, /service-02-1440.webp 1440w',
+      mobileSrc: '/service-02-mobile.webp',
+      sizes: '100vw',
+      width: 1440,
+      height: 810,
+    },
+  ],
   scopeTitle: 'A defined service scope',
   scopeText: 'The scope stays in the normal page flow.',
   offersTitle: 'Service capabilities',
@@ -65,16 +77,28 @@ describe('ServicePage', () => {
   });
 
   it('keeps responsive hero media without a page-level modal action', () => {
-    const { container } = render(<ServicePage {...props} />);
-    const heroImage = container.querySelector('.domain-hero-bg-img');
-    const sources = container.querySelectorAll('.domain-hero-picture source');
+    vi.useFakeTimers();
+    const rendered = render(<ServicePage {...props} />);
+    act(() => vi.runOnlyPendingTimers());
+    const heroImages = rendered.container.querySelectorAll('.domain-hero-bg-img');
+    const pictures = rendered.container.querySelectorAll('.domain-hero-picture picture');
+    const sources = pictures[0].querySelectorAll('source');
 
+    expect(pictures).toHaveLength(2);
+    expect(Array.from(pictures, (picture) => picture.dataset.heroId)).toEqual([
+      'service-primary',
+      'service-02',
+    ]);
     expect(sources[0]).toHaveAttribute('media', '(max-width: 767px)');
-    expect(sources[0]).toHaveAttribute('srcset', props.heroImage.mobileSrc);
-    expect(sources[1]).toHaveAttribute('srcset', props.heroImage.desktopSrcSet);
-    expect(heroImage).toHaveAttribute('src', props.heroImage.src);
-    expect(heroImage).toHaveAttribute('width', '1440');
-    expect(heroImage).toHaveAttribute('height', '810');
-    expect(container.querySelector('.domain-cta')).not.toBeInTheDocument();
+    expect(sources[0]).toHaveAttribute('srcset', props.heroImages[0].mobileSrc);
+    expect(sources[1]).toHaveAttribute('srcset', props.heroImages[0].desktopSrcSet);
+    expect(heroImages[0]).toHaveAttribute('src', props.heroImages[0].src);
+    expect(heroImages[0]).toHaveAttribute('width', '1440');
+    expect(heroImages[0]).toHaveAttribute('height', '810');
+    expect(rendered.container.querySelector('.domain-cta')).not.toBeInTheDocument();
+
+    rendered.unmount();
+    vi.clearAllTimers();
+    vi.useRealTimers();
   });
 });

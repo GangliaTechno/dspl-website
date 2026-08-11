@@ -12,10 +12,10 @@
 .domain-hero {
   position: relative;
   display: grid;
-  min-height: 400px;
+  min-height: 35rem;
   place-items: center;
   overflow: hidden;
-  padding: 4rem 0;
+  padding: 5rem 0;
   background-color: var(--bg-primary);
   text-align: center;
 }
@@ -49,18 +49,18 @@
   position: relative;
   z-index: 3;
   width: 100%;
-  max-width: 820px;
+  max-width: 52rem;
   margin: 0 auto;
 }
 
 .domain-hero .section-subtitle {
-  margin-bottom: 0.875rem;
+  margin-bottom: 1rem;
   color: rgba(255, 255, 255, 0.72);
   text-shadow: 0 1px 5px rgba(0, 0, 0, 0.45);
 }
 
 .domain-title {
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
   color: var(--accent);
   font-size: clamp(2.75rem, 5vw, 3.75rem);
   font-weight: 800;
@@ -71,7 +71,7 @@
 
 .domain-subtitle {
   max-width: 38ch;
-  margin: 0 auto 1.25rem;
+  margin: 0 auto 1.5rem;
   color: #ffffff;
   font-size: clamp(1.25rem, 2.1vw, 1.6rem);
   font-weight: 600;
@@ -149,8 +149,8 @@
 
 @media (max-width: 768px) {
   .domain-hero {
-    min-height: auto;
-    padding: 3.5rem 0 3rem;
+    min-height: 34rem;
+    padding: 4rem 0;
   }
 
   .domain-title {

@@ -2,6 +2,9 @@ import brandingHero960 from '../assets/dspl-branding-hero-960.webp';
 import brandingHero1440 from '../assets/dspl-branding-hero-1440.webp';
 import brandingHero1600 from '../assets/dspl-branding-hero-1600.webp';
 import brandingHeroMobile from '../assets/dspl-branding-hero-mobile.webp';
+import brandingRotation02960 from '../assets/branding-rotation-02-960.webp';
+import brandingRotation021440 from '../assets/branding-rotation-02-1440.webp';
+import brandingRotation02Mobile from '../assets/branding-rotation-02-mobile.webp';
 import ServicePage from '../components/ServicePage';
 import { getRouteMetadata } from '../seo/routeMetadata';
 
@@ -49,21 +52,33 @@ const faqs = [
   },
 ];
 
-const heroImage = {
-  src: brandingHero1440,
-  desktopSrcSet: `${brandingHero960} 960w, ${brandingHero1440} 1440w, ${brandingHero1600} 1600w`,
-  mobileSrc: brandingHeroMobile,
-  sizes: '100vw',
-  width: 1600,
-  height: 901,
-};
+const heroImages = [
+  {
+    id: 'branding-primary',
+    src: brandingHero1440,
+    desktopSrcSet: `${brandingHero960} 960w, ${brandingHero1440} 1440w, ${brandingHero1600} 1600w`,
+    mobileSrc: brandingHeroMobile,
+    sizes: '100vw',
+    width: 1600,
+    height: 900,
+  },
+  {
+    id: 'branding-02',
+    src: brandingRotation021440,
+    desktopSrcSet: `${brandingRotation02960} 960w, ${brandingRotation021440} 1440w`,
+    mobileSrc: brandingRotation02Mobile,
+    sizes: '100vw',
+    width: 1440,
+    height: 810,
+  },
+];
 
 const Branding = () => (
   <ServicePage
     seoMetadata={getRouteMetadata('/branding')}
     pageTypeClass="branding-page"
     heroTitle="Branding"
-    heroImage={heroImage}
+    heroImages={heroImages}
     {...brandingCopy}
     offers={offers}
     faqsTitle="Branding engagement questions"

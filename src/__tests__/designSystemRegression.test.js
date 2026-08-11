@@ -619,8 +619,10 @@ describe('approved design-system corrections', () => {
     expect(servicePage).toContain('{faqsDescription}');
     expect(servicePage).not.toContain('className="glow-bg"');
     expect(servicePage).not.toContain('matters-box');
+    expect(servicePage).toContain('heroImages');
+    expect(servicePage).toContain('<RotatingHeroMedia');
     expect(serviceCss).toMatch(
-      /\.domain-hero\s*{[^}]*display:\s*grid;[^}]*min-height:\s*400px;[^}]*place-items:\s*center;/s,
+      /\.domain-hero\s*{[^}]*display:\s*grid;[^}]*min-height:\s*35rem;[^}]*place-items:\s*center;[^}]*padding:\s*5rem 0;/s,
     );
     expect(serviceCss).toMatch(
       /\.domain-title\s*{[^}]*color:\s*var\(--accent\);/s,
@@ -638,7 +640,7 @@ describe('approved design-system corrections', () => {
       /\.offer-entry\s*{[^}]*padding:\s*2rem 0;[^}]*border-bottom:\s*1px solid var\(--border-color\);/s,
     );
     expect(serviceCss).toMatch(
-      /@media\s*\(max-width:\s*768px\)\s*{[\s\S]*?\.domain-hero\s*{[^}]*min-height:\s*auto;[^}]*padding:\s*3\.5rem 0 3rem;[\s\S]*?\.offers-grid\s*{[^}]*grid-template-columns:\s*1fr;/s,
+      /@media\s*\(max-width:\s*768px\)\s*{[\s\S]*?\.domain-hero\s*{[^}]*min-height:\s*34rem;[^}]*padding:\s*4rem 0;[\s\S]*?\.offers-grid\s*{[^}]*grid-template-columns:\s*1fr;/s,
     );
     expect(serviceCss).not.toMatch(/\.offer-card\s*\{/);
     expect(serviceCss).not.toContain('.offer-icon-wrapper');

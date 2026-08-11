@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import Marketing from '../Marketing';
 import Branding from '../Branding';
@@ -33,6 +33,7 @@ const routeCases = [
       ['Can you work with existing teams or agencies?', 'Yes. Roles, access, review responsibilities, and hand-offs are documented so strategy, creative, media, and reporting remain coordinated.'],
     ],
     rejectedClaims: ['Get found. Get chosen. Get sales.', 'We did this for Raw Radicles. We can do it for you.', 'Paid ads can bring leads in the first week.'],
+    heroIds: ['marketing-primary', 'marketing-02'],
   },
   {
     name: 'Branding',
@@ -58,6 +59,7 @@ const routeCases = [
       ['What is included in the handover?', 'We provide the agreed source files, usage guidance, and templates, together with a handover for the people responsible for implementation.'],
     ],
     rejectedClaims: ['Build a name customers trust and remember.', 'We did this for Raw Radicles. We can do it for you.', 'A full identity takes four to six weeks'],
+    heroIds: ['branding-primary', 'branding-02'],
   },
   {
     name: 'E-commerce',
@@ -83,6 +85,7 @@ const routeCases = [
       ['Can marketplace and ongoing support be included?', 'Yes, when included in the scope. The engagement defines which channels, integrations, data owners, and ongoing responsibilities are covered.'],
     ],
     rejectedClaims: ['Build a store that loads fast and converts.', 'We sell our own brand this way, so we know what holds up.', 'Your store loads quickly and looks right on every phone.'],
+    heroIds: ['ecommerce-primary', 'ecommerce-02'],
   },
 ];
 
@@ -100,9 +103,13 @@ describe.each(routeCases)('$name service copy', ({
   offers,
   faqs,
   rejectedClaims,
+  heroIds,
 }) => {
   it('renders the approved route-specific messaging and icon mapping', () => {
-    const { container } = render(<Component />);
+    vi.useFakeTimers();
+    const rendered = render(<Component />);
+    const { container } = rendered;
+    act(() => vi.runOnlyPendingTimers());
 
     for (const text of [
       contextLabel,
@@ -132,5 +139,13 @@ describe.each(routeCases)('$name service copy', ({
 
     faqs.flat().forEach((text) => expect(screen.getByText(text)).toBeInTheDocument());
     rejectedClaims.forEach((claim) => expect(screen.queryByText(claim, { exact: false })).not.toBeInTheDocument());
+    expect(Array.from(
+      container.querySelectorAll('.domain-hero-picture picture'),
+      (picture) => picture.dataset.heroId,
+    )).toEqual(heroIds);
+
+    rendered.unmount();
+    vi.clearAllTimers();
+    vi.useRealTimers();
   });
 });
