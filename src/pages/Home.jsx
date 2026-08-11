@@ -38,19 +38,16 @@ const services = [
     title: 'Branding',
     text: 'Positioning, identity, voice, and reusable brand assets designed for consistent use across customer-facing channels.',
     link: '/branding',
-    marker: '01',
   },
   {
     title: 'Marketing',
     text: 'Search, paid media, content, measurement, and reporting planned around defined audiences and commercial priorities.',
     link: '/marketing',
-    marker: '02',
   },
   {
     title: 'E-commerce',
     text: 'Storefront, marketplace, payment, and delivery systems scoped around the selected platform and operating workflow.',
     link: '/ecommerce',
-    marker: '03',
   },
 ];
 
@@ -170,9 +167,6 @@ const Home = () => {
           <div className="service-evidence-grid">
             {services.map((service) => (
               <article className="service-evidence-card" key={service.title}>
-                <span className="service-marker" aria-hidden="true">
-                  {service.marker}
-                </span>
                 <h3>{service.title}</h3>
                 <p>{service.text}</p>
                 <Link to={service.link}>

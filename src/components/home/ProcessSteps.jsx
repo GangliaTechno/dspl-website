@@ -16,7 +16,7 @@ const ProcessSteps = ({ steps }) => (
         {steps.map((step) => (
           <li className="process-step" key={step.number}>
             <span className="process-step-number" aria-hidden="true">
-              {step.number}
+              Step {Number(step.number)}
             </span>
             <div>
               <h3 className="process-step-title">{step.title}</h3>

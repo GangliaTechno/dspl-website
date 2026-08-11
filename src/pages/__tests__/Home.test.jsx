@@ -5,7 +5,7 @@ import Home from '../Home';
 
 describe('Home page', () => {
   it('presents institutional, process, and owned-brand proof without duplicate logos', () => {
-    render(
+    const { container } = render(
       <BrowserRouter>
         <Home />
       </BrowserRouter>,
@@ -25,7 +25,10 @@ describe('Home page', () => {
     expect(
       screen.getByRole('heading', { name: 'How We Work With You' }),
     ).toBeInTheDocument();
-    expect(screen.getByText('06')).toBeInTheDocument();
+    expect(screen.getByText('Step 1')).toBeInTheDocument();
+    expect(screen.getByText('Step 6')).toBeInTheDocument();
+    expect(container.querySelectorAll('.service-evidence-card')).toHaveLength(3);
+    expect(container.querySelector('.service-marker')).not.toBeInTheDocument();
     expect(
       screen.getByRole('heading', { name: 'Raw Radicles' }),
     ).toBeInTheDocument();

@@ -190,6 +190,16 @@ describe('approved design-system corrections', () => {
     );
   });
 
+  it('uses numbers only for the named Home process sequence', () => {
+    const homePage = readSource('src/pages/Home.jsx');
+    const processSteps = readSource('src/components/home/ProcessSteps.jsx');
+
+    expect(homePage).not.toContain("marker: '01'");
+    expect(homePage).not.toContain('className="service-marker"');
+    expect(homePage).not.toMatch(/return on every rupee/i);
+    expect(processSteps).toContain('Step {Number(step.number)}');
+  });
+
   it('uses a responsive, text-led direction framework on About', () => {
     const aboutPage = readSource('src/pages/About.jsx');
     const aboutCss = readSource('src/pages/About.css');
