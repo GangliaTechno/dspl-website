@@ -392,18 +392,18 @@ describe('approved design-system corrections', () => {
     const marketingPage = readSource('src/pages/Marketing.jsx');
     const pageShell = readSource('index.html');
 
-    expect(homePage).toContain('<picture className="home-hero-media"');
+    expect(homePage).toContain('const homeHeroImages = [');
+    expect(homePage.match(/id: 'home-(?:primary|02|03)'/g)).toHaveLength(3);
+    expect(homePage).toContain('<RotatingHeroMedia');
+    expect(homePage).toContain('className="home-hero-media"');
+    expect(homePage).toContain('imageClassName="home-hero-image"');
     expect(homePage).toContain('dspl-home-editorial-960.webp');
     expect(homePage).toContain('dspl-home-editorial-1440.webp');
     expect(homePage).toContain('dspl-home-editorial-1920.webp');
     expect(homePage).toContain('dspl-home-editorial-mobile.webp');
-    expect(homePage).toContain(
-      '<source media="(max-width: 768px)" srcSet={homeHeroMobile} />',
-    );
-    expect(homePage).toContain('sizes="100vw"');
-    expect(homePage).toContain('width="1440"');
-    expect(homePage).toContain('height="810"');
-    expect(homePage).toContain('fetchPriority="high"');
+    expect(homePage).toContain('home-rotation-02-1440.webp');
+    expect(homePage).toContain('home-rotation-03-1440.webp');
+    expect(homePage).toContain('mobileBreakpoint={768}');
     expect(homePage).not.toContain('dspl_banner.webp');
     expect(homePage).not.toContain('dspl_banner-mobile.webp');
     expect(marketingPage).toContain('dspl-marketing-editorial-960.webp');

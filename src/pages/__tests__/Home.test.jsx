@@ -1,6 +1,6 @@
-import { render, screen, within } from '@testing-library/react';
+import { act, render, screen, within } from '@testing-library/react';
 import { BrowserRouter } from 'react-router';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import Home from '../Home';
 
 describe('Home page', () => {
@@ -95,5 +95,35 @@ describe('Home page', () => {
     expect(
       within(supporterRegion).queryByRole('button'),
     ).not.toBeInTheDocument();
+  });
+
+  it('mounts the approved Home hero images in a fixed three-image order', () => {
+    vi.useFakeTimers();
+    const rendered = render(
+      <BrowserRouter>
+        <Home />
+      </BrowserRouter>,
+    );
+
+    act(() => vi.runOnlyPendingTimers());
+    const layers = Array.from(
+      rendered.container.querySelectorAll('.home-hero-media picture'),
+    );
+    expect(layers).toHaveLength(3);
+    expect(layers.map((layer) => layer.dataset.heroId)).toEqual([
+      'home-primary',
+      'home-02',
+      'home-03',
+    ]);
+    expect(screen.getByRole('heading', {
+      level: 1,
+      name: 'We develop brands. We deliver disciplined market execution.',
+    })).toBeInTheDocument();
+    expect(screen.getByRole('region', { name: 'Supported by' }))
+      .toBeInTheDocument();
+
+    rendered.unmount();
+    vi.clearAllTimers();
+    vi.useRealTimers();
   });
 });
