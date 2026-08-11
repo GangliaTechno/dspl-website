@@ -543,13 +543,121 @@ Run build, then fail if `(Get-ChildItem dist -Recurse -Filter *.map)` returns an
 
 ---
 
-### Task 7: Full automated and responsive verification
+### Task 7: Supporter marquee clarity without cadence drift
+
+**Files:**
+- Modify: `src/__tests__/designSystemRegression.test.js`
+- Modify: `src/components/home/homeSections.css`
+
+**Interfaces:**
+- Consumes: exact `--supporter-shift`, 28-second linear transform loop, current gaps, and reduced-motion contract.
+- Produces: unfiltered full-opacity white marquee assets without changing geometry or speed.
+
+- [ ] **Step 1: Add a failing marquee clarity regression**
+
+Change the existing supporter assertion to require:
+
+```js
+expect(homeSections).toMatch(
+  /\.supporter-logo\s*{[^}]*filter:\s*none;[^}]*opacity:\s*1;/s,
+);
+expect(homeSections).not.toContain('drop-shadow(');
+expect(homeSections).not.toMatch(/\.supporter-logo\s*{[^}]*transition:/s);
+expect(homeSections).toContain('animation: supporter-marquee 28s linear infinite;');
+```
+
+- [ ] **Step 2: Run the design regression and verify RED**
+
+```powershell
+& 'C:\Program Files\nodejs\npm.cmd' test -- src/__tests__/designSystemRegression.test.js
+```
+
+Expected: failure because the current moving logos use brightness/invert,
+drop-shadow, 0.86 opacity, and an opacity transition.
+
+- [ ] **Step 3: Remove paint-heavy logo treatment**
+
+Set the delivery rule to:
+
+```css
+.supporter-logo {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  transform: none;
+  filter: none;
+  opacity: 1;
+  image-rendering: auto;
+  backface-visibility: hidden;
+}
+```
+
+Remove `.supporter-logo:hover`; keep every track, sequence, keyframe, gap,
+duration, edge mask, and reduced-motion declaration unchanged.
+
+- [ ] **Step 4: Verify GREEN and the motion contract**
+
+Run the design regression and confirm the diff contains no change to
+`SupporterStrip.jsx`, `--supporter-gap`, `--supporter-shift`, the 28-second
+duration, or reduced-motion declarations.
+
+---
+
+### Task 8: Reserve execution language for the Home proposition
+
+**Files:**
+- Modify: `src/pages/__tests__/Home.test.jsx`
+- Modify: `src/pages/__tests__/About.test.jsx`
+- Modify: `src/pages/Home.jsx`
+- Modify: `src/pages/About.jsx`
+
+**Interfaces:**
+- Consumes: existing Home hero/capability and About hero/direction-card composition.
+- Produces: one use of `execution` across both rendered routes, in the Home H1 only.
+
+- [ ] **Step 1: Add failing exact-copy regressions**
+
+Assert the exact five approved replacement strings on their respective pages.
+Also concatenate `src/pages/Home.jsx` and `src/pages/About.jsx` in the static
+design regression and assert `/\bexecution\b/gi` has length `1`.
+
+- [ ] **Step 2: Run focused tests and verify RED**
+
+```powershell
+& 'C:\Program Files\nodejs\npm.cmd' test -- src/pages/__tests__/Home.test.jsx src/pages/__tests__/About.test.jsx src/__tests__/designSystemRegression.test.js
+```
+
+Expected: failure because six current source occurrences remain and none of the
+five approved replacements is rendered.
+
+- [ ] **Step 3: Apply the approved copy exactly**
+
+Use the five exact strings recorded under `Home and About copy discipline` in
+`docs/superpowers/specs/2026-08-11-dspl-launch-hardening-design.md`. Do not
+change the Home H1 proposition or any array/section structure.
+
+- [ ] **Step 4: Verify GREEN**
+
+Run the focused tests and prove:
+
+```powershell
+rg -n -i "\bexecution\b" src/pages/Home.jsx src/pages/About.jsx
+```
+
+Expected: one match, the Home hero proposition.
+
+---
+
+### Task 9: Full automated and responsive verification
 
 **Files:**
 - Verify all touched files and generated binary assets.
 
 **Interfaces:**
-- Consumes: Tasks 1-6.
+- Consumes: Tasks 1-8.
 - Produces: fresh release-readiness evidence without deployment.
 
 - [ ] **Step 1: Run complete automated verification**

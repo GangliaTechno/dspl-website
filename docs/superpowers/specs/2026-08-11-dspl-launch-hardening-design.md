@@ -174,6 +174,48 @@ test. Production rotation timing, lazy mounting, visibility pausing, and reduced
 motion behavior must not change unless a failing regression proves a production
 defect.
 
+## Supporter marquee clarity and cadence
+
+Keep the existing measured CSS conveyor architecture: `SupporterStrip` measures
+one complete sequence with `ResizeObserver`, duplicates that sequence, and
+animates exactly one measured sequence width with `translate3d`. Preserve the
+28-second linear duration, current desktop/mobile gaps, compositor promotion,
+and reduced-motion fallback.
+
+The four dedicated marquee assets are already transparent white artwork. Remove
+the redundant `brightness(0) invert(1) drop-shadow(...)` filter, render the logos
+at full opacity, and remove their hover-opacity transition. This produces clearer
+marks and removes continuous filter paint from the moving surface without
+changing sequence geometry or introducing a second animation system. Do not
+change speed unless a later rendered review still identifies a cadence defect.
+
+## Home and About copy discipline
+
+Reserve the word `execution` for the primary Home proposition, `We deliver
+disciplined market execution.` Remove the five supporting repetitions so Home
+states the market promise once and About develops company identity, mission, and
+values rather than echoing the same noun.
+
+Use these exact replacements:
+
+- Home subhead: `Dashapatmaja Solutions Pvt Ltd develops and operates consumer
+  brands while helping businesses coordinate branding, marketing, and
+  e-commerce through clearly defined, accountable delivery.`
+- Home coordinated-services description: `Start with the capability you need
+  now. Keep strategy, market activity, and commerce aligned as the business
+  grows.`
+- About hero subtitle: `A multidisciplinary company focused on developing brands
+  and building coordinated commercial capabilities.`
+- About Mission: `We develop our own brands and help businesses strengthen their
+  branding, marketing, and e-commerce capabilities through practical,
+  accountable collaboration.`
+- About Values: `Evidence guides our recommendations. We define scope,
+  responsibilities, and measures clearly, communicate decisions honestly, and
+  carry agreed work through with care.`
+
+Do not alter the Home proposition, route metadata, journey facts, leadership
+records, service scope, or business claims.
+
 ## Testing strategy
 
 Behavior changes follow red-green-refactor cycles:
@@ -221,6 +263,8 @@ delivered, the four production-heavy assets meet quality-aware budgets, fresh
 builds emit no source maps, unknown-path hydration is mismatch-free, the global
 Contact CTA is present without duplicate Home CTA CSS, both forms focus their
 first invalid field, the mobile drawer contains its own keyboard-reachable close
-control, the hero test suite emits no React warnings, and the full automated and
-responsive-browser validation matrix passes. CIN, hosting configuration,
-security headers, and Web3Forms behavior must remain unchanged.
+control, the hero test suite emits no React warnings, supporter logos render
+without filter/shadow work while retaining the exact measured loop, `execution`
+appears only in the primary Home proposition across Home and About, and the full
+automated and responsive-browser validation matrix passes. CIN, hosting
+configuration, security headers, and Web3Forms behavior must remain unchanged.
