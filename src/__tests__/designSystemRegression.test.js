@@ -285,7 +285,7 @@ describe('approved design-system corrections', () => {
       /@media\s*\(max-width:\s*900px\)\s*{[\s\S]*?\.contact-hero\s*{[^}]*padding:\s*3rem 0 2rem;/s,
     );
     expect(contactCss).toMatch(
-      /@media\s*\(min-width:\s*901px\)\s*{[\s\S]*?\.contact-hero\s*{[^}]*padding:\s*0\.75rem 0 0\.5rem;[\s\S]*?\.contact-title\s*{[^}]*font-size:\s*3rem;[^}]*margin-bottom:\s*0\.5rem;[\s\S]*?\.contact-description\s*{[^}]*font-size:\s*1rem;[^}]*line-height:\s*1\.5;[\s\S]*?\.contact-grid-section\s*{[^}]*padding-top:\s*0\.75rem;[\s\S]*?\.contact-column\s*{[^}]*gap:\s*1rem;[\s\S]*?\.contact-form-panel\s*{[^}]*padding:\s*1\.5rem;[\s\S]*?\.contact-form-panel \.form-group\s*{[^}]*margin-bottom:\s*0\.75rem;[\s\S]*?\.contact-form-panel textarea\.form-input\s*{[^}]*min-height:\s*72px;[\s\S]*?\.contact-submit-btn\s*{[^}]*margin-top:\s*0\.5rem;[^}]*min-height:\s*44px;/s,
+      /@media\s*\(min-width:\s*901px\)\s*{[\s\S]*?\.contact-hero\s*{[^}]*padding:\s*0\.75rem 0 0\.5rem;[\s\S]*?\.contact-title\s*{[^}]*font-size:\s*3rem;[^}]*margin-bottom:\s*0\.5rem;[\s\S]*?\.contact-description\s*{[^}]*font-size:\s*1rem;[^}]*line-height:\s*1\.5;[\s\S]*?\.contact-grid-section\s*{[^}]*padding-top:\s*0\.5rem;[\s\S]*?\.contact-column\s*{[^}]*gap:\s*1rem;[\s\S]*?\.contact-form-panel\s*{[^}]*padding:\s*1rem;[\s\S]*?\.contact-form-panel \.form-group\s*{[^}]*margin-bottom:\s*0\.5rem;[\s\S]*?\.contact-form-panel \.form-input\s*{[^}]*min-height:\s*44px;[^}]*padding:\s*0\.625rem 0\.875rem;[\s\S]*?\.contact-form-panel textarea\.form-input\s*{[^}]*min-height:\s*72px;[\s\S]*?\.contact-submit-btn\s*{[^}]*margin-top:\s*0\.5rem;[^}]*min-height:\s*44px;/s,
     );
   });
 

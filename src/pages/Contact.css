@@ -194,7 +194,7 @@
   }
 
   .contact-grid-section {
-    padding-top: 0.75rem;
+    padding-top: 0.5rem;
   }
 
   .contact-column {
@@ -202,11 +202,16 @@
   }
 
   .contact-form-panel {
-    padding: 1.5rem;
+    padding: 1rem;
   }
 
   .contact-form-panel .form-group {
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .contact-form-panel .form-input {
+    min-height: 44px;
+    padding: 0.625rem 0.875rem;
   }
 
   .contact-form-panel textarea.form-input {
