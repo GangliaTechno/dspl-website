@@ -56,13 +56,15 @@ describe('Contact', () => {
     const { container } = renderContact();
     const section = container.querySelector('.contact-main-section');
     const layout = container.querySelector('.contact-layout');
-    const regions = Array.from(layout.children);
+    const surface = container.querySelector('.contact-enquiry-surface');
+    const regions = Array.from(surface.children);
     const headings = screen.getAllByRole('heading', { level: 2 });
 
     expect(section).toBeInTheDocument();
     expect(container.querySelector('.contact-hero')).not.toBeInTheDocument();
     expect(layout.querySelector('.contact-intro .section-subtitle'))
       .toHaveTextContent('Contact');
+    expect(layout.querySelector('.contact-intro-heading')).toBeInTheDocument();
     expect(screen.getByRole('heading', {
       level: 1,
       name: 'Start a conversation.',
@@ -74,14 +76,14 @@ describe('Contact', () => {
       'General enquiry',
       'Headquarters',
     ]);
-    expect(regions).toHaveLength(3);
-    expect(regions[0]).toHaveClass('contact-intro');
-    expect(regions[1]).toHaveClass('contact-form-column');
-    expect(regions[2]).toHaveClass('contact-details-column');
-    expect(regions[1].firstElementChild).toBe(headings[0]);
-    expect(regions[1].lastElementChild).toHaveClass('contact-form-panel');
-    expect(regions[2].firstElementChild).toBe(headings[1]);
-    expect(regions[2].lastElementChild).toHaveClass('contact-details-panel');
+    expect(surface).toBeInTheDocument();
+    expect(regions).toHaveLength(2);
+    expect(regions[0]).toHaveClass('contact-form-column');
+    expect(regions[1]).toHaveClass('contact-details-column');
+    expect(regions[0].firstElementChild).toBe(headings[0]);
+    expect(regions[0].lastElementChild).toHaveClass('contact-form-panel');
+    expect(regions[1].firstElementChild).toBe(headings[1]);
+    expect(regions[1].lastElementChild).toHaveClass('contact-details-panel');
     expect(screen.getByRole('heading', { name: 'Address', level: 3 })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Phone', level: 3 })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Email', level: 3 })).toBeInTheDocument();

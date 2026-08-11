@@ -236,6 +236,8 @@ describe('approved design-system corrections', () => {
     const indexCss = readSource('src/index.css');
 
     expect(contactPage).toContain('className="contact-details-panel"');
+    expect(contactPage).toContain('className="contact-enquiry-surface"');
+    expect(contactPage).toContain('className="contact-intro-heading"');
     expect(contactPage.match(/className="contact-detail-row"/g)).toHaveLength(3);
     expect(contactPage).toContain('className="contact-intro"');
     expect(contactPage).toContain('className="contact-form-column"');
@@ -260,19 +262,16 @@ describe('approved design-system corrections', () => {
     expect(indexCss).not.toContain('.glow-circle');
     expect(indexCss).not.toContain('pulseSlow');
     expect(contactCss).toMatch(
-      /\.contact-layout\s*{[^}]*grid-template-columns:\s*minmax\(0,\s*2fr\) minmax\(0,\s*3fr\);[^}]*grid-template-areas:\s*"intro form"\s*"details form";/s,
+      /\.contact-intro\s*{[^}]*grid-template-columns:\s*minmax\(0,\s*1\.1fr\) minmax\(0,\s*0\.9fr\);/s,
     );
     expect(contactCss).toMatch(
-      /\.contact-main-section\s*{[^}]*padding:\s*2\.5rem 0 3\.5rem;/s,
+      /\.contact-enquiry-surface\s*{[^}]*grid-template-columns:\s*minmax\(0,\s*2fr\) minmax\(0,\s*3fr\);[^}]*grid-template-areas:\s*"details form";[^}]*background:\s*#ffffff;/s,
     );
     expect(contactCss).toMatch(
-      /\.contact-layout\s*{[^}]*row-gap:\s*1rem;/s,
+      /\.contact-main-section\s*{[^}]*padding:\s*1\.5rem 0 2rem;/s,
     );
     expect(contactCss).toMatch(
-      /\.contact-intro\s*{[^}]*grid-area:\s*intro;/s,
-    );
-    expect(contactCss).toMatch(
-      /\.contact-form-column\s*{[^}]*grid-area:\s*form;/s,
+      /\.contact-form-column\s*{[^}]*grid-area:\s*form;[^}]*border-left:\s*1px solid var\(--border-color\);/s,
     );
     expect(contactCss).toMatch(
       /\.contact-details-column\s*{[^}]*grid-area:\s*details;/s,
@@ -285,7 +284,7 @@ describe('approved design-system corrections', () => {
     );
     expect(contactCss).not.toContain('.contact-detail-info h4');
     expect(contactCss).toMatch(
-      /@media\s*\(max-width:\s*900px\)\s*{[\s\S]*?\.contact-layout\s*{[^}]*grid-template-columns:\s*1fr;[^}]*grid-template-areas:\s*"intro"\s*"form"\s*"details";/s,
+      /@media\s*\(max-width:\s*900px\)\s*{[\s\S]*?\.contact-enquiry-surface\s*{[^}]*grid-template-columns:\s*1fr;[^}]*grid-template-areas:\s*"form"\s*"details";/s,
     );
   });
 

@@ -112,14 +112,17 @@ const Contact = () => {
       <section className="section contact-main-section">
         <div className="container contact-layout">
           <header className="contact-intro">
-            <span className="section-subtitle">Contact</span>
-            <h1 className="contact-title">Start a conversation.</h1>
+            <div className="contact-intro-heading">
+              <span className="section-subtitle">Contact</span>
+              <h1 className="contact-title">Start a conversation.</h1>
+            </div>
             <p className="contact-description">
               For general enquiries, tell us what you need and how we can reach you. For a detailed project brief, use Work With Us in the header.
             </p>
           </header>
 
-          <div className="contact-form-column">
+          <div className="contact-enquiry-surface">
+            <div className="contact-form-column">
               <h2 className="contact-column-heading">General enquiry</h2>
               <div className="contact-form-panel">
                 {submitted ? (
@@ -259,8 +262,8 @@ const Contact = () => {
               </div>
             </div>
 
-          <aside className="contact-details-column">
-            <h2 className="contact-column-heading">Headquarters</h2>
+            <aside className="contact-details-column">
+              <h2 className="contact-column-heading">Headquarters</h2>
 
             <div className="contact-details-panel">
               <div className="contact-detail-row">
@@ -286,9 +289,10 @@ const Contact = () => {
                 </div>
               </div>
             </div>
-          </aside>
-
+            </aside>
           </div>
+
+        </div>
       </section>
 
     </div>
