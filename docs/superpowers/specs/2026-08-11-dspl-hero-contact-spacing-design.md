@@ -8,14 +8,14 @@
 
 Give the public website more visual breathing room without changing its established warm editorial identity. The work covers three connected corrections:
 
-1. Richer, fixed hero imagery across Home, About, Brands, Marketing, Branding, and E-commerce, with taller cinematic framing on the five interior routes.
+1. A controlled three-image Home rotation plus one richer fixed hero image for About, Brands, Marketing, Branding, and E-commerce, with taller cinematic framing on the five interior routes.
 2. More deliberate spacing between the About heading “What guides our work” and the Vision / Mission / Values cards.
 3. A genuinely vertical Contact page that no longer attempts to fit all information and the complete form into one desktop viewport.
 
 ## Design principles
 
 - Preserve the warm off-white, cream, charcoal, white, and restrained-gold palette.
-- Use one stable, curated hero image per route. Do not randomise imagery or introduce a slideshow.
+- Use a controlled three-image rotation on Home and one stable image on each interior route. Never randomise the sequence.
 - Gold remains a deliberate hero emphasis, not a general text colour.
 - Preserve the responsive `<picture>` contract while allowing the underlying hero artwork and crops to be replaced.
 - Use white cards for bounded information or interaction; use open cream sections for narrative content.
@@ -23,7 +23,7 @@ Give the public website more visual breathing room without changing its establis
 - Normal page scrolling is acceptable and preferred over compressed spacing.
 - Preserve verified business copy and contact details unless this specification explicitly moves it.
 
-## 1. Richer static imagery and taller cinematic heroes
+## 1. Controlled Home imagery and taller cinematic heroes
 
 ### Pages
 
@@ -36,26 +36,41 @@ Give the public website more visual breathing room without changing its establis
 
 ### Image behaviour
 
-- Each route receives one fixed hero image with its own subject and focal point.
-- Images do not change randomly between visits.
-- Do not add a carousel, automatic crossfade, pagination controls, or timer state.
+- Home receives three curated hero images in a fixed sequence.
+- Home crossfades every `8s` using opacity only; the transition duration is `800ms`.
+- The sequence always begins with the same primary Home image. It is not randomised between visits.
+- About, Brands, Marketing, Branding, and E-commerce each receive one fixed hero image with their own subject and focal point.
+- The Home backgrounds are decorative and do not introduce pagination, previous/next controls, or changing text.
+- Pause the Home timer while the document is hidden.
+- Under `prefers-reduced-motion: reduce`, render only the primary Home image and do not start the timer.
+- Load the primary Home image eagerly with `fetchPriority="high"`; begin loading the other two images only after the primary page content is ready.
 - Replace or colour-refine the current muted artwork where necessary; do not reuse visibly dated or low-resolution legacy images merely because they existed in the first site version.
 - Produce responsive `960px`, `1440px`, `1920px`, and mobile crops for every replaced image family.
-- Retain `<picture>`, intrinsic image dimensions, eager loading, `fetchPriority="high"`, and asynchronous decoding.
+- Retain `<picture>`, intrinsic image dimensions, and asynchronous decoding. Eager loading and `fetchPriority="high"` apply only to the initially visible hero image.
 - Maintain a consistent premium photographic treatment: warm natural light, deeper colour, realistic materials, controlled contrast, and no synthetic text or logos inside generated artwork.
+
+### Artwork sourcing and provenance
+
+- Generate eight new master images: three for Home and one each for About, Brands, Marketing, Branding, and E-commerce.
+- Use current and historical DSPL assets only as art-direction references unless a source is explicitly selected and its provenance is already documented.
+- Do not download arbitrary images from the web or introduce unclear commercial licensing.
+- Record prompts, generation outputs, selected masters, crops, and exported filenames in `docs/ASSET_PROVENANCE.md`.
+- Preserve master outputs separately from production WebP derivatives.
 
 ### Page-specific art direction
 
 | Route | Hero subject | Colour direction |
 | --- | --- | --- |
-| Home | A premium brand-development worktable combining packaging, campaign planning, and commerce execution | Warm ochre, cacao, restrained teal, charcoal |
+| Home 01 | Brand strategy and packaging development arranged on a premium worktable | Warm ochre, cacao, deep green, charcoal |
+| Home 02 | Coordinated campaign planning, content, and measurement materials | Saffron, cobalt accents, burgundy, warm neutral |
+| Home 03 | Product, storefront, order, and fulfilment operations | Deep teal, gold, warm white, charcoal |
 | About | A multidisciplinary studio table showing research, strategy, design, and product-development materials | Warm timber, burgundy, deep green, cream |
 | Brands | Consumer-product and packaging prototypes presented as an active portfolio-development environment | Cacao, saffron, muted red, dark neutral |
 | Marketing | Search, paid-media, content, and measurement artefacts arranged as one coordinated programme | Gold, cobalt accents, warm neutral, charcoal |
 | Branding | Identity boards, packaging studies, typography, and material swatches in a disciplined design workspace | Saffron, forest green, burgundy, cream |
 | E-commerce | Product, storefront, order, fulfilment, and measurement cues in one operational commerce workspace | Deep teal, gold, warm white, charcoal |
 
-The six images must be visibly distinct while sharing the same photographic quality and warm DSPL palette.
+The eight images must be visibly distinct while sharing the same photographic quality and warm DSPL palette.
 
 ### Content hierarchy
 
@@ -219,6 +234,7 @@ The redesign must not change:
 
 ### Automated contracts
 
+- Add Home rotation tests for the fixed three-image sequence, `8s` interval, visibility pause, deferred secondary loading, and reduced-motion fallback.
 - Update About regression coverage for the increased heading-to-card spacing and three-card layout.
 - Update shared service-hero regression coverage for the new minimum height and retained four-level hierarchy.
 - Add or update Brands and About hero contracts for cinematic height and responsive focal positions.
@@ -248,8 +264,10 @@ Check Home, About, Brands, Marketing, Branding, E-commerce, and Contact at:
 Verify:
 
 - No clipped hero copy.
-- Every route uses its assigned stable image after reload and navigation.
-- No carousel, random image selection, or automatic crossfade is present.
+- Home starts on the primary image, advances in the fixed three-image sequence, and pauses while the document is hidden.
+- Reduced-motion mode renders only the primary Home image.
+- Every interior route uses its assigned stable image after reload and navigation.
+- No random image selection or rotating interior hero is present.
 - Hero images retain meaningful focal areas.
 - No horizontal overflow.
 - The About heading-to-card gap is visibly intentional.
@@ -260,7 +278,7 @@ Verify:
 
 - No Home-page layout or copy redesign beyond its hero artwork and crop.
 - No changes to the supporter marquee.
-- No random hero imagery or rotating slideshow.
+- No random hero imagery, changing hero copy, or rotating interior-page slideshow.
 - No new Contact backend or CMS.
 - No changes to Privacy or 404 behaviour.
 - No reintroduction of service capability icon cards.
