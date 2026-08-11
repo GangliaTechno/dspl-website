@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
   getRouteMetadata,
+  NOT_FOUND_METADATA,
   organizationStructuredData,
   PUBLIC_ROUTES,
 } from '../routeMetadata';
@@ -51,5 +52,13 @@ describe('route metadata', () => {
     expect(descriptions.every((description) => !/\b(?:india|indian)\b/i.test(description))).toBe(
       true,
     );
+  });
+
+  it('defines a noindex production 404 document', () => {
+    expect(NOT_FOUND_METADATA).toMatchObject({
+      title: 'Dashapatmaja Solutions Pvt Ltd | Page Not Found',
+      canonical: '/404.html',
+      robots: 'noindex, follow',
+    });
   });
 });

@@ -10,6 +10,7 @@ const useSEO = ({
   canonical = '',
   image = 'https://dashapatmaja.in/logo.png',
   type = 'website',
+  robots = 'index, follow',
   structuredData = organizationStructuredData,
 }) => {
   useEffect(() => {
@@ -32,6 +33,7 @@ const useSEO = ({
 
     // 2. Meta Description
     setMetaTag('meta[name="description"]', 'name', 'description', description);
+    setMetaTag('meta[name="robots"]', 'name', 'robots', robots);
 
     // 3. Open Graph Tags
     setMetaTag('meta[property="og:title"]', 'property', 'og:title', title || document.title);
@@ -63,7 +65,7 @@ const useSEO = ({
     schema.type = 'application/ld+json';
     schema.dataset.dsplSchema = 'organization';
     schema.textContent = JSON.stringify(structuredData);
-  }, [title, description, canonical, image, type, structuredData]);
+  }, [title, description, canonical, image, type, robots, structuredData]);
 };
 
 export default useSEO;

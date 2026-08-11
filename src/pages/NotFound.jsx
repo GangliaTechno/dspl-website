@@ -4,14 +4,14 @@ import { Link, useLocation } from 'react-router';
 import { Home, ArrowLeft, Mail } from 'lucide-react';
 import useSEO from '../hooks/useSEO';
 import { trackEvent } from '../utils/analytics';
+import { NOT_FOUND_METADATA } from '../seo/routeMetadata';
 
 const NotFound = () => {
   const location = useLocation();
 
   useSEO({
-    title: 'Dashapatmaja Solutions Pvt Ltd | Page Not Found',
-    description: 'The page you are looking for does not exist or has been moved.',
-    canonical: location.pathname
+    ...NOT_FOUND_METADATA,
+    canonical: location.pathname,
   });
 
   useEffect(() => {

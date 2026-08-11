@@ -606,6 +606,23 @@ describe('approved design-system corrections', () => {
     expect(serviceCss).not.toContain('.offer-card:hover');
   });
 
+  it('builds a noindex production 404 without a catch-all 200 rewrite', () => {
+    const viteConfig = readSource('vite.config.js');
+    const prerenderEntry = readSource('src/entry-prerender.jsx');
+    const verifier = readSource('scripts/verify-prerender.mjs');
+    const indexHtml = readSource('index.html');
+
+    expect(viteConfig).toContain(
+      "additionalPrerenderRoutes: ['/privacy', '/404.html']",
+    );
+    expect(prerenderEntry).toContain('NOT_FOUND_METADATA');
+    expect(prerenderEntry).toContain("name: 'robots'");
+    expect(verifier).toContain("path.join('dist', '404.html')");
+    expect(verifier).toContain('prerendered public routes and a production 404 page.');
+    expect(indexHtml).not.toContain('<meta name="robots" content="index, follow"');
+    expect(existsSync(resolve('public/_redirects'))).toBe(false);
+  });
+
   it('tiers About page motion for reduced-motion visitors', () => {
     const aboutPage = readSource('src/pages/About.jsx');
     const aboutCss = readSource('src/pages/About.css');

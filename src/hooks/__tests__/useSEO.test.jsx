@@ -33,6 +33,8 @@ describe('useSEO', () => {
     expect(document.title).toBe(
       'Dashapatmaja Solutions Pvt Ltd | Page Not Found',
     );
+    expect(document.querySelector('meta[name="robots"]'))
+      .toHaveAttribute('content', 'noindex, follow');
   });
 
   it('keeps one canonical link and one schema script across navigation', () => {

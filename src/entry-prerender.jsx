@@ -12,6 +12,7 @@ import NotFound from './pages/NotFound';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import {
   getRouteMetadata,
+  NOT_FOUND_METADATA,
   PUBLIC_ROUTES,
 } from './seo/routeMetadata';
 
@@ -48,6 +49,13 @@ const createHeadElements = (metadata) =>
     {
       type: 'meta',
       props: { name: 'description', content: metadata.description },
+    },
+    {
+      type: 'meta',
+      props: {
+        name: 'robots',
+        content: metadata.robots || 'index, follow',
+      },
     },
     {
       type: 'meta',
@@ -106,7 +114,9 @@ const createHeadElements = (metadata) =>
 
 export async function prerender(data) {
   const pathname = new URL(data.url, SITE_URL).pathname;
-  const metadata = getRouteMetadata(pathname);
+  const metadata = pathname === '/404.html'
+    ? NOT_FOUND_METADATA
+    : getRouteMetadata(pathname);
   const html = renderToString(
     <StaticRouter location={pathname}>
       <AppRoutes pages={pages} />

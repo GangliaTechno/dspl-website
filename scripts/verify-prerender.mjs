@@ -59,6 +59,28 @@ for (const { route, heading } of routes) {
   }
 }
 
+const notFoundPath = path.join('dist', '404.html');
+if (!fs.existsSync(notFoundPath)) {
+  failures.push(`404: missing ${notFoundPath}`);
+} else {
+  const notFoundHtml = fs.readFileSync(notFoundPath, 'utf8');
+  const notFoundTitle = notFoundHtml.match(/<title>([^<]+)<\/title>/i)?.[1]?.trim();
+  const notFoundH1 = decodeHtmlText(
+    (notFoundHtml.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/i)?.[1] ?? '')
+      .replace(/<[^>]+>/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim(),
+  );
+
+  if (!notFoundTitle) failures.push('404: missing title');
+  if (!notFoundH1.includes('Page Not Found')) {
+    failures.push('404: expected h1 containing "Page Not Found"');
+  }
+  if (!/<meta\b[^>]*name=["']robots["'][^>]*content=["']noindex, follow["'][^>]*>/i.test(notFoundHtml)) {
+    failures.push('404: missing noindex, follow robots metadata');
+  }
+}
+
 const duplicateTitles = titles.filter(
   ({ title }, index) => titles.findIndex((item) => item.title === title) !== index,
 );
@@ -71,4 +93,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log(`Verified ${routes.length} prerendered public routes.`);
+console.log(`Verified ${routes.length} prerendered public routes and a production 404 page.`);

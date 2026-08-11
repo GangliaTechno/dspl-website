@@ -93,6 +93,16 @@ for (const path of PUBLIC_ROUTES) {
   });
 }
 
+export const NOT_FOUND_METADATA = Object.freeze({
+  title: 'Dashapatmaja Solutions Pvt Ltd | Page Not Found',
+  description: 'The page you are looking for does not exist or has been moved.',
+  canonical: '/404.html',
+  image: DEFAULT_IMAGE,
+  type: 'website',
+  robots: 'noindex, follow',
+  structuredData: organizationStructuredData,
+});
+
 export function getRouteMetadata(pathname) {
   const metadata = routeMetadata[pathname];
 

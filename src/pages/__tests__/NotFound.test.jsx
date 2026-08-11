@@ -30,6 +30,8 @@ describe('NotFound Page Component', () => {
     expect(screen.getByRole('link', { name: 'E-Commerce' })).toHaveAttribute('href', '/ecommerce');
     expect(screen.getByRole('link', { name: /contact us/i })).toHaveAttribute('href', '/contact');
     expect(screen.queryByText('Contact Support')).not.toBeInTheDocument();
+    expect(document.querySelector('meta[name="robots"]'))
+      .toHaveAttribute('content', 'noindex, follow');
 
     expect(trackEvent).toHaveBeenCalledWith({
       category: 'navigation',
