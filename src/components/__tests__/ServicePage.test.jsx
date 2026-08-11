@@ -12,7 +12,6 @@ const props = {
   contextLabel: 'Test services',
   heroTitle: 'Test service',
   heroTagline: 'A precise service positioning statement.',
-  heroDescription: 'One concise service context paragraph.',
   heroImages: [
     {
       id: 'service-primary',
@@ -54,7 +53,7 @@ describe('ServicePage', () => {
       .toBeInTheDocument();
     expect(screen.getByText(props.contextLabel)).toHaveClass('section-subtitle');
     expect(screen.getByText(props.heroTagline)).toHaveClass('domain-subtitle');
-    expect(screen.getByText(props.heroDescription)).toHaveClass('domain-description');
+    expect(container.querySelector('.domain-description')).not.toBeInTheDocument();
     expect(screen.queryByRole('button', { name: /discuss/i }))
       .not.toBeInTheDocument();
     expect(container.querySelector('.domain-hero .section-subtitle'))

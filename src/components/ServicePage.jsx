@@ -9,7 +9,6 @@ const ServicePage = ({
   contextLabel,
   heroTitle,
   heroTagline,
-  heroDescription,
   heroImages,
   scopeTitle,
   scopeText,
@@ -37,9 +36,6 @@ const ServicePage = ({
           <span className="section-subtitle">{contextLabel}</span>
           <h1 className="domain-title">{heroTitle}</h1>
           <p className="domain-subtitle">{heroTagline}</p>
-          <p className="domain-description">
-            {heroDescription}
-          </p>
         </div>
       </section>
 

@@ -1,6 +1,6 @@
-import { act, render, screen, within } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import { BrowserRouter } from 'react-router';
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import Home from '../Home';
 
 describe('Home page', () => {
@@ -97,33 +97,24 @@ describe('Home page', () => {
     ).not.toBeInTheDocument();
   });
 
-  it('mounts the approved Home hero images in a fixed three-image order', () => {
-    vi.useFakeTimers();
+  it('uses the selected Home artwork as one static responsive hero', () => {
     const rendered = render(
       <BrowserRouter>
         <Home />
       </BrowserRouter>,
     );
 
-    act(() => vi.runOnlyPendingTimers());
-    const layers = Array.from(
-      rendered.container.querySelectorAll('.home-hero-media picture'),
-    );
-    expect(layers).toHaveLength(3);
-    expect(layers.map((layer) => layer.dataset.heroId)).toEqual([
-      'home-primary',
-      'home-02',
-      'home-03',
-    ]);
+    const pictures = rendered.container.querySelectorAll('picture.home-hero-media');
+    const image = rendered.container.querySelector('.home-hero-image');
+    expect(pictures).toHaveLength(1);
+    expect(image).toHaveAttribute('alt', '');
+    expect(image).toHaveAttribute('loading', 'eager');
+    expect(image).toHaveAttribute('fetchpriority', 'high');
     expect(screen.getByRole('heading', {
       level: 1,
       name: 'We develop brands. We deliver disciplined market execution.',
     })).toBeInTheDocument();
     expect(screen.getByRole('region', { name: 'Supported by' }))
       .toBeInTheDocument();
-
-    rendered.unmount();
-    vi.clearAllTimers();
-    vi.useRealTimers();
   });
 });

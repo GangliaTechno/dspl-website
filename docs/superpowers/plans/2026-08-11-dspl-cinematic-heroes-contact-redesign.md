@@ -8,6 +8,18 @@
 
 **Tech Stack:** React 19.2.8, React Router 8.3.0, Vite 8.0.12, Vitest 4.1.10, Testing Library 16.3.2, plain CSS, Python 3.12 with Pillow 12.3.0, OpenAI built-in image generation.
 
+## Approved live-review amendment
+
+The implementation below records the original task sequence. The final live-reviewed result supersedes conflicting details as follows:
+
+- Home uses the user-selected `home-03` artwork as one static responsive image. Rotation remains only on About, Brands, Marketing, Branding, and E-commerce.
+- Interior heroes use three content levels: context label, gold H1, and one white tagline. The tertiary hero description was removed and its detail remains in the next scope section.
+- About, Brands, and shared service heroes use a `38rem` desktop minimum height; interior overlays use `rgba(0, 0, 0, 0.55)`.
+- About, Brands, and Branding retain both approved images but open on their refreshed colourful artwork; the previous image becomes the second controlled frame.
+- Marketing and E-commerce use newly generated page-specific primary scenes informed by audited legacy subject matter, without republishing the low-resolution or unclear-provenance legacy files.
+- Contact uses a new static meeting-table image, `0.56` overlay, three peer information panels with a restrained gold rule and stronger internal hierarchy, and a separate centred enquiry section.
+- The Home supporter logos use higher opacity plus a restrained contour-following drop shadow for visibility against the hero image.
+
 ## Global Constraints
 
 - Home uses three images; About, Brands, Marketing, Branding, and E-commerce use two images each.

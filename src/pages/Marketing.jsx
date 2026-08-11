@@ -1,7 +1,6 @@
-import marketingHero960 from '../assets/dspl-marketing-editorial-960.webp';
-import marketingHero1440 from '../assets/dspl-marketing-editorial-1440.webp';
-import marketingHero1920 from '../assets/dspl-marketing-editorial-1920.webp';
-import marketingMobile from '../assets/dspl-marketing-editorial-mobile.webp';
+import marketingHero960 from '../assets/marketing-primary-960.webp';
+import marketingHero1440 from '../assets/marketing-primary-1440.webp';
+import marketingMobile from '../assets/marketing-primary-mobile.webp';
 import marketingRotation02960 from '../assets/marketing-rotation-02-960.webp';
 import marketingRotation021440 from '../assets/marketing-rotation-02-1440.webp';
 import marketingRotation02Mobile from '../assets/marketing-rotation-02-mobile.webp';
@@ -11,7 +10,6 @@ import { getRouteMetadata } from '../seo/routeMetadata';
 const marketingCopy = {
   contextLabel: 'Marketing services',
   heroTagline: 'Marketing built around clear audiences, disciplined execution, and measurable decisions.',
-  heroDescription: 'We plan search, paid media, content, and measurement as one programme, with scope and priorities defined against your audience, objectives, and available evidence.',
   scopeTitle: 'A coordinated marketing programme',
   scopeText: 'Engagements begin with the current market position, audience, channel performance, and measurement setup. From there, we agree channel responsibilities, campaign cadence, reporting measures, and the work required to improve performance over time.',
   offersTitle: 'Marketing capabilities',
@@ -56,7 +54,7 @@ const heroImages = [
   {
     id: 'marketing-primary',
     src: marketingHero1440,
-    desktopSrcSet: `${marketingHero960} 960w, ${marketingHero1440} 1440w, ${marketingHero1920} 1920w`,
+    desktopSrcSet: `${marketingHero960} 960w, ${marketingHero1440} 1440w`,
     mobileSrc: marketingMobile,
     sizes: '100vw',
     width: 1440,

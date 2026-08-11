@@ -3,16 +3,8 @@ import { Link } from 'react-router';
 import OwnedBrandProof from '../components/home/OwnedBrandProof';
 import ProcessSteps from '../components/home/ProcessSteps';
 import SupporterStrip from '../components/home/SupporterStrip';
-import RotatingHeroMedia from '../components/RotatingHeroMedia';
 import '../components/home/homeSections.css';
 import rawRadiclesLogo from '../assets/raw-radicles-logo-cropped.webp';
-import homeHero960 from '../assets/dspl-home-editorial-960.webp';
-import homeHero1440 from '../assets/dspl-home-editorial-1440.webp';
-import homeHero1920 from '../assets/dspl-home-editorial-1920.webp';
-import homeHeroMobile from '../assets/dspl-home-editorial-mobile.webp';
-import homeRotation02960 from '../assets/home-rotation-02-960.webp';
-import homeRotation021440 from '../assets/home-rotation-02-1440.webp';
-import homeRotation02Mobile from '../assets/home-rotation-02-mobile.webp';
 import homeRotation03960 from '../assets/home-rotation-03-960.webp';
 import homeRotation031440 from '../assets/home-rotation-03-1440.webp';
 import homeRotation03Mobile from '../assets/home-rotation-03-mobile.webp';
@@ -36,36 +28,6 @@ const supporters = [
     src: startupKarnatakaLogo,
     alt: 'Startup Karnataka',
     className: 'supporter-logo-startup',
-  },
-];
-
-const homeHeroImages = [
-  {
-    id: 'home-primary',
-    src: homeHero1440,
-    desktopSrcSet: `${homeHero960} 960w, ${homeHero1440} 1440w, ${homeHero1920} 1920w`,
-    mobileSrc: homeHeroMobile,
-    sizes: '100vw',
-    width: 1440,
-    height: 810,
-  },
-  {
-    id: 'home-02',
-    src: homeRotation021440,
-    desktopSrcSet: `${homeRotation02960} 960w, ${homeRotation021440} 1440w`,
-    mobileSrc: homeRotation02Mobile,
-    sizes: '100vw',
-    width: 1440,
-    height: 810,
-  },
-  {
-    id: 'home-03',
-    src: homeRotation031440,
-    desktopSrcSet: `${homeRotation03960} 960w, ${homeRotation031440} 1440w`,
-    mobileSrc: homeRotation03Mobile,
-    sizes: '100vw',
-    width: 1440,
-    height: 810,
   },
 ];
 
@@ -132,12 +94,23 @@ const Home = () => {
   return (
     <div className="home-page fade-in">
       <section className="home-hero">
-        <RotatingHeroMedia
-          images={homeHeroImages}
-          className="home-hero-media"
-          imageClassName="home-hero-image"
-          mobileBreakpoint={768}
-        />
+        <picture className="home-hero-media" aria-hidden="true">
+          <source media="(max-width: 768px)" srcSet={homeRotation03Mobile} />
+          <source
+            srcSet={`${homeRotation03960} 960w, ${homeRotation031440} 1440w`}
+            sizes="100vw"
+          />
+          <img
+            className="home-hero-image"
+            src={homeRotation031440}
+            alt=""
+            width="1440"
+            height="810"
+            loading="eager"
+            fetchPriority="high"
+            decoding="async"
+          />
+        </picture>
         <div className="container home-hero-layout">
           <div className="home-hero-content">
             <h1 className="hero-title">

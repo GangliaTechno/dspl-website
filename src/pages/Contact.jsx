@@ -5,6 +5,9 @@ import { Send, CheckCircle2, AlertCircle } from 'lucide-react';
 import useSEO from '../hooks/useSEO';
 import { getRouteMetadata } from '../seo/routeMetadata';
 import { FORM_SUBMISSION_ERROR } from '../utils/formMessages';
+import contactHero960 from '../assets/contact-hero-960.webp';
+import contactHero1440 from '../assets/contact-hero-1440.webp';
+import contactHeroMobile from '../assets/contact-hero-mobile.webp';
 
 const Contact = () => {
   useSEO(getRouteMetadata('/contact'));
@@ -110,6 +113,23 @@ const Contact = () => {
   return (
     <div className="contact-page fade-in">
       <section className="contact-hero">
+        <picture className="contact-hero-picture" aria-hidden="true">
+          <source media="(max-width: 767px)" srcSet={contactHeroMobile} />
+          <source
+            srcSet={`${contactHero960} 960w, ${contactHero1440} 1440w`}
+            sizes="100vw"
+          />
+          <img
+            className="contact-hero-image"
+            src={contactHero1440}
+            alt=""
+            width="1440"
+            height="810"
+            loading="eager"
+            fetchPriority="high"
+            decoding="async"
+          />
+        </picture>
         <div className="container contact-hero-content">
           <span className="section-subtitle">Contact</span>
           <h1 className="contact-title">Start a conversation.</h1>
@@ -125,17 +145,20 @@ const Contact = () => {
           <div className="contact-info-grid">
             <article className="contact-info-card">
               <h3>Address</h3>
+              <p className="contact-info-summary">Headquarters in Manipal</p>
               <p>Room No. 12, 4th Floor, MUTBI, Advanced Research Center, Madhava Nagar, Manipal 576104</p>
             </article>
 
             <article className="contact-info-card">
               <h3>Phone</h3>
+              <p className="contact-info-summary">Direct contact</p>
               <p><a href="tel:+918861942440">+91 88619 42440</a></p>
               <p><a href="tel:+919072556665">+91 90725 56665</a></p>
             </article>
 
             <article className="contact-info-card">
               <h3>Email</h3>
+              <p className="contact-info-summary">General enquiries</p>
               <p><a href="mailto:director@dashapatmaja.in">director@dashapatmaja.in</a></p>
               <p><a href="mailto:dsplmanipal@gmail.com">dsplmanipal@gmail.com</a></p>
             </article>

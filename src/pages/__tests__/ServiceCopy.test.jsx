@@ -14,7 +14,6 @@ const routeCases = [
     Component: Marketing,
     contextLabel: 'Marketing services',
     heroTagline: 'Marketing built around clear audiences, disciplined execution, and measurable decisions.',
-    heroDescription: 'We plan search, paid media, content, and measurement as one programme, with scope and priorities defined against your audience, objectives, and available evidence.',
     scopeTitle: 'A coordinated marketing programme',
     scopeText: 'Engagements begin with the current market position, audience, channel performance, and measurement setup. From there, we agree channel responsibilities, campaign cadence, reporting measures, and the work required to improve performance over time.',
     offersTitle: 'Marketing capabilities',
@@ -34,13 +33,13 @@ const routeCases = [
     ],
     rejectedClaims: ['Get found. Get chosen. Get sales.', 'We did this for Raw Radicles. We can do it for you.', 'Paid ads can bring leads in the first week.'],
     heroIds: ['marketing-primary', 'marketing-02'],
+    primaryHeroAsset: 'marketing-primary-1440.webp',
   },
   {
     name: 'Branding',
     Component: Branding,
     contextLabel: 'Branding services',
     heroTagline: 'Positioning, identity, and brand systems designed for consistent use.',
-    heroDescription: 'We translate business context into a usable brand system: positioning, identity, voice, and the assets required for consistent execution.',
     scopeTitle: 'A brand system built for application',
     scopeText: 'The work starts with the business, audience, category, and competitive context. The resulting system connects positioning and language with visual identity, application rules, and assets that internal and external teams can use consistently.',
     offersTitle: 'Branding capabilities',
@@ -60,13 +59,13 @@ const routeCases = [
     ],
     rejectedClaims: ['Build a name customers trust and remember.', 'We did this for Raw Radicles. We can do it for you.', 'A full identity takes four to six weeks'],
     heroIds: ['branding-primary', 'branding-02'],
+    primaryHeroAsset: 'branding-rotation-02-1440.webp',
   },
   {
     name: 'E-commerce',
     Component: Ecommerce,
     contextLabel: 'E-commerce services',
     heroTagline: 'Storefront, marketplace, payment, and fulfilment systems designed for reliable day-to-day operation.',
-    heroDescription: 'We plan and implement commerce systems that connect product presentation, checkout, payments, marketplaces, and fulfilment. Scope is defined around the selected platform, operating model, and support needs.',
     scopeTitle: 'Commerce aligned with day-to-day operations',
     scopeText: 'Storefront and marketplace work is planned alongside catalogue ownership, payment setup, inventory, fulfilment, and reporting. This keeps the customer journey and operational responsibilities within one documented scope.',
     offersTitle: 'E-commerce capabilities',
@@ -86,6 +85,7 @@ const routeCases = [
     ],
     rejectedClaims: ['Build a store that loads fast and converts.', 'We sell our own brand this way, so we know what holds up.', 'Your store loads quickly and looks right on every phone.'],
     heroIds: ['ecommerce-primary', 'ecommerce-02'],
+    primaryHeroAsset: 'ecommerce-primary-1440.webp',
   },
 ];
 
@@ -93,7 +93,6 @@ describe.each(routeCases)('$name service copy', ({
   Component,
   contextLabel,
   heroTagline,
-  heroDescription,
   scopeTitle,
   scopeText,
   offersTitle,
@@ -104,6 +103,7 @@ describe.each(routeCases)('$name service copy', ({
   faqs,
   rejectedClaims,
   heroIds,
+  primaryHeroAsset,
 }) => {
   it('renders the approved route-specific messaging and icon mapping', () => {
     vi.useFakeTimers();
@@ -114,7 +114,6 @@ describe.each(routeCases)('$name service copy', ({
     for (const text of [
       contextLabel,
       heroTagline,
-      heroDescription,
       scopeTitle,
       scopeText,
       offersTitle,
@@ -128,6 +127,7 @@ describe.each(routeCases)('$name service copy', ({
       .not.toBeInTheDocument();
     expect(container.querySelector('.domain-hero .section-subtitle'))
       .toBeInTheDocument();
+    expect(container.querySelector('.domain-description')).not.toBeInTheDocument();
 
     const entries = container.querySelectorAll('article.offer-entry');
     expect(entries).toHaveLength(4);
@@ -143,6 +143,10 @@ describe.each(routeCases)('$name service copy', ({
       container.querySelectorAll('.domain-hero-picture picture'),
       (picture) => picture.dataset.heroId,
     )).toEqual(heroIds);
+    expect(container.querySelector('.domain-hero-picture picture img')).toHaveAttribute(
+      'src',
+      expect.stringContaining(primaryHeroAsset),
+    );
 
     rendered.unmount();
     vi.clearAllTimers();

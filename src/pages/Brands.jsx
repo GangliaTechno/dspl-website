@@ -17,21 +17,21 @@ import brandsRotation02Mobile from '../assets/brands-rotation-02-mobile.webp';
 const brandsHeroImages = [
   {
     id: 'brands-primary',
-    src: brandHero1672,
-    desktopSrcSet: `${brandHero768} 768w, ${brandHero1200} 1200w, ${brandHero1672} 1672w`,
-    mobileSrc: brandHeroMobile,
-    sizes: '100vw',
-    width: 1672,
-    height: 941,
-  },
-  {
-    id: 'brands-02',
     src: brandsRotation021440,
     desktopSrcSet: `${brandsRotation02960} 960w, ${brandsRotation021440} 1440w`,
     mobileSrc: brandsRotation02Mobile,
     sizes: '100vw',
     width: 1440,
     height: 810,
+  },
+  {
+    id: 'brands-02',
+    src: brandHero1672,
+    desktopSrcSet: `${brandHero768} 768w, ${brandHero1200} 1200w, ${brandHero1672} 1672w`,
+    mobileSrc: brandHeroMobile,
+    sizes: '100vw',
+    width: 1672,
+    height: 941,
   },
 ];
 
@@ -60,9 +60,6 @@ const Brands = () => {
             <span className="section-subtitle">DSPL Brands</span>
             <h1 className="brands-title">We develop and operate consumer brands.</h1>
             <p className="brands-tagline">From product development to market execution.</p>
-            <p className="brands-description">
-              We work across product development, packaging, compliance, market positioning, and commerce. Raw Radicles is our first flagship consumer brand, with additional concepts in development.
-            </p>
           </motion.div>
         </div>
       </section>

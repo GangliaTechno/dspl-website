@@ -89,21 +89,21 @@ const directionCards = [
 const aboutHeroImages = [
   {
     id: 'about-primary',
-    src: aboutHero1440,
-    desktopSrcSet: `${aboutHero960} 960w, ${aboutHero1440} 1440w, ${aboutHero1600} 1600w`,
-    mobileSrc: aboutHeroMobile,
-    sizes: '100vw',
-    width: 1600,
-    height: 900,
-  },
-  {
-    id: 'about-02',
     src: aboutRotation021440,
     desktopSrcSet: `${aboutRotation02960} 960w, ${aboutRotation021440} 1440w`,
     mobileSrc: aboutRotation02Mobile,
     sizes: '100vw',
     width: 1440,
     height: 810,
+  },
+  {
+    id: 'about-02',
+    src: aboutHero1440,
+    desktopSrcSet: `${aboutHero960} 960w, ${aboutHero1440} 1440w, ${aboutHero1600} 1600w`,
+    mobileSrc: aboutHeroMobile,
+    sizes: '100vw',
+    width: 1600,
+    height: 900,
   },
 ];
 
@@ -227,11 +227,6 @@ const About = () => {
           <p className="about-subtitle">
             A multidisciplinary company focused on brand development and commercial execution.
           </p>
-          <div className="about-intro-grid">
-            <p className="about-intro-text">
-              Founded in 2023, Dashapatmaja Solutions Pvt Ltd develops consumer brands and provides branding, marketing, and e-commerce services. Based at MUTBI, MAHE, Manipal, our team combines healthcare, engineering, design, management, and technology experience.
-            </p>
-          </div>
         </motion.div>
       </section>
 

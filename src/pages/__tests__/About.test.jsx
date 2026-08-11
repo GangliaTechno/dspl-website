@@ -36,7 +36,9 @@ describe('About page', () => {
       'A multidisciplinary company focused on brand development and commercial execution.',
     )).toHaveClass('about-subtitle');
     expect(container.querySelector('.about-hero .about-intro-text'))
-      .toBeInTheDocument();
+      .not.toBeInTheDocument();
+    expect(screen.queryByText(/Founded in 2023, Dashapatmaja Solutions Pvt Ltd/))
+      .not.toBeInTheDocument();
 
     const heading = screen.getByRole('heading', {
       level: 2,
@@ -88,6 +90,22 @@ describe('About page', () => {
       'about-primary',
       'about-02',
     ]);
+    expect(layers[0].querySelector('img')).toHaveAttribute(
+      'src',
+      expect.stringContaining('about-rotation-02-1440.webp'),
+    );
+    expect(layers[1].querySelector('img')).toHaveAttribute(
+      'src',
+      expect.stringContaining('dspl-about-hero-1440.webp'),
+    );
+    expect(layers[0].querySelector('img')).toHaveAttribute(
+      'src',
+      expect.stringContaining('about-rotation-02-1440.webp'),
+    );
+    expect(layers[1].querySelector('img')).toHaveAttribute(
+      'src',
+      expect.stringContaining('dspl-about-hero-1440.webp'),
+    );
 
     rendered.unmount();
     vi.clearAllTimers();

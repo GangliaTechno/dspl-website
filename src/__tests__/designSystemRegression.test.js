@@ -67,7 +67,7 @@ describe('approved design-system corrections', () => {
       /\.brands-hero\s*{[^}]*text-align:\s*center;[^}]*min-height:\s*38rem;/s,
     );
     expect(brandsCss).toMatch(
-      /\.brands-hero::after\s*{[^}]*background:\s*rgba\(8,\s*8,\s*8,\s*0\.68\);/s,
+      /\.brands-hero::after\s*{[^}]*background:\s*rgba\(8,\s*8,\s*8,\s*0\.55\);/s,
     );
     expect(brandsCss).toMatch(
       /\.brands-hero \.container\s*{[^}]*max-width:\s*52rem;[^}]*justify-content:\s*center;/s,
@@ -252,6 +252,8 @@ describe('approved design-system corrections', () => {
     const indexCss = readSource('src/index.css');
 
     expect(contactPage).toContain('className="contact-hero"');
+    expect(contactPage).toContain('className="contact-hero-picture"');
+    expect(contactPage).toContain('className="contact-hero-image"');
     expect(contactPage).toContain('className="section contact-information-section"');
     expect(contactPage).toContain('className="contact-info-grid"');
     expect(contactPage.match(/className="contact-info-card"/g)).toHaveLength(3);
@@ -277,10 +279,13 @@ describe('approved design-system corrections', () => {
     expect(indexCss).not.toContain('.glow-circle');
     expect(indexCss).not.toContain('pulseSlow');
     expect(contactCss).toMatch(/\.contact-hero\s*{[^}]*min-height:\s*22rem;[^}]*background:\s*var\(--text-heading\);/s);
+    expect(contactCss).toMatch(/\.contact-hero-picture\s*{[^}]*position:\s*absolute;[^}]*inset:\s*0;/s);
+    expect(contactCss).toMatch(/\.contact-hero::after\s*{[^}]*background:\s*rgba\(0,\s*0,\s*0,\s*0\.56\);/s);
     expect(contactCss).toMatch(/\.contact-title\s*{[^}]*color:\s*var\(--accent\);/s);
     expect(contactCss).toMatch(/\.contact-information-section\s*{[^}]*padding:\s*5rem 0;/s);
     expect(contactCss).toMatch(/\.contact-info-grid\s*{[^}]*grid-template-columns:\s*repeat\(3,\s*minmax\(0,\s*1fr\)\);[^}]*gap:\s*1\.5rem;/s);
-    expect(contactCss).toMatch(/\.contact-info-card\s*{[^}]*padding:\s*2rem;[^}]*background:\s*#ffffff;[^}]*border:\s*1px solid var\(--border-color\);/s);
+    expect(contactCss).toMatch(/\.contact-info-card\s*{[^}]*min-height:\s*14rem;[^}]*padding:\s*2\.5rem;[^}]*border:\s*1px solid var\(--border-color\);[^}]*border-top:\s*3px solid var\(--accent\);[^}]*background:\s*#ffffff;[^}]*box-shadow:\s*0 18px 50px rgba\(32,\s*24,\s*8,\s*0\.08\);/s);
+    expect(contactCss).toMatch(/\.contact-info-summary\s*{[^}]*font-size:\s*clamp\(1\.25rem,\s*1\.8vw,\s*1\.5rem\);[^}]*font-weight:\s*800;/s);
     expect(contactCss).toMatch(/\.contact-enquiry-section\s*{[^}]*padding:\s*6rem 0;/s);
     expect(contactCss).toMatch(/\.contact-enquiry-layout\s*{[^}]*max-width:\s*800px;/s);
     expect(contactCss).toMatch(
@@ -290,6 +295,23 @@ describe('approved design-system corrections', () => {
     expect(contactCss).not.toMatch(/max-height:\s*760px/);
     expect(contactCss).not.toContain('.contact-main-section');
     expect(contactCss).toMatch(/@media\s*\(max-width:\s*900px\)\s*{[\s\S]*?\.contact-info-grid\s*{[^}]*grid-template-columns:\s*1fr;/s);
+  });
+
+  it('keeps interior hero copy to one supporting line with deliberate spacing', () => {
+    const aboutPage = readSource('src/pages/About.jsx');
+    const brandsPage = readSource('src/pages/Brands.jsx');
+    const servicePage = readSource('src/components/ServicePage.jsx');
+    const aboutCss = readSource('src/pages/About.css');
+    const brandsCss = readSource('src/pages/Brands.css');
+    const serviceCss = readSource('src/components/ServicePage.css');
+
+    expect(aboutPage).not.toContain('className="about-intro-text"');
+    expect(brandsPage).not.toContain('className="brands-description"');
+    expect(servicePage).not.toContain('heroDescription');
+    expect(servicePage).not.toContain('className="domain-description"');
+    expect(aboutCss).toMatch(/\.about-subtitle\s*{[^}]*margin:\s*0 auto 3rem;/s);
+    expect(brandsCss).toMatch(/\.brands-tagline\s*{[^}]*margin:\s*0 auto 3rem;/s);
+    expect(serviceCss).toMatch(/\.domain-subtitle\s*{[^}]*margin:\s*0 auto 3rem;/s);
   });
 
   it('uses route-owned form layout and state class names', () => {
@@ -348,7 +370,7 @@ describe('approved design-system corrections', () => {
     const homePage = readSource('src/pages/Home.jsx');
 
     expect(home).toMatch(
-      /\.home-hero::after\s*{[^}]*background:\s*rgba\(8,\s*8,\s*8,\s*0\.72\);/s,
+      /\.home-hero::after\s*{[^}]*background:\s*rgba\(8,\s*8,\s*8,\s*0\.75\);/s,
     );
     expect(home).toMatch(
       /\.home-hero-layout\s*{[^}]*display:\s*flex;[^}]*justify-content:\s*center;[^}]*padding-block:\s*clamp\(4\.5rem,\s*8vw,\s*7rem\)\s+clamp\(7rem,\s*12vw,\s*9\.5rem\);/s,
@@ -360,7 +382,7 @@ describe('approved design-system corrections', () => {
       /\.hero-title\s*>\s*span\s*{[^}]*display:\s*block;/s,
     );
     expect(home).toMatch(
-      /\.hero-subhead\s*{[^}]*max-width:\s*66ch;[^}]*margin:\s*0 auto 2\.5rem;[^}]*font-size:\s*clamp\(1\.05rem,\s*1\.45vw,\s*1\.25rem\);[^}]*line-height:\s*1\.65;/s,
+      /\.hero-subhead\s*{[^}]*max-width:\s*62ch;[^}]*margin:\s*0 auto 2\.75rem;[^}]*font-size:\s*clamp\(1\.125rem,\s*1\.65vw,\s*1\.375rem\);[^}]*line-height:\s*1\.65;/s,
     );
     expect(home).toMatch(/\.hero-title\s*{[^}]*color:\s*#fff;/s);
     expect(home).toMatch(
@@ -390,24 +412,20 @@ describe('approved design-system corrections', () => {
     const marketingPage = readSource('src/pages/Marketing.jsx');
     const pageShell = readSource('index.html');
 
-    expect(homePage).toContain('const homeHeroImages = [');
-    expect(homePage.match(/id: 'home-(?:primary|02|03)'/g)).toHaveLength(3);
-    expect(homePage).toContain('<RotatingHeroMedia');
+    expect(homePage).not.toContain('const homeHeroImages = [');
+    expect(homePage).not.toContain('<RotatingHeroMedia');
     expect(homePage).toContain('className="home-hero-media"');
-    expect(homePage).toContain('imageClassName="home-hero-image"');
-    expect(homePage).toContain('dspl-home-editorial-960.webp');
-    expect(homePage).toContain('dspl-home-editorial-1440.webp');
-    expect(homePage).toContain('dspl-home-editorial-1920.webp');
-    expect(homePage).toContain('dspl-home-editorial-mobile.webp');
-    expect(homePage).toContain('home-rotation-02-1440.webp');
+    expect(homePage).toContain('className="home-hero-image"');
+    expect(homePage).toContain('home-rotation-03-960.webp');
     expect(homePage).toContain('home-rotation-03-1440.webp');
-    expect(homePage).toContain('mobileBreakpoint={768}');
+    expect(homePage).toContain('home-rotation-03-mobile.webp');
+    expect(homePage).toContain('loading="eager"');
+    expect(homePage).toContain('fetchPriority="high"');
     expect(homePage).not.toContain('dspl_banner.webp');
     expect(homePage).not.toContain('dspl_banner-mobile.webp');
-    expect(marketingPage).toContain('dspl-marketing-editorial-960.webp');
-    expect(marketingPage).toContain('dspl-marketing-editorial-1440.webp');
-    expect(marketingPage).toContain('dspl-marketing-editorial-1920.webp');
-    expect(marketingPage).toContain('dspl-marketing-editorial-mobile.webp');
+    expect(marketingPage).toContain('marketing-primary-960.webp');
+    expect(marketingPage).toContain('marketing-primary-1440.webp');
+    expect(marketingPage).toContain('marketing-primary-mobile.webp');
     expect(marketingPage).not.toContain('Marketing_hero_section');
     expect(pageShell).toContain(
       'Dashapatmaja Solutions Pvt Ltd develops consumer brands and provides branding, marketing, and e-commerce services.',
@@ -483,7 +501,7 @@ describe('approved design-system corrections', () => {
       /\.supporter-logo-slot\s*{[^}]*width:\s*auto;[^}]*height:\s*var\(--supporter-slot-height\);/s,
     );
     expect(homeSections).toMatch(
-      /\.supporter-logo\s*{[^}]*width:\s*auto;[^}]*height:\s*100%;[^}]*object-fit:\s*contain;[^}]*transform:\s*none;[^}]*opacity:\s*0\.6;/s,
+      /\.supporter-logo\s*{[^}]*width:\s*auto;[^}]*height:\s*100%;[^}]*object-fit:\s*contain;[^}]*transform:\s*none;[^}]*filter:\s*brightness\(0\) invert\(1\) drop-shadow\(0 1px 3px rgba\(0,\s*0,\s*0,\s*0\.65\)\);[^}]*opacity:\s*0\.86;/s,
     );
     expect(homeSections).not.toMatch(/\.supporter-logo-(?:dst|nidhi|mutbi|startup)\s*{/);
     expect(homeSections).not.toContain('--supporter-optical-trim');
@@ -593,7 +611,7 @@ describe('approved design-system corrections', () => {
     expect(servicePage).not.toContain('offer-icon-wrapper');
     expect(servicePage).toContain('{contextLabel}');
     expect(servicePage).toContain('{heroTagline}');
-    expect(servicePage).toContain('{heroDescription}');
+    expect(servicePage).not.toContain('{heroDescription}');
     expect(servicePage).toContain('className="container service-scope-layout"');
     expect(servicePage).toContain('<article key={offer.title} className="offer-entry">');
     expect(servicePage).not.toContain('<span className="section-subtitle">Services</span>');
@@ -604,7 +622,7 @@ describe('approved design-system corrections', () => {
     expect(servicePage).toContain('heroImages');
     expect(servicePage).toContain('<RotatingHeroMedia');
     expect(serviceCss).toMatch(
-      /\.domain-hero\s*{[^}]*display:\s*grid;[^}]*min-height:\s*35rem;[^}]*place-items:\s*center;[^}]*padding:\s*5rem 0;/s,
+      /\.domain-hero\s*{[^}]*display:\s*grid;[^}]*min-height:\s*38rem;[^}]*place-items:\s*center;[^}]*padding:\s*5rem 0;/s,
     );
     expect(serviceCss).toMatch(
       /\.domain-title\s*{[^}]*color:\s*var\(--accent\);/s,
@@ -685,12 +703,11 @@ describe('approved design-system corrections', () => {
     );
   });
 
-  it('caps the About introduction at the documented reading measure', () => {
+  it('removes the tertiary About hero paragraph and its obsolete layout rules', () => {
     const aboutCss = readSource('src/pages/About.css');
 
-    expect(aboutCss).toMatch(
-      /\.about-intro-grid\s*{[^}]*max-width:\s*72ch;/s,
-    );
+    expect(aboutCss).not.toContain('.about-intro-grid');
+    expect(aboutCss).not.toContain('.about-intro-text');
   });
 
   it('presents Brands as a restrained portfolio in development', () => {
@@ -700,7 +717,7 @@ describe('approved design-system corrections', () => {
 
     expect(brandsPage).toContain('DSPL Brands');
     expect(brandsPage).toContain('We develop and operate consumer brands.');
-    expect(brandsPage).toContain(
+    expect(brandsPage).not.toContain(
       'We work across product development, packaging, compliance, market positioning, and commerce. Raw Radicles is our first flagship consumer brand, with additional concepts in development.',
     );
     expect(brandsPage).toContain('Portfolio in development');

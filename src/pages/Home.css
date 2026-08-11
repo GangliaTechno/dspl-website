@@ -16,13 +16,14 @@
   position: absolute;
   z-index: 0;
   inset: 0;
-  background: rgba(8, 8, 8, 0.72);
+  background: rgba(8, 8, 8, 0.75);
   content: '';
 }
 
 .home-hero-media {
   position: absolute;
   inset: 0;
+  display: block;
 }
 
 .home-hero-image {
@@ -66,10 +67,10 @@
 }
 
 .hero-subhead {
-  max-width: 66ch;
-  margin: 0 auto 2.5rem;
+  max-width: 62ch;
+  margin: 0 auto 2.75rem;
   color: rgba(255, 255, 255, 0.84);
-  font-size: clamp(1.05rem, 1.45vw, 1.25rem);
+  font-size: clamp(1.125rem, 1.65vw, 1.375rem);
   line-height: 1.65;
   text-wrap: pretty;
 }

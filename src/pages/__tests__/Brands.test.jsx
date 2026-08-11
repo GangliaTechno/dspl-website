@@ -32,9 +32,10 @@ describe('Brands page', () => {
     })).toBeInTheDocument();
     expect(screen.getByText('From product development to market execution.'))
       .toHaveClass('brands-tagline');
-    expect(screen.getByText(
+    expect(screen.queryByText(
       'We work across product development, packaging, compliance, market positioning, and commerce. Raw Radicles is our first flagship consumer brand, with additional concepts in development.',
-    )).toBeInTheDocument();
+    )).not.toBeInTheDocument();
+    expect(container.querySelector('.brands-description')).not.toBeInTheDocument();
 
     expect(screen.getByRole('heading', { level: 2, name: 'Raw Radicles' }))
       .toBeInTheDocument();
@@ -99,6 +100,22 @@ describe('Brands page', () => {
       'brands-primary',
       'brands-02',
     ]);
+    expect(layers[0].querySelector('img')).toHaveAttribute(
+      'src',
+      expect.stringContaining('brands-rotation-02-1440.webp'),
+    );
+    expect(layers[1].querySelector('img')).toHaveAttribute(
+      'src',
+      expect.stringContaining('brands-hero-editorial-1672.webp'),
+    );
+    expect(layers[0].querySelector('img')).toHaveAttribute(
+      'src',
+      expect.stringContaining('brands-rotation-02-1440.webp'),
+    );
+    expect(layers[1].querySelector('img')).toHaveAttribute(
+      'src',
+      expect.stringContaining('brands-hero-editorial-1672.webp'),
+    );
 
     rendered.unmount();
     vi.clearAllTimers();

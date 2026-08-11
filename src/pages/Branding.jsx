@@ -11,7 +11,6 @@ import { getRouteMetadata } from '../seo/routeMetadata';
 const brandingCopy = {
   contextLabel: 'Branding services',
   heroTagline: 'Positioning, identity, and brand systems designed for consistent use.',
-  heroDescription: 'We translate business context into a usable brand system: positioning, identity, voice, and the assets required for consistent execution.',
   scopeTitle: 'A brand system built for application',
   scopeText: 'The work starts with the business, audience, category, and competitive context. The resulting system connects positioning and language with visual identity, application rules, and assets that internal and external teams can use consistently.',
   offersTitle: 'Branding capabilities',
@@ -55,21 +54,21 @@ const faqs = [
 const heroImages = [
   {
     id: 'branding-primary',
-    src: brandingHero1440,
-    desktopSrcSet: `${brandingHero960} 960w, ${brandingHero1440} 1440w, ${brandingHero1600} 1600w`,
-    mobileSrc: brandingHeroMobile,
-    sizes: '100vw',
-    width: 1600,
-    height: 900,
-  },
-  {
-    id: 'branding-02',
     src: brandingRotation021440,
     desktopSrcSet: `${brandingRotation02960} 960w, ${brandingRotation021440} 1440w`,
     mobileSrc: brandingRotation02Mobile,
     sizes: '100vw',
     width: 1440,
     height: 810,
+  },
+  {
+    id: 'branding-02',
+    src: brandingHero1440,
+    desktopSrcSet: `${brandingHero960} 960w, ${brandingHero1440} 1440w, ${brandingHero1600} 1600w`,
+    mobileSrc: brandingHeroMobile,
+    sizes: '100vw',
+    width: 1600,
+    height: 900,
   },
 ];
 

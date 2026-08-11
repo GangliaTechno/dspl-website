@@ -50,7 +50,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.65); /* Dark blackish overlay at 65% opacity */
+  background: rgba(0, 0, 0, 0.55);
   z-index: 1;
 }
 
@@ -76,25 +76,12 @@
 
 .about-subtitle {
   max-width: 48ch;
-  margin: 0 auto 1.25rem;
+  margin: 0 auto 3rem;
   font-size: clamp(1.25rem, 2.1vw, 1.6rem);
   font-weight: 600;
   color: #ffffff;
   letter-spacing: -0.02em;
   text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
-}
-
-.about-intro-grid {
-  max-width: 72ch;
-  margin: 0 auto;
-}
-
-.about-intro-text {
-  font-size: 1.15rem;
-  line-height: 1.8;
-  color: rgba(255, 255, 255, 0.86);
-  font-weight: 400;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 /* Direction Framework */
@@ -409,14 +396,6 @@
   }
   .about-subtitle {
     font-size: 1.4rem;
-  }
-  .about-intro-grid {
-    max-width: 36rem;
-  }
-  .about-intro-text {
-    font-size: 1rem;
-    line-height: 1.55;
-    text-wrap: pretty;
   }
   .journey-stories {
     gap: 3.5rem;

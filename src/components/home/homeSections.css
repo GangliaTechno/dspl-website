@@ -101,8 +101,8 @@
   object-fit: contain;
   object-position: center;
   transform: none;
-  filter: brightness(0) invert(1);
-  opacity: 0.6;
+  filter: brightness(0) invert(1) drop-shadow(0 1px 3px rgba(0, 0, 0, 0.65));
+  opacity: 0.86;
   image-rendering: auto;
   backface-visibility: hidden;
   transition: opacity 0.3s ease;

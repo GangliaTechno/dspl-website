@@ -47,6 +47,14 @@ describe('Contact', () => {
       'Phone',
       'Email',
     ]);
+    expect(Array.from(
+      cards,
+      (card) => card.querySelector('.contact-info-summary')?.textContent,
+    )).toEqual([
+      'Headquarters in Manipal',
+      'Direct contact',
+      'General enquiries',
+    ]);
     expect(screen.getByRole('link', { name: '+91 88619 42440' }))
       .toHaveAttribute('href', 'tel:+918861942440');
     expect(screen.getByRole('link', { name: '+91 90725 56665' }))
@@ -64,6 +72,11 @@ describe('Contact', () => {
     const enquiry = container.querySelector('.contact-enquiry-section');
 
     expect(hero).toBeInTheDocument();
+    const heroImage = hero.querySelector('.contact-hero-image');
+    expect(hero.querySelector('.contact-hero-picture')).toBeInTheDocument();
+    expect(heroImage).toHaveAttribute('alt', '');
+    expect(heroImage).toHaveAttribute('loading', 'eager');
+    expect(heroImage).toHaveAttribute('fetchpriority', 'high');
     expect(hero.querySelector('.section-subtitle')).toHaveTextContent('Contact');
     expect(screen.getByRole('heading', {
       level: 1,

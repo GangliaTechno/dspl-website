@@ -1,7 +1,6 @@
-import ecommerceHero960 from '../assets/dspl-ecommerce-hero-960.webp';
-import ecommerceHero1440 from '../assets/dspl-ecommerce-hero-1440.webp';
-import ecommerceHero1600 from '../assets/dspl-ecommerce-hero-1600.webp';
-import ecommerceHeroMobile from '../assets/dspl-ecommerce-hero-mobile.webp';
+import ecommerceHero960 from '../assets/ecommerce-primary-960.webp';
+import ecommerceHero1440 from '../assets/ecommerce-primary-1440.webp';
+import ecommerceHeroMobile from '../assets/ecommerce-primary-mobile.webp';
 import ecommerceRotation02960 from '../assets/ecommerce-rotation-02-960.webp';
 import ecommerceRotation021440 from '../assets/ecommerce-rotation-02-1440.webp';
 import ecommerceRotation02Mobile from '../assets/ecommerce-rotation-02-mobile.webp';
@@ -11,7 +10,6 @@ import { getRouteMetadata } from '../seo/routeMetadata';
 const ecommerceCopy = {
   contextLabel: 'E-commerce services',
   heroTagline: 'Storefront, marketplace, payment, and fulfilment systems designed for reliable day-to-day operation.',
-  heroDescription: 'We plan and implement commerce systems that connect product presentation, checkout, payments, marketplaces, and fulfilment. Scope is defined around the selected platform, operating model, and support needs.',
   scopeTitle: 'Commerce aligned with day-to-day operations',
   scopeText: 'Storefront and marketplace work is planned alongside catalogue ownership, payment setup, inventory, fulfilment, and reporting. This keeps the customer journey and operational responsibilities within one documented scope.',
   offersTitle: 'E-commerce capabilities',
@@ -56,11 +54,11 @@ const heroImages = [
   {
     id: 'ecommerce-primary',
     src: ecommerceHero1440,
-    desktopSrcSet: `${ecommerceHero960} 960w, ${ecommerceHero1440} 1440w, ${ecommerceHero1600} 1600w`,
+    desktopSrcSet: `${ecommerceHero960} 960w, ${ecommerceHero1440} 1440w`,
     mobileSrc: ecommerceHeroMobile,
     sizes: '100vw',
-    width: 1600,
-    height: 900,
+    width: 1440,
+    height: 810,
   },
   {
     id: 'ecommerce-02',
