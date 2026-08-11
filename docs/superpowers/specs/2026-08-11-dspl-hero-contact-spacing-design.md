@@ -45,7 +45,7 @@ Give the public website more visual breathing room without changing its establis
 - Under `prefers-reduced-motion: reduce`, render only that route's primary image and do not start a timer.
 - Load the primary image eagerly with `fetchPriority="high"`; begin loading the remaining image or images only after the primary page content is ready.
 - Replace or colour-refine the current muted artwork where necessary; do not reuse visibly dated or low-resolution legacy images merely because they existed in the first site version.
-- Produce responsive `960px`, `1440px`, `1920px`, and mobile crops for every replaced image family.
+- Produce native-resolution `960px`, `1440px`, and mobile crops for every new rotation family. Retain existing approved `1600px` or `1920px` primary derivatives; never upscale a generated master merely to match them.
 - Retain `<picture>`, intrinsic image dimensions, and asynchronous decoding. Eager loading and `fetchPriority="high"` apply only to the initially visible hero image.
 - Maintain a consistent premium photographic treatment: warm natural light, deeper colour, realistic materials, controlled contrast, and no synthetic text or logos inside generated artwork.
 

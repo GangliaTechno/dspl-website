@@ -56,17 +56,17 @@
 - Create: `docs/assets/hero-masters/marketing-02.png`
 - Create: `docs/assets/hero-masters/branding-02.png`
 - Create: `docs/assets/hero-masters/ecommerce-02.png`
-- Create: `src/assets/home-rotation-02-{960,1440,1920,mobile}.webp`
-- Create: `src/assets/home-rotation-03-{960,1440,1920,mobile}.webp`
-- Create: `src/assets/about-rotation-02-{960,1440,1920,mobile}.webp`
-- Create: `src/assets/brands-rotation-02-{960,1440,1920,mobile}.webp`
-- Create: `src/assets/marketing-rotation-02-{960,1440,1920,mobile}.webp`
-- Create: `src/assets/branding-rotation-02-{960,1440,1920,mobile}.webp`
-- Create: `src/assets/ecommerce-rotation-02-{960,1440,1920,mobile}.webp`
+- Create: `src/assets/home-rotation-02-{960,1440,mobile}.webp`
+- Create: `src/assets/home-rotation-03-{960,1440,mobile}.webp`
+- Create: `src/assets/about-rotation-02-{960,1440,mobile}.webp`
+- Create: `src/assets/brands-rotation-02-{960,1440,mobile}.webp`
+- Create: `src/assets/marketing-rotation-02-{960,1440,mobile}.webp`
+- Create: `src/assets/branding-rotation-02-{960,1440,mobile}.webp`
+- Create: `src/assets/ecommerce-rotation-02-{960,1440,mobile}.webp`
 - Modify: `docs/ASSET_PROVENANCE.md`
 
 **Interfaces:**
-- Consumes: seven built-in image-generation outputs at or above `1920x1080` with centre-safe composition.
+- Consumes: seven built-in image-generation outputs at or above `1440x853` with centre-safe composition.
 - Produces: `export_family(input_path, output_dir, slug, desktop_focal, mobile_focal)` and seven named responsive asset families used by Tasks 3-5.
 
 - [ ] **Step 1: Write the failing Pillow exporter tests**
@@ -89,7 +89,7 @@ class ExportHeroAssetsTest(unittest.TestCase):
             root = Path(folder)
             source = root / "master.png"
             output = root / "out"
-            Image.new("RGB", (2400, 1600), "#b56d24").save(source)
+            Image.new("RGB", (1440, 853), "#b56d24").save(source)
 
             paths = export_family(
                 source,
@@ -102,8 +102,7 @@ class ExportHeroAssetsTest(unittest.TestCase):
             expected = {
                 "960": (960, 540),
                 "1440": (1440, 810),
-                "1920": (1920, 1080),
-                "mobile": (768, 1024),
+                "mobile": (640, 853),
             }
             self.assertEqual(set(paths), set(expected))
             for variant, size in expected.items():
@@ -115,9 +114,9 @@ class ExportHeroAssetsTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as folder:
             root = Path(folder)
             source = root / "small.png"
-            Image.new("RGB", (1536, 1024), "#245c50").save(source)
+            Image.new("RGB", (1400, 1000), "#245c50").save(source)
 
-            with self.assertRaisesRegex(ValueError, "at least 1920x1080"):
+            with self.assertRaisesRegex(ValueError, "at least 1440x853"):
                 export_family(source, root / "out", "small")
 
 
@@ -149,8 +148,7 @@ from PIL import Image, ImageOps
 VARIANTS = {
     "960": (960, 540),
     "1440": (1440, 810),
-    "1920": (1920, 1080),
-    "mobile": (768, 1024),
+    "mobile": (640, 853),
 }
 
 
@@ -167,9 +165,9 @@ def export_family(
 
     with Image.open(input_path) as source:
         image = ImageOps.exif_transpose(source).convert("RGB")
-        if image.width < 1920 or image.height < 1080:
+        if image.width < 1440 or image.height < 853:
             raise ValueError(
-                f"Hero master must be at least 1920x1080; received {image.width}x{image.height}"
+                f"Hero master must be at least 1440x853; received {image.width}x{image.height}"
             )
 
         outputs = {}
@@ -228,7 +226,7 @@ Expected: 2 tests PASS.
 
 - [ ] **Step 5: Generate seven masters with the built-in image tool**
 
-Issue one built-in image-generation call per prompt. Use case for all seven: `photorealistic-natural`. Request a `3840x2160` landscape master; reject any result below `1920x1080`, any visible text/logo/watermark, or any composition without a calm central copy area.
+Issue one built-in image-generation call per prompt. Use case for all seven: `photorealistic-natural`. Request a wide landscape master; reject any result below `1440x853`, any visible text/logo/watermark, or any composition without a calm central copy area. Preserve native resolution rather than upscaling the generated output.
 
 Shared constraints appended to every prompt:
 
@@ -289,7 +287,7 @@ git add -- scripts/export_hero_assets.py scripts/test_export_hero_assets.py docs
 git commit -m "assets: add cinematic hero rotation families"
 ```
 
-Expected: exporter tests pass and the commit contains only the exporter, seven masters, 28 derivatives, and provenance.
+Expected: exporter tests pass and the commit contains only the exporter, seven masters, 21 derivatives, provenance, and the documented native-resolution adjustment.
 
 ---
 
@@ -559,7 +557,7 @@ const homeHeroImages = [
   {
     id: 'home-02',
     src: homeRotation021440,
-    desktopSrcSet: `${homeRotation02960} 960w, ${homeRotation021440} 1440w, ${homeRotation021920} 1920w`,
+    desktopSrcSet: `${homeRotation02960} 960w, ${homeRotation021440} 1440w`,
     mobileSrc: homeRotation02Mobile,
     width: 1440,
     height: 810,
@@ -567,7 +565,7 @@ const homeHeroImages = [
   {
     id: 'home-03',
     src: homeRotation031440,
-    desktopSrcSet: `${homeRotation03960} 960w, ${homeRotation031440} 1440w, ${homeRotation031920} 1920w`,
+    desktopSrcSet: `${homeRotation03960} 960w, ${homeRotation031440} 1440w`,
     mobileSrc: homeRotation03Mobile,
     width: 1440,
     height: 810,
