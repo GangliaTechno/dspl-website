@@ -1,10 +1,9 @@
-import brandingHero960 from '../assets/dspl-branding-hero-960.webp';
-import brandingHero1440 from '../assets/dspl-branding-hero-1440.webp';
-import brandingHero1600 from '../assets/dspl-branding-hero-1600.webp';
-import brandingHeroMobile from '../assets/dspl-branding-hero-mobile.webp';
-import brandingRotation02960 from '../assets/branding-rotation-02-960.webp';
-import brandingRotation021440 from '../assets/branding-rotation-02-1440.webp';
-import brandingRotation02Mobile from '../assets/branding-rotation-02-mobile.webp';
+import brandingWorkshop01960 from '../assets/branding-workshop-01-960.webp';
+import brandingWorkshop011440 from '../assets/branding-workshop-01-1440.webp';
+import brandingWorkshop01Mobile from '../assets/branding-workshop-01-mobile.webp';
+import brandingWorkshop02960 from '../assets/branding-workshop-02-960.webp';
+import brandingWorkshop021440 from '../assets/branding-workshop-02-1440.webp';
+import brandingWorkshop02Mobile from '../assets/branding-workshop-02-mobile.webp';
 import ServicePage from '../components/ServicePage';
 import { getRouteMetadata } from '../seo/routeMetadata';
 
@@ -54,21 +53,21 @@ const faqs = [
 const heroImages = [
   {
     id: 'branding-primary',
-    src: brandingRotation021440,
-    desktopSrcSet: `${brandingRotation02960} 960w, ${brandingRotation021440} 1440w`,
-    mobileSrc: brandingRotation02Mobile,
+    src: brandingWorkshop011440,
+    desktopSrcSet: `${brandingWorkshop01960} 960w, ${brandingWorkshop011440} 1440w`,
+    mobileSrc: brandingWorkshop01Mobile,
     sizes: '100vw',
     width: 1440,
     height: 810,
   },
   {
     id: 'branding-02',
-    src: brandingHero1440,
-    desktopSrcSet: `${brandingHero960} 960w, ${brandingHero1440} 1440w, ${brandingHero1600} 1600w`,
-    mobileSrc: brandingHeroMobile,
+    src: brandingWorkshop021440,
+    desktopSrcSet: `${brandingWorkshop02960} 960w, ${brandingWorkshop021440} 1440w`,
+    mobileSrc: brandingWorkshop02Mobile,
     sizes: '100vw',
-    width: 1600,
-    height: 900,
+    width: 1440,
+    height: 810,
   },
 ];
 

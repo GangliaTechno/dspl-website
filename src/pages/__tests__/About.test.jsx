@@ -74,7 +74,7 @@ describe('About page', () => {
     expect(section.querySelectorAll('svg')).toHaveLength(0);
   });
 
-  it('mounts the approved About hero images in a fixed order', () => {
+  it('mounts the selected multidisciplinary About hero images in a fixed order', () => {
     vi.useFakeTimers();
     const rendered = render(
       <MemoryRouter initialEntries={['/about']}>
@@ -92,19 +92,11 @@ describe('About page', () => {
     ]);
     expect(layers[0].querySelector('img')).toHaveAttribute(
       'src',
-      expect.stringContaining('about-rotation-02-1440.webp'),
+      expect.stringContaining('about-team-01-1440.webp'),
     );
     expect(layers[1].querySelector('img')).toHaveAttribute(
       'src',
-      expect.stringContaining('dspl-about-hero-1440.webp'),
-    );
-    expect(layers[0].querySelector('img')).toHaveAttribute(
-      'src',
-      expect.stringContaining('about-rotation-02-1440.webp'),
-    );
-    expect(layers[1].querySelector('img')).toHaveAttribute(
-      'src',
-      expect.stringContaining('dspl-about-hero-1440.webp'),
+      expect.stringContaining('about-team-02-1440.webp'),
     );
 
     rendered.unmount();

@@ -8,19 +8,22 @@ opinion.
 | --- | --- | --- | --- | --- | --- | --- |
 | `dspl-home-editorial-{960,1440,1920}.webp`, `dspl-home-editorial-mobile.webp` | Generated original; responsive derivatives created locally from `dspl-home-editorial-source.png` | OpenAI built-in image generation | 2026-07-29 | Prompt recorded below | Reviewed: no recognizable people or third-party trademarks; packaging is generic; faint non-readable decorative marks only; no watermark | Approved for branch review |
 | `dspl-marketing-editorial-{960,1440,1920}.webp`, `dspl-marketing-editorial-mobile.webp` | Generated original; responsive derivatives created locally from `dspl-marketing-editorial-source.png` | OpenAI built-in image generation | 2026-07-29 | Prompt recorded below | Reviewed: no people, trademarks, recognizable brands, billboards, or watermark; charts and planning sheets contain abstract non-readable shapes | Approved for branch review |
-| `brands-hero-editorial-{768,1200,1672}.webp`, `brands-hero-editorial-mobile.webp` | Generated original; locally cropped and optimized responsive family | OpenAI built-in image generation | 2026-07-30 | Premium brand-development studio with center-safe composition and generic packaging | Reviewed: no people, readable brand names, third-party trademarks, or watermark | Approved for branch review |
+| `brands-hero-editorial-{768,1200,1672}.webp`, `brands-hero-editorial-mobile.webp` | Generated original; locally cropped and optimized responsive family | OpenAI built-in image generation | 2026-07-30 | Premium brand-development studio with center-safe composition and generic packaging | Reviewed: no people, readable brand names, third-party trademarks, or watermark | Superseded by the explicit portfolio-scene direction at `f022b1c` |
 | `about-journey-{2023,2024,2025,2026}.webp` | Four generated originals; locally fitted and optimized to a shared editorial ratio | OpenAI built-in image generation | 2026-07-30 | Milestone briefs in the About mission and journey design record | Reviewed: no recognizable people, copied marks, readable text, or watermark | Approved for branch review |
 | `supporter-*-marquee.png` | Optically normalized derivatives made from supplied institutional source marks; transparent canvases and visual baselines standardized without redrawing logos | Local image processing | 2026-07-30 | DSPL-supplied Startup Karnataka, DST NIDHI, NIDHI-PRAYAS, and MUTBI/MAHE marks | Identity artwork preserved; only whitespace, scale, and canvas placement changed | Approved for branch review |
 | `home-rotation-02-{960,1440,mobile}.webp` | Generated master `docs/assets/hero-masters/home-02.png`; deterministic local crops | OpenAI built-in image generation | 2026-08-11 | Site-wide rotation prompt plus Home 02 brief below; focal points desktop `0.5,0.5`, mobile `0.32,0.5` | Reviewed: no recognizable people, readable text, logos, third-party trademarks, watermark, or malformed objects | Approved for implementation |
 | `home-rotation-03-{960,1440,mobile}.webp` | Generated master `docs/assets/hero-masters/home-03.png`; deterministic local crops | OpenAI built-in image generation | 2026-08-11 | Site-wide rotation prompt plus Home 03 brief below; focal points desktop `0.5,0.5`, mobile `0.65,0.5` | Reviewed: no recognizable people, readable text, logos, third-party trademarks, watermark, or malformed objects | Approved for implementation |
-| `about-rotation-02-{960,1440,mobile}.webp` | Generated master `docs/assets/hero-masters/about-02.png`; deterministic local crops | OpenAI built-in image generation | 2026-08-11 | Site-wide rotation prompt plus About 02 brief below; focal points desktop/mobile `0.5,0.5` | Reviewed: no recognizable people, readable text, logos, third-party trademarks, watermark, or malformed objects | Approved for implementation |
-| `brands-rotation-02-{960,1440,mobile}.webp` | Generated master `docs/assets/hero-masters/brands-02.png`; deterministic local crops | OpenAI built-in image generation | 2026-08-11 | Site-wide rotation prompt plus Brands 02 brief below; focal points desktop `0.5,0.5`, mobile `0.35,0.5` | Reviewed: blank generic packaging; no recognizable people, readable text, logos, third-party trademarks, watermark, or malformed objects | Approved for implementation |
+| `about-rotation-02-{960,1440,mobile}.webp` | Generated master `docs/assets/hero-masters/about-02.png`; deterministic local crops | OpenAI built-in image generation | 2026-08-11 | Site-wide rotation prompt plus About 02 brief below; focal points desktop/mobile `0.5,0.5` | Reviewed: no recognizable people, readable text, logos, third-party trademarks, watermark, or malformed objects | Superseded by the explicit multidisciplinary-team direction at `f022b1c` |
+| `brands-rotation-02-{960,1440,mobile}.webp` | Generated master `docs/assets/hero-masters/brands-02.png`; deterministic local crops | OpenAI built-in image generation | 2026-08-11 | Site-wide rotation prompt plus Brands 02 brief below; focal points desktop `0.5,0.5`, mobile `0.35,0.5` | Reviewed: blank generic packaging; no recognizable people, readable text, logos, third-party trademarks, watermark, or malformed objects | Superseded by the explicit portfolio-scene direction at `f022b1c` |
 | `marketing-rotation-02-{960,1440,mobile}.webp` | Generated master `docs/assets/hero-masters/marketing-02.png`; deterministic local crops | OpenAI built-in image generation | 2026-08-11 | Site-wide rotation prompt plus Marketing 02 brief below; focal points desktop `0.5,0.5`, mobile `0.35,0.5` | Regenerated after rejecting a branded-camera draft; selected master has no recognizable people, readable text, logos, third-party trademarks, watermark, or malformed objects | Approved for implementation |
-| `branding-rotation-02-{960,1440,mobile}.webp` | Generated master `docs/assets/hero-masters/branding-02.png`; deterministic local crops | OpenAI built-in image generation | 2026-08-11 | Site-wide rotation prompt plus Branding 02 brief below; focal points desktop/mobile `0.5,0.5` | Reviewed: abstract unreadable glyph studies only; no recognizable people, readable text, logos, third-party trademarks, watermark, or malformed objects | Approved for implementation |
+| `branding-rotation-02-{960,1440,mobile}.webp` | Generated master `docs/assets/hero-masters/branding-02.png`; deterministic local crops | OpenAI built-in image generation | 2026-08-11 | Site-wide rotation prompt plus Branding 02 brief below; focal points desktop/mobile `0.5,0.5` | Reviewed: abstract unreadable glyph studies only; no recognizable people, readable text, logos, third-party trademarks, watermark, or malformed objects | Superseded by the explicit active-workshop direction at `f022b1c` |
 | `ecommerce-rotation-02-{960,1440,mobile}.webp` | Generated master `docs/assets/hero-masters/ecommerce-02.png`; deterministic local crops | OpenAI built-in image generation | 2026-08-11 | Site-wide rotation prompt plus E-commerce 02 brief below; focal points desktop `0.5,0.5`, mobile `0.65,0.5` | Reviewed: generic blank devices and packaging; no recognizable people, readable text, logos, third-party trademarks, watermark, or malformed objects | Approved for implementation |
 | `contact-hero-{960,1440,mobile}.webp` | Generated master `docs/assets/hero-masters/contact-01.png`; deterministic local crops | OpenAI built-in image generation | 2026-08-11 | Contact prompt below; focal points desktop `0.5,0.5`, mobile `0.62,0.5` | Reviewed: blank notebook and unbranded meeting environment; no people, readable text, logos, third-party trademarks, or watermark | Approved for implementation |
 | `marketing-primary-{960,1440,mobile}.webp` | Regenerated master `docs/assets/hero-masters/marketing-billboard-01.png` using the deleted legacy `src/assets/marketing-banner.jpg` at `428501ec^` as a visual reference; deterministic local crops | OpenAI built-in image generation | 2026-08-11 | Marketing regeneration prompt below; focal points desktop `0.5,0.5`, mobile `0.68,0.5` | The legacy file was not republished. Selected derivative contains abstract billboard artwork only; no people, readable campaign copy, logos, third-party trademarks, or watermark | Approved for implementation |
 | `ecommerce-primary-{960,1440,mobile}.webp` | Regenerated master `docs/assets/hero-masters/ecommerce-store-01.png` using the deleted legacy `src/assets/ecom.png` at `428501ec^` as a visual reference; deterministic local crops | OpenAI built-in image generation | 2026-08-11 | E-commerce regeneration prompt below; focal points desktop/mobile `0.5,0.5` | The low-resolution legacy file was not republished. Selected derivative uses generic merchandise, blank packaging, and unbranded commerce hardware; no people, readable text, logos, third-party trademarks, or watermark | Approved for implementation |
+| `about-team-{01,02}-{960,1440,mobile}.webp` | Generated masters `docs/assets/hero-masters/about-team-{01,02}.png`; deterministic local crops | OpenAI built-in image generation | 2026-08-11 | Approved refresh prompts below; desktop focal `0.50,0.50`; mobile focal `01: 0.50,0.50`, `02: 0.52,0.50` | Reviewed: fictional adult collaborators, natural anatomy, no readable text, real logos, trademarks, public figures, named DSPL employees, or watermark | Approved by user; final live crop QA required |
+| `brands-portfolio-{01,02}-{960,1440,mobile}.webp` | Generated masters `docs/assets/hero-masters/brands-portfolio-{01,02}.png`; deterministic local crops | OpenAI built-in image generation | 2026-08-11 | Approved refresh prompts below; desktop focal `0.50,0.50`; mobile focal `01: 0.50,0.50`, `02: 0.46,0.50` | First `02` draft rejected for synthetic label-like marks; selected families use fictional blank packaging with no readable text, logos, trademarks, people, malformed products, or watermark | Approved by user; final live crop QA required |
+| `branding-workshop-{01,02}-{960,1440,mobile}.webp` | Generated masters `docs/assets/hero-masters/branding-workshop-{01,02}.png`; deterministic local crops | OpenAI built-in image generation | 2026-08-11 | Approved refresh prompts below; desktop focal `0.50,0.50`; mobile focal `01: 0.52,0.50`, `02: 0.50,0.50` | First `01` draft rejected for synthetic label-like marks; selected scenes use fictional adults and abstract geometric identity applications with no readable text, real logos, trademarks, public figures, named DSPL employees, malformed anatomy, or watermark | Approved by user; final live crop QA required |
 
 ## Homepage editorial source prompt
 
@@ -114,3 +117,77 @@ E-commerce primary: Transform the referenced legacy boutique image into a premiu
 The user-selected Home artwork is the existing `home-03.png` master and its
 `home-rotation-03-{960,1440,mobile}.webp` derivatives. It is now used as one
 static responsive Home hero; no duplicate export family was created.
+
+## 2026-08-11 route-specific hero direction refresh
+
+The user explicitly rejected treating the then-current About, Brands, and
+Branding hero images as approved. The old desk-led families remain in the
+repository for provenance, but are no longer referenced by those routes.
+This also supersedes the earlier `dspl-about-hero-*` and
+`dspl-branding-hero-*` route use.
+
+Selected built-in generation prompts:
+
+```text
+About team 01: Premium realistic editorial website hero of four fictional
+Indian professionals collaborating across product development, brand
+strategy, marketing, and e-commerce in a contemporary warm-timber studio.
+Use packaging prototypes, an unbranded laptop, research sheets without
+readable text, colour samples, and fulfilment materials. Wide cinematic 16:9;
+keep the group meaningful in a centre portrait crop and leave a calm
+medium-dark central copy band. No named DSPL employees, public figures,
+logos, trademarks, readable text, watermark, posed handshake, malformed
+hands, or duplicated people.
+
+About team 02: Premium realistic editorial cross-functional standing review
+connecting research, a physical consumer-product prototype, campaign
+planning, and digital commerce operations. Three to five fictional Indian
+professionals discuss a refined review wall and standing worktable with
+abstract charts, blank packaging, material samples, and an unbranded tablet.
+Wide 16:9 with at least three collaborators and clear multidisciplinary cues
+surviving a centre portrait crop. No readable text, logos, trademarks,
+watermark, posed portrait, malformed anatomy, or duplicated objects.
+
+Brands portfolio 01: Photorealistic high-end consumer-brand portfolio on
+tiered plinths and a curved retail-display backdrop. Show fictional unbranded
+chocolate, botanical wellness, beverage, personal-care, and pantry families
+through bottle, pouch, carton, jar, and bar silhouettes in saffron, cacao,
+teal, coral, violet, green, and warm cream. Wide 16:9, portfolio unmistakable
+in a centre portrait crop, calm darker central copy area, no single hero
+product. No readable text, pseudo-letters, logos, trademarks, people,
+watermark, chemistry-lab framing, or warped containers.
+
+Brands portfolio 02: Photorealistic premium architectural showroom with
+illuminated shelves and tiered plinths holding fictional consumer families
+for chocolate, snacks, botanical wellness, beverages, personal care, and home
+fragrance. Every package surface is blank and uses only solid colour blocking
+or non-symbolic material bands in cacao, saffron, cobalt, coral, forest green,
+violet, and cream. Wide 16:9 with multiple categories surviving a centre
+portrait crop and a calm deep-teal central copy wall. Absolutely no words,
+letters, numbers, logos, symbols, emblems, seals, pseudo-text, people,
+trademarks, watermark, laboratory glassware, or warped containers.
+
+Branding workshop 01: Premium realistic editorial identity-studio critique
+with a large charcoal presentation wall using only solid colour cards, grids,
+circles, arcs, lines, material samples, and blank packaging applications.
+Three fictional Indian professionals stand and discuss the system; the wall,
+not a desk, is dominant. Wide 16:9 with people and visual-system artefacts
+surviving a centre portrait crop and a calm dark copy band. No words, letters,
+numbers, typography, logos, monograms, emblems, seals, pseudo-text,
+trademarks, public figures, watermark, malformed hands, or duplicated people.
+
+Branding workshop 02: Photorealistic premium design-studio reportage of an
+active brand workshop and handover. A standing pinboard and presentation rail
+show colour standards, abstract symbol construction, packaging applications,
+poster and blank-device mockups while four fictional Indian professionals
+pin, compare, point, and hold applications. Wide 16:9; retain people and
+identity boards in a centre portrait crop; use controlled dark board spacing
+for the central copy zone. No readable words, real logos, brands, trademarks,
+public figures, watermark, generic meeting pose, malformed anatomy, or
+duplicated hands.
+```
+
+The first generated `brands-portfolio-02` and `branding-workshop-01` drafts
+were rejected and were not copied into the repository because small
+synthetic label-like marks violated the prompt contract. The selected masters
+listed above are the regenerated blank-surface versions.

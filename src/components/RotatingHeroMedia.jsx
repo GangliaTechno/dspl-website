@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import './RotatingHeroMedia.css';
 
-export const HERO_ROTATION_INTERVAL_MS = 8000;
+export const HERO_ROTATION_INTERVAL_MS = 20000;
 export const HERO_TRANSITION_MS = 800;
 
 const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)';

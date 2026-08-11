@@ -84,16 +84,20 @@ describe('RotatingHeroMedia', () => {
     expect(container.querySelector('source[media="(max-width: 700px)"]'))
       .toHaveAttribute('srcset', '/primary-mobile.webp');
 
-    act(() => vi.advanceTimersByTime(8000));
+    act(() => vi.advanceTimersByTime(19999));
     expect(container.querySelector('[data-hero-id="primary"]'))
       .toHaveAttribute('data-active', 'true');
 
     fireEvent.load(screen.getByTestId('hero-secondary'));
-    act(() => vi.advanceTimersByTime(8000));
+    act(() => vi.advanceTimersByTime(19999));
+    expect(container.querySelector('[data-hero-id="primary"]'))
+      .toHaveAttribute('data-active', 'true');
+
+    act(() => vi.advanceTimersByTime(1));
     expect(container.querySelector('[data-hero-id="secondary"]'))
       .toHaveAttribute('data-active', 'true');
 
-    act(() => vi.advanceTimersByTime(8000));
+    act(() => vi.advanceTimersByTime(20000));
     expect(container.querySelector('[data-hero-id="primary"]'))
       .toHaveAttribute('data-active', 'true');
   });
@@ -110,12 +114,12 @@ describe('RotatingHeroMedia', () => {
     act(() => vi.runOnlyPendingTimers());
     fireEvent.load(screen.getByTestId('hero-secondary'));
     act(() => setDocumentHidden(true));
-    act(() => vi.advanceTimersByTime(16000));
+    act(() => vi.advanceTimersByTime(40000));
     expect(container.querySelector('[data-hero-id="primary"]'))
       .toHaveAttribute('data-active', 'true');
 
     act(() => setDocumentHidden(false));
-    act(() => vi.advanceTimersByTime(8000));
+    act(() => vi.advanceTimersByTime(20000));
     expect(container.querySelector('[data-hero-id="secondary"]'))
       .toHaveAttribute('data-active', 'true');
   });

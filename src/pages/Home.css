@@ -16,7 +16,7 @@
   position: absolute;
   z-index: 0;
   inset: 0;
-  background: rgba(8, 8, 8, 0.75);
+  background: transparent;
   content: '';
 }
 
@@ -43,8 +43,26 @@
 }
 
 .home-hero-content {
+  position: relative;
+  isolation: isolate;
   width: min(100%, 68rem);
   text-align: center;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.88);
+}
+
+.home-hero-content::before {
+  position: absolute;
+  z-index: -1;
+  inset: -3.5rem -5rem;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(8, 8, 8, 0.62) 0%,
+    rgba(8, 8, 8, 0.48) 38%,
+    rgba(8, 8, 8, 0.18) 62%,
+    transparent 80%
+  );
+  content: '';
+  pointer-events: none;
 }
 
 .hero-title {
@@ -77,13 +95,14 @@
 
 .hero-capabilities-link {
   border-color: rgba(255, 255, 255, 0.32);
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(8, 8, 8, 0.26);
+  backdrop-filter: blur(3px);
   color: #fff;
 }
 
 .hero-capabilities-link:hover {
   border-color: rgba(255, 255, 255, 0.55);
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(8, 8, 8, 0.38);
   color: #fff;
 }
 
@@ -195,6 +214,16 @@
 
   .hero-title {
     font-size: clamp(2.25rem, 10vw, 3.125rem);
+  }
+
+  .home-hero-content::before {
+    inset: -2rem -0.75rem;
+    background: radial-gradient(
+      ellipse at center,
+      rgba(8, 8, 8, 0.28) 0%,
+      rgba(8, 8, 8, 0.12) 58%,
+      transparent 82%
+    );
   }
 }
 

@@ -12,13 +12,12 @@ import drImg from '../assets/dr_pro.png';
 import balakrishnaImg from '../assets/balakrishna_pro_extended.webp';
 import anushaImg from '../assets/Anusha-mam_pro.png';
 import nameshImg from '../assets/ceo_pro.png';
-import aboutHero960 from '../assets/dspl-about-hero-960.webp';
-import aboutHero1440 from '../assets/dspl-about-hero-1440.webp';
-import aboutHero1600 from '../assets/dspl-about-hero-1600.webp';
-import aboutHeroMobile from '../assets/dspl-about-hero-mobile.webp';
-import aboutRotation02960 from '../assets/about-rotation-02-960.webp';
-import aboutRotation021440 from '../assets/about-rotation-02-1440.webp';
-import aboutRotation02Mobile from '../assets/about-rotation-02-mobile.webp';
+import aboutTeam01960 from '../assets/about-team-01-960.webp';
+import aboutTeam011440 from '../assets/about-team-01-1440.webp';
+import aboutTeam01Mobile from '../assets/about-team-01-mobile.webp';
+import aboutTeam02960 from '../assets/about-team-02-960.webp';
+import aboutTeam021440 from '../assets/about-team-02-1440.webp';
+import aboutTeam02Mobile from '../assets/about-team-02-mobile.webp';
 import teamBgImg from '../assets/linen_concrete_texture.webp';
 import journey2023Img from '../assets/about-journey-2023.webp';
 import journey2024Img from '../assets/about-journey-2024.webp';
@@ -89,21 +88,21 @@ const directionCards = [
 const aboutHeroImages = [
   {
     id: 'about-primary',
-    src: aboutRotation021440,
-    desktopSrcSet: `${aboutRotation02960} 960w, ${aboutRotation021440} 1440w`,
-    mobileSrc: aboutRotation02Mobile,
+    src: aboutTeam011440,
+    desktopSrcSet: `${aboutTeam01960} 960w, ${aboutTeam011440} 1440w`,
+    mobileSrc: aboutTeam01Mobile,
     sizes: '100vw',
     width: 1440,
     height: 810,
   },
   {
     id: 'about-02',
-    src: aboutHero1440,
-    desktopSrcSet: `${aboutHero960} 960w, ${aboutHero1440} 1440w, ${aboutHero1600} 1600w`,
-    mobileSrc: aboutHeroMobile,
+    src: aboutTeam021440,
+    desktopSrcSet: `${aboutTeam02960} 960w, ${aboutTeam021440} 1440w`,
+    mobileSrc: aboutTeam02Mobile,
     sizes: '100vw',
-    width: 1600,
-    height: 900,
+    width: 1440,
+    height: 810,
   },
 ];
 

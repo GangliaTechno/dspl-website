@@ -57,8 +57,10 @@ describe('approved design-system corrections', () => {
     expect(brandsPage).toContain('const brandsHeroImages = [');
     expect(brandsPage.match(/id: 'brands-(?:primary|02)'/g)).toHaveLength(2);
     expect(brandsPage).toContain('<RotatingHeroMedia');
-    expect(brandsPage).toContain('brands-hero-editorial-1672.webp');
-    expect(brandsPage).toContain('brands-hero-editorial-mobile.webp');
+    expect(brandsPage).toContain('brands-portfolio-01-1440.webp');
+    expect(brandsPage).toContain('brands-portfolio-01-mobile.webp');
+    expect(brandsPage).toContain('brands-portfolio-02-1440.webp');
+    expect(brandsPage).toContain('brands-portfolio-02-mobile.webp');
     expect(brandsCss).toMatch(
       /\.brands-hero-bg\s*{[^}]*width:\s*100%;/s,
     );
@@ -370,13 +372,22 @@ describe('approved design-system corrections', () => {
     const homePage = readSource('src/pages/Home.jsx');
 
     expect(home).toMatch(
-      /\.home-hero::after\s*{[^}]*background:\s*rgba\(8,\s*8,\s*8,\s*0\.75\);/s,
+      /\.home-hero::after\s*{[^}]*background:\s*transparent;/s,
     );
     expect(home).toMatch(
       /\.home-hero-layout\s*{[^}]*display:\s*flex;[^}]*justify-content:\s*center;[^}]*padding-block:\s*clamp\(4\.5rem,\s*8vw,\s*7rem\)\s+clamp\(7rem,\s*12vw,\s*9\.5rem\);/s,
     );
     expect(home).toMatch(
-      /\.home-hero-content\s*{[^}]*width:\s*min\(100%,\s*68rem\);[^}]*text-align:\s*center;/s,
+      /\.home-hero-content\s*{[^}]*position:\s*relative;[^}]*isolation:\s*isolate;[^}]*width:\s*min\(100%,\s*68rem\);[^}]*text-align:\s*center;[^}]*text-shadow:\s*0 2px 16px rgba\(0,\s*0,\s*0,\s*0\.88\);/s,
+    );
+    expect(home).toMatch(
+      /\.home-hero-content::before\s*{[^}]*position:\s*absolute;[^}]*z-index:\s*-1;[^}]*inset:\s*-3\.5rem -5rem;[^}]*background:\s*radial-gradient\([^}]*content:\s*'';/s,
+    );
+    expect(home).toMatch(
+      /\.hero-capabilities-link\s*{[^}]*background:\s*rgba\(8,\s*8,\s*8,\s*0\.26\);[^}]*backdrop-filter:\s*blur\(3px\);/s,
+    );
+    expect(home).toMatch(
+      /@media\s*\(max-width:\s*768px\)\s*{[\s\S]*?\.home-hero-content::before\s*{[^}]*inset:\s*-2rem -0\.75rem;[^}]*background:\s*radial-gradient\(/s,
     );
     expect(home).toMatch(
       /\.hero-title\s*>\s*span\s*{[^}]*display:\s*block;/s,
@@ -388,7 +399,6 @@ describe('approved design-system corrections', () => {
     expect(home).toMatch(
       /\.hero-title-accent\s*{[^}]*color:\s*var\(--accent\);/s,
     );
-    expect(home).not.toContain('.home-hero-content::before');
     expect(homePage).not.toContain(
       "import { openWorkModal } from '../utils/workModal';",
     );

@@ -6,32 +6,31 @@ import useSEO from '../hooks/useSEO';
 import { getRouteMetadata } from '../seo/routeMetadata';
 import RotatingHeroMedia from '../components/RotatingHeroMedia';
 import rawRadiclesLogo from '../assets/raw-radicles-logo-cropped.webp';
-import brandHero768 from '../assets/brands-hero-editorial-768.webp';
-import brandHero1200 from '../assets/brands-hero-editorial-1200.webp';
-import brandHero1672 from '../assets/brands-hero-editorial-1672.webp';
-import brandHeroMobile from '../assets/brands-hero-editorial-mobile.webp';
-import brandsRotation02960 from '../assets/brands-rotation-02-960.webp';
-import brandsRotation021440 from '../assets/brands-rotation-02-1440.webp';
-import brandsRotation02Mobile from '../assets/brands-rotation-02-mobile.webp';
+import brandsPortfolio01960 from '../assets/brands-portfolio-01-960.webp';
+import brandsPortfolio011440 from '../assets/brands-portfolio-01-1440.webp';
+import brandsPortfolio01Mobile from '../assets/brands-portfolio-01-mobile.webp';
+import brandsPortfolio02960 from '../assets/brands-portfolio-02-960.webp';
+import brandsPortfolio021440 from '../assets/brands-portfolio-02-1440.webp';
+import brandsPortfolio02Mobile from '../assets/brands-portfolio-02-mobile.webp';
 
 const brandsHeroImages = [
   {
     id: 'brands-primary',
-    src: brandsRotation021440,
-    desktopSrcSet: `${brandsRotation02960} 960w, ${brandsRotation021440} 1440w`,
-    mobileSrc: brandsRotation02Mobile,
+    src: brandsPortfolio011440,
+    desktopSrcSet: `${brandsPortfolio01960} 960w, ${brandsPortfolio011440} 1440w`,
+    mobileSrc: brandsPortfolio01Mobile,
     sizes: '100vw',
     width: 1440,
     height: 810,
   },
   {
     id: 'brands-02',
-    src: brandHero1672,
-    desktopSrcSet: `${brandHero768} 768w, ${brandHero1200} 1200w, ${brandHero1672} 1672w`,
-    mobileSrc: brandHeroMobile,
+    src: brandsPortfolio021440,
+    desktopSrcSet: `${brandsPortfolio02960} 960w, ${brandsPortfolio021440} 1440w`,
+    mobileSrc: brandsPortfolio02Mobile,
     sizes: '100vw',
-    width: 1672,
-    height: 941,
+    width: 1440,
+    height: 810,
   },
 ];
 

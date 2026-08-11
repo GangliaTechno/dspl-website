@@ -84,7 +84,7 @@ describe('Brands page', () => {
     }
   });
 
-  it('mounts the approved Brands hero images in a fixed order', () => {
+  it('mounts the selected consumer-portfolio hero images in a fixed order', () => {
     vi.useFakeTimers();
     const rendered = render(
       <MemoryRouter initialEntries={['/brands']}>
@@ -102,19 +102,11 @@ describe('Brands page', () => {
     ]);
     expect(layers[0].querySelector('img')).toHaveAttribute(
       'src',
-      expect.stringContaining('brands-rotation-02-1440.webp'),
+      expect.stringContaining('brands-portfolio-01-1440.webp'),
     );
     expect(layers[1].querySelector('img')).toHaveAttribute(
       'src',
-      expect.stringContaining('brands-hero-editorial-1672.webp'),
-    );
-    expect(layers[0].querySelector('img')).toHaveAttribute(
-      'src',
-      expect.stringContaining('brands-rotation-02-1440.webp'),
-    );
-    expect(layers[1].querySelector('img')).toHaveAttribute(
-      'src',
-      expect.stringContaining('brands-hero-editorial-1672.webp'),
+      expect.stringContaining('brands-portfolio-02-1440.webp'),
     );
 
     rendered.unmount();

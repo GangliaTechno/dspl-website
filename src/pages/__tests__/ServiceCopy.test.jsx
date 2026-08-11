@@ -34,6 +34,7 @@ const routeCases = [
     rejectedClaims: ['Get found. Get chosen. Get sales.', 'We did this for Raw Radicles. We can do it for you.', 'Paid ads can bring leads in the first week.'],
     heroIds: ['marketing-primary', 'marketing-02'],
     primaryHeroAsset: 'marketing-primary-1440.webp',
+    secondaryHeroAsset: 'marketing-rotation-02-1440.webp',
   },
   {
     name: 'Branding',
@@ -59,7 +60,8 @@ const routeCases = [
     ],
     rejectedClaims: ['Build a name customers trust and remember.', 'We did this for Raw Radicles. We can do it for you.', 'A full identity takes four to six weeks'],
     heroIds: ['branding-primary', 'branding-02'],
-    primaryHeroAsset: 'branding-rotation-02-1440.webp',
+    primaryHeroAsset: 'branding-workshop-01-1440.webp',
+    secondaryHeroAsset: 'branding-workshop-02-1440.webp',
   },
   {
     name: 'E-commerce',
@@ -86,6 +88,7 @@ const routeCases = [
     rejectedClaims: ['Build a store that loads fast and converts.', 'We sell our own brand this way, so we know what holds up.', 'Your store loads quickly and looks right on every phone.'],
     heroIds: ['ecommerce-primary', 'ecommerce-02'],
     primaryHeroAsset: 'ecommerce-primary-1440.webp',
+    secondaryHeroAsset: 'ecommerce-rotation-02-1440.webp',
   },
 ];
 
@@ -104,6 +107,7 @@ describe.each(routeCases)('$name service copy', ({
   rejectedClaims,
   heroIds,
   primaryHeroAsset,
+  secondaryHeroAsset,
 }) => {
   it('renders the approved route-specific messaging and icon mapping', () => {
     vi.useFakeTimers();
@@ -143,9 +147,14 @@ describe.each(routeCases)('$name service copy', ({
       container.querySelectorAll('.domain-hero-picture picture'),
       (picture) => picture.dataset.heroId,
     )).toEqual(heroIds);
-    expect(container.querySelector('.domain-hero-picture picture img')).toHaveAttribute(
+    const heroLayers = container.querySelectorAll('.domain-hero-picture picture img');
+    expect(heroLayers[0]).toHaveAttribute(
       'src',
       expect.stringContaining(primaryHeroAsset),
+    );
+    expect(heroLayers[1]).toHaveAttribute(
+      'src',
+      expect.stringContaining(secondaryHeroAsset),
     );
 
     rendered.unmount();
