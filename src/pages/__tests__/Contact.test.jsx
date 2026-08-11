@@ -52,35 +52,40 @@ describe('Contact', () => {
       .toHaveAttribute('href', 'mailto:dsplmanipal@gmail.com');
   });
 
-  it('presents Contact as peer enquiry columns with approved visitor-facing copy', () => {
+  it('presents an integrated enquiry layout in the approved reading order', () => {
     const { container } = renderContact();
-    const hero = container.querySelector('.contact-hero');
+    const section = container.querySelector('.contact-main-section');
     const layout = container.querySelector('.contact-layout');
-    const columns = Array.from(layout.children);
+    const regions = Array.from(layout.children);
     const headings = screen.getAllByRole('heading', { level: 2 });
 
-    expect(hero).toHaveTextContent('Contact');
-    expect(hero).toHaveTextContent('Contact us');
-    expect(hero.querySelector('.section-subtitle')).not.toBeInTheDocument();
-    expect(hero).toHaveTextContent(
-      'Tell us about your brand, campaign, or e-commerce requirements. We will review the details and respond using the contact information you provide.',
+    expect(section).toBeInTheDocument();
+    expect(container.querySelector('.contact-hero')).not.toBeInTheDocument();
+    expect(layout.querySelector('.contact-intro .section-subtitle'))
+      .toHaveTextContent('Contact');
+    expect(screen.getByRole('heading', {
+      level: 1,
+      name: 'Start a conversation.',
+    })).toBeInTheDocument();
+    expect(layout.querySelector('.contact-intro')).toHaveTextContent(
+      'For general enquiries, tell us what you need and how we can reach you. For a detailed project brief, use Work With Us in the header.',
     );
     expect(headings.map((heading) => heading.textContent)).toEqual([
+      'General enquiry',
       'Headquarters',
-      'Send a message',
     ]);
-    expect(columns).toHaveLength(2);
-    expect(columns[0]).toHaveClass('contact-column', 'contact-details-column');
-    expect(columns[1]).toHaveClass('contact-column', 'contact-form-column');
-    columns.forEach((column, index) => {
-      expect(column.firstElementChild).toBe(headings[index]);
-      expect(column.children).toHaveLength(2);
-    });
-    expect(columns[0].lastElementChild).toHaveClass('contact-details-panel');
-    expect(columns[1].lastElementChild).toHaveClass('contact-form-panel');
+    expect(regions).toHaveLength(3);
+    expect(regions[0]).toHaveClass('contact-intro');
+    expect(regions[1]).toHaveClass('contact-form-column');
+    expect(regions[2]).toHaveClass('contact-details-column');
+    expect(regions[1].firstElementChild).toBe(headings[0]);
+    expect(regions[1].lastElementChild).toHaveClass('contact-form-panel');
+    expect(regions[2].firstElementChild).toBe(headings[1]);
+    expect(regions[2].lastElementChild).toHaveClass('contact-details-panel');
     expect(screen.getByRole('heading', { name: 'Address', level: 3 })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Phone', level: 3 })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Email', level: 3 })).toBeInTheDocument();
+    expect(container.querySelector('.contact-details-panel svg')).not.toBeInTheDocument();
     expect(container.querySelector('.contact-form-title')).not.toBeInTheDocument();
     expect(container.querySelector('.glow-bg')).not.toBeInTheDocument();
   });

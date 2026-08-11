@@ -229,7 +229,7 @@ describe('approved design-system corrections', () => {
     expect(aboutCss).not.toContain('.direction-card:hover');
   });
 
-  it('uses aligned Contact enquiry columns and prioritizes the form on smaller screens', () => {
+  it('uses an integrated Contact layout with mobile reading order preserved', () => {
     const contactPage = readSource('src/pages/Contact.jsx');
     const contactCss = readSource('src/pages/Contact.css');
     const formMessages = readSource('src/utils/formMessages.js');
@@ -237,16 +237,19 @@ describe('approved design-system corrections', () => {
 
     expect(contactPage).toContain('className="contact-details-panel"');
     expect(contactPage.match(/className="contact-detail-row"/g)).toHaveLength(3);
-    expect(contactPage).not.toContain('className="contact-detail-card glass"');
-    expect(contactPage).toContain('className="contact-column contact-details-column"');
-    expect(contactPage).toContain('className="contact-column contact-form-column"');
+    expect(contactPage).toContain('className="contact-intro"');
+    expect(contactPage).toContain('className="contact-form-column"');
+    expect(contactPage).toContain('className="contact-details-column"');
+    expect(contactPage).toContain('>General enquiry</h2>');
     expect(contactPage).toContain('>Headquarters</h2>');
-    expect(contactPage).toContain('>Send a message</h2>');
     expect(contactPage).toContain('>Phone</h3>');
     expect(contactPage).toContain('>Email</h3>');
     expect(contactPage).toContain('Message received');
     expect(contactPage).toContain('FORM_SUBMISSION_ERROR');
-    expect(contactPage).not.toContain('<span className="section-subtitle">Contact</span>');
+    expect(contactPage).toContain('<span className="section-subtitle">Contact</span>');
+    expect(contactPage).toContain('>Start a conversation.</h1>');
+    expect(contactPage).not.toContain('className="contact-hero"');
+    expect(contactPage).not.toContain('contact-detail-icon');
     expect(contactPage).toContain('className="contact-privacy-notice"');
     expect(contactPage).not.toContain('className="glow-bg"');
     expect(formMessages).toContain(
@@ -257,35 +260,23 @@ describe('approved design-system corrections', () => {
     expect(indexCss).not.toContain('.glow-circle');
     expect(indexCss).not.toContain('pulseSlow');
     expect(contactCss).toMatch(
-      /\.contact-description\s*{[^}]*max-width:\s*58ch;[^}]*margin-inline:\s*auto;/s,
+      /\.contact-layout\s*{[^}]*grid-template-columns:\s*minmax\(0,\s*2fr\) minmax\(0,\s*3fr\);[^}]*grid-template-areas:\s*"intro form"\s*"details form";/s,
     );
     expect(contactCss).toMatch(
-      /\.contact-hero\s*{[^}]*padding:\s*2\.5rem 0 2rem;/s,
+      /\.contact-intro\s*{[^}]*grid-area:\s*intro;/s,
     );
     expect(contactCss).toMatch(
-      /\.contact-grid-section\s*{[^}]*padding-top:\s*2rem;/s,
+      /\.contact-form-column\s*{[^}]*grid-area:\s*form;/s,
     );
     expect(contactCss).toMatch(
-      /\.contact-layout\s*{[^}]*gap:\s*1\.5rem;/s,
+      /\.contact-details-column\s*{[^}]*grid-area:\s*details;/s,
     );
     expect(contactCss).toMatch(
-      /\.contact-column\s*{[^}]*display:\s*flex;[^}]*flex-direction:\s*column;[^}]*gap:\s*1\.5rem;/s,
-    );
-    expect(contactCss).toMatch(
-      /\.contact-form-panel\s*{[^}]*padding:\s*2rem;/s,
-    );
-    expect(contactCss).toMatch(
-      /\.contact-detail-info h3\s*{[^}]*font-size:\s*1\.1rem;[^}]*margin-bottom:\s*0\.5rem;/s,
+      /\.contact-detail-info h3\s*{[^}]*color:\s*var\(--accent-text\);[^}]*font-size:\s*0\.75rem;[^}]*text-transform:\s*uppercase;/s,
     );
     expect(contactCss).not.toContain('.contact-detail-info h4');
     expect(contactCss).toMatch(
-      /@media\s*\(max-width:\s*900px\)\s*{[\s\S]*?\.contact-form-column\s*{[^}]*order:\s*-1;/s,
-    );
-    expect(contactCss).toMatch(
-      /@media\s*\(max-width:\s*900px\)\s*{[\s\S]*?\.contact-hero\s*{[^}]*padding:\s*3rem 0 2rem;/s,
-    );
-    expect(contactCss).toMatch(
-      /@media\s*\(min-width:\s*901px\)\s*{[\s\S]*?\.contact-hero\s*{[^}]*padding:\s*0\.75rem 0 0\.5rem;[\s\S]*?\.contact-title\s*{[^}]*font-size:\s*3rem;[^}]*margin-bottom:\s*0\.5rem;[\s\S]*?\.contact-description\s*{[^}]*font-size:\s*1rem;[^}]*line-height:\s*1\.5;[\s\S]*?\.contact-grid-section\s*{[^}]*padding-top:\s*0\.5rem;[\s\S]*?\.contact-column\s*{[^}]*gap:\s*1rem;[\s\S]*?\.contact-form-panel\s*{[^}]*padding:\s*1rem;[\s\S]*?\.contact-form-panel \.form-group\s*{[^}]*margin-bottom:\s*0\.5rem;[\s\S]*?\.contact-form-panel \.form-input\s*{[^}]*min-height:\s*44px;[^}]*padding:\s*0\.625rem 0\.875rem;[\s\S]*?\.contact-form-panel textarea\.form-input\s*{[^}]*min-height:\s*72px;[\s\S]*?\.contact-submit-btn\s*{[^}]*margin-top:\s*0\.5rem;[^}]*min-height:\s*44px;/s,
+      /@media\s*\(max-width:\s*900px\)\s*{[\s\S]*?\.contact-layout\s*{[^}]*grid-template-columns:\s*1fr;[^}]*grid-template-areas:\s*"intro"\s*"form"\s*"details";/s,
     );
   });
 

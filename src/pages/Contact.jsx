@@ -1,7 +1,7 @@
 import './Contact.css';
 import { useState } from 'react';
 import { Link } from 'react-router';
-import { Mail, Phone, MapPin, Send, CheckCircle2, AlertCircle } from 'lucide-react';
+import { Send, CheckCircle2, AlertCircle } from 'lucide-react';
 import useSEO from '../hooks/useSEO';
 import { getRouteMetadata } from '../seo/routeMetadata';
 import { FORM_SUBMISSION_ERROR } from '../utils/formMessages';
@@ -109,55 +109,18 @@ const Contact = () => {
 
   return (
     <div className="contact-page fade-in">
-      {/* Header Block */}
-      <section className="section contact-hero">
-        <div className="container">
-          <h1 className="contact-title">Contact us</h1>
-          <p className="contact-description">
-            Tell us about your brand, campaign, or e-commerce requirements. We will review the details and respond using the contact information you provide.
-          </p>
-        </div>
-      </section>
+      <section className="section contact-main-section">
+        <div className="container contact-layout">
+          <header className="contact-intro">
+            <span className="section-subtitle">Contact</span>
+            <h1 className="contact-title">Start a conversation.</h1>
+            <p className="contact-description">
+              For general enquiries, tell us what you need and how we can reach you. For a detailed project brief, use Work With Us in the header.
+            </p>
+          </header>
 
-      {/* Main Grid */}
-      <section className="section contact-grid-section contact-glass-top-border">
-        <div className="container">
-          <div className="contact-layout">
-            
-            <div className="contact-column contact-details-column">
-              <h2 className="contact-column-heading">Headquarters</h2>
-
-              <div className="contact-details-panel">
-                <div className="contact-detail-row">
-                  <MapPin className="contact-detail-icon" aria-hidden="true" />
-                  <div className="contact-detail-info">
-                    <h3>Address</h3>
-                    <p>Room No. 12, 4th Floor, MUTBI, Advanced Research Center, Madhava Nagar, Manipal 576104</p>
-                  </div>
-                </div>
-
-                <div className="contact-detail-row">
-                  <Phone className="contact-detail-icon" aria-hidden="true" />
-                  <div className="contact-detail-info">
-                    <h3>Phone</h3>
-                    <p><a href="tel:+918861942440">+91 88619 42440</a></p>
-                    <p><a href="tel:+919072556665">+91 90725 56665</a></p>
-                  </div>
-                </div>
-
-                <div className="contact-detail-row">
-                  <Mail className="contact-detail-icon" aria-hidden="true" />
-                  <div className="contact-detail-info">
-                    <h3>Email</h3>
-                    <p><a href="mailto:director@dashapatmaja.in">director@dashapatmaja.in</a></p>
-                    <p><a href="mailto:dsplmanipal@gmail.com">dsplmanipal@gmail.com</a></p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="contact-column contact-form-column">
-              <h2 className="contact-column-heading">Send a message</h2>
+          <div className="contact-form-column">
+              <h2 className="contact-column-heading">General enquiry</h2>
               <div className="contact-form-panel">
                 {submitted ? (
                   <div className="contact-success-state" role="status" aria-live="polite">
@@ -296,8 +259,36 @@ const Contact = () => {
               </div>
             </div>
 
+          <aside className="contact-details-column">
+            <h2 className="contact-column-heading">Headquarters</h2>
+
+            <div className="contact-details-panel">
+              <div className="contact-detail-row">
+                <div className="contact-detail-info">
+                  <h3>Address</h3>
+                  <p>Room No. 12, 4th Floor, MUTBI, Advanced Research Center, Madhava Nagar, Manipal 576104</p>
+                </div>
+              </div>
+
+              <div className="contact-detail-row">
+                <div className="contact-detail-info">
+                  <h3>Phone</h3>
+                  <p><a href="tel:+918861942440">+91 88619 42440</a></p>
+                  <p><a href="tel:+919072556665">+91 90725 56665</a></p>
+                </div>
+              </div>
+
+              <div className="contact-detail-row">
+                <div className="contact-detail-info">
+                  <h3>Email</h3>
+                  <p><a href="mailto:director@dashapatmaja.in">director@dashapatmaja.in</a></p>
+                  <p><a href="mailto:dsplmanipal@gmail.com">dsplmanipal@gmail.com</a></p>
+                </div>
+              </div>
+            </div>
+          </aside>
+
           </div>
-        </div>
       </section>
 
     </div>
