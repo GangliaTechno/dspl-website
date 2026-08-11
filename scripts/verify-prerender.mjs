@@ -8,7 +8,7 @@ const routes = [
   { route: 'marketing', heading: 'Marketing' },
   { route: 'branding', heading: 'Branding' },
   { route: 'ecommerce', heading: 'E-commerce' },
-  { route: 'contact', heading: 'Contact us' },
+  { route: 'contact', heading: 'Start a conversation.' },
   { route: 'privacy', heading: 'Privacy Policy' },
 ];
 
