@@ -1,6 +1,5 @@
-import { fireEvent, render, screen, within } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
-import { WORK_MODAL_EVENT } from '../../utils/workModal';
 import ServicePage from '../ServicePage';
 
 vi.mock('../../hooks/useSEO', () => ({
@@ -10,11 +9,8 @@ vi.mock('../../hooks/useSEO', () => ({
 const props = {
   seoMetadata: { title: 'Test service' },
   pageTypeClass: 'test-service',
-  contextLabel: 'Test services',
   heroTitle: 'Test service',
-  heroTagline: 'A clear, useful service tagline.',
-  heroDescription: 'A description of the service engagement.',
-  heroCtaLabel: 'Discuss a test project',
+  heroIntro: 'One concise service positioning paragraph.',
   heroImage: {
     src: '/service-1440.webp',
     desktopSrcSet: '/service-960.webp 960w, /service-1440.webp 1440w',
@@ -30,7 +26,6 @@ const props = {
   offers: Array.from({ length: 4 }, (_, index) => ({
     title: `Capability ${index + 1}`,
     text: `Capability ${index + 1} description.`,
-    icon: <svg aria-hidden="true" />,
   })),
   faqsTitle: 'Service questions',
   faqsDescription: 'Answers about the engagement.',
@@ -41,13 +36,14 @@ describe('ServicePage', () => {
   it('renders the explicit service-page contract with semantic content groups', () => {
     const { container } = render(<ServicePage {...props} />);
 
-    expect(screen.getByText(props.contextLabel)).toBeInTheDocument();
     expect(screen.getByRole('heading', { level: 1, name: props.heroTitle }))
       .toBeInTheDocument();
-
-    const tagline = screen.getByText(props.heroTagline);
-    expect(tagline.tagName).toBe('P');
-    expect(screen.getByText(props.heroDescription)).toBeInTheDocument();
+    expect(screen.getByText(props.heroIntro)).toHaveClass('domain-description');
+    expect(screen.queryByRole('button', { name: /discuss/i }))
+      .not.toBeInTheDocument();
+    expect(container.querySelector('.domain-hero .section-subtitle'))
+      .not.toBeInTheDocument();
+    expect(container.querySelector('.domain-subtitle')).not.toBeInTheDocument();
 
     const scope = screen.getByRole('region', { name: props.scopeTitle });
     expect(scope).toHaveClass('service-scope-section');
@@ -55,7 +51,8 @@ describe('ServicePage', () => {
     expect(scope.querySelector('.glass')).not.toBeInTheDocument();
     expect(scope.querySelector('.matters-box')).not.toBeInTheDocument();
 
-    expect(container.querySelectorAll('article.offer-card')).toHaveLength(4);
+    expect(container.querySelectorAll('article.offer-entry')).toHaveLength(4);
+    expect(container.querySelector('.offer-icon-wrapper')).not.toBeInTheDocument();
     expect(screen.queryByText('Services')).not.toBeInTheDocument();
     expect(screen.getByRole('heading', { level: 2, name: props.faqsTitle }))
       .toBeInTheDocument();
@@ -64,11 +61,7 @@ describe('ServicePage', () => {
     expect(container.querySelector('.offer-card.glass')).not.toBeInTheDocument();
   });
 
-  it('keeps responsive hero media and opens the modal from the existing route source', () => {
-    const modalSources = [];
-    const captureModalSource = (event) => modalSources.push(event.detail.source);
-    window.addEventListener(WORK_MODAL_EVENT, captureModalSource);
-
+  it('keeps responsive hero media without a page-level modal action', () => {
     const { container } = render(<ServicePage {...props} />);
     const heroImage = container.querySelector('.domain-hero-bg-img');
     const sources = container.querySelectorAll('.domain-hero-picture source');
@@ -79,10 +72,6 @@ describe('ServicePage', () => {
     expect(heroImage).toHaveAttribute('src', props.heroImage.src);
     expect(heroImage).toHaveAttribute('width', '1440');
     expect(heroImage).toHaveAttribute('height', '810');
-
-    fireEvent.click(screen.getByRole('button', { name: props.heroCtaLabel }));
-    expect(modalSources).toEqual(['test-service-hero']);
-
-    window.removeEventListener(WORK_MODAL_EVENT, captureModalSource);
+    expect(container.querySelector('.domain-cta')).not.toBeInTheDocument();
   });
 });

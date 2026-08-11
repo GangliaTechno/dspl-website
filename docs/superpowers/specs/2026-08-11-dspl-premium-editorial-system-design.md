@@ -46,7 +46,7 @@ Render the H1 as two visible statements on separate lines:
 >
 > We deliver disciplined market execution.
 
-Both statements remain prominent and use `#FFFFFF`. The second statement must not be rendered in gold. Add one decorative `3rem` by `3px` gold rule above the H1 through a pseudo-element on the hero content; it must not add accessible text.
+Both statements remain prominent. Render the first statement in `#FFFFFF` and the second statement in the existing DSPL `var(--accent)` gold. Do not add a separate decorative gold rule; the second statement is the single hero gold accent.
 
 ### Supporting copy
 

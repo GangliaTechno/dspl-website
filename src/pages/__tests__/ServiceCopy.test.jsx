@@ -12,10 +12,7 @@ const routeCases = [
   {
     name: 'Marketing',
     Component: Marketing,
-    contextLabel: 'Marketing services',
-    heroTagline: 'Marketing built around clear audiences, disciplined execution, and measurable decisions.',
-    heroDescription: 'We plan search, paid media, content, and measurement as one programme, with scope and priorities defined against your audience, objectives, and available evidence.',
-    heroCtaLabel: 'Discuss a marketing project',
+    heroIntro: 'Search, paid media, content, and measurement coordinated around defined audiences, commercial priorities, and available evidence.',
     scopeTitle: 'A coordinated marketing programme',
     scopeText: 'Engagements begin with the current market position, audience, channel performance, and measurement setup. From there, we agree channel responsibilities, campaign cadence, reporting measures, and the work required to improve performance over time.',
     offersTitle: 'Marketing capabilities',
@@ -23,10 +20,10 @@ const routeCases = [
     faqsTitle: 'Marketing engagement questions',
     faqsDescription: 'Scope, measurement, and collaboration.',
     offers: [
-      ['Search Engine Optimisation (SEO)', 'Technical review, search-intent research, on-page structure, and content planning designed to improve qualified organic visibility over time.', 'lucide-search'],
-      ['Paid Campaign Management', 'Campaign planning and management across Google, Meta, and relevant commerce channels, with budgets reviewed against agreed performance measures.', 'lucide-megaphone'],
-      ['Analytics and Performance Tracking', 'Tracking and reporting for traffic, campaign spend, enquiries, and commercial outcomes, with measurement definitions agreed before launch.', 'lucide-chart-no-axes-column-increasing'],
-      ['Content and Copywriting', "Landing pages, articles, product copy, and campaign messaging aligned with search intent and the brand's voice.", 'lucide-file-text'],
+      ['Search Engine Optimisation (SEO)', 'Technical review, search-intent research, on-page structure, and content planning designed to improve qualified organic visibility over time.'],
+      ['Paid Campaign Management', 'Campaign planning and management across Google, Meta, and relevant commerce channels, with budgets reviewed against agreed performance measures.'],
+      ['Analytics and Performance Tracking', 'Tracking and reporting for traffic, campaign spend, enquiries, and commercial outcomes, with measurement definitions agreed before launch.'],
+      ['Content and Copywriting', "Landing pages, articles, product copy, and campaign messaging aligned with search intent and the brand's voice."],
     ],
     faqs: [
       ['How is the scope defined?', 'We begin with your objectives, audience, current channels, available data, and budget. The proposal then sets out priorities, responsibilities, deliverables, and reporting cadence.'],
@@ -38,10 +35,7 @@ const routeCases = [
   {
     name: 'Branding',
     Component: Branding,
-    contextLabel: 'Branding services',
-    heroTagline: 'Positioning, identity, and brand systems designed for consistent use.',
-    heroDescription: 'We translate business context into a usable brand system: positioning, identity, voice, and the assets required for consistent execution.',
-    heroCtaLabel: 'Discuss a branding project',
+    heroIntro: 'Positioning, identity, voice, and application systems developed for consistent use across the business.',
     scopeTitle: 'A brand system built for application',
     scopeText: 'The work starts with the business, audience, category, and competitive context. The resulting system connects positioning and language with visual identity, application rules, and assets that internal and external teams can use consistently.',
     offersTitle: 'Branding capabilities',
@@ -49,10 +43,10 @@ const routeCases = [
     faqsTitle: 'Branding engagement questions',
     faqsDescription: 'Scope, existing brands, and handover.',
     offers: [
-      ['Brand Identity and Visual Systems', 'Logo, colour, typography, packaging and application rules, with a practical system for consistent use across priority touchpoints.', 'lucide-palette'],
-      ['Market Positioning', 'Audience, category, competitor, and offer analysis used to define a clear market position and decision framework.', 'lucide-compass'],
-      ['Brand Story and Voice', 'A messaging framework covering the brand narrative, voice, core messages, and examples for common customer-facing contexts.', 'lucide-book-open'],
-      ['Design Systems and Brand Assets', 'Reusable templates, organised source files, and guidance that support day-to-day implementation by internal and partner teams.', 'lucide-layout-template'],
+      ['Brand Identity and Visual Systems', 'Logo, colour, typography, packaging and application rules, with a practical system for consistent use across priority touchpoints.'],
+      ['Market Positioning', 'Audience, category, competitor, and offer analysis used to define a clear market position and decision framework.'],
+      ['Brand Story and Voice', 'A messaging framework covering the brand narrative, voice, core messages, and examples for common customer-facing contexts.'],
+      ['Design Systems and Brand Assets', 'Reusable templates, organised source files, and guidance that support day-to-day implementation by internal and partner teams.'],
     ],
     faqs: [
       ['What can a branding engagement include?', 'Scope can include positioning, naming, identity, voice, packaging or application guidelines, and reusable assets. The proposal identifies which are required.'],
@@ -64,10 +58,7 @@ const routeCases = [
   {
     name: 'E-commerce',
     Component: Ecommerce,
-    contextLabel: 'E-commerce services',
-    heroTagline: 'Storefront, marketplace, payment, and fulfilment systems designed for reliable day-to-day operation.',
-    heroDescription: 'We plan and implement commerce systems that connect product presentation, checkout, payments, marketplaces, and fulfilment. Scope is defined around the selected platform, operating model, and support needs.',
-    heroCtaLabel: 'Discuss an e-commerce project',
+    heroIntro: 'Storefront, marketplace, payment, and fulfilment systems planned around the selected platform and operating model.',
     scopeTitle: 'Commerce aligned with day-to-day operations',
     scopeText: 'Storefront and marketplace work is planned alongside catalogue ownership, payment setup, inventory, fulfilment, and reporting. This keeps the customer journey and operational responsibilities within one documented scope.',
     offersTitle: 'E-commerce capabilities',
@@ -75,10 +66,10 @@ const routeCases = [
     faqsTitle: 'E-commerce engagement questions',
     faqsDescription: 'Platforms, existing stores, and ongoing support.',
     offers: [
-      ['Store Setup and Build', 'Storefront planning and implementation for Shopify, WooCommerce, or React-based commerce, with responsive behaviour and a clear catalogue and content structure.', 'lucide-shopping-cart'],
-      ['Conversion Rate Optimisation (CRO)', 'Review of product discovery, product detail, cart, and checkout journeys to identify measurable friction and prioritise testable improvements.', 'lucide-mouse-pointer-click'],
-      ['Multi-Channel Selling', 'Marketplace setup and workflow planning for Amazon, Flipkart, and other agreed channels, including catalogue, inventory, and pricing responsibilities.', 'lucide-layers'],
-      ['Payments and Delivery Setup', 'Payment and delivery integrations configured around the selected platform, providers, fulfilment model, and internal operating workflow.', 'lucide-credit-card'],
+      ['Store Setup and Build', 'Storefront planning and implementation for Shopify, WooCommerce, or React-based commerce, with responsive behaviour and a clear catalogue and content structure.'],
+      ['Conversion Rate Optimisation (CRO)', 'Review of product discovery, product detail, cart, and checkout journeys to identify measurable friction and prioritise testable improvements.'],
+      ['Multi-Channel Selling', 'Marketplace setup and workflow planning for Amazon, Flipkart, and other agreed channels, including catalogue, inventory, and pricing responsibilities.'],
+      ['Payments and Delivery Setup', 'Payment and delivery integrations configured around the selected platform, providers, fulfilment model, and internal operating workflow.'],
     ],
     faqs: [
       ['How do you select a platform?', 'We recommend a platform after reviewing catalogue complexity, integrations, internal capability, budget, and the expected operating model. Shopify, WooCommerce, and React-based builds are supported where appropriate.'],
@@ -91,10 +82,7 @@ const routeCases = [
 
 describe.each(routeCases)('$name service copy', ({
   Component,
-  contextLabel,
-  heroTagline,
-  heroDescription,
-  heroCtaLabel,
+  heroIntro,
   scopeTitle,
   scopeText,
   offersTitle,
@@ -109,9 +97,7 @@ describe.each(routeCases)('$name service copy', ({
     const { container } = render(<Component />);
 
     for (const text of [
-      contextLabel,
-      heroTagline,
-      heroDescription,
+      heroIntro,
       scopeTitle,
       scopeText,
       offersTitle,
@@ -121,14 +107,17 @@ describe.each(routeCases)('$name service copy', ({
     ]) {
       expect(screen.getByText(text)).toBeInTheDocument();
     }
-    expect(screen.getByRole('button', { name: heroCtaLabel })).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: /^Discuss / }))
+      .not.toBeInTheDocument();
+    expect(container.querySelector('.domain-hero .section-subtitle'))
+      .not.toBeInTheDocument();
 
-    const cards = container.querySelectorAll('article.offer-card');
-    expect(cards).toHaveLength(4);
-    offers.forEach(([title, text, iconClass], index) => {
-      expect(cards[index]).toHaveTextContent(title);
-      expect(cards[index]).toHaveTextContent(text);
-      expect(cards[index].querySelector(`.${iconClass}`)).toBeInTheDocument();
+    const entries = container.querySelectorAll('article.offer-entry');
+    expect(entries).toHaveLength(4);
+    offers.forEach(([title, text], index) => {
+      expect(entries[index]).toHaveTextContent(title);
+      expect(entries[index]).toHaveTextContent(text);
+      expect(entries[index].querySelector('svg')).not.toBeInTheDocument();
     });
 
     faqs.flat().forEach((text) => expect(screen.getByText(text)).toBeInTheDocument());

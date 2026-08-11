@@ -359,11 +359,11 @@ describe('approved design-system corrections', () => {
     expect(home).toMatch(
       /\.hero-subhead\s*{[^}]*max-width:\s*66ch;[^}]*margin:\s*0 auto 2\.5rem;[^}]*font-size:\s*clamp\(1\.05rem,\s*1\.45vw,\s*1\.25rem\);[^}]*line-height:\s*1\.65;/s,
     );
-    expect(home).toMatch(
-      /\.home-hero-content::before\s*{[^}]*width:\s*3rem;[^}]*height:\s*3px;[^}]*background:\s*var\(--accent\);/s,
-    );
     expect(home).toMatch(/\.hero-title\s*{[^}]*color:\s*#fff;/s);
-    expect(home).not.toContain('.accent-text');
+    expect(home).toMatch(
+      /\.hero-title-accent\s*{[^}]*color:\s*var\(--accent\);/s,
+    );
+    expect(home).not.toContain('.home-hero-content::before');
     expect(homePage).not.toContain(
       "import { openWorkModal } from '../utils/workModal';",
     );
@@ -580,37 +580,37 @@ describe('approved design-system corrections', () => {
     );
   });
 
-  it('gives every shared service hero one contextual project CTA', () => {
+  it('uses one editorial hero statement and text-led capabilities on service pages', () => {
     const servicePage = readSource('src/components/ServicePage.jsx');
     const serviceCss = readSource('src/components/ServicePage.css');
 
-    expect(servicePage).toContain(
-      "import { openWorkModal } from '../utils/workModal';",
-    );
-    expect(servicePage).toContain('className="btn btn-primary domain-cta"');
-    expect(servicePage).toContain('{heroCtaLabel}');
-    expect(servicePage).toContain(
-      "openWorkModal(`${pageTypeClass}-hero`)",
-    );
-    expect(servicePage).toContain('className="domain-subtitle"');
+    expect(servicePage).not.toContain('openWorkModal');
+    expect(servicePage).not.toContain('heroCtaLabel');
+    expect(servicePage).not.toContain('domain-cta');
+    expect(servicePage).not.toContain('domain-subtitle');
+    expect(servicePage).not.toContain('offer-icon-wrapper');
+    expect(servicePage).toContain('{heroIntro}');
     expect(servicePage).toContain('className="container service-scope-layout"');
-    expect(servicePage).toContain('<article key={offer.title} className="offer-card">');
+    expect(servicePage).toContain('<article key={offer.title} className="offer-entry">');
     expect(servicePage).not.toContain('<span className="section-subtitle">Services</span>');
     expect(servicePage).toContain('{faqsTitle}');
     expect(servicePage).toContain('{faqsDescription}');
     expect(servicePage).not.toContain('className="glow-bg"');
     expect(servicePage).not.toContain('matters-box');
-    expect(servicePage).not.toContain('offer-card glass');
     expect(serviceCss).toMatch(
-      /\.domain-cta\s*{[^}]*margin-top:\s*2rem;/s,
+      /\.domain-hero\s*{[^}]*display:\s*grid;[^}]*min-height:\s*400px;[^}]*place-items:\s*center;/s,
     );
     expect(serviceCss).toMatch(
-      /\.domain-hero\s*{[^}]*padding:\s*6rem 0 4\.5rem;/s,
+      /\.offers-grid\s*{[^}]*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\);[^}]*border-top:\s*1px solid var\(--border-color\);/s,
     );
     expect(serviceCss).toMatch(
-      /@media\s*\(max-width:\s*768px\)\s*{[\s\S]*?\.domain-hero\s*{[^}]*padding:\s*4rem 0 3rem;/s,
+      /\.offer-entry\s*{[^}]*padding:\s*2rem 0;[^}]*border-bottom:\s*1px solid var\(--border-color\);/s,
     );
-    expect(serviceCss).not.toContain('.offer-card:hover');
+    expect(serviceCss).toMatch(
+      /@media\s*\(max-width:\s*768px\)\s*{[\s\S]*?\.domain-hero\s*{[^}]*min-height:\s*auto;[^}]*padding:\s*3\.5rem 0 3rem;[\s\S]*?\.offers-grid\s*{[^}]*grid-template-columns:\s*1fr;/s,
+    );
+    expect(serviceCss).not.toMatch(/\.offer-card\s*\{/);
+    expect(serviceCss).not.toContain('.offer-icon-wrapper');
   });
 
   it('builds a noindex production 404 without a catch-all 200 rewrite', () => {

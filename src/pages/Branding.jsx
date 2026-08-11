@@ -1,4 +1,3 @@
-import { Palette, Compass, BookOpen, LayoutTemplate } from 'lucide-react';
 import brandingHero960 from '../assets/dspl-branding-hero-960.webp';
 import brandingHero1440 from '../assets/dspl-branding-hero-1440.webp';
 import brandingHero1600 from '../assets/dspl-branding-hero-1600.webp';
@@ -7,10 +6,7 @@ import ServicePage from '../components/ServicePage';
 import { getRouteMetadata } from '../seo/routeMetadata';
 
 const brandingCopy = {
-  contextLabel: 'Branding services',
-  heroTagline: 'Positioning, identity, and brand systems designed for consistent use.',
-  heroDescription: 'We translate business context into a usable brand system: positioning, identity, voice, and the assets required for consistent execution.',
-  heroCtaLabel: 'Discuss a branding project',
+  heroIntro: 'Positioning, identity, voice, and application systems developed for consistent use across the business.',
   scopeTitle: 'A brand system built for application',
   scopeText: 'The work starts with the business, audience, category, and competitive context. The resulting system connects positioning and language with visual identity, application rules, and assets that internal and external teams can use consistently.',
   offersTitle: 'Branding capabilities',
@@ -21,22 +17,18 @@ const offers = [
   {
     title: 'Brand Identity and Visual Systems',
     text: 'Logo, colour, typography, packaging and application rules, with a practical system for consistent use across priority touchpoints.',
-    icon: <Palette size={22} />,
   },
   {
     title: 'Market Positioning',
     text: 'Audience, category, competitor, and offer analysis used to define a clear market position and decision framework.',
-    icon: <Compass size={22} />,
   },
   {
     title: 'Brand Story and Voice',
     text: 'A messaging framework covering the brand narrative, voice, core messages, and examples for common customer-facing contexts.',
-    icon: <BookOpen size={22} />,
   },
   {
     title: 'Design Systems and Brand Assets',
     text: 'Reusable templates, organised source files, and guidance that support day-to-day implementation by internal and partner teams.',
-    icon: <LayoutTemplate size={22} />,
   },
 ];
 

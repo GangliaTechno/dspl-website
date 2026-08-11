@@ -115,7 +115,9 @@ const Home = () => {
           <div className="home-hero-content">
             <h1 className="hero-title">
               <span>We develop brands.</span>{' '}
-              <span>We deliver disciplined market execution.</span>
+              <span className="hero-title-accent">
+                We deliver disciplined market execution.
+              </span>
             </h1>
             <p className="hero-subhead">
               Dashapatmaja Solutions Pvt Ltd develops and operates consumer

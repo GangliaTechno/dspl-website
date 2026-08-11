@@ -1,4 +1,3 @@
-import { Search, Megaphone, BarChart, FileText } from 'lucide-react';
 import marketingHero960 from '../assets/dspl-marketing-editorial-960.webp';
 import marketingHero1440 from '../assets/dspl-marketing-editorial-1440.webp';
 import marketingHero1920 from '../assets/dspl-marketing-editorial-1920.webp';
@@ -7,10 +6,7 @@ import ServicePage from '../components/ServicePage';
 import { getRouteMetadata } from '../seo/routeMetadata';
 
 const marketingCopy = {
-  contextLabel: 'Marketing services',
-  heroTagline: 'Marketing built around clear audiences, disciplined execution, and measurable decisions.',
-  heroDescription: 'We plan search, paid media, content, and measurement as one programme, with scope and priorities defined against your audience, objectives, and available evidence.',
-  heroCtaLabel: 'Discuss a marketing project',
+  heroIntro: 'Search, paid media, content, and measurement coordinated around defined audiences, commercial priorities, and available evidence.',
   scopeTitle: 'A coordinated marketing programme',
   scopeText: 'Engagements begin with the current market position, audience, channel performance, and measurement setup. From there, we agree channel responsibilities, campaign cadence, reporting measures, and the work required to improve performance over time.',
   offersTitle: 'Marketing capabilities',
@@ -21,22 +17,18 @@ const offers = [
   {
     title: 'Search Engine Optimisation (SEO)',
     text: 'Technical review, search-intent research, on-page structure, and content planning designed to improve qualified organic visibility over time.',
-    icon: <Search size={22} />,
   },
   {
     title: 'Paid Campaign Management',
     text: 'Campaign planning and management across Google, Meta, and relevant commerce channels, with budgets reviewed against agreed performance measures.',
-    icon: <Megaphone size={22} />,
   },
   {
     title: 'Analytics and Performance Tracking',
     text: 'Tracking and reporting for traffic, campaign spend, enquiries, and commercial outcomes, with measurement definitions agreed before launch.',
-    icon: <BarChart size={22} />,
   },
   {
     title: 'Content and Copywriting',
     text: "Landing pages, articles, product copy, and campaign messaging aligned with search intent and the brand's voice.",
-    icon: <FileText size={22} />,
   },
 ];
 

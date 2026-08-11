@@ -1,17 +1,12 @@
 import './ServicePage.css';
-import { ArrowRight } from 'lucide-react';
 import useSEO from '../hooks/useSEO';
 import FAQAccordion from './FAQAccordion';
-import { openWorkModal } from '../utils/workModal';
 
 const ServicePage = ({
   seoMetadata,
   pageTypeClass,
-  contextLabel,
   heroTitle,
-  heroTagline,
-  heroDescription,
-  heroCtaLabel,
+  heroIntro,
   heroImage,
   scopeTitle,
   scopeText,
@@ -43,20 +38,10 @@ const ServicePage = ({
           </picture>
         )}
         <div className="container">
-          <span className="section-subtitle">{contextLabel}</span>
           <h1 className="domain-title">{heroTitle}</h1>
-          <p className="domain-subtitle">{heroTagline}</p>
           <p className="domain-description">
-            {heroDescription}
+            {heroIntro}
           </p>
-          <button
-            type="button"
-            className="btn btn-primary domain-cta"
-            onClick={() => openWorkModal(`${pageTypeClass}-hero`)}
-          >
-            {heroCtaLabel}
-            <ArrowRight size={18} aria-hidden="true" />
-          </button>
         </div>
       </section>
 
@@ -78,10 +63,7 @@ const ServicePage = ({
 
           <div className="offers-grid">
             {offers.map((offer) => (
-              <article key={offer.title} className="offer-card">
-                <div className="offer-icon-wrapper">
-                  {offer.icon}
-                </div>
+              <article key={offer.title} className="offer-entry">
                 <h3 className="offer-card-title">{offer.title}</h3>
                 <p className="offer-card-text">{offer.text}</p>
               </article>

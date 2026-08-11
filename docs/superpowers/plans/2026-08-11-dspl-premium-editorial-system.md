@@ -10,7 +10,7 @@
 
 ## Global Constraints
 
-- Use the exact approved Home H1: `We develop brands. We deliver disciplined market execution.` as two visible statements.
+- Use the exact approved Home H1 as two visible statements: `We develop brands.` in white and `We deliver disciplined market execution.` in DSPL gold.
 - Use the exact approved Home paragraph: `Dashapatmaja Solutions Pvt Ltd develops and operates consumer brands while helping businesses coordinate branding, marketing, and e-commerce through clearly defined, accountable execution.`
 - Header is the only production component permitted to import or call `openWorkModal`.
 - Do not add geographic qualifiers, currency-specific claims, testimonials, unverifiable metrics, guaranteed outcomes, response-time promises, decorative numbers, or replacement capability icons.
@@ -82,11 +82,11 @@ expect(homePage).not.toContain("openWorkModal('homepage-hero')");
 expect(homePage).toContain('We deliver disciplined market execution.');
 expect(homePage).toContain('href="#capabilities"');
 expect(homePage).toContain('id="capabilities"');
-expect(home).toMatch(
-  /\.home-hero-content::before\s*{[^}]*width:\s*3rem;[^}]*height:\s*3px;[^}]*background:\s*var\(--accent\);/s,
-);
 expect(home).toMatch(/\.hero-title\s*{[^}]*color:\s*#fff;/s);
-expect(home).not.toContain('.accent-text');
+expect(home).toMatch(
+  /\.hero-title-accent\s*{[^}]*color:\s*var\(--accent\);/s,
+);
+expect(home).not.toContain('.home-hero-content::before');
 ```
 
 - [ ] **Step 2: Run the Home tests to verify RED**
@@ -106,7 +106,9 @@ Remove the `openWorkModal` import from `Home.jsx`. Replace the H1, paragraph, an
 ```jsx
 <h1 className="hero-title">
   <span>We develop brands.</span>
-  <span>We deliver disciplined market execution.</span>
+              <span className="hero-title-accent">
+                We deliver disciplined market execution.
+              </span>
 </h1>
 <p className="hero-subhead">
   Dashapatmaja Solutions Pvt Ltd develops and operates consumer brands
@@ -131,13 +133,8 @@ Change the coordinated-services opening tag to:
 Replace `.accent-text`, `.hero-ctas`, and the mobile `.hero-ctas` rules in `Home.css` with:
 
 ```css
-.home-hero-content::before {
-  display: block;
-  width: 3rem;
-  height: 3px;
-  margin: 0 auto 1.5rem;
-  background: var(--accent);
-  content: '';
+.hero-title-accent {
+  color: var(--accent);
 }
 
 .hero-capabilities-link {
@@ -159,7 +156,7 @@ Replace `.accent-text`, `.hero-ctas`, and the mobile `.hero-ctas` rules in `Home
 }
 ```
 
-Keep `.hero-title { color: #fff; }` and the existing two-span block layout. Do not change hero media, overlay, supporter markup, or the lower Home sections.
+Keep `.hero-title { color: #fff; }` so the first statement remains white, apply gold only through `.hero-title-accent` on the second statement, and retain the two-span block layout. Do not change hero media, overlay, supporter markup, or the lower Home sections.
 
 - [ ] **Step 4: Run the Home tests to verify GREEN**
 

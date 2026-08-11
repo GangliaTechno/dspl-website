@@ -42,13 +42,17 @@ describe('Home page', () => {
       </BrowserRouter>,
     );
 
-    expect(
-      screen.getByRole('heading', {
-        level: 1,
-        name:
-          'We develop brands. We deliver disciplined market execution.',
-      }),
-    ).toBeInTheDocument();
+    const heroHeading = screen.getByRole('heading', {
+      level: 1,
+      name: 'We develop brands. We deliver disciplined market execution.',
+    });
+    expect(heroHeading).toBeInTheDocument();
+    expect(heroHeading.querySelectorAll('span')[0]).not.toHaveClass(
+      'hero-title-accent',
+    );
+    expect(heroHeading.querySelectorAll('span')[1]).toHaveClass(
+      'hero-title-accent',
+    );
 
     expect(
       screen.getByText(
