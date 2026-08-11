@@ -5,8 +5,10 @@ import FAQAccordion from './FAQAccordion';
 const ServicePage = ({
   seoMetadata,
   pageTypeClass,
+  contextLabel,
   heroTitle,
-  heroIntro,
+  heroTagline,
+  heroDescription,
   heroImage,
   scopeTitle,
   scopeText,
@@ -38,9 +40,11 @@ const ServicePage = ({
           </picture>
         )}
         <div className="container">
+          <span className="section-subtitle">{contextLabel}</span>
           <h1 className="domain-title">{heroTitle}</h1>
+          <p className="domain-subtitle">{heroTagline}</p>
           <p className="domain-description">
-            {heroIntro}
+            {heroDescription}
           </p>
         </div>
       </section>

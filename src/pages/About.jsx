@@ -215,6 +215,9 @@ const About = () => {
         >
           <span className="section-subtitle">Our Corporate Profile</span>
           <h1 className="about-title">About Dashapatmaja Solutions Pvt Ltd</h1>
+          <p className="about-subtitle">
+            A multidisciplinary company focused on brand development and commercial execution.
+          </p>
           <div className="about-intro-grid">
             <p className="about-intro-text">
               Founded in 2023, Dashapatmaja Solutions Pvt Ltd develops consumer brands and provides branding, marketing, and e-commerce services. Based at MUTBI, MAHE, Manipal, our team combines healthcare, engineering, design, management, and technology experience.

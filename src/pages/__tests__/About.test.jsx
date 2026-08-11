@@ -21,11 +21,22 @@ describe('About page', () => {
   });
 
   it('presents the direction framework in its approved reading order', () => {
-    render(
+    const { container } = render(
       <MemoryRouter initialEntries={['/about']}>
         <About />
       </MemoryRouter>,
     );
+
+    expect(screen.getByText('Our Corporate Profile')).toBeInTheDocument();
+    expect(screen.getByRole('heading', {
+      level: 1,
+      name: 'About Dashapatmaja Solutions Pvt Ltd',
+    })).toBeInTheDocument();
+    expect(screen.getByText(
+      'A multidisciplinary company focused on brand development and commercial execution.',
+    )).toHaveClass('about-subtitle');
+    expect(container.querySelector('.about-hero .about-intro-text'))
+      .toBeInTheDocument();
 
     const heading = screen.getByRole('heading', {
       level: 2,

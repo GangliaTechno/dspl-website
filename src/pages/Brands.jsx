@@ -9,7 +9,6 @@ import brandHero768 from '../assets/brands-hero-editorial-768.webp';
 import brandHero1200 from '../assets/brands-hero-editorial-1200.webp';
 import brandHero1672 from '../assets/brands-hero-editorial-1672.webp';
 import brandHeroMobile from '../assets/brands-hero-editorial-mobile.webp';
-import { openWorkModal } from '../utils/workModal';
 
 const Brands = () => {
   useSEO(getRouteMetadata('/brands'));
@@ -45,6 +44,7 @@ const Brands = () => {
           >
             <span className="section-subtitle">DSPL Brands</span>
             <h1 className="brands-title">We develop and operate consumer brands.</h1>
+            <p className="brands-tagline">From product development to market execution.</p>
             <p className="brands-description">
               We work across product development, packaging, compliance, market positioning, and commerce. Raw Radicles is our first flagship consumer brand, with additional concepts in development.
             </p>
@@ -141,14 +141,9 @@ const Brands = () => {
             <p className="pipeline-text">
               Additional consumer-brand concepts are being evaluated and developed. We will publish them here when they are ready for market.
             </p>
-            <button
-              type="button"
-              aria-label="Open enquiry form to discuss a brand partnership"
-              onClick={() => openWorkModal('brands-page')}
-              className="btn btn-primary pipeline-btn"
-            >
-              Discuss a brand partnership <ArrowRight size={16} />
-            </button>
+            <Link to="/contact" className="btn btn-primary pipeline-btn">
+              Contact us about a brand partnership <ArrowRight size={16} aria-hidden="true" />
+            </Link>
           </motion.div>
         </div>
       </section>

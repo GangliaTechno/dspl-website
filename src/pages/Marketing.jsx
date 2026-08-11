@@ -6,7 +6,9 @@ import ServicePage from '../components/ServicePage';
 import { getRouteMetadata } from '../seo/routeMetadata';
 
 const marketingCopy = {
-  heroIntro: 'Search, paid media, content, and measurement coordinated around defined audiences, commercial priorities, and available evidence.',
+  contextLabel: 'Marketing services',
+  heroTagline: 'Marketing built around clear audiences, disciplined execution, and measurable decisions.',
+  heroDescription: 'We plan search, paid media, content, and measurement as one programme, with scope and priorities defined against your audience, objectives, and available evidence.',
   scopeTitle: 'A coordinated marketing programme',
   scopeText: 'Engagements begin with the current market position, audience, channel performance, and measurement setup. From there, we agree channel responsibilities, campaign cadence, reporting measures, and the work required to improve performance over time.',
   offersTitle: 'Marketing capabilities',

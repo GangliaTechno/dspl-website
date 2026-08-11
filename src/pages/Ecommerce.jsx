@@ -6,7 +6,9 @@ import ServicePage from '../components/ServicePage';
 import { getRouteMetadata } from '../seo/routeMetadata';
 
 const ecommerceCopy = {
-  heroIntro: 'Storefront, marketplace, payment, and fulfilment systems planned around the selected platform and operating model.',
+  contextLabel: 'E-commerce services',
+  heroTagline: 'Storefront, marketplace, payment, and fulfilment systems designed for reliable day-to-day operation.',
+  heroDescription: 'We plan and implement commerce systems that connect product presentation, checkout, payments, marketplaces, and fulfilment. Scope is defined around the selected platform, operating model, and support needs.',
   scopeTitle: 'Commerce aligned with day-to-day operations',
   scopeText: 'Storefront and marketplace work is planned alongside catalogue ownership, payment setup, inventory, fulfilment, and reporting. This keeps the customer journey and operational responsibilities within one documented scope.',
   offersTitle: 'E-commerce capabilities',

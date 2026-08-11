@@ -2,6 +2,7 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { BrowserRouter } from 'react-router';
 import { afterEach, describe, it, expect } from 'vitest';
 import Header from '../Header';
+import { WORK_MODAL_EVENT } from '../../utils/workModal';
 
 const originalInnerWidth = window.innerWidth;
 
@@ -24,6 +25,25 @@ describe('Header Component', () => {
     expect(screen.getAllByText('Home')[0]).toBeInTheDocument();
     expect(screen.getAllByText('About')[0]).toBeInTheDocument();
     expect(screen.getAllByText('Contact')[0]).toBeInTheDocument();
+  });
+
+  it('owns the global Work With Us modal action', () => {
+    const sources = [];
+    const captureSource = (event) => sources.push(event.detail.source);
+    window.addEventListener(WORK_MODAL_EVENT, captureSource);
+
+    render(
+      <BrowserRouter>
+        <Header />
+      </BrowserRouter>,
+    );
+
+    fireEvent.click(screen.getAllByRole('button', {
+      name: 'Open Work With Us enquiry form',
+    })[0]);
+    expect(sources).toEqual(['header']);
+
+    window.removeEventListener(WORK_MODAL_EVENT, captureSource);
   });
 
   it('toggles mobile menu button with proper ARIA attributes', () => {

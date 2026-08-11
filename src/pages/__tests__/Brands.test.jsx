@@ -1,7 +1,6 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { WORK_MODAL_EVENT } from '../../utils/workModal';
 import Brands from '../Brands';
 
 describe('Brands page', () => {
@@ -20,10 +19,6 @@ describe('Brands page', () => {
   });
 
   it('renders the approved portfolio context and preserved brand actions', () => {
-    const modalSources = [];
-    const captureModalSource = (event) => modalSources.push(event.detail.source);
-    window.addEventListener(WORK_MODAL_EVENT, captureModalSource);
-
     const { container } = render(
       <MemoryRouter initialEntries={['/brands']}>
         <Brands />
@@ -35,6 +30,8 @@ describe('Brands page', () => {
       level: 1,
       name: 'We develop and operate consumer brands.',
     })).toBeInTheDocument();
+    expect(screen.getByText('From product development to market execution.'))
+      .toHaveClass('brands-tagline');
     expect(screen.getByText(
       'We work across product development, packaging, compliance, market positioning, and commerce. Raw Radicles is our first flagship consumer brand, with additional concepts in development.',
     )).toBeInTheDocument();
@@ -61,11 +58,12 @@ describe('Brands page', () => {
       .toHaveAttribute('href', '/contact');
     expect(container.querySelector('.rr-cta-btn[href^="mailto:"]'))
       .not.toBeInTheDocument();
-    fireEvent.click(screen.getByRole('button', {
-      name: 'Open enquiry form to discuss a brand partnership',
-    }));
-    expect(modalSources).toEqual(['brands-page']);
-    window.removeEventListener(WORK_MODAL_EVENT, captureModalSource);
+    expect(screen.getByRole('link', {
+      name: 'Contact us about a brand partnership',
+    })).toHaveAttribute('href', '/contact');
+    expect(screen.queryByRole('button', {
+      name: /brand partnership/i,
+    })).not.toBeInTheDocument();
 
     expect(screen.getByRole('heading', {
       level: 2,

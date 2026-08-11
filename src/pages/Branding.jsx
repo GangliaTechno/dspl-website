@@ -6,7 +6,9 @@ import ServicePage from '../components/ServicePage';
 import { getRouteMetadata } from '../seo/routeMetadata';
 
 const brandingCopy = {
-  heroIntro: 'Positioning, identity, voice, and application systems developed for consistent use across the business.',
+  contextLabel: 'Branding services',
+  heroTagline: 'Positioning, identity, and brand systems designed for consistent use.',
+  heroDescription: 'We translate business context into a usable brand system: positioning, identity, voice, and the assets required for consistent execution.',
   scopeTitle: 'A brand system built for application',
   scopeText: 'The work starts with the business, audience, category, and competitive context. The resulting system connects positioning and language with visual identity, application rules, and assets that internal and external teams can use consistently.',
   offersTitle: 'Branding capabilities',

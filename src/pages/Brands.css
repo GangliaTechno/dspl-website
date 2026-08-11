@@ -71,7 +71,7 @@
 }
 
 .brands-hero-content .section-subtitle {
-  color: var(--accent);
+  color: rgba(255, 255, 255, 0.72);
   font-weight: 700;
   letter-spacing: 0.1em;
   font-size: 0.85rem;
@@ -82,19 +82,32 @@
 .brands-title {
   font-size: 3.5rem;
   font-weight: 800;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   line-height: 1.1;
   letter-spacing: -0.04em;
-  color: #ffffff !important;
+  color: var(--accent);
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
 }
 
-.brands-description {
-  font-size: 1.25rem;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.88);
+.brands-tagline {
+  max-width: 40ch;
+  margin: 0 auto 1.25rem;
+  color: #ffffff;
+  font-size: clamp(1.25rem, 2.1vw, 1.6rem);
   font-weight: 600;
-  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+  line-height: 1.35;
+  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.45);
+  text-wrap: balance;
+}
+
+.brands-description {
+  max-width: 70ch;
+  margin: 0 auto 1rem;
+  color: rgba(255, 255, 255, 0.84);
+  font-size: 1.1rem;
+  font-weight: 400;
+  line-height: 1.7;
 }
 
 .showcase-container {

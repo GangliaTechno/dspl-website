@@ -9,8 +9,10 @@ vi.mock('../../hooks/useSEO', () => ({
 const props = {
   seoMetadata: { title: 'Test service' },
   pageTypeClass: 'test-service',
+  contextLabel: 'Test services',
   heroTitle: 'Test service',
-  heroIntro: 'One concise service positioning paragraph.',
+  heroTagline: 'A precise service positioning statement.',
+  heroDescription: 'One concise service context paragraph.',
   heroImage: {
     src: '/service-1440.webp',
     desktopSrcSet: '/service-960.webp 960w, /service-1440.webp 1440w',
@@ -38,12 +40,13 @@ describe('ServicePage', () => {
 
     expect(screen.getByRole('heading', { level: 1, name: props.heroTitle }))
       .toBeInTheDocument();
-    expect(screen.getByText(props.heroIntro)).toHaveClass('domain-description');
+    expect(screen.getByText(props.contextLabel)).toHaveClass('section-subtitle');
+    expect(screen.getByText(props.heroTagline)).toHaveClass('domain-subtitle');
+    expect(screen.getByText(props.heroDescription)).toHaveClass('domain-description');
     expect(screen.queryByRole('button', { name: /discuss/i }))
       .not.toBeInTheDocument();
     expect(container.querySelector('.domain-hero .section-subtitle'))
-      .not.toBeInTheDocument();
-    expect(container.querySelector('.domain-subtitle')).not.toBeInTheDocument();
+      .toBeInTheDocument();
 
     const scope = screen.getByRole('region', { name: props.scopeTitle });
     expect(scope).toHaveClass('service-scope-section');

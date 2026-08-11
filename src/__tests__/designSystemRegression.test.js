@@ -39,7 +39,7 @@ describe('approved design-system corrections', () => {
 
     expect(tokens).toContain('--accent-text: #8A5B00;');
     expect(brands).toMatch(
-      /\.brands-hero-content\s+\.section-subtitle\s*{[^}]*color:\s*var\(--accent\);/s,
+      /\.brands-title\s*{[^}]*color:\s*var\(--accent\);/s,
     );
     expect(privacy).toMatch(
       /\.privacy-section h2\s*{[^}]*color:\s*var\(--accent-text\);/s,
@@ -587,9 +587,10 @@ describe('approved design-system corrections', () => {
     expect(servicePage).not.toContain('openWorkModal');
     expect(servicePage).not.toContain('heroCtaLabel');
     expect(servicePage).not.toContain('domain-cta');
-    expect(servicePage).not.toContain('domain-subtitle');
     expect(servicePage).not.toContain('offer-icon-wrapper');
-    expect(servicePage).toContain('{heroIntro}');
+    expect(servicePage).toContain('{contextLabel}');
+    expect(servicePage).toContain('{heroTagline}');
+    expect(servicePage).toContain('{heroDescription}');
     expect(servicePage).toContain('className="container service-scope-layout"');
     expect(servicePage).toContain('<article key={offer.title} className="offer-entry">');
     expect(servicePage).not.toContain('<span className="section-subtitle">Services</span>');
@@ -599,6 +600,15 @@ describe('approved design-system corrections', () => {
     expect(servicePage).not.toContain('matters-box');
     expect(serviceCss).toMatch(
       /\.domain-hero\s*{[^}]*display:\s*grid;[^}]*min-height:\s*400px;[^}]*place-items:\s*center;/s,
+    );
+    expect(serviceCss).toMatch(
+      /\.domain-title\s*{[^}]*color:\s*var\(--accent\);/s,
+    );
+    expect(serviceCss).toMatch(
+      /\.domain-hero \.section-subtitle\s*{[^}]*color:\s*rgba\(255,\s*255,\s*255,\s*0\.72\);/s,
+    );
+    expect(serviceCss).toMatch(
+      /\.domain-subtitle\s*{[^}]*color:\s*#ffffff;/s,
     );
     expect(serviceCss).toMatch(
       /\.offers-grid\s*{[^}]*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\);[^}]*border-top:\s*1px solid var\(--border-color\);/s,
@@ -611,6 +621,20 @@ describe('approved design-system corrections', () => {
     );
     expect(serviceCss).not.toMatch(/\.offer-card\s*\{/);
     expect(serviceCss).not.toContain('.offer-icon-wrapper');
+  });
+
+  it('keeps the Header as the sole global Work With Us modal owner', () => {
+    const header = readSource('src/components/Header.jsx');
+    const brands = readSource('src/pages/Brands.jsx');
+    const home = readSource('src/pages/Home.jsx');
+    const servicePage = readSource('src/components/ServicePage.jsx');
+
+    expect(header).toContain("openWorkModal('header')");
+    expect(brands).not.toContain('openWorkModal');
+    expect(home).not.toContain('openWorkModal');
+    expect(servicePage).not.toContain('openWorkModal');
+    expect(brands).toContain('to="/contact"');
+    expect(brands).toContain('Contact us about a brand partnership');
   });
 
   it('builds a noindex production 404 without a catch-all 200 rewrite', () => {
