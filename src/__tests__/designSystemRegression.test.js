@@ -263,6 +263,12 @@ describe('approved design-system corrections', () => {
       /\.contact-layout\s*{[^}]*grid-template-columns:\s*minmax\(0,\s*2fr\) minmax\(0,\s*3fr\);[^}]*grid-template-areas:\s*"intro form"\s*"details form";/s,
     );
     expect(contactCss).toMatch(
+      /\.contact-main-section\s*{[^}]*padding:\s*2\.5rem 0 3\.5rem;/s,
+    );
+    expect(contactCss).toMatch(
+      /\.contact-layout\s*{[^}]*row-gap:\s*1rem;/s,
+    );
+    expect(contactCss).toMatch(
       /\.contact-intro\s*{[^}]*grid-area:\s*intro;/s,
     );
     expect(contactCss).toMatch(
@@ -273,6 +279,9 @@ describe('approved design-system corrections', () => {
     );
     expect(contactCss).toMatch(
       /\.contact-detail-info h3\s*{[^}]*color:\s*var\(--accent-text\);[^}]*font-size:\s*0\.75rem;[^}]*text-transform:\s*uppercase;/s,
+    );
+    expect(contactCss).toMatch(
+      /\.contact-detail-row\s*{[^}]*padding:\s*0\.625rem 0;/s,
     );
     expect(contactCss).not.toContain('.contact-detail-info h4');
     expect(contactCss).toMatch(

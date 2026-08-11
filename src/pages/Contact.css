@@ -5,7 +5,7 @@
 
 .contact-main-section {
   min-height: calc(100vh - 5rem);
-  padding: 3rem 0 4rem;
+  padding: 2.5rem 0 3.5rem;
 }
 
 .contact-layout {
@@ -15,7 +15,7 @@
     "intro form"
     "details form";
   column-gap: 3rem;
-  row-gap: 2rem;
+  row-gap: 1rem;
   align-items: start;
   max-width: 1120px;
   margin: 0 auto;
@@ -72,7 +72,7 @@
 }
 
 .contact-detail-row {
-  padding: 1rem 0;
+  padding: 0.625rem 0;
   border-bottom: 1px solid var(--border-color);
 }
 
