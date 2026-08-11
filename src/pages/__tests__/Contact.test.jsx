@@ -1,11 +1,18 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
+import { MemoryRouter } from 'react-router';
 import Contact from '../Contact';
 import { FORM_SUBMISSION_ERROR } from '../../utils/formMessages';
 
 vi.mock('../../hooks/useSEO', () => ({
   default: vi.fn(),
 }));
+
+const renderContact = () => render(
+  <MemoryRouter initialEntries={['/contact']}>
+    <Contact />
+  </MemoryRouter>,
+);
 
 const fillValidForm = () => {
   fireEvent.change(screen.getByLabelText('First Name'), { target: { value: 'Jane' } });
@@ -29,7 +36,7 @@ afterEach(() => {
 
 describe('Contact', () => {
   it('keeps one headquarters panel with the verified contact routes', () => {
-    const { container } = render(<Contact />);
+    const { container } = renderContact();
     const panel = container.querySelector('.contact-details-panel');
     const rows = panel?.querySelectorAll('.contact-detail-row');
 
@@ -46,7 +53,7 @@ describe('Contact', () => {
   });
 
   it('presents Contact as peer enquiry columns with approved visitor-facing copy', () => {
-    const { container } = render(<Contact />);
+    const { container } = renderContact();
     const hero = container.querySelector('.contact-hero');
     const layout = container.querySelector('.contact-layout');
     const columns = Array.from(layout.children);
@@ -54,6 +61,7 @@ describe('Contact', () => {
 
     expect(hero).toHaveTextContent('Contact');
     expect(hero).toHaveTextContent('Contact us');
+    expect(hero.querySelector('.section-subtitle')).not.toBeInTheDocument();
     expect(hero).toHaveTextContent(
       'Tell us about your brand, campaign, or e-commerce requirements. We will review the details and respond using the contact information you provide.',
     );
@@ -78,7 +86,7 @@ describe('Contact', () => {
   });
 
   it('preserves the primary enquiry fields and choices', () => {
-    render(<Contact />);
+    const { container } = renderContact();
 
     expect(screen.getByLabelText('First Name')).toBeRequired();
     expect(screen.getByLabelText('Last Name')).toBeRequired();
@@ -99,10 +107,15 @@ describe('Contact', () => {
     ]);
     expect(screen.getByRole('button', { name: /Send Message/i }))
       .toHaveAttribute('type', 'submit');
+    expect(container.querySelector('.contact-privacy-notice')).toHaveTextContent(
+      'Information submitted through this form is handled as described in our Privacy Policy.',
+    );
+    expect(screen.getByRole('link', { name: 'Privacy Policy' }))
+      .toHaveAttribute('href', '/privacy');
   });
 
   it('announces a Message validation error with a linked alert', () => {
-    render(<Contact />);
+    renderContact();
 
     fireEvent.click(screen.getByRole('button', { name: /Send Message/i }));
 
@@ -117,7 +130,7 @@ describe('Contact', () => {
 
   it('uses a safe shared error when the contact configuration is unavailable', async () => {
     vi.stubEnv('VITE_WEB3FORMS_ACCESS_KEY', '');
-    render(<Contact />);
+    renderContact();
     fillValidForm();
 
     fireEvent.click(screen.getByRole('button', { name: /Send Message/i }));
@@ -132,7 +145,7 @@ describe('Contact', () => {
       json: async () => ({ success: false, message: 'Provider response with internal detail.' }),
     });
     vi.stubGlobal('fetch', fetchMock);
-    render(<Contact />);
+    renderContact();
     fillValidForm();
 
     fireEvent.click(screen.getByRole('button', { name: /Send Message/i }));
@@ -158,7 +171,7 @@ describe('Contact', () => {
   it('uses the same safe error when the submission request cannot connect', async () => {
     vi.stubEnv('VITE_WEB3FORMS_ACCESS_KEY', 'test-access-key');
     vi.stubGlobal('fetch', vi.fn().mockRejectedValue(new Error('Network failure')));
-    render(<Contact />);
+    renderContact();
     fillValidForm();
 
     fireEvent.click(screen.getByRole('button', { name: /Send Message/i }));
@@ -174,7 +187,7 @@ describe('Contact', () => {
       json: async () => ({ success: true }),
     }));
     vi.stubGlobal('gtag', gtag);
-    render(<Contact />);
+    renderContact();
     fillValidForm();
 
     fireEvent.click(screen.getByRole('button', { name: /Send Message/i }));

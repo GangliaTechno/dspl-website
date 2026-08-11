@@ -1,5 +1,6 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import { afterEach, describe, expect, it } from 'vitest';
+import { MemoryRouter } from 'react-router';
 import contactCss from '../pages/Contact.css?raw';
 import WorkWithUsModal from '../components/WorkWithUsModal';
 import { openWorkModal } from '../utils/workModal';
@@ -36,7 +37,11 @@ afterEach(() => {
 
 describe('route stylesheet isolation', () => {
   it('does not let Contact styles alter an open Work With Us modal', () => {
-    render(<WorkWithUsModal />);
+    render(
+      <MemoryRouter>
+        <WorkWithUsModal />
+      </MemoryRouter>,
+    );
     act(() => openWorkModal('route-style-isolation'));
 
     fireEvent.click(screen.getByRole('button', { name: /Send My Project Details/i }));

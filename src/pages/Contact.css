@@ -132,6 +132,25 @@
   margin-top: 1rem;
 }
 
+.contact-privacy-notice {
+  margin: 0.25rem 0 0.5rem;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.contact-privacy-notice a {
+  color: var(--accent-text);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.contact-privacy-notice a:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: 3px;
+}
+
 /* Success State */
 .contact-success-state {
   text-align: center;
@@ -161,15 +180,42 @@
 
 @media (min-width: 901px) {
   .contact-hero {
-    padding: 1.5rem 0 1rem;
+    padding: 0.75rem 0 0.5rem;
   }
 
   .contact-title {
-    margin-bottom: 1rem;
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .contact-description {
+    font-size: 1rem;
+    line-height: 1.5;
   }
 
   .contact-grid-section {
-    padding-top: 1.25rem;
+    padding-top: 0.75rem;
+  }
+
+  .contact-column {
+    gap: 1rem;
+  }
+
+  .contact-form-panel {
+    padding: 1.5rem;
+  }
+
+  .contact-form-panel .form-group {
+    margin-bottom: 0.75rem;
+  }
+
+  .contact-form-panel textarea.form-input {
+    min-height: 72px;
+  }
+
+  .contact-submit-btn {
+    margin-top: 0.5rem;
+    min-height: 44px;
   }
 }
 

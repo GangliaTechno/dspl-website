@@ -1,5 +1,6 @@
 import './WorkWithUsModal.css';
 import { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router';
 import { X, CheckCircle2, AlertCircle } from 'lucide-react';
 import { trackEvent } from '../utils/analytics';
 import { FORM_SUBMISSION_ERROR } from '../utils/formMessages';
@@ -458,6 +459,11 @@ const WorkWithUsModal = () => {
                   onChange={handleInputChange} 
                 />
               </div>
+
+              <p className="work-modal-privacy-notice">
+                Information submitted through this form is handled as described in our{' '}
+                <Link to="/privacy">Privacy Policy</Link>.
+              </p>
 
               {submitError && (
                 <div className="work-modal-submit-error-banner" role="alert">

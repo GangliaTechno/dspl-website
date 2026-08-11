@@ -1,5 +1,6 @@
 import './Contact.css';
 import { useState } from 'react';
+import { Link } from 'react-router';
 import { Mail, Phone, MapPin, Send, CheckCircle2, AlertCircle } from 'lucide-react';
 import useSEO from '../hooks/useSEO';
 import { getRouteMetadata } from '../seo/routeMetadata';
@@ -111,7 +112,6 @@ const Contact = () => {
       {/* Header Block */}
       <section className="section contact-hero">
         <div className="container">
-          <span className="section-subtitle">Contact</span>
           <h1 className="contact-title">Contact us</h1>
           <p className="contact-description">
             Tell us about your brand, campaign, or e-commerce requirements. We will review the details and respond using the contact information you provide.
@@ -272,6 +272,11 @@ const Contact = () => {
                     />
                     {errors.message && <span id="message-error" className="form-error-text" role="alert">{errors.message}</span>}
                   </div>
+
+                  <p className="contact-privacy-notice">
+                    Information submitted through this form is handled as described in our{' '}
+                    <Link to="/privacy">Privacy Policy</Link>.
+                  </p>
 
                   {submitError && (
                     <div className="contact-submit-error-banner" role="alert">

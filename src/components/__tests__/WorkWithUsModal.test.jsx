@@ -1,8 +1,15 @@
 import { act, render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { MemoryRouter } from 'react-router';
 import WorkWithUsModal from '../WorkWithUsModal';
 import { openWorkModal } from '../../utils/workModal';
 import { FORM_SUBMISSION_ERROR } from '../../utils/formMessages';
+
+const renderModal = () => render(
+  <MemoryRouter>
+    <WorkWithUsModal />
+  </MemoryRouter>,
+);
 
 describe('WorkWithUsModal Component', () => {
   beforeEach(() => {
@@ -11,7 +18,7 @@ describe('WorkWithUsModal Component', () => {
   });
 
   it('opens when open-work-modal event is dispatched and closes on Escape key', () => {
-    render(<WorkWithUsModal />);
+    renderModal();
 
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
 
@@ -25,7 +32,7 @@ describe('WorkWithUsModal Component', () => {
   });
 
   it('uses clear visitor-facing project planner labels without internal lead language', () => {
-    render(<WorkWithUsModal />);
+    renderModal();
     act(() => openWorkModal('modal-copy-test'));
 
     expect(screen.getByRole('heading', { level: 3, name: 'Contact details' })).toBeInTheDocument();
@@ -35,7 +42,7 @@ describe('WorkWithUsModal Component', () => {
   });
 
   it('uses a neutral email placeholder without an absolute sharing claim', () => {
-    render(<WorkWithUsModal />);
+    renderModal();
     act(() => openWorkModal('modal-email-placeholder-test'));
 
     const emailInput = screen.getByLabelText(/Email Address/i);
@@ -44,7 +51,7 @@ describe('WorkWithUsModal Component', () => {
   });
 
   it('displays validation errors when required fields are missing', () => {
-    render(<WorkWithUsModal />);
+    renderModal();
     act(() => openWorkModal('modal-test'));
 
     const submitBtn = screen.getByText('Send My Project Details');
@@ -57,7 +64,7 @@ describe('WorkWithUsModal Component', () => {
   });
 
   it('silently aborts submission when honeypot field is filled', async () => {
-    render(<WorkWithUsModal />);
+    renderModal();
     act(() => openWorkModal('modal-test'));
 
     // Fill honeypot field
@@ -76,7 +83,7 @@ describe('WorkWithUsModal Component', () => {
   });
 
   it('keeps the form open and reports the shared recoverable submission error when configuration is unavailable', async () => {
-    render(<WorkWithUsModal />);
+    renderModal();
     act(() => openWorkModal('test'));
 
     fireEvent.change(screen.getByLabelText(/Full Name/i), {
@@ -98,11 +105,22 @@ describe('WorkWithUsModal Component', () => {
     expect(screen.getByRole('dialog')).toBeInTheDocument();
   });
 
+  it('links the project form to the Privacy Policy before submission', () => {
+    const { container } = renderModal();
+    act(() => openWorkModal('modal-privacy-test'));
+
+    expect(container.querySelector('.work-modal-privacy-notice')).toHaveTextContent(
+      'Information submitted through this form is handled as described in our Privacy Policy.',
+    );
+    expect(screen.getByRole('link', { name: 'Privacy Policy' }))
+      .toHaveAttribute('href', '/privacy');
+  });
+
   it('uses the shared recoverable submission error for a failed public request', async () => {
     vi.stubEnv('VITE_WEB3FORMS_ACCESS_KEY', 'test-access-key');
     vi.stubGlobal('fetch', vi.fn().mockRejectedValue(new Error('network unavailable')));
 
-    render(<WorkWithUsModal />);
+    renderModal();
     act(() => openWorkModal('modal-request-error-test'));
 
     fireEvent.change(screen.getByLabelText(/Full Name/i), {
@@ -130,7 +148,7 @@ describe('WorkWithUsModal Component', () => {
       json: async () => ({ success: false, message: 'Provider response with internal detail.' }),
     }));
 
-    render(<WorkWithUsModal />);
+    renderModal();
     act(() => openWorkModal('modal-provider-rejection-test'));
 
     fireEvent.change(screen.getByLabelText(/Full Name/i), {

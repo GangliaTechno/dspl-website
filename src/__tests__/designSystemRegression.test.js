@@ -246,6 +246,8 @@ describe('approved design-system corrections', () => {
     expect(contactPage).toContain('>Email</h3>');
     expect(contactPage).toContain('Message received');
     expect(contactPage).toContain('FORM_SUBMISSION_ERROR');
+    expect(contactPage).not.toContain('<span className="section-subtitle">Contact</span>');
+    expect(contactPage).toContain('className="contact-privacy-notice"');
     expect(contactPage).not.toContain('className="glow-bg"');
     expect(formMessages).toContain(
       "'We could not send your message right now. Please try again or contact us by email.'",
@@ -283,7 +285,7 @@ describe('approved design-system corrections', () => {
       /@media\s*\(max-width:\s*900px\)\s*{[\s\S]*?\.contact-hero\s*{[^}]*padding:\s*3rem 0 2rem;/s,
     );
     expect(contactCss).toMatch(
-      /@media\s*\(min-width:\s*901px\)\s*{[\s\S]*?\.contact-hero\s*{[^}]*padding:\s*1\.5rem 0 1rem;[\s\S]*?\.contact-title\s*{[^}]*margin-bottom:\s*1rem;[\s\S]*?\.contact-grid-section\s*{[^}]*padding-top:\s*1\.25rem;/s,
+      /@media\s*\(min-width:\s*901px\)\s*{[\s\S]*?\.contact-hero\s*{[^}]*padding:\s*0\.75rem 0 0\.5rem;[\s\S]*?\.contact-title\s*{[^}]*font-size:\s*3rem;[^}]*margin-bottom:\s*0\.5rem;[\s\S]*?\.contact-description\s*{[^}]*font-size:\s*1rem;[^}]*line-height:\s*1\.5;[\s\S]*?\.contact-grid-section\s*{[^}]*padding-top:\s*0\.75rem;[\s\S]*?\.contact-column\s*{[^}]*gap:\s*1rem;[\s\S]*?\.contact-form-panel\s*{[^}]*padding:\s*1\.5rem;[\s\S]*?\.contact-form-panel \.form-group\s*{[^}]*margin-bottom:\s*0\.75rem;[\s\S]*?\.contact-form-panel textarea\.form-input\s*{[^}]*min-height:\s*72px;[\s\S]*?\.contact-submit-btn\s*{[^}]*margin-top:\s*0\.5rem;[^}]*min-height:\s*44px;/s,
     );
   });
 
