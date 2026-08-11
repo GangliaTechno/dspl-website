@@ -4,11 +4,36 @@ import { motion, useReducedMotion } from 'framer-motion';
 import { Link } from 'react-router';
 import useSEO from '../hooks/useSEO';
 import { getRouteMetadata } from '../seo/routeMetadata';
+import RotatingHeroMedia from '../components/RotatingHeroMedia';
 import rawRadiclesLogo from '../assets/raw-radicles-logo-cropped.webp';
 import brandHero768 from '../assets/brands-hero-editorial-768.webp';
 import brandHero1200 from '../assets/brands-hero-editorial-1200.webp';
 import brandHero1672 from '../assets/brands-hero-editorial-1672.webp';
 import brandHeroMobile from '../assets/brands-hero-editorial-mobile.webp';
+import brandsRotation02960 from '../assets/brands-rotation-02-960.webp';
+import brandsRotation021440 from '../assets/brands-rotation-02-1440.webp';
+import brandsRotation02Mobile from '../assets/brands-rotation-02-mobile.webp';
+
+const brandsHeroImages = [
+  {
+    id: 'brands-primary',
+    src: brandHero1672,
+    desktopSrcSet: `${brandHero768} 768w, ${brandHero1200} 1200w, ${brandHero1672} 1672w`,
+    mobileSrc: brandHeroMobile,
+    sizes: '100vw',
+    width: 1672,
+    height: 941,
+  },
+  {
+    id: 'brands-02',
+    src: brandsRotation021440,
+    desktopSrcSet: `${brandsRotation02960} 960w, ${brandsRotation021440} 1440w`,
+    mobileSrc: brandsRotation02Mobile,
+    sizes: '100vw',
+    width: 1440,
+    height: 810,
+  },
+];
 
 const Brands = () => {
   useSEO(getRouteMetadata('/brands'));
@@ -19,22 +44,12 @@ const Brands = () => {
     <div className="brands-page fade-in">
       {/* Intro Section */}
       <section className="section brands-hero">
-        <picture className="brands-hero-bg" aria-hidden="true">
-          <source media="(max-width: 600px)" srcSet={brandHeroMobile} />
-          <source
-            srcSet={`${brandHero768} 768w, ${brandHero1200} 1200w, ${brandHero1672} 1672w`}
-            sizes="100vw"
-          />
-          <img
-            src={brandHero1672}
-            alt=""
-            className="brands-hero-img"
-            width="1672"
-            height="941"
-            fetchPriority="high"
-            decoding="async"
-          />
-        </picture>
+        <RotatingHeroMedia
+          images={brandsHeroImages}
+          className="brands-hero-bg"
+          imageClassName="brands-hero-img"
+          mobileBreakpoint={600}
+        />
         <div className="container">
           <motion.div
             className="brands-hero-content"

@@ -4,6 +4,7 @@ import { useLocation } from 'react-router';
 import { motion, useReducedMotion } from 'framer-motion';
 import useSEO from '../hooks/useSEO';
 import { getRouteMetadata } from '../seo/routeMetadata';
+import RotatingHeroMedia from '../components/RotatingHeroMedia';
 
 import manuImg from '../assets/manu_pro_fixed.jpg';
 import sreeImg from '../assets/sree_pro_extended.webp';
@@ -15,6 +16,9 @@ import aboutHero960 from '../assets/dspl-about-hero-960.webp';
 import aboutHero1440 from '../assets/dspl-about-hero-1440.webp';
 import aboutHero1600 from '../assets/dspl-about-hero-1600.webp';
 import aboutHeroMobile from '../assets/dspl-about-hero-mobile.webp';
+import aboutRotation02960 from '../assets/about-rotation-02-960.webp';
+import aboutRotation021440 from '../assets/about-rotation-02-1440.webp';
+import aboutRotation02Mobile from '../assets/about-rotation-02-mobile.webp';
 import teamBgImg from '../assets/linen_concrete_texture.webp';
 import journey2023Img from '../assets/about-journey-2023.webp';
 import journey2024Img from '../assets/about-journey-2024.webp';
@@ -79,6 +83,27 @@ const directionCards = [
     label: 'Operating principles',
     title: 'Values',
     text: 'Evidence guides our recommendations. We define scope, responsibilities, and measures clearly, communicate decisions honestly, and execute agreed work with care.',
+  },
+];
+
+const aboutHeroImages = [
+  {
+    id: 'about-primary',
+    src: aboutHero1440,
+    desktopSrcSet: `${aboutHero960} 960w, ${aboutHero1440} 1440w, ${aboutHero1600} 1600w`,
+    mobileSrc: aboutHeroMobile,
+    sizes: '100vw',
+    width: 1600,
+    height: 900,
+  },
+  {
+    id: 'about-02',
+    src: aboutRotation021440,
+    desktopSrcSet: `${aboutRotation02960} 960w, ${aboutRotation021440} 1440w`,
+    mobileSrc: aboutRotation02Mobile,
+    sizes: '100vw',
+    width: 1440,
+    height: 810,
   },
 ];
 
@@ -176,15 +201,6 @@ const About = () => {
     },
   ];
 
-  const heroImage = {
-    src: aboutHero1440,
-    desktopSrcSet: `${aboutHero960} 960w, ${aboutHero1440} 1440w, ${aboutHero1600} 1600w`,
-    mobileSrc: aboutHeroMobile,
-    sizes: '100vw',
-    width: 1600,
-    height: 901,
-  };
-
   return (
     <div
       className="about-page fade-in"
@@ -194,19 +210,12 @@ const About = () => {
     >
       {/* Story Section */}
       <section id="story" className="section about-hero">
-        <picture className="about-hero-bg" aria-hidden="true">
-          <source media="(max-width: 767px)" srcSet={heroImage.mobileSrc} />
-          <source srcSet={heroImage.desktopSrcSet} sizes={heroImage.sizes} />
-          <img
-            className="about-hero-bg-img"
-            src={heroImage.src}
-            alt=""
-            width={heroImage.width}
-            height={heroImage.height}
-            fetchPriority="high"
-            decoding="async"
-          />
-        </picture>
+        <RotatingHeroMedia
+          images={aboutHeroImages}
+          className="about-hero-bg"
+          imageClassName="about-hero-bg-img"
+          mobileBreakpoint={767}
+        />
         <motion.div 
           className="container"
           initial={revealInitial(30)}

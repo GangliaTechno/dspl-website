@@ -54,6 +54,9 @@ describe('approved design-system corrections', () => {
     const brandsCss = readSource('src/pages/Brands.css');
 
     expect(brandsPage).not.toContain('brands-hero-overlay');
+    expect(brandsPage).toContain('const brandsHeroImages = [');
+    expect(brandsPage.match(/id: 'brands-(?:primary|02)'/g)).toHaveLength(2);
+    expect(brandsPage).toContain('<RotatingHeroMedia');
     expect(brandsPage).toContain('brands-hero-editorial-1672.webp');
     expect(brandsPage).toContain('brands-hero-editorial-mobile.webp');
     expect(brandsCss).toMatch(
@@ -61,19 +64,19 @@ describe('approved design-system corrections', () => {
     );
     expect(brandsCss).not.toMatch(/\.brands-hero-overlay\s*{/);
     expect(brandsCss).toMatch(
-      /\.brands-hero\s*{[^}]*text-align:\s*center;[^}]*min-height:\s*32rem;[^}]*padding:\s*8rem 0 6rem;/s,
+      /\.brands-hero\s*{[^}]*text-align:\s*center;[^}]*min-height:\s*38rem;/s,
     );
     expect(brandsCss).toMatch(
       /\.brands-hero::after\s*{[^}]*background:\s*rgba\(8,\s*8,\s*8,\s*0\.68\);/s,
     );
     expect(brandsCss).toMatch(
-      /\.brands-hero \.container\s*{[^}]*max-width:\s*50rem;[^}]*justify-content:\s*center;/s,
+      /\.brands-hero \.container\s*{[^}]*max-width:\s*52rem;[^}]*justify-content:\s*center;/s,
     );
     expect(brandsCss).toMatch(
-      /\.brands-hero-content\s*{[^}]*max-width:\s*50rem;[^}]*margin-inline:\s*auto;[^}]*text-align:\s*center;/s,
+      /\.brands-hero-content\s*{[^}]*max-width:\s*52rem;[^}]*margin-inline:\s*auto;[^}]*text-align:\s*center;/s,
     );
     expect(brandsCss).toMatch(
-      /@media\s*\(max-width:\s*900px\)\s*{[\s\S]*?\.brands-hero\s*{[^}]*padding:\s*5\.5rem 0 4\.5rem;[\s\S]*?\.brands-hero-img\s*{[^}]*object-position:\s*56% 52%;/s,
+      /@media\s*\(max-width:\s*900px\)\s*{[\s\S]*?\.brands-hero\s*{[^}]*min-height:\s*34rem;[^}]*padding:\s*5\.5rem 0 4\.5rem;[\s\S]*?\.brands-hero-img\s*{[^}]*object-position:\s*56% 52%;/s,
     );
   });
 
@@ -227,6 +230,19 @@ describe('approved design-system corrections', () => {
       /@media\s*\(max-width:\s*900px\)\s*{[\s\S]*?\.direction-grid\s*{[^}]*grid-template-columns:\s*1fr;/s,
     );
     expect(aboutCss).not.toContain('.direction-card:hover');
+    expect(aboutPage).toContain('const aboutHeroImages = [');
+    expect(aboutPage.match(/id: 'about-(?:primary|02)'/g)).toHaveLength(2);
+    expect(aboutPage).toContain('<RotatingHeroMedia');
+    expect(aboutCss).toMatch(/\.about-hero\s*{[^}]*min-height:\s*38rem;/s);
+    expect(aboutCss).not.toContain('@keyframes subtleZoom');
+    expect(aboutCss).toMatch(
+      /\.direction-section\s*{[^}]*padding:\s*6\.5rem 0;/s,
+    );
+    expect(aboutCss).toMatch(
+      /#direction-title\s*{[^}]*margin-bottom:\s*3rem;[^}]*font-size:\s*clamp\(2\.5rem,\s*4vw,\s*3\.25rem\);/s,
+    );
+    expect(aboutCss).toMatch(/\.direction-grid\s*{[^}]*gap:\s*1\.75rem;/s);
+    expect(aboutCss).toMatch(/\.direction-card\s*{[^}]*padding:\s*2\.5rem;/s);
   });
 
   it('uses an integrated Contact layout with mobile reading order preserved', () => {
@@ -662,6 +678,7 @@ describe('approved design-system corrections', () => {
   it('tiers About page motion for reduced-motion visitors', () => {
     const aboutPage = readSource('src/pages/About.jsx');
     const aboutCss = readSource('src/pages/About.css');
+    const rotatingHeroCss = readSource('src/components/RotatingHeroMedia.css');
 
     expect(aboutPage).toContain(
       "import { motion, useReducedMotion } from 'framer-motion';",
@@ -678,8 +695,9 @@ describe('approved design-system corrections', () => {
     expect(aboutPage).toContain(
       "behavior: prefersReducedMotion ? 'auto' : 'smooth'",
     );
-    expect(aboutCss).toMatch(
-      /@media\s*\(prefers-reduced-motion:\s*reduce\)\s*{[\s\S]*?\.about-hero-bg\s*{[^}]*animation:\s*none;/s,
+    expect(aboutCss).not.toContain('@keyframes subtleZoom');
+    expect(rotatingHeroCss).toMatch(
+      /@media\s*\(prefers-reduced-motion:\s*reduce\)\s*{[\s\S]*?\.rotating-hero-layer\s*{[^}]*transition:\s*none;/s,
     );
   });
 

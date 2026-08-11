@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import Brands from '../Brands';
@@ -81,5 +81,27 @@ describe('Brands page', () => {
     ]) {
       expect(container.querySelector(selector)).not.toBeInTheDocument();
     }
+  });
+
+  it('mounts the approved Brands hero images in a fixed order', () => {
+    vi.useFakeTimers();
+    const rendered = render(
+      <MemoryRouter initialEntries={['/brands']}>
+        <Brands />
+      </MemoryRouter>,
+    );
+
+    act(() => vi.runOnlyPendingTimers());
+    const layers = Array.from(
+      rendered.container.querySelectorAll('.brands-hero-bg picture'),
+    );
+    expect(layers.map((layer) => layer.dataset.heroId)).toEqual([
+      'brands-primary',
+      'brands-02',
+    ]);
+
+    rendered.unmount();
+    vi.clearAllTimers();
+    vi.useRealTimers();
   });
 });

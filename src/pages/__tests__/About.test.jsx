@@ -1,4 +1,4 @@
-import { render, screen, within } from '@testing-library/react';
+import { act, render, screen, within } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import About from '../About';
@@ -70,5 +70,27 @@ describe('About page', () => {
     )).toBeInTheDocument();
     expect(section.querySelector('.direction-values-list')).not.toBeInTheDocument();
     expect(section.querySelectorAll('svg')).toHaveLength(0);
+  });
+
+  it('mounts the approved About hero images in a fixed order', () => {
+    vi.useFakeTimers();
+    const rendered = render(
+      <MemoryRouter initialEntries={['/about']}>
+        <About />
+      </MemoryRouter>,
+    );
+
+    act(() => vi.runOnlyPendingTimers());
+    const layers = Array.from(
+      rendered.container.querySelectorAll('.about-hero-bg picture'),
+    );
+    expect(layers.map((layer) => layer.dataset.heroId)).toEqual([
+      'about-primary',
+      'about-02',
+    ]);
+
+    rendered.unmount();
+    vi.clearAllTimers();
+    vi.useRealTimers();
   });
 });
