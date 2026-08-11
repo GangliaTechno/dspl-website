@@ -360,10 +360,17 @@ describe('approved design-system corrections', () => {
       /\.hero-subhead\s*{[^}]*max-width:\s*66ch;[^}]*margin:\s*0 auto 2\.5rem;[^}]*font-size:\s*clamp\(1\.05rem,\s*1\.45vw,\s*1\.25rem\);[^}]*line-height:\s*1\.65;/s,
     );
     expect(home).toMatch(
-      /\.hero-ctas\s*{[^}]*justify-content:\s*center;/s,
+      /\.home-hero-content::before\s*{[^}]*width:\s*3rem;[^}]*height:\s*3px;[^}]*background:\s*var\(--accent\);/s,
     );
-    expect(homePage).toContain('Work With Us');
-    expect(homePage).toContain('See Our Brands');
+    expect(home).toMatch(/\.hero-title\s*{[^}]*color:\s*#fff;/s);
+    expect(home).not.toContain('.accent-text');
+    expect(homePage).not.toContain(
+      "import { openWorkModal } from '../utils/workModal';",
+    );
+    expect(homePage).not.toContain("openWorkModal('homepage-hero')");
+    expect(homePage).toContain('We deliver disciplined market execution.');
+    expect(homePage).toContain('href="#capabilities"');
+    expect(homePage).toContain('id="capabilities"');
     expect(homePage).not.toContain(
       'Brand systems for Indian consumer businesses',
     );

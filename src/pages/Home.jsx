@@ -15,7 +15,6 @@ import mutbiLogo from '../assets/supporter-mutbi-marquee.png';
 import startupKarnatakaLogo from '../assets/supporter-startup-karnataka-marquee.png';
 import useSEO from '../hooks/useSEO';
 import { getRouteMetadata } from '../seo/routeMetadata';
-import { openWorkModal } from '../utils/workModal';
 import './Home.css';
 
 const supporters = [
@@ -116,30 +115,19 @@ const Home = () => {
           <div className="home-hero-content">
             <h1 className="hero-title">
               <span>We develop brands.</span>{' '}
-              <span className="accent-text">
-                We strengthen how businesses go to market.
-              </span>
+              <span>We deliver disciplined market execution.</span>
             </h1>
             <p className="hero-subhead">
-              Dashapatmaja Solutions Pvt Ltd brings branding, marketing, and
-              e-commerce into one coordinated system. We apply the same
-              disciplines to Raw Radicles, the consumer brand we develop and
-              operate.
+              Dashapatmaja Solutions Pvt Ltd develops and operates consumer
+              brands while helping businesses coordinate branding, marketing,
+              and e-commerce through clearly defined, accountable execution.
             </p>
-            <div className="hero-ctas">
-              <button
-                type="button"
-                aria-haspopup="dialog"
-                onClick={() => openWorkModal('homepage-hero')}
-                className="btn btn-primary"
-              >
-                Work With Us
-                <ArrowRight size={16} aria-hidden="true" />
-              </button>
-              <Link to="/brands" className="btn btn-secondary hero-secondary">
-                See Our Brands
-              </Link>
-            </div>
+            <a
+              href="#capabilities"
+              className="btn btn-secondary hero-capabilities-link"
+            >
+              Explore our capabilities
+            </a>
           </div>
         </div>
 
@@ -148,6 +136,7 @@ const Home = () => {
 
       <section
         className="section coordinated-services"
+        id="capabilities"
         aria-labelledby="services-title"
       >
         <div className="container">

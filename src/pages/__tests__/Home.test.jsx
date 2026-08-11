@@ -14,7 +14,7 @@ describe('Home page', () => {
     expect(
       screen.getByRole('heading', {
         level: 1,
-        name: /we develop brands.*we strengthen how businesses go to market/i,
+        name: /we develop brands.*we deliver disciplined market execution/i,
       }),
     ).toBeInTheDocument();
 
@@ -46,22 +46,25 @@ describe('Home page', () => {
       screen.getByRole('heading', {
         level: 1,
         name:
-          'We develop brands. We strengthen how businesses go to market.',
+          'We develop brands. We deliver disciplined market execution.',
       }),
     ).toBeInTheDocument();
 
     expect(
       screen.getByText(
-        'Dashapatmaja Solutions Pvt Ltd brings branding, marketing, and e-commerce into one coordinated system. We apply the same disciplines to Raw Radicles, the consumer brand we develop and operate.',
+        'Dashapatmaja Solutions Pvt Ltd develops and operates consumer brands while helping businesses coordinate branding, marketing, and e-commerce through clearly defined, accountable execution.',
       ),
     ).toBeInTheDocument();
 
-    expect(
-      screen.getByRole('button', { name: 'Work With Us' }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole('link', { name: 'See Our Brands' }),
-    ).toHaveAttribute('href', '/brands');
+    expect(screen.queryByRole('button', { name: 'Work With Us' }))
+      .not.toBeInTheDocument();
+    expect(screen.queryByRole('link', { name: 'See Our Brands' }))
+      .not.toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Explore our capabilities' }))
+      .toHaveAttribute('href', '#capabilities');
+    expect(screen.getByRole('region', {
+      name: 'One growth system, not three disconnected vendors',
+    })).toHaveAttribute('id', 'capabilities');
 
     expect(
       screen.queryByText('Brand systems for Indian consumer businesses'),
