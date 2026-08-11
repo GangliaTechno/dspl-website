@@ -15,6 +15,10 @@ dist-ssr
 .env.*
 !.env.example
 
+# Python helper output
+__pycache__/
+*.py[cod]
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
