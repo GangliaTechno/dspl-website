@@ -199,7 +199,8 @@ change speed unless a later rendered review still identifies a cadence defect.
 ## Home and About copy discipline
 
 Reserve the word `execution` for the primary Home proposition, `We deliver
-disciplined market execution.` Remove the five supporting repetitions so Home
+disciplined market execution.` Remove the supporting repetitions and close
+variants so Home
 states the market promise once and About develops company identity, mission, and
 values rather than echoing the same noun.
 
@@ -211,6 +212,7 @@ Use these exact replacements:
 - Home coordinated-services description: `Start with the capability you need
   now. Keep strategy, market activity, and commerce aligned as the business
   grows.`
+- Home process eyebrow: `Delivery framework`
 - About hero subtitle: `A multidisciplinary company focused on developing brands
   and building coordinated commercial capabilities.`
 - About Mission: `We develop our own brands and help businesses strengthen their

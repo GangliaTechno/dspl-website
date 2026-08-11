@@ -622,15 +622,17 @@ duration, or reduced-motion declarations.
 - Modify: `src/pages/__tests__/About.test.jsx`
 - Modify: `src/pages/Home.jsx`
 - Modify: `src/pages/About.jsx`
+- Modify: `src/components/home/ProcessSteps.jsx`
 
 **Interfaces:**
-- Consumes: existing Home hero/capability and About hero/direction-card composition.
+- Consumes: existing Home hero/capability/process and About hero/direction-card composition.
 - Produces: one use of `execution` across both rendered routes, in the Home H1 only.
 
 - [ ] **Step 1: Add failing exact-copy regressions**
 
-Assert the exact five approved replacement strings on their respective pages.
-Also concatenate `src/pages/Home.jsx` and `src/pages/About.jsx` in the static
+Assert the exact approved replacement strings on their respective pages and the
+`Delivery framework` process eyebrow. Also concatenate `src/pages/Home.jsx`,
+`src/pages/About.jsx`, and `src/components/home/ProcessSteps.jsx` in the static
 design regression and assert `/\bexecution\b/gi` has length `1`.
 
 - [ ] **Step 2: Run focused tests and verify RED**
@@ -639,8 +641,8 @@ design regression and assert `/\bexecution\b/gi` has length `1`.
 & 'C:\Program Files\nodejs\npm.cmd' test -- src/pages/__tests__/Home.test.jsx src/pages/__tests__/About.test.jsx src/__tests__/designSystemRegression.test.js
 ```
 
-Expected: failure because six current source occurrences remain and none of the
-five approved replacements is rendered.
+Expected: failure because repeated source occurrences remain and the approved
+replacements are not all rendered.
 
 - [ ] **Step 3: Apply the approved copy exactly**
 
