@@ -56,6 +56,10 @@ describe('ServicePage', () => {
     expect(scope.querySelector('.matters-box')).not.toBeInTheDocument();
 
     expect(container.querySelectorAll('article.offer-card')).toHaveLength(4);
+    expect(screen.queryByText('Services')).not.toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 2, name: props.faqsTitle }))
+      .toBeInTheDocument();
+    expect(screen.getByText(props.faqsDescription)).toBeInTheDocument();
     expect(container.querySelector('.glow-bg')).not.toBeInTheDocument();
     expect(container.querySelector('.offer-card.glass')).not.toBeInTheDocument();
   });

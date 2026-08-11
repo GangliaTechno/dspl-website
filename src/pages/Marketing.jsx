@@ -72,8 +72,8 @@ const Marketing = () => (
     heroImage={heroImage}
     {...marketingCopy}
     offers={offers}
-    faqsTitle="Frequently Asked Questions"
-    faqsDescription="Common questions about our marketing, SEO, and paid ad strategies."
+    faqsTitle="Marketing engagement questions"
+    faqsDescription="Scope, measurement, and collaboration."
     faqs={faqs}
   />
 );

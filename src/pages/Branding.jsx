@@ -72,8 +72,8 @@ const Branding = () => (
     heroImage={heroImage}
     {...brandingCopy}
     offers={offers}
-    faqsTitle="Frequently Asked Questions"
-    faqsDescription="Common questions about our brand identity design and visual strategies."
+    faqsTitle="Branding engagement questions"
+    faqsDescription="Scope, existing brands, and handover."
     faqs={faqs}
   />
 );

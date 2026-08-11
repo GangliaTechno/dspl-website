@@ -70,7 +70,6 @@ const ServicePage = ({
       <section className="section offers-section">
         <div className="container">
           <div className="section-header">
-            <span className="section-subtitle">Services</span>
             <h2 className="section-title">{offersTitle}</h2>
             <p className="section-title-description">
               {offersDescription}

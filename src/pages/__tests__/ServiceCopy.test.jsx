@@ -20,6 +20,8 @@ const routeCases = [
     scopeText: 'Engagements begin with the current market position, audience, channel performance, and measurement setup. From there, we agree channel responsibilities, campaign cadence, reporting measures, and the work required to improve performance over time.',
     offersTitle: 'Marketing capabilities',
     offersDescription: 'The mix is selected against the brief; it is not a fixed package.',
+    faqsTitle: 'Marketing engagement questions',
+    faqsDescription: 'Scope, measurement, and collaboration.',
     offers: [
       ['Search Engine Optimisation (SEO)', 'Technical review, search-intent research, on-page structure, and content planning designed to improve qualified organic visibility over time.', 'lucide-search'],
       ['Paid Campaign Management', 'Campaign planning and management across Google, Meta, and relevant commerce channels, with budgets reviewed against agreed performance measures.', 'lucide-megaphone'],
@@ -44,6 +46,8 @@ const routeCases = [
     scopeText: 'The work starts with the business, audience, category, and competitive context. The resulting system connects positioning and language with visual identity, application rules, and assets that internal and external teams can use consistently.',
     offersTitle: 'Branding capabilities',
     offersDescription: 'The scope is shaped around the decisions and applications the business needs.',
+    faqsTitle: 'Branding engagement questions',
+    faqsDescription: 'Scope, existing brands, and handover.',
     offers: [
       ['Brand Identity and Visual Systems', 'Logo, colour, typography, packaging and application rules, with a practical system for consistent use across priority touchpoints.', 'lucide-palette'],
       ['Market Positioning', 'Audience, category, competitor, and offer analysis used to define a clear market position and decision framework.', 'lucide-compass'],
@@ -68,6 +72,8 @@ const routeCases = [
     scopeText: 'Storefront and marketplace work is planned alongside catalogue ownership, payment setup, inventory, fulfilment, and reporting. This keeps the customer journey and operational responsibilities within one documented scope.',
     offersTitle: 'E-commerce capabilities',
     offersDescription: 'Implementation and support are scoped to the platforms, integrations, and operating responsibilities agreed for the project.',
+    faqsTitle: 'E-commerce engagement questions',
+    faqsDescription: 'Platforms, existing stores, and ongoing support.',
     offers: [
       ['Store Setup and Build', 'Storefront planning and implementation for Shopify, WooCommerce, or React-based commerce, with responsive behaviour and a clear catalogue and content structure.', 'lucide-shopping-cart'],
       ['Conversion Rate Optimisation (CRO)', 'Review of product discovery, product detail, cart, and checkout journeys to identify measurable friction and prioritise testable improvements.', 'lucide-mouse-pointer-click'],
@@ -93,6 +99,8 @@ describe.each(routeCases)('$name service copy', ({
   scopeText,
   offersTitle,
   offersDescription,
+  faqsTitle,
+  faqsDescription,
   offers,
   faqs,
   rejectedClaims,
@@ -108,6 +116,8 @@ describe.each(routeCases)('$name service copy', ({
       scopeText,
       offersTitle,
       offersDescription,
+      faqsTitle,
+      faqsDescription,
     ]) {
       expect(screen.getByText(text)).toBeInTheDocument();
     }

@@ -583,6 +583,9 @@ describe('approved design-system corrections', () => {
     expect(servicePage).toContain('className="domain-subtitle"');
     expect(servicePage).toContain('className="container service-scope-layout"');
     expect(servicePage).toContain('<article key={offer.title} className="offer-card">');
+    expect(servicePage).not.toContain('<span className="section-subtitle">Services</span>');
+    expect(servicePage).toContain('{faqsTitle}');
+    expect(servicePage).toContain('{faqsDescription}');
     expect(servicePage).not.toContain('className="glow-bg"');
     expect(servicePage).not.toContain('matters-box');
     expect(servicePage).not.toContain('offer-card glass');

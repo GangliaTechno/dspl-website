@@ -72,8 +72,8 @@ const Ecommerce = () => (
     heroImage={heroImage}
     {...ecommerceCopy}
     offers={offers}
-    faqsTitle="Frequently Asked Questions"
-    faqsDescription="Common questions about our e-commerce platforms and optimization strategies."
+    faqsTitle="E-commerce engagement questions"
+    faqsDescription="Platforms, existing stores, and ongoing support."
     faqs={faqs}
   />
 );
