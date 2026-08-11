@@ -66,19 +66,19 @@ const journeyMilestones = [
 
 const directionCards = [
   {
-    number: '01',
+    label: 'Long-term direction',
     title: 'Vision',
     text: 'To build an enduring portfolio of consumer brands defined by quality, relevance, and responsible growth.',
   },
   {
-    number: '02',
+    label: 'Our mandate',
     title: 'Mission',
     text: 'We develop our own brands and help businesses strengthen their branding, marketing, and e-commerce capabilities through practical, accountable execution.',
   },
   {
-    number: '03',
+    label: 'Operating principles',
     title: 'Values',
-    text: 'Evidence before claims. Clarity in decisions. Care in execution.',
+    text: 'Evidence guides our recommendations. We define scope, responsibilities, and measures clearly, communicate decisions honestly, and execute agreed work with care.',
   },
 ];
 
@@ -236,7 +236,7 @@ const About = () => {
                 viewport={{ once: true, margin: '-50px' }}
                 transition={revealTransition({ duration: 0.6, delay: index * 0.1 })}
               >
-                <span className="direction-number" aria-hidden="true">{card.number}</span>
+                <span className="direction-label">{card.label}</span>
                 <h3 className="direction-title">{card.title}</h3>
                 <p className="direction-text">{card.text}</p>
               </motion.article>

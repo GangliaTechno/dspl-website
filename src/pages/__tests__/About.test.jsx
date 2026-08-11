@@ -40,11 +40,14 @@ describe('About page', () => {
     expect(
       directionSection.getAllByRole('heading', { level: 3 }).map((card) => card.textContent),
     ).toEqual(['Vision', 'Mission', 'Values']);
-    expect(directionSection.getAllByText(/^0[1-3]$/).map((number) => number.textContent)).toEqual([
-      '01',
-      '02',
-      '03',
+    expect(directionSection.getAllByText(
+      /^(Long-term direction|Our mandate|Operating principles)$/,
+    ).map((label) => label.textContent)).toEqual([
+      'Long-term direction',
+      'Our mandate',
+      'Operating principles',
     ]);
+    expect(directionSection.queryByText(/^0[1-3]$/)).not.toBeInTheDocument();
     expect(directionSection.getByText(
       'To build an enduring portfolio of consumer brands defined by quality, relevance, and responsible growth.',
     )).toBeInTheDocument();
@@ -52,8 +55,9 @@ describe('About page', () => {
       'We develop our own brands and help businesses strengthen their branding, marketing, and e-commerce capabilities through practical, accountable execution.',
     )).toBeInTheDocument();
     expect(directionSection.getByText(
-      'Evidence before claims. Clarity in decisions. Care in execution.',
+      'Evidence guides our recommendations. We define scope, responsibilities, and measures clearly, communicate decisions honestly, and execute agreed work with care.',
     )).toBeInTheDocument();
+    expect(section.querySelector('.direction-values-list')).not.toBeInTheDocument();
     expect(section.querySelectorAll('svg')).toHaveLength(0);
   });
 });

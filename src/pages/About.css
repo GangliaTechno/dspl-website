@@ -120,12 +120,13 @@
   box-sizing: border-box;
 }
 
-.direction-number {
+.direction-label {
   color: var(--accent-text);
   font-family: var(--font-heading);
   font-size: 0.875rem;
   font-weight: 800;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .direction-title {

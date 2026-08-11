@@ -205,12 +205,20 @@ describe('approved design-system corrections', () => {
     const aboutCss = readSource('src/pages/About.css');
 
     expect(aboutPage).toContain('const directionCards = [');
-    expect(aboutPage).toContain("number: '01'");
+    expect(aboutPage).not.toContain("number: '01'");
+    expect(aboutPage).toContain("label: 'Long-term direction'");
+    expect(aboutPage).toContain("label: 'Our mandate'");
+    expect(aboutPage).toContain("label: 'Operating principles'");
     expect(aboutPage).toContain("title: 'Vision'");
     expect(aboutPage).toContain(
       'To build an enduring portfolio of consumer brands defined by quality, relevance, and responsible growth.',
     );
+    expect(aboutPage).toContain(
+      'Evidence guides our recommendations. We define scope, responsibilities, and measures clearly, communicate decisions honestly, and execute agreed work with care.',
+    );
     expect(aboutPage).toContain('directionCards.map((card, index)');
+    expect(aboutPage).not.toContain('card.items');
+    expect(aboutCss).not.toContain('.direction-values-');
     expect(aboutPage).not.toContain("from 'lucide-react'");
     expect(aboutCss).toMatch(
       /\.direction-grid\s*{[^}]*grid-template-columns:\s*repeat\(3,\s*1fr\);/s,
