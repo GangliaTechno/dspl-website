@@ -35,13 +35,18 @@ afterEach(() => {
 });
 
 describe('Contact', () => {
-  it('keeps one headquarters panel with the verified contact routes', () => {
+  it('keeps three peer contact cards with the verified contact routes', () => {
     const { container } = renderContact();
-    const panel = container.querySelector('.contact-details-panel');
-    const rows = panel?.querySelectorAll('.contact-detail-row');
+    const grid = container.querySelector('.contact-info-grid');
+    const cards = grid?.querySelectorAll('.contact-info-card');
 
-    expect(panel).toBeInTheDocument();
-    expect(rows).toHaveLength(3);
+    expect(grid).toBeInTheDocument();
+    expect(cards).toHaveLength(3);
+    expect(Array.from(cards, (card) => card.querySelector('h3')?.textContent)).toEqual([
+      'Address',
+      'Phone',
+      'Email',
+    ]);
     expect(screen.getByRole('link', { name: '+91 88619 42440' }))
       .toHaveAttribute('href', 'tel:+918861942440');
     expect(screen.getByRole('link', { name: '+91 90725 56665' }))
@@ -52,43 +57,37 @@ describe('Contact', () => {
       .toHaveAttribute('href', 'mailto:dsplmanipal@gmail.com');
   });
 
-  it('presents an integrated enquiry layout in the approved reading order', () => {
+  it('presents the approved vertical hero, contact cards, and enquiry flow', () => {
     const { container } = renderContact();
-    const section = container.querySelector('.contact-main-section');
-    const layout = container.querySelector('.contact-layout');
-    const surface = container.querySelector('.contact-enquiry-surface');
-    const regions = Array.from(surface.children);
-    const headings = screen.getAllByRole('heading', { level: 2 });
+    const hero = container.querySelector('.contact-hero');
+    const information = container.querySelector('.contact-information-section');
+    const enquiry = container.querySelector('.contact-enquiry-section');
 
-    expect(section).toBeInTheDocument();
-    expect(container.querySelector('.contact-hero')).not.toBeInTheDocument();
-    expect(layout.querySelector('.contact-intro .section-subtitle'))
-      .toHaveTextContent('Contact');
-    expect(layout.querySelector('.contact-intro-heading')).toBeInTheDocument();
+    expect(hero).toBeInTheDocument();
+    expect(hero.querySelector('.section-subtitle')).toHaveTextContent('Contact');
     expect(screen.getByRole('heading', {
       level: 1,
       name: 'Start a conversation.',
     })).toBeInTheDocument();
-    expect(layout.querySelector('.contact-intro')).toHaveTextContent(
+    expect(hero).toHaveTextContent(
       'For general enquiries, tell us what you need and how we can reach you. For a detailed project brief, use Work With Us in the header.',
     );
-    expect(headings.map((heading) => heading.textContent)).toEqual([
-      'General enquiry',
-      'Headquarters',
-    ]);
-    expect(surface).toBeInTheDocument();
-    expect(regions).toHaveLength(2);
-    expect(regions[0]).toHaveClass('contact-form-column');
-    expect(regions[1]).toHaveClass('contact-details-column');
-    expect(regions[0].firstElementChild).toBe(headings[0]);
-    expect(regions[0].lastElementChild).toHaveClass('contact-form-panel');
-    expect(regions[1].firstElementChild).toBe(headings[1]);
-    expect(regions[1].lastElementChild).toHaveClass('contact-details-panel');
+    expect(information).toBeInTheDocument();
+    expect(enquiry).toBeInTheDocument();
+    expect(hero.compareDocumentPosition(information) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(information.compareDocumentPosition(enquiry) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(screen.getByRole('heading', { name: 'Contact details', level: 2 })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'General enquiry', level: 2 })).toBeInTheDocument();
+    expect(enquiry.querySelector('.section-subtitle')).toHaveTextContent('Send a message');
+    expect(enquiry.querySelector('.contact-enquiry-header')).toHaveTextContent(
+      'Tell us what you need and how we can reach you.',
+    );
+    expect(enquiry.querySelector('.contact-form-panel')).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Address', level: 3 })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Phone', level: 3 })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Email', level: 3 })).toBeInTheDocument();
-    expect(container.querySelector('.contact-details-panel svg')).not.toBeInTheDocument();
-    expect(container.querySelector('.contact-form-title')).not.toBeInTheDocument();
+    expect(information.querySelector('svg')).not.toBeInTheDocument();
+    expect(container.querySelector('.contact-enquiry-surface')).not.toBeInTheDocument();
     expect(container.querySelector('.glow-bg')).not.toBeInTheDocument();
   });
 

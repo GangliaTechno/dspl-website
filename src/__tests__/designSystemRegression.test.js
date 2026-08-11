@@ -245,29 +245,28 @@ describe('approved design-system corrections', () => {
     expect(aboutCss).toMatch(/\.direction-card\s*{[^}]*padding:\s*2\.5rem;/s);
   });
 
-  it('uses an integrated Contact layout with mobile reading order preserved', () => {
+  it('uses a spacious vertical Contact page with peer information cards', () => {
     const contactPage = readSource('src/pages/Contact.jsx');
     const contactCss = readSource('src/pages/Contact.css');
     const formMessages = readSource('src/utils/formMessages.js');
     const indexCss = readSource('src/index.css');
 
-    expect(contactPage).toContain('className="contact-details-panel"');
-    expect(contactPage).toContain('className="contact-enquiry-surface"');
-    expect(contactPage).toContain('className="contact-intro-heading"');
-    expect(contactPage.match(/className="contact-detail-row"/g)).toHaveLength(3);
-    expect(contactPage).toContain('className="contact-intro"');
-    expect(contactPage).toContain('className="contact-form-column"');
-    expect(contactPage).toContain('className="contact-details-column"');
+    expect(contactPage).toContain('className="contact-hero"');
+    expect(contactPage).toContain('className="section contact-information-section"');
+    expect(contactPage).toContain('className="contact-info-grid"');
+    expect(contactPage.match(/className="contact-info-card"/g)).toHaveLength(3);
+    expect(contactPage).toContain('className="section contact-enquiry-section"');
+    expect(contactPage).toContain('className="contact-enquiry-header"');
     expect(contactPage).toContain('>General enquiry</h2>');
-    expect(contactPage).toContain('>Headquarters</h2>');
+    expect(contactPage).toContain('>Contact details</h2>');
     expect(contactPage).toContain('>Phone</h3>');
     expect(contactPage).toContain('>Email</h3>');
     expect(contactPage).toContain('Message received');
     expect(contactPage).toContain('FORM_SUBMISSION_ERROR');
     expect(contactPage).toContain('<span className="section-subtitle">Contact</span>');
     expect(contactPage).toContain('>Start a conversation.</h1>');
-    expect(contactPage).not.toContain('className="contact-hero"');
     expect(contactPage).not.toContain('contact-detail-icon');
+    expect(contactPage).not.toContain('contact-enquiry-surface');
     expect(contactPage).toContain('className="contact-privacy-notice"');
     expect(contactPage).not.toContain('className="glow-bg"');
     expect(formMessages).toContain(
@@ -277,37 +276,20 @@ describe('approved design-system corrections', () => {
     expect(indexCss).not.toContain('.glow-bg');
     expect(indexCss).not.toContain('.glow-circle');
     expect(indexCss).not.toContain('pulseSlow');
+    expect(contactCss).toMatch(/\.contact-hero\s*{[^}]*min-height:\s*22rem;[^}]*background:\s*var\(--text-heading\);/s);
+    expect(contactCss).toMatch(/\.contact-title\s*{[^}]*color:\s*var\(--accent\);/s);
+    expect(contactCss).toMatch(/\.contact-information-section\s*{[^}]*padding:\s*5rem 0;/s);
+    expect(contactCss).toMatch(/\.contact-info-grid\s*{[^}]*grid-template-columns:\s*repeat\(3,\s*minmax\(0,\s*1fr\)\);[^}]*gap:\s*1\.5rem;/s);
+    expect(contactCss).toMatch(/\.contact-info-card\s*{[^}]*padding:\s*2rem;[^}]*background:\s*#ffffff;[^}]*border:\s*1px solid var\(--border-color\);/s);
+    expect(contactCss).toMatch(/\.contact-enquiry-section\s*{[^}]*padding:\s*6rem 0;/s);
+    expect(contactCss).toMatch(/\.contact-enquiry-layout\s*{[^}]*max-width:\s*800px;/s);
     expect(contactCss).toMatch(
-      /\.contact-intro\s*{[^}]*grid-template-columns:\s*minmax\(0,\s*1\.1fr\) minmax\(0,\s*0\.9fr\);/s,
+      /\.contact-form-panel\s*{[^}]*padding:\s*2\.5rem;[^}]*border:\s*1px solid var\(--border-color\);[^}]*background:\s*#ffffff;[^}]*box-shadow:\s*var\(--shadow-surface\);/s,
     );
-    expect(contactCss).toMatch(
-      /\.contact-enquiry-surface\s*{[^}]*grid-template-columns:\s*minmax\(0,\s*2fr\) minmax\(0,\s*3fr\);[^}]*grid-template-areas:\s*"details form";[^}]*column-gap:\s*3rem;[^}]*align-items:\s*start;/s,
-    );
-    expect(contactCss).not.toMatch(
-      /\.contact-enquiry-surface\s*{[^}]*(?:background|border|box-shadow):/s,
-    );
-    expect(contactCss).toMatch(
-      /\.contact-main-section\s*{[^}]*padding:\s*1\.5rem 0 2rem;/s,
-    );
-    expect(contactCss).toMatch(
-      /\.contact-form-column\s*{[^}]*grid-area:\s*form;/s,
-    );
-    expect(contactCss).toMatch(
-      /\.contact-form-panel\s*{[^}]*padding:\s*1\.5rem;[^}]*border:\s*1px solid var\(--border-color\);[^}]*background:\s*#ffffff;[^}]*box-shadow:\s*var\(--shadow-sm\);/s,
-    );
-    expect(contactCss).toMatch(
-      /\.contact-details-column\s*{[^}]*grid-area:\s*details;/s,
-    );
-    expect(contactCss).toMatch(
-      /\.contact-detail-info h3\s*{[^}]*color:\s*var\(--accent-text\);[^}]*font-size:\s*0\.75rem;[^}]*text-transform:\s*uppercase;/s,
-    );
-    expect(contactCss).toMatch(
-      /\.contact-detail-row\s*{[^}]*padding:\s*0\.625rem 0;/s,
-    );
-    expect(contactCss).not.toContain('.contact-detail-info h4');
-    expect(contactCss).toMatch(
-      /@media\s*\(max-width:\s*900px\)\s*{[\s\S]*?\.contact-enquiry-surface\s*{[^}]*grid-template-columns:\s*1fr;[^}]*grid-template-areas:\s*"form"\s*"details";/s,
-    );
+    expect(contactCss).toMatch(/\.contact-form-panel textarea\.form-input\s*{[^}]*min-height:\s*9rem;/s);
+    expect(contactCss).not.toMatch(/max-height:\s*760px/);
+    expect(contactCss).not.toContain('.contact-main-section');
+    expect(contactCss).toMatch(/@media\s*\(max-width:\s*900px\)\s*{[\s\S]*?\.contact-info-grid\s*{[^}]*grid-template-columns:\s*1fr;/s);
   });
 
   it('uses route-owned form layout and state class names', () => {
