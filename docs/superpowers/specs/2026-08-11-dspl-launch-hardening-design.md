@@ -109,9 +109,16 @@ prerendered and hydrated 404 body deterministic:
 - the visible explanation must not interpolate `location.pathname`;
 - 404 metadata must use the stable `/404.html` canonical and
   `noindex, follow`;
-- analytics may still record the actual missing pathname after hydration; and
-- a production fallback loaded at an unknown pathname must hydrate without a
-  React mismatch.
+- analytics may still record the actual missing pathname after client startup;
+  and
+- a production fallback loaded at an unknown pathname must transition to the
+  NotFound route without attempting incompatible hydration.
+
+Known prerendered routes continue to hydrate normally. Unknown paths are
+client-rendered after clearing any fallback markup because a generic static-host
+fallback may contain the Home document rather than `404.html`; trying to hydrate
+that markup as NotFound causes React error 418 even when the NotFound body itself
+is path-independent.
 
 The build verifier will continue requiring all eight public route documents and
 `dist/404.html`, and will additionally reject a 404 document that leaks the

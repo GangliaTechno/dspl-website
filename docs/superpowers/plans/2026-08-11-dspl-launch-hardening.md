@@ -297,12 +297,16 @@ generator still use it.
 **Files:**
 - Modify: `src/pages/__tests__/NotFound.test.jsx`
 - Modify: `src/hooks/__tests__/useSEO.test.jsx`
+- Modify: `src/__tests__/hydrationRoute.test.js`
 - Modify: `src/pages/NotFound.jsx`
+- Modify: `src/hydrationRoute.js`
+- Modify: `src/main.jsx`
 - Modify: `scripts/verify-prerender.mjs`
 
 **Interfaces:**
 - Consumes: `NOT_FOUND_METADATA` with canonical `/404.html`.
-- Produces: path-independent 404 body while preserving pathname analytics.
+- Produces: path-independent 404 body, a safe unknown-route client-render
+  fallback, and preserved pathname analytics.
 
 - [ ] **Step 1: Write failing 404 regressions**
 
@@ -335,6 +339,11 @@ Keep `location.pathname` only in the analytics effect.
 In the `404.html` verifier, reject visible fallback copy containing
 `<code class="missing-path">/404.html</code>` and require the stable canonical
 `https://dashapatmaja.in/404.html`.
+
+Production browser verification must also cover a host that returns the Home
+document for an unknown URL. In that case, startup must not hydrate incompatible
+markup: known prerendered pages continue to hydrate, while a loaded `NotFound`
+page clears the fallback markup and mounts with `createRoot`.
 
 - [ ] **Step 5: Verify GREEN**
 
