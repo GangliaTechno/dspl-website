@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor, within } from '@testing-library/react';
 import { BrowserRouter } from 'react-router';
 import { afterEach, describe, it, expect } from 'vitest';
 import Header from '../Header';
@@ -53,12 +53,14 @@ describe('Header Component', () => {
       </BrowserRouter>
     );
 
-    const toggleBtn = screen.getByLabelText('Toggle navigation menu');
+    // When closed the label reads "Open navigation menu"
+    const toggleBtn = screen.getByLabelText('Open navigation menu');
     expect(toggleBtn).toBeInTheDocument();
     expect(toggleBtn).toHaveAttribute('aria-expanded', 'false');
 
     fireEvent.click(toggleBtn);
     expect(toggleBtn).toHaveAttribute('aria-expanded', 'true');
+    expect(toggleBtn).toHaveAttribute('tabindex', '-1');
   });
 
   it('keeps the drawer open through 1039px and closes it at 1040px', () => {
@@ -68,15 +70,44 @@ describe('Header Component', () => {
       </BrowserRouter>
     );
 
-    const menuButton = screen.getByLabelText('Toggle navigation menu');
+    // Button label is "Open navigation menu" when closed
+    const menuButton = screen.getByLabelText('Open navigation menu');
     fireEvent.click(menuButton);
 
     window.innerWidth = 1039;
     fireEvent(window, new Event('resize'));
+    // After click, label is "Close navigation menu" — but element is same button
     expect(menuButton).toHaveAttribute('aria-expanded', 'true');
 
     window.innerWidth = 1040;
     fireEvent(window, new Event('resize'));
+    expect(screen.getByLabelText('Open navigation menu')).toHaveAttribute('aria-expanded', 'false');
+  });
+
+  it('keeps the internal drawer close control inside the keyboard focus cycle', async () => {
+    render(
+      <BrowserRouter>
+        <Header />
+      </BrowserRouter>
+    );
+
+    const menuButton = screen.getByLabelText('Open navigation menu');
+    fireEvent.click(menuButton);
+
+    const drawer = screen.getByRole('dialog', { name: 'Navigation menu' });
+    const closeButton = within(drawer).getByRole('button', {
+      name: 'Close navigation menu',
+    });
+    const workWithUs = within(drawer).getByRole('button', {
+      name: 'Open Work With Us enquiry form',
+    });
+
+    await waitFor(() => expect(closeButton).toHaveFocus());
+    fireEvent.keyDown(window, { key: 'Tab', shiftKey: true });
+    expect(workWithUs).toHaveFocus();
+
+    fireEvent.click(closeButton);
+    expect(menuButton).toHaveFocus();
     expect(menuButton).toHaveAttribute('aria-expanded', 'false');
   });
 

@@ -61,6 +61,28 @@ describe('WorkWithUsModal Component', () => {
     expect(screen.getByText('Email address is required')).toBeInTheDocument();
     expect(screen.getByText('Phone / WhatsApp number is required')).toBeInTheDocument();
     expect(screen.getByText('Please select at least one service')).toBeInTheDocument();
+    expect(document.activeElement).toBe(screen.getByLabelText(/Full Name/i));
+  });
+
+  it('focuses the first service when contact fields are valid but no service is selected', () => {
+    renderModal();
+    act(() => openWorkModal('modal-service-focus-test'));
+
+    fireEvent.change(screen.getByLabelText(/Full Name/i), {
+      target: { value: 'Asha Rao' },
+    });
+    fireEvent.change(screen.getByLabelText(/Email Address/i), {
+      target: { value: 'asha@example.test' },
+    });
+    fireEvent.change(screen.getByLabelText(/Phone \/ WhatsApp Number/i), {
+      target: { value: '9876543210' },
+    });
+    fireEvent.click(screen.getByRole('button', { name: 'Send My Project Details' }));
+
+    expect(screen.getByText('Please select at least one service')).toBeInTheDocument();
+    expect(document.activeElement).toBe(
+      screen.getByRole('checkbox', { name: 'Branding' }),
+    );
   });
 
   it('silently aborts submission when honeypot field is filled', async () => {

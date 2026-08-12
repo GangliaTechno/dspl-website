@@ -17,6 +17,9 @@ export default defineConfig({
       previewMiddlewareFallback: '/404.html',
     }),
   ],
+  build: {
+    sourcemap: false,
+  },
   server: {
     host: true,
     port: 5174,

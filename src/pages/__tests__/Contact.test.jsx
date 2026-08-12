@@ -55,10 +55,10 @@ describe('Contact', () => {
       'Direct contact',
       'General enquiries',
     ]);
-    expect(screen.getByRole('link', { name: '+91 88619 42440' }))
-      .toHaveAttribute('href', 'tel:+918861942440');
-    expect(screen.getByRole('link', { name: '+91 90725 56665' }))
-      .toHaveAttribute('href', 'tel:+919072556665');
+    expect(screen.getByRole('link', { name: 'Call +91 88619 42440' }))
+      .toHaveAttribute('href', '#phone');
+    expect(screen.getByRole('link', { name: 'Call +91 90725 56665' }))
+      .toHaveAttribute('href', '#phone');
     expect(screen.getByRole('link', { name: 'director@dashapatmaja.in' }))
       .toHaveAttribute('href', 'mailto:director@dashapatmaja.in');
     expect(screen.getByRole('link', { name: 'dsplmanipal@gmail.com' }))
@@ -141,6 +141,7 @@ describe('Contact', () => {
     const message = screen.getByLabelText('Message');
     const error = screen.getByText('Message is required');
 
+    expect(document.activeElement).toBe(screen.getByLabelText('First Name'));
     expect(message).toHaveAttribute('aria-invalid', 'true');
     expect(message).toHaveAttribute('aria-describedby', 'message-error');
     expect(error).toHaveAttribute('id', 'message-error');

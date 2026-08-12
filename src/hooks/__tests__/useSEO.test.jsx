@@ -35,6 +35,10 @@ describe('useSEO', () => {
     );
     expect(document.querySelector('meta[name="robots"]'))
       .toHaveAttribute('content', 'noindex, follow');
+    expect(document.querySelector('link[rel="canonical"]')).toHaveAttribute(
+      'href',
+      'https://dashapatmaja.in/404.html',
+    );
   });
 
   it('keeps one canonical link and one schema script across navigation', () => {

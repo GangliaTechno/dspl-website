@@ -6,11 +6,11 @@
   z-index: 3;
   width: 100%;
   overflow: hidden;
-  padding-block: 12px;
-  background: transparent;
+  padding-block: 6px;
+  background: rgba(0, 0, 0, 0.28);
   border: 0;
   --supporter-gap: 7rem;
-  --supporter-slot-height: 3rem;
+  --supporter-slot-height: 3.5rem;
   --supporter-sequence-min-width: max-content;
   --supporter-edge-guard: 0rem;
   --supporter-edge-fade: clamp(2.5rem, 5vw, 5rem);
@@ -101,15 +101,14 @@
   object-fit: contain;
   object-position: center;
   transform: none;
-  filter: brightness(0) invert(1) drop-shadow(0 1px 3px rgba(0, 0, 0, 0.65));
-  opacity: 0.86;
+  filter: none;
+  opacity: 1;
   image-rendering: auto;
-  backface-visibility: hidden;
-  transition: opacity 0.3s ease;
 }
 
-.supporter-logo:hover {
-  opacity: 1;
+/* Manipal Universal (MUTBI) logo has lighter pixels — boost to match others */
+.supporter-logo-mutbi .supporter-logo {
+  filter: brightness(2) contrast(1.2);
 }
 
 @media (max-width: 768px) {
@@ -117,7 +116,7 @@
     bottom: 2.5rem;
     padding-block: 8px;
     --supporter-gap: 5rem;
-    --supporter-slot-height: 2.25rem;
+    --supporter-slot-height: 2.5rem;
     --supporter-sequence-min-width: max-content;
     --supporter-edge-guard: 0rem;
     --supporter-edge-fade: 2.25rem;

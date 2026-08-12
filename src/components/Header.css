@@ -133,6 +133,22 @@
   visibility: visible;
 }
 
+.mobile-drawer-close {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  display: inline-flex;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-heading);
+  background: transparent;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-control);
+  cursor: pointer;
+}
+
 .mobile-nav {
   display: flex;
   flex-direction: column;
@@ -180,5 +196,22 @@
   .header,
   .logo-image {
     transition: none;
+  }
+}
+
+/* Mobile drawer backdrop overlay */
+.mobile-drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 94;
+  background: rgba(8, 8, 8, 0.4);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-drawer-backdrop {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 }

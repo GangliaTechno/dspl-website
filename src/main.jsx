@@ -1,11 +1,15 @@
 import { StrictMode } from 'react';
 import { createRoot, hydrateRoot } from 'react-dom/client';
 import App from './App.jsx';
-import { loadHydrationPage } from './hydrationRoute';
+import {
+  loadHydrationPage,
+  shouldHydratePrerenderedPage,
+} from './hydrationRoute';
 import './index.css';
 
 const container = document.getElementById('root');
-const pages = container.hasChildNodes()
+const hasPrerenderedMarkup = container.hasChildNodes();
+const pages = hasPrerenderedMarkup
   ? await loadHydrationPage(window.location.pathname)
   : undefined;
 const app = (
@@ -14,8 +18,9 @@ const app = (
   </StrictMode>
 );
 
-if (container.hasChildNodes()) {
+if (shouldHydratePrerenderedPage(hasPrerenderedMarkup, pages)) {
   hydrateRoot(container, app);
 } else {
+  if (hasPrerenderedMarkup) container.replaceChildren();
   createRoot(container).render(app);
 }

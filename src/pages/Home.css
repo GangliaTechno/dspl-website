@@ -81,6 +81,7 @@
 }
 
 .hero-title-accent {
+  /* Gold (#F5A800) on the dark hero overlay — passes contrast ≥ 4.5:1 */
   color: var(--accent);
 }
 

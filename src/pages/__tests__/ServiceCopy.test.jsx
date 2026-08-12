@@ -34,7 +34,7 @@ const routeCases = [
     rejectedClaims: ['Get found. Get chosen. Get sales.', 'We did this for Raw Radicles. We can do it for you.', 'Paid ads can bring leads in the first week.'],
     heroIds: ['marketing-primary', 'marketing-02'],
     primaryHeroAsset: 'marketing-primary-1440.webp',
-    secondaryHeroAsset: 'marketing-rotation-02-1440.webp',
+    secondaryHeroAsset: 'marketing-dashboard-1440.webp',
   },
   {
     name: 'Branding',
@@ -86,9 +86,9 @@ const routeCases = [
       ['Can marketplace and ongoing support be included?', 'Yes, when included in the scope. The engagement defines which channels, integrations, data owners, and ongoing responsibilities are covered.'],
     ],
     rejectedClaims: ['Build a store that loads fast and converts.', 'We sell our own brand this way, so we know what holds up.', 'Your store loads quickly and looks right on every phone.'],
-    heroIds: ['ecommerce-primary', 'ecommerce-02'],
-    primaryHeroAsset: 'ecommerce-primary-1440.webp',
-    secondaryHeroAsset: 'ecommerce-rotation-02-1440.webp',
+    heroIds: ['ecommerce-dashboard', 'ecommerce-primary'],
+    primaryHeroAsset: 'ecommerce-dashboard-1440.webp',
+    secondaryHeroAsset: 'ecommerce-primary-1440.webp',
   },
 ];
 

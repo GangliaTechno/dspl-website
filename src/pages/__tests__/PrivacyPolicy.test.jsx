@@ -21,7 +21,7 @@ const approvedPolicySectionText = [
   '2. Information handled through the websiteThe Contact form collects your name, email address, service requirement, and message. The project planner may also collect your phone or WhatsApp number, company or brand name, website or social handle, services of interest, project details, referral source, preferred contact method, and an optional attachment.',
   '3. How the information is usedWe use enquiry information to review your request, contact you using the details you provide, prepare or discuss a relevant scope of work, and maintain a record of the enquiry. Project-planner submissions may receive an internal priority label based on the company details and project text submitted. This label is used to organise follow-up; it does not determine eligibility for a service or affect legal rights.',
   '4. Service providers and analyticsContact and project-planner submissions are transmitted through Web3Forms. In production, Google Analytics records page views and selected website interaction events. These providers handle information under their own terms and privacy practices.',
-  '5. Questions about your informationFor questions about this policy or information submitted through the website, contact Dashapatmaja Solutions Pvt Ltd at director@dashapatmaja.in or the telephone number listed below.Dashapatmaja Solutions Pvt LtdRoom No. 12, 4th Floor, MUTBI, Advanced Research Center, Madhava Nagar, Manipal, Karnataka 576104Email: director@dashapatmaja.in | Phone: +91 88619 42440',
+  '5. Questions about your informationFor questions about this policy or information submitted through the website, contact Dashapatmaja Solutions Pvt Ltd at director@dashapatmaja.in or the telephone number listed below.Dashapatmaja Solutions Pvt LtdRoom No. 12, 4th Floor, MUTBI, Advanced Research Center, Madhava Nagar, Manipal, Karnataka 576104Email: director@dashapatmaja.in | Phone: 04424 91688 19+',
 ];
 
 const normalizeWhitespace = (value) => value.replace(/\s+/g, ' ').trim();
@@ -75,7 +75,7 @@ describe('Privacy policy page', () => {
     expect(screen.getByText('Room No. 12, 4th Floor, MUTBI, Advanced Research Center, Madhava Nagar, Manipal, Karnataka 576104')).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'director@dashapatmaja.in' }))
       .toHaveAttribute('href', 'mailto:director@dashapatmaja.in');
-    expect(screen.getByRole('link', { name: '+91 88619 42440' }))
-      .toHaveAttribute('href', 'tel:+918861942440');
+    expect(screen.getByRole('link', { name: 'Call +91 88619 42440' }))
+      .toHaveAttribute('href', '#phone');
   });
 });

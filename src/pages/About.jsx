@@ -6,7 +6,7 @@ import useSEO from '../hooks/useSEO';
 import { getRouteMetadata } from '../seo/routeMetadata';
 import RotatingHeroMedia from '../components/RotatingHeroMedia';
 
-import manuImg from '../assets/manu_pro_fixed.jpg';
+import manuImg from '../assets/manu_pro_fixed.webp';
 import sreeImg from '../assets/sree_pro_extended.webp';
 import drImg from '../assets/dr_pro.png';
 import balakrishnaImg from '../assets/balakrishna_pro_extended.webp';
@@ -76,12 +76,12 @@ const directionCards = [
   {
     label: 'Our mandate',
     title: 'Mission',
-    text: 'We develop our own brands and help businesses strengthen their branding, marketing, and e-commerce capabilities through practical, accountable execution.',
+    text: 'We develop our own brands and help businesses strengthen their branding, marketing, and e-commerce capabilities through practical, accountable collaboration.',
   },
   {
     label: 'Operating principles',
     title: 'Values',
-    text: 'Evidence guides our recommendations. We define scope, responsibilities, and measures clearly, communicate decisions honestly, and execute agreed work with care.',
+    text: 'Evidence guides our recommendations. We define scope, responsibilities, and measures clearly, communicate decisions honestly, and carry agreed work through with care.',
   },
 ];
 
@@ -224,7 +224,7 @@ const About = () => {
           <span className="section-subtitle">Our Corporate Profile</span>
           <h1 className="about-title">About Dashapatmaja Solutions Pvt Ltd</h1>
           <p className="about-subtitle">
-            A multidisciplinary company focused on brand development and commercial execution.
+            A multidisciplinary company focused on developing brands and building coordinated commercial capabilities.
           </p>
         </motion.div>
       </section>

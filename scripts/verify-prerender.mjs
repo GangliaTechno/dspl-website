@@ -79,6 +79,12 @@ if (!fs.existsSync(notFoundPath)) {
   if (!/<meta\b[^>]*name=["']robots["'][^>]*content=["']noindex, follow["'][^>]*>/i.test(notFoundHtml)) {
     failures.push('404: missing noindex, follow robots metadata');
   }
+  if (!/<link\b(?=[^>]*rel=["']canonical["'])(?=[^>]*href=["']https:\/\/dashapatmaja\.in\/404\.html["'])[^>]*>/i.test(notFoundHtml)) {
+    failures.push('404: missing stable https://dashapatmaja.in/404.html canonical');
+  }
+  if (/<code\b[^>]*class=["'][^"']*missing-path[^"']*["'][^>]*>\s*\/404\.html\s*<\/code>/i.test(notFoundHtml)) {
+    failures.push('404: prerendered fallback exposes /404.html as the missing path');
+  }
 }
 
 const duplicateTitles = titles.filter(

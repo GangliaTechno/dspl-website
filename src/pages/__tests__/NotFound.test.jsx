@@ -17,8 +17,10 @@ describe('NotFound Page Component', () => {
 
     expect(screen.getByText('404')).toBeInTheDocument();
     expect(screen.getByText('Page Not Found')).toBeInTheDocument();
-    expect(screen.getByText('/missing-page')).toBeInTheDocument();
-    expect(screen.getByText(/does not exist, has been removed, or is temporarily unavailable/i)).toBeInTheDocument();
+    expect(screen.queryByText('/missing-page')).not.toBeInTheDocument();
+    expect(screen.getByText(
+      'The requested page does not exist, has been removed, or is temporarily unavailable.',
+    )).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /return to home/i })).toHaveAttribute('href', '/');
     expect(screen.getByRole('button', { name: /go back/i })).toBeInTheDocument();
     expect(screen.getByRole('heading', { level: 2, name: 'Explore popular sections' })).toBeInTheDocument();

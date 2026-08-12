@@ -1,11 +1,14 @@
 import './Header.css';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { Link, useLocation } from 'react-router';
 import { Menu, X } from 'lucide-react';
-import logoImg from '../assets/icon_orange.png';
+import logoImg from '../assets/icon_orange.webp';
 import { openWorkModal } from '../utils/workModal';
 
 const DESKTOP_NAV_MIN_WIDTH = 1040;
+
+const FOCUSABLE_SELECTORS =
+  'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,6 +17,8 @@ const Header = () => {
   const lastScrollYRef = useRef(0);
   const animationFrameRef = useRef(null);
   const location = useLocation();
+  const menuBtnRef = useRef(null);
+  const drawerRef = useRef(null);
 
   useEffect(() => {
     lastScrollYRef.current = Math.max(window.scrollY, 0);
@@ -63,19 +68,49 @@ const Header = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  // Focus trap + Escape key for mobile drawer
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.key === 'Escape' && isOpen) {
+      if (!isOpen) return;
+
+      if (e.key === 'Escape') {
         setIsOpen(false);
+        menuBtnRef.current?.focus();
+        return;
+      }
+
+      if (e.key === 'Tab' && drawerRef.current) {
+        const focusables = Array.from(
+          drawerRef.current.querySelectorAll(FOCUSABLE_SELECTORS)
+        ).filter((el) => !el.closest('[aria-hidden="true"]'));
+
+        if (focusables.length === 0) return;
+
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+
+        if (e.shiftKey && document.activeElement === first) {
+          last.focus();
+          e.preventDefault();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          first.focus();
+          e.preventDefault();
+        }
       }
     };
+
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen]);
 
+  // Body scroll lock + focus management on open/close
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
+      // Move focus into drawer after transition starts
+      setTimeout(() => {
+        drawerRef.current?.querySelector('.mobile-drawer-close')?.focus();
+      }, 50);
     } else {
       document.body.style.overflow = '';
     }
@@ -84,14 +119,27 @@ const Header = () => {
     };
   }, [isOpen]);
 
-  const handleLinkClick = () => {
-    setIsOpen(false);
-  };
+  // Drawer closes via handleLinkClick on each nav link \u2014 no effect needed here.
 
-  const handleOpenWorkModal = (e) => {
+  const handleLinkClick = useCallback(() => {
+    setIsOpen(false);
+    menuBtnRef.current?.focus();
+  }, []);
+
+  const handleOpenWorkModal = useCallback((e) => {
     e.preventDefault();
     openWorkModal('header');
-  };
+  }, []);
+
+  const toggleMenu = useCallback(() => {
+    setIsOpen((prev) => {
+      if (prev) {
+        // Closing — restore focus to button
+        setTimeout(() => menuBtnRef.current?.focus(), 0);
+      }
+      return !prev;
+    });
+  }, []);
 
   return (
     <>
@@ -104,7 +152,7 @@ const Header = () => {
       >
         <div className="header-container">
           {/* Left Side: Logo */}
-          <Link to="/" className="logo-link" onClick={handleLinkClick}>
+          <Link to="/" className="logo-link" onClick={() => setIsOpen(false)}>
             <img src={logoImg} alt="Dashapatmaja Solutions Pvt Ltd logo" className="logo-image" loading="eager" decoding="async" />
           </Link>
 
@@ -149,21 +197,48 @@ const Header = () => {
           {/* Mobile controls wrapper */}
           <div className="mobile-controls">
             {/* Mobile Menu Button */}
-            <button 
-              className="mobile-menu-btn" 
-              onClick={() => setIsOpen(!isOpen)}
-              aria-label="Toggle navigation menu"
+            <button
+              ref={menuBtnRef}
+              className="mobile-menu-btn"
+              onClick={toggleMenu}
+              aria-label={isOpen ? 'Close navigation menu' : 'Open navigation menu'}
               aria-expanded={isOpen}
               aria-controls="mobile-navigation"
+              tabIndex={isOpen ? -1 : 0}
             >
-              {isOpen ? <X size={24} /> : <Menu size={24} />}
+              {isOpen ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
             </button>
           </div>
         </div>
       </header>
 
       {/* Mobile Navigation Drawer */}
-      <div id="mobile-navigation" className={`mobile-drawer ${isOpen ? 'mobile-drawer-open' : ''}`} aria-hidden={!isOpen}>
+      {/* Backdrop overlay */}
+      {isOpen && (
+        <div
+          className="mobile-drawer-backdrop"
+          onClick={() => { setIsOpen(false); menuBtnRef.current?.focus(); }}
+          aria-hidden="true"
+        />
+      )}
+
+      <div
+        ref={drawerRef}
+        id="mobile-navigation"
+        className={`mobile-drawer ${isOpen ? 'mobile-drawer-open' : ''}`}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Navigation menu"
+        aria-hidden={!isOpen}
+      >
+        <button
+          type="button"
+          className="mobile-drawer-close"
+          aria-label="Close navigation menu"
+          onClick={handleLinkClick}
+        >
+          <X size={24} aria-hidden="true" />
+        </button>
         <nav className="mobile-nav" aria-label="Mobile Navigation">
           <Link to="/" className="mobile-nav-link" onClick={handleLinkClick} aria-current={location.pathname === '/' ? 'page' : undefined}>Home</Link>
           <Link to="/about" className="mobile-nav-link" onClick={handleLinkClick} aria-current={location.pathname === '/about' ? 'page' : undefined}>About</Link>
@@ -172,9 +247,9 @@ const Header = () => {
           <Link to="/branding" className="mobile-nav-link" onClick={handleLinkClick} aria-current={location.pathname === '/branding' ? 'page' : undefined}>Branding</Link>
           <Link to="/ecommerce" className="mobile-nav-link" onClick={handleLinkClick} aria-current={location.pathname === '/ecommerce' ? 'page' : undefined}>E-commerce</Link>
           <Link to="/contact" className="mobile-nav-link" onClick={handleLinkClick} aria-current={location.pathname === '/contact' ? 'page' : undefined}>Contact</Link>
-          <button 
+          <button
             type="button"
-            className="btn btn-primary mobile-cta" 
+            className="btn btn-primary mobile-cta"
             aria-label="Open Work With Us enquiry form"
             onClick={(e) => { handleLinkClick(); handleOpenWorkModal(e); }}
           >

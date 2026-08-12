@@ -1,5 +1,5 @@
 import './Contact.css';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Link } from 'react-router';
 import { Send, CheckCircle2, AlertCircle } from 'lucide-react';
 import useSEO from '../hooks/useSEO';
@@ -8,6 +8,8 @@ import { FORM_SUBMISSION_ERROR } from '../utils/formMessages';
 import contactHero960 from '../assets/contact-hero-960.webp';
 import contactHero1440 from '../assets/contact-hero-1440.webp';
 import contactHeroMobile from '../assets/contact-hero-mobile.webp';
+import PhoneObfuscated from '../components/PhoneObfuscated';
+
 
 const Contact = () => {
   useSEO(getRouteMetadata('/contact'));
@@ -24,6 +26,7 @@ const Contact = () => {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState('');
+  const formRef = useRef(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -45,7 +48,7 @@ const Contact = () => {
     if (!formData.helpType) tempErrors.helpType = 'Please select what you need help with';
     if (!formData.message.trim()) tempErrors.message = 'Message is required';
     setErrors(tempErrors);
-    return Object.keys(tempErrors).length === 0;
+    return tempErrors;
   };
 
   const handleSubmit = async (e) => {
@@ -55,7 +58,9 @@ const Contact = () => {
       return;
     }
 
-    if (validate()) {
+    const validationErrors = validate();
+
+    if (Object.keys(validationErrors).length === 0) {
       setIsSubmitting(true);
       setSubmitError('');
 
@@ -107,6 +112,11 @@ const Contact = () => {
       } finally {
         setIsSubmitting(false);
       }
+    } else {
+      const firstErrorKey = Object.keys(validationErrors)[0];
+      const field = formRef.current?.elements.namedItem(firstErrorKey);
+      const focusTarget = typeof field?.length === 'number' ? field[0] : field;
+      focusTarget?.focus();
     }
   };
 
@@ -152,8 +162,8 @@ const Contact = () => {
             <article className="contact-info-card">
               <h3>Phone</h3>
               <p className="contact-info-summary">Direct contact</p>
-              <p><a href="tel:+918861942440">+91 88619 42440</a></p>
-              <p><a href="tel:+919072556665">+91 90725 56665</a></p>
+              <p><PhoneObfuscated digits="+918861942440" display="+91 88619 42440" /></p>
+              <p><PhoneObfuscated digits="+919072556665" display="+91 90725 56665" /></p>
             </article>
 
             <article className="contact-info-card">
@@ -185,7 +195,7 @@ const Contact = () => {
                     </button>
                   </div>
                 ) : (
-                <form onSubmit={handleSubmit} noValidate>
+                <form ref={formRef} onSubmit={handleSubmit} noValidate>
                   <div className="contact-form-row">
                     <div className="form-group">
                       <label className="form-label" htmlFor="firstName">First Name</label>

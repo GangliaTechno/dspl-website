@@ -2,6 +2,7 @@ import './App.css';
 import { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router';
 import AnalyticsTracker from './components/AnalyticsTracker';
+import ErrorBoundary from './components/ErrorBoundary';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import PageLoader from './components/PageLoader';
@@ -33,22 +34,26 @@ const AppRoutes = ({ pages = {} }) => {
     <>
       <ScrollToTop />
       <AnalyticsTracker />
+      {/* Skip Navigation — WCAG 2.4.1 Bypass Blocks */}
+      <a href="#main-content" className="skip-link">Skip to main content</a>
       <div id="app-root">
         <Header />
-        <main className="main-content">
-          <Suspense fallback={<PageLoader />}>
-            <Routes>
-              <Route path="/" element={<HomeRoute />} />
-              <Route path="/about" element={<AboutRoute />} />
-              <Route path="/brands" element={<BrandsRoute />} />
-              <Route path="/marketing" element={<MarketingRoute />} />
-              <Route path="/branding" element={<BrandingRoute />} />
-              <Route path="/ecommerce" element={<EcommerceRoute />} />
-              <Route path="/contact" element={<ContactRoute />} />
-              <Route path="/privacy" element={<PrivacyPolicyRoute />} />
-              <Route path="*" element={<NotFoundRoute />} />
-            </Routes>
-          </Suspense>
+        <main className="main-content" id="main-content">
+          <ErrorBoundary>
+            <Suspense fallback={<PageLoader />}>
+              <Routes>
+                <Route path="/" element={<HomeRoute />} />
+                <Route path="/about" element={<AboutRoute />} />
+                <Route path="/brands" element={<BrandsRoute />} />
+                <Route path="/marketing" element={<MarketingRoute />} />
+                <Route path="/branding" element={<BrandingRoute />} />
+                <Route path="/ecommerce" element={<EcommerceRoute />} />
+                <Route path="/contact" element={<ContactRoute />} />
+                <Route path="/privacy" element={<PrivacyPolicyRoute />} />
+                <Route path="*" element={<NotFoundRoute />} />
+              </Routes>
+            </Suspense>
+          </ErrorBoundary>
         </main>
         <Footer />
         <WorkWithUsModal />

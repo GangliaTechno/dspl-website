@@ -1,6 +1,8 @@
 import './PrivacyPolicy.css';
 import useSEO from '../hooks/useSEO';
 import { getRouteMetadata } from '../seo/routeMetadata';
+import PhoneObfuscated from '../components/PhoneObfuscated';
+
 
 const PrivacyPolicy = () => {
   useSEO(getRouteMetadata('/privacy'));
@@ -47,7 +49,7 @@ const PrivacyPolicy = () => {
           <div className="contact-info-card">
             <p><strong>Dashapatmaja Solutions Pvt Ltd</strong></p>
             <p>Room No. 12, 4th Floor, MUTBI, Advanced Research Center, Madhava Nagar, Manipal, Karnataka 576104</p>
-            <p>Email: <a href="mailto:director@dashapatmaja.in">director@dashapatmaja.in</a> | Phone: <a href="tel:+918861942440">+91 88619 42440</a></p>
+            <p>Email: <a href="mailto:director@dashapatmaja.in">director@dashapatmaja.in</a> | Phone: <PhoneObfuscated digits="+918861942440" display="+91 88619 42440" /></p>
           </div>
         </section>
       </div>

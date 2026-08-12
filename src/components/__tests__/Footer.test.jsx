@@ -11,7 +11,7 @@ const renderFooter = () =>
   );
 
 describe('Footer', () => {
-  it('renders the compact corporate information surface without a repeated CTA', () => {
+  it('renders one global consultation CTA before the corporate information', () => {
     const { container } = renderFooter();
 
     expect(container.querySelector('.footer-banner')).not.toBeInTheDocument();
@@ -24,19 +24,32 @@ describe('Footer', () => {
     expect(
       screen.queryByRole('button', { name: /get in touch/i }),
     ).not.toBeInTheDocument();
+    expect(screen.getByText('Start a conversation')).toBeInTheDocument();
+    expect(screen.getByRole('heading', {
+      level: 2,
+      name: 'Ready to build with greater clarity?',
+    })).toBeInTheDocument();
+    expect(screen.getByText(
+      'Tell us what you are building, where you need support, and what a successful next step looks like.',
+    )).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Contact DSPL' })).toHaveAttribute(
+      'href',
+      '/contact',
+    );
 
     expect(
       screen.getByText(
         'Dashapatmaja Solutions Pvt Ltd develops consumer brands and provides branding, marketing, and e-commerce services.',
       ),
     ).toBeInTheDocument();
+
     expect(screen.getByRole('heading', { level: 2, name: 'Services' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { level: 2, name: 'Contact' })).toBeInTheDocument();
 
     expect(
       screen.getByAltText('Dashapatmaja Solutions Pvt Ltd logo'),
     ).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'LinkedIn' })).toHaveAttribute(
+    expect(screen.getByRole('link', { name: 'Dashapatmaja Solutions Pvt Ltd on LinkedIn' })).toHaveAttribute(
       'href',
       'https://www.linkedin.com/company/dashapatmaja-solutions-private-limited/',
     );
@@ -45,13 +58,11 @@ describe('Footer', () => {
       ['Marketing', '/marketing'],
       ['Branding', '/branding'],
       ['E-commerce', '/ecommerce'],
-      ['Brands', '/brands'],
+      ['Our Brands', '/brands'],
       ['About Our Company', '/about'],
       ['Privacy Policy', '/privacy'],
       ['director@dashapatmaja.in', 'mailto:director@dashapatmaja.in'],
-      ['dsplmanipal@gmail.com', 'mailto:dsplmanipal@gmail.com'],
-      ['+91 88619 42440', 'tel:+918861942440'],
-      ['+91 90725 56665', 'tel:+919072556665'],
+      ['Call +91 88619 42440', '#phone'],
     ]) {
       expect(screen.getByRole('link', { name })).toHaveAttribute('href', href);
     }

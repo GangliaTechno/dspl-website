@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import { organizationStructuredData } from '../seo/routeMetadata';
 
+const SITE_NAME = 'Dashapatmaja Solutions Pvt Ltd';
+
 /**
  * Custom hook to update document title, description, canonical link, OpenGraph, and Twitter tags
  */
@@ -8,7 +10,7 @@ const useSEO = ({
   title = '',
   description = '',
   canonical = '',
-  image = 'https://dashapatmaja.in/logo.png',
+  image = 'https://dashapatmaja.in/og-cover.jpg',
   type = 'website',
   robots = 'index, follow',
   structuredData = organizationStructuredData,
@@ -16,12 +18,23 @@ const useSEO = ({
   useEffect(() => {
     if (title) document.title = title;
 
-    const setMetaTag = (selector, nameAttr, nameValue, content) => {
+    const setMetaByName = (nameValue, content) => {
       if (!content) return;
-      let el = document.querySelector(selector);
+      let el = document.querySelector(`meta[name="${nameValue}"]`);
       if (!el) {
         el = document.createElement('meta');
-        el.setAttribute(nameAttr, nameValue);
+        el.setAttribute('name', nameValue);
+        document.head.appendChild(el);
+      }
+      el.setAttribute('content', content);
+    };
+
+    const setMetaByProperty = (propValue, content) => {
+      if (!content) return;
+      let el = document.querySelector(`meta[property="${propValue}"]`);
+      if (!el) {
+        el = document.createElement('meta');
+        el.setAttribute('property', propValue);
         document.head.appendChild(el);
       }
       el.setAttribute('content', content);
@@ -31,24 +44,25 @@ const useSEO = ({
       canonical || window.location.pathname
     }`;
 
-    // 2. Meta Description
-    setMetaTag('meta[name="description"]', 'name', 'description', description);
-    setMetaTag('meta[name="robots"]', 'name', 'robots', robots);
+    // Primary meta
+    setMetaByName('description', description);
+    setMetaByName('robots', robots);
 
-    // 3. Open Graph Tags
-    setMetaTag('meta[property="og:title"]', 'property', 'og:title', title || document.title);
-    setMetaTag('meta[property="og:description"]', 'property', 'og:description', description);
-    setMetaTag('meta[property="og:url"]', 'property', 'og:url', currentUrl);
-    setMetaTag('meta[property="og:image"]', 'property', 'og:image', image);
-    setMetaTag('meta[property="og:type"]', 'property', 'og:type', type);
+    // Open Graph
+    setMetaByProperty('og:title', title || document.title);
+    setMetaByProperty('og:description', description);
+    setMetaByProperty('og:url', currentUrl);
+    setMetaByProperty('og:image', image);
+    setMetaByProperty('og:type', type);
+    setMetaByProperty('og:site_name', SITE_NAME);
 
-    // 4. Twitter Card Meta Tags
-    setMetaTag('meta[name="twitter:card"]', 'name', 'twitter:card', 'summary_large_image');
-    setMetaTag('meta[name="twitter:title"]', 'name', 'twitter:title', title || document.title);
-    setMetaTag('meta[name="twitter:description"]', 'name', 'twitter:description', description);
-    setMetaTag('meta[name="twitter:image"]', 'name', 'twitter:image', image);
+    // Twitter Card
+    setMetaByName('twitter:card', 'summary_large_image');
+    setMetaByName('twitter:title', title || document.title);
+    setMetaByName('twitter:description', description);
+    setMetaByName('twitter:image', image);
 
-    // 5. Canonical Link
+    // Canonical Link
     let canonicalLink = document.querySelector('link[rel="canonical"]');
     if (!canonicalLink) {
       canonicalLink = document.createElement('link');
@@ -57,6 +71,7 @@ const useSEO = ({
     }
     canonicalLink.setAttribute('href', currentUrl);
 
+    // Structured Data
     let schema = document.querySelector('script[data-dspl-schema]');
     if (!schema) {
       schema = document.createElement('script');

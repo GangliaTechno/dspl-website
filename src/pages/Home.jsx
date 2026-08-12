@@ -122,7 +122,7 @@ const Home = () => {
             <p className="hero-subhead">
               Dashapatmaja Solutions Pvt Ltd develops and operates consumer
               brands while helping businesses coordinate branding, marketing,
-              and e-commerce through clearly defined, accountable execution.
+              and e-commerce through clearly defined, accountable delivery.
             </p>
             <a
               href="#capabilities"
@@ -151,7 +151,7 @@ const Home = () => {
             </div>
             <p className="section-title-description">
               Start with the capability you need now. Keep strategy, market
-              execution, and commerce aligned as the business grows.
+              activity, and commerce aligned as the business grows.
             </p>
           </div>
 
@@ -171,6 +171,8 @@ const Home = () => {
       </section>
 
       <ProcessSteps steps={processSteps} />
+
+
 
       <OwnedBrandProof logoSrc={rawRadiclesLogo} />
     </div>

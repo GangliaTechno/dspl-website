@@ -9,10 +9,7 @@ import { NOT_FOUND_METADATA } from '../seo/routeMetadata';
 const NotFound = () => {
   const location = useLocation();
 
-  useSEO({
-    ...NOT_FOUND_METADATA,
-    canonical: location.pathname,
-  });
+  useSEO(NOT_FOUND_METADATA);
 
   useEffect(() => {
     trackEvent({
@@ -28,7 +25,7 @@ const NotFound = () => {
         <div className="not-found-code">404</div>
         <h1 className="not-found-title">Page Not Found</h1>
         <p className="not-found-description">
-          The page <code className="missing-path">{location.pathname}</code> does not exist, has been removed, or is temporarily unavailable.
+          The requested page does not exist, has been removed, or is temporarily unavailable.
         </p>
 
         <div className="not-found-actions">

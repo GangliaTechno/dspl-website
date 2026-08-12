@@ -2,7 +2,7 @@ const ProcessSteps = ({ steps }) => (
   <section className="section process-section" aria-labelledby="process-title">
     <div className="container">
       <div className="section-header process-header">
-        <span className="section-subtitle">Execution framework</span>
+        <span className="section-subtitle">Delivery framework</span>
         <h2 className="section-title" id="process-title">
           How We Work With You
         </h2>

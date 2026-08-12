@@ -23,6 +23,7 @@ const WorkWithUsModal = () => {
   const [submitError, setSubmitError] = useState('');
 
   const modalRef = useRef(null);
+  const formRef = useRef(null);
   const lastActiveElement = useRef(null);
 
   useEffect(() => {
@@ -210,6 +211,10 @@ const WorkWithUsModal = () => {
     } else {
       const firstErrorKey = Object.keys(validationErrors)[0];
       if (firstErrorKey) {
+        const field = formRef.current?.elements.namedItem(firstErrorKey);
+        const focusTarget = typeof field?.length === 'number' ? field[0] : field;
+        focusTarget?.focus();
+
         const errEl = document.getElementById(`modal-${firstErrorKey}`);
         if (errEl && typeof errEl.scrollIntoView === 'function') {
           errEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -256,7 +261,7 @@ const WorkWithUsModal = () => {
               </button>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} noValidate>
+            <form ref={formRef} onSubmit={handleSubmit} noValidate>
               <p className="work-modal-form-intro-text">Please fill out all the sections below. Required fields are marked with *</p>
               
               {/* SECTION 1 – Basic Info */}

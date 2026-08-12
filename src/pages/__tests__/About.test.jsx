@@ -33,7 +33,7 @@ describe('About page', () => {
       name: 'About Dashapatmaja Solutions Pvt Ltd',
     })).toBeInTheDocument();
     expect(screen.getByText(
-      'A multidisciplinary company focused on brand development and commercial execution.',
+      'A multidisciplinary company focused on developing brands and building coordinated commercial capabilities.',
     )).toHaveClass('about-subtitle');
     expect(container.querySelector('.about-hero .about-intro-text'))
       .not.toBeInTheDocument();
@@ -65,10 +65,10 @@ describe('About page', () => {
       'To build an enduring portfolio of consumer brands defined by quality, relevance, and responsible growth.',
     )).toBeInTheDocument();
     expect(directionSection.getByText(
-      'We develop our own brands and help businesses strengthen their branding, marketing, and e-commerce capabilities through practical, accountable execution.',
+      'We develop our own brands and help businesses strengthen their branding, marketing, and e-commerce capabilities through practical, accountable collaboration.',
     )).toBeInTheDocument();
     expect(directionSection.getByText(
-      'Evidence guides our recommendations. We define scope, responsibilities, and measures clearly, communicate decisions honestly, and execute agreed work with care.',
+      'Evidence guides our recommendations. We define scope, responsibilities, and measures clearly, communicate decisions honestly, and carry agreed work through with care.',
     )).toBeInTheDocument();
     expect(section.querySelector('.direction-values-list')).not.toBeInTheDocument();
     expect(section.querySelectorAll('svg')).toHaveLength(0);

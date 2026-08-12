@@ -29,3 +29,7 @@ export async function loadHydrationPage(pathname, loaders = defaultLoaders) {
 
   return { [pageName]: pageModule.default };
 }
+
+export function shouldHydratePrerenderedPage(hasMarkup, pages) {
+  return Boolean(hasMarkup && pages && !pages.NotFound);
+}

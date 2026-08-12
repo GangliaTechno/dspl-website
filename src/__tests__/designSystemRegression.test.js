@@ -219,7 +219,7 @@ describe('approved design-system corrections', () => {
       'To build an enduring portfolio of consumer brands defined by quality, relevance, and responsible growth.',
     );
     expect(aboutPage).toContain(
-      'Evidence guides our recommendations. We define scope, responsibilities, and measures clearly, communicate decisions honestly, and execute agreed work with care.',
+      'Evidence guides our recommendations. We define scope, responsibilities, and measures clearly, communicate decisions honestly, and carry agreed work through with care.',
     );
     expect(aboutPage).toContain('directionCards.map((card, index)');
     expect(aboutPage).not.toContain('card.items');
@@ -396,9 +396,6 @@ describe('approved design-system corrections', () => {
       /\.hero-subhead\s*{[^}]*max-width:\s*62ch;[^}]*margin:\s*0 auto 2\.75rem;[^}]*font-size:\s*clamp\(1\.125rem,\s*1\.65vw,\s*1\.375rem\);[^}]*line-height:\s*1\.65;/s,
     );
     expect(home).toMatch(/\.hero-title\s*{[^}]*color:\s*#fff;/s);
-    expect(home).toMatch(
-      /\.hero-title-accent\s*{[^}]*color:\s*var\(--accent\);/s,
-    );
     expect(homePage).not.toContain(
       "import { openWorkModal } from '../utils/workModal';",
     );
@@ -457,6 +454,18 @@ describe('approved design-system corrections', () => {
     expect(homePage).not.toContain('homepage-owned-brand');
   });
 
+  it('reserves execution language for the primary Home proposition', () => {
+    const homeAndAbout = [
+      readSource('src/pages/Home.jsx'),
+      readSource('src/pages/About.jsx'),
+      readSource('src/components/home/ProcessSteps.jsx'),
+    ].join('\n');
+
+    expect(homeAndAbout.match(/\bexecution\b/gi)).toHaveLength(1);
+    expect(homeAndAbout).toContain('We deliver disciplined market execution.');
+    expect(homeAndAbout).toContain('Delivery framework');
+  });
+
   it('keeps the About journey inside the approved editorial section', () => {
     const aboutPage = readSource('src/pages/About.jsx');
     const aboutCss = readSource('src/pages/About.css');
@@ -511,8 +520,11 @@ describe('approved design-system corrections', () => {
       /\.supporter-logo-slot\s*{[^}]*width:\s*auto;[^}]*height:\s*var\(--supporter-slot-height\);/s,
     );
     expect(homeSections).toMatch(
-      /\.supporter-logo\s*{[^}]*width:\s*auto;[^}]*height:\s*100%;[^}]*object-fit:\s*contain;[^}]*transform:\s*none;[^}]*filter:\s*brightness\(0\) invert\(1\) drop-shadow\(0 1px 3px rgba\(0,\s*0,\s*0,\s*0\.65\)\);[^}]*opacity:\s*0\.86;/s,
+      /\.supporter-logo\s*{[^}]*width:\s*auto;[^}]*height:\s*100%;[^}]*object-fit:\s*contain;[^}]*transform:\s*none;[^}]*filter:\s*none;[^}]*opacity:\s*1;/s,
     );
+    expect(homeSections).not.toContain('drop-shadow(');
+    expect(homeSections).not.toMatch(/\.supporter-logo\s*{[^}]*transition:/s);
+    expect(homeSections).not.toContain('.supporter-logo:hover');
     expect(homeSections).not.toMatch(/\.supporter-logo-(?:dst|nidhi|mutbi|startup)\s*{/);
     expect(homeSections).not.toContain('--supporter-optical-trim');
     expect(homeSections).toMatch(
@@ -683,8 +695,17 @@ describe('approved design-system corrections', () => {
     expect(prerenderEntry).toContain("name: 'robots'");
     expect(verifier).toContain("path.join('dist', '404.html')");
     expect(verifier).toContain('prerendered public routes and a production 404 page.');
-    expect(indexHtml).not.toContain('<meta name="robots" content="index, follow"');
+    // Audit improvement: index.html now has a robots meta as SEO fallback
+    // The tag provides a static baseline before JS hydration, overridden per-route by useSEO
+    expect(indexHtml).toContain('<meta name="robots" content="index, follow"');
     expect(existsSync(resolve('public/_redirects'))).toBe(false);
+  });
+
+  it('does not publish production source maps', () => {
+    const viteConfig = readSource('vite.config.js');
+
+    expect(viteConfig).toContain('sourcemap: false');
+    expect(viteConfig).not.toContain("sourcemap: 'hidden'");
   });
 
   it('tiers About page motion for reduced-motion visitors', () => {
@@ -746,9 +767,10 @@ describe('approved design-system corrections', () => {
     );
   });
 
-  it('keeps the global footer as compact corporate information without a duplicate CTA', () => {
+  it('keeps one global pre-footer CTA above compact corporate information', () => {
     const footer = readSource('src/components/Footer.jsx');
     const footerCss = readSource('src/components/Footer.css');
+    const homeCss = readSource('src/pages/Home.css');
 
     expect(footer).not.toContain('footer-banner');
     expect(footer).not.toContain('Ready to build something that lasts?');
@@ -756,6 +778,9 @@ describe('approved design-system corrections', () => {
     expect(footer).not.toContain('ArrowUpRight');
     expect(footer).not.toContain('openWorkModal');
     expect(footer).not.toContain('Get in Touch');
+    expect(footer).toContain('className="footer-cta-strip"');
+    expect(footer).toContain('Ready to build with greater clarity?');
+    expect(footer).toContain('Contact DSPL');
     expect(footer).toContain(
       'Dashapatmaja Solutions Pvt Ltd develops consumer brands and provides branding, marketing, and e-commerce services.',
     );
@@ -767,6 +792,7 @@ describe('approved design-system corrections', () => {
     expect(footerCss).not.toContain('.banner-title');
     expect(footerCss).not.toContain('.banner-text');
     expect(footerCss).not.toContain('.banner-btn');
+    expect(homeCss).not.toContain('.home-mid-cta');
     expect(footerCss).toMatch(
       /\.footer\s*{[^}]*padding:\s*4rem 0 2rem;/s,
     );
@@ -776,5 +802,43 @@ describe('approved design-system corrections', () => {
     expect(footerCss).toMatch(
       /@media\s*\(max-width:\s*576px\)\s*{[\s\S]*?\.footer-bottom\s*{[^}]*flex-direction:\s*column;[^}]*align-items:\s*flex-start;[^}]*gap:\s*1rem;/s,
     );
+  });
+
+  it('references the generated icon set and optimized production assets', () => {
+    const indexHtml = readSource('index.html');
+    const header = readSource('src/components/Header.jsx');
+    const footer = readSource('src/components/Footer.jsx');
+    const about = readSource('src/pages/About.jsx');
+    const manifest = JSON.parse(readSource('public/site.webmanifest'));
+
+    expect(indexHtml).toContain('href="/favicon-16.png"');
+    expect(indexHtml).toContain('href="/favicon-32.png"');
+    expect(indexHtml).toContain('href="/apple-touch-icon.png"');
+    expect(indexHtml).toContain('href="/site.webmanifest"');
+    expect(indexHtml).toContain('<meta name="theme-color" content="#111111"');
+    expect(indexHtml).not.toContain('href="/favicon.png"');
+    expect(manifest).toMatchObject({
+      name: 'Dashapatmaja Solutions Pvt Ltd',
+      short_name: 'DSPL',
+      start_url: '/',
+      display: 'standalone',
+    });
+    expect(manifest.icons).toEqual([
+      { src: '/icon-192.png', sizes: '192x192', type: 'image/png' },
+      { src: '/icon-512.png', sizes: '512x512', type: 'image/png' },
+    ]);
+    for (const path of [
+      'public/favicon-16.png',
+      'public/favicon-32.png',
+      'public/apple-touch-icon.png',
+      'public/icon-192.png',
+      'public/icon-512.png',
+    ]) {
+      expect(existsSync(resolve(path))).toBe(true);
+    }
+    expect(header).toContain("import logoImg from '../assets/icon_orange.webp';");
+    expect(footer).toContain("import logoImg from '../assets/icon_orange.webp';");
+    expect(about).toContain("import manuImg from '../assets/manu_pro_fixed.webp';");
+    expect(about).not.toContain('manu_pro_fixed.jpg');
   });
 });

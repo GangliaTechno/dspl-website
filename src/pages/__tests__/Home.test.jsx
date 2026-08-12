@@ -56,9 +56,12 @@ describe('Home page', () => {
 
     expect(
       screen.getByText(
-        'Dashapatmaja Solutions Pvt Ltd develops and operates consumer brands while helping businesses coordinate branding, marketing, and e-commerce through clearly defined, accountable execution.',
+        'Dashapatmaja Solutions Pvt Ltd develops and operates consumer brands while helping businesses coordinate branding, marketing, and e-commerce through clearly defined, accountable delivery.',
       ),
     ).toBeInTheDocument();
+    expect(screen.getByText(
+      'Start with the capability you need now. Keep strategy, market activity, and commerce aligned as the business grows.',
+    )).toBeInTheDocument();
 
     expect(screen.queryByRole('button', { name: 'Work With Us' }))
       .not.toBeInTheDocument();
