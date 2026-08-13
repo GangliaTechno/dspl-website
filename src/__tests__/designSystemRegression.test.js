@@ -779,8 +779,8 @@ describe('approved design-system corrections', () => {
     expect(aboutMotion).toContain(
       "prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y }",
     );
-    expect(aboutMotion).toContain('duration: prefersReducedMotion ? 0.15 : 0.65');
-    expect(aboutMotion).toContain('Math.min(index * 0.07, 0.21)');
+    expect(aboutMotion).toContain('duration: prefersReducedMotion ? 0 : 0.5');
+    expect(aboutMotion).toContain('Math.min(index * 0.04, 0.12)');
     expect(aboutPage).toContain('behavior: getHashScrollBehavior(prefersReducedMotion)');
     expect(aboutCss).not.toContain('@keyframes subtleZoom');
     expect(rotatingHeroCss).toMatch(
@@ -911,6 +911,61 @@ describe('approved design-system corrections', () => {
     expect(header).toContain("import logoImg from '../assets/icon_orange.webp';");
     expect(footer).toContain("import logoImg from '../assets/icon_orange.webp';");
     expect(about).toContain("import manuImg from '../assets/manu_pro_fixed.webp';");
+    expect(about).toContain("import drImg from '../assets/dr_pro.webp';");
+    expect(about).toContain("import anushaImg from '../assets/Anusha-mam_pro.webp';");
+    expect(about).toContain("import nameshImg from '../assets/ceo_pro.webp';");
     expect(about).not.toContain('manu_pro_fixed.jpg');
+    expect(about).not.toContain("from '../assets/dr_pro.png'");
+    expect(about).not.toContain("from '../assets/Anusha-mam_pro.png'");
+    expect(about).not.toContain("from '../assets/ceo_pro.png'");
+  });
+
+  it('limits transitions to the properties each interaction changes', () => {
+    const styleSources = [
+      'src/index.css',
+      'src/components/FAQAccordion.css',
+      'src/components/Footer.css',
+      'src/pages/NotFound.css',
+    ].map(readSource);
+
+    for (const css of styleSources) {
+      expect(css).not.toMatch(/transition:\s*all\b/);
+    }
+  });
+
+  it('reserves intrinsic space for every production image', () => {
+    const imageSources = [
+      'src/components/Header.jsx',
+      'src/components/Footer.jsx',
+      'src/components/home/SupporterStrip.jsx',
+      'src/components/home/OwnedBrandProof.jsx',
+      'src/components/PackagingGallery.jsx',
+      'src/components/RotatingHeroMedia.jsx',
+      'src/pages/Home.jsx',
+      'src/pages/About.jsx',
+      'src/pages/Brands.jsx',
+      'src/pages/Contact.jsx',
+      'src/pages/RawRadicles.jsx',
+    ].map(readSource).join('\n');
+    const images = imageSources.match(/<img\b[\s\S]*?\/>/g) ?? [];
+
+    expect(images.length).toBeGreaterThan(0);
+    for (const image of images) {
+      expect(image).toMatch(/\bwidth=/);
+      expect(image).toMatch(/\bheight=/);
+    }
+  });
+
+  it('keeps normal page scrolling native and reduces About scroll-motion noise', () => {
+    const globalCss = readSource('src/index.css');
+    const aboutPage = readSource('src/pages/About.jsx');
+    const aboutMotion = readSource('src/pages/aboutMotion.js');
+
+    expect(globalCss).not.toMatch(/html\s*{[^}]*scroll-behavior:\s*smooth;/s);
+    expect(aboutPage).toContain('viewport={{ once: true, amount: 0.2 }}');
+    expect(aboutPage).not.toContain("viewport={{ once: true, margin: '-50px' }}");
+    expect(aboutPage).not.toContain('viewport={{ once: true, margin: "-50px" }}');
+    expect(aboutMotion).toContain('duration: prefersReducedMotion ? 0 : 0.5');
+    expect(aboutMotion).toContain('Math.min(index * 0.04, 0.12)');
   });
 });

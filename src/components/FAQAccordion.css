@@ -9,7 +9,6 @@
 .faq-item {
   border-radius: 12px;
   overflow: hidden;
-  transition: all 0.3s ease;
   border: 1px solid var(--border-color);
   background: rgba(255, 255, 255, 0.4);
 }

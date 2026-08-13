@@ -166,7 +166,7 @@ const Brands = () => {
 
                 <div className="rr-visual-panel">
                   <div className="brand-showcase-logo-wrapper">
-                    <img src={rawRadiclesLogo} alt="Raw Radicles" className="brand-showcase-logo-img" loading="lazy" decoding="async" />
+                    <img src={rawRadiclesLogo} alt="Raw Radicles" className="brand-showcase-logo-img" width="748" height="692" loading="lazy" decoding="async" />
                   </div>
                 </div>
 

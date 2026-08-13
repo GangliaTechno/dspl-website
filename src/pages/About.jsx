@@ -8,10 +8,10 @@ import RotatingHeroMedia from '../components/RotatingHeroMedia';
 
 import manuImg from '../assets/manu_pro_fixed.webp';
 import sreeImg from '../assets/sree_pro_extended.webp';
-import drImg from '../assets/dr_pro.png';
+import drImg from '../assets/dr_pro.webp';
 import balakrishnaImg from '../assets/balakrishna_pro_extended.webp';
-import anushaImg from '../assets/Anusha-mam_pro.png';
-import nameshImg from '../assets/ceo_pro.png';
+import anushaImg from '../assets/Anusha-mam_pro.webp';
+import nameshImg from '../assets/ceo_pro.webp';
 import aboutTeam01960 from '../assets/about-team-01-960.webp';
 import aboutTeam011440 from '../assets/about-team-01-1440.webp';
 import aboutTeam01Mobile from '../assets/about-team-01-mobile.webp';
@@ -40,6 +40,8 @@ const journeyMilestones = [
     year: '2022',
     title: 'Company incorporation',
     image: journey2023Img,
+    width: 1536,
+    height: 1024,
     alt: 'Early consumer-brand planning materials at a shared workspace',
     items: [
       'Dashapatmaja Solutions Pvt Ltd was incorporated on 28 July 2022.',
@@ -50,6 +52,8 @@ const journeyMilestones = [
     year: '2023',
     title: 'First incubation',
     image: journey2023Img,
+    width: 1536,
+    height: 1024,
     alt: 'Consumer-brand planning materials in an early-stage incubator workspace',
     items: [
       'Incubated at GoK Bioincubator, Manipal, where we set up our base.',
@@ -59,6 +63,8 @@ const journeyMilestones = [
     year: '2024',
     title: 'First brand',
     image: journey2024Img,
+    width: 1536,
+    height: 1024,
     alt: 'Cacao, chocolate, and Ayurvedic botanicals arranged for premium product development',
     items: [
       'Launched Raw Radicles, a premium chocolate brand with Ayurveda inside.',
@@ -69,6 +75,8 @@ const journeyMilestones = [
     year: '2025',
     title: 'MUTBI incubation and national grant',
     image: journey2025Img,
+    width: 1536,
+    height: 1024,
     alt: 'Research desk with a consumer-product prototype and measured botanical ingredients',
     items: [
       'Joined MUTBI at MAHE, Manipal, for technical and academic support.',
@@ -80,6 +88,8 @@ const journeyMilestones = [
     year: '2026',
     title: 'Services arm',
     image: journey2026Img,
+    width: 1536,
+    height: 1024,
     alt: 'Brand and e-commerce operations studio with packaging, photography, and dispatch materials',
     items: [
       'Opened our branding, marketing, and e-commerce services to outside clients.',
@@ -158,6 +168,8 @@ const About = () => {
       role: 'Chairman and Director',
       initial: 'MS',
       image: manuImg,
+      width: 1024,
+      height: 1024,
       linkedin: 'https://www.linkedin.com/in/dr-manu-sudhi-609296167/',
       objectPosition: 'center',
       scale: 1.04,
@@ -168,6 +180,8 @@ const About = () => {
       role: 'Managing Director',
       initial: 'SR',
       image: sreeImg,
+      width: 640,
+      height: 640,
       linkedin: 'https://www.linkedin.com/in/shreepathy-ranga-bhatta-b-862a2b24a/',
       objectPosition: 'center',
       scale: 1.45,
@@ -178,6 +192,8 @@ const About = () => {
       role: 'Director',
       initial: 'AP',
       image: anushaImg,
+      width: 302,
+      height: 302,
       linkedin: 'https://www.linkedin.com/in/anusha-pai-013b0213/',
       objectPosition: 'center',
       scale: 1.08,
@@ -188,6 +204,8 @@ const About = () => {
       role: 'Mentor',
       initial: 'BM',
       image: balakrishnaImg,
+      width: 640,
+      height: 640,
       linkedin: 'https://www.linkedin.com/in/dr-balakrishna-srinivas-maddodi-68874218/',
       objectPosition: 'center',
       scale: 1.45,
@@ -198,6 +216,8 @@ const About = () => {
       role: 'Director',
       initial: 'NM',
       image: nameshImg,
+      width: 332,
+      height: 327,
       linkedin: 'https://www.linkedin.com/in/namesh-malarout-97375697/',
       objectPosition: 'center',
       scale: 1.9,
@@ -208,6 +228,8 @@ const About = () => {
       role: 'Mentor',
       initial: 'DS',
       image: drImg,
+      width: 358,
+      height: 354,
       linkedin: 'https://www.linkedin.com/in/dasharathraj/',
       objectPosition: 'center',
       scale: 1.06,
@@ -254,7 +276,7 @@ const About = () => {
                 className="direction-card"
                 initial={revealInitial(20)}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-50px' }}
+                viewport={{ once: true, amount: 0.2 }}
                 transition={getAboutRevealTransition(prefersReducedMotion, index)}
               >
                 <span className="direction-label">{card.label}</span>
@@ -321,13 +343,15 @@ const About = () => {
                 key={milestone.year}
                 initial={revealInitial(24)}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-50px' }}
+                viewport={{ once: true, amount: 0.2 }}
                 transition={getAboutRevealTransition(prefersReducedMotion, index)}
               >
                 <div className="journey-story-media">
                   <img
                     src={milestone.image}
                     alt={milestone.alt}
+                    width={milestone.width}
+                    height={milestone.height}
                     loading="lazy"
                     decoding="async"
                   />
@@ -364,7 +388,7 @@ const About = () => {
                 key={idx}
                 initial={revealInitial(20)}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
+                viewport={{ once: true, amount: 0.2 }}
                 transition={getAboutRevealTransition(prefersReducedMotion, idx)}
               >
                 <div className="team-card glass">
@@ -403,6 +427,8 @@ const About = () => {
                           src={member.image}
                           alt={member.name}
                           className="team-avatar-image"
+                          width={member.width}
+                          height={member.height}
                           loading="lazy"
                           decoding="async"
                         />

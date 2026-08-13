@@ -13,6 +13,8 @@ const OwnedBrandProof = ({ logoSrc }) => (
           src={logoSrc}
           alt=""
           className="owned-brand-logo"
+          width="748"
+          height="692"
           loading="lazy"
           decoding="async"
         />

@@ -18,11 +18,13 @@ const PackagingGallery = ({ items = [], fallbackActionHref = '/contact' }) => {
       {items.map((item) => (
         <article className="packaging-item" key={item.sku}>
           <div className="packaging-images">
-            <img src={item.image} alt={item.alt} loading="lazy" decoding="async" />
+            <img src={item.image} alt={item.alt} width={item.width} height={item.height} loading="lazy" decoding="async" />
             {item.backImage && (
               <img
                 src={item.backImage}
                 alt={`${item.alt} back packaging`}
+                width={item.backWidth ?? item.width}
+                height={item.backHeight ?? item.height}
                 loading="lazy"
                 decoding="async"
               />

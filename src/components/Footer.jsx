@@ -45,6 +45,8 @@ const Footer = () => {
                   src={logoImg}
                   alt="Dashapatmaja Solutions Pvt Ltd logo"
                   className="footer-logo-image"
+                  width="806"
+                  height="190"
                   loading="lazy"
                   decoding="async"
                 />

@@ -159,7 +159,7 @@ const Header = () => {
         <div className="header-container">
           {/* Left Side: Logo */}
           <Link to="/" className="logo-link" onClick={() => setIsOpen(false)}>
-            <img src={logoImg} alt="Dashapatmaja Solutions Pvt Ltd logo" className="logo-image" loading="eager" decoding="async" />
+            <img src={logoImg} alt="Dashapatmaja Solutions Pvt Ltd logo" className="logo-image" width="806" height="190" loading="eager" decoding="async" />
           </Link>
 
           {/* Center: Desktop Navigation Links */}

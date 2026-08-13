@@ -19,17 +19,21 @@ import { getRouteMetadata } from '../seo/routeMetadata';
 import './Home.css';
 
 const supporters = [
-  { src: dstNidhiLogo, alt: 'DST NIDHI', className: 'supporter-logo-dst' },
-  { src: nidhiPrayasLogo, alt: 'NIDHI PRAYAS', className: 'supporter-logo-nidhi' },
+  { src: dstNidhiLogo, alt: 'DST NIDHI', className: 'supporter-logo-dst', width: 186, height: 96 },
+  { src: nidhiPrayasLogo, alt: 'NIDHI PRAYAS', className: 'supporter-logo-nidhi', width: 113, height: 96 },
   {
     src: mutbiLogo,
     alt: 'Manipal Universal Technology Business Incubator',
     className: 'supporter-logo-mutbi',
+    width: 300,
+    height: 96,
   },
   {
     src: startupKarnatakaLogo,
     alt: 'Startup Karnataka',
     className: 'supporter-logo-startup',
+    width: 260,
+    height: 96,
   },
 ];
 

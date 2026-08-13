@@ -35,6 +35,10 @@ describe('PackagingGallery', () => {
           collection: 'Cacao Collection',
           description: 'Approved front and back packaging artwork.',
           alt: 'Raw Radicles cacao bar front packaging',
+          width: 800,
+          height: 1200,
+          backWidth: 800,
+          backHeight: 1200,
         },
       ],
       fallbackActionHref: '/contact',
@@ -52,6 +56,12 @@ describe('PackagingGallery', () => {
       'src',
       '/approved-back.webp',
     );
+    expect(screen.getByAltText('Raw Radicles cacao bar front packaging'))
+      .toHaveAttribute('width', '800');
+    expect(screen.getByAltText('Raw Radicles cacao bar front packaging'))
+      .toHaveAttribute('height', '1200');
+    expect(screen.getByAltText(/back packaging/i)).toHaveAttribute('width', '800');
+    expect(screen.getByAltText(/back packaging/i)).toHaveAttribute('height', '1200');
     expect(
       screen.queryByText(/Packaging imagery will be added/i),
     ).not.toBeInTheDocument();

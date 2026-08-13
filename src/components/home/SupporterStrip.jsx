@@ -100,6 +100,8 @@ const SupporterStrip = ({ supporters }) => {
                     src={logo.src}
                     alt={sequenceIndex > 0 ? '' : logo.alt}
                     className="supporter-logo"
+                    width={logo.width}
+                    height={logo.height}
                     loading="eager"
                     decoding="async"
                     draggable="false"

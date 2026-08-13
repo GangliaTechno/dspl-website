@@ -62,13 +62,13 @@ describe('About page', () => {
     expect(getAboutRevealInitial(false, 24)).toEqual({ opacity: 0, y: 24 });
     expect(getAboutRevealInitial(true, 24)).toEqual({ opacity: 0 });
     expect(getAboutRevealTransition(false, 0)).toEqual({
-      duration: 0.65,
+      duration: 0.5,
       ease: 'easeOut',
       delay: 0,
     });
-    expect(getAboutRevealTransition(false, 10).delay).toBe(0.21);
+    expect(getAboutRevealTransition(false, 10).delay).toBe(0.12);
     expect(getAboutRevealTransition(true, 10)).toEqual({
-      duration: 0.15,
+      duration: 0,
       ease: 'easeOut',
       delay: 0,
     });
