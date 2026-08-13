@@ -2,14 +2,17 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const routes = [
-  { route: '', heading: 'We develop brands.' },
+  { route: '', heading: 'We build consumer brands.' },
   { route: 'about', heading: 'About Dashapatmaja Solutions Pvt Ltd' },
   { route: 'brands', heading: 'We develop and operate consumer brands.' },
+  { route: 'brands/raw-radicles', heading: 'Raw Radicles' },
   { route: 'marketing', heading: 'Marketing' },
   { route: 'branding', heading: 'Branding' },
   { route: 'ecommerce', heading: 'E-commerce' },
   { route: 'contact', heading: 'Start a conversation.' },
+  { route: 'start', heading: 'Start a Project' },
   { route: 'privacy', heading: 'Privacy Policy' },
+  { route: 'terms', heading: 'Terms of Use' },
 ];
 
 const titles = [];
@@ -21,6 +24,40 @@ const decodeHtmlText = (value) =>
     .replace(/&gt;/g, '>')
     .replace(/&quot;/g, '"')
     .replace(/&#39;/g, "'");
+
+const verifyOrganizationSchema = (html, label) => {
+  const schemas = Array.from(
+    html.matchAll(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi),
+    (match) => match[1],
+  );
+
+  if (!schemas.length) {
+    failures.push(`${label}: missing JSON-LD`);
+    return;
+  }
+
+  let hasOrganization = false;
+  for (const source of schemas) {
+    try {
+      const data = JSON.parse(source);
+      const types = Array.isArray(data['@type']) ? data['@type'] : [data['@type']];
+      if (
+        types.includes('Organization')
+        && data.name === 'Dashapatmaja Solutions Pvt Ltd'
+        && data.brand?.['@type'] === 'Brand'
+        && data.brand?.name === 'Raw Radicles'
+      ) {
+        hasOrganization = true;
+      }
+    } catch {
+      failures.push(`${label}: invalid JSON-LD`);
+    }
+  }
+
+  if (!hasOrganization) {
+    failures.push(`${label}: missing DSPL Organization schema with Raw Radicles Brand data`);
+  }
+};
 
 for (const { route, heading } of routes) {
   const htmlPath = route
@@ -49,14 +86,15 @@ for (const { route, heading } of routes) {
   if (!/<link\b[^>]*rel=["']canonical["'][^>]*>/i.test(html)) {
     failures.push(`${label}: missing canonical link`);
   }
+  if (!/<meta\b[^>]*name=["']robots["'][^>]*content=["']index, follow["'][^>]*>/i.test(html)) {
+    failures.push(`${label}: missing index, follow robots metadata`);
+  }
   if (!title) {
     failures.push(`${label}: missing title`);
   } else {
     titles.push({ label, title });
   }
-  if (!/type=["']application\/ld\+json["']/i.test(html)) {
-    failures.push(`${label}: missing JSON-LD`);
-  }
+  verifyOrganizationSchema(html, label);
 }
 
 const notFoundPath = path.join('dist', '404.html');
@@ -82,6 +120,7 @@ if (!fs.existsSync(notFoundPath)) {
   if (!/<link\b(?=[^>]*rel=["']canonical["'])(?=[^>]*href=["']https:\/\/dashapatmaja\.in\/404\.html["'])[^>]*>/i.test(notFoundHtml)) {
     failures.push('404: missing stable https://dashapatmaja.in/404.html canonical');
   }
+  verifyOrganizationSchema(notFoundHtml, '404');
   if (/<code\b[^>]*class=["'][^"']*missing-path[^"']*["'][^>]*>\s*\/404\.html\s*<\/code>/i.test(notFoundHtml)) {
     failures.push('404: prerendered fallback exposes /404.html as the missing path');
   }

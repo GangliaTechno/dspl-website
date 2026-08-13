@@ -63,6 +63,45 @@ const Brands = () => {
         </div>
       </section>
 
+      <section className="section brands-ownership-section" aria-labelledby="brands-ownership-title">
+        <div className="container brands-ownership-grid">
+          <div>
+            <span className="section-subtitle">Ownership</span>
+            <h2 id="brands-ownership-title" className="section-title">
+              Raw Radicles is owned and developed by Dashapatmaja Solutions Pvt Ltd
+            </h2>
+          </div>
+          <div className="brands-ownership-copy">
+            <p>
+              Raw Radicles is DSPL's first owned consumer brand. Its trademark
+              application has been filed; the mark is not described as registered.
+            </p>
+            <p>
+              Product, packaging, compliance coordination, photography, pricing,
+              marketing, and route-to-market decisions are managed as part of the
+              same operating system.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="section brands-architecture-section bg-alt" aria-labelledby="brands-architecture-title">
+        <div className="container brands-ownership-grid">
+          <div>
+            <span className="section-subtitle">How the company is structured</span>
+            <h2 id="brands-architecture-title" className="section-title">
+              Brand owner and services operator
+            </h2>
+          </div>
+          <p>
+            DSPL develops and operates its own consumer brands. The same team also
+            provides clearly scoped branding, marketing, e-commerce, and
+            compliance-support services to other businesses, without implying
+            ownership of client brands.
+          </p>
+        </div>
+      </section>
+
       {/* Brands Showcase Grid */}
       <section className="section brands-showcase-section bg-alt" id="raw-radicles">
         <div className="container">
@@ -119,8 +158,8 @@ const Brands = () => {
                   </div>
 
                   <div className="brand-cta-block">
-                    <Link to="/contact" className="btn btn-primary rr-cta-btn">
-                      Contact us about Raw Radicles <ArrowRight size={16} aria-hidden="true" />
+                    <Link to="/brands/raw-radicles" className="btn btn-primary rr-cta-btn">
+                      View the Raw Radicles project overview <ArrowRight size={16} aria-hidden="true" />
                     </Link>
                   </div>
                 </div>
@@ -135,27 +174,6 @@ const Brands = () => {
             </motion.div>
 
           </div>
-        </div>
-      </section>
-
-      {/* Portfolio in development */}
-      <section className="section pipeline-section bg-alt">
-        <div className="container">
-          <motion.div
-            className="pipeline-content"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={mt({ duration: 0.7 })}
-          >
-            <h2 className="pipeline-title">Portfolio in development</h2>
-            <p className="pipeline-text">
-              Additional consumer-brand concepts are being evaluated and developed. We will publish them here when they are ready for market.
-            </p>
-            <Link to="/contact" className="btn btn-primary pipeline-btn">
-              Contact us about a brand partnership <ArrowRight size={16} aria-hidden="true" />
-            </Link>
-          </motion.div>
         </div>
       </section>
 

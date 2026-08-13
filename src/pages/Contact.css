@@ -66,6 +66,18 @@
   text-wrap: pretty;
 }
 
+.contact-hero-link {
+  color: #ffffff;
+  font-weight: 800;
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-underline-offset: 0.2em;
+}
+
+.contact-hero-link:hover {
+  color: var(--accent);
+}
+
 .contact-information-section {
   padding: 5rem 0;
   background: var(--bg-primary);

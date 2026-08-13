@@ -1,0 +1,16 @@
+.project-planner-form {
+  width: 100%;
+}
+
+.project-planner-form > .work-modal-form-section {
+  padding-inline: 0;
+}
+
+.project-planner-success {
+  min-height: 20rem;
+}
+
+.work-modal-radio-fieldset {
+  border: 0;
+  padding: 0;
+}

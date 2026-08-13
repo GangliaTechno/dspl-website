@@ -1,17 +1,30 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router';
-import { initGA, trackPageView } from '../utils/analytics';
+import {
+  ANALYTICS_CONSENT_EVENT,
+  getAnalyticsConsent,
+  initGA,
+  trackPageView,
+} from '../utils/analytics';
 
 const AnalyticsTracker = () => {
   const location = useLocation();
+  const currentPath = location.pathname + location.search;
 
   useEffect(() => {
-    initGA();
-  }, []);
+    const startTracking = () => {
+      initGA();
+      trackPageView(currentPath);
+    };
+    const handleConsent = (event) => {
+      if (event.detail === 'granted') startTracking();
+    };
 
-  useEffect(() => {
-    trackPageView(location.pathname + location.search);
-  }, [location]);
+    window.addEventListener(ANALYTICS_CONSENT_EVENT, handleConsent);
+    if (getAnalyticsConsent() === 'granted') startTracking();
+
+    return () => window.removeEventListener(ANALYTICS_CONSENT_EVENT, handleConsent);
+  }, [currentPath]);
 
   return null;
 };

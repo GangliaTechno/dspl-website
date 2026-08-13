@@ -1,0 +1,29 @@
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+  gap: 1.25rem;
+}
+
+.testimonial-card {
+  margin: 0;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  background: var(--surface-color);
+}
+
+.testimonial-card blockquote {
+  margin: 0 0 1.25rem;
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  line-height: 1.6;
+}
+
+.testimonial-card figcaption {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.testimonial-card figcaption span {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}

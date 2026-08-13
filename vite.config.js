@@ -13,7 +13,13 @@ export default defineConfig({
     vitePrerenderPlugin({
       renderTarget: '#root',
       prerenderScript: path.resolve(__dirname, 'src/entry-prerender.jsx'),
-      additionalPrerenderRoutes: ['/privacy', '/404.html'],
+      additionalPrerenderRoutes: [
+        '/brands/raw-radicles',
+        '/start',
+        '/privacy',
+        '/terms',
+        '/404.html',
+      ],
       previewMiddlewareFallback: '/404.html',
     }),
   ],

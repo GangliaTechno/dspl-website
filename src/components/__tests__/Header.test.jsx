@@ -2,7 +2,6 @@ import { render, screen, fireEvent, waitFor, within } from '@testing-library/rea
 import { BrowserRouter } from 'react-router';
 import { afterEach, describe, it, expect } from 'vitest';
 import Header from '../Header';
-import { WORK_MODAL_EVENT } from '../../utils/workModal';
 
 const originalInnerWidth = window.innerWidth;
 
@@ -25,25 +24,26 @@ describe('Header Component', () => {
     expect(screen.getAllByText('Home')[0]).toBeInTheDocument();
     expect(screen.getAllByText('About')[0]).toBeInTheDocument();
     expect(screen.getAllByText('Contact')[0]).toBeInTheDocument();
-  });
+    for (const link of screen.getAllByRole('link', { name: 'Start a Project' })) {
+      expect(link).toHaveAttribute('href', '/start');
+    }
+    expect(screen.queryByRole('link', { name: 'Blogs' })).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole('button', { name: /work with us/i }),
+    ).not.toBeInTheDocument();
 
-  it('owns the global Work With Us modal action', () => {
-    const sources = [];
-    const captureSource = (event) => sources.push(event.detail.source);
-    window.addEventListener(WORK_MODAL_EVENT, captureSource);
-
-    render(
-      <BrowserRouter>
-        <Header />
-      </BrowserRouter>,
-    );
-
-    fireEvent.click(screen.getAllByRole('button', {
-      name: 'Open Work With Us enquiry form',
-    })[0]);
-    expect(sources).toEqual(['header']);
-
-    window.removeEventListener(WORK_MODAL_EVENT, captureSource);
+    const desktopNav = screen.getByRole('navigation', { name: 'Main Navigation' });
+    expect(
+      within(desktopNav).getAllByRole('link').map((link) => link.textContent),
+    ).toEqual([
+      'Home',
+      'About',
+      'Brands',
+      'Marketing',
+      'Branding',
+      'E-commerce',
+      'Contact',
+    ]);
   });
 
   it('toggles mobile menu button with proper ARIA attributes', () => {
@@ -98,13 +98,13 @@ describe('Header Component', () => {
     const closeButton = within(drawer).getByRole('button', {
       name: 'Close navigation menu',
     });
-    const workWithUs = within(drawer).getByRole('button', {
-      name: 'Open Work With Us enquiry form',
+    const startProject = within(drawer).getByRole('link', {
+      name: 'Start a Project',
     });
 
     await waitFor(() => expect(closeButton).toHaveFocus());
     fireEvent.keyDown(window, { key: 'Tab', shiftKey: true });
-    expect(workWithUs).toHaveFocus();
+    expect(startProject).toHaveFocus();
 
     fireEvent.click(closeButton);
     expect(menuButton).toHaveFocus();

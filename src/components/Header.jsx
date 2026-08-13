@@ -3,12 +3,23 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { Link, useLocation } from 'react-router';
 import { Menu, X } from 'lucide-react';
 import logoImg from '../assets/icon_orange.webp';
-import { openWorkModal } from '../utils/workModal';
+import { blogsEnabled } from '../content/publication';
 
 const DESKTOP_NAV_MIN_WIDTH = 1040;
 
 const FOCUSABLE_SELECTORS =
   'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
+
+const navItems = [
+  { label: 'Home', to: '/' },
+  { label: 'About', to: '/about' },
+  { label: 'Brands', to: '/brands' },
+  { label: 'Marketing', to: '/marketing' },
+  { label: 'Branding', to: '/branding' },
+  { label: 'E-commerce', to: '/ecommerce' },
+  ...(blogsEnabled ? [{ label: 'Blogs', to: '/blogs' }] : []),
+  { label: 'Contact', to: '/contact' },
+];
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -126,11 +137,6 @@ const Header = () => {
     menuBtnRef.current?.focus();
   }, []);
 
-  const handleOpenWorkModal = useCallback((e) => {
-    e.preventDefault();
-    openWorkModal('header');
-  }, []);
-
   const toggleMenu = useCallback(() => {
     setIsOpen((prev) => {
       if (prev) {
@@ -158,40 +164,26 @@ const Header = () => {
 
           {/* Center: Desktop Navigation Links */}
           <nav className="desktop-nav" aria-label="Main Navigation">
-            <Link to="/" className={`nav-link ${location.pathname === '/' ? 'nav-link-active' : ''}`} aria-current={location.pathname === '/' ? 'page' : undefined}>
-              Home
-            </Link>
-
-            <Link to="/about" className={`nav-link ${location.pathname === '/about' ? 'nav-link-active' : ''}`} aria-current={location.pathname === '/about' ? 'page' : undefined}>
-              About
-            </Link>
-
-            <Link to="/brands" className={`nav-link ${location.pathname === '/brands' ? 'nav-link-active' : ''}`} aria-current={location.pathname === '/brands' ? 'page' : undefined}>
-              Brands
-            </Link>
-
-            <Link to="/marketing" className={`nav-link ${location.pathname === '/marketing' ? 'nav-link-active' : ''}`} aria-current={location.pathname === '/marketing' ? 'page' : undefined}>
-              Marketing
-            </Link>
-
-            <Link to="/branding" className={`nav-link ${location.pathname === '/branding' ? 'nav-link-active' : ''}`} aria-current={location.pathname === '/branding' ? 'page' : undefined}>
-              Branding
-            </Link>
-
-            <Link to="/ecommerce" className={`nav-link ${location.pathname === '/ecommerce' ? 'nav-link-active' : ''}`} aria-current={location.pathname === '/ecommerce' ? 'page' : undefined}>
-              E-commerce
-            </Link>
-
-            <Link to="/contact" className={`nav-link ${location.pathname === '/contact' ? 'nav-link-active' : ''}`} aria-current={location.pathname === '/contact' ? 'page' : undefined}>
-              Contact
-            </Link>
+            {navItems.map((item) => {
+              const active = location.pathname === item.to;
+              return (
+                <Link
+                  key={item.to}
+                  to={item.to}
+                  className={`nav-link ${active ? 'nav-link-active' : ''}`}
+                  aria-current={active ? 'page' : undefined}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
           </nav>
 
           {/* Right Side: Action Button */}
           <div className="desktop-right-controls">
-            <button type="button" onClick={handleOpenWorkModal} className="btn btn-primary header-cta" aria-label="Open Work With Us enquiry form">
-              Work With Us
-            </button>
+            <Link to="/start" className="btn btn-primary header-cta">
+              Start a Project
+            </Link>
           </div>
 
           {/* Mobile controls wrapper */}
@@ -240,21 +232,24 @@ const Header = () => {
           <X size={24} aria-hidden="true" />
         </button>
         <nav className="mobile-nav" aria-label="Mobile Navigation">
-          <Link to="/" className="mobile-nav-link" onClick={handleLinkClick} aria-current={location.pathname === '/' ? 'page' : undefined}>Home</Link>
-          <Link to="/about" className="mobile-nav-link" onClick={handleLinkClick} aria-current={location.pathname === '/about' ? 'page' : undefined}>About</Link>
-          <Link to="/brands" className="mobile-nav-link" onClick={handleLinkClick} aria-current={location.pathname === '/brands' ? 'page' : undefined}>Brands</Link>
-          <Link to="/marketing" className="mobile-nav-link" onClick={handleLinkClick} aria-current={location.pathname === '/marketing' ? 'page' : undefined}>Marketing</Link>
-          <Link to="/branding" className="mobile-nav-link" onClick={handleLinkClick} aria-current={location.pathname === '/branding' ? 'page' : undefined}>Branding</Link>
-          <Link to="/ecommerce" className="mobile-nav-link" onClick={handleLinkClick} aria-current={location.pathname === '/ecommerce' ? 'page' : undefined}>E-commerce</Link>
-          <Link to="/contact" className="mobile-nav-link" onClick={handleLinkClick} aria-current={location.pathname === '/contact' ? 'page' : undefined}>Contact</Link>
-          <button
-            type="button"
+          {navItems.map((item) => (
+            <Link
+              key={item.to}
+              to={item.to}
+              className="mobile-nav-link"
+              onClick={handleLinkClick}
+              aria-current={location.pathname === item.to ? 'page' : undefined}
+            >
+              {item.label}
+            </Link>
+          ))}
+          <Link
+            to="/start"
             className="btn btn-primary mobile-cta"
-            aria-label="Open Work With Us enquiry form"
-            onClick={(e) => { handleLinkClick(); handleOpenWorkModal(e); }}
+            onClick={handleLinkClick}
           >
-            Work With Us
-          </button>
+            Start a Project
+          </Link>
         </nav>
       </div>
 

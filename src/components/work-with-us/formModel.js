@@ -1,4 +1,22 @@
 export const MAX_ATTACHMENT_BYTES = 5 * 1024 * 1024;
+export const PROJECT_SERVICES = Object.freeze([
+  'Branding',
+  'Marketing',
+  'Social Media',
+  'Website',
+  'E-commerce',
+  'Compliance',
+  'Other',
+]);
+
+const ALLOWED_ATTACHMENT_EXTENSIONS = new Set([
+  'pdf',
+  'doc',
+  'docx',
+  'png',
+  'jpg',
+  'jpeg',
+]);
 
 export function createInitialLeadForm() {
   return {
@@ -18,6 +36,8 @@ export function createInitialLeadForm() {
     websiteConfirm: '',
   };
 }
+
+export const createInitialLead = createInitialLeadForm;
 
 export function validateLead(data) {
   const errors = {};
@@ -61,12 +81,23 @@ export function classifyLead(data) {
 }
 
 export function validateAttachment(file) {
-  return file && file.size > MAX_ATTACHMENT_BYTES
-    ? 'File size exceeds 5MB limit'
-    : '';
+  if (!file) return '';
+  if (file.size > MAX_ATTACHMENT_BYTES) return 'File size exceeds 5MB limit';
+
+  const extension = file.name?.split('.').pop()?.toLowerCase();
+  if (!extension || !ALLOWED_ATTACHMENT_EXTENSIONS.has(extension)) {
+    return 'File type is not supported';
+  }
+
+  return '';
 }
 
-export function createLeadPayload(data, accessKey, file) {
+export function createLeadPayload(
+  data,
+  accessKey,
+  file,
+  source = 'project-planner',
+) {
   const classification = classifyLead(data);
   const payload = new FormData();
 
@@ -89,6 +120,8 @@ export function createLeadPayload(data, accessKey, file) {
   payload.append('preferredContact', data.preferredContact || '');
   payload.append('newsletterOptIn', data.newsletterOptIn ? 'Yes' : 'No');
   payload.append('priority', classification.priority);
+  payload.append('source', source);
+  payload.append('websiteConfirm', data.websiteConfirm || '');
 
   if (file) payload.append('attachment', file);
 

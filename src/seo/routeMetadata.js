@@ -5,11 +5,14 @@ export const PUBLIC_ROUTES = [
   '/',
   '/about',
   '/brands',
+  '/brands/raw-radicles',
   '/marketing',
   '/branding',
   '/ecommerce',
   '/contact',
+  '/start',
   '/privacy',
+  '/terms',
 ];
 
 export const organizationStructuredData = {
@@ -37,6 +40,11 @@ export const organizationStructuredData = {
   sameAs: [
     'https://www.linkedin.com/company/dashapatmaja-solutions-private-limited/',
   ],
+  brand: {
+    '@type': 'Brand',
+    name: 'Raw Radicles',
+    url: `${SITE_URL}/brands/raw-radicles`,
+  },
 };
 
 const routeMetadata = {
@@ -55,6 +63,11 @@ const routeMetadata = {
     title: 'Dashapatmaja Solutions Pvt Ltd | Our Brands',
     description:
       'Explore the consumer brands built by Dashapatmaja Solutions Pvt Ltd, beginning with Raw Radicles and its Ayurveda-inspired premium chocolate range.',
+  },
+  '/brands/raw-radicles': {
+    title: 'Dashapatmaja Solutions Pvt Ltd | Raw Radicles Brand',
+    description:
+      'See how Dashapatmaja Solutions Pvt Ltd is developing Raw Radicles across formulation, packaging, compliance coordination, and routes to market.',
   },
   '/marketing': {
     title: 'Dashapatmaja Solutions Pvt Ltd | Marketing & SEO',
@@ -76,10 +89,25 @@ const routeMetadata = {
     description:
       'Talk with Dashapatmaja Solutions Pvt Ltd in Manipal about branding, marketing, e-commerce, or a new consumer brand and share your project context.',
   },
+  '/start': {
+    title: 'Dashapatmaja Solutions Pvt Ltd | Start a Project',
+    description:
+      'Share your brand, marketing, e-commerce, website, or compliance-support requirements with the Dashapatmaja Solutions Pvt Ltd project team.',
+  },
   '/privacy': {
     title: 'Dashapatmaja Solutions Pvt Ltd | Privacy Policy',
     description:
       'Read how Dashapatmaja Solutions Pvt Ltd handles information submitted through website enquiries, project-planning forms, and analytics.',
+  },
+  '/terms': {
+    title: 'Dashapatmaja Solutions Pvt Ltd | Terms of Use',
+    description:
+      'Read the terms that apply when using the Dashapatmaja Solutions Pvt Ltd website and contacting the company about a potential engagement.',
+  },
+  '/blogs': {
+    title: 'Dashapatmaja Solutions Pvt Ltd | Insights',
+    description:
+      'Insights from building consumer brands and supporting branding, marketing, e-commerce, and compliance-coordination work.',
   },
 };
 
@@ -89,9 +117,19 @@ for (const path of PUBLIC_ROUTES) {
     canonical: path,
     image: DEFAULT_IMAGE,
     type: 'website',
+    robots: 'index, follow',
     structuredData: organizationStructuredData,
   });
 }
+
+routeMetadata['/blogs'] = Object.freeze({
+  ...routeMetadata['/blogs'],
+  canonical: '/blogs',
+  image: DEFAULT_IMAGE,
+  type: 'website',
+  robots: 'noindex, follow',
+  structuredData: organizationStructuredData,
+});
 
 export const NOT_FOUND_METADATA = Object.freeze({
   title: 'Dashapatmaja Solutions Pvt Ltd | Page Not Found',

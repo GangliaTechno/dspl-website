@@ -6,7 +6,7 @@
   z-index: 3;
   width: 100%;
   overflow: hidden;
-  padding-block: 6px;
+  padding-block: 6px 10px;
   background: rgba(0, 0, 0, 0.28);
   border: 0;
   --supporter-gap: 7rem;
@@ -14,6 +14,16 @@
   --supporter-sequence-min-width: max-content;
   --supporter-edge-guard: 0rem;
   --supporter-edge-fade: clamp(2.5rem, 5vw, 5rem);
+}
+
+.supporter-label {
+  margin: 0 0 0.2rem;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-align: center;
+  text-transform: uppercase;
 }
 
 .supporter-viewport {
@@ -195,6 +205,33 @@
   color: var(--text-secondary);
   font-size: 0.925rem;
   line-height: 1.65;
+}
+
+.process-step-details {
+  display: grid;
+  gap: 0.75rem;
+  margin: 1.25rem 0 0;
+}
+
+.process-step-details > div {
+  display: grid;
+  grid-template-columns: 5rem 1fr;
+  gap: 0.75rem;
+}
+
+.process-step-details dt {
+  color: var(--accent-text);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.process-step-details dd {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  line-height: 1.5;
 }
 
 .owned-brand-section {

@@ -3,10 +3,10 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import { MemoryRouter } from 'react-router';
 import Contact from '../Contact';
 import { FORM_SUBMISSION_ERROR } from '../../utils/formMessages';
+import { trackEvent } from '../../utils/analytics';
 
-vi.mock('../../hooks/useSEO', () => ({
-  default: vi.fn(),
-}));
+vi.mock('../../hooks/useSEO', () => ({ default: vi.fn() }));
+vi.mock('../../utils/analytics', () => ({ trackEvent: vi.fn() }));
 
 const renderContact = () => render(
   <MemoryRouter initialEntries={['/contact']}>
@@ -16,158 +16,95 @@ const renderContact = () => render(
 
 const fillValidForm = () => {
   fireEvent.change(screen.getByLabelText('First Name'), { target: { value: 'Jane' } });
-  fireEvent.change(screen.getByLabelText('Last Name'), { target: { value: 'Doe' } });
+  fireEvent.change(screen.getByLabelText('Last Name (optional)'), { target: { value: 'Doe' } });
   fireEvent.change(screen.getByLabelText('Email Address'), { target: { value: 'jane@example.com' } });
-  fireEvent.change(screen.getByLabelText('What do you need help with?'), { target: { value: 'Branding' } });
-  fireEvent.change(screen.getByLabelText('Message'), { target: { value: 'Please contact me about a brand project.' } });
+  fireEvent.change(screen.getByLabelText('Company / Brand Name (optional)'), { target: { value: 'Jane Brands' } });
+  fireEvent.change(screen.getByLabelText('Phone Number (optional)'), { target: { value: '+91 98765 43210' } });
+  fireEvent.change(screen.getByLabelText('Website or Social Handle (optional)'), { target: { value: 'https://example.com' } });
+  fireEvent.change(screen.getByLabelText('What do you need help with?'), { target: { value: 'Compliance' } });
+  fireEvent.change(screen.getByLabelText('Budget band (optional)'), { target: { value: 'Scope first' } });
+  fireEvent.change(screen.getByLabelText('Message'), { target: { value: 'Please review the packaging workflow.' } });
 };
 
 const expectSafeSubmissionError = async () => {
   const alert = await screen.findByRole('alert');
-
   expect(alert).toHaveTextContent(FORM_SUBMISSION_ERROR);
   expect(alert).not.toHaveTextContent(/access key|Web3Forms|environment/i);
 };
 
 afterEach(() => {
+  vi.clearAllMocks();
   vi.unstubAllEnvs();
   vi.unstubAllGlobals();
 });
 
 describe('Contact', () => {
-  it('keeps three peer contact cards with the verified contact routes', () => {
-    const { container } = renderContact();
-    const grid = container.querySelector('.contact-info-grid');
-    const cards = grid?.querySelectorAll('.contact-info-card');
-
-    expect(grid).toBeInTheDocument();
-    expect(cards).toHaveLength(3);
-    expect(Array.from(cards, (card) => card.querySelector('h3')?.textContent)).toEqual([
-      'Address',
-      'Phone',
-      'Email',
-    ]);
-    expect(Array.from(
-      cards,
-      (card) => card.querySelector('.contact-info-summary')?.textContent,
-    )).toEqual([
-      'Headquarters in Manipal',
-      'Direct contact',
-      'General enquiries',
-    ]);
-    expect(screen.getByRole('link', { name: 'Call +91 88619 42440' }))
-      .toHaveAttribute('href', '#phone');
-    expect(screen.getByRole('link', { name: 'Call +91 90725 56665' }))
-      .toHaveAttribute('href', '#phone');
-    expect(screen.getByRole('link', { name: 'director@dashapatmaja.in' }))
-      .toHaveAttribute('href', 'mailto:director@dashapatmaja.in');
-    expect(screen.getByRole('link', { name: 'dsplmanipal@gmail.com' }))
-      .toHaveAttribute('href', 'mailto:dsplmanipal@gmail.com');
-  });
-
-  it('presents the approved vertical hero, contact cards, and enquiry flow', () => {
-    const { container } = renderContact();
-    const hero = container.querySelector('.contact-hero');
-    const information = container.querySelector('.contact-information-section');
-    const enquiry = container.querySelector('.contact-enquiry-section');
-
-    expect(hero).toBeInTheDocument();
-    const heroImage = hero.querySelector('.contact-hero-image');
-    expect(hero.querySelector('.contact-hero-picture')).toBeInTheDocument();
-    expect(heroImage).toHaveAttribute('alt', '');
-    expect(heroImage).toHaveAttribute('loading', 'eager');
-    expect(heroImage).toHaveAttribute('fetchpriority', 'high');
-    expect(hero.querySelector('.section-subtitle')).toHaveTextContent('Contact');
-    expect(screen.getByRole('heading', {
-      level: 1,
-      name: 'Start a conversation.',
-    })).toBeInTheDocument();
-    expect(hero).toHaveTextContent(
-      'For general enquiries, tell us what you need and how we can reach you. For a detailed project brief, use Work With Us in the header.',
-    );
-    expect(information).toBeInTheDocument();
-    expect(enquiry).toBeInTheDocument();
-    expect(hero.compareDocumentPosition(information) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
-    expect(information.compareDocumentPosition(enquiry) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
-    expect(screen.getByRole('heading', { name: 'Contact details', level: 2 })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'General enquiry', level: 2 })).toBeInTheDocument();
-    expect(enquiry.querySelector('.section-subtitle')).toHaveTextContent('Send a message');
-    expect(enquiry.querySelector('.contact-enquiry-header')).toHaveTextContent(
-      'Tell us what you need and how we can reach you.',
-    );
-    expect(enquiry.querySelector('.contact-form-panel')).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'Address', level: 3 })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'Phone', level: 3 })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'Email', level: 3 })).toBeInTheDocument();
-    expect(information.querySelector('svg')).not.toBeInTheDocument();
-    expect(container.querySelector('.contact-enquiry-surface')).not.toBeInTheDocument();
-    expect(container.querySelector('.glow-bg')).not.toBeInTheDocument();
-  });
-
-  it('preserves the primary enquiry fields and choices', () => {
+  it('publishes verified response, office, and direct-contact details only', () => {
     const { container } = renderContact();
 
-    expect(screen.getByLabelText('First Name')).toBeRequired();
-    expect(screen.getByLabelText('Last Name')).toBeRequired();
-    expect(screen.getByLabelText('Email Address')).toBeRequired();
-    const helpType = screen.getByLabelText('What do you need help with?');
-
-    expect(helpType).toBeRequired();
-    expect(screen.getByLabelText('Message')).toBeRequired();
-    expect(
-      Array.from(helpType.options, (option) => option.textContent),
-    ).toEqual([
-      'Select an option...',
-      'Marketing',
-      'Branding',
-      'E-commerce',
-      'New brand',
-      'Other',
-    ]);
-    expect(screen.getByRole('button', { name: /Send Message/i }))
-      .toHaveAttribute('type', 'submit');
-    expect(container.querySelector('.contact-privacy-notice')).toHaveTextContent(
-      'Information submitted through this form is handled as described in our Privacy Policy.',
-    );
-    expect(screen.getByRole('link', { name: 'Privacy Policy' }))
-      .toHaveAttribute('href', '/privacy');
+    expect(screen.getByText(/respond within one working day/i)).toBeInTheDocument();
+    expect(screen.getByText(/Room No\. 12, 4th Floor, MUTBI, Advanced Research Center, Madhava Nagar, Manipal 576104/i)).toBeInTheDocument();
+    expect(screen.getByText(/Office days: Monday to Saturday/i)).toBeInTheDocument();
+    expect(screen.getByText('New enquiries')).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Call +91 88619 42440' })).toHaveAttribute('href', 'tel:+918861942440');
+    expect(screen.getByText('Existing projects')).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Call +91 90725 56665' })).toHaveAttribute('href', 'tel:+919072556665');
+    expect(screen.getByRole('link', { name: 'director@dashapatmaja.in' })).toHaveAttribute('href', 'mailto:director@dashapatmaja.in');
+    expect(container).not.toHaveTextContent(/WhatsApp|gmail\.com/i);
   });
 
-  it('announces a Message validation error with a linked alert', () => {
+  it('directs detailed briefs to the Start page and exposes every enquiry field', () => {
     renderContact();
 
-    fireEvent.click(screen.getByRole('button', { name: /Send Message/i }));
+    expect(screen.getByRole('heading', { level: 1, name: 'Start a conversation.' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Start a detailed project brief' })).toHaveAttribute('href', '/start');
+    expect(screen.getByLabelText('First Name')).toBeRequired();
+    expect(screen.getByLabelText('Last Name (optional)')).not.toBeRequired();
+    expect(screen.getByLabelText('Email Address')).toBeRequired();
+    expect(screen.getByLabelText('Company / Brand Name (optional)')).toBeInTheDocument();
+    expect(screen.getByLabelText('Phone Number (optional)')).toBeInTheDocument();
+    expect(screen.getByLabelText('Website or Social Handle (optional)')).toBeInTheDocument();
+    expect(screen.getByLabelText('Budget band (optional)')).toBeInTheDocument();
+    expect(screen.getByLabelText('Message')).toBeRequired();
 
-    const message = screen.getByLabelText('Message');
-    const error = screen.getByText('Message is required');
-
-    expect(document.activeElement).toBe(screen.getByLabelText('First Name'));
-    expect(message).toHaveAttribute('aria-invalid', 'true');
-    expect(message).toHaveAttribute('aria-describedby', 'message-error');
-    expect(error).toHaveAttribute('id', 'message-error');
-    expect(error).toHaveAttribute('role', 'alert');
+    const helpType = screen.getByLabelText('What do you need help with?');
+    expect(Array.from(helpType.options, (option) => option.textContent)).toEqual([
+      'Select an option...',
+      'Branding',
+      'Marketing',
+      'E-commerce',
+      'Compliance',
+      'Other',
+    ]);
+    expect(screen.getByRole('link', { name: 'Privacy Policy' })).toHaveAttribute('href', '/privacy');
   });
 
-  it('uses a safe shared error when the contact configuration is unavailable', async () => {
+  it('focuses the first invalid field and links errors to their controls', () => {
+    renderContact();
+    fireEvent.click(screen.getByRole('button', { name: /Send Message/i }));
+
+    expect(document.activeElement).toBe(screen.getByLabelText('First Name'));
+    expect(screen.getByLabelText('Message')).toHaveAttribute('aria-describedby', 'message-error');
+    expect(screen.getByText('Message is required')).toHaveAttribute('role', 'alert');
+  });
+
+  it('uses the shared recoverable error when configuration is unavailable', async () => {
     vi.stubEnv('VITE_WEB3FORMS_ACCESS_KEY', '');
     renderContact();
     fillValidForm();
-
     fireEvent.click(screen.getByRole('button', { name: /Send Message/i }));
-
     await expectSafeSubmissionError();
   });
 
-  it('keeps rejected submission details private while preserving the request payload', async () => {
+  it('submits every displayed value without exposing provider rejection details', async () => {
     vi.stubEnv('VITE_WEB3FORMS_ACCESS_KEY', 'test-access-key');
     const fetchMock = vi.fn().mockResolvedValue({
       ok: false,
-      json: async () => ({ success: false, message: 'Provider response with internal detail.' }),
+      json: async () => ({ success: false, message: 'Provider internal detail.' }),
     });
     vi.stubGlobal('fetch', fetchMock);
     renderContact();
     fillValidForm();
-
     fireEvent.click(screen.getByRole('button', { name: /Send Message/i }));
 
     await expectSafeSubmissionError();
@@ -180,51 +117,51 @@ describe('Contact', () => {
           subject: 'New Contact Message: Jane Doe',
           from_name: 'Jane Doe',
           fullName: 'Jane Doe',
+          firstName: 'Jane',
+          lastName: 'Doe',
           email: 'jane@example.com',
-          helpType: 'Branding',
-          message: 'Please contact me about a brand project.',
+          companyName: 'Jane Brands',
+          phone: '+91 98765 43210',
+          website: 'https://example.com',
+          helpType: 'Compliance',
+          budgetBand: 'Scope first',
+          message: 'Please review the packaging workflow.',
+          websiteConfirm: '',
         }),
       }),
     );
+    expect(screen.queryByText('Provider internal detail.')).not.toBeInTheDocument();
   });
 
-  it('uses the same safe error when the submission request cannot connect', async () => {
+  it('uses the same safe error when the request cannot connect', async () => {
     vi.stubEnv('VITE_WEB3FORMS_ACCESS_KEY', 'test-access-key');
     vi.stubGlobal('fetch', vi.fn().mockRejectedValue(new Error('Network failure')));
     renderContact();
     fillValidForm();
-
     fireEvent.click(screen.getByRole('button', { name: /Send Message/i }));
-
     await expectSafeSubmissionError();
   });
 
-  it('shows the success state after a successful provider response and resets the form for another message', async () => {
+  it('announces success, tracks through the analytics utility, and resets safely', async () => {
     vi.stubEnv('VITE_WEB3FORMS_ACCESS_KEY', 'test-access-key');
-    const gtag = vi.fn();
     vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
       ok: true,
       json: async () => ({ success: true }),
     }));
-    vi.stubGlobal('gtag', gtag);
     renderContact();
     fillValidForm();
-
     fireEvent.click(screen.getByRole('button', { name: /Send Message/i }));
 
     expect(await screen.findByRole('heading', { name: 'Message received' })).toBeInTheDocument();
-    expect(screen.getByText('Thank you. We have received your message and will review it before contacting you.')).toBeInTheDocument();
-    expect(gtag).toHaveBeenCalledWith('event', 'generate_lead', {
-      event_category: 'contact_form',
-      event_label: 'Branding',
+    expect(trackEvent).toHaveBeenCalledWith({
+      category: 'contact_form',
+      action: 'generate_lead',
+      label: 'Compliance',
     });
 
     fireEvent.click(screen.getByRole('button', { name: 'Send Another Message' }));
-
     expect(screen.getByLabelText('First Name')).toHaveValue('');
-    expect(screen.getByLabelText('Last Name')).toHaveValue('');
-    expect(screen.getByLabelText('Email Address')).toHaveValue('');
+    expect(screen.getByLabelText('Company / Brand Name (optional)')).toHaveValue('');
     expect(screen.getByLabelText('What do you need help with?')).toHaveValue('');
-    expect(screen.getByLabelText('Message')).toHaveValue('');
   });
 });

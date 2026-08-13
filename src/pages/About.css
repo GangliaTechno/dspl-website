@@ -136,6 +136,24 @@
   color: var(--text-secondary);
 }
 
+.about-scope-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(20rem, 0.85fr);
+  align-items: start;
+  gap: clamp(2rem, 7vw, 7rem);
+}
+
+.about-scope-grid .section-title {
+  margin-bottom: 0;
+}
+
+.about-scope-grid > p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+
 /* Timeline Styles */
 .timeline-section {
   position: relative;
@@ -376,6 +394,9 @@
   }
   .team-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .about-scope-grid {
+    grid-template-columns: 1fr;
   }
 }
 

@@ -7,6 +7,27 @@ import {
 } from '../routeMetadata';
 
 describe('route metadata', () => {
+  it('keeps the exact public route set separate from the staged Blog', () => {
+    expect(PUBLIC_ROUTES).toEqual([
+      '/',
+      '/about',
+      '/brands',
+      '/brands/raw-radicles',
+      '/marketing',
+      '/branding',
+      '/ecommerce',
+      '/contact',
+      '/start',
+      '/privacy',
+      '/terms',
+    ]);
+    expect(PUBLIC_ROUTES).not.toContain('/blogs');
+    expect(getRouteMetadata('/blogs')).toMatchObject({
+      canonical: '/blogs',
+      robots: 'noindex, follow',
+    });
+  });
+
   it('defines unique metadata for every public route', () => {
     const records = PUBLIC_ROUTES.map(getRouteMetadata);
 
@@ -27,6 +48,23 @@ describe('route metadata', () => {
     expect(organizationStructuredData.name).toBe(
       'Dashapatmaja Solutions Pvt Ltd',
     );
+    expect(organizationStructuredData.brand).toEqual({
+      '@type': 'Brand',
+      name: 'Raw Radicles',
+      url: 'https://dashapatmaja.in/brands/raw-radicles',
+    });
+    expect(organizationStructuredData.sameAs).toContain(
+      'https://www.linkedin.com/company/dashapatmaja-solutions-private-limited/',
+    );
+  });
+
+  it('defines indexable metadata for every new public route', () => {
+    for (const route of ['/brands/raw-radicles', '/start', '/terms']) {
+      expect(getRouteMetadata(route)).toMatchObject({
+        canonical: route,
+        robots: 'index, follow',
+      });
+    }
   });
 
   it('defines the exact privacy policy metadata', () => {

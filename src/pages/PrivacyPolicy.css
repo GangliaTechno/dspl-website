@@ -73,6 +73,22 @@
   text-decoration: underline;
 }
 
+.privacy-consent-controls {
+  margin-top: 1rem;
+  padding: 1.25rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-card);
+  background: var(--card-bg);
+}
+
+.privacy-consent-controls > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.privacy-consent-controls .btn { min-height: 44px; }
+
 @media (max-width: 600px) {
   .privacy-content {
     padding: 2rem 1.5rem;

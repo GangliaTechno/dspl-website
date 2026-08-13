@@ -211,15 +211,17 @@ describe('approved design-system corrections', () => {
 
     expect(aboutPage).toContain('const directionCards = [');
     expect(aboutPage).not.toContain("number: '01'");
+    expect(aboutPage).toContain("label: 'Company and operating team'");
     expect(aboutPage).toContain("label: 'Long-term direction'");
-    expect(aboutPage).toContain("label: 'Our mandate'");
     expect(aboutPage).toContain("label: 'Operating principles'");
-    expect(aboutPage).toContain("title: 'Vision'");
+    expect(aboutPage).toContain("title: 'What we are'");
+    expect(aboutPage).toContain("title: 'What we are building towards'");
+    expect(aboutPage).toContain("title: 'How we work'");
     expect(aboutPage).toContain(
-      'To build an enduring portfolio of consumer brands defined by quality, relevance, and responsible growth.',
+      'A private limited company developing and operating consumer brands while providing coordinated branding, marketing, e-commerce, and compliance-support services.',
     );
     expect(aboutPage).toContain(
-      'Evidence guides our recommendations. We define scope, responsibilities, and measures clearly, communicate decisions honestly, and carry agreed work through with care.',
+      'We define scope, responsibilities, dependencies, and evidence clearly; coordinate the agreed work; and communicate decisions without overstating what the evidence can support.',
     );
     expect(aboutPage).toContain('directionCards.map((card, index)');
     expect(aboutPage).not.toContain('card.items');
@@ -263,8 +265,9 @@ describe('approved design-system corrections', () => {
     expect(contactPage).toContain('className="contact-enquiry-header"');
     expect(contactPage).toContain('>General enquiry</h2>');
     expect(contactPage).toContain('>Contact details</h2>');
-    expect(contactPage).toContain('>Phone</h3>');
-    expect(contactPage).toContain('>Email</h3>');
+    expect(contactPage).toContain('>Office</h3>');
+    expect(contactPage).toContain('>New enquiries</h3>');
+    expect(contactPage).toContain('>Existing projects</h3>');
     expect(contactPage).toContain('Message received');
     expect(contactPage).toContain('FORM_SUBMISSION_ERROR');
     expect(contactPage).toContain('<span className="section-subtitle">Contact</span>');
@@ -319,11 +322,13 @@ describe('approved design-system corrections', () => {
   it('uses route-owned form layout and state class names', () => {
     const contactPage = readSource('src/pages/Contact.jsx');
     const modalPage = readSource('src/components/WorkWithUsModal.jsx');
+    const plannerForm = readSource('src/components/ProjectPlannerForm.jsx');
 
     expect(contactPage).toContain('contact-form-row');
     expect(contactPage).toContain('contact-submit-btn');
-    expect(modalPage).toContain('work-modal-form-row');
-    expect(modalPage).toContain('work-modal-submit-btn');
+    expect(modalPage).toContain('<ProjectPlannerForm');
+    expect(plannerForm).toContain('work-modal-form-row');
+    expect(plannerForm).toContain('work-modal-submit-btn');
   });
 
   it('presents four alternating About journey stories with original imagery', () => {
@@ -386,23 +391,19 @@ describe('approved design-system corrections', () => {
     const homePage = readSource('src/pages/Home.jsx');
 
     expect(home).toMatch(
-      /\.home-hero::after\s*{[^}]*background:\s*transparent;/s,
+      /\.home-hero::after\s*{[^}]*background:\s*rgba\(0,\s*0,\s*0,\s*0\.38\);/s,
     );
     expect(home).toMatch(
       /\.home-hero-layout\s*{[^}]*display:\s*flex;[^}]*justify-content:\s*center;[^}]*padding-block:\s*clamp\(4\.5rem,\s*8vw,\s*7rem\)\s+clamp\(7rem,\s*12vw,\s*9\.5rem\);/s,
     );
     expect(home).toMatch(
-      /\.home-hero-content\s*{[^}]*position:\s*relative;[^}]*isolation:\s*isolate;[^}]*width:\s*min\(100%,\s*68rem\);[^}]*text-align:\s*center;[^}]*text-shadow:\s*0 2px 16px rgba\(0,\s*0,\s*0,\s*0\.88\);/s,
+      /\.home-hero-content\s*{[^}]*width:\s*min\(100%,\s*68rem\);[^}]*text-align:\s*center;[^}]*text-shadow:\s*0 2px 16px rgba\(0,\s*0,\s*0,\s*0\.88\);/s,
     );
-    expect(home).toMatch(
-      /\.home-hero-content::before\s*{[^}]*position:\s*absolute;[^}]*z-index:\s*-1;[^}]*inset:\s*-3\.5rem -5rem;[^}]*background:\s*radial-gradient\([^}]*content:\s*'';/s,
-    );
+    expect(home).not.toContain('.home-hero-content::before');
     expect(home).toMatch(
       /\.hero-capabilities-link\s*{[^}]*background:\s*rgba\(8,\s*8,\s*8,\s*0\.26\);[^}]*backdrop-filter:\s*blur\(3px\);/s,
     );
-    expect(home).toMatch(
-      /@media\s*\(max-width:\s*768px\)\s*{[\s\S]*?\.home-hero-content::before\s*{[^}]*inset:\s*-2rem -0\.75rem;[^}]*background:\s*radial-gradient\(/s,
-    );
+    expect(home).not.toContain('radial-gradient(');
     expect(home).toMatch(
       /\.hero-title\s*>\s*span\s*{[^}]*display:\s*block;/s,
     );
@@ -414,8 +415,9 @@ describe('approved design-system corrections', () => {
       "import { openWorkModal } from '../utils/workModal';",
     );
     expect(homePage).not.toContain("openWorkModal('homepage-hero')");
-    expect(homePage).toContain('We deliver disciplined market execution.');
-    expect(homePage).toContain('href="#capabilities"');
+    expect(homePage).toContain('We build consumer brands.');
+    expect(homePage).toContain('We help businesses build theirs.');
+    expect(homePage).toContain('and compliance-support work.');
     expect(homePage).toContain('id="capabilities"');
     expect(homePage).not.toContain(
       'Brand systems for Indian consumer businesses',
@@ -462,13 +464,13 @@ describe('approved design-system corrections', () => {
     const ownedBrand = readSource('src/components/home/OwnedBrandProof.jsx');
     const homePage = readSource('src/pages/Home.jsx');
 
-    expect(ownedBrand).toContain('See the brand');
+    expect(ownedBrand).toContain('View the project overview');
     expect(ownedBrand).not.toContain('Build with us');
     expect(ownedBrand).not.toContain('onEnquire');
     expect(homePage).not.toContain('homepage-owned-brand');
   });
 
-  it('reserves execution language for the primary Home proposition', () => {
+  it('uses execution language as descriptive scope rather than a performance promise', () => {
     const homeAndAbout = [
       readSource('src/pages/Home.jsx'),
       readSource('src/pages/About.jsx'),
@@ -476,7 +478,8 @@ describe('approved design-system corrections', () => {
     ].join('\n');
 
     expect(homeAndAbout.match(/\bexecution\b/gi)).toHaveLength(1);
-    expect(homeAndAbout).toContain('We deliver disciplined market execution.');
+    expect(homeAndAbout).toContain('through market and commerce execution.');
+    expect(homeAndAbout).not.toContain('We deliver disciplined market execution.');
     expect(homeAndAbout).toContain('Delivery framework');
   });
 
@@ -588,8 +591,8 @@ describe('approved design-system corrections', () => {
     expect(brandsPage).toContain(
       'className="btn btn-primary rr-cta-btn"',
     );
-    expect(brandsPage).toContain('to="/contact"');
-    expect(brandsPage).toContain('Contact us about Raw Radicles');
+    expect(brandsPage).toContain('to="/brands/raw-radicles"');
+    expect(brandsPage).toContain('View the Raw Radicles project overview');
     expect(brandsPage).not.toContain('Raw%20Radicles%20Inquiry');
   });
 
@@ -670,30 +673,62 @@ describe('approved design-system corrections', () => {
       /\.domain-subtitle\s*{[^}]*color:\s*#ffffff;/s,
     );
     expect(serviceCss).toMatch(
-      /\.offers-grid\s*{[^}]*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\);[^}]*border-top:\s*1px solid var\(--border-color\);/s,
+      /\.offers-grid\s*{[^}]*grid-template-columns:\s*repeat\(6,\s*minmax\(0,\s*1fr\)\);[^}]*gap:\s*1rem;/s,
     );
     expect(serviceCss).toMatch(
-      /\.offer-entry\s*{[^}]*padding:\s*2rem 0;[^}]*border-bottom:\s*1px solid var\(--border-color\);/s,
+      /\.offer-entry\s*{[^}]*grid-column:\s*span 2;[^}]*min-height:\s*13rem;[^}]*border:\s*1px solid var\(--border-color\);/s,
     );
     expect(serviceCss).toMatch(
       /@media\s*\(max-width:\s*768px\)\s*{[\s\S]*?\.domain-hero\s*{[^}]*min-height:\s*34rem;[^}]*padding:\s*4rem 0;[\s\S]*?\.offers-grid\s*{[^}]*grid-template-columns:\s*1fr;/s,
     );
     expect(serviceCss).not.toMatch(/\.offer-card\s*\{/);
     expect(serviceCss).not.toContain('.offer-icon-wrapper');
+    expect(serviceCss).toContain('.offer-sequence');
   });
 
-  it('keeps the Header as the sole global Work With Us modal owner', () => {
+  it('routes global project actions through the dedicated Start page', () => {
     const header = readSource('src/components/Header.jsx');
     const brands = readSource('src/pages/Brands.jsx');
     const home = readSource('src/pages/Home.jsx');
     const servicePage = readSource('src/components/ServicePage.jsx');
 
-    expect(header).toContain("openWorkModal('header')");
+    expect(header).toContain('to="/start"');
+    expect(header).toContain('Start a Project');
+    expect(header).not.toContain('openWorkModal');
     expect(brands).not.toContain('openWorkModal');
     expect(home).not.toContain('openWorkModal');
     expect(servicePage).not.toContain('openWorkModal');
-    expect(brands).toContain('to="/contact"');
-    expect(brands).toContain('Contact us about a brand partnership');
+    expect(brands).toContain('to="/brands/raw-radicles"');
+    expect(brands).toContain('View the Raw Radicles project overview');
+  });
+
+  it('balances incomplete service-card rows instead of leaving accidental gaps', () => {
+    const serviceCss = readSource('src/components/ServicePage.css');
+
+    expect(serviceCss).toMatch(
+      /\.offers-grid\[data-count="5"\] > :nth-child\(4\)\s*{[^}]*grid-column:\s*2 \/ span 2;/s,
+    );
+    expect(serviceCss).toMatch(
+      /\.offers-grid\[data-count="5"\] > :nth-child\(5\)\s*{[^}]*grid-column:\s*4 \/ span 2;/s,
+    );
+    expect(serviceCss).toMatch(
+      /\.service-detail-grid\s*{[^}]*grid-template-columns:\s*repeat\(6,\s*minmax\(0,\s*1fr\)\);/s,
+    );
+    expect(serviceCss).toMatch(
+      /\.service-detail-grid\[data-count="5"\] > :nth-child\(4\)\s*{[^}]*grid-column:\s*2 \/ span 2;/s,
+    );
+  });
+
+  it('keeps informational route typography independent from service hero styles', () => {
+    const start = readSource('src/pages/StartProject.jsx');
+    const terms = readSource('src/pages/TermsOfUse.jsx');
+    const blogs = readSource('src/pages/Blogs.jsx');
+    const blogPost = readSource('src/pages/BlogPost.jsx');
+
+    for (const source of [start, terms, blogs, blogPost]) {
+      expect(source).not.toContain('className="domain-title"');
+      expect(source).not.toContain('className="domain-subtitle"');
+    }
   });
 
   it('builds a noindex production 404 without a catch-all 200 rewrite', () => {
@@ -702,9 +737,16 @@ describe('approved design-system corrections', () => {
     const verifier = readSource('scripts/verify-prerender.mjs');
     const indexHtml = readSource('index.html');
 
-    expect(viteConfig).toContain(
-      "additionalPrerenderRoutes: ['/privacy', '/404.html']",
-    );
+    for (const route of [
+      '/brands/raw-radicles',
+      '/start',
+      '/privacy',
+      '/terms',
+      '/404.html',
+    ]) {
+      expect(viteConfig).toContain(`'${route}'`);
+    }
+    expect(viteConfig).not.toContain("'/blogs'");
     expect(prerenderEntry).toContain('NOT_FOUND_METADATA');
     expect(prerenderEntry).toContain("name: 'robots'");
     expect(verifier).toContain("path.join('dist', '404.html')");
@@ -724,6 +766,7 @@ describe('approved design-system corrections', () => {
 
   it('tiers About page motion for reduced-motion visitors', () => {
     const aboutPage = readSource('src/pages/About.jsx');
+    const aboutMotion = readSource('src/pages/aboutMotion.js');
     const aboutCss = readSource('src/pages/About.css');
     const rotatingHeroCss = readSource('src/components/RotatingHeroMedia.css');
 
@@ -733,15 +776,12 @@ describe('approved design-system corrections', () => {
     expect(aboutPage).toContain(
       'const prefersReducedMotion = useReducedMotion();',
     );
-    expect(aboutPage).toContain(
+    expect(aboutMotion).toContain(
       "prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y }",
     );
-    expect(aboutPage).toContain(
-      "prefersReducedMotion ? { duration: 0.15, ease: 'easeOut' } : base",
-    );
-    expect(aboutPage).toContain(
-      "behavior: prefersReducedMotion ? 'auto' : 'smooth'",
-    );
+    expect(aboutMotion).toContain('duration: prefersReducedMotion ? 0.15 : 0.65');
+    expect(aboutMotion).toContain('Math.min(index * 0.07, 0.21)');
+    expect(aboutPage).toContain('behavior: getHashScrollBehavior(prefersReducedMotion)');
     expect(aboutCss).not.toContain('@keyframes subtleZoom');
     expect(rotatingHeroCss).toMatch(
       /@media\s*\(prefers-reduced-motion:\s*reduce\)\s*{[\s\S]*?\.rotating-hero-layer\s*{[^}]*transition:\s*none;/s,
@@ -755,7 +795,7 @@ describe('approved design-system corrections', () => {
     expect(aboutCss).not.toContain('.about-intro-text');
   });
 
-  it('presents Brands as a restrained portfolio in development', () => {
+  it('presents only the confirmed owned-brand portfolio', () => {
     const brandsPage = readSource('src/pages/Brands.jsx');
     const brandsCss = readSource('src/pages/Brands.css');
     const prerenderVerification = readSource('scripts/verify-prerender.mjs');
@@ -765,10 +805,13 @@ describe('approved design-system corrections', () => {
     expect(brandsPage).not.toContain(
       'We work across product development, packaging, compliance, market positioning, and commerce. Raw Radicles is our first flagship consumer brand, with additional concepts in development.',
     );
-    expect(brandsPage).toContain('Portfolio in development');
-    expect(brandsPage).toContain(
-      'Additional consumer-brand concepts are being evaluated and developed. We will publish them here when they are ready for market.',
-    );
+    expect(brandsPage).toContain('Raw Radicles is owned and developed by Dashapatmaja Solutions Pvt Ltd');
+    expect(brandsPage).toMatch(/trademark\s+application has been filed/);
+    expect(brandsPage).toContain('the mark is not described as registered');
+    expect(brandsPage).toContain('Brand owner and services operator');
+    expect(brandsPage).not.toContain('Portfolio in development');
+    expect(brandsPage).not.toContain('Additional consumer-brand concepts');
+    expect(brandsPage).not.toContain('Packaging record');
     expect(brandsPage).not.toContain('Sparkles');
     expect(brandsPage).not.toContain('Cookie');
     expect(brandsPage).not.toContain('HOUSE OF BRANDS');
@@ -777,12 +820,13 @@ describe('approved design-system corrections', () => {
     expect(brandsPage).not.toContain('pipeline-decorative-shape');
     expect(brandsCss).not.toContain('.pipeline-card:hover');
     expect(prerenderVerification).toContain(
-      "{ route: 'brands', heading: 'We develop and operate consumer brands.' }",
+      "{ route: '', heading: 'We build consumer brands.' }",
     );
   });
 
   it('keeps one global pre-footer CTA above compact corporate information', () => {
     const footer = readSource('src/components/Footer.jsx');
+    const footerCtas = readSource('src/content/footerCtas.js');
     const footerCss = readSource('src/components/Footer.css');
     const homeCss = readSource('src/pages/Home.css');
 
@@ -793,13 +837,21 @@ describe('approved design-system corrections', () => {
     expect(footer).not.toContain('openWorkModal');
     expect(footer).not.toContain('Get in Touch');
     expect(footer).toContain('className="footer-cta-strip"');
-    expect(footer).toContain('Ready to build with greater clarity?');
-    expect(footer).toContain('Contact DSPL');
-    expect(footer).toContain(
-      'Dashapatmaja Solutions Pvt Ltd develops consumer brands and provides branding, marketing, and e-commerce services.',
+    expect(footerCtas).toContain('Turn a promising idea into a coordinated project.');
+    expect(footerCtas).toContain('See how Raw Radicles is being developed.');
+    expect(footerCtas).toContain('Start a project');
+    expect(footer).toMatch(
+      /Dashapatmaja Solutions Pvt Ltd develops consumer brands and\s+provides branding, marketing, and e-commerce services\./,
     );
     expect(footer).toContain('>Services</h2>');
-    expect(footer).toContain('>Contact</h2>');
+    expect(footer).toContain('>Company</h2>');
+    expect(footer).toContain('>Legal</h2>');
+    expect(footer).toContain('CalendarDays');
+    expect(footer).toContain('Office days: Monday to Saturday');
+    expect(footer).toContain('&copy; 2026 Dashapatmaja Solutions Pvt Ltd. All rights reserved.');
+    expect(footer).not.toMatch(/Â|Ã|â€|â€”/);
+    expect(footer).toContain('className="footer-contact-list footer-contact-rail"');
+    expect(footer).toContain('className="footer-meta-rail"');
     expect(footer).toContain('>Privacy Policy</Link>');
     expect(footerCss).not.toContain('.footer-banner');
     expect(footerCss).not.toContain('.banner-content');
@@ -808,10 +860,16 @@ describe('approved design-system corrections', () => {
     expect(footerCss).not.toContain('.banner-btn');
     expect(homeCss).not.toContain('.home-mid-cta');
     expect(footerCss).toMatch(
-      /\.footer\s*{[^}]*padding:\s*4rem 0 2rem;/s,
+      /\.footer\s*{[^}]*padding:\s*3\.25rem 0 1\.5rem;/s,
     );
     expect(footerCss).toMatch(
-      /\.footer-grid\s*{[^}]*padding-bottom:\s*3rem;/s,
+      /\.footer-grid\s*{[^}]*padding-bottom:\s*2\.5rem;/s,
+    );
+    expect(footerCss).toMatch(
+      /\.footer-contact-rail\s*{[^}]*grid-template-columns:\s*1\.2fr 0\.9fr 2fr 1\.2fr;/s,
+    );
+    expect(footerCss).toMatch(
+      /\.footer-meta-rail\s*{[^}]*grid-template-columns:\s*repeat\(4,\s*minmax\(0,\s*1fr\)\);/s,
     );
     expect(footerCss).toMatch(
       /@media\s*\(max-width:\s*576px\)\s*{[\s\S]*?\.footer-bottom\s*{[^}]*flex-direction:\s*column;[^}]*align-items:\s*flex-start;[^}]*gap:\s*1rem;/s,

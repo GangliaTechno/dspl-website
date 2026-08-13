@@ -2,6 +2,7 @@ import './App.css';
 import { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router';
 import AnalyticsTracker from './components/AnalyticsTracker';
+import CookieNotice from './components/CookieNotice';
 import ErrorBoundary from './components/ErrorBoundary';
 import Footer from './components/Footer';
 import Header from './components/Header';
@@ -17,6 +18,11 @@ const Branding = lazy(() => import('./pages/Branding'));
 const Ecommerce = lazy(() => import('./pages/Ecommerce'));
 const Contact = lazy(() => import('./pages/Contact'));
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
+const RawRadicles = lazy(() => import('./pages/RawRadicles'));
+const StartProject = lazy(() => import('./pages/StartProject'));
+const TermsOfUse = lazy(() => import('./pages/TermsOfUse'));
+const Blogs = lazy(() => import('./pages/Blogs'));
+const BlogPost = lazy(() => import('./pages/BlogPost'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 const AppRoutes = ({ pages = {} }) => {
@@ -28,6 +34,11 @@ const AppRoutes = ({ pages = {} }) => {
   const EcommerceRoute = pages.Ecommerce || Ecommerce;
   const ContactRoute = pages.Contact || Contact;
   const PrivacyPolicyRoute = pages.PrivacyPolicy || PrivacyPolicy;
+  const RawRadiclesRoute = pages.RawRadicles || RawRadicles;
+  const StartProjectRoute = pages.StartProject || StartProject;
+  const TermsOfUseRoute = pages.TermsOfUse || TermsOfUse;
+  const BlogsRoute = pages.Blogs || Blogs;
+  const BlogPostRoute = pages.BlogPost || BlogPost;
   const NotFoundRoute = pages.NotFound || NotFound;
 
   return (
@@ -45,11 +56,16 @@ const AppRoutes = ({ pages = {} }) => {
                 <Route path="/" element={<HomeRoute />} />
                 <Route path="/about" element={<AboutRoute />} />
                 <Route path="/brands" element={<BrandsRoute />} />
+                <Route path="/brands/raw-radicles" element={<RawRadiclesRoute />} />
                 <Route path="/marketing" element={<MarketingRoute />} />
                 <Route path="/branding" element={<BrandingRoute />} />
                 <Route path="/ecommerce" element={<EcommerceRoute />} />
                 <Route path="/contact" element={<ContactRoute />} />
+                <Route path="/start" element={<StartProjectRoute />} />
                 <Route path="/privacy" element={<PrivacyPolicyRoute />} />
+                <Route path="/terms" element={<TermsOfUseRoute />} />
+                <Route path="/blogs" element={<BlogsRoute />} />
+                <Route path="/blogs/:slug" element={<BlogPostRoute />} />
                 <Route path="*" element={<NotFoundRoute />} />
               </Routes>
             </Suspense>
@@ -58,6 +74,7 @@ const AppRoutes = ({ pages = {} }) => {
         <Footer />
         <WorkWithUsModal />
       </div>
+      <CookieNotice />
     </>
   );
 };

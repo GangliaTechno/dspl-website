@@ -1,0 +1,27 @@
+.blog-post-page {
+  padding-top: calc(var(--header-height, 5rem) + 4rem);
+}
+
+.blog-post-content {
+  max-width: 48rem;
+}
+
+.blog-post-title {
+  margin-bottom: 1rem;
+  color: var(--text-heading);
+  font-size: clamp(2.75rem, 6vw, 4.5rem);
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 1;
+  text-wrap: balance;
+}
+
+.blog-post-lead {
+  color: var(--text-secondary);
+  font-size: 1.15rem;
+  line-height: 1.65;
+}
+
+.blog-post-content > section {
+  margin-top: 2.5rem;
+}

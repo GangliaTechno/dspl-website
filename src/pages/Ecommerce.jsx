@@ -5,35 +5,67 @@ import ecommerceDashboard960 from '../assets/ecommerce-dashboard-960.webp';
 import ecommerceDashboard1440 from '../assets/ecommerce-dashboard-1440.webp';
 import ecommerceDashboardMobile from '../assets/ecommerce-dashboard-mobile-hq.webp';
 import ServicePage from '../components/ServicePage';
+import { approvedTestimonials } from '../content/publication';
 import { getRouteMetadata } from '../seo/routeMetadata';
-
-const ecommerceCopy = {
-  contextLabel: 'E-commerce services',
-  heroTagline: 'Storefront, marketplace, payment, and fulfilment systems designed for reliable day-to-day operation.',
-  scopeTitle: 'Commerce aligned with day-to-day operations',
-  scopeText: 'Storefront and marketplace work is planned alongside catalogue ownership, payment setup, inventory, fulfilment, and reporting. This keeps the customer journey and operational responsibilities within one documented scope.',
-  offersTitle: 'E-commerce capabilities',
-  offersDescription: 'Implementation and support are scoped to the platforms, integrations, and operating responsibilities agreed for the project.',
-};
 
 const offers = [
   {
     title: 'Store Setup and Build',
-    text: 'Storefront planning and implementation for Shopify, WooCommerce, or React-based commerce, with responsive behaviour and a clear catalogue and content structure.',
+    text: 'Storefront planning and implementation for Shopify, WooCommerce, or React-based commerce, with responsive behaviour and a clear content structure.',
   },
   {
-    title: 'Conversion Rate Optimisation (CRO)',
-    text: 'Review of product discovery, product detail, cart, and checkout journeys to identify measurable friction and prioritise testable improvements.',
+    title: 'Catalogue and Product Content',
+    text: 'Product data, collection structure, imagery requirements, and content ownership organised for the selected channels.',
   },
   {
-    title: 'Multi-Channel Selling',
-    text: 'Marketplace setup and workflow planning for Amazon, Flipkart, and other agreed channels, including catalogue, inventory, and pricing responsibilities.',
+    title: 'Conversion Journey Review',
+    text: 'Product discovery, product detail, cart, and checkout journeys reviewed to identify measurable friction and testable improvements.',
   },
   {
-    title: 'Payments and Delivery Setup',
-    text: 'Payment and delivery integrations configured around the selected platform, providers, fulfilment model, and internal operating workflow.',
+    title: 'Marketplace Operations',
+    text: 'Marketplace setup and workflow planning for agreed channels, including catalogue, inventory, pricing, and review responsibilities.',
+  },
+  {
+    title: 'Payments, Delivery, and Returns',
+    text: 'Payment, fulfilment, delivery, and returns workflows configured around the selected platform, providers, and operating model.',
+  },
+  {
+    title: 'Commerce Analytics and Reconciliation',
+    text: 'Tracking, channel reporting, settlement inputs, and operating checks designed around named data owners and review cadence.',
   },
 ];
+
+const compliance = {
+  title: 'Commerce compliance coordination',
+  intro: 'Commerce implementation includes the practical configuration and declaration inputs agreed for the project.',
+  items: [
+    {
+      title: 'GST configuration',
+      text: 'Tax settings are configured from information approved by the client and their qualified tax adviser.',
+    },
+    {
+      title: 'HSN mapping',
+      text: 'Approved HSN mapping can be organised across catalogue and commerce records.',
+    },
+    {
+      title: 'Settlement reconciliation',
+      text: 'Marketplace and payment-settlement inputs can be mapped into a documented reconciliation workflow.',
+    },
+    {
+      title: 'E-way-bill process',
+      text: 'Operational handoffs for the e-way-bill process can be documented against the selected fulfilment flow.',
+    },
+    {
+      title: 'Returns policies',
+      text: 'Approved returns policies can be implemented consistently across storefront and marketplace touchpoints.',
+    },
+    {
+      title: 'Listing declarations',
+      text: 'Required listing declarations are coordinated from client-approved product and compliance records.',
+    },
+  ],
+  disclaimer: "DSPL coordinates configuration and operating implementation. Tax and legal advice remains with the client's qualified tax and legal advisers.",
+};
 
 const faqs = [
   {
@@ -42,11 +74,11 @@ const faqs = [
   },
   {
     q: 'Can you improve an existing store?',
-    a: 'Yes. An audit can cover performance, catalogue structure, product journeys, checkout, analytics, and operating dependencies before improvement work is scoped.',
+    a: 'Yes. An audit can cover performance, catalogue structure, product journeys, checkout, analytics, compliance inputs, and operating dependencies before improvement work is scoped.',
   },
   {
     q: 'Can marketplace and ongoing support be included?',
-    a: 'Yes, when included in the scope. The engagement defines which channels, integrations, data owners, and ongoing responsibilities are covered.',
+    a: 'Yes, when included in the scope. The engagement defines which channels, integrations, data owners, compliance inputs, and ongoing responsibilities are covered.',
   },
 ];
 
@@ -75,10 +107,17 @@ const Ecommerce = () => (
   <ServicePage
     seoMetadata={getRouteMetadata('/ecommerce')}
     pageTypeClass="ecommerce-page"
+    contextLabel="E-commerce services"
     heroTitle="E-commerce"
+    heroTagline="Connect storefront, marketplace, payment, fulfilment, and operating responsibilities."
     heroImages={heroImages}
-    {...ecommerceCopy}
+    scopeTitle="Commerce aligned with day-to-day operations"
+    scopeText="Storefront and marketplace work is planned alongside catalogue ownership, payment setup, inventory, fulfilment, compliance inputs, and reporting. This keeps the customer journey and operational responsibilities within one documented scope."
+    offersTitle="E-commerce capabilities"
+    offersDescription="Implementation and support are scoped to the platforms, integrations, and operating responsibilities agreed for the project."
     offers={offers}
+    compliance={compliance}
+    testimonials={approvedTestimonials}
     faqsTitle="E-commerce engagement questions"
     faqsDescription="Platforms, existing stores, and ongoing support."
     faqs={faqs}

@@ -2,16 +2,30 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 import { describe, expect, it, vi } from 'vitest';
 import Footer from '../Footer';
+import { getFooterCta } from '../../content/footerCtas';
 
-const renderFooter = () =>
+const renderFooter = (path = '/') =>
   render(
-    <MemoryRouter>
+    <MemoryRouter initialEntries={[path]}>
       <Footer />
     </MemoryRouter>,
   );
 
 describe('Footer', () => {
-  it('renders one global consultation CTA before the corporate information', () => {
+  it('selects route-specific CTAs and suppresses transactional/legal routes', () => {
+    expect(getFooterCta('/').href).toBe('/start');
+    expect(getFooterCta('/brands').href).toBe('/brands/raw-radicles');
+    expect(getFooterCta('/branding').href).toBe('/start');
+    expect(getFooterCta('/marketing').href).toBe('/start');
+    expect(getFooterCta('/ecommerce').href).toBe('/start');
+    expect(getFooterCta('/contact')).toBeNull();
+    expect(getFooterCta('/start')).toBeNull();
+    expect(getFooterCta('/privacy')).toBeNull();
+    expect(getFooterCta('/terms')).toBeNull();
+    expect(getFooterCta('/blogs')).toBeNull();
+  });
+
+  it('renders the Home CTA before verified corporate information', () => {
     const { container } = renderFooter();
 
     expect(container.querySelector('.footer-banner')).not.toBeInTheDocument();
@@ -24,17 +38,10 @@ describe('Footer', () => {
     expect(
       screen.queryByRole('button', { name: /get in touch/i }),
     ).not.toBeInTheDocument();
-    expect(screen.getByText('Start a conversation')).toBeInTheDocument();
-    expect(screen.getByRole('heading', {
-      level: 2,
-      name: 'Ready to build with greater clarity?',
-    })).toBeInTheDocument();
-    expect(screen.getByText(
-      'Tell us what you are building, where you need support, and what a successful next step looks like.',
-    )).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'Contact DSPL' })).toHaveAttribute(
+    expect(screen.getByText('Build with us')).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Start a project' })).toHaveAttribute(
       'href',
-      '/contact',
+      '/start',
     );
 
     expect(
@@ -44,7 +51,18 @@ describe('Footer', () => {
     ).toBeInTheDocument();
 
     expect(screen.getByRole('heading', { level: 2, name: 'Services' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { level: 2, name: 'Contact' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 2, name: 'Company' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 2, name: 'Legal' })).toBeInTheDocument();
+    expect(screen.getByText('Incorporated')).toBeInTheDocument();
+    expect(screen.getByText('28 July 2022')).toBeInTheDocument();
+    expect(screen.getByText(/MUTBI\/MAHE/)).toBeInTheDocument();
+    expect(screen.getByText(/DST-NIDHI PRAYAS/)).toBeInTheDocument();
+    expect(screen.getByText(/Office days: Monday to Saturday/)).toBeInTheDocument();
+    expect(screen.getByText(/Madhava Nagar, Manipal 576104/)).toBeInTheDocument();
+    expect(
+      screen.getByText('© 2026 Dashapatmaja Solutions Pvt Ltd. All rights reserved.'),
+    ).toBeInTheDocument();
+    expect(container.textContent).not.toMatch(/Â|Ã|â€|â€”/);
 
     expect(
       screen.getByAltText('Dashapatmaja Solutions Pvt Ltd logo'),
@@ -61,11 +79,18 @@ describe('Footer', () => {
       ['Our Brands', '/brands'],
       ['About Our Company', '/about'],
       ['Privacy Policy', '/privacy'],
+      ['Terms of Use', '/terms'],
       ['director@dashapatmaja.in', 'mailto:director@dashapatmaja.in'],
-      ['Call +91 88619 42440', '#phone'],
+      ['Call +91 88619 42440', 'tel:+918861942440'],
     ]) {
       expect(screen.getByRole('link', { name })).toHaveAttribute('href', href);
     }
+  });
+
+  it('suppresses the closing CTA on Contact', () => {
+    renderFooter('/contact');
+
+    expect(screen.queryByLabelText('Closing call to action')).not.toBeInTheDocument();
   });
 
   it('keeps the back-to-top action available', () => {

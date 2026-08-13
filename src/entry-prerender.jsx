@@ -10,6 +10,9 @@ import Home from './pages/Home';
 import Marketing from './pages/Marketing';
 import NotFound from './pages/NotFound';
 import PrivacyPolicy from './pages/PrivacyPolicy';
+import RawRadicles from './pages/RawRadicles';
+import StartProject from './pages/StartProject';
+import TermsOfUse from './pages/TermsOfUse';
 import {
   getRouteMetadata,
   NOT_FOUND_METADATA,
@@ -27,6 +30,9 @@ const pages = {
   Marketing,
   NotFound,
   PrivacyPolicy,
+  RawRadicles,
+  StartProject,
+  TermsOfUse,
 };
 
 const releaseReactServerMessagePort = () => {

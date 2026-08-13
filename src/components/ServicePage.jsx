@@ -2,6 +2,7 @@ import './ServicePage.css';
 import useSEO from '../hooks/useSEO';
 import FAQAccordion from './FAQAccordion';
 import RotatingHeroMedia from './RotatingHeroMedia';
+import TestimonialsSection from './TestimonialsSection';
 
 const ServicePage = ({
   seoMetadata,
@@ -15,6 +16,10 @@ const ServicePage = ({
   offersTitle,
   offersDescription,
   offers,
+  compliance,
+  proof,
+  engagements,
+  testimonials = [],
   faqsTitle,
   faqsDescription,
   faqs,
@@ -55,16 +60,84 @@ const ServicePage = ({
             </p>
           </div>
 
-          <div className="offers-grid">
-            {offers.map((offer) => (
+          <div className="offers-grid" data-count={offers.length}>
+            {offers.map((offer, index) => (
               <article key={offer.title} className="offer-entry">
-                <h3 className="offer-card-title">{offer.title}</h3>
-                <p className="offer-card-text">{offer.text}</p>
+                <span className="offer-sequence" aria-hidden="true">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <div>
+                  <h3 className="offer-card-title">{offer.title}</h3>
+                  <p className="offer-card-text">{offer.text}</p>
+                </div>
               </article>
             ))}
           </div>
         </div>
       </section>
+
+      {compliance && (
+        <section
+          id="compliance"
+          className="section service-detail-section bg-alt"
+          aria-labelledby={`${pageTypeClass}-compliance-title`}
+        >
+          <div className="container">
+            <div className="section-header">
+              <span className="section-subtitle">Compliance support</span>
+              <h2 id={`${pageTypeClass}-compliance-title`} className="section-title">
+                {compliance.title}
+              </h2>
+              <p className="section-title-description">{compliance.intro}</p>
+            </div>
+            <div className="service-detail-grid" data-count={compliance.items.length}>
+              {compliance.items.map((item) => (
+                <article key={item.title}>
+                  <h3>{item.title}</h3>
+                  <p>{item.text}</p>
+                </article>
+              ))}
+            </div>
+            <p className="service-detail-disclaimer">{compliance.disclaimer}</p>
+          </div>
+        </section>
+      )}
+
+      {proof && (
+        <section className="section service-proof-section" aria-labelledby={`${pageTypeClass}-proof-title`}>
+          <div className="container service-proof-layout">
+            <div>
+              <span className="section-subtitle">{proof.eyebrow}</span>
+              <h2 id={`${pageTypeClass}-proof-title`} className="section-title">{proof.title}</h2>
+              <p className="section-title-description">{proof.body}</p>
+            </div>
+            <ul className="service-proof-points">
+              {proof.points.map((point) => <li key={point}>{point}</li>)}
+            </ul>
+          </div>
+        </section>
+      )}
+
+      {engagements && (
+        <section className="section service-engagements-section bg-alt" aria-labelledby={`${pageTypeClass}-engagements-title`}>
+          <div className="container">
+            <div className="section-header">
+              <h2 id={`${pageTypeClass}-engagements-title`} className="section-title">{engagements.title}</h2>
+              <p className="section-title-description">{engagements.description}</p>
+            </div>
+            <div className="service-detail-grid" data-count={engagements.items.length}>
+              {engagements.items.map((item) => (
+                <article key={item.title}>
+                  <h3>{item.title}</h3>
+                  <p>{item.text}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      <TestimonialsSection testimonials={testimonials} />
 
       <section className="section faq-section bg-alt">
         <div className="container">

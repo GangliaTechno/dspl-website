@@ -3,111 +3,67 @@ import { MemoryRouter } from 'react-router';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import Brands from '../Brands';
 
+const renderBrands = () =>
+  render(
+    <MemoryRouter initialEntries={['/brands']}>
+      <Brands />
+    </MemoryRouter>,
+  );
+
 describe('Brands page', () => {
   beforeEach(() => {
     vi.stubGlobal('IntersectionObserver', class {
       observe() {}
-
       unobserve() {}
-
       disconnect() {}
     });
   });
 
-  afterEach(() => {
-    vi.unstubAllGlobals();
+  afterEach(() => vi.unstubAllGlobals());
+
+  it('states ownership and the filed trademark status without overclaiming', () => {
+    const { container } = renderBrands();
+    const ownership = screen.getByText(/Raw Radicles is owned and developed by Dashapatmaja Solutions Pvt Ltd/i);
+    const hero = container.querySelector('.brands-hero');
+
+    expect(hero.compareDocumentPosition(ownership.closest('section')) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(screen.getByText(/trademark application has been filed/i)).toBeInTheDocument();
+    expect(container).not.toHaveTextContent(/registered trademark/i);
+    expect(container).not.toHaveTextContent(/FSSAI licensed/i);
   });
 
-  it('renders the approved portfolio context and preserved brand actions', () => {
-    const { container } = render(
-      <MemoryRouter initialEntries={['/brands']}>
-        <Brands />
-      </MemoryRouter>,
-    );
+  it('explains the brand-owner and services-arm relationship with confirmed product facts', () => {
+    renderBrands();
 
-    expect(screen.getByText('DSPL Brands')).toBeInTheDocument();
-    expect(screen.getByRole('heading', {
-      level: 1,
-      name: 'We develop and operate consumer brands.',
-    })).toBeInTheDocument();
-    expect(screen.getByText('From product development to market execution.'))
-      .toHaveClass('brands-tagline');
-    expect(screen.queryByText(
-      'We work across product development, packaging, compliance, market positioning, and commerce. Raw Radicles is our first flagship consumer brand, with additional concepts in development.',
-    )).not.toBeInTheDocument();
-    expect(container.querySelector('.brands-description')).not.toBeInTheDocument();
-
-    expect(screen.getByRole('heading', { level: 2, name: 'Raw Radicles' }))
-      .toBeInTheDocument();
-    expect(screen.getByRole('img', { name: 'Raw Radicles' })).toBeInTheDocument();
-    expect(screen.getByText('Chocolate, reimagined through Ayurveda.'))
-      .toBeInTheDocument();
-    for (const proof of [
+    expect(screen.getByRole('heading', { name: 'Brand owner and services operator' })).toBeInTheDocument();
+    for (const fact of [
       'Six 60 g bars across three collections',
       'Real cacao with selected Ayurvedic botanicals',
       'Chocolate production partnership in Kerala',
       'Formulation partnership in Thrissur',
     ]) {
-      expect(screen.getByText(proof)).toBeInTheDocument();
+      expect(screen.getByText(fact)).toBeInTheDocument();
     }
-
-    const brandBadge = container.querySelector('.brand-type-badge');
-    expect(brandBadge).toHaveTextContent('FLAGSHIP CONSUMER BRAND');
-    expect(brandBadge.querySelector('svg')).not.toBeInTheDocument();
-
-    expect(screen.getByRole('link', { name: 'Contact us about Raw Radicles' }))
-      .toHaveAttribute('href', '/contact');
-    expect(container.querySelector('.rr-cta-btn[href^="mailto:"]'))
-      .not.toBeInTheDocument();
-    expect(screen.getByRole('link', {
-      name: 'Contact us about a brand partnership',
-    })).toHaveAttribute('href', '/contact');
-    expect(screen.queryByRole('button', {
-      name: /brand partnership/i,
-    })).not.toBeInTheDocument();
-
-    expect(screen.getByRole('heading', {
-      level: 2,
-      name: 'Portfolio in development',
-    })).toBeInTheDocument();
-    expect(screen.getByText(
-      'Additional consumer-brand concepts are being evaluated and developed. We will publish them here when they are ready for market.',
-    )).toBeInTheDocument();
-
-    for (const selector of [
-      '.glow-bg',
-      '.pipeline-icon-box',
-      '.pipeline-decorative-shape-1',
-      '.pipeline-decorative-shape-2',
-    ]) {
-      expect(container.querySelector(selector)).not.toBeInTheDocument();
-    }
+    expect(screen.getByRole('link', { name: 'View the Raw Radicles project overview' }))
+      .toHaveAttribute('href', '/brands/raw-radicles');
   });
 
-  it('mounts the selected consumer-portfolio hero images in a fixed order', () => {
+  it('withholds unapproved packaging records and removes the vague pipeline', () => {
+    renderBrands();
+
+    expect(screen.queryByRole('heading', { name: /Approved packaging views/i })).not.toBeInTheDocument();
+    expect(screen.queryByText(/Packaging imagery will be added/i)).not.toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: 'Portfolio in development' })).not.toBeInTheDocument();
+    expect(screen.queryByText(/additional consumer-brand concepts/i)).not.toBeInTheDocument();
+  });
+
+  it('mounts the selected portfolio hero images in order', () => {
     vi.useFakeTimers();
-    const rendered = render(
-      <MemoryRouter initialEntries={['/brands']}>
-        <Brands />
-      </MemoryRouter>,
-    );
+    const rendered = renderBrands();
 
     act(() => vi.runOnlyPendingTimers());
-    const layers = Array.from(
-      rendered.container.querySelectorAll('.brands-hero-bg picture'),
-    );
-    expect(layers.map((layer) => layer.dataset.heroId)).toEqual([
-      'brands-primary',
-      'brands-02',
-    ]);
-    expect(layers[0].querySelector('img')).toHaveAttribute(
-      'src',
-      expect.stringContaining('brands-portfolio-01-1440.webp'),
-    );
-    expect(layers[1].querySelector('img')).toHaveAttribute(
-      'src',
-      expect.stringContaining('brands-portfolio-02-1440.webp'),
-    );
+    const layers = Array.from(rendered.container.querySelectorAll('.brands-hero-bg picture'));
+    expect(layers.map((layer) => layer.dataset.heroId)).toEqual(['brands-primary', 'brands-02']);
 
     rendered.unmount();
     vi.clearAllTimers();

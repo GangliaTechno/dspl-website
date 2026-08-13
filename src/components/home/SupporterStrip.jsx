@@ -72,8 +72,9 @@ const SupporterStrip = ({ supporters }) => {
       ref={bandRef}
       className="supporter-band"
       role="region"
-      aria-label="Supported by"
+      aria-label="Recognised and supported by"
     >
+      <p className="supporter-label">Recognised and supported by</p>
       <div className="supporter-viewport">
         <div
           className={trackClassName}

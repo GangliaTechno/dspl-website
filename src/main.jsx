@@ -18,7 +18,13 @@ const app = (
   </StrictMode>
 );
 
-if (shouldHydratePrerenderedPage(hasPrerenderedMarkup, pages)) {
+if (
+  shouldHydratePrerenderedPage(
+    hasPrerenderedMarkup,
+    pages,
+    window.location.pathname,
+  )
+) {
   hydrateRoot(container, app);
 } else {
   if (hasPrerenderedMarkup) container.replaceChildren();

@@ -27,12 +27,13 @@ const OwnedBrandProof = ({ logoSrc }) => (
           Chocolate, reimagined through Ayurveda.
         </p>
         <p className="owned-brand-description">
-          DSPL applies brand strategy, packaging, market presentation, and
-          e-commerce thinking to a consumer brand it operates itself.
+          DSPL coordinates formulation briefing, packaging, compliance
+          coordination, photography, pricing, and route to market for a
+          consumer brand it owns and operates.
         </p>
         <div className="owned-brand-actions">
-          <Link to="/brands#raw-radicles" className="btn btn-primary">
-            See the brand <ArrowRight size={16} aria-hidden="true" />
+          <Link to="/brands/raw-radicles" className="btn btn-primary">
+            View the project overview <ArrowRight size={16} aria-hidden="true" />
           </Link>
         </div>
       </div>

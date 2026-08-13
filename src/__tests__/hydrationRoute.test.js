@@ -22,6 +22,26 @@ describe('loadHydrationPage', () => {
     expect(loaders.NotFound).not.toHaveBeenCalled();
   });
 
+  it.each([
+    ['/brands/raw-radicles', 'RawRadicles'],
+    ['/start', 'StartProject'],
+    ['/terms', 'TermsOfUse'],
+    ['/blogs', 'Blogs'],
+    ['/blogs/approved-slug', 'BlogPost'],
+  ])('loads %s through the %s page loader', async (pathname, pageName) => {
+    const Page = () => null;
+    const loaders = {
+      [pageName]: vi.fn(async () => ({ default: Page })),
+      NotFound: vi.fn(async () => ({ default: () => null })),
+    };
+
+    await expect(loadHydrationPage(pathname, loaders)).resolves.toEqual({
+      [pageName]: Page,
+    });
+    expect(loaders[pageName]).toHaveBeenCalledOnce();
+    expect(loaders.NotFound).not.toHaveBeenCalled();
+  });
+
   it('uses the not-found page for an unknown pathname', async () => {
     const NotFound = () => null;
     const loaders = {
@@ -39,16 +59,46 @@ describe('loadHydrationPage', () => {
 
 describe('shouldHydratePrerenderedPage', () => {
   it('hydrates known prerendered routes', () => {
-    expect(shouldHydratePrerenderedPage(true, { Home: () => null })).toBe(true);
+    expect(
+      shouldHydratePrerenderedPage(true, { Home: () => null }, '/'),
+    ).toBe(true);
+    expect(
+      shouldHydratePrerenderedPage(
+        true,
+        { StartProject: () => null },
+        '/start',
+      ),
+    ).toBe(true);
   });
 
   it('client-renders unknown routes because the server fallback may contain another route', () => {
     expect(
-      shouldHydratePrerenderedPage(true, { NotFound: () => null }),
+      shouldHydratePrerenderedPage(
+        true,
+        { NotFound: () => null },
+        '/missing-evidence-route',
+      ),
+    ).toBe(false);
+  });
+
+  it('client-renders staged Blog routes because they are not prerendered', () => {
+    expect(
+      shouldHydratePrerenderedPage(
+        true,
+        { Blogs: () => null },
+        '/blogs',
+      ),
+    ).toBe(false);
+    expect(
+      shouldHydratePrerenderedPage(
+        true,
+        { BlogPost: () => null },
+        '/blogs/example',
+      ),
     ).toBe(false);
   });
 
   it('client-renders when no prerendered markup exists', () => {
-    expect(shouldHydratePrerenderedPage(false, undefined)).toBe(false);
+    expect(shouldHydratePrerenderedPage(false, undefined, '/')).toBe(false);
   });
 });

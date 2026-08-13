@@ -1,0 +1,151 @@
+.start-project-page {
+  background: var(--bg-primary);
+}
+
+.start-project-hero {
+  padding: calc(var(--header-height, 5rem) + 4.5rem) 0 5rem;
+  border-bottom: 1px solid var(--border-color);
+  background:
+    linear-gradient(135deg, rgba(245, 168, 0, 0.08), transparent 45%),
+    var(--bg-primary);
+}
+
+.start-project-intro {
+  display: grid;
+  max-width: 70rem;
+  grid-template-columns: minmax(0, 1.25fr) minmax(19rem, 0.75fr);
+  align-items: end;
+  gap: clamp(3rem, 8vw, 7rem);
+}
+
+.start-project-title {
+  max-width: 11ch;
+  margin-bottom: 1rem;
+  color: var(--text-heading);
+  font-size: clamp(3rem, 6vw, 5rem);
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 0.98;
+  text-wrap: balance;
+}
+
+.start-project-subtitle {
+  max-width: 39rem;
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: clamp(1.1rem, 1.7vw, 1.35rem);
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+.start-project-briefing-points {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 2.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+.start-project-briefing-points li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.65rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.start-project-briefing-points li > span,
+.start-project-next-label {
+  color: var(--accent-text);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.start-project-briefing-points strong {
+  color: var(--text-heading);
+  font-size: 0.9rem;
+}
+
+.start-project-briefing-points p {
+  margin: 0.25rem 0 0;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.start-project-next {
+  padding: 2rem;
+  border: 1px solid var(--border-color);
+  border-top: 3px solid var(--accent);
+  border-radius: var(--radius-card);
+  background: var(--card-bg);
+  box-shadow: var(--shadow-surface);
+}
+
+.start-project-next h2 {
+  margin: 0.5rem 0 1.25rem;
+  font-size: 1.5rem;
+}
+
+.start-project-next ol {
+  display: grid;
+  gap: 0.85rem;
+  margin: 0;
+  padding-left: 1.25rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+.start-project-next > p {
+  margin: 1.5rem 0 0;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+  color: var(--text-heading);
+  font-weight: 700;
+}
+
+.start-project-form-section {
+  border-bottom: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+}
+
+.start-project-form-wrap { max-width: 70rem; }
+
+.start-project-form-heading {
+  display: grid;
+  max-width: 46rem;
+  margin-bottom: 2.5rem;
+}
+
+.start-project-form-heading .section-title { margin-bottom: 0.75rem; }
+.start-project-form-heading p { max-width: 60ch; margin: 0; }
+
+.start-project-form-shell {
+  padding: clamp(1.5rem, 4vw, 3rem);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-card);
+  background: var(--card-bg);
+  box-shadow: var(--shadow-surface);
+}
+
+.start-project-form-shell .work-modal-form-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+@media (max-width: 800px) {
+  .start-project-intro { grid-template-columns: 1fr; align-items: start; }
+  .start-project-briefing-points { grid-template-columns: 1fr; }
+  .start-project-next { max-width: 34rem; }
+}
+
+@media (max-width: 600px) {
+  .start-project-hero { padding-top: calc(var(--header-height, 5rem) + 3rem); }
+  .start-project-title { font-size: clamp(2.75rem, 14vw, 4rem); }
+  .start-project-next { padding: 1.5rem; }
+  .start-project-form-shell { padding: 1.25rem; }
+  .start-project-form-shell .work-modal-form-row { grid-template-columns: 1fr; }
+}

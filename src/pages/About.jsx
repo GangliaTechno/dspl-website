@@ -23,15 +23,35 @@ import journey2023Img from '../assets/about-journey-2023.webp';
 import journey2024Img from '../assets/about-journey-2024.webp';
 import journey2025Img from '../assets/about-journey-2025.webp';
 import journey2026Img from '../assets/about-journey-2026.webp';
+import {
+  getAboutRevealInitial,
+  getAboutRevealTransition,
+  getHashScrollBehavior,
+} from './aboutMotion';
+
+const getAboutHeroTransition = (prefersReducedMotion) => (
+  prefersReducedMotion
+    ? getAboutRevealTransition(true, 0)
+    : { duration: 0.8, ease: 'easeOut', delay: 0 }
+);
 
 const journeyMilestones = [
   {
+    year: '2022',
+    title: 'Company incorporation',
+    image: journey2023Img,
+    alt: 'Early consumer-brand planning materials at a shared workspace',
+    items: [
+      'Dashapatmaja Solutions Pvt Ltd was incorporated on 28 July 2022.',
+      'The company was formed to develop consumer brands and the capabilities needed to take them to market.',
+    ],
+  },
+  {
     year: '2023',
-    title: 'Founding and first incubation',
+    title: 'First incubation',
     image: journey2023Img,
     alt: 'Consumer-brand planning materials in an early-stage incubator workspace',
     items: [
-      'Started with a plan to build consumer brands and the services that grow them.',
       'Incubated at GoK Bioincubator, Manipal, where we set up our base.',
     ],
   },
@@ -69,19 +89,19 @@ const journeyMilestones = [
 
 const directionCards = [
   {
-    label: 'Long-term direction',
-    title: 'Vision',
-    text: 'To build an enduring portfolio of consumer brands defined by quality, relevance, and responsible growth.',
+    label: 'Company and operating team',
+    title: 'What we are',
+    text: 'A private limited company developing and operating consumer brands while providing coordinated branding, marketing, e-commerce, and compliance-support services.',
   },
   {
-    label: 'Our mandate',
-    title: 'Mission',
-    text: 'We develop our own brands and help businesses strengthen their branding, marketing, and e-commerce capabilities through practical, accountable collaboration.',
+    label: 'Long-term direction',
+    title: 'What we are building towards',
+    text: 'A focused portfolio of consumer brands and an operating team able to support businesses from brand decisions through market and commerce execution.',
   },
   {
     label: 'Operating principles',
-    title: 'Values',
-    text: 'Evidence guides our recommendations. We define scope, responsibilities, and measures clearly, communicate decisions honestly, and carry agreed work through with care.',
+    title: 'How we work',
+    text: 'We define scope, responsibilities, dependencies, and evidence clearly; coordinate the agreed work; and communicate decisions without overstating what the evidence can support.',
   },
 ];
 
@@ -110,32 +130,27 @@ const About = () => {
   const location = useLocation();
   const prefersReducedMotion = useReducedMotion();
   const revealInitial = (y) =>
-    prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y };
-  const revealTransition = (base) =>
-    prefersReducedMotion ? { duration: 0.15, ease: 'easeOut' } : base;
+    getAboutRevealInitial(prefersReducedMotion, y);
 
   useSEO(getRouteMetadata('/about'));
 
   // Scroll to hash anchor when route hash changes
   useEffect(() => {
-    if (location.hash) {
-      const id = location.hash.substring(1);
-      const element = document.getElementById(id);
-      if (element) {
-        setTimeout(() => {
-          element.scrollIntoView({
-            behavior: prefersReducedMotion ? 'auto' : 'smooth',
-            block: 'start',
-          });
-        }, 100);
-      }
-    } else {
-      window.scrollTo({
-        top: 0,
-        behavior: prefersReducedMotion ? 'auto' : 'smooth',
+    if (!location.hash) return undefined;
+
+    const id = location.hash.substring(1);
+    const element = document.getElementById(id);
+    if (!element) return undefined;
+
+    const timerId = window.setTimeout(() => {
+      element.scrollIntoView({
+        behavior: getHashScrollBehavior(prefersReducedMotion),
+        block: 'start',
       });
-    }
-  }, [location, prefersReducedMotion]);
+    }, 100);
+
+    return () => window.clearTimeout(timerId);
+  }, [location.hash, prefersReducedMotion]);
 
   const team = [
     {
@@ -219,7 +234,7 @@ const About = () => {
           className="container"
           initial={revealInitial(30)}
           animate={{ opacity: 1, y: 0 }}
-          transition={revealTransition({ duration: 0.8, ease: 'easeOut' })}
+          transition={getAboutHeroTransition(prefersReducedMotion)}
         >
           <span className="section-subtitle">Our Corporate Profile</span>
           <h1 className="about-title">About Dashapatmaja Solutions Pvt Ltd</h1>
@@ -240,7 +255,7 @@ const About = () => {
                 initial={revealInitial(20)}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-50px' }}
-                transition={revealTransition({ duration: 0.6, delay: index * 0.1 })}
+                transition={getAboutRevealTransition(prefersReducedMotion, index)}
               >
                 <span className="direction-label">{card.label}</span>
                 <h3 className="direction-title">{card.title}</h3>
@@ -248,6 +263,40 @@ const About = () => {
               </motion.article>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="section about-delivery-section" aria-labelledby="about-delivery-title">
+        <div className="container about-scope-grid">
+          <div>
+            <span className="section-subtitle">Delivery model</span>
+            <h2 id="about-delivery-title" className="section-title">
+              Based in Manipal, built to work remotely
+            </h2>
+          </div>
+          <p>
+            Our operating base is in Manipal. Project work can be coordinated
+            remotely through defined briefs, review points, shared files, and
+            named decision-makers, with in-person work agreed when it materially
+            helps the engagement.
+          </p>
+        </div>
+      </section>
+
+      <section className="section about-boundaries-section bg-alt" aria-labelledby="about-boundaries-title">
+        <div className="container about-scope-grid">
+          <div>
+            <span className="section-subtitle">Clear boundaries</span>
+            <h2 id="about-boundaries-title" className="section-title">
+              What we do not take on
+            </h2>
+          </div>
+          <p>
+            DSPL does not act as a regulator, licensing authority, chartered
+            accountant, or legal adviser. Where regulated advice or formal
+            certification is required, the client retains the appropriate
+            qualified professional and we coordinate the agreed implementation.
+          </p>
         </div>
       </section>
 
@@ -273,10 +322,7 @@ const About = () => {
                 initial={revealInitial(24)}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-50px' }}
-                transition={revealTransition({
-                  duration: 0.55,
-                  delay: index > 0 ? 0.05 : 0,
-                })}
+                transition={getAboutRevealTransition(prefersReducedMotion, index)}
               >
                 <div className="journey-story-media">
                   <img
@@ -319,10 +365,7 @@ const About = () => {
                 initial={revealInitial(20)}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
-                transition={revealTransition({
-                  duration: 0.5,
-                  delay: idx * 0.1,
-                })}
+                transition={getAboutRevealTransition(prefersReducedMotion, idx)}
               >
                 <div className="team-card glass">
                   {member.linkedin && (
@@ -372,6 +415,7 @@ const About = () => {
                   </div>
                   <h3 className="member-name">{member.name}</h3>
                   <p className="member-role">{member.role}</p>
+                  {member.bio && <p className="member-bio">{member.bio}</p>}
                 </div>
               </motion.div>
             ))}

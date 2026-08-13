@@ -21,6 +21,16 @@ const ProcessSteps = ({ steps }) => (
             <div>
               <h3 className="process-step-title">{step.title}</h3>
               <p className="process-step-description">{step.description}</p>
+              <dl className="process-step-details">
+                <div className="process-step-timing">
+                  <dt>Timing</dt>
+                  <dd>{step.timing}</dd>
+                </div>
+                <div className="process-step-output">
+                  <dt>Output</dt>
+                  <dd>{step.output}</dd>
+                </div>
+              </dl>
             </div>
           </li>
         ))}

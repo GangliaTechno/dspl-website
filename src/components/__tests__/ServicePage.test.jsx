@@ -40,6 +40,30 @@ const props = {
     title: `Capability ${index + 1}`,
     text: `Capability ${index + 1} description.`,
   })),
+  compliance: {
+    title: 'Compliance coordination',
+    intro: 'A careful compliance introduction.',
+    items: [
+      { title: 'Labels', text: 'Label coordination detail.' },
+      { title: 'Listings', text: 'Listing coordination detail.' },
+    ],
+    disclaimer: 'Qualified advisers retain regulated advice.',
+  },
+  proof: {
+    eyebrow: 'Owned experience',
+    title: 'Proof without invented metrics',
+    body: 'A factual proof statement.',
+    points: ['Confirmed point one', 'Confirmed point two'],
+  },
+  engagements: {
+    title: 'Ways to engage',
+    description: 'Select the shape that fits the brief.',
+    items: [
+      { title: 'Audit and plan', text: 'A defined audit.' },
+      { title: 'Ongoing programme', text: 'A coordinated programme.' },
+    ],
+  },
+  testimonials: [],
   faqsTitle: 'Service questions',
   faqsDescription: 'Answers about the engagement.',
   faqs: [{ q: 'How does this work?', a: 'With a documented scope.' }],
@@ -66,6 +90,8 @@ describe('ServicePage', () => {
     expect(scope.querySelector('.matters-box')).not.toBeInTheDocument();
 
     expect(container.querySelectorAll('article.offer-entry')).toHaveLength(4);
+    expect(Array.from(container.querySelectorAll('.offer-sequence'), (node) => node.textContent))
+      .toEqual(['01', '02', '03', '04']);
     expect(container.querySelector('.offer-icon-wrapper')).not.toBeInTheDocument();
     expect(screen.queryByText('Services')).not.toBeInTheDocument();
     expect(screen.getByRole('heading', { level: 2, name: props.faqsTitle }))
@@ -73,6 +99,17 @@ describe('ServicePage', () => {
     expect(screen.getByText(props.faqsDescription)).toBeInTheDocument();
     expect(container.querySelector('.glow-bg')).not.toBeInTheDocument();
     expect(container.querySelector('.offer-card.glass')).not.toBeInTheDocument();
+    expect(screen.getByRole('region', { name: 'Compliance coordination' }))
+      .toHaveAttribute('id', 'compliance');
+    expect(screen.getByText('Qualified advisers retain regulated advice.'))
+      .toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Proof without invented metrics' }))
+      .toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Ways to engage' }))
+      .toBeInTheDocument();
+    expect(screen.queryByRole('region', { name: /what collaborators say/i }))
+      .not.toBeInTheDocument();
+    expect(screen.getByText('With a documented scope.')).toBeInTheDocument();
   });
 
   it('keeps responsive hero media without a page-level modal action', () => {

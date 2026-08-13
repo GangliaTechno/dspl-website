@@ -16,7 +16,7 @@
   position: absolute;
   z-index: 0;
   inset: 0;
-  background: transparent;
+  background: rgba(0, 0, 0, 0.38);
   content: '';
 }
 
@@ -43,26 +43,9 @@
 }
 
 .home-hero-content {
-  position: relative;
-  isolation: isolate;
   width: min(100%, 68rem);
   text-align: center;
   text-shadow: 0 2px 16px rgba(0, 0, 0, 0.88);
-}
-
-.home-hero-content::before {
-  position: absolute;
-  z-index: -1;
-  inset: -3.5rem -5rem;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(8, 8, 8, 0.62) 0%,
-    rgba(8, 8, 8, 0.48) 38%,
-    rgba(8, 8, 8, 0.18) 62%,
-    transparent 80%
-  );
-  content: '';
-  pointer-events: none;
 }
 
 .hero-title {
@@ -107,6 +90,13 @@
   color: #fff;
 }
 
+.home-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
 .services-intro {
   display: grid;
   grid-template-columns: minmax(0, 1.2fr) minmax(18rem, 0.8fr);
@@ -122,7 +112,7 @@
 
 .service-evidence-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   border-top: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
 }
@@ -176,12 +166,34 @@
   color: var(--text-heading);
 }
 
+.service-evidence-links {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: auto;
+}
+
+.owned-experience-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(20rem, 0.8fr);
+  align-items: end;
+  gap: clamp(2rem, 7vw, 7rem);
+}
+
+.owned-experience-layout .section-title,
+.owned-experience-layout .section-title-description {
+  margin-bottom: 0;
+}
+
 @media (max-width: 900px) {
   .home-page {
     padding-top: 4.5rem;
   }
 
   .services-intro {
+    grid-template-columns: 1fr;
+  }
+
+  .owned-experience-layout {
     grid-template-columns: 1fr;
   }
 
@@ -227,15 +239,6 @@
     line-height: 1.55;
   }
 
-  .home-hero-content::before {
-    inset: -2rem -0.75rem;
-    background: radial-gradient(
-      ellipse at center,
-      rgba(8, 8, 8, 0.28) 0%,
-      rgba(8, 8, 8, 0.12) 58%,
-      transparent 82%
-    );
-  }
 }
 
 @media (max-width: 520px) {

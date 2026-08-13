@@ -17,6 +17,31 @@
   padding: 4rem 0;
 }
 
+.brands-ownership-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(20rem, 0.95fr);
+  align-items: start;
+  gap: clamp(2rem, 7vw, 7rem);
+}
+
+.brands-ownership-grid .section-title {
+  margin-bottom: 0;
+}
+
+.brands-ownership-copy,
+.brands-architecture-section .brands-ownership-grid > p {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+
+.brands-ownership-copy p {
+  margin: 0;
+}
+
 .brands-hero {
   position: relative;
   display: flex;
@@ -324,6 +349,10 @@
 
   .pipeline-content {
     padding: 3rem;
+  }
+
+  .brands-ownership-grid {
+    grid-template-columns: 1fr;
   }
 }
 

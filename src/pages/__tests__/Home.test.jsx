@@ -3,121 +3,93 @@ import { BrowserRouter } from 'react-router';
 import { describe, expect, it } from 'vitest';
 import Home from '../Home';
 
+const renderHome = () =>
+  render(
+    <BrowserRouter>
+      <Home />
+    </BrowserRouter>,
+  );
+
 describe('Home page', () => {
-  it('presents institutional, process, and owned-brand proof without duplicate logos', () => {
-    const { container } = render(
-      <BrowserRouter>
-        <Home />
-      </BrowserRouter>,
-    );
+  it('leads with owned brand-building experience and two durable actions', () => {
+    renderHome();
 
     expect(
       screen.getByRole('heading', {
         level: 1,
-        name: /we develop brands.*we deliver disciplined market execution/i,
+        name: /we build consumer brands.*we help businesses build theirs/i,
       }),
     ).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Start a project' })).toHaveAttribute(
+      'href',
+      '/start',
+    );
+    expect(
+      screen.getByRole('link', { name: 'See how we built Raw Radicles' }),
+    ).toHaveAttribute('href', '/brands/raw-radicles');
+  });
 
+  it('labels verified supporters and exposes four coordinated services', () => {
+    const { container } = renderHome();
     const supporterRegion = screen.getByRole('region', {
-      name: 'Supported by',
+      name: 'Recognised and supported by',
     });
+
+    expect(
+      within(supporterRegion).getByText('Recognised and supported by'),
+    ).toBeVisible();
     expect(within(supporterRegion).getAllByRole('img')).toHaveLength(4);
-    expect(
-      screen.getByRole('heading', { name: 'How We Work With You' }),
-    ).toBeInTheDocument();
-    expect(screen.getByText('Step 1')).toBeInTheDocument();
-    expect(screen.getByText('Step 6')).toBeInTheDocument();
-    expect(container.querySelectorAll('.service-evidence-card')).toHaveLength(3);
-    expect(container.querySelector('.service-marker')).not.toBeInTheDocument();
-    expect(
-      screen.getByRole('heading', { name: 'Raw Radicles' }),
-    ).toBeInTheDocument();
-    expect(screen.getByText('Built and operated by DSPL')).toBeInTheDocument();
+    expect(within(supporterRegion).queryByRole('button')).not.toBeInTheDocument();
+    expect(container.querySelectorAll('.service-evidence-card')).toHaveLength(4);
+    expect(screen.getByRole('link', { name: /branding compliance/i }))
+      .toHaveAttribute('href', '/branding#compliance');
+    expect(screen.getByRole('link', { name: /e-commerce compliance/i }))
+      .toHaveAttribute('href', '/ecommerce#compliance');
   });
 
-  it('renders the approved centered hero content and removes the legacy proof panel', () => {
-    render(
-      <BrowserRouter>
-        <Home />
-      </BrowserRouter>,
-    );
-
-    const heroHeading = screen.getByRole('heading', {
-      level: 1,
-      name: 'We develop brands. We deliver disciplined market execution.',
-    });
-    expect(heroHeading).toBeInTheDocument();
-    expect(heroHeading.querySelectorAll('span')[0]).not.toHaveClass(
-      'hero-title-accent',
-    );
-    expect(heroHeading.querySelectorAll('span')[1]).toHaveClass(
-      'hero-title-accent',
-    );
+  it('places owned experience before the six-step process with timing and outputs', () => {
+    const { container } = renderHome();
+    const ownedProof = screen.getByRole('heading', {
+      level: 2,
+      name: 'Owned experience informs the work',
+    }).closest('section');
+    const process = screen.getByRole('heading', {
+      level: 2,
+      name: 'How We Work With You',
+    }).closest('section');
 
     expect(
-      screen.getByText(
-        'Dashapatmaja Solutions Pvt Ltd develops and operates consumer brands while helping businesses coordinate branding, marketing, and e-commerce through clearly defined, accountable delivery.',
-      ),
-    ).toBeInTheDocument();
-    expect(screen.getByText(
-      'Start with the capability you need now. Keep strategy, market activity, and commerce aligned as the business grows.',
-    )).toBeInTheDocument();
-
-    expect(screen.queryByRole('button', { name: 'Work With Us' }))
-      .not.toBeInTheDocument();
-    expect(screen.queryByRole('link', { name: 'See Our Brands' }))
-      .not.toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'Explore our capabilities' }))
-      .toHaveAttribute('href', '#capabilities');
-    expect(screen.getByRole('region', {
-      name: 'One growth system, not three disconnected vendors',
-    })).toHaveAttribute('id', 'capabilities');
-
-    expect(
-      screen.queryByText('Brand systems for Indian consumer businesses'),
-    ).not.toBeInTheDocument();
-    expect(screen.queryByText('One accountable team')).not.toBeInTheDocument();
-    expect(
-      screen.queryByText('Brand strategy and identity'),
-    ).not.toBeInTheDocument();
-    expect(screen.queryByText(/return on every rupee/i)).not.toBeInTheDocument();
-    expect(screen.queryByText(/convert/i)).not.toBeInTheDocument();
-    expect(screen.queryByText(/all from one place/i)).not.toBeInTheDocument();
+      ownedProof.compareDocumentPosition(process) & Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+    expect(container.querySelectorAll('.process-step')).toHaveLength(6);
+    expect(screen.getAllByText('Timing')).toHaveLength(6);
+    expect(screen.getAllByText('Output')).toHaveLength(6);
+    for (const step of container.querySelectorAll('.process-step')) {
+      expect(step.querySelector('.process-step-timing dd')).not.toBeEmptyDOMElement();
+      expect(step.querySelector('.process-step-output dd')).not.toBeEmptyDOMElement();
+    }
   });
 
-  it('keeps the supporter marquee decorative without a pause control', () => {
-    render(
-      <BrowserRouter>
-        <Home />
-      </BrowserRouter>,
-    );
+  it('expands Raw Radicles responsibilities without inventing testimonials', () => {
+    renderHome();
 
-    const supporterRegion = screen.getByRole('region', {
-      name: 'Supported by',
-    });
+    expect(screen.getByRole('heading', { name: 'Raw Radicles' })).toBeInTheDocument();
     expect(
-      within(supporterRegion).queryByRole('button'),
+      screen.getByText(/formulation briefing, packaging, compliance coordination, photography, pricing, and route to market/i),
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByRole('region', { name: /what collaborators say/i }),
     ).not.toBeInTheDocument();
   });
 
-  it('uses the selected Home artwork as one static responsive hero', () => {
-    const rendered = render(
-      <BrowserRouter>
-        <Home />
-      </BrowserRouter>,
-    );
+  it('keeps the selected Home artwork as one responsive hero', () => {
+    const { container } = renderHome();
+    const pictures = container.querySelectorAll('picture.home-hero-media');
+    const image = container.querySelector('.home-hero-image');
 
-    const pictures = rendered.container.querySelectorAll('picture.home-hero-media');
-    const image = rendered.container.querySelector('.home-hero-image');
     expect(pictures).toHaveLength(1);
     expect(image).toHaveAttribute('alt', '');
     expect(image).toHaveAttribute('loading', 'eager');
     expect(image).toHaveAttribute('fetchpriority', 'high');
-    expect(screen.getByRole('heading', {
-      level: 1,
-      name: 'We develop brands. We deliver disciplined market execution.',
-    })).toBeInTheDocument();
-    expect(screen.getByRole('region', { name: 'Supported by' }))
-      .toBeInTheDocument();
   });
 });
