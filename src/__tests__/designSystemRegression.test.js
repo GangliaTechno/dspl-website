@@ -346,12 +346,18 @@ describe('approved design-system corrections', () => {
     expect(plannerForm).toContain('work-modal-submit-btn');
   });
 
-  it('presents four alternating About journey stories with original imagery', () => {
+  it('presents five alternating About journey stories with unique original imagery', () => {
     const aboutPage = readSource('src/pages/About.jsx');
     const aboutCss = readSource('src/pages/About.css');
 
-    for (const year of ['2023', '2024', '2025', '2026']) {
-      expect(aboutPage).toContain(`about-journey-${year}.webp`);
+    for (const year of ['2022', '2023', '2024', '2025', '2026']) {
+      expect(aboutPage).toContain(`about-journey-v2-${year}.webp`);
+      expect(aboutPage).toContain(`year: '${year}'`);
+      expect(aboutPage).toMatch(
+        new RegExp(
+          `year:\\s*'${year}'[\\s\\S]{0,160}?image:\\s*journey${year}Img`,
+        ),
+      );
     }
     expect(aboutPage).toContain('const journeyMilestones = [');
     expect(aboutPage).toContain('journeyMilestones.map((milestone, index)');

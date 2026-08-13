@@ -19,10 +19,11 @@ import aboutTeam02960 from '../assets/about-team-02-960.webp';
 import aboutTeam021440 from '../assets/about-team-02-1440.webp';
 import aboutTeam02Mobile from '../assets/about-team-02-mobile.webp';
 import teamBgImg from '../assets/linen_concrete_texture.webp';
-import journey2023Img from '../assets/about-journey-2023.webp';
-import journey2024Img from '../assets/about-journey-2024.webp';
-import journey2025Img from '../assets/about-journey-2025.webp';
-import journey2026Img from '../assets/about-journey-2026.webp';
+import journey2022Img from '../assets/about-journey-v2-2022.webp';
+import journey2023Img from '../assets/about-journey-v2-2023.webp';
+import journey2024Img from '../assets/about-journey-v2-2024.webp';
+import journey2025Img from '../assets/about-journey-v2-2025.webp';
+import journey2026Img from '../assets/about-journey-v2-2026.webp';
 import {
   getAboutRevealInitial,
   getAboutRevealTransition,
@@ -39,10 +40,10 @@ const journeyMilestones = [
   {
     year: '2022',
     title: 'Company incorporation',
-    image: journey2023Img,
+    image: journey2022Img,
     width: 1536,
     height: 1024,
-    alt: 'Early consumer-brand planning materials at a shared workspace',
+    alt: 'Company-incorporation folio and formal founding materials in a modest office',
     items: [
       'Dashapatmaja Solutions Pvt Ltd was incorporated on 28 July 2022.',
       'The company was formed to develop consumer brands and the capabilities needed to take them to market.',
@@ -54,7 +55,7 @@ const journeyMilestones = [
     image: journey2023Img,
     width: 1536,
     height: 1024,
-    alt: 'Consumer-brand planning materials in an early-stage incubator workspace',
+    alt: 'Early food-technology prototype in a university-linked incubator workspace',
     items: [
       'Incubated at GoK Bioincubator, Manipal, where we set up our base.',
     ],
@@ -65,7 +66,7 @@ const journeyMilestones = [
     image: journey2024Img,
     width: 1536,
     height: 1024,
-    alt: 'Cacao, chocolate, and Ayurvedic botanicals arranged for premium product development',
+    alt: 'Finished chocolate, Ayurvedic botanicals, and premium packaging prepared for brand launch',
     items: [
       'Launched Raw Radicles, a premium chocolate brand with Ayurveda inside.',
       'Built the product, packaging, and supply chain from the ground up.',
@@ -77,7 +78,7 @@ const journeyMilestones = [
     image: journey2025Img,
     width: 1536,
     height: 1024,
-    alt: 'Research desk with a consumer-product prototype and measured botanical ingredients',
+    alt: 'Consumer-product prototype undergoing institutional validation and manufacturing handoff',
     items: [
       'Joined MUTBI at MAHE, Manipal, for technical and academic support.',
       'Won a government grant under the NIDHI-PRAYAS scheme.',
@@ -90,7 +91,7 @@ const journeyMilestones = [
     image: journey2026Img,
     width: 1536,
     height: 1024,
-    alt: 'Brand and e-commerce operations studio with packaging, photography, and dispatch materials',
+    alt: 'Integrated branding, marketing, e-commerce, and fulfilment services studio',
     items: [
       'Opened our branding, marketing, and e-commerce services to outside clients.',
     ],
