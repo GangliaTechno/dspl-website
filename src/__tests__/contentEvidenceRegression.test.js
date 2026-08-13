@@ -1,6 +1,5 @@
-import { execFileSync } from 'node:child_process';
-import { readFileSync } from 'node:fs';
-import { extname } from 'node:path';
+import { readdirSync, readFileSync } from 'node:fs';
+import { extname, join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 
 const scannedExtensions = new Set(['.html', '.js', '.jsx', '.json', '.mjs', '.xml']);
@@ -19,13 +18,14 @@ const allowedLinePatterns = new Map([
   ['src/__tests__/contentEvidenceRegression.test.js', forbiddenPatterns.map(([, pattern]) => pattern)],
 ]);
 
-const publicSourceFiles = () => execFileSync(
-  'rg',
-  ['--files', 'src', 'public', 'scripts'],
-  { encoding: 'utf8' },
-)
-  .split(/\r?\n/)
-  .filter(Boolean)
+const collectFiles = (directory) => readdirSync(directory, { withFileTypes: true })
+  .flatMap((entry) => {
+    const file = join(directory, entry.name);
+    return entry.isDirectory() ? collectFiles(file) : [file];
+  });
+
+const publicSourceFiles = () => ['src', 'public', 'scripts']
+  .flatMap(collectFiles)
   .map((file) => file.replaceAll('\\', '/'))
   .filter((file) => scannedExtensions.has(extname(file)));
 
