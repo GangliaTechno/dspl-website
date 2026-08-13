@@ -123,8 +123,10 @@
 
 @media (max-width: 768px) {
   .supporter-band {
-    bottom: 1.25rem;
-    padding-block: 8px;
+    position: relative;
+    bottom: auto;
+    padding-block: 0.75rem 1rem;
+    background: rgba(0, 0, 0, 0.52);
     --supporter-gap: 5rem;
     --supporter-slot-height: 2.5rem;
     --supporter-sequence-min-width: max-content;

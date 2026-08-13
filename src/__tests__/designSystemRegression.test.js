@@ -379,10 +379,10 @@ describe('approved design-system corrections', () => {
 
     expect(homePage).toContain('<source media="(max-width: 600px)"');
     expect(home).toMatch(
-      /@media\s*\(max-width:\s*520px\)\s*{[\s\S]*?\.hero-capabilities-link\s*{[^}]*width:\s*auto;[^}]*min-height:\s*44px;/s,
+      /@media\s*\(max-width:\s*520px\)\s*{[\s\S]*?\.home-hero-layout\s*{[^}]*padding-block:\s*2\.5rem\s+2rem;[\s\S]*?\.home-hero-actions\s*{[^}]*flex-direction:\s*column;[^}]*width:\s*min\(100%,\s*22rem\);[\s\S]*?\.home-hero-actions\s+\.btn\s*{[^}]*width:\s*100%;/s,
     );
     expect(homeSections).toMatch(
-      /@media\s*\(max-width:\s*768px\)\s*{[\s\S]*?\.supporter-band\s*{[^}]*bottom:\s*1\.25rem;/s,
+      /@media\s*\(max-width:\s*768px\)\s*{[\s\S]*?\.supporter-band\s*{[^}]*position:\s*relative;[^}]*bottom:\s*auto;[^}]*background:\s*rgba\(0,\s*0,\s*0,\s*0\.52\);/s,
     );
   });
 

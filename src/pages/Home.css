@@ -243,7 +243,7 @@
 
 @media (max-width: 520px) {
   .home-hero-layout {
-    padding-block: 3.5rem 8rem;
+    padding-block: 2.5rem 2rem;
   }
 
   .hero-title {
@@ -257,9 +257,15 @@
     line-height: 1.5;
   }
 
-  .hero-capabilities-link {
-    width: auto;
-    min-height: 44px;
+  .home-hero-actions {
+    flex-direction: column;
+    width: min(100%, 22rem);
+    margin-inline: auto;
+  }
+
+  .home-hero-actions .btn {
+    width: 100%;
+    min-height: 48px;
   }
 
   .service-evidence-card {
