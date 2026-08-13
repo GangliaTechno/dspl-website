@@ -99,6 +99,21 @@ describe('approved design-system corrections', () => {
     );
   });
 
+  it('does not move shared buttons when touch devices emulate hover', () => {
+    const tokens = readSource('src/index.css');
+    const pointerHoverStart = tokens.indexOf('@media (hover: hover) and (pointer: fine)');
+    const pointerHoverEnd = tokens.indexOf('/* Forms */', pointerHoverStart);
+    const touchSafeCss = tokens.slice(0, pointerHoverStart);
+    const pointerHoverCss = tokens.slice(pointerHoverStart, pointerHoverEnd);
+
+    expect(pointerHoverStart).toBeGreaterThan(-1);
+    expect(touchSafeCss).not.toContain('.btn-primary:hover');
+    expect(touchSafeCss).not.toContain('.btn-secondary:hover');
+    expect(pointerHoverCss).toContain('.btn-primary:hover');
+    expect(pointerHoverCss).toContain('.btn-secondary:hover');
+    expect(pointerHoverCss).toContain('transform: translateY(-2px);');
+  });
+
   it('keeps shared FAQ controls on the design-system typeface', () => {
     const faq = readSource('src/components/FAQAccordion.css');
 
