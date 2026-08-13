@@ -36,3 +36,6 @@ graphify-out/
 # Local visual-design companion
 .superpowers/
 
+# Local Git worktrees
+.worktrees/
+
