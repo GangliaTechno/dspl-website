@@ -204,17 +204,27 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1039px) {
   .home-hero {
     min-height: auto;
   }
 
   .home-hero-layout {
-    padding-block: 4.75rem 7.25rem;
+    padding-block: clamp(4.25rem, 8vw, 5.5rem)
+      clamp(8rem, 14vw, 9.5rem);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-title {
+    margin-bottom: 1.25rem;
+    font-size: clamp(2.125rem, 8.5vw, 2.875rem);
   }
 
-  .hero-title {
-    font-size: clamp(2.25rem, 10vw, 3.125rem);
+  .hero-subhead {
+    margin-bottom: 1.75rem;
+    font-size: 1.0625rem;
+    line-height: 1.55;
   }
 
   .home-hero-content::before {
@@ -229,8 +239,24 @@
 }
 
 @media (max-width: 520px) {
+  .home-hero-layout {
+    padding-block: 3.5rem 8rem;
+  }
+
+  .hero-title {
+    font-size: clamp(2rem, 9vw, 2.5rem);
+  }
+
+  .hero-subhead {
+    max-width: 34ch;
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
   .hero-capabilities-link {
-    width: 100%;
+    width: auto;
+    min-height: 44px;
   }
 
   .service-evidence-card {

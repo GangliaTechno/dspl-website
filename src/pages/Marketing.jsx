@@ -3,7 +3,7 @@ import marketingHero1440 from '../assets/marketing-primary-1440.webp';
 import marketingMobile from '../assets/marketing-primary-mobile.webp';
 import marketingRotation02960 from '../assets/marketing-dashboard-960.webp';
 import marketingRotation021440 from '../assets/marketing-dashboard-1440.webp';
-import marketingRotation02Mobile from '../assets/marketing-dashboard-mobile.webp';
+import marketingRotation02Mobile from '../assets/marketing-dashboard-mobile-hq.webp';
 import ServicePage from '../components/ServicePage';
 import { getRouteMetadata } from '../seo/routeMetadata';
 

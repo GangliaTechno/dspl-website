@@ -3,7 +3,7 @@ import ecommerceHero1440 from '../assets/ecommerce-primary-1440.webp';
 import ecommerceHeroMobile from '../assets/ecommerce-primary-mobile.webp';
 import ecommerceDashboard960 from '../assets/ecommerce-dashboard-960.webp';
 import ecommerceDashboard1440 from '../assets/ecommerce-dashboard-1440.webp';
-import ecommerceDashboardMobile from '../assets/ecommerce-dashboard-mobile.webp';
+import ecommerceDashboardMobile from '../assets/ecommerce-dashboard-mobile-hq.webp';
 import ServicePage from '../components/ServicePage';
 import { getRouteMetadata } from '../seo/routeMetadata';
 

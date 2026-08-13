@@ -35,6 +35,7 @@ const routeCases = [
     heroIds: ['marketing-primary', 'marketing-02'],
     primaryHeroAsset: 'marketing-primary-1440.webp',
     secondaryHeroAsset: 'marketing-dashboard-1440.webp',
+    dashboardMobileAsset: 'marketing-dashboard-mobile-hq.webp',
   },
   {
     name: 'Branding',
@@ -89,6 +90,7 @@ const routeCases = [
     heroIds: ['ecommerce-dashboard', 'ecommerce-primary'],
     primaryHeroAsset: 'ecommerce-dashboard-1440.webp',
     secondaryHeroAsset: 'ecommerce-primary-1440.webp',
+    dashboardMobileAsset: 'ecommerce-dashboard-mobile-hq.webp',
   },
 ];
 
@@ -108,6 +110,7 @@ describe.each(routeCases)('$name service copy', ({
   heroIds,
   primaryHeroAsset,
   secondaryHeroAsset,
+  dashboardMobileAsset,
 }) => {
   it('renders the approved route-specific messaging and icon mapping', () => {
     vi.useFakeTimers();
@@ -156,6 +159,14 @@ describe.each(routeCases)('$name service copy', ({
       'src',
       expect.stringContaining(secondaryHeroAsset),
     );
+    if (dashboardMobileAsset) {
+      expect(Array.from(
+        container.querySelectorAll(
+          '.domain-hero-picture picture source[media="(max-width: 767px)"]',
+        ),
+        (source) => source.getAttribute('srcset'),
+      )).toContainEqual(expect.stringContaining(dashboardMobileAsset));
+    }
 
     rendered.unmount();
     vi.clearAllTimers();

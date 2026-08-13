@@ -363,7 +363,21 @@ describe('approved design-system corrections', () => {
       /\.home-hero\s*{[^}]*min-height:\s*max\(42rem,\s*calc\(100svh\s*-\s*4\.75rem\)\);/s,
     );
     expect(home).toMatch(
-      /@media\s*\(max-width:\s*768px\)\s*{[\s\S]*?\.home-hero\s*{[^}]*min-height:\s*auto;/s,
+      /@media\s*\(max-width:\s*1039px\)\s*{[\s\S]*?\.home-hero\s*{[^}]*min-height:\s*auto;/s,
+    );
+  });
+
+  it('keeps Home readable and separated across phone and tablet widths', () => {
+    const home = readSource('src/pages/Home.css');
+    const homePage = readSource('src/pages/Home.jsx');
+    const homeSections = readSource('src/components/home/homeSections.css');
+
+    expect(homePage).toContain('<source media="(max-width: 600px)"');
+    expect(home).toMatch(
+      /@media\s*\(max-width:\s*520px\)\s*{[\s\S]*?\.hero-capabilities-link\s*{[^}]*width:\s*auto;[^}]*min-height:\s*44px;/s,
+    );
+    expect(homeSections).toMatch(
+      /@media\s*\(max-width:\s*768px\)\s*{[\s\S]*?\.supporter-band\s*{[^}]*bottom:\s*1\.25rem;/s,
     );
   });
 

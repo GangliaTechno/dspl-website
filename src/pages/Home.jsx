@@ -95,7 +95,7 @@ const Home = () => {
     <div className="home-page fade-in">
       <section className="home-hero">
         <picture className="home-hero-media" aria-hidden="true">
-          <source media="(max-width: 768px)" srcSet={homeRotation03Mobile} />
+          <source media="(max-width: 600px)" srcSet={homeRotation03Mobile} />
           <source
             srcSet={`${homeRotation03960} 960w, ${homeRotation031440} 1440w`}
             sizes="100vw"
