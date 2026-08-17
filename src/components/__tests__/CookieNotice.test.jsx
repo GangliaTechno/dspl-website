@@ -1,4 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
+import { renderToString } from 'react-dom/server';
 import { MemoryRouter } from 'react-router';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import CookieNotice from '../CookieNotice';
@@ -23,6 +24,16 @@ describe('CookieNotice', () => {
     expect(screen.getByRole('button', { name: 'Allow analytics' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Decline' })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'Privacy Policy' })).toHaveAttribute('href', '/privacy');
+  });
+
+  it('does not include an inert notice in prerendered HTML', () => {
+    const html = renderToString(
+      <MemoryRouter>
+        <CookieNotice />
+      </MemoryRouter>,
+    );
+
+    expect(html).not.toContain('Analytics preferences');
   });
 
   it.each([

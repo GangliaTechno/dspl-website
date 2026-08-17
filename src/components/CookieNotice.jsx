@@ -1,12 +1,21 @@
-import { useState } from 'react';
+import { useState, useSyncExternalStore } from 'react';
 import { Link } from 'react-router';
 import './CookieNotice.css';
 import { getAnalyticsConsent, setAnalyticsConsent } from '../utils/analytics';
 
+const subscribeToHydration = () => () => {};
+const getClientSnapshot = () => true;
+const getServerSnapshot = () => false;
+
 const CookieNotice = () => {
+  const isHydrated = useSyncExternalStore(
+    subscribeToHydration,
+    getClientSnapshot,
+    getServerSnapshot,
+  );
   const [choice, setChoice] = useState(getAnalyticsConsent);
 
-  if (choice) return null;
+  if (!isHydrated || choice) return null;
 
   const choose = (value) => {
     setAnalyticsConsent(value);
