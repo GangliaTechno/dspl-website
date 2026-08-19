@@ -1,11 +1,25 @@
 import ReactGA from 'react-ga4';
 
-const GA_MEASUREMENT_ID = import.meta.env.VITE_GA_MEASUREMENT_ID || 'G-QYVQY0Q9KE';
-
 export const ANALYTICS_CONSENT_KEY = 'dspl.analytics-consent';
 export const ANALYTICS_CONSENT_EVENT = 'dspl:analytics-consent';
 
 let isInitialized = false;
+
+export const getGaMeasurementId = () =>
+  import.meta.env.VITE_GA_MEASUREMENT_ID || '';
+
+export const isAnalyticsSupported = () => {
+  const id = getGaMeasurementId();
+  if (!id) return false;
+  if (import.meta.env.MODE === 'test') return true;
+  const isDev = Boolean(
+    import.meta.env.DEV || import.meta.env.MODE === 'development',
+  );
+  const isProd = Boolean(
+    import.meta.env.PROD || import.meta.env.MODE === 'production',
+  );
+  return isProd && !isDev;
+};
 
 export const getAnalyticsConsent = () => {
   if (typeof window === 'undefined') return null;
@@ -22,7 +36,8 @@ export const clearGaCookies = () => {
   if (typeof document === 'undefined' || !document.cookie) return;
 
   const cookies = document.cookie.split(';');
-  const hostname = typeof window !== 'undefined' ? window.location?.hostname || '' : '';
+  const hostname =
+    typeof window !== 'undefined' ? window.location?.hostname || '' : '';
   const domainParts = hostname.split('.');
 
   for (const cookie of cookies) {
@@ -50,30 +65,46 @@ export const setAnalyticsConsent = (value) => {
     // A blocked storage API must not prevent the visitor from using the site.
   }
 
+  const measurementId = getGaMeasurementId();
+
   if (value === 'denied') {
-    window[`ga-disable-${GA_MEASUREMENT_ID}`] = true;
+    if (measurementId) {
+      window[`ga-disable-${measurementId}`] = true;
+    }
     if (typeof window.gtag === 'function') {
       window.gtag('consent', 'update', { analytics_storage: 'denied' });
     }
     clearGaCookies();
   } else if (value === 'granted') {
-    window[`ga-disable-${GA_MEASUREMENT_ID}`] = false;
+    if (measurementId) {
+      window[`ga-disable-${measurementId}`] = false;
+    }
     if (typeof window.gtag === 'function') {
       window.gtag('consent', 'update', { analytics_storage: 'granted' });
     }
   }
 
-  window.dispatchEvent(new CustomEvent(ANALYTICS_CONSENT_EVENT, { detail: value }));
+  window.dispatchEvent(
+    new CustomEvent(ANALYTICS_CONSENT_EVENT, { detail: value }),
+  );
 };
 
 export const initGA = () => {
-  if (isInitialized || getAnalyticsConsent() !== 'granted') return;
+  if (
+    isInitialized ||
+    !isAnalyticsSupported() ||
+    getAnalyticsConsent() !== 'granted'
+  ) {
+    return;
+  }
+
+  const measurementId = getGaMeasurementId();
 
   try {
     if (typeof window !== 'undefined') {
-      window[`ga-disable-${GA_MEASUREMENT_ID}`] = false;
+      window[`ga-disable-${measurementId}`] = false;
     }
-    ReactGA.initialize(GA_MEASUREMENT_ID);
+    ReactGA.initialize(measurementId);
     isInitialized = true;
   } catch (error) {
     console.error('[Analytics] Failed to initialize GA4:', error);
@@ -81,7 +112,7 @@ export const initGA = () => {
 };
 
 export const trackPageView = (path) => {
-  if (getAnalyticsConsent() !== 'granted') return;
+  if (getAnalyticsConsent() !== 'granted' || !isAnalyticsSupported()) return;
   if (!isInitialized) initGA();
   if (!isInitialized) return;
 
@@ -93,7 +124,7 @@ export const trackPageView = (path) => {
 };
 
 export const trackEvent = ({ category, action, label, value }) => {
-  if (getAnalyticsConsent() !== 'granted') return;
+  if (getAnalyticsConsent() !== 'granted' || !isAnalyticsSupported()) return;
   if (!isInitialized) initGA();
   if (!isInitialized) return;
 

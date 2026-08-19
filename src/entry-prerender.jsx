@@ -13,13 +13,14 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import RawRadicles from './pages/RawRadicles';
 import StartProject from './pages/StartProject';
 import TermsOfUse from './pages/TermsOfUse';
+import { SITE_CONFIG } from './content/siteConfig';
 import {
   getRouteMetadata,
   NOT_FOUND_METADATA,
   PUBLIC_ROUTES,
 } from './seo/routeMetadata';
 
-const SITE_URL = 'https://dashapatmaja.in';
+const SITE_URL = SITE_CONFIG.siteUrl;
 const pages = {
   About,
   Branding,
@@ -87,7 +88,7 @@ const createHeadElements = (metadata) =>
     },
     {
       type: 'meta',
-      props: { property: 'og:site_name', content: 'Dashapatmaja Solutions Pvt Ltd' },
+      props: { property: 'og:site_name', content: SITE_CONFIG.siteName },
     },
     {
       type: 'meta',

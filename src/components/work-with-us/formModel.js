@@ -18,6 +18,14 @@ const ALLOWED_ATTACHMENT_EXTENSIONS = new Set([
   'jpeg',
 ]);
 
+const ALLOWED_MIME_TYPES = new Set([
+  'application/pdf',
+  'application/msword',
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+  'image/png',
+  'image/jpeg',
+]);
+
 export function createInitialLeadForm() {
   return {
     fullName: '',
@@ -49,10 +57,13 @@ export function validateLead(data) {
 
   const phoneValue = data.phone?.trim() || '';
   const preferredContact = data.preferredContact?.toLowerCase() || '';
-  const requiresPhone = preferredContact === 'phone' || preferredContact === 'whatsapp';
+  const requiresPhone =
+    preferredContact === 'call' ||
+    preferredContact === 'phone' ||
+    preferredContact === 'whatsapp';
 
   if (requiresPhone && !phoneValue) {
-    errors.phone = 'Phone / WhatsApp number is required when phone or WhatsApp contact is requested';
+    errors.phone = 'Phone / WhatsApp number is required when Call or WhatsApp is selected';
   } else if (phoneValue && phoneValue.replace(/[^0-9]/g, '').length < 8) {
     errors.phone = 'Please enter a valid phone number (minimum 8 digits)';
   }
@@ -87,6 +98,10 @@ export function validateAttachment(file) {
 
   const extension = file.name?.split('.').pop()?.toLowerCase();
   if (!extension || !ALLOWED_ATTACHMENT_EXTENSIONS.has(extension)) {
+    return 'File type is not supported';
+  }
+
+  if (file.type && !ALLOWED_MIME_TYPES.has(file.type.toLowerCase())) {
     return 'File type is not supported';
   }
 

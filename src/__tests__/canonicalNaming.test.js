@@ -100,12 +100,28 @@ describe('canonical naming', () => {
       'src/pages/About.jsx',
       'src/pages/RawRadicles.jsx',
       'src/pages/Contact.jsx',
+      'src/pages/PrivacyPolicy.jsx',
+      'src/pages/TermsOfUse.jsx',
       'src/seo/routeMetadata.js',
     ];
 
     for (const consumerPath of consumers) {
       const content = readFileSync(consumerPath, 'utf8');
       expect(content).toContain('COMPANY_FACTS');
+    }
+  });
+
+  it('verifies that metadata consumers import SITE_CONFIG directly', () => {
+    const metadataConsumers = [
+      'src/seo/routeMetadata.js',
+      'src/hooks/useSEO.js',
+      'src/entry-prerender.jsx',
+      'src/pages/blogPostModel.js',
+    ];
+
+    for (const consumerPath of metadataConsumers) {
+      const content = readFileSync(consumerPath, 'utf8');
+      expect(content).toContain('SITE_CONFIG');
     }
   });
 });

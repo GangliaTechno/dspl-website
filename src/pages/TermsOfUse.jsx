@@ -1,6 +1,7 @@
 import './TermsOfUse.css';
 import useSEO from '../hooks/useSEO';
 import { getRouteMetadata } from '../seo/routeMetadata';
+import { COMPANY_FACTS } from '../content/companyFacts';
 
 const TermsOfUse = () => {
   useSEO(getRouteMetadata('/terms'));
@@ -19,7 +20,7 @@ const TermsOfUse = () => {
           <section>
             <h2>1. Information, not an engagement</h2>
             <p>
-              Website content is general information about DSPL, its owned brand,
+              Website content is general information about {COMPANY_FACTS.shortName}, its owned brand,
               and the services it can coordinate. Visiting the site or submitting
               an enquiry does not create an adviser-client or service-provider-client relationship.
             </p>
@@ -37,9 +38,9 @@ const TermsOfUse = () => {
           <section>
             <h2>3. Intellectual property</h2>
             <p>
-              Unless stated otherwise, the website design, text, graphics, and DSPL
+              Unless stated otherwise, the website design, text, graphics, and {COMPANY_FACTS.shortName}
               brand materials are intellectual property owned by or licensed to
-              DSPL. Raw Radicles materials are presented as DSPL-owned brand work.
+              {COMPANY_FACTS.shortName}. Raw Radicles materials are presented as {COMPANY_FACTS.shortName}-owned brand work.
               You may view and share page links, but may not reproduce brand assets
               or substantial website content for commercial use without permission.
             </p>
@@ -50,7 +51,7 @@ const TermsOfUse = () => {
             <p>
               Do not interfere with the website, attempt unauthorised access,
               submit unlawful or malicious material, misuse forms for spam, or
-              misrepresent DSPL, Raw Radicles, or their work.
+              misrepresent {COMPANY_FACTS.shortName}, Raw Radicles, or their work.
             </p>
           </section>
 
@@ -65,7 +66,7 @@ const TermsOfUse = () => {
           <section>
             <h2>6. Accuracy and availability</h2>
             <p>
-              DSPL makes reasonable efforts to keep website information accurate
+              {COMPANY_FACTS.shortName} makes reasonable efforts to keep website information accurate
               and the site available, but content may become outdated and access
               may be interrupted. Confirm material project decisions in a signed
               scope or agreement rather than relying only on website text.
@@ -78,7 +79,7 @@ const TermsOfUse = () => {
               These website terms are governed by the laws of India. Subject to
               applicable law, disputes relating to website use are within the
               jurisdiction of the courts in Karnataka. Questions may be sent to{' '}
-              <a href="mailto:director@dashapatmaja.in">director@dashapatmaja.in</a>.
+              <a href={`mailto:${COMPANY_FACTS.contacts.directorEmail}`}>{COMPANY_FACTS.contacts.directorEmail}</a>.
             </p>
           </section>
         </article>

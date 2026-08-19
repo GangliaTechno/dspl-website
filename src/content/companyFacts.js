@@ -41,6 +41,6 @@ export const COMPANY_FACTS = Object.freeze({
   }),
   brands: Object.freeze({
     flagship: 'Raw Radicles',
-    flagshipUrl: 'https://dashapatmaja.in/brands/raw-radicles',
+    flagshipPath: '/brands/raw-radicles',
   }),
 });

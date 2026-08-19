@@ -238,16 +238,14 @@
 
 .service-detail-grid p,
 .service-detail-disclaimer {
-  margin: 0;
+  max-width: 60rem;
+  margin: 1.5rem 0 0;
+  padding: 1rem 1.25rem;
   color: var(--text-secondary);
   line-height: 1.65;
-}
-
-.service-detail-disclaimer {
-  max-width: 60rem;
-  margin-top: 1.5rem;
-  padding-left: 1rem;
-  border-left: 3px solid var(--accent);
+  background: var(--bg-alt, rgba(26, 26, 26, 0.03));
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-card);
 }
 
 .service-proof-layout {

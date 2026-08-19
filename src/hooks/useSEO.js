@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
+import { SITE_CONFIG } from '../content/siteConfig';
 import { organizationStructuredData } from '../seo/routeMetadata';
 
-const SITE_NAME = 'Dashapatmaja Solutions Pvt Ltd';
+const SITE_NAME = SITE_CONFIG.siteName;
 
 /**
  * Custom hook to update document title, description, canonical link, OpenGraph, and Twitter tags
@@ -11,7 +12,7 @@ const useSEO = (metadata = {}) => {
     title = '',
     description = '',
     canonical = '',
-    image = 'https://dashapatmaja.in/og-cover.jpg',
+    image = SITE_CONFIG.defaultOgImage,
     type = 'website',
     robots = 'index, follow',
     structuredData = organizationStructuredData,
@@ -43,7 +44,7 @@ const useSEO = (metadata = {}) => {
       el.setAttribute('content', content);
     };
 
-    const currentUrl = `https://dashapatmaja.in${
+    const currentUrl = `${SITE_CONFIG.siteUrl}${
       canonical || window.location.pathname
     }`;
 

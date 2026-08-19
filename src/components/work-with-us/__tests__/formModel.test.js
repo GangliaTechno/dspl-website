@@ -32,13 +32,17 @@ describe('lead form model', () => {
     expect(validateLead({ ...base, phone: '123' })).toEqual({
       phone: 'Please enter a valid phone number (minimum 8 digits)',
     });
+    expect(validateLead({ ...base, preferredContact: 'Call', phone: '' })).toEqual({
+      phone: 'Phone / WhatsApp number is required when Call or WhatsApp is selected',
+    });
     expect(validateLead({ ...base, preferredContact: 'Phone', phone: '' })).toEqual({
-      phone: 'Phone / WhatsApp number is required when phone or WhatsApp contact is requested',
+      phone: 'Phone / WhatsApp number is required when Call or WhatsApp is selected',
     });
     expect(validateLead({ ...base, preferredContact: 'WhatsApp', phone: '' })).toEqual({
-      phone: 'Phone / WhatsApp number is required when phone or WhatsApp contact is requested',
+      phone: 'Phone / WhatsApp number is required when Call or WhatsApp is selected',
     });
     expect(validateLead({ ...base, preferredContact: 'Email', phone: '' })).toEqual({});
+    expect(validateLead({ ...base, preferredContact: 'Call', phone: '+91 98765 43210' })).toEqual({});
     expect(validateLead({ ...base, preferredContact: 'Phone', phone: '+91 98765 43210' })).toEqual({});
   });
 
@@ -113,8 +117,11 @@ describe('lead form model', () => {
     expect(Object.isFrozen(PROJECT_SERVICES)).toBe(true);
   });
 
-  it('rejects attachments over 5 MB and unsupported file types', () => {
+  it('rejects attachments over 5 MB and unsupported file types or disguised MIME types', () => {
     expect(validateAttachment({ name: 'brief.pdf', size: 1024 })).toBe('');
+    expect(validateAttachment({ name: 'brief.pdf', size: 1024, type: 'application/pdf' })).toBe('');
+    expect(validateAttachment({ name: 'brief.png', size: 1024, type: 'image/png' })).toBe('');
+    expect(validateAttachment({ name: 'brief.pdf', size: 1024, type: 'application/x-msdownload' })).toMatch(/file type/i);
     expect(validateAttachment({ name: 'brief.exe', size: 1024 })).toMatch(/file type/i);
     expect(
       validateAttachment({ name: 'brief.pdf', size: 5 * 1024 * 1024 + 1 }),

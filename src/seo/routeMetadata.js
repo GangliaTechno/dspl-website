@@ -1,7 +1,8 @@
 import { COMPANY_FACTS } from '../content/companyFacts';
+import { SITE_CONFIG } from '../content/siteConfig';
 
-const SITE_URL = 'https://dashapatmaja.in';
-const DEFAULT_IMAGE = `${SITE_URL}/og-cover.jpg`; /* 1200×630 landscape for social sharing */
+const SITE_URL = SITE_CONFIG.siteUrl;
+const DEFAULT_IMAGE = SITE_CONFIG.defaultOgImage;
 
 export const PUBLIC_ROUTES = [
   '/',
@@ -22,7 +23,7 @@ export const organizationStructuredData = {
   '@type': ['Organization', 'LocalBusiness'],
   name: COMPANY_FACTS.legalName,
   url: SITE_URL,
-  logo: `${SITE_URL}/logo.png`,
+  logo: SITE_CONFIG.defaultLogo,
   email: COMPANY_FACTS.contacts.directorEmail,
   telephone: COMPANY_FACTS.contacts.primaryPhone,
   address: {
@@ -44,7 +45,7 @@ export const organizationStructuredData = {
   brand: {
     '@type': 'Brand',
     name: COMPANY_FACTS.brands.flagship,
-    url: COMPANY_FACTS.brands.flagshipUrl,
+    url: `${SITE_CONFIG.siteUrl}${COMPANY_FACTS.brands.flagshipPath}`,
   },
 };
 

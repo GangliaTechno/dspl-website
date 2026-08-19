@@ -95,4 +95,29 @@ describe('ProjectPlannerForm', () => {
       label: 'start-page',
     });
   });
+
+  it('requires phone number when Call is selected as preferred contact and prevents submission', async () => {
+    vi.stubEnv('VITE_WEB3FORMS_ACCESS_KEY', 'test-key');
+    const fetchMock = vi.fn();
+    vi.stubGlobal('fetch', fetchMock);
+
+    renderForm();
+    fireEvent.change(screen.getByLabelText(/Full Name/i), {
+      target: { value: 'Asha Rao' },
+    });
+    fireEvent.change(screen.getByLabelText(/Email Address/i), {
+      target: { value: 'asha@example.test' },
+    });
+    fireEvent.click(screen.getByRole('checkbox', { name: 'Compliance' }));
+    fireEvent.click(screen.getByLabelText('Call'));
+
+    fireEvent.click(screen.getByRole('button', { name: 'Send My Project Details' }));
+
+    expect(
+      await screen.findByText(
+        'Phone / WhatsApp number is required when Call or WhatsApp is selected',
+      ),
+    ).toBeInTheDocument();
+    expect(fetchMock).not.toHaveBeenCalled();
+  });
 });
