@@ -572,6 +572,7 @@ describe('approved design-system corrections', () => {
     expect(homeSections).not.toMatch(/\.supporter-logo\s*{[^}]*transition:/s);
     expect(homeSections).not.toContain('.supporter-logo:hover');
     expect(homeSections).not.toMatch(/\.supporter-logo-(?:dst|nidhi|mutbi|startup)\s*{/);
+    expect(homeSections).not.toContain('.supporter-logo-mutbi');
     expect(homeSections).not.toContain('--supporter-optical-trim');
     expect(homeSections).toMatch(
       /@media\s*\(max-width:\s*768px\)\s*{[\s\S]*?--supporter-gap:\s*5rem;/s,
