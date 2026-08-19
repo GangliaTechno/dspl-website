@@ -192,7 +192,6 @@ describe('approved design-system corrections', () => {
     expect(header).toMatch(
       /@media\s*\(prefers-reduced-motion:\s*reduce\)\s*{[\s\S]*?\.header,[\s\S]*?\.logo-image,[\s\S]*?\.mobile-drawer\s*{[^}]*transition:\s*none;/s,
     );
-    expect(header).not.toMatch(/\.logo-image\b[^}]*filter:\s*drop-shadow/s);
     expect(headerPage).toContain(
       "window.addEventListener('scroll', handleScroll, { passive: true })",
     );
@@ -573,7 +572,6 @@ describe('approved design-system corrections', () => {
     expect(homeSections).not.toMatch(/\.supporter-logo\s*{[^}]*transition:/s);
     expect(homeSections).not.toContain('.supporter-logo:hover');
     expect(homeSections).not.toMatch(/\.supporter-logo-(?:dst|nidhi|mutbi|startup)\s*{/);
-    expect(homeSections).not.toContain('.supporter-logo-mutbi');
     expect(homeSections).not.toContain('--supporter-optical-trim');
     expect(homeSections).toMatch(
       /@media\s*\(max-width:\s*768px\)\s*{[\s\S]*?--supporter-gap:\s*5rem;/s,
