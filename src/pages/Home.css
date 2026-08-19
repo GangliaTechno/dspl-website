@@ -187,8 +187,10 @@
 
 .compliance-support-links a {
   display: inline-flex;
+  min-height: 44px;
   align-items: center;
   gap: 0.4rem;
+  padding: 0.5rem 0;
   color: var(--accent-text);
   font-family: var(--font-heading);
   font-size: 0.85rem;
@@ -283,5 +285,11 @@
 
   .service-evidence-card {
     padding-inline: 0;
+  }
+}
+
+@media (max-width: 520px) and (max-height: 600px) {
+  .home-hero-layout {
+    padding-block: 2rem 1.5rem;
   }
 }

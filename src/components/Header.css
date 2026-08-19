@@ -48,13 +48,11 @@
   height: 48px;
   width: auto;
   object-fit: contain;
-  filter: drop-shadow(0 2px 8px rgba(255, 255, 255, 0.6));
-  transition: filter 0.3s ease, transform 0.3s ease;
+  transition: transform 0.3s ease;
 }
 
 .logo-image:hover {
   transform: scale(1.02);
-  filter: drop-shadow(0 4px 12px rgba(255, 255, 255, 0.8));
 }
 
 .desktop-nav {
