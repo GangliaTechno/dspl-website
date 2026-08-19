@@ -44,7 +44,7 @@ const RawRadicles = () => {
       <section className="section raw-radicles-hero">
         <picture className="raw-radicles-hero-background" aria-hidden="true">
           <source media="(max-width: 700px)" srcSet={rawHero960} />
-          <img src={rawHero1600} alt="" width="1600" height="900" fetchPriority="high" />
+          <img src={rawHero1600} alt="" width="1600" height="900" fetchPriority="high" decoding="async" />
         </picture>
         <div className="container raw-radicles-hero-grid">
           <div className="raw-radicles-hero-copy">
@@ -56,9 +56,9 @@ const RawRadicles = () => {
             </p>
           </div>
           <div className="raw-radicles-hero-products">
-            <img className="raw-radicles-hero-pack" src={holySinPack} alt="Holy Sin Raw Radicles milk chocolate pack" width="475" height="1100" />
-            <img className="raw-radicles-hero-pack raw-radicles-hero-pack--primary" src={wrathReliefPack} alt="Wrath Relief Raw Radicles milk chocolate pack" width="550" height="1100" />
-            <img className="raw-radicles-hero-pack" src={smartSinPack} alt="Smart Sin Raw Radicles milk chocolate pack" width="477" height="1100" />
+            <img className="raw-radicles-hero-pack" src={holySinPack} alt="Holy Sin Raw Radicles milk chocolate pack" width="475" height="1100" decoding="async" />
+            <img className="raw-radicles-hero-pack raw-radicles-hero-pack--primary" src={wrathReliefPack} alt="Wrath Relief Raw Radicles milk chocolate pack" width="550" height="1100" decoding="async" />
+            <img className="raw-radicles-hero-pack" src={smartSinPack} alt="Smart Sin Raw Radicles milk chocolate pack" width="477" height="1100" decoding="async" />
           </div>
         </div>
       </section>

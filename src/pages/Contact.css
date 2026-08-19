@@ -52,7 +52,7 @@
   color: var(--accent);
   font-size: clamp(3rem, 6vw, 4.75rem);
   font-weight: 800;
-  letter-spacing: -0.045em;
+  letter-spacing: -0.03em;
   line-height: 1;
   text-wrap: balance;
 }
@@ -108,7 +108,6 @@
   flex-direction: column;
   padding: 2.5rem;
   border: 1px solid var(--border-color);
-  border-top: 3px solid var(--accent);
   background: #ffffff;
   border-radius: var(--radius-control);
   box-shadow: 0 18px 50px rgba(32, 24, 8, 0.08);
