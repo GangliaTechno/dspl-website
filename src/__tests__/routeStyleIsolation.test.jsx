@@ -1,9 +1,8 @@
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { afterEach, describe, expect, it } from 'vitest';
 import { MemoryRouter } from 'react-router';
 import contactCss from '../pages/Contact.css?raw';
-import WorkWithUsModal from '../components/WorkWithUsModal';
-import { openWorkModal } from '../utils/workModal';
+import ProjectPlannerForm from '../components/ProjectPlannerForm';
 
 const pick = (styles, properties) => Object.fromEntries(
   properties.map((property) => [property, styles[property]]),
@@ -36,13 +35,12 @@ afterEach(() => {
 });
 
 describe('route stylesheet isolation', () => {
-  it('does not let Contact styles alter an open Work With Us modal', () => {
+  it('does not let Contact styles alter the Project Planner form', () => {
     render(
       <MemoryRouter>
-        <WorkWithUsModal />
+        <ProjectPlannerForm />
       </MemoryRouter>,
     );
-    act(() => openWorkModal('route-style-isolation'));
 
     fireEvent.click(screen.getByRole('button', { name: /Send My Project Details/i }));
 

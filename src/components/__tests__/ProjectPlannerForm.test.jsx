@@ -50,7 +50,6 @@ describe('ProjectPlannerForm', () => {
 
     expect(screen.getByText('Full Name is required')).toBeInTheDocument();
     expect(screen.getByText('Email address is required')).toBeInTheDocument();
-    expect(screen.getByText('Phone / WhatsApp number is required')).toBeInTheDocument();
     expect(screen.getByText('Please select at least one service')).toBeInTheDocument();
     expect(screen.getByLabelText(/Full Name/i)).toHaveFocus();
   });
@@ -85,7 +84,7 @@ describe('ProjectPlannerForm', () => {
 
     fireEvent.click(screen.getByRole('button', { name: 'Send My Project Details' }));
 
-    expect(await screen.findByRole('heading', { name: 'Project details received' })).toBeInTheDocument();
+    expect(await screen.findByRole('heading', { name: 'Project brief received' })).toBeInTheDocument();
     await waitFor(() => expect(fetchMock).toHaveBeenCalledOnce());
     const payload = fetchMock.mock.calls[0][1].body;
     expect(payload.get('source')).toBe('start-page');

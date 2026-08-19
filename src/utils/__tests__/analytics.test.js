@@ -73,4 +73,31 @@ describe('consent-aware analytics', () => {
       value: undefined,
     });
   });
+
+  it('sets ga-disable flag, calls gtag consent update, and disables tracking on revocation', () => {
+    const gtagMock = vi.fn();
+    window.gtag = gtagMock;
+
+    setAnalyticsConsent('granted');
+    expect(window['ga-disable-G-QYVQY0Q9KE']).toBe(false);
+    expect(gtagMock).toHaveBeenCalledWith('consent', 'update', { analytics_storage: 'granted' });
+
+    setAnalyticsConsent('denied');
+    expect(window['ga-disable-G-QYVQY0Q9KE']).toBe(true);
+    expect(gtagMock).toHaveBeenCalledWith('consent', 'update', { analytics_storage: 'denied' });
+
+    trackPageView('/pricing');
+    expect(ReactGA.send).not.toHaveBeenCalled();
+
+    delete window.gtag;
+  });
+
+  it('handles deny safely before GA or gtag is ever loaded or initialized', () => {
+    delete window.gtag;
+    delete window['ga-disable-G-QYVQY0Q9KE'];
+
+    expect(() => setAnalyticsConsent('denied')).not.toThrow();
+    expect(window['ga-disable-G-QYVQY0Q9KE']).toBe(true);
+    expect(getAnalyticsConsent()).toBe('denied');
+  });
 });

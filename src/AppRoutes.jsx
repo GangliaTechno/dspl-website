@@ -8,7 +8,6 @@ import Footer from './components/Footer';
 import Header from './components/Header';
 import PageLoader from './components/PageLoader';
 import ScrollToTop from './components/ScrollToTop';
-import WorkWithUsModal from './components/WorkWithUsModal';
 
 const Home = lazy(() => import('./pages/Home'));
 const About = lazy(() => import('./pages/About'));
@@ -72,7 +71,6 @@ const AppRoutes = ({ pages = {} }) => {
           </ErrorBoundary>
         </main>
         <Footer />
-        <WorkWithUsModal />
       </div>
       <CookieNotice />
     </>

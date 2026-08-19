@@ -87,6 +87,10 @@ const createHeadElements = (metadata) =>
     },
     {
       type: 'meta',
+      props: { property: 'og:site_name', content: 'Dashapatmaja Solutions Pvt Ltd' },
+    },
+    {
+      type: 'meta',
       props: { property: 'og:type', content: metadata.type },
     },
     {

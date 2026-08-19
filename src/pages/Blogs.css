@@ -1,6 +1,16 @@
-.blogs-hero {
+.blogs-hero,
+.section.blogs-hero {
   min-height: 70vh;
-  padding-top: calc(var(--header-height, 5rem) + 4rem);
+  padding-top: calc(var(--header-height, 4.75rem) + 4rem);
+  padding-bottom: var(--space-6);
+}
+
+@media (max-width: 768px) {
+  .blogs-hero,
+  .section.blogs-hero {
+    padding-top: calc(var(--header-height, 4.5rem) + 2.5rem);
+    padding-bottom: var(--space-5);
+  }
 }
 
 .blogs-content { max-width: 70rem; }

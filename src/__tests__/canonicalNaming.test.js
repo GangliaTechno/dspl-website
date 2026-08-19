@@ -2,6 +2,7 @@ import { execFileSync } from 'node:child_process';
 import { existsSync, readFileSync } from 'node:fs';
 import { extname } from 'node:path';
 import { describe, expect, it } from 'vitest';
+import { COMPANY_FACTS } from '../content/companyFacts';
 
 const canonicalCompanyName = 'Dashapatmaja Solutions Pvt Ltd';
 const trackedTextExtensions = new Set([
@@ -61,9 +62,50 @@ describe('canonical naming', () => {
     expect(violations).toEqual([]);
   });
 
-  it('keeps the approved exact names available to product code', () => {
+  it('keeps the approved exact names and official company facts available to product code', () => {
     expect(canonicalCompanyName).toBe('Dashapatmaja Solutions Pvt Ltd');
+    expect(COMPANY_FACTS.legalName).toBe('Dashapatmaja Solutions Pvt Ltd');
+    expect(COMPANY_FACTS.cin).toBe('U74999KA2022PTC163810');
+    expect(COMPANY_FACTS.cin).toMatch(/^U\d{5}[A-Z]{2}\d{4}PTC\d{6}$/);
+    expect(COMPANY_FACTS.incorporationDate).toBe('28 July 2022');
+    expect(COMPANY_FACTS.contacts.primaryPhone).toBe('+91 88619 42440');
+    expect(COMPANY_FACTS.contacts.directorEmail).toBe('director@dashapatmaja.in');
+    expect(COMPANY_FACTS.registeredOffice.fullAddress).toContain('Manipal, Karnataka 576104');
     expect('Dr. Shreepathy Rangabhatta R').not.toContain(' Ranga Bhatta');
     expect('Dr. Anusha Pai').toMatch(/^Dr\./);
+  });
+
+  it('prevents the literal CIN from being hard-coded anywhere outside companyFacts.js', () => {
+    const cinViolations = [];
+    const ignoredFiles = new Set([
+      'src/content/companyFacts.js',
+      'src/__tests__/canonicalNaming.test.js',
+      'scripts/audit-and-clean-assets.mjs',
+    ]);
+
+    for (const file of trackedTextFiles()) {
+      if (file.startsWith('docs/') || ignoredFiles.has(file)) continue;
+      const content = readFileSync(file, 'utf8');
+      if (content.includes('U74999KA2022PTC163810')) {
+        cinViolations.push(file);
+      }
+    }
+
+    expect(cinViolations).toEqual([]);
+  });
+
+  it('verifies that statutory consumers import COMPANY_FACTS directly', () => {
+    const consumers = [
+      'src/components/Footer.jsx',
+      'src/pages/About.jsx',
+      'src/pages/RawRadicles.jsx',
+      'src/pages/Contact.jsx',
+      'src/seo/routeMetadata.js',
+    ];
+
+    for (const consumerPath of consumers) {
+      const content = readFileSync(consumerPath, 'utf8');
+      expect(content).toContain('COMPANY_FACTS');
+    }
   });
 });

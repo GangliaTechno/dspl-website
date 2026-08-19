@@ -23,8 +23,13 @@ const isValidWebsiteOrHandle = (value) => {
   const candidate = value.trim();
   if (/^@[a-z0-9._-]{2,}$/i.test(candidate)) return true;
 
+  let urlCandidate = candidate;
+  if (!urlCandidate.startsWith('http://') && !urlCandidate.startsWith('https://')) {
+    urlCandidate = 'https://' + urlCandidate;
+  }
+
   try {
-    const url = new URL(candidate);
+    const url = new URL(urlCandidate);
     return ['http:', 'https:'].includes(url.protocol) && Boolean(url.hostname);
   } catch {
     return false;

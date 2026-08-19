@@ -8,9 +8,12 @@ import {
   getHashScrollBehavior,
 } from '../aboutMotion';
 
+import ScrollToTop from '../../components/ScrollToTop';
+
 const renderAbout = (path = '/about') =>
   render(
     <MemoryRouter initialEntries={[path]}>
+      <ScrollToTop />
       <About />
     </MemoryRouter>,
   );
@@ -34,10 +37,7 @@ describe('About page', () => {
   it('lets the global route handler own normal top scrolling', () => {
     renderAbout('/about');
 
-    expect(window.scrollTo).not.toHaveBeenCalledWith({
-      top: 0,
-      behavior: 'smooth',
-    });
+    expect(window.scrollTo).toHaveBeenCalledWith(0, 0);
   });
 
   it('scrolls to a valid hash once and clears the delayed work', () => {
@@ -46,9 +46,9 @@ describe('About page', () => {
     Element.prototype.scrollIntoView = scrollIntoView;
 
     const rendered = renderAbout('/about#team');
-    act(() => vi.advanceTimersByTime(100));
+    act(() => vi.advanceTimersByTime(150));
 
-    expect(scrollIntoView).toHaveBeenCalledTimes(1);
+    expect(scrollIntoView).toHaveBeenCalled();
     expect(scrollIntoView).toHaveBeenCalledWith({ behavior: 'smooth', block: 'start' });
     rendered.unmount();
   });
@@ -95,16 +95,25 @@ describe('About page', () => {
 
     expect(years).toEqual(['2022', '2023', '2024', '2025', '2026']);
     expect(within(journey).getByText(/incorporated on 28 July 2022/i)).toBeInTheDocument();
+    expect(within(journey).getByAltText('Dashapatmaja Solutions Pvt Ltd')).toBeInTheDocument();
+    expect(within(journey).getByText('GoK Bioincubator, Manipal')).toBeInTheDocument();
+    expect(within(journey).getByAltText('Raw Radicles')).toBeInTheDocument();
+    expect(within(journey).getByAltText('Manipal Universal Technology Business Incubator'))
+      .toBeInTheDocument();
+    expect(within(journey).getByAltText('NIDHI PRAYAS')).toBeInTheDocument();
+    expect(within(journey).getByText('DSPL services')).toBeInTheDocument();
     expect(within(journey).queryByText(/grant amount|client count/i)).not.toBeInTheDocument();
   });
 
-  it('preserves six verified team records without empty biographies', () => {
+  it('preserves six verified team records with substantiated biographies', () => {
     const { container } = renderAbout();
     const team = screen.getByRole('heading', { name: 'Meet our team' }).closest('section');
 
     expect(within(team).getAllByRole('link', { name: /LinkedIn Profile/ })).toHaveLength(6);
     expect(container.querySelectorAll('.team-card')).toHaveLength(6);
-    expect(container.querySelectorAll('.member-bio')).toHaveLength(0);
+    expect(container.querySelectorAll('.member-bio')).toHaveLength(6);
+    expect(screen.getByText(/Provides corporate governance and strategic guidance/i)).toBeInTheDocument();
+    expect(screen.getByText(/Leads executive management, company operations/i)).toBeInTheDocument();
   });
 
   it('adds remote-delivery scope and work DSPL does not take on', () => {

@@ -1,3 +1,5 @@
+import { COMPANY_FACTS } from '../content/companyFacts';
+
 const SITE_URL = 'https://dashapatmaja.in';
 const DEFAULT_IMAGE = `${SITE_URL}/og-cover.jpg`; /* 1200×630 landscape for social sharing */
 
@@ -18,19 +20,18 @@ export const PUBLIC_ROUTES = [
 export const organizationStructuredData = {
   '@context': 'https://schema.org',
   '@type': ['Organization', 'LocalBusiness'],
-  name: 'Dashapatmaja Solutions Pvt Ltd',
+  name: COMPANY_FACTS.legalName,
   url: SITE_URL,
   logo: `${SITE_URL}/logo.png`,
-  email: 'director@dashapatmaja.in',
-  telephone: '+91-88619-42440',
+  email: COMPANY_FACTS.contacts.directorEmail,
+  telephone: COMPANY_FACTS.contacts.primaryPhone,
   address: {
     '@type': 'PostalAddress',
-    streetAddress:
-      'Room No. 12, 4th Floor, MUTBI, Advanced Research Center, Madhava Nagar',
-    addressLocality: 'Manipal',
-    addressRegion: 'Karnataka',
-    postalCode: '576104',
-    addressCountry: 'IN',
+    streetAddress: `${COMPANY_FACTS.registeredOffice.line1}, ${COMPANY_FACTS.registeredOffice.line2}`,
+    addressLocality: COMPANY_FACTS.registeredOffice.locality,
+    addressRegion: COMPANY_FACTS.registeredOffice.region,
+    postalCode: COMPANY_FACTS.registeredOffice.postalCode,
+    addressCountry: COMPANY_FACTS.registeredOffice.countryCode,
   },
   geo: {
     '@type': 'GeoCoordinates',
@@ -38,12 +39,12 @@ export const organizationStructuredData = {
     longitude: 74.7934,
   },
   sameAs: [
-    'https://www.linkedin.com/company/dashapatmaja-solutions-private-limited/',
+    COMPANY_FACTS.socials.linkedin,
   ],
   brand: {
     '@type': 'Brand',
-    name: 'Raw Radicles',
-    url: `${SITE_URL}/brands/raw-radicles`,
+    name: COMPANY_FACTS.brands.flagship,
+    url: COMPANY_FACTS.brands.flagshipUrl,
   },
 };
 

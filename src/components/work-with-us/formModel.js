@@ -26,13 +26,10 @@ export function createInitialLeadForm() {
     phone: '',
     website: '',
     services: [],
-    businessDescription: '',
-    hasOnlinePresence: '',
     projectGoal: '',
     referralSource: '',
     preferredContact: '',
     fileName: '',
-    newsletterOptIn: false,
     websiteConfirm: '',
   };
 }
@@ -50,9 +47,13 @@ export function validateLead(data) {
     errors.email = 'Please enter a valid email address';
   }
 
-  if (!data.phone.trim()) {
-    errors.phone = 'Phone / WhatsApp number is required';
-  } else if (data.phone.replace(/[^0-9]/g, '').length < 8) {
+  const phoneValue = data.phone?.trim() || '';
+  const preferredContact = data.preferredContact?.toLowerCase() || '';
+  const requiresPhone = preferredContact === 'phone' || preferredContact === 'whatsapp';
+
+  if (requiresPhone && !phoneValue) {
+    errors.phone = 'Phone / WhatsApp number is required when phone or WhatsApp contact is requested';
+  } else if (phoneValue && phoneValue.replace(/[^0-9]/g, '').length < 8) {
     errors.phone = 'Please enter a valid phone number (minimum 8 digits)';
   }
 
@@ -110,15 +111,12 @@ export function createLeadPayload(
   payload.append('fullName', data.fullName);
   payload.append('companyName', data.companyName || '');
   payload.append('email', data.email);
-  payload.append('phone', data.phone);
+  payload.append('phone', data.phone || '');
   payload.append('website', data.website || '');
   payload.append('services', data.services.join(', '));
-  payload.append('businessDescription', data.businessDescription || '');
-  payload.append('hasOnlinePresence', data.hasOnlinePresence || '');
   payload.append('projectGoal', data.projectGoal || '');
   payload.append('referralSource', data.referralSource || '');
   payload.append('preferredContact', data.preferredContact || '');
-  payload.append('newsletterOptIn', data.newsletterOptIn ? 'Yes' : 'No');
   payload.append('priority', classification.priority);
   payload.append('source', source);
   payload.append('websiteConfirm', data.websiteConfirm || '');

@@ -72,6 +72,12 @@
   will-change: transform;
 }
 
+@media (hover: hover) {
+  .supporter-track-running:hover {
+    animation-play-state: paused;
+  }
+}
+
 @keyframes supporter-marquee {
   from {
     transform: translate3d(0, 0, 0);
@@ -223,7 +229,7 @@
 
 .process-step-details dt {
   color: var(--accent-text);
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   font-weight: 800;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -325,13 +331,8 @@
 }
 
 @media (max-width: 900px) {
-  .supporter-proof-inner,
   .owned-brand-layout {
     grid-template-columns: 1fr;
-  }
-
-  .supporter-proof-inner {
-    gap: 1rem;
   }
 
   .process-list {
@@ -353,10 +354,6 @@
 }
 
 @media (max-width: 620px) {
-  .supporter-proof-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
   .process-list {
     grid-template-columns: 1fr;
   }

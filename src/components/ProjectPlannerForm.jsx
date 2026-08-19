@@ -79,8 +79,13 @@ const ProjectPlannerForm = ({
     const field = formRef.current?.elements.namedItem(firstError);
     const focusTarget = typeof field?.length === 'number' ? field[0] : field;
     focusTarget?.focus();
+
+    const prefersReducedMotion =
+      typeof window !== 'undefined' &&
+      window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
+
     document.getElementById(id(`${firstError}-group`))?.scrollIntoView?.({
-      behavior: 'smooth',
+      behavior: prefersReducedMotion ? 'auto' : 'smooth',
       block: 'center',
     });
   };
@@ -111,98 +116,88 @@ const ProjectPlannerForm = ({
     }
 
     const payload = createLeadPayload(formData, accessKey, selectedFile, source);
-
     try {
       const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
+        headers: { Accept: 'application/json' },
         body: payload,
       });
-      const result = await response.json();
 
-      if (!response.ok || !result.success) {
+      const data = await response.json();
+      if (!response.ok || !data.success) {
         setSubmitError(FORM_SUBMISSION_ERROR);
+        setIsSubmitting(false);
         return;
       }
 
       setSubmitted(true);
+      setIsSubmitting(false);
+      setFormData(createInitialLeadForm());
+      setSelectedFile(null);
+      onSuccess?.(data);
       trackEvent({
         category: 'project_planner',
         action: 'generate_lead',
         label: source,
       });
-      onSuccess?.({ spam: false });
     } catch {
       setSubmitError(FORM_SUBMISSION_ERROR);
-    } finally {
       setIsSubmitting(false);
     }
   };
 
-  const resetForm = () => {
-    setFormData(createInitialLeadForm());
-    setErrors({});
-    setSelectedFile(null);
-    setSubmitted(false);
-    setSubmitError('');
-  };
-
   if (submitted) {
     return (
-      <div className="work-modal-success-state project-planner-success" role="status" aria-live="polite">
+      <div className="work-modal-success" role="status" aria-live="polite">
         <CheckCircle2 className="work-modal-success-icon" aria-hidden="true" />
-        <h2>Project details received</h2>
-        <p className="work-modal-success-message">
-          Thank you. We have received your project details and will review them
-          before contacting you.
+        <h3 className="work-modal-success-title">Project brief received</h3>
+        <p className="work-modal-success-text">
+          Thank you. We have received your brief and will review your requirements
+          before scheduling a focused first conversation.
         </p>
-        <button type="button" className="btn btn-secondary work-modal-reset-btn" onClick={resetForm}>
-          Submit Another Project
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={() => setSubmitted(false)}
+        >
+          Send Another Project Brief
         </button>
       </div>
     );
   }
 
   return (
-    <form
-      ref={formRef}
-      className="project-planner-form"
-      onSubmit={handleSubmit}
-      noValidate
-    >
-      <p className="work-modal-form-intro-text">
-        Please fill out the sections below. Required fields are marked with *.
-      </p>
-
+    <form ref={formRef} onSubmit={handleSubmit} noValidate className="work-modal-form">
       <section className="work-modal-form-section" aria-labelledby={id('contact-title')}>
         <h3 id={id('contact-title')} className="work-modal-section-header-title">Contact details</h3>
 
         <div className="form-group" id={id('fullName-group')}>
           <label className="form-label" htmlFor={id('fullName')}>Full Name *</label>
-          <input id={id('fullName')} name="fullName" className="form-input" value={formData.fullName} onChange={handleInputChange} placeholder="Enter your first and last name" aria-invalid={Boolean(errors.fullName)} aria-describedby={errors.fullName ? id('fullName-error') : undefined} required />
+          <input id={id('fullName')} name="fullName" autoComplete="name" className="form-input" value={formData.fullName} onChange={handleInputChange} placeholder="Enter your first and last name" aria-invalid={Boolean(errors.fullName)} aria-describedby={errors.fullName ? id('fullName-error') : undefined} required />
           {errors.fullName && <span id={id('fullName-error')} className="form-error-text work-modal-form-error" role="alert"><AlertCircle size={12} aria-hidden="true" /> {errors.fullName}</span>}
         </div>
 
         <div className="form-group">
           <label className="form-label" htmlFor={id('companyName')}>Company / Brand Name</label>
-          <input id={id('companyName')} name="companyName" className="form-input" value={formData.companyName} onChange={handleInputChange} placeholder="Name of your business or project (optional)" />
+          <input id={id('companyName')} name="companyName" autoComplete="organization" className="form-input" value={formData.companyName} onChange={handleInputChange} placeholder="Name of your business or project (optional)" />
         </div>
 
         <div className="work-modal-form-row">
           <div className="form-group" id={id('email-group')}>
             <label className="form-label" htmlFor={id('email')}>Email Address *</label>
-            <input id={id('email')} type="email" name="email" className="form-input" value={formData.email} onChange={handleInputChange} placeholder="name@example.com" aria-invalid={Boolean(errors.email)} aria-describedby={errors.email ? id('email-error') : undefined} required />
+            <input id={id('email')} type="email" name="email" autoComplete="email" className="form-input" value={formData.email} onChange={handleInputChange} placeholder="name@example.com" aria-invalid={Boolean(errors.email)} aria-describedby={errors.email ? id('email-error') : undefined} required />
             {errors.email && <span id={id('email-error')} className="form-error-text work-modal-form-error" role="alert"><AlertCircle size={12} aria-hidden="true" /> {errors.email}</span>}
           </div>
           <div className="form-group" id={id('phone-group')}>
-            <label className="form-label" htmlFor={id('phone')}>Phone / WhatsApp Number *</label>
-            <input id={id('phone')} type="tel" name="phone" className="form-input" value={formData.phone} onChange={handleInputChange} placeholder="Used for direct scheduling and follow-ups" aria-invalid={Boolean(errors.phone)} aria-describedby={errors.phone ? id('phone-error') : undefined} required />
+            <label className="form-label" htmlFor={id('phone')}>Phone / WhatsApp Number (optional)</label>
+            <input id={id('phone')} type="tel" name="phone" autoComplete="tel" className="form-input" value={formData.phone} onChange={handleInputChange} placeholder="Used for direct scheduling and follow-ups" aria-invalid={Boolean(errors.phone)} aria-describedby={errors.phone ? id('phone-error') : undefined} />
             {errors.phone && <span id={id('phone-error')} className="form-error-text work-modal-form-error" role="alert"><AlertCircle size={12} aria-hidden="true" /> {errors.phone}</span>}
           </div>
         </div>
 
         <div className="form-group">
           <label className="form-label" htmlFor={id('website')}>Website or Instagram Handle</label>
-          <input id={id('website')} name="website" className="form-input" value={formData.website} onChange={handleInputChange} placeholder="Website or public social handle (optional)" />
+          <input id={id('website')} name="website" autoComplete="url" className="form-input" value={formData.website} onChange={handleInputChange} placeholder="Website or public social handle (optional)" />
         </div>
       </section>
 

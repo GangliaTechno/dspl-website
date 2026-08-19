@@ -10,7 +10,7 @@
   --accent-dark: #b87c00;          /* High contrast gold for text */
   --accent-text: #8A5B00;          /* Accessible bronze for small text */
   --accent-gold: #F5A800;          /* Hero Gold */
-  --accent-red: #ef4444;           /* Minimal Red Accent */
+  --accent-red: #C0392B;           /* Minimal Red Accent */
   --accent-orange: #f97316;        /* Orange Accent */
   --accent-gradient: linear-gradient(135deg, #F5A800 0%, #FFC107 100%);
   --accent-gradient-hover: linear-gradient(135deg, #FFC107 0%, #F5A800 100%);
@@ -38,6 +38,7 @@
   --focus-ring: 3px solid var(--accent-text);
   --font-sans: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --header-height: 4.75rem;
   --max-width: var(--container-width);
 
   /* Breakpoints (reference only \u2014 use in @media queries) */
@@ -136,7 +137,7 @@ p {
   width: 100%;
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 0 1.5rem;
+  padding-inline: 1.5rem;
 }
 
 .section {
@@ -158,6 +159,7 @@ p {
   font-size: 0.85rem;
   font-weight: 700;
   letter-spacing: 0.15em;
+  text-indent: -0.075em;
   text-transform: uppercase;
 }
 
@@ -280,7 +282,7 @@ textarea.form-input {
 
 select.form-input {
   appearance: none;
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%238d9365' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23555555' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
   background-repeat: no-repeat;
   background-position: right 1.25rem center;
   background-size: 1rem;
@@ -295,14 +297,14 @@ select.form-input option {
 }
 
 .form-input[aria-invalid='true'] {
-  border-color: #ef4444 !important;
-  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.05) !important;
+  border-color: var(--accent-red) !important;
+  box-shadow: 0 0 0 4px rgba(192, 57, 43, 0.05) !important;
 }
 
 .form-error-text {
   display: block;
   margin-top: 0.35rem;
-  color: #ef4444;
+  color: var(--accent-red);
   font-size: 0.8rem;
   font-weight: 500;
 }
@@ -340,6 +342,12 @@ select:focus-visible,
   }
 }
 
+@media (max-width: 1039px) {
+  :root {
+    --header-height: 4.5rem;
+  }
+}
+
 /* Global Mobile Responsiveness */
 @media (max-width: 768px) {
   .section { padding: 4rem 0; }
@@ -347,7 +355,7 @@ select:focus-visible,
   h1 { font-size: 2.25rem; }
   h2 { font-size: 1.875rem; }
   h3 { font-size: 1.5rem; }
-  .container { padding: 0 1.25rem; }
+  .container { padding-inline: 1.25rem; }
 }
 
 /* Accessibility: visually hidden but screen-reader accessible */

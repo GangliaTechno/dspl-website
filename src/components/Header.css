@@ -194,7 +194,8 @@
 
 @media (prefers-reduced-motion: reduce) {
   .header,
-  .logo-image {
+  .logo-image,
+  .mobile-drawer {
     transition: none;
   }
 }

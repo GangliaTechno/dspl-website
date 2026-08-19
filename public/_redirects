@@ -1,0 +1,15 @@
+# Redirects & routing rules for static hosting (Netlify, Cloudflare Pages, etc.)
+
+# Canonical domain redirects (redirect www and http to https apex)
+https://www.dashapatmaja.in/*  https://dashapatmaja.in/:splat  301!
+http://www.dashapatmaja.in/*   https://dashapatmaja.in/:splat  301!
+http://dashapatmaja.in/*       https://dashapatmaja.in/:splat  301!
+
+# Legacy route redirects
+/research       /  301
+/research/*     /  301
+/services       /  301
+/services/*     /  301
+
+# Real HTTP 404 status for unknown routes (existing static route files take precedence)
+/*  /404.html  404

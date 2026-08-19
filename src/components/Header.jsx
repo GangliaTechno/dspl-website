@@ -11,7 +11,6 @@ const FOCUSABLE_SELECTORS =
   'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
 
 const navItems = [
-  { label: 'Home', to: '/' },
   { label: 'About', to: '/about' },
   { label: 'Brands', to: '/brands' },
   { label: 'Marketing', to: '/marketing' },
@@ -20,6 +19,9 @@ const navItems = [
   ...(blogsEnabled ? [{ label: 'Blogs', to: '/blogs' }] : []),
   { label: 'Contact', to: '/contact' },
 ];
+
+const normalizePath = (pathname) =>
+  pathname.length > 1 ? pathname.replace(/\/+$/, '') : pathname;
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -119,9 +121,9 @@ const Header = () => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
       // Move focus into drawer after transition starts
-      setTimeout(() => {
+      requestAnimationFrame(() => {
         drawerRef.current?.querySelector('.mobile-drawer-close')?.focus();
-      }, 50);
+      });
     } else {
       document.body.style.overflow = '';
     }
@@ -165,7 +167,8 @@ const Header = () => {
           {/* Center: Desktop Navigation Links */}
           <nav className="desktop-nav" aria-label="Main Navigation">
             {navItems.map((item) => {
-              const active = location.pathname === item.to;
+              const currentPath = normalizePath(location.pathname);
+              const active = currentPath === item.to;
               return (
                 <Link
                   key={item.to}
@@ -232,17 +235,21 @@ const Header = () => {
           <X size={24} aria-hidden="true" />
         </button>
         <nav className="mobile-nav" aria-label="Mobile Navigation">
-          {navItems.map((item) => (
-            <Link
-              key={item.to}
-              to={item.to}
-              className="mobile-nav-link"
-              onClick={handleLinkClick}
-              aria-current={location.pathname === item.to ? 'page' : undefined}
-            >
-              {item.label}
-            </Link>
-          ))}
+          {navItems.map((item) => {
+            const currentPath = normalizePath(location.pathname);
+            const active = currentPath === item.to;
+            return (
+              <Link
+                key={item.to}
+                to={item.to}
+                className="mobile-nav-link"
+                onClick={handleLinkClick}
+                aria-current={active ? 'page' : undefined}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
           <Link
             to="/start"
             className="btn btn-primary mobile-cta"

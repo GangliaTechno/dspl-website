@@ -1,11 +1,18 @@
 import './About.css';
-import { useEffect } from 'react';
-import { useLocation } from 'react-router';
 import { motion, useReducedMotion } from 'framer-motion';
 import useSEO from '../hooks/useSEO';
 import { getRouteMetadata } from '../seo/routeMetadata';
 import RotatingHeroMedia from '../components/RotatingHeroMedia';
+import {
+  getAboutRevealInitial,
+  getAboutRevealTransition,
+} from './aboutMotion';
+import { COMPANY_FACTS } from '../content/companyFacts';
 
+import dsplLogo from '../assets/icon_orange.webp';
+import rawRadiclesLogo from '../assets/raw-radicles-logo-official.webp';
+import mutbiLogo from '../assets/supporter-mutbi-marquee.png';
+import nidhiPrayasLogo from '../assets/supporter-nidhi-prayas-marquee.png';
 import manuImg from '../assets/manu_pro_fixed.webp';
 import sreeImg from '../assets/sree_pro_extended.webp';
 import drImg from '../assets/dr_pro.webp';
@@ -24,11 +31,6 @@ import journey2023Img from '../assets/about-journey-v2-2023.webp';
 import journey2024Img from '../assets/about-journey-v2-2024.webp';
 import journey2025Img from '../assets/about-journey-v2-2025.webp';
 import journey2026Img from '../assets/about-journey-v2-2026.webp';
-import {
-  getAboutRevealInitial,
-  getAboutRevealTransition,
-  getHashScrollBehavior,
-} from './aboutMotion';
 
 const getAboutHeroTransition = (prefersReducedMotion) => (
   prefersReducedMotion
@@ -45,8 +47,12 @@ const journeyMilestones = [
     height: 1024,
     alt: 'Company-incorporation folio and formal founding materials in a modest office',
     items: [
-      'Dashapatmaja Solutions Pvt Ltd was incorporated on 28 July 2022.',
+      `${COMPANY_FACTS.legalName} was incorporated on ${COMPANY_FACTS.incorporationDate}.`,
       'The company was formed to develop consumer brands and the capabilities needed to take them to market.',
+    ],
+    references: [
+      { src: dsplLogo, alt: COMPANY_FACTS.legalName, width: 806, height: 190, className: 'journey-reference--dspl' },
+      { text: `Incorporated ${COMPANY_FACTS.incorporationDate}` },
     ],
   },
   {
@@ -59,6 +65,7 @@ const journeyMilestones = [
     items: [
       'Incubated at GoK Bioincubator, Manipal, where we set up our base.',
     ],
+    references: [{ text: 'GoK Bioincubator, Manipal' }],
   },
   {
     year: '2024',
@@ -70,6 +77,9 @@ const journeyMilestones = [
     items: [
       'Launched Raw Radicles, a premium chocolate brand with Ayurveda inside.',
       'Built the product, packaging, and supply chain from the ground up.',
+    ],
+    references: [
+      { src: rawRadiclesLogo, alt: 'Raw Radicles', width: 760, height: 760, className: 'journey-reference--raw-radicles' },
     ],
   },
   {
@@ -84,6 +94,10 @@ const journeyMilestones = [
       'Won a government grant under the NIDHI-PRAYAS scheme.',
       'Signed a Memorandum of Understanding with Amruthanjali Ayurveda for manufacturing.',
     ],
+    references: [
+      { src: mutbiLogo, alt: 'Manipal Universal Technology Business Incubator', width: 300, height: 96 },
+      { src: nidhiPrayasLogo, alt: 'NIDHI PRAYAS', width: 113, height: 96 },
+    ],
   },
   {
     year: '2026',
@@ -95,6 +109,7 @@ const journeyMilestones = [
     items: [
       'Opened our branding, marketing, and e-commerce services to outside clients.',
     ],
+    references: [{ text: 'DSPL services' }],
   },
 ];
 
@@ -138,35 +153,17 @@ const aboutHeroImages = [
 ];
 
 const About = () => {
-  const location = useLocation();
   const prefersReducedMotion = useReducedMotion();
   const revealInitial = (y) =>
     getAboutRevealInitial(prefersReducedMotion, y);
 
   useSEO(getRouteMetadata('/about'));
 
-  // Scroll to hash anchor when route hash changes
-  useEffect(() => {
-    if (!location.hash) return undefined;
-
-    const id = location.hash.substring(1);
-    const element = document.getElementById(id);
-    if (!element) return undefined;
-
-    const timerId = window.setTimeout(() => {
-      element.scrollIntoView({
-        behavior: getHashScrollBehavior(prefersReducedMotion),
-        block: 'start',
-      });
-    }, 100);
-
-    return () => window.clearTimeout(timerId);
-  }, [location.hash, prefersReducedMotion]);
-
   const team = [
     {
       name: 'Dr. Manu Sudhi',
       role: 'Chairman and Director',
+      bio: "Provides corporate governance and strategic guidance across DSPL's business operations.",
       initial: 'MS',
       image: manuImg,
       width: 1024,
@@ -179,6 +176,7 @@ const About = () => {
     {
       name: 'Dr. Shreepathy Rangabhatta R',
       role: 'Managing Director',
+      bio: 'Leads executive management, company operations, and project delivery.',
       initial: 'SR',
       image: sreeImg,
       width: 640,
@@ -191,6 +189,7 @@ const About = () => {
     {
       name: 'Dr. Anusha Pai',
       role: 'Director',
+      bio: 'Contributes healthcare and product guidance for consumer brand development.',
       initial: 'AP',
       image: anushaImg,
       width: 302,
@@ -203,6 +202,7 @@ const About = () => {
     {
       name: 'Dr. Balakrishna S. Maddodi',
       role: 'Mentor',
+      bio: 'Provides academic mentorship and guidance in environmental management and sustainability.',
       initial: 'BM',
       image: balakrishnaImg,
       width: 640,
@@ -215,6 +215,7 @@ const About = () => {
     {
       name: 'Mr. Namesh Malarout',
       role: 'Director',
+      bio: 'Oversees technology strategy and digital systems architecture.',
       initial: 'NM',
       image: nameshImg,
       width: 332,
@@ -227,6 +228,7 @@ const About = () => {
     {
       name: 'Dr. Dasharathraj K Shetty',
       role: 'Mentor',
+      bio: 'Provides mentorship in innovation, management systems, and enterprise development.',
       initial: 'DS',
       image: drImg,
       width: 358,
@@ -292,7 +294,6 @@ const About = () => {
       <section className="section about-delivery-section" aria-labelledby="about-delivery-title">
         <div className="container about-scope-grid">
           <div>
-            <span className="section-subtitle">Delivery model</span>
             <h2 id="about-delivery-title" className="section-title">
               Based in Manipal, built to work remotely
             </h2>
@@ -309,7 +310,6 @@ const About = () => {
       <section className="section about-boundaries-section bg-alt" aria-labelledby="about-boundaries-title">
         <div className="container about-scope-grid">
           <div>
-            <span className="section-subtitle">Clear boundaries</span>
             <h2 id="about-boundaries-title" className="section-title">
               What we do not take on
             </h2>
@@ -365,6 +365,26 @@ const About = () => {
                       <li key={item}>{item}</li>
                     ))}
                   </ul>
+                  {milestone.references && (
+                    <div className="journey-references" aria-label={`${milestone.year} references`}>
+                      {milestone.references.map((reference) =>
+                        reference.src ? (
+                          <img
+                            key={reference.alt}
+                            className={reference.className || ''}
+                            src={reference.src}
+                            alt={reference.alt}
+                            width={reference.width}
+                            height={reference.height}
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        ) : (
+                          <span key={reference.text}>{reference.text}</span>
+                        ),
+                      )}
+                    </div>
+                  )}
                 </div>
               </motion.article>
             ))}
@@ -386,7 +406,7 @@ const About = () => {
           <div className="team-grid">
             {team.map((member, idx) => (
               <motion.div 
-                key={idx}
+                key={member.name}
                 initial={revealInitial(20)}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}

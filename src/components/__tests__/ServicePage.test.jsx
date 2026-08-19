@@ -97,8 +97,11 @@ describe('ServicePage', () => {
     expect(screen.getByRole('heading', { level: 2, name: props.faqsTitle }))
       .toBeInTheDocument();
     expect(screen.getByText(props.faqsDescription)).toBeInTheDocument();
-    expect(container.querySelector('.glow-bg')).not.toBeInTheDocument();
-    expect(container.querySelector('.offer-card.glass')).not.toBeInTheDocument();
+    expect(container.querySelector('.offers-grid')).toHaveClass('offers-grid--editorial');
+    expect(screen.getByRole('region', { name: 'Compliance coordination' })
+      .querySelector('.service-detail-grid')).toHaveClass('service-detail-grid--supporting');
+    expect(screen.getByRole('heading', { name: 'Ways to engage' }).closest('section'))
+      .toHaveClass('service-engagements-section');
     expect(screen.getByRole('region', { name: 'Compliance coordination' }))
       .toHaveAttribute('id', 'compliance');
     expect(screen.getByText('Qualified advisers retain regulated advice.'))

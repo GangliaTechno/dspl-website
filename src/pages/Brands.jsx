@@ -66,15 +66,14 @@ const Brands = () => {
       <section className="section brands-ownership-section" aria-labelledby="brands-ownership-title">
         <div className="container brands-ownership-grid">
           <div>
-            <span className="section-subtitle">Ownership</span>
             <h2 id="brands-ownership-title" className="section-title">
               Raw Radicles is owned and developed by Dashapatmaja Solutions Pvt Ltd
             </h2>
           </div>
           <div className="brands-ownership-copy">
             <p>
-              Raw Radicles is DSPL's first owned consumer brand. Its trademark
-              application has been filed; the mark is not described as registered.
+              Raw Radicles is DSPL&apos;s first owned consumer brand. A trademark
+              application has been filed for the Raw Radicles mark.
             </p>
             <p>
               Product, packaging, compliance coordination, photography, pricing,
@@ -88,7 +87,6 @@ const Brands = () => {
       <section className="section brands-architecture-section bg-alt" aria-labelledby="brands-architecture-title">
         <div className="container brands-ownership-grid">
           <div>
-            <span className="section-subtitle">How the company is structured</span>
             <h2 id="brands-architecture-title" className="section-title">
               Brand owner and services operator
             </h2>
@@ -96,8 +94,7 @@ const Brands = () => {
           <p>
             DSPL develops and operates its own consumer brands. The same team also
             provides clearly scoped branding, marketing, e-commerce, and
-            compliance-support services to other businesses, without implying
-            ownership of client brands.
+            compliance-support services to other businesses.
           </p>
         </div>
       </section>

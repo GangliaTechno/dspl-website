@@ -37,6 +37,11 @@ describe('Raw Radicles project overview', () => {
 
     expect(screen.getByRole('link', { name: 'Explore our brands' })).toHaveAttribute('href', '/brands');
     expect(screen.getByRole('link', { name: 'Start a project' })).toHaveAttribute('href', '/start');
+    expect(screen.getByRole('heading', { name: 'Built through direct operating experience' }))
+      .toBeInTheDocument();
+    expect(container).not.toHaveTextContent(
+      /evidence boundary|confirmed facts|approved evidence|does not claim|owner approval/i,
+    );
 
     const text = container.textContent;
     for (const unsupported of [

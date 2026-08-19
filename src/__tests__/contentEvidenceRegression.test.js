@@ -50,11 +50,15 @@ describe('public content evidence boundaries', () => {
     expect(violations).toEqual([]);
   });
 
-  it('uses the exact evidence-limited Raw Radicles trademark statement', () => {
-    const brandsSource = readFileSync('src/pages/Brands.jsx', 'utf8')
-      .replace(/\s+/g, ' ');
+  it('keeps internal audit language off public brand routes', () => {
+    const publicBrandSources = [
+      'src/pages/Brands.jsx',
+      'src/pages/RawRadicles.jsx',
+      'src/content/footerCtas.js',
+    ].map((file) => readFileSync(file, 'utf8')).join('\n');
 
-    expect(brandsSource).toContain('trademark application has been filed');
-    expect(brandsSource).toContain('the mark is not described as registered');
+    expect(publicBrandSources).not.toMatch(
+      /evidence boundary|confirmed facts|approved evidence|owner approval|does not claim/i,
+    );
   });
 });

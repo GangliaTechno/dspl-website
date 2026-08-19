@@ -4,13 +4,20 @@ import { CalendarDays, Mail, MapPin, Phone } from 'lucide-react';
 import logoImg from '../assets/icon_orange.webp';
 import PhoneObfuscated from './PhoneObfuscated';
 import { getFooterCta } from '../content/footerCtas';
+import { COMPANY_FACTS } from '../content/companyFacts';
 
 const Footer = () => {
   const { pathname } = useLocation();
   const cta = getFooterCta(pathname);
 
   const handleBackToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const prefersReducedMotion =
+      typeof window !== 'undefined' &&
+      window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
+    window.scrollTo({
+      top: 0,
+      behavior: prefersReducedMotion ? 'auto' : 'smooth',
+    });
   };
 
   return (
@@ -99,22 +106,22 @@ const Footer = () => {
 
           <section className="footer-contact-panel" aria-labelledby="footer-contact-title">
             <ul className="footer-meta-rail" aria-label="Company registration and support details">
-              <li><span>Incorporated</span><strong>28 July 2022</strong></li>
-              <li><span>CIN</span><strong>U74999KA2022PTC163810</strong></li>
+              <li><span>Incorporated</span><strong>{COMPANY_FACTS.incorporationDate}</strong></li>
+              <li><span>CIN</span><strong>{COMPANY_FACTS.cin}</strong></li>
               <li><span>Incubated at</span><strong>MUTBI/MAHE</strong></li>
-              <li><span>Supported through</span><strong>DST-NIDHI PRAYAS</strong></li>
+              <li><span>Supported through</span><strong>{COMPANY_FACTS.incubation.support}</strong></li>
             </ul>
             <h2 id="footer-contact-title" className="footer-contact-title">Contact details</h2>
             <ul className="footer-contact-list footer-contact-rail">
               <li>
-                <a href="mailto:director@dashapatmaja.in" className="contact-item">
+                <a href={`mailto:${COMPANY_FACTS.contacts.directorEmail}`} className="contact-item">
                   <Mail size={16} className="contact-icon" aria-hidden="true" />
-                  <span>director@dashapatmaja.in</span>
+                  <span>{COMPANY_FACTS.contacts.directorEmail}</span>
                 </a>
               </li>
               <li>
                 <PhoneObfuscated
-                  number="+91 88619 42440"
+                  number={COMPANY_FACTS.contacts.primaryPhone}
                   className="contact-item"
                   icon={<Phone size={16} className="contact-icon" aria-hidden="true" />}
                 />
@@ -141,7 +148,7 @@ const Footer = () => {
           </section>
 
           <div className="footer-bottom">
-            <p>&copy; 2026 Dashapatmaja Solutions Pvt Ltd. All rights reserved.</p>
+            <p>&copy; {new Date().getFullYear()} {COMPANY_FACTS.legalName}. All rights reserved.</p>
             <div className="footer-legal-links">
               <button
                 type="button"

@@ -1,10 +1,12 @@
-.raw-radicles-hero {
+.raw-radicles-hero,
+.section.raw-radicles-hero {
   position: relative;
   display: grid;
   min-height: min(64vh, 42rem);
   align-items: center;
   overflow: hidden;
-  padding-top: calc(var(--header-height, 5rem) + 4rem);
+  padding-top: calc(var(--header-height, 4.75rem) + 4rem);
+  padding-bottom: var(--space-6);
   color: #fff;
   background: #24140e;
 }
@@ -150,9 +152,11 @@
 }
 
 @media (max-width: 800px) {
-  .raw-radicles-hero {
+  .raw-radicles-hero,
+  .section.raw-radicles-hero {
     min-height: auto;
-    padding-top: calc(var(--header-height, 5rem) + 3rem);
+    padding-top: calc(var(--header-height, 4.5rem) + 2.5rem);
+    padding-bottom: var(--space-5);
   }
 
   .raw-radicles-hero-grid {

@@ -190,7 +190,7 @@ describe('approved design-system corrections', () => {
       /\.header\s*{[^}]*transition:[^}]*transform 280ms cubic-bezier\(0\.16,\s*1,\s*0\.3,\s*1\),/s,
     );
     expect(header).toMatch(
-      /@media\s*\(prefers-reduced-motion:\s*reduce\)\s*{[\s\S]*?\.header,[\s\S]*?\.logo-image\s*{[^}]*transition:\s*none;/s,
+      /@media\s*\(prefers-reduced-motion:\s*reduce\)\s*{[\s\S]*?\.header,[\s\S]*?\.logo-image,[\s\S]*?\.mobile-drawer\s*{[^}]*transition:\s*none;/s,
     );
     expect(headerPage).toContain(
       "window.addEventListener('scroll', handleScroll, { passive: true })",
@@ -336,14 +336,22 @@ describe('approved design-system corrections', () => {
 
   it('uses route-owned form layout and state class names', () => {
     const contactPage = readSource('src/pages/Contact.jsx');
-    const modalPage = readSource('src/components/WorkWithUsModal.jsx');
     const plannerForm = readSource('src/components/ProjectPlannerForm.jsx');
 
     expect(contactPage).toContain('contact-form-row');
     expect(contactPage).toContain('contact-submit-btn');
-    expect(modalPage).toContain('<ProjectPlannerForm');
     expect(plannerForm).toContain('work-modal-form-row');
     expect(plannerForm).toContain('work-modal-submit-btn');
+  });
+
+  it('ensures no production source imports legacy WorkWithUsModal or workModal', () => {
+    const appRoutes = readSource('src/AppRoutes.jsx');
+    const errorBoundary = readSource('src/components/ErrorBoundary.jsx');
+
+    expect(appRoutes).not.toContain('WorkWithUsModal');
+    expect(appRoutes).not.toContain('workModal');
+    expect(errorBoundary).not.toContain('WorkWithUsModal');
+    expect(errorBoundary).not.toContain('workModal');
   });
 
   it('presents five alternating About journey stories with unique original imagery', () => {
@@ -454,7 +462,7 @@ describe('approved design-system corrections', () => {
   it('uses original responsive editorial imagery for Home and Marketing', () => {
     const homePage = readSource('src/pages/Home.jsx');
     const marketingPage = readSource('src/pages/Marketing.jsx');
-    const pageShell = readSource('index.html');
+    const routeMetadata = readSource('src/seo/routeMetadata.js');
 
     expect(homePage).not.toContain('const homeHeroImages = [');
     expect(homePage).not.toContain('<RotatingHeroMedia');
@@ -471,15 +479,12 @@ describe('approved design-system corrections', () => {
     expect(marketingPage).toContain('marketing-primary-1440.webp');
     expect(marketingPage).toContain('marketing-primary-mobile.webp');
     expect(marketingPage).not.toContain('Marketing_hero_section');
-    expect(pageShell).toContain(
+    expect(routeMetadata).toContain(
       'Dashapatmaja Solutions Pvt Ltd develops consumer brands and provides branding, marketing, and e-commerce services.',
     );
-    expect(pageShell).not.toContain('Indian consumer businesses');
-    expect(pageShell).not.toContain('dspl-home-editorial-1440.webp');
-    expect(pageShell).not.toContain('dspl-home-editorial-mobile.webp');
-    expect(pageShell).not.toContain('dspl_banner.webp');
-    expect(pageShell).not.toContain('dspl_banner-mobile.webp');
+    expect(routeMetadata).not.toContain('Indian consumer businesses');
   });
+
 
   it('keeps the owned-brand section focused on its distinct brand action', () => {
     const ownedBrand = readSource('src/components/home/OwnedBrandProof.jsx');
@@ -501,7 +506,7 @@ describe('approved design-system corrections', () => {
     expect(homeAndAbout.match(/\bexecution\b/gi)).toHaveLength(1);
     expect(homeAndAbout).toContain('through market and commerce execution.');
     expect(homeAndAbout).not.toContain('We deliver disciplined market execution.');
-    expect(homeAndAbout).toContain('Delivery framework');
+    expect(homeAndAbout).toContain('How We Work With You');
   });
 
   it('keeps the About journey inside the approved editorial section', () => {
@@ -756,7 +761,8 @@ describe('approved design-system corrections', () => {
     const viteConfig = readSource('vite.config.js');
     const prerenderEntry = readSource('src/entry-prerender.jsx');
     const verifier = readSource('scripts/verify-prerender.mjs');
-    const indexHtml = readSource('index.html');
+    const redirects = readSource('public/_redirects');
+    const headers = readSource('public/_headers');
 
     for (const route of [
       '/brands/raw-radicles',
@@ -772,11 +778,13 @@ describe('approved design-system corrections', () => {
     expect(prerenderEntry).toContain("name: 'robots'");
     expect(verifier).toContain("path.join('dist', '404.html')");
     expect(verifier).toContain('prerendered public routes and a production 404 page.');
-    // Audit improvement: index.html now has a robots meta as SEO fallback
-    // The tag provides a static baseline before JS hydration, overridden per-route by useSEO
-    expect(indexHtml).toContain('<meta name="robots" content="index, follow"');
-    expect(existsSync(resolve('public/_redirects'))).toBe(false);
+    expect(verifier).toContain('verifyHeadUniqueness');
+    expect(redirects).toContain('/*  /404.html  404');
+    expect(redirects).not.toContain('200');
+    expect(headers).toContain('Strict-Transport-Security');
+    expect(headers).toContain('Content-Security-Policy');
   });
+
 
   it('does not publish production source maps', () => {
     const viteConfig = readSource('vite.config.js');
@@ -802,7 +810,9 @@ describe('approved design-system corrections', () => {
     );
     expect(aboutMotion).toContain('duration: prefersReducedMotion ? 0 : 0.5');
     expect(aboutMotion).toContain('Math.min(index * 0.04, 0.12)');
-    expect(aboutPage).toContain('behavior: getHashScrollBehavior(prefersReducedMotion)');
+    expect(readSource('src/components/ScrollToTop.jsx')).toContain(
+      'behavior: getHashScrollBehavior(prefersReducedMotion)',
+    );
     expect(aboutCss).not.toContain('@keyframes subtleZoom');
     expect(rotatingHeroCss).toMatch(
       /@media\s*\(prefers-reduced-motion:\s*reduce\)\s*{[\s\S]*?\.rotating-hero-layer\s*{[^}]*transition:\s*none;/s,
@@ -828,7 +838,7 @@ describe('approved design-system corrections', () => {
     );
     expect(brandsPage).toContain('Raw Radicles is owned and developed by Dashapatmaja Solutions Pvt Ltd');
     expect(brandsPage).toMatch(/trademark\s+application has been filed/);
-    expect(brandsPage).toContain('the mark is not described as registered');
+    expect(brandsPage).not.toContain('the mark is not described as registered');
     expect(brandsPage).toContain('Brand owner and services operator');
     expect(brandsPage).not.toContain('Portfolio in development');
     expect(brandsPage).not.toContain('Additional consumer-brand concepts');
@@ -859,7 +869,7 @@ describe('approved design-system corrections', () => {
     expect(footer).not.toContain('Get in Touch');
     expect(footer).toContain('className="footer-cta-strip"');
     expect(footerCtas).toContain('Turn a promising idea into a coordinated project.');
-    expect(footerCtas).toContain('See how Raw Radicles is being developed.');
+    expect(footerCtas).toContain('See how DSPL built Raw Radicles.');
     expect(footerCtas).toContain('Start a project');
     expect(footer).toMatch(
       /Dashapatmaja Solutions Pvt Ltd develops consumer brands and\s+provides branding, marketing, and e-commerce services\./,
@@ -867,9 +877,7 @@ describe('approved design-system corrections', () => {
     expect(footer).toContain('>Services</h2>');
     expect(footer).toContain('>Company</h2>');
     expect(footer).toContain('>Legal</h2>');
-    expect(footer).toContain('CalendarDays');
-    expect(footer).toContain('Office days: Monday to Saturday');
-    expect(footer).toContain('&copy; 2026 Dashapatmaja Solutions Pvt Ltd. All rights reserved.');
+    expect(footer).toMatch(/\{new Date\(\)\.getFullYear\(\)\}\s*(\{COMPANY_FACTS\.legalName\}|Dashapatmaja Solutions Pvt Ltd)\.\s*All rights reserved\./);
     expect(footer).not.toMatch(/Â|Ã|â€|â€”/);
     expect(footer).toContain('className="footer-contact-list footer-contact-rail"');
     expect(footer).toContain('className="footer-meta-rail"');
@@ -988,5 +996,17 @@ describe('approved design-system corrections', () => {
     expect(aboutPage).not.toContain('viewport={{ once: true, margin: "-50px" }}');
     expect(aboutMotion).toContain('duration: prefersReducedMotion ? 0 : 0.5');
     expect(aboutMotion).toContain('Math.min(index * 0.04, 0.12)');
+  });
+
+  it('keeps the polished routes on native scroll with mobile-safe grids', () => {
+    const about = readSource('src/pages/About.jsx');
+    const homeCss = readSource('src/pages/Home.css');
+    const serviceCss = readSource('src/components/ServicePage.css');
+    const faqCss = readSource('src/components/FAQAccordion.css');
+
+    expect([about, homeCss, serviceCss, faqCss].join('\n'))
+      .not.toMatch(/scroll-behavior:\s*smooth|ScrollSmoother|wheel\s*\(/i);
+    expect(homeCss).toMatch(/@media\s*\(max-width:\s*900px\)[\s\S]*?\.compliance-support-strip\s*{[^}]*grid-template-columns:\s*1fr;/);
+    expect(faqCss).toMatch(/\.faq-header-btn\s*{[^}]*min-height:\s*4\.5rem;/s);
   });
 });

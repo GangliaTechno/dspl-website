@@ -16,10 +16,30 @@ describe('lead form model', () => {
     expect(validateLead(form)).toEqual({
       fullName: 'Full Name is required',
       email: 'Email address is required',
-      phone: 'Phone / WhatsApp number is required',
       services: 'Please select at least one service',
     });
     expect(form).toEqual(original);
+  });
+
+  it('conditionally requires phone only when phone or WhatsApp is preferred contact', () => {
+    const base = {
+      fullName: 'Asha Rao',
+      email: 'asha@example.test',
+      services: ['Branding'],
+    };
+
+    expect(validateLead({ ...base, phone: '' })).toEqual({});
+    expect(validateLead({ ...base, phone: '123' })).toEqual({
+      phone: 'Please enter a valid phone number (minimum 8 digits)',
+    });
+    expect(validateLead({ ...base, preferredContact: 'Phone', phone: '' })).toEqual({
+      phone: 'Phone / WhatsApp number is required when phone or WhatsApp contact is requested',
+    });
+    expect(validateLead({ ...base, preferredContact: 'WhatsApp', phone: '' })).toEqual({
+      phone: 'Phone / WhatsApp number is required when phone or WhatsApp contact is requested',
+    });
+    expect(validateLead({ ...base, preferredContact: 'Email', phone: '' })).toEqual({});
+    expect(validateLead({ ...base, preferredContact: 'Phone', phone: '+91 98765 43210' })).toEqual({});
   });
 
   it('classifies an established business without inventing outcome claims', () => {
@@ -37,7 +57,7 @@ describe('lead form model', () => {
     });
   });
 
-  it('creates the existing Web3Forms field contract', () => {
+  it('creates the cleaned Web3Forms field contract without stale fields', () => {
     const form = {
       ...createInitialLeadForm(),
       fullName: 'Asha Rao',
@@ -65,14 +85,18 @@ describe('lead form model', () => {
       'phone',
       'website',
       'services',
-      'businessDescription',
-      'hasOnlinePresence',
       'projectGoal',
       'referralSource',
       'preferredContact',
-      'newsletterOptIn',
     ]) {
       expect(payload.has(field)).toBe(true);
+    }
+    for (const staleField of [
+      'businessDescription',
+      'hasOnlinePresence',
+      'newsletterOptIn',
+    ]) {
+      expect(payload.has(staleField)).toBe(false);
     }
   });
 

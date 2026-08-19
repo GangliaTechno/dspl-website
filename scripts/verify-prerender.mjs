@@ -25,6 +25,32 @@ const decodeHtmlText = (value) =>
     .replace(/&quot;/g, '"')
     .replace(/&#39;/g, "'");
 
+const verifyHeadUniqueness = (html, label) => {
+  const checkSingle = (regex, tagName) => {
+    const matches = html.match(regex) || [];
+    if (matches.length !== 1) {
+      failures.push(
+        `${label}: expected exactly 1 ${tagName}, found ${matches.length}`,
+      );
+    }
+  };
+
+  checkSingle(/<title\b[^>]*>/gi, '<title>');
+  checkSingle(/<meta\b[^>]*name=["']description["'][^>]*>/gi, '<meta name="description">');
+  checkSingle(/<meta\b[^>]*name=["']robots["'][^>]*>/gi, '<meta name="robots">');
+  checkSingle(/<link\b[^>]*rel=["']canonical["'][^>]*>/gi, '<link rel="canonical">');
+  checkSingle(/<meta\b[^>]*property=["']og:title["'][^>]*>/gi, '<meta property="og:title">');
+  checkSingle(/<meta\b[^>]*property=["']og:description["'][^>]*>/gi, '<meta property="og:description">');
+  checkSingle(/<meta\b[^>]*property=["']og:url["'][^>]*>/gi, '<meta property="og:url">');
+  checkSingle(/<meta\b[^>]*property=["']og:image["'][^>]*>/gi, '<meta property="og:image">');
+  checkSingle(/<meta\b[^>]*property=["']og:site_name["'][^>]*>/gi, '<meta property="og:site_name">');
+  checkSingle(/<meta\b[^>]*property=["']og:type["'][^>]*>/gi, '<meta property="og:type">');
+  checkSingle(/<meta\b[^>]*name=["']twitter:card["'][^>]*>/gi, '<meta name="twitter:card">');
+  checkSingle(/<meta\b[^>]*name=["']twitter:title["'][^>]*>/gi, '<meta name="twitter:title">');
+  checkSingle(/<meta\b[^>]*name=["']twitter:description["'][^>]*>/gi, '<meta name="twitter:description">');
+  checkSingle(/<meta\b[^>]*name=["']twitter:image["'][^>]*>/gi, '<meta name="twitter:image">');
+};
+
 const verifyOrganizationSchema = (html, label) => {
   const schemas = Array.from(
     html.matchAll(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi),
@@ -95,6 +121,7 @@ for (const { route, heading } of routes) {
     titles.push({ label, title });
   }
   verifyOrganizationSchema(html, label);
+  verifyHeadUniqueness(html, label);
 }
 
 const notFoundPath = path.join('dist', '404.html');
@@ -121,6 +148,7 @@ if (!fs.existsSync(notFoundPath)) {
     failures.push('404: missing stable https://dashapatmaja.in/404.html canonical');
   }
   verifyOrganizationSchema(notFoundHtml, '404');
+  verifyHeadUniqueness(notFoundHtml, '404');
   if (/<code\b[^>]*class=["'][^"']*missing-path[^"']*["'][^>]*>\s*\/404\.html\s*<\/code>/i.test(notFoundHtml)) {
     failures.push('404: prerendered fallback exposes /404.html as the missing path');
   }

@@ -60,7 +60,7 @@ const ServicePage = ({
             </p>
           </div>
 
-          <div className="offers-grid" data-count={offers.length}>
+          <div className="offers-grid offers-grid--editorial" data-count={offers.length}>
             {offers.map((offer, index) => (
               <article key={offer.title} className="offer-entry">
                 <span className="offer-sequence" aria-hidden="true">
@@ -84,13 +84,12 @@ const ServicePage = ({
         >
           <div className="container">
             <div className="section-header">
-              <span className="section-subtitle">Compliance support</span>
               <h2 id={`${pageTypeClass}-compliance-title`} className="section-title">
                 {compliance.title}
               </h2>
               <p className="section-title-description">{compliance.intro}</p>
             </div>
-            <div className="service-detail-grid" data-count={compliance.items.length}>
+            <div className="service-detail-grid service-detail-grid--supporting" data-count={compliance.items.length}>
               {compliance.items.map((item) => (
                 <article key={item.title}>
                   <h3>{item.title}</h3>
@@ -142,7 +141,6 @@ const ServicePage = ({
       <section className="section faq-section bg-alt">
         <div className="container">
           <div className="section-header">
-            <span className="section-subtitle">Questions & Answers</span>
             <h2 className="section-title">{faqsTitle}</h2>
             <p className="section-title-description">
               {faqsDescription}

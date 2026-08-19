@@ -18,6 +18,26 @@ export const getAnalyticsConsent = () => {
   }
 };
 
+export const clearGaCookies = () => {
+  if (typeof document === 'undefined' || !document.cookie) return;
+
+  const cookies = document.cookie.split(';');
+  const hostname = typeof window !== 'undefined' ? window.location?.hostname || '' : '';
+  const domainParts = hostname.split('.');
+
+  for (const cookie of cookies) {
+    const name = cookie.split('=')[0]?.trim();
+    if (name && (name.startsWith('_ga') || name.startsWith('_gid'))) {
+      document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+      if (domainParts.length >= 2) {
+        const rootDomain = `.${domainParts.slice(-2).join('.')}`;
+        document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${rootDomain};`;
+        document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${hostname};`;
+      }
+    }
+  }
+};
+
 export const setAnalyticsConsent = (value) => {
   if (value !== 'granted' && value !== 'denied') {
     throw new TypeError('Analytics consent must be granted or denied.');
@@ -30,6 +50,19 @@ export const setAnalyticsConsent = (value) => {
     // A blocked storage API must not prevent the visitor from using the site.
   }
 
+  if (value === 'denied') {
+    window[`ga-disable-${GA_MEASUREMENT_ID}`] = true;
+    if (typeof window.gtag === 'function') {
+      window.gtag('consent', 'update', { analytics_storage: 'denied' });
+    }
+    clearGaCookies();
+  } else if (value === 'granted') {
+    window[`ga-disable-${GA_MEASUREMENT_ID}`] = false;
+    if (typeof window.gtag === 'function') {
+      window.gtag('consent', 'update', { analytics_storage: 'granted' });
+    }
+  }
+
   window.dispatchEvent(new CustomEvent(ANALYTICS_CONSENT_EVENT, { detail: value }));
 };
 
@@ -37,6 +70,9 @@ export const initGA = () => {
   if (isInitialized || getAnalyticsConsent() !== 'granted') return;
 
   try {
+    if (typeof window !== 'undefined') {
+      window[`ga-disable-${GA_MEASUREMENT_ID}`] = false;
+    }
     ReactGA.initialize(GA_MEASUREMENT_ID);
     isInitialized = true;
   } catch (error) {

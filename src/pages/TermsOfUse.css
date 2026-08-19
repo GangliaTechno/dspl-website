@@ -1,4 +1,16 @@
-.terms-hero { padding-top: calc(var(--header-height, 5rem) + 4rem); }
+.terms-hero,
+.section.terms-hero {
+  padding-top: calc(var(--header-height, 4.75rem) + 4rem);
+  padding-bottom: var(--space-6);
+}
+
+@media (max-width: 768px) {
+  .terms-hero,
+  .section.terms-hero {
+    padding-top: calc(var(--header-height, 4.5rem) + 2.5rem);
+    padding-bottom: var(--space-5);
+  }
+}
 .terms-content { max-width: 52rem; }
 
 .terms-title {

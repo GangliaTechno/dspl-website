@@ -89,6 +89,18 @@
   gap: 1.5rem;
 }
 
+.contact-info-icon {
+  display: inline-grid;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin-bottom: 1.25rem;
+  place-items: center;
+  color: var(--accent-text);
+  border: 1px solid rgba(138, 91, 0, 0.22);
+  border-radius: 50%;
+  background: rgba(245, 168, 0, 0.1);
+}
+
 .contact-info-card {
   min-width: 0;
   min-height: 14rem;

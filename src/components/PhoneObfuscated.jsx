@@ -16,7 +16,7 @@ const PhoneObfuscated = ({
       aria-label={label || `Call ${visibleNumber}`}
       className={className}
     >
-      {icon && icon}
+      {icon}
       <span>{visibleNumber}</span>
     </a>
   );

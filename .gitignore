@@ -39,3 +39,7 @@ graphify-out/
 # Local Git worktrees
 .worktrees/
 
+# Tooling and archives
+.impeccable/
+*.zip
+

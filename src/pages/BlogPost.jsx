@@ -2,7 +2,6 @@ import './BlogPost.css';
 import { useParams } from 'react-router';
 import { blogPosts, hasPublishableBlog } from '../content/publication';
 import useSEO from '../hooks/useSEO';
-import { NOT_FOUND_METADATA } from '../seo/routeMetadata';
 import NotFound from './NotFound';
 import { createBlogPostMetadata, normalizeBlogSlug } from './blogPostModel';
 
@@ -17,7 +16,7 @@ const BlogPost = ({ posts = blogPosts }) => {
 
   useSEO(post && isBlogOpen
     ? createBlogPostMetadata(post, true)
-    : NOT_FOUND_METADATA);
+    : null);
 
   if (!isBlogOpen || !post) return <NotFound />;
 

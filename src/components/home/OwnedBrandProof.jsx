@@ -30,8 +30,9 @@ const OwnedBrandProof = ({ logoSrc }) => (
         </p>
         <p className="owned-brand-description">
           DSPL coordinates formulation briefing, packaging, compliance
-          coordination, photography, pricing, and route to market for a
-          consumer brand it owns and operates.
+          inputs, photography, pricing, and route to market for a
+          consumer brand it owns and operates. That experience informs how we
+          plan and structure client work.
         </p>
         <div className="owned-brand-actions">
           <Link to="/brands/raw-radicles" className="btn btn-primary">

@@ -21,7 +21,6 @@ describe('Header Component', () => {
       screen.getByAltText('Dashapatmaja Solutions Pvt Ltd logo'),
     ).toBeInTheDocument();
     expect(screen.getByRole('navigation', { name: 'Main Navigation' })).toBeInTheDocument();
-    expect(screen.getAllByText('Home')[0]).toBeInTheDocument();
     expect(screen.getAllByText('About')[0]).toBeInTheDocument();
     expect(screen.getAllByText('Contact')[0]).toBeInTheDocument();
     for (const link of screen.getAllByRole('link', { name: 'Start a Project' })) {
@@ -36,7 +35,6 @@ describe('Header Component', () => {
     expect(
       within(desktopNav).getAllByRole('link').map((link) => link.textContent),
     ).toEqual([
-      'Home',
       'About',
       'Brands',
       'Marketing',

@@ -40,14 +40,6 @@
   line-height: 1.6;
 }
 
-.missing-path {
-  background: rgba(255, 255, 255, 0.08);
-  padding: 0.2rem 0.5rem;
-  border-radius: 4px;
-  color: var(--accent-text);
-  font-family: monospace;
-}
-
 .not-found-actions {
   display: flex;
   gap: 1rem;
@@ -62,7 +54,7 @@
   text-align: left;
 }
 
-.quick-links-section h3 {
+.quick-links-section h2 {
   font-size: 0.95rem;
   color: var(--text-secondary);
   margin-bottom: 1rem;

@@ -9,14 +9,14 @@ export const footerCtas = Object.freeze({
   '/about': {
     eyebrow: 'Work with DSPL',
     title: 'Bring the right disciplines around the same brief.',
-    text: 'Tell us where your project stands and where coordinated support would help.',
+    text: 'Tell us where your project stands and where multidisciplinary support would help.',
     label: 'Start a project',
     href: '/start',
   },
   '/brands': {
     eyebrow: 'Owned brand experience',
-    title: 'See how Raw Radicles is being developed.',
-    text: 'Review the confirmed workstreams behind our first owned consumer brand.',
+    title: 'See how DSPL built Raw Radicles.',
+    text: 'Explore the operating work behind our first owned consumer brand.',
     label: 'View the project overview',
     href: '/brands/raw-radicles',
   },
@@ -37,10 +37,14 @@ export const footerCtas = Object.freeze({
   '/ecommerce': {
     eyebrow: 'Improve the commerce operation',
     title: 'Make the buying journey and operating handoffs easier to manage.',
-    text: 'Share your store, marketplace, payment, fulfilment, or compliance-coordination needs.',
+    text: 'Share your store, marketplace, payment, fulfilment, or compliance-support needs.',
     label: 'Start an e-commerce project',
     href: '/start',
   },
 });
 
-export const getFooterCta = (pathname) => footerCtas[pathname] || null;
+const normalizePath = (path) =>
+  path && path.length > 1 ? path.replace(/\/+$/, '') : path;
+
+export const getFooterCta = (pathname) =>
+  footerCtas[normalizePath(pathname)] || null;

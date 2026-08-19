@@ -53,64 +53,29 @@ const services = [
     text: 'Storefront, marketplace, payment, and delivery systems scoped around the selected platform and operating workflow.',
     link: '/ecommerce',
   },
-  {
-    title: 'Compliance support',
-    text: 'Practical coordination for packaging, labelling, listings, and commerce declarations, with regulated advice retained by qualified advisers.',
-    links: [
-      { label: 'Branding compliance', to: '/branding#compliance' },
-      { label: 'E-commerce compliance', to: '/ecommerce#compliance' },
-    ],
-  },
 ];
 
 const processSteps = [
   {
     number: '01',
-    title: 'Discovery & Audit',
-    description:
-      'We examine your positioning, audience, commercial context, and current constraints.',
+    title: 'Audit',
+    description: 'We examine the current position, audience, constraints, and priorities.',
     timing: 'Confirmed after the initial scope review',
-    output: 'Discovery record and priority audit',
+    output: 'Priority audit and agreed brief',
   },
   {
     number: '02',
-    title: 'Strategy & Roadmap',
-    description:
-      'We agree the priorities, responsibilities, sequence, and measurable milestones.',
-    timing: 'Confirmed after discovery',
-    output: 'Agreed roadmap and responsibility map',
+    title: 'Build',
+    description: 'We create and coordinate the agreed brand, market, and commerce system.',
+    timing: 'Set by the approved roadmap',
+    output: 'Launch-ready system and operating handoffs',
   },
   {
     number: '03',
-    title: 'Branding & Design',
-    description:
-      'We create the identity, packaging, content system, and customer-facing experience.',
-    timing: 'Set by the approved roadmap',
-    output: 'Approved brand and design system',
-  },
-  {
-    number: '04',
-    title: 'Campaign Launch',
-    description:
-      'We coordinate channels, creative, media, and the practical work needed to go live.',
-    timing: 'Set by launch scope and dependencies',
-    output: 'Launch-ready channel and asset plan',
-  },
-  {
-    number: '05',
-    title: 'E-commerce Scale',
-    description:
-      'We improve storefront, marketplace, checkout, and operational conversion points.',
-    timing: 'Set by platform and integration scope',
-    output: 'Configured commerce journey and operating checklist',
-  },
-  {
-    number: '06',
-    title: 'Measurement & Growth',
-    description:
-      'We review evidence, learn what is working, and focus the next cycle of investment.',
+    title: 'Grow',
+    description: 'We launch, measure, and improve the system around useful evidence.',
     timing: 'Agreed as part of the engagement',
-    output: 'Measurement review and next-cycle priorities',
+    output: 'Performance review and next priorities',
   },
 ];
 
@@ -151,8 +116,13 @@ const Home = () => {
               e-commerce, and compliance-support work.
             </p>
             <div className="home-hero-actions">
-              <Link to="/start" className="btn btn-primary">Start a project</Link>
-              <Link to="/brands/raw-radicles" className="btn btn-secondary hero-capabilities-link">
+              <Link className="btn btn-primary" to="/start">
+                Start a project
+              </Link>
+              <Link
+                className="btn btn-secondary hero-capabilities-link"
+                to="/brands/raw-radicles"
+              >
                 See how we built Raw Radicles
               </Link>
             </div>
@@ -170,7 +140,6 @@ const Home = () => {
         <div className="container">
           <div className="services-intro">
             <div>
-              <span className="section-subtitle">Coordinated services</span>
               <h2 className="section-title" id="services-title">
                 One growth system, not three disconnected vendors
               </h2>
@@ -186,38 +155,28 @@ const Home = () => {
               <article className="service-evidence-card" key={service.title}>
                 <h3>{service.title}</h3>
                 <p>{service.text}</p>
-                {service.links ? (
-                  <div className="service-evidence-links">
-                    {service.links.map((link) => (
-                      <Link key={link.to} to={link.to}>
-                        {link.label}<ArrowRight size={15} aria-hidden="true" />
-                      </Link>
-                    ))}
-                  </div>
-                ) : (
-                  <Link to={service.link}>
-                    Explore {service.title}
-                    <ArrowRight size={15} aria-hidden="true" />
-                  </Link>
-                )}
+                <Link to={service.link}>
+                  Explore {service.title}
+                  <ArrowRight size={15} aria-hidden="true" />
+                </Link>
               </article>
             ))}
           </div>
-        </div>
-      </section>
 
-      <section className="section owned-experience-proof bg-alt" aria-labelledby="owned-experience-title">
-        <div className="container owned-experience-layout">
-          <div>
-            <span className="section-subtitle">Operator-led perspective</span>
-            <h2 id="owned-experience-title" className="section-title">Owned experience informs the work</h2>
-          </div>
-          <p className="section-title-description">
-            Building Raw Radicles means working through product, packaging,
-            compliance coordination, photography, pricing, marketing, and
-            commerce decisions inside one operating system. That experience
-            shapes how we scope and coordinate client work.
-          </p>
+          <aside className="compliance-support-strip" aria-labelledby="compliance-support-title">
+            <div>
+              <span className="section-subtitle">Supporting capability</span>
+              <h3 id="compliance-support-title">Compliance coordination</h3>
+            </div>
+            <p>
+              Practical coordination for packaging, labelling, listings, and commerce
+              declarations, with regulated advice retained by qualified advisers.
+            </p>
+            <div className="compliance-support-links">
+              <Link to="/branding#compliance">Branding compliance <ArrowRight size={15} aria-hidden="true" /></Link>
+              <Link to="/ecommerce#compliance">E-commerce compliance <ArrowRight size={15} aria-hidden="true" /></Link>
+            </div>
+          </aside>
         </div>
       </section>
 

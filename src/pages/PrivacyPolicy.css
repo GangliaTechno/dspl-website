@@ -1,9 +1,15 @@
 .privacy-page-container {
-  padding: 5rem 1.5rem;
+  padding: calc(var(--header-height, 4.75rem) + 3.5rem) 1.5rem 5rem;
   background: var(--bg-primary);
   min-height: 80vh;
   display: flex;
   justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .privacy-page-container {
+    padding: calc(var(--header-height, 4.5rem) + 2rem) 1.25rem 4rem;
+  }
 }
 
 .privacy-content {
@@ -55,7 +61,7 @@
   margin-bottom: 0.5rem;
 }
 
-.contact-info-card {
+.privacy-page-container .contact-info-card {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--border-color);
   padding: 1.25rem;
@@ -63,12 +69,12 @@
   margin-top: 1rem;
 }
 
-.contact-info-card p {
+.privacy-page-container .contact-info-card p {
   margin-bottom: 0.3rem;
   color: var(--text-primary);
 }
 
-.contact-info-card a {
+.privacy-page-container .contact-info-card a {
   color: var(--accent-text);
   text-decoration: underline;
 }

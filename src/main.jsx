@@ -1,11 +1,11 @@
 import { StrictMode } from 'react';
 import { createRoot, hydrateRoot } from 'react-dom/client';
+import './index.css';
 import App from './App.jsx';
 import {
   loadHydrationPage,
   shouldHydratePrerenderedPage,
 } from './hydrationRoute';
-import './index.css';
 
 const container = document.getElementById('root');
 const hasPrerenderedMarkup = container.hasChildNodes();

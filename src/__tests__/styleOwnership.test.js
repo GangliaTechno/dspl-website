@@ -69,4 +69,11 @@ describe('eager stylesheet ownership', () => {
     expect(unownedTopLevelClasses(contactCss, 'contact-')).toEqual([]);
     expect(unownedTopLevelClasses(modalCss, 'work-modal-')).toEqual([]);
   });
+
+  it('scopes privacy contact-card styles to the privacy route', () => {
+    const privacyCss = readSource('src/pages/PrivacyPolicy.css');
+
+    expect(privacyCss).not.toMatch(/^\s*\.contact-info-card\b/m);
+    expect(privacyCss).toMatch(/\.privacy-page-container\s+\.contact-info-card\s*\{/);
+  });
 });

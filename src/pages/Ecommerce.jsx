@@ -1,9 +1,6 @@
 import ecommerceHero960 from '../assets/ecommerce-primary-960.webp';
 import ecommerceHero1440 from '../assets/ecommerce-primary-1440.webp';
 import ecommerceHeroMobile from '../assets/ecommerce-primary-mobile.webp';
-import ecommerceDashboard960 from '../assets/ecommerce-dashboard-960.webp';
-import ecommerceDashboard1440 from '../assets/ecommerce-dashboard-1440.webp';
-import ecommerceDashboardMobile from '../assets/ecommerce-dashboard-mobile-hq.webp';
 import ServicePage from '../components/ServicePage';
 import { approvedTestimonials } from '../content/publication';
 import { getRouteMetadata } from '../seo/routeMetadata';
@@ -83,15 +80,6 @@ const faqs = [
 ];
 
 const heroImages = [
-  {
-    id: 'ecommerce-dashboard',
-    src: ecommerceDashboard1440,
-    desktopSrcSet: `${ecommerceDashboard960} 960w, ${ecommerceDashboard1440} 1440w`,
-    mobileSrc: ecommerceDashboardMobile,
-    sizes: '100vw',
-    width: 1440,
-    height: 810,
-  },
   {
     id: 'ecommerce-primary',
     src: ecommerceHero1440,

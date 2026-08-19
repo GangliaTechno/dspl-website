@@ -1,10 +1,18 @@
 import './Contact.css';
 import { useRef, useState } from 'react';
 import { Link } from 'react-router';
-import { AlertCircle, CheckCircle2, Send } from 'lucide-react';
+import {
+  AlertCircle,
+  CheckCircle2,
+  ClipboardCheck,
+  MapPin,
+  MessageCircle,
+  Send,
+} from 'lucide-react';
 import PhoneObfuscated from '../components/PhoneObfuscated';
 import useSEO from '../hooks/useSEO';
 import { getRouteMetadata } from '../seo/routeMetadata';
+import { COMPANY_FACTS } from '../content/companyFacts';
 import { FORM_SUBMISSION_ERROR } from '../utils/formMessages';
 import { trackEvent } from '../utils/analytics';
 import contactHero960 from '../assets/contact-hero-960.webp';
@@ -69,53 +77,73 @@ const Contact = () => {
         },
         body: JSON.stringify(payload),
       });
-      const result = await response.json();
 
-      if (!response.ok || !result.success) {
+      const data = await response.json();
+      if (!response.ok || !data.success) {
         setSubmitError(FORM_SUBMISSION_ERROR);
+        setIsSubmitting(false);
         return;
       }
 
       setSubmitted(true);
+      setIsSubmitting(false);
       setFormData(createInitialContact());
       trackEvent({
         category: 'contact_form',
         action: 'generate_lead',
-        label: formData.helpType,
+        label: formData.helpType || 'general',
       });
     } catch {
       setSubmitError(FORM_SUBMISSION_ERROR);
-    } finally {
       setIsSubmitting(false);
     }
   };
 
-  const errorFor = (name) => errors[name] && (
-    <span id={`${name}-error`} className="form-error-text" role="alert">
-      {errors[name]}
-    </span>
-  );
+  const fieldA11y = (fieldName) => {
+    const errorId = `${fieldName}-error`;
+    return {
+      'aria-invalid': Boolean(errors[fieldName]),
+      'aria-describedby': errors[fieldName] ? errorId : undefined,
+    };
+  };
 
-  const fieldA11y = (name) => ({
-    'aria-invalid': Boolean(errors[name]),
-    'aria-describedby': errors[name] ? `${name}-error` : undefined,
-  });
+  const errorFor = (fieldName) =>
+    errors[fieldName] ? (
+      <span id={`${fieldName}-error`} className="form-error-text" role="alert">
+        {errors[fieldName]}
+      </span>
+    ) : null;
 
   return (
     <div className="contact-page fade-in">
       <section className="contact-hero">
         <picture className="contact-hero-picture" aria-hidden="true">
-          <source media="(max-width: 767px)" srcSet={contactHeroMobile} />
-          <source srcSet={`${contactHero960} 960w, ${contactHero1440} 1440w`} sizes="100vw" />
-          <img className="contact-hero-image" src={contactHero1440} alt="" width="1440" height="810" loading="eager" fetchPriority="high" decoding="async" />
+          <source media="(max-width: 600px)" srcSet={contactHeroMobile} />
+          <source
+            srcSet={`${contactHero960} 960w, ${contactHero1440} 1440w`}
+            sizes="100vw"
+          />
+          <img
+            src={contactHero1440}
+            alt=""
+            width="1440"
+            height="810"
+            className="contact-hero-image"
+            fetchPriority="high"
+            decoding="async"
+          />
         </picture>
         <div className="container contact-hero-content">
           <span className="section-subtitle">Contact</span>
           <h1 className="contact-title">Start a conversation.</h1>
           <p className="contact-description">
-            For general enquiries, tell us what you need and how we can reach
-            you. We aim to respond within one working day. For a more detailed
-            scope, <Link className="contact-hero-link" to="/start">Start a detailed project brief</Link>.
+            Share context, timelines, and outcomes for your project. We respond
+            within one working day with scope considerations or a focused
+            follow-up call. For detailed scopes, use our{' '}
+            <Link to="/start" className="contact-hero-link">
+              Start a detailed project brief
+            </Link>
+            .
           </p>
         </div>
       </section>
@@ -125,23 +153,28 @@ const Contact = () => {
           <h2 id="contact-details-title" className="sr-only">Contact details</h2>
           <div className="contact-info-grid">
             <article className="contact-info-card">
+              <span className="contact-info-icon" aria-hidden="true"><MapPin size={20} /></span>
               <h3>Office</h3>
               <p className="contact-info-summary">Manipal office</p>
-              <p>Room No. 12, 4th Floor, MUTBI, Advanced Research Center, Madhava Nagar, Manipal 576104</p>
+              <p>{COMPANY_FACTS.registeredOffice.fullAddress}</p>
               <p>Office days: Monday to Saturday</p>
             </article>
 
             <article className="contact-info-card">
+              <span className="contact-info-icon" aria-hidden="true"><MessageCircle size={20} /></span>
               <h3>New enquiries</h3>
               <p className="contact-info-summary">Start a conversation</p>
-              <p><PhoneObfuscated number="+91 88619 42440" /></p>
-              <p><a href="mailto:director@dashapatmaja.in">director@dashapatmaja.in</a></p>
+              <p>For new business, partnerships, and general questions.</p>
+              <p><PhoneObfuscated number={COMPANY_FACTS.contacts.primaryPhone} /></p>
+              <p><a href={`mailto:${COMPANY_FACTS.contacts.directorEmail}`}>{COMPANY_FACTS.contacts.directorEmail}</a></p>
             </article>
 
             <article className="contact-info-card">
+              <span className="contact-info-icon" aria-hidden="true"><ClipboardCheck size={20} /></span>
               <h3>Existing projects</h3>
               <p className="contact-info-summary">Project coordination</p>
-              <p><PhoneObfuscated number="+91 90725 56665" /></p>
+              <p>For reviews, delivery questions, and active workstreams.</p>
+              <p><PhoneObfuscated number={COMPANY_FACTS.contacts.secondaryPhone} /></p>
             </article>
           </div>
         </div>
@@ -170,24 +203,24 @@ const Contact = () => {
                 <div className="contact-form-row">
                   <div className="form-group">
                     <label className="form-label" htmlFor="firstName">First Name</label>
-                    <input id="firstName" name="firstName" className="form-input" value={formData.firstName} onChange={handleChange} placeholder="Jane" required {...fieldA11y('firstName')} />
+                    <input id="firstName" name="firstName" autoComplete="given-name" className="form-input" value={formData.firstName} onChange={handleChange} placeholder="Jane" required {...fieldA11y('firstName')} />
                     {errorFor('firstName')}
                   </div>
                   <div className="form-group">
                     <label className="form-label" htmlFor="lastName">Last Name (optional)</label>
-                    <input id="lastName" name="lastName" className="form-input" value={formData.lastName} onChange={handleChange} placeholder="Doe" />
+                    <input id="lastName" name="lastName" autoComplete="family-name" className="form-input" value={formData.lastName} onChange={handleChange} placeholder="Doe" />
                   </div>
                 </div>
 
                 <div className="contact-form-row">
                   <div className="form-group">
                     <label className="form-label" htmlFor="email">Email Address</label>
-                    <input id="email" type="email" name="email" className="form-input" value={formData.email} onChange={handleChange} placeholder="name@example.com" required {...fieldA11y('email')} />
+                    <input id="email" type="email" name="email" autoComplete="email" className="form-input" value={formData.email} onChange={handleChange} placeholder="name@example.com" required {...fieldA11y('email')} />
                     {errorFor('email')}
                   </div>
                   <div className="form-group">
                     <label className="form-label" htmlFor="phone">Phone Number (optional)</label>
-                    <input id="phone" type="tel" name="phone" className="form-input" value={formData.phone} onChange={handleChange} placeholder="Include country code" {...fieldA11y('phone')} />
+                    <input id="phone" type="tel" name="phone" autoComplete="tel" className="form-input" value={formData.phone} onChange={handleChange} placeholder="Include country code" {...fieldA11y('phone')} />
                     {errorFor('phone')}
                   </div>
                 </div>
@@ -195,11 +228,11 @@ const Contact = () => {
                 <div className="contact-form-row">
                   <div className="form-group">
                     <label className="form-label" htmlFor="companyName">Company / Brand Name (optional)</label>
-                    <input id="companyName" name="companyName" className="form-input" value={formData.companyName} onChange={handleChange} />
+                    <input id="companyName" name="companyName" autoComplete="organization" className="form-input" value={formData.companyName} onChange={handleChange} />
                   </div>
                   <div className="form-group">
                     <label className="form-label" htmlFor="website">Website or Social Handle (optional)</label>
-                    <input id="website" name="website" className="form-input" value={formData.website} onChange={handleChange} placeholder="https://example.com or @handle" {...fieldA11y('website')} />
+                    <input id="website" name="website" autoComplete="url" className="form-input" value={formData.website} onChange={handleChange} placeholder="https://example.com or @handle" {...fieldA11y('website')} />
                     {errorFor('website')}
                   </div>
                 </div>

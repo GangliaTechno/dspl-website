@@ -2,6 +2,7 @@ import './RawRadicles.css';
 import { Link } from 'react-router';
 import useSEO from '../hooks/useSEO';
 import { getRouteMetadata } from '../seo/routeMetadata';
+import { COMPANY_FACTS } from '../content/companyFacts';
 import rawHero1600 from '../assets/raw-radicles-hero-1600.webp';
 import rawHero960 from '../assets/raw-radicles-hero-960.webp';
 import wrathReliefPack from '../assets/raw-radicles-wrath-relief.webp';
@@ -50,9 +51,8 @@ const RawRadicles = () => {
             <span className="section-subtitle">A DSPL-owned consumer brand</span>
             <h1 className="domain-title">Raw Radicles</h1>
             <p className="domain-subtitle">
-              A project overview of how Dashapatmaja Solutions Pvt Ltd is
-              developing a focused chocolate portfolio from formulation brief to
-              route to market.
+              How Dashapatmaja Solutions Pvt Ltd developed a focused chocolate
+              portfolio from formulation brief to route to market.
             </p>
           </div>
           <div className="raw-radicles-hero-products">
@@ -66,21 +66,20 @@ const RawRadicles = () => {
       <section className="section" aria-labelledby="raw-overview-title">
         <div className="container raw-radicles-split">
           <div>
-            <span className="section-subtitle">Overview</span>
             <h2 id="raw-overview-title" className="section-title">
-              Owned by Dashapatmaja Solutions Pvt Ltd
+              Owned by {COMPANY_FACTS.legalName}
             </h2>
           </div>
           <div className="raw-radicles-copy">
             <p>
-              DSPL was incorporated on 28 July 2022 and owns Raw Radicles. The
+              {COMPANY_FACTS.shortName} was incorporated on {COMPANY_FACTS.incorporationDate} and owns Raw Radicles. The
               brand provides the company with direct operating experience across
-              product, packaging, compliance coordination, market presentation,
+              product, packaging, compliance inputs, market presentation,
               and commerce decisions.
             </p>
             <p>
-              This overview records confirmed facts only and can be expanded as
-              approved evidence becomes available.
+              That direct operating experience shapes how DSPL scopes branding,
+              marketing, e-commerce, and compliance-support work for clients.
             </p>
           </div>
         </div>
@@ -89,15 +88,13 @@ const RawRadicles = () => {
       <section className="section bg-alt" aria-labelledby="raw-product-title">
         <div className="container raw-radicles-split">
           <div>
-            <span className="section-subtitle">Product system</span>
             <h2 id="raw-product-title" className="section-title">
               Six 60 g bars across three collections
             </h2>
           </div>
           <p className="raw-radicles-lead">
             The portfolio brings together real cacao and selected Ayurvedic
-            botanicals. The published description does not claim medical effects
-            or quantified product outcomes.
+            botanicals across a focused chocolate range.
           </p>
         </div>
       </section>
@@ -105,7 +102,6 @@ const RawRadicles = () => {
       <section className="section" aria-labelledby="raw-partners-title">
         <div className="container">
           <div className="section-header">
-            <span className="section-subtitle">Specialist partnerships</span>
             <h2 id="raw-partners-title" className="section-title">
               Product development and production
             </h2>
@@ -148,19 +144,19 @@ const RawRadicles = () => {
         </div>
       </section>
 
-      <section className="section" aria-labelledby="raw-boundary-title">
+      <section className="section" aria-labelledby="raw-next-title">
         <div className="container raw-radicles-split">
           <div>
-            <span className="section-subtitle">Evidence boundary</span>
-            <h2 id="raw-boundary-title" className="section-title">
-              What this overview does not claim
+            <span className="section-subtitle">Owned operating experience</span>
+            <h2 id="raw-next-title" className="section-title">
+              Built through direct operating experience
             </h2>
           </div>
           <div className="raw-radicles-copy">
             <p>
-              No quantified commercial results, licence details, non-public
-              operating information, or regulatory approvals are published
-              without documentary evidence and owner approval.
+              Raw Radicles gives DSPL first-hand experience of the decisions and
+              handoffs involved in taking a consumer brand from product brief to
+              customer-facing channels.
             </p>
             <div className="raw-radicles-actions">
               <Link className="btn btn-secondary" to="/brands">Explore our brands</Link>

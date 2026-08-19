@@ -6,16 +6,19 @@ const SITE_NAME = 'Dashapatmaja Solutions Pvt Ltd';
 /**
  * Custom hook to update document title, description, canonical link, OpenGraph, and Twitter tags
  */
-const useSEO = ({
-  title = '',
-  description = '',
-  canonical = '',
-  image = 'https://dashapatmaja.in/og-cover.jpg',
-  type = 'website',
-  robots = 'index, follow',
-  structuredData = organizationStructuredData,
-}) => {
+const useSEO = (metadata = {}) => {
+  const {
+    title = '',
+    description = '',
+    canonical = '',
+    image = 'https://dashapatmaja.in/og-cover.jpg',
+    type = 'website',
+    robots = 'index, follow',
+    structuredData = organizationStructuredData,
+  } = metadata || {};
+
   useEffect(() => {
+    if (!metadata) return;
     if (title) document.title = title;
 
     const setMetaByName = (nameValue, content) => {
@@ -80,7 +83,7 @@ const useSEO = ({
     schema.type = 'application/ld+json';
     schema.dataset.dsplSchema = 'organization';
     schema.textContent = JSON.stringify(structuredData);
-  }, [title, description, canonical, image, type, robots, structuredData]);
+  }, [metadata, title, description, canonical, image, type, robots, structuredData]);
 };
 
 export default useSEO;

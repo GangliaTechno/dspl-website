@@ -14,6 +14,8 @@ describe('FAQAccordion', () => {
     const firstButton = screen.getByRole('button', { name: faqs[0].q });
     const firstAnswer = container.querySelector('#faq-0-answer');
 
+    expect(container.querySelector('.faq-item')).not.toHaveClass('glass');
+    expect(container.querySelector('.faq-list')).toHaveClass('faq-list--divided');
     expect(firstButton.closest('h3')).toHaveClass('faq-heading');
     expect(firstButton).toHaveAttribute('aria-expanded', 'false');
     expect(firstAnswer).toHaveAttribute('role', 'region');

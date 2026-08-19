@@ -257,17 +257,6 @@
   flex-wrap: wrap;
 }
 
-.legal-link {
-  color: var(--text-secondary);
-  font-size: 0.875rem;
-  font-weight: 500;
-}
-
-.legal-link:hover {
-  color: var(--accent-text);
-  text-decoration: underline;
-}
-
 .back-to-top {
   background: none;
   min-height: 44px;

@@ -10,15 +10,15 @@ const FAQAccordion = ({ faqs }) => {
   };
 
   return (
-    <div className="faq-list">
+    <div className="faq-list faq-list--divided">
       {faqs.map((faq, idx) => {
         const isOpen = openIdx === idx;
         const faqId = `faq-${idx}`;
-        
+
         return (
-          <div 
-            key={idx} 
-            className={`faq-item glass ${isOpen ? 'faq-open' : ''}`}
+          <div
+            key={idx}
+            className={`faq-item ${isOpen ? 'faq-open' : ''}`}
           >
             <h3 className="faq-heading">
               <button
@@ -33,7 +33,7 @@ const FAQAccordion = ({ faqs }) => {
                 <ChevronDown size={20} className="faq-arrow" aria-hidden="true" />
               </button>
             </h3>
-            <div 
+            <div
               id={`${faqId}-answer`}
               className="faq-a"
               role="region"
@@ -45,7 +45,6 @@ const FAQAccordion = ({ faqs }) => {
           </div>
         );
       })}
-
     </div>
   );
 };

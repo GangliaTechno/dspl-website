@@ -28,6 +28,7 @@ describe('Brands page', () => {
 
     expect(hero.compareDocumentPosition(ownership.closest('section')) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     expect(screen.getByText(/trademark application has been filed/i)).toBeInTheDocument();
+    expect(container).not.toHaveTextContent(/not described as registered|without implying ownership/i);
     expect(container).not.toHaveTextContent(/registered trademark/i);
     expect(container).not.toHaveTextContent(/FSSAI licensed/i);
   });

@@ -1,5 +1,4 @@
 import { Component } from 'react';
-import { openWorkModal } from '../utils/workModal';
 
 class ErrorBoundary extends Component {
   constructor(props) {
@@ -54,10 +53,13 @@ class ErrorBoundary extends Component {
             >
               Refresh Page
             </button>
-            <button
-              type="button"
-              onClick={() => openWorkModal('error-boundary')}
+            <a
+              href="/contact"
               style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                textDecoration: 'none',
                 padding: '0.75rem 1.75rem',
                 background: '#F5EFEB',
                 color: '#111111',
@@ -70,7 +72,7 @@ class ErrorBoundary extends Component {
               }}
             >
               Contact Us
-            </button>
+            </a>
           </div>
         </div>
       );

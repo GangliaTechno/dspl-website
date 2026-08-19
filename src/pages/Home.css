@@ -112,7 +112,7 @@
 
 .service-evidence-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   border-top: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
 }
@@ -128,14 +128,6 @@
 
 .service-evidence-card:last-child {
   border-right: 0;
-}
-
-.service-marker {
-  color: var(--accent-text); /* #8A5B00 — WCAG AA safe on cream ~5.5:1 */
-  font-family: var(--font-heading);
-  font-size: 0.75rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
 }
 
 .service-evidence-card h3 {
@@ -166,22 +158,45 @@
   color: var(--text-heading);
 }
 
-.service-evidence-links {
+.compliance-support-strip {
   display: grid;
-  gap: 0.75rem;
-  margin-top: auto;
+  grid-template-columns: minmax(12rem, 0.75fr) minmax(18rem, 1.2fr) auto;
+  gap: 2rem;
+  align-items: center;
+  margin-top: 2rem;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--border-color);
 }
 
-.owned-experience-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(20rem, 0.8fr);
-  align-items: end;
-  gap: clamp(2rem, 7vw, 7rem);
+.compliance-support-strip h3 {
+  margin: 0;
+  color: var(--text-heading);
+  font-size: 1.25rem;
 }
 
-.owned-experience-layout .section-title,
-.owned-experience-layout .section-title-description {
-  margin-bottom: 0;
+.compliance-support-strip p {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+.compliance-support-links {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.compliance-support-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--accent-text);
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.compliance-support-links a:hover {
+  color: var(--text-heading);
 }
 
 @media (max-width: 900px) {
@@ -193,12 +208,14 @@
     grid-template-columns: 1fr;
   }
 
-  .owned-experience-layout {
+  .service-evidence-grid {
     grid-template-columns: 1fr;
   }
 
-  .service-evidence-grid {
+  .compliance-support-strip {
     grid-template-columns: 1fr;
+    gap: 1rem;
+    align-items: flex-start;
   }
 
   .service-evidence-card {
@@ -209,10 +226,6 @@
 
   .service-evidence-card:last-child {
     border-bottom: 0;
-  }
-
-  .service-marker {
-    margin-bottom: 2.5rem;
   }
 }
 

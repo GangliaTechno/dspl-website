@@ -1,5 +1,15 @@
-.blog-post-page {
-  padding-top: calc(var(--header-height, 5rem) + 4rem);
+.blog-post-page,
+.section.blog-post-page {
+  padding-top: calc(var(--header-height, 4.75rem) + 4rem);
+  padding-bottom: var(--space-6);
+}
+
+@media (max-width: 768px) {
+  .blog-post-page,
+  .section.blog-post-page {
+    padding-top: calc(var(--header-height, 4.5rem) + 2.5rem);
+    padding-bottom: var(--space-5);
+  }
 }
 
 .blog-post-content {

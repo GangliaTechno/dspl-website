@@ -39,25 +39,29 @@ const installMatchMedia = (matches) => {
   return { mediaQuery, listeners };
 };
 
-const setDocumentHidden = (hidden) => {
+const setDocumentHidden = (hidden, dispatch = true) => {
   Object.defineProperty(document, 'hidden', {
     configurable: true,
     value: hidden,
   });
-  document.dispatchEvent(new Event('visibilitychange'));
+  if (dispatch) {
+    document.dispatchEvent(new Event('visibilitychange'));
+  }
 };
 
 describe('RotatingHeroMedia', () => {
   beforeEach(() => {
     vi.useFakeTimers();
+    vi.stubGlobal('requestIdleCallback', vi.fn((cb) => setTimeout(cb, 0)));
+    vi.stubGlobal('cancelIdleCallback', vi.fn((id) => clearTimeout(id)));
     installMatchMedia(false);
-    setDocumentHidden(false);
+    setDocumentHidden(false, false);
   });
 
   afterEach(() => {
     vi.useRealTimers();
     vi.unstubAllGlobals();
-    setDocumentHidden(false);
+    setDocumentHidden(false, false);
   });
 
   it('defers secondary media and rotates only after it has loaded', () => {
@@ -88,7 +92,9 @@ describe('RotatingHeroMedia', () => {
     expect(container.querySelector('[data-hero-id="primary"]'))
       .toHaveAttribute('data-active', 'true');
 
-    fireEvent.load(screen.getByTestId('hero-secondary'));
+    act(() => {
+      fireEvent.load(screen.getByTestId('hero-secondary'));
+    });
     act(() => vi.advanceTimersByTime(19999));
     expect(container.querySelector('[data-hero-id="primary"]'))
       .toHaveAttribute('data-active', 'true');
@@ -112,7 +118,9 @@ describe('RotatingHeroMedia', () => {
     );
 
     act(() => vi.runOnlyPendingTimers());
-    fireEvent.load(screen.getByTestId('hero-secondary'));
+    act(() => {
+      fireEvent.load(screen.getByTestId('hero-secondary'));
+    });
     act(() => setDocumentHidden(true));
     act(() => vi.advanceTimersByTime(40000));
     expect(container.querySelector('[data-hero-id="primary"]'))
@@ -134,7 +142,9 @@ describe('RotatingHeroMedia', () => {
     );
 
     act(() => vi.runOnlyPendingTimers());
-    fireEvent.load(screen.getByTestId('hero-secondary'));
+    act(() => {
+      fireEvent.load(screen.getByTestId('hero-secondary'));
+    });
     expect(vi.getTimerCount()).toBeGreaterThan(0);
 
     unmount();
