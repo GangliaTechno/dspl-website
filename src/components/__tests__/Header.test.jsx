@@ -52,7 +52,6 @@ describe('Header Component', () => {
       </BrowserRouter>
     );
 
-    // When closed the label reads "Open navigation menu"
     const toggleBtn = screen.getByLabelText('Open navigation menu');
     expect(toggleBtn).toBeInTheDocument();
     expect(toggleBtn).toHaveAttribute('aria-expanded', 'false');
@@ -69,13 +68,11 @@ describe('Header Component', () => {
       </BrowserRouter>
     );
 
-    // Button label is "Open navigation menu" when closed
     const menuButton = screen.getByLabelText('Open navigation menu');
     fireEvent.click(menuButton);
 
     window.innerWidth = 1039;
     fireEvent(window, new Event('resize'));
-    // After click, label is "Close navigation menu" — but element is same button
     expect(menuButton).toHaveAttribute('aria-expanded', 'true');
 
     window.innerWidth = 1040;
@@ -110,7 +107,7 @@ describe('Header Component', () => {
     expect(menuButton).toHaveAttribute('aria-expanded', 'false');
   });
 
-  it('lifts slightly while scrolling down and returns while scrolling up', async () => {
+  it('morphs into a compact floating shell on scroll and restores at top', async () => {
     const originalAnimationFrame = window.requestAnimationFrame;
     const originalCancelAnimationFrame = window.cancelAnimationFrame;
 
@@ -130,14 +127,19 @@ describe('Header Component', () => {
 
     const header = screen.getByRole('banner');
 
-    window.scrollY = 180;
-    fireEvent.scroll(window);
-    await waitFor(() => expect(header).toHaveClass('header-lifted'));
-    expect(header).not.toHaveClass('header-hidden');
+    expect(header).not.toHaveClass('header-scrolled');
 
-    window.scrollY = 100;
+    window.scrollY = 60;
     fireEvent.scroll(window);
-    await waitFor(() => expect(header).not.toHaveClass('header-lifted'));
+    await waitFor(() => expect(header).toHaveClass('header-scrolled'));
+
+    window.scrollY = 300;
+    fireEvent.scroll(window);
+    await waitFor(() => expect(header).toHaveClass('header-scrolled'));
+
+    window.scrollY = 8;
+    fireEvent.scroll(window);
+    await waitFor(() => expect(header).not.toHaveClass('header-scrolled'));
 
     window.requestAnimationFrame = originalAnimationFrame;
     window.cancelAnimationFrame = originalCancelAnimationFrame;

@@ -160,7 +160,7 @@ describe('approved design-system corrections', () => {
     });
   });
 
-  it('keeps the shared header visible while lifting slightly on downward scroll', () => {
+  it('keeps the shared header full size at top and morphs into a floating compact shell on scroll', () => {
     const header = readSource('src/components/Header.css');
     const headerPage = readSource('src/components/Header.jsx');
 
@@ -171,28 +171,24 @@ describe('approved design-system corrections', () => {
       /\.logo-image\s*{[^}]*height:\s*48px;/s,
     );
     expect(header).toMatch(
+      /\.header-scrolled \.header-container\s*{[^}]*width:\s*min\(calc\(100% - 2rem\),\s*var\(--max-width\)\);[^}]*min-height:\s*64px;[^}]*border-radius:\s*14px;/s,
+    );
+    expect(header).toMatch(
       /@media\s*\(max-width:\s*1039px\)\s*{[\s\S]*?\.header-container\s*{[^}]*min-height:\s*72px;[^}]*padding:\s*0 1\.25rem;[\s\S]*?\.logo-image\s*{[^}]*height:\s*44px;/s,
     );
     expect(header).toMatch(
-      /\.header-scrolled \.logo-image\s*{[^}]*transform:\s*scale\(0\.875\);/s,
+      /\.header-scrolled \.logo-image\s*{[^}]*transform:\s*scale\(0\.92\);/s,
     );
     expect(header).toMatch(
-      /\.header-lifted\s*{[^}]*transform:\s*translate3d\(0,\s*-0\.5rem,\s*0\);/s,
+      /\.header\s*{[^}]*transition:[^}]*transform 360ms cubic-bezier\(0\.16,\s*1,\s*0\.3,\s*1\),/s,
     );
     expect(header).toMatch(
-      /@media\s*\(max-width:\s*768px\)\s*{[\s\S]*?\.header-lifted\s*{[^}]*transform:\s*translate3d\(0,\s*-0\.375rem,\s*0\);/s,
-    );
-    expect(header).not.toContain('pointer-events: none');
-    expect(header).toMatch(
-      /\.header\s*{[^}]*transition:[^}]*transform 280ms cubic-bezier\(0\.16,\s*1,\s*0\.3,\s*1\),/s,
-    );
-    expect(header).toMatch(
-      /@media\s*\(prefers-reduced-motion:\s*reduce\)\s*{[\s\S]*?\.header,[\s\S]*?\.logo-image,[\s\S]*?\.mobile-drawer\s*{[^}]*transition:\s*none;/s,
+      /@media\s*\(prefers-reduced-motion:\s*reduce\)\s*{[\s\S]*?\.header,[\s\S]*?\.header-container,[\s\S]*?\.logo-image,[\s\S]*?\.mobile-drawer\s*{[^}]*transition:\s*none;/s,
     );
     expect(headerPage).toContain(
       "window.addEventListener('scroll', handleScroll, { passive: true })",
     );
-    expect(headerPage).toContain("isLifted ? 'header-lifted' : ''");
+    expect(headerPage).toContain("scrolled ? 'header-scrolled' : ''");
     expect(headerPage).toContain('requestAnimationFrame');
   });
 

@@ -1,11 +1,13 @@
 import './Header.css';
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { Link, useLocation } from 'react-router';
-import { Menu, X } from 'lucide-react';
+import { ArrowUpRight, Menu, X } from 'lucide-react';
 import logoImg from '../assets/icon_orange.webp';
 import { blogsEnabled } from '../content/publication';
 
 const DESKTOP_NAV_MIN_WIDTH = 1040;
+const SCROLLED_ENTER_Y = 36;
+const SCROLLED_EXIT_Y = 12;
 
 const FOCUSABLE_SELECTORS =
   'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
@@ -26,38 +28,21 @@ const normalizePath = (pathname) =>
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [isLifted, setIsLifted] = useState(false);
-  const lastScrollYRef = useRef(0);
   const animationFrameRef = useRef(null);
   const location = useLocation();
   const menuBtnRef = useRef(null);
   const drawerRef = useRef(null);
 
   useEffect(() => {
-    lastScrollYRef.current = Math.max(window.scrollY, 0);
-
     const updateHeader = () => {
       animationFrameRef.current = null;
-
       const currentScrollY = Math.max(window.scrollY, 0);
-      const scrollDelta = currentScrollY - lastScrollYRef.current;
 
-      // Stable hysteresis threshold: enter compact state at > 36px, exit at < 12px
       setScrolled((prev) => {
-        if (currentScrollY > 36) return true;
-        if (currentScrollY < 12) return false;
+        if (currentScrollY > SCROLLED_ENTER_Y) return true;
+        if (currentScrollY < SCROLLED_EXIT_Y) return false;
         return prev;
       });
-
-      if (isOpen || currentScrollY <= 80) {
-        setIsLifted(false);
-      } else if (scrollDelta > 4) {
-        setIsLifted(true);
-      } else if (scrollDelta < -4) {
-        setIsLifted(false);
-      }
-
-      lastScrollYRef.current = currentScrollY;
     };
 
     const handleScroll = () => {
@@ -74,7 +59,7 @@ const Header = () => {
         window.cancelAnimationFrame(animationFrameRef.current);
       }
     };
-  }, [isOpen]);
+  }, []);
 
   useEffect(() => {
     const handleResize = () => {
@@ -86,7 +71,6 @@ const Header = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Focus trap + Escape key for mobile drawer
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (!isOpen) return;
@@ -121,11 +105,9 @@ const Header = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen]);
 
-  // Body scroll lock + focus management on open/close
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
-      // Move focus into drawer after transition starts
       requestAnimationFrame(() => {
         drawerRef.current?.querySelector('.mobile-drawer-close')?.focus();
       });
@@ -137,8 +119,6 @@ const Header = () => {
     };
   }, [isOpen]);
 
-  // Drawer closes via handleLinkClick on each nav link \u2014 no effect needed here.
-
   const handleLinkClick = useCallback(() => {
     setIsOpen(false);
     menuBtnRef.current?.focus();
@@ -147,7 +127,6 @@ const Header = () => {
   const toggleMenu = useCallback(() => {
     setIsOpen((prev) => {
       if (prev) {
-        // Closing — restore focus to button
         setTimeout(() => menuBtnRef.current?.focus(), 0);
       }
       return !prev;
@@ -160,20 +139,27 @@ const Header = () => {
         className={[
           'header',
           scrolled ? 'header-scrolled' : '',
-          isLifted ? 'header-lifted' : '',
         ].filter(Boolean).join(' ')}
       >
         <div className="header-container">
-          {/* Left Side: Logo */}
           <Link to="/" className="logo-link" onClick={() => setIsOpen(false)}>
-            <img src={logoImg} alt="Dashapatmaja Solutions Pvt Ltd logo" className="logo-image" width="806" height="190" loading="eager" decoding="async" />
+            <img
+              src={logoImg}
+              alt="Dashapatmaja Solutions Pvt Ltd logo"
+              className="logo-image"
+              width="806"
+              height="190"
+              loading="eager"
+              decoding="async"
+            />
           </Link>
 
-          {/* Center: Desktop Navigation Links */}
           <nav className="desktop-nav" aria-label="Main Navigation">
             {navItems.map((item) => {
               const currentPath = normalizePath(location.pathname);
-              const active = currentPath === item.to || (item.to === '/blogs' && currentPath.startsWith('/blogs/'));
+              const active =
+                currentPath === item.to ||
+                (item.to === '/blogs' && currentPath.startsWith('/blogs/'));
               return (
                 <Link
                   key={item.to}
@@ -187,20 +173,18 @@ const Header = () => {
             })}
           </nav>
 
-          {/* Right Side: Action Button */}
           <div className="desktop-right-controls">
             <Link
               to="/start"
               className="btn btn-primary header-cta"
               data-umami-event="cta_start_project"
             >
-              Start a project
+              <span>Start a project</span>
+              <ArrowUpRight size={15} strokeWidth={2} aria-hidden="true" />
             </Link>
           </div>
 
-          {/* Mobile controls wrapper */}
           <div className="mobile-controls">
-            {/* Mobile Menu Button */}
             <button
               ref={menuBtnRef}
               className="mobile-menu-btn"
@@ -216,12 +200,13 @@ const Header = () => {
         </div>
       </header>
 
-      {/* Mobile Navigation Drawer */}
-      {/* Backdrop overlay */}
       {isOpen && (
         <div
           className="mobile-drawer-backdrop"
-          onClick={() => { setIsOpen(false); menuBtnRef.current?.focus(); }}
+          onClick={() => {
+            setIsOpen(false);
+            menuBtnRef.current?.focus();
+          }}
           aria-hidden="true"
         />
       )}
@@ -246,7 +231,9 @@ const Header = () => {
         <nav className="mobile-nav" aria-label="Mobile Navigation">
           {navItems.map((item) => {
             const currentPath = normalizePath(location.pathname);
-            const active = currentPath === item.to || (item.to === '/blogs' && currentPath.startsWith('/blogs/'));
+            const active =
+              currentPath === item.to ||
+              (item.to === '/blogs' && currentPath.startsWith('/blogs/'));
             return (
               <Link
                 key={item.to}
@@ -265,11 +252,11 @@ const Header = () => {
             onClick={handleLinkClick}
             data-umami-event="cta_start_project"
           >
-            Start a project
+            <span>Start a project</span>
+            <ArrowUpRight size={17} strokeWidth={2} aria-hidden="true" />
           </Link>
         </nav>
       </div>
-
     </>
   );
 };
