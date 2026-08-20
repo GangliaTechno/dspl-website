@@ -55,6 +55,16 @@ describe('Home page', () => {
     });
 
     expect(within(supporterRegion).queryByRole('button')).not.toBeInTheDocument();
+    expect(screen.getByText('Capabilities')).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', {
+        level: 2,
+        name: /Brand, market, and commerce.*Coordinated as one system/i,
+      }),
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByText(/Start with the capability you need now/i),
+    ).not.toBeInTheDocument();
     expect(container.querySelectorAll('.service-evidence-card')).toHaveLength(3);
     expect(screen.getByRole('heading', { name: 'Compliance coordination' }))
       .toBeInTheDocument();

@@ -129,15 +129,13 @@ const Home = () => {
       >
         <div className="container">
           <div className="services-intro">
-            <div>
-              <h2 className="section-title" id="services-title">
-                Brand, market, and commerce — coordinated as one system.
-              </h2>
-            </div>
-            <p className="section-title-description">
-              Start with the capability you need now, then connect strategy,
-              market activity, and commerce as the business grows.
-            </p>
+            <span className="section-subtitle services-eyebrow">Capabilities</span>
+            <h2 className="services-title" id="services-title">
+              <span className="services-title-primary">Brand, market, and commerce</span>
+              <span className="services-title-secondary">
+                Coordinated as one system.
+              </span>
+            </h2>
           </div>
 
           <div className="service-evidence-grid">
