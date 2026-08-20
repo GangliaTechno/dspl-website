@@ -23,7 +23,7 @@ describe('Header Component', () => {
     expect(screen.getByRole('navigation', { name: 'Main Navigation' })).toBeInTheDocument();
     expect(screen.getAllByText('About')[0]).toBeInTheDocument();
     expect(screen.getAllByText('Contact')[0]).toBeInTheDocument();
-    for (const link of screen.getAllByRole('link', { name: 'Start a Project' })) {
+    for (const link of screen.getAllByRole('link', { name: 'Start a project' })) {
       expect(link).toHaveAttribute('href', '/start');
     }
     expect(screen.getByRole('link', { name: 'Blogs' })).toHaveAttribute('href', '/blogs');
@@ -98,7 +98,7 @@ describe('Header Component', () => {
       name: 'Close navigation menu',
     });
     const startProject = within(drawer).getByRole('link', {
-      name: 'Start a Project',
+      name: 'Start a project',
     });
 
     await waitFor(() => expect(closeButton).toHaveFocus());

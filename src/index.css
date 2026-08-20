@@ -39,6 +39,7 @@
   --focus-ring: 3px solid var(--accent-text);
   --font-sans: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-serif: Georgia, 'Times New Roman', serif;
   --header-height: 4.75rem;
   --max-width: var(--container-width);
 
@@ -335,7 +336,6 @@ select:focus-visible,
     transition-duration: 0.01ms !important;
   }
 
-  .supporter-track,
   .mobile-drawer,
   .faq-content-wrapper {
     animation: none !important;

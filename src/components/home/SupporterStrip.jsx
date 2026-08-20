@@ -1,119 +1,103 @@
-import { useLayoutEffect, useRef, useState } from 'react';
-import { useReducedMotion } from 'framer-motion';
+const SupporterStrip = ({ supporters }) => (
+  <aside
+    className="supporter-rail"
+    role="region"
+    aria-label="Recognised and supported by"
+  >
+    <div className="supporter-rail-inner">
+      <div className="supporter-rail-header">
+        <span className="supporter-rail-label">Recognised and supported by</span>
+      </div>
 
-const SupporterStrip = ({ supporters }) => {
-  const prefersReducedMotion = useReducedMotion();
-  const bandRef = useRef(null);
-  const sequenceRef = useRef(null);
-  const [marqueeMetrics, setMarqueeMetrics] = useState({
-    sequenceWidth: 0,
-    sequenceCount: 2,
-  });
+      <div className="supporter-marquee-viewport">
+        <div className="supporter-marquee-track">
+          {/* Primary Sequence (Accessible) */}
+          <div className="supporter-marquee-sequence">
+            {supporters.map((logo) => (
+              <div
+                className={`supporter-logo-slot ${logo.className || ''}`}
+                key={`primary-${logo.alt}`}
+              >
+                <img
+                  src={logo.src}
+                  alt={logo.alt}
+                  className="supporter-logo"
+                  width={logo.width}
+                  height={logo.height}
+                  loading="eager"
+                  decoding="async"
+                  draggable="false"
+                />
+              </div>
+            ))}
+          </div>
 
-  useLayoutEffect(() => {
-    const band = bandRef.current;
-    const sequence = sequenceRef.current;
+          {/* Duplicate Sequence 1 for CSS Marquee Continuity (Aria-Hidden) */}
+          <div className="supporter-marquee-sequence" aria-hidden="true">
+            {supporters.map((logo) => (
+              <div
+                className={`supporter-logo-slot ${logo.className || ''}`}
+                key={`dup1-${logo.alt}`}
+              >
+                <img
+                  src={logo.src}
+                  alt=""
+                  className="supporter-logo"
+                  width={logo.width}
+                  height={logo.height}
+                  loading="eager"
+                  decoding="async"
+                  draggable="false"
+                />
+              </div>
+            ))}
+          </div>
 
-    if (!band || !sequence) {
-      return undefined;
-    }
+          {/* Duplicate Sequence 2 for Wide Screen Coverage (Aria-Hidden) */}
+          <div className="supporter-marquee-sequence" aria-hidden="true">
+            {supporters.map((logo) => (
+              <div
+                className={`supporter-logo-slot ${logo.className || ''}`}
+                key={`dup2-${logo.alt}`}
+              >
+                <img
+                  src={logo.src}
+                  alt=""
+                  className="supporter-logo"
+                  width={logo.width}
+                  height={logo.height}
+                  loading="eager"
+                  decoding="async"
+                  draggable="false"
+                />
+              </div>
+            ))}
+          </div>
 
-    const measure = () => {
-      const bandWidth = band.getBoundingClientRect().width;
-      const sequenceWidth = sequence.getBoundingClientRect().width;
-
-      if (bandWidth <= 0 || sequenceWidth <= 0) {
-        return;
-      }
-
-      const sequenceCount = Math.max(
-        2,
-        Math.ceil(bandWidth / sequenceWidth) + 1,
-      );
-
-      setMarqueeMetrics((current) => {
-        if (
-          current.sequenceWidth === sequenceWidth
-          && current.sequenceCount === sequenceCount
-        ) {
-          return current;
-        }
-
-        return { sequenceWidth, sequenceCount };
-      });
-    };
-
-    measure();
-
-    if (typeof ResizeObserver === 'undefined') {
-      return undefined;
-    }
-
-    const observer = new ResizeObserver(measure);
-    observer.observe(band);
-    observer.observe(sequence);
-
-    return () => observer.disconnect();
-  }, [supporters]);
-
-  const sequenceWidth = marqueeMetrics.sequenceWidth;
-  const sequenceCount = prefersReducedMotion
-    ? 1
-    : marqueeMetrics.sequenceCount;
-  const shouldAnimate = !prefersReducedMotion && sequenceWidth > 0;
-  const trackClassName = [
-    'supporter-track',
-    prefersReducedMotion ? 'supporter-track-static' : '',
-    shouldAnimate ? 'supporter-track-running' : '',
-  ].filter(Boolean).join(' ');
-
-  return (
-    <div
-      ref={bandRef}
-      className="supporter-band"
-      role="region"
-      aria-label="Recognised and supported by"
-    >
-      <p className="supporter-label">Recognised and supported by</p>
-      <div className="supporter-viewport">
-        <div
-          className={trackClassName}
-          style={
-            shouldAnimate
-              ? { '--supporter-shift': `${-sequenceWidth}px` }
-              : undefined
-          }
-        >
-          {Array.from({ length: sequenceCount }, (_, sequenceIndex) => (
-            <div
-              ref={sequenceIndex === 0 ? sequenceRef : undefined}
-              className="supporter-sequence"
-              key={`supporter-sequence-${sequenceIndex}`}
-              aria-hidden={sequenceIndex > 0 ? 'true' : undefined}
-            >
-              {supporters.map((logo) => (
-                <div
-                  className={`supporter-logo-slot ${logo.className || ''}`}
-                  key={`${logo.alt}-${sequenceIndex}`}
-                >
-                  <img
-                    src={logo.src}
-                    alt={sequenceIndex > 0 ? '' : logo.alt}
-                    className="supporter-logo"
-                    width={logo.width}
-                    height={logo.height}
-                    loading="eager"
-                    decoding="async"
-                    draggable="false"
-                  />
-                </div>
-              ))}
-            </div>
-          ))}
+          {/* Duplicate Sequence 3 for Ultra-Wide / 4K Screen Coverage (Aria-Hidden) */}
+          <div className="supporter-marquee-sequence" aria-hidden="true">
+            {supporters.map((logo) => (
+              <div
+                className={`supporter-logo-slot ${logo.className || ''}`}
+                key={`dup3-${logo.alt}`}
+              >
+                <img
+                  src={logo.src}
+                  alt=""
+                  className="supporter-logo"
+                  width={logo.width}
+                  height={logo.height}
+                  loading="eager"
+                  decoding="async"
+                  draggable="false"
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
-  );
-};
+  </aside>
+);
 
 export default SupporterStrip;

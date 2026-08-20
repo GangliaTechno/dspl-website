@@ -12,7 +12,6 @@ import homeRotation031440 from '../assets/home-rotation-03-1440.webp';
 import homeRotation03Mobile from '../assets/home-rotation-03-mobile.webp';
 import dstNidhiLogo from '../assets/supporter-dst-nidhi-marquee.png';
 import nidhiPrayasLogo from '../assets/supporter-nidhi-prayas-marquee.png';
-import mutbiLogo from '../assets/supporter-mutbi-marquee.png';
 import startupKarnatakaLogo from '../assets/supporter-startup-karnataka-marquee.png';
 import useSEO from '../hooks/useSEO';
 import { getRouteMetadata } from '../seo/routeMetadata';
@@ -21,20 +20,7 @@ import './Home.css';
 const supporters = [
   { src: dstNidhiLogo, alt: 'DST NIDHI', className: 'supporter-logo-dst', width: 186, height: 96 },
   { src: nidhiPrayasLogo, alt: 'NIDHI PRAYAS', className: 'supporter-logo-nidhi', width: 113, height: 96 },
-  {
-    src: mutbiLogo,
-    alt: 'Manipal Universal Technology Business Incubator',
-    className: 'supporter-logo-mutbi',
-    width: 300,
-    height: 96,
-  },
-  {
-    src: startupKarnatakaLogo,
-    alt: 'Startup Karnataka',
-    className: 'supporter-logo-startup',
-    width: 260,
-    height: 96,
-  },
+  { src: startupKarnatakaLogo, alt: 'Startup Karnataka', className: 'supporter-logo-startup', width: 260, height: 96 },
 ];
 
 const services = [
@@ -59,23 +45,23 @@ const processSteps = [
   {
     number: '01',
     title: 'Audit',
-    description: 'We examine the current position, audience, constraints, and priorities.',
-    timing: 'Confirmed after the initial scope review',
-    output: 'Priority audit and agreed brief',
+    description: 'Understand the current position, priorities and constraints.',
+    timing: 'Initial scope review',
+    output: 'Priority audit and brief',
   },
   {
     number: '02',
     title: 'Build',
-    description: 'We create and coordinate the agreed brand, market, and commerce system.',
-    timing: 'Set by the approved roadmap',
-    output: 'Launch-ready system and operating handoffs',
+    description: 'Create and coordinate the agreed system.',
+    timing: 'Approved roadmap',
+    output: 'Launch-ready system',
   },
   {
     number: '03',
     title: 'Grow',
-    description: 'We launch, measure, and improve the system around useful evidence.',
-    timing: 'Agreed as part of the engagement',
-    output: 'Performance review and next priorities',
+    description: 'Launch, measure and improve around evidence.',
+    timing: 'Engagement cadence',
+    output: 'Review and next priorities',
   },
 ];
 
@@ -84,7 +70,7 @@ const Home = () => {
 
   return (
     <div className="home-page fade-in">
-      <section className="home-hero">
+      <section className="home-hero" aria-label="Introduction">
         <picture className="home-hero-media" aria-hidden="true">
           <source media="(max-width: 600px)" srcSet={homeRotation03Mobile} />
           <source
@@ -102,28 +88,32 @@ const Home = () => {
             decoding="async"
           />
         </picture>
+
+        <div className="home-hero-overlay" aria-hidden="true" />
+
         <div className="container home-hero-layout">
           <div className="home-hero-content">
             <h1 className="hero-title">
-              <span>We build consumer brands.</span>{' '}
-              <span className="hero-title-accent">
+              <span className="hero-title-main">We build consumer brands.</span>
+              <span className="hero-title-secondary">
                 We help businesses build theirs.
               </span>
             </h1>
             <p className="hero-subhead">
-              Dashapatmaja Solutions Pvt Ltd develops its own consumer brands
-              and supports businesses with coordinated branding, marketing,
-              e-commerce, and compliance support.
+              DSPL builds its own consumer brands and helps businesses grow
+              through coordinated branding, marketing, e-commerce and
+              compliance support.
             </p>
             <div className="home-hero-actions">
               <Link className="btn btn-primary" to="/start">
                 Start a project
               </Link>
               <Link
-                className="btn btn-secondary hero-capabilities-link"
+                className="hero-secondary-action"
                 to="/brands/raw-radicles"
               >
-                See how we built Raw Radicles
+                <span>See how we built Raw Radicles</span>
+                <ArrowRight size={16} aria-hidden="true" />
               </Link>
             </div>
           </div>

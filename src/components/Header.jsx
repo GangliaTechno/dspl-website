@@ -194,7 +194,7 @@ const Header = () => {
               className="btn btn-primary header-cta"
               data-umami-event="cta_start_project"
             >
-              Start a Project
+              Start a project
             </Link>
           </div>
 
@@ -265,7 +265,7 @@ const Header = () => {
             onClick={handleLinkClick}
             data-umami-event="cta_start_project"
           >
-            Start a Project
+            Start a project
           </Link>
         </nav>
       </div>

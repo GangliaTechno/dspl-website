@@ -82,21 +82,18 @@ describe('approved design-system corrections', () => {
     );
   });
 
-  it('normalizes responsive display type, touch targets, and looping motion', () => {
+  it('normalizes responsive display type, touch targets, and proof rail', () => {
     const home = readSource('src/pages/Home.css');
     const header = readSource('src/components/Header.css');
     const supporter = readSource('src/components/home/SupporterStrip.jsx');
 
     expect(home).toMatch(
-      /\.hero-title\s*{[^}]*font-size:\s*clamp\(2\.75rem,\s*5\.5vw,\s*5\.0625rem\);/s,
+      /\.hero-title-main\s*{[^}]*font-size:\s*clamp\(3\.25rem,\s*5\.8vw,\s*6\.25rem\);/s,
     );
     expect(header).toMatch(
       /\.mobile-menu-btn\s*{[^}]*min-width:\s*44px;[^}]*min-height:\s*44px;/s,
     );
-    expect(supporter).toContain('useReducedMotion');
-    expect(supporter).toContain(
-      "'--supporter-shift': `${-sequenceWidth}px`",
-    );
+    expect(supporter).toContain('className="supporter-rail"');
   });
 
   it('does not move shared buttons when touch devices emulate hover', () => {
@@ -217,7 +214,7 @@ describe('approved design-system corrections', () => {
     expect(homePage).not.toContain("marker: '01'");
     expect(homePage).not.toContain('className="service-marker"');
     expect(homePage).not.toMatch(/return on every rupee/i);
-    expect(processSteps).toContain('Step {Number(step.number)}');
+    expect(processSteps).toContain('{step.number}');
   });
 
   it('uses a responsive, text-led direction framework on About', () => {
@@ -388,14 +385,14 @@ describe('approved design-system corrections', () => {
     );
   });
 
-  it('keeps the desktop Home hero at least one available viewport tall', () => {
+  it('shapes the desktop Home hero with full-bleed photographic proportions', () => {
     const home = readSource('src/pages/Home.css');
 
     expect(home).toMatch(
       /\.home-page\s*{[^}]*padding-top:\s*4\.75rem;/s,
     );
     expect(home).toMatch(
-      /\.home-hero\s*{[^}]*min-height:\s*max\(42rem,\s*calc\(100svh\s*-\s*4\.75rem\)\);/s,
+      /\.home-hero\s*{[^}]*min-height:\s*max\(42\.5rem,\s*calc\(100svh\s*-\s*var\(--header-height/s,
     );
     expect(home).toMatch(
       /@media\s*\(max-width:\s*1039px\)\s*{[\s\S]*?\.home-hero\s*{[^}]*min-height:\s*auto;/s,
@@ -409,50 +406,48 @@ describe('approved design-system corrections', () => {
 
     expect(homePage).toContain('<source media="(max-width: 600px)"');
     expect(home).toMatch(
-      /@media\s*\(max-width:\s*520px\)\s*{[\s\S]*?\.home-hero-layout\s*{[^}]*padding-block:\s*2\.5rem\s+2rem;[\s\S]*?\.home-hero-actions\s*{[^}]*flex-direction:\s*column;[^}]*width:\s*min\(100%,\s*22rem\);[\s\S]*?\.home-hero-actions\s+\.btn\s*{[^}]*width:\s*100%;/s,
+      /@media\s*\(max-width:\s*576px\)\s*{[\s\S]*?\.home-hero-actions\s*{[^}]*flex-direction:\s*column;[^}]*width:\s*min\(100%,\s*20rem\);[\s\S]*?\.home-hero-actions\s+\.btn\s*{[^}]*width:\s*100%;/s,
     );
     expect(homeSections).toMatch(
-      /@media\s*\(max-width:\s*768px\)\s*{[\s\S]*?\.supporter-band\s*{[^}]*position:\s*relative;[^}]*bottom:\s*auto;[^}]*background:\s*rgba\(0,\s*0,\s*0,\s*0\.52\);/s,
+      /@media\s*\(max-width:\s*900px\)\s*{[\s\S]*?\.supporter-rail-inner\s*{[^}]*padding-block:\s*0\.15rem/s,
     );
     expect(home).toMatch(
       /\.compliance-support-links\s+a\s*{[^}]*min-height:\s*44px;[^}]*padding:\s*0\.5rem\s+0;/s,
     );
   });
 
-  it('uses the approved Home hero hierarchy without a duplicate final CTA', () => {
+  it('uses the approved full-bleed photographic editorial hero hierarchy without a duplicate final CTA', () => {
     const home = readSource('src/pages/Home.css');
     const homePage = readSource('src/pages/Home.jsx');
 
     expect(home).toMatch(
-      /\.home-hero::after\s*{[^}]*background:\s*rgba\(0,\s*0,\s*0,\s*0\.38\);/s,
+      /\.home-hero\s*{[^}]*display:\s*grid;[^}]*grid-template-rows:\s*minmax\(0,\s*1fr\)\s*auto;/s,
     );
     expect(home).toMatch(
-      /\.home-hero-layout\s*{[^}]*display:\s*flex;[^}]*justify-content:\s*center;[^}]*padding-block:\s*clamp\(4rem,\s*6\.5vw,\s*5\.75rem\)\s+clamp\(5rem,\s*8vw,\s*6\.75rem\);/s,
+      /\.home-hero-layout\s*{[^}]*display:\s*flex;[^}]*align-items:\s*center;[^}]*justify-content:\s*center;/s,
     );
     expect(home).toMatch(
-      /\.home-hero-content\s*{[^}]*width:\s*min\(100%,\s*78rem\);[^}]*text-align:\s*center;[^}]*text-shadow:\s*0 2px 16px rgba\(0,\s*0,\s*0,\s*0\.88\);/s,
+      /\.hero-title-main\s*{[^}]*font-family:\s*var\(--font-heading\);/s,
     );
-    expect(home).not.toContain('.home-hero-content::before');
     expect(home).toMatch(
-      /\.hero-capabilities-link\s*{[^}]*background:\s*rgba\(8,\s*8,\s*8,\s*0\.26\);[^}]*backdrop-filter:\s*blur\(3px\);/s,
+      /\.hero-title-secondary\s*{[^}]*font-family:\s*var\(--font-heading\);[^}]*font-size:\s*clamp\(2\.5rem,\s*4\.2vw,\s*4\.4rem\);/s,
     );
-    expect(home).not.toContain('radial-gradient(');
+    expect(home).toMatch(
+      /radial-gradient\(\s*ellipse at center,\s*rgba\(4,\s*7,\s*10,\s*0\.18\)/s,
+    );
     expect(home).not.toContain('.hero-eyebrow');
     expect(homePage).not.toContain('className="hero-eyebrow"');
     expect(home).toMatch(
-      /\.hero-title\s*>\s*span\s*{[^}]*display:\s*block;/s,
+      /\.hero-subhead\s*{[^}]*max-width:\s*min\(92vw,\s*78ch\);/s,
     );
-    expect(home).toMatch(
-      /\.hero-subhead\s*{[^}]*max-width:\s*64ch;[^}]*margin:\s*0 auto 2\.75rem;[^}]*font-size:\s*clamp\(1\.125rem,\s*1\.65vw,\s*1\.375rem\);[^}]*line-height:\s*1\.65;/s,
-    );
-    expect(home).toMatch(/\.hero-title\s*{[^}]*color:\s*#fff;/s);
     expect(homePage).not.toContain(
       "import { openWorkModal } from '../utils/workModal';",
     );
     expect(homePage).not.toContain("openWorkModal('homepage-hero')");
-    expect(homePage).toContain('We build consumer brands.');
+    expect(homePage).toContain('We build');
+    expect(homePage).toContain('consumer brands.');
     expect(homePage).toContain('We help businesses build theirs.');
-    expect(homePage).toContain('and compliance support.');
+    expect(homePage).toContain('compliance support.');
     expect(homePage).toContain('id="capabilities"');
     expect(homePage).not.toContain(
       'Brand systems for Indian consumer businesses',
@@ -531,72 +526,43 @@ describe('approved design-system corrections', () => {
     expect(aboutPage).toContain('className="journey-stories"');
   });
 
-  it('aligns supporter logos and uses the approved warm Raw Radicles treatment', () => {
+  it('aligns supporter logos in the proof rail and uses the approved warm Raw Radicles treatment', () => {
     const supporter = readSource('src/components/home/SupporterStrip.jsx');
     const homeSections = readSource('src/components/home/homeSections.css');
     const brandsCss = readSource('src/pages/Brands.css');
     const homePage = readSource('src/pages/Home.jsx');
     const brandsPage = readSource('src/pages/Brands.jsx');
 
-    expect(supporter).toContain(
-      'Math.ceil(bandWidth / sequenceWidth) + 1',
-    );
-    expect(supporter).toContain('new ResizeObserver(measure)');
-    expect(supporter).toContain(
-      "'--supporter-shift': `${-sequenceWidth}px`",
-    );
-    expect(supporter).toContain('supporter-track-running');
-    expect(supporter).toContain('className="supporter-sequence"');
-    expect(homeSections).toContain(
-      '--supporter-sequence-min-width: max-content;',
+    expect(supporter).toContain('className="supporter-rail"');
+    expect(supporter).toContain('className="supporter-marquee-track"');
+    expect(homeSections).toMatch(
+      /\.supporter-marquee-track\s*{[^}]*animation:\s*supporter-marquee-anim\s*28s\s*linear\s*infinite;/s,
     );
     expect(homeSections).toMatch(
-      /\.supporter-sequence\s*{[^}]*min-width:\s*var\(--supporter-sequence-min-width\);/s,
+      /\.supporter-logo-dst\s*{[^}]*height:\s*clamp\(54px,\s*6\.2vw,\s*66px\);/s,
     );
     expect(homeSections).toMatch(
-      /\.supporter-track-running\s*{[^}]*animation:\s*supporter-marquee 28s linear infinite;[^}]*will-change:\s*transform;/s,
+      /\.supporter-logo\s*{[^}]*width:\s*auto;[^}]*height:\s*100%;[^}]*object-fit:\s*contain;/s,
     );
-    expect(homeSections).toMatch(
-      /@keyframes supporter-marquee\s*{[\s\S]*?from\s*{[^}]*transform:\s*translate3d\(0,\s*0,\s*0\);[^}]*}[\s\S]*?to\s*{[^}]*transform:\s*translate3d\(var\(--supporter-shift\),\s*0,\s*0\);/s,
-    );
-    expect(homeSections).toMatch(
-      /@media\s*\(prefers-reduced-motion:\s*reduce\)\s*{[\s\S]*?\.supporter-track-running\s*{[^}]*animation:\s*none;/s,
-    );
-    expect(homeSections).toContain('--supporter-gap: 7rem;');
-    expect(homeSections).not.toContain('--supporter-slot-width');
-    expect(homeSections).toMatch(
-      /\.supporter-logo-slot\s*{[^}]*width:\s*auto;[^}]*height:\s*var\(--supporter-slot-height\);/s,
-    );
-    expect(homeSections).toMatch(
-      /\.supporter-logo\s*{[^}]*width:\s*auto;[^}]*height:\s*100%;[^}]*object-fit:\s*contain;[^}]*transform:\s*none;[^}]*filter:\s*none;[^}]*opacity:\s*1;/s,
-    );
-    expect(homeSections).not.toContain('drop-shadow(');
-    expect(homeSections).not.toMatch(/\.supporter-logo\s*{[^}]*transition:/s);
-    expect(homeSections).not.toContain('.supporter-logo:hover');
-    expect(homeSections).not.toMatch(/\.supporter-logo-(?:dst|nidhi|mutbi|startup)\s*{/);
     expect(homeSections).not.toContain('.supporter-logo-mutbi');
     expect(homeSections).not.toContain('--supporter-optical-trim');
-    expect(homeSections).toMatch(
-      /@media\s*\(max-width:\s*768px\)\s*{[\s\S]*?--supporter-gap:\s*5rem;/s,
-    );
-    expect(supporter).not.toContain('supporter-track-paused');
-    expect(supporter).not.toContain('Pause supporter logos');
-    expect(supporter).not.toContain('Resume supporter logos');
     expect(homeSections).not.toContain('.supporter-motion-control');
-    expect(homeSections).toContain('--supporter-edge-guard:');
     expect(homePage).toContain(
       "alt: 'DST NIDHI', className: 'supporter-logo-dst'",
     );
     expect(homePage).toContain(
       "alt: 'NIDHI PRAYAS', className: 'supporter-logo-nidhi'",
     );
-    const marqueeSupporters = [
+    expect(homePage).toContain(
+      "alt: 'Startup Karnataka', className: 'supporter-logo-startup'",
+    );
+    expect(homePage).not.toContain('supporter-mutbi-marquee.png');
+    const staticSupporters = [
       ['supporter-dst-nidhi-marquee.png', 186],
       ['supporter-nidhi-prayas-marquee.png', 113],
-      ['supporter-mutbi-marquee.png', 300],
       ['supporter-startup-karnataka-marquee.png', 260],
     ];
-    marqueeSupporters.forEach(([asset, width]) => {
+    staticSupporters.forEach(([asset, width]) => {
       expect(homePage).toContain(asset);
       expect(readPngSize(`src/assets/${asset}`)).toEqual({
         width,
@@ -723,7 +689,7 @@ describe('approved design-system corrections', () => {
     const servicePage = readSource('src/components/ServicePage.jsx');
 
     expect(header).toContain('to="/start"');
-    expect(header).toContain('Start a Project');
+    expect(header).toContain('Start a project');
     expect(header).not.toContain('openWorkModal');
     expect(brands).not.toContain('openWorkModal');
     expect(home).not.toContain('openWorkModal');

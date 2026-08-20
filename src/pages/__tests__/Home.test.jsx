@@ -25,7 +25,7 @@ describe('Home page', () => {
       '/start',
     );
     expect(
-      screen.getByRole('link', { name: 'See how we built Raw Radicles' }),
+      screen.getByRole('link', { name: /see how we built raw radicles/i }),
     ).toHaveAttribute('href', '/brands/raw-radicles');
   });
 
@@ -38,7 +38,22 @@ describe('Home page', () => {
     expect(
       within(supporterRegion).getByText('Recognised and supported by'),
     ).toBeVisible();
-    expect(within(supporterRegion).getAllByRole('img')).toHaveLength(4);
+    expect(within(supporterRegion).getAllByRole('img')).toHaveLength(3);
+    expect(within(supporterRegion).getByAltText('DST NIDHI')).toBeInTheDocument();
+    expect(within(supporterRegion).getByAltText('NIDHI PRAYAS')).toBeInTheDocument();
+    expect(within(supporterRegion).getByAltText('Startup Karnataka')).toBeInTheDocument();
+    expect(within(supporterRegion).queryByAltText(/manipal universal technology business incubator|mutbi/i)).not.toBeInTheDocument();
+
+    const duplicateSequences = supporterRegion.querySelectorAll(
+      '.supporter-marquee-sequence[aria-hidden="true"]',
+    );
+    expect(duplicateSequences).toHaveLength(3);
+    duplicateSequences.forEach((seq) => {
+      const dupImages = seq.querySelectorAll('img');
+      expect(dupImages).toHaveLength(3);
+      dupImages.forEach((img) => expect(img).toHaveAttribute('alt', ''));
+    });
+
     expect(within(supporterRegion).queryByRole('button')).not.toBeInTheDocument();
     expect(container.querySelectorAll('.service-evidence-card')).toHaveLength(3);
     expect(screen.getByRole('heading', { name: 'Compliance coordination' }))
@@ -53,15 +68,36 @@ describe('Home page', () => {
     const { container } = renderHome();
     expect(screen.queryByRole('heading', { name: 'Owned experience informs the work' }))
       .not.toBeInTheDocument();
-    expect(container.querySelectorAll('.process-step')).toHaveLength(3);
+    expect(container.querySelectorAll('.process-column')).toHaveLength(3);
     expect(screen.getAllByText('Timing')).toHaveLength(3);
     expect(screen.getAllByText('Output')).toHaveLength(3);
     expect(Array.from(container.querySelectorAll('.process-step-title'), (node) => node.textContent))
       .toEqual(['Audit', 'Build', 'Grow']);
-    for (const step of container.querySelectorAll('.process-step')) {
-      expect(step.querySelector('.process-step-timing dd')).not.toBeEmptyDOMElement();
-      expect(step.querySelector('.process-step-output dd')).not.toBeEmptyDOMElement();
-    }
+    expect(Array.from(container.querySelectorAll('.process-big-numeral'), (node) => node.textContent))
+      .toEqual(['01', '02', '03']);
+
+    const steps = container.querySelectorAll('.process-column');
+    expect(steps[0].querySelector('.process-step-description').textContent)
+      .toBe('Understand the current position, priorities and constraints.');
+    expect(steps[0].querySelector('.process-step-details .process-meta-row:nth-child(1) dd').textContent)
+      .toBe('Initial scope review');
+    expect(steps[0].querySelector('.process-step-details .process-meta-row:nth-child(2) dd').textContent)
+      .toBe('Priority audit and brief');
+
+    expect(steps[1].querySelector('.process-step-description').textContent)
+      .toBe('Create and coordinate the agreed system.');
+    expect(steps[1].querySelector('.process-step-details .process-meta-row:nth-child(1) dd').textContent)
+      .toBe('Approved roadmap');
+    expect(steps[1].querySelector('.process-step-details .process-meta-row:nth-child(2) dd').textContent)
+      .toBe('Launch-ready system');
+
+    expect(steps[2].querySelector('.process-step-description').textContent)
+      .toBe('Launch, measure and improve around evidence.');
+    expect(steps[2].querySelector('.process-step-details .process-meta-row:nth-child(1) dd').textContent)
+      .toBe('Engagement cadence');
+    expect(steps[2].querySelector('.process-step-details .process-meta-row:nth-child(2) dd').textContent)
+      .toBe('Review and next priorities');
+
     expect(screen.getByRole('heading', { name: 'Raw Radicles' })).toBeInTheDocument();
     expect(screen.getByText(/informs how we plan and structure client work/i))
       .toBeInTheDocument();

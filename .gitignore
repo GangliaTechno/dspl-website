@@ -42,4 +42,5 @@ graphify-out/
 # Tooling and archives
 .impeccable/
 *.zip
+test-results/
 
