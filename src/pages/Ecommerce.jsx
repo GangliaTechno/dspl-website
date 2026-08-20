@@ -61,7 +61,7 @@ const compliance = {
       text: 'Required listing declarations are coordinated from client-approved product and compliance records.',
     },
   ],
-  disclaimer: "DSPL coordinates configuration and operating implementation. Tax and legal advice remains with the client's qualified tax and legal advisers.",
+  disclaimer: 'DSPL coordinates implementation; tax and legal advice remains with the client’s qualified advisers.',
 };
 
 const faqs = [
@@ -72,6 +72,14 @@ const faqs = [
   {
     q: 'Can you improve an existing store?',
     a: 'Yes. An audit can cover performance, catalogue structure, product journeys, checkout, analytics, compliance inputs, and operating dependencies before improvement work is scoped.',
+  },
+  {
+    q: 'Can product and catalogue setup be included?',
+    a: 'Yes, when included in scope. We can structure product data, variants, collections, content fields, and channel-ready records using approved source information.',
+  },
+  {
+    q: 'What happens after launch?',
+    a: 'Post-launch support can cover agreed fixes, analytics checks, catalogue updates, marketplace coordination, and operating handover. Ongoing support is scoped separately when required.',
   },
   {
     q: 'Can marketplace and ongoing support be included?',

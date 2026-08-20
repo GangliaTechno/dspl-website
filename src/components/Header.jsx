@@ -12,7 +12,7 @@ const FOCUSABLE_SELECTORS =
 
 const navItems = [
   { label: 'About', to: '/about' },
-  { label: 'Brands', to: '/brands' },
+  { label: 'Our Brands', to: '/brands' },
   { label: 'Marketing', to: '/marketing' },
   { label: 'Branding', to: '/branding' },
   { label: 'E-commerce', to: '/ecommerce' },
@@ -42,7 +42,12 @@ const Header = () => {
       const currentScrollY = Math.max(window.scrollY, 0);
       const scrollDelta = currentScrollY - lastScrollYRef.current;
 
-      setScrolled(currentScrollY > 20);
+      // Stable hysteresis threshold: enter compact state at > 36px, exit at < 12px
+      setScrolled((prev) => {
+        if (currentScrollY > 36) return true;
+        if (currentScrollY < 12) return false;
+        return prev;
+      });
 
       if (isOpen || currentScrollY <= 80) {
         setIsLifted(false);

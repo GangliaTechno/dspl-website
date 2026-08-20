@@ -53,12 +53,12 @@ describe('Footer', () => {
     expect(screen.getByRole('heading', { level: 2, name: 'Services' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { level: 2, name: 'Company' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { level: 2, name: 'Legal' })).toBeInTheDocument();
-    expect(screen.getByText('Incorporated')).toBeInTheDocument();
-    expect(screen.getByText('28 July 2022')).toBeInTheDocument();
-    expect(screen.getByText(/MUTBI\/MAHE/)).toBeInTheDocument();
-    expect(screen.getByText(/DST-NIDHI PRAYAS/)).toBeInTheDocument();
-    expect(screen.getByText(/Office days: Monday to Saturday/)).toBeInTheDocument();
-    expect(screen.getByText(/Madhava Nagar, Manipal 576104/)).toBeInTheDocument();
+    expect(screen.queryByText('Incorporated')).not.toBeInTheDocument();
+    expect(screen.queryByText('28 July 2022')).not.toBeInTheDocument();
+    expect(screen.queryByText('MUTBI/MAHE')).not.toBeInTheDocument();
+    expect(screen.queryByText('DST-NIDHI PRAYAS')).not.toBeInTheDocument();
+    expect(screen.getByText(/Monday – Saturday: 9:00 AM – 6:00 PM IST/)).toBeInTheDocument();
+    expect(screen.getByText(/Madhava Nagar, Manipal.*576104/)).toBeInTheDocument();
     expect(
       screen.getByText('© 2026 Dashapatmaja Solutions Pvt Ltd. All rights reserved.'),
     ).toBeInTheDocument();
@@ -81,7 +81,9 @@ describe('Footer', () => {
       ['Privacy Policy', '/privacy'],
       ['Terms of Use', '/terms'],
       ['director@dashapatmaja.in', 'mailto:director@dashapatmaja.in'],
+      ['dsplmanipal@gmail.com', 'mailto:dsplmanipal@gmail.com'],
       ['Call +91 88619 42440', 'tel:+918861942440'],
+      ['Call +91 90725 56665', 'tel:+919072556665'],
     ]) {
       expect(screen.getByRole('link', { name })).toHaveAttribute('href', href);
     }

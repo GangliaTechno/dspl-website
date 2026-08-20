@@ -44,7 +44,7 @@ const proof = {
 
 const engagements = {
   title: 'Ways to engage',
-  description: 'The proposal selects the engagement shape that matches the evidence, team, and operating need.',
+  description: 'Choose the engagement shape that matches the scope, evidence, and operating need.',
   items: [
     {
       title: 'Audit and plan',

@@ -14,23 +14,23 @@ const ProcessSteps = ({ steps }) => (
       <ol className="process-list">
         {steps.map((step) => (
           <li className="process-step" key={step.number}>
-            <span className="process-step-number" aria-hidden="true">
-              Step {Number(step.number)}
-            </span>
-            <div>
+            <div className="process-step-header">
+              <span className="process-step-number" aria-hidden="true">
+                Step {Number(step.number)}
+              </span>
               <h3 className="process-step-title">{step.title}</h3>
-              <p className="process-step-description">{step.description}</p>
-              <dl className="process-step-details">
-                <div className="process-step-timing">
-                  <dt>Timing</dt>
-                  <dd>{step.timing}</dd>
-                </div>
-                <div className="process-step-output">
-                  <dt>Output</dt>
-                  <dd>{step.output}</dd>
-                </div>
-              </dl>
             </div>
+            <p className="process-step-description">{step.description}</p>
+            <dl className="process-step-details">
+              <div className="process-step-timing">
+                <dt>Timing</dt>
+                <dd>{step.timing}</dd>
+              </div>
+              <div className="process-step-output">
+                <dt>Output</dt>
+                <dd>{step.output}</dd>
+              </div>
+            </dl>
           </li>
         ))}
       </ol>

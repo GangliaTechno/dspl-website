@@ -69,6 +69,14 @@ const faqs = [
     a: 'Yes. We first identify what should be retained, clarified, or replaced, then define the refresh scope against current business needs.',
   },
   {
+    q: 'Can branding work include packaging?',
+    a: 'Yes, when packaging is in scope. We can coordinate structure, information hierarchy, artwork application, and approved label content, while regulated advice and formal approvals remain with the appropriate qualified professionals.',
+  },
+  {
+    q: 'How do reviews and approvals work?',
+    a: 'The proposal defines review stages, decision-makers, and revision responsibilities so feedback, approvals, and handover remain controlled.',
+  },
+  {
     q: 'What is included in the handover?',
     a: 'We provide the agreed source files, usage guidance, templates, and a handover for the people responsible for implementation.',
   },

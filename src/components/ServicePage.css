@@ -231,18 +231,26 @@
 }
 
 .service-detail-grid h3 {
-  margin-bottom: 0.75rem;
+  margin: 0 0 0.5rem;
   color: var(--text-heading);
   font-size: 1.1rem;
 }
 
-.service-detail-grid p,
+.service-detail-grid p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
 .service-detail-disclaimer {
   max-width: 60rem;
-  margin: 1.5rem 0 0;
-  padding: 1rem 1.25rem;
+  margin: 2rem auto 0;
+  padding: 0.85rem 1.25rem;
   color: var(--text-secondary);
-  line-height: 1.65;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  text-align: center;
   background: var(--bg-alt, rgba(26, 26, 26, 0.03));
   border: 1px solid var(--border-color);
   border-radius: var(--radius-card);

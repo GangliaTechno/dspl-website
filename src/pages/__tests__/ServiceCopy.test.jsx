@@ -14,7 +14,7 @@ const expectNoUnapprovedCommercialClaims = (container) => {
 };
 
 describe('Branding service copy', () => {
-  it('renders five capabilities, compliance coordination, and three approved FAQs', () => {
+  it('renders five capabilities, compliance coordination, and five approved FAQs', () => {
     const { container } = render(<Branding />);
 
     expect(container.querySelectorAll('article.offer-entry')).toHaveLength(5);
@@ -31,7 +31,7 @@ describe('Branding service copy', () => {
     ]) {
       expect(within(compliance).getAllByText(text).length).toBeGreaterThan(0);
     }
-    expect(container.querySelectorAll('.faq-list .faq-item')).toHaveLength(3);
+    expect(container.querySelectorAll('.faq-list .faq-item')).toHaveLength(5);
     expectNoUnapprovedCommercialClaims(container);
   });
 });
@@ -55,7 +55,7 @@ describe('Marketing service copy', () => {
 });
 
 describe('E-commerce service copy', () => {
-  it('renders six capabilities, commerce compliance, and three approved FAQs', () => {
+  it('renders six capabilities, commerce compliance, and five approved FAQs', () => {
     const { container } = render(<Ecommerce />);
 
     expect(container.querySelectorAll('article.offer-entry')).toHaveLength(6);
@@ -68,11 +68,11 @@ describe('E-commerce service copy', () => {
       /e-way-bill process/i,
       /returns policies/i,
       /listing declarations/i,
-      /qualified tax and legal advisers/i,
+      /qualified advisers/i,
     ]) {
       expect(within(compliance).getAllByText(text).length).toBeGreaterThan(0);
     }
-    expect(container.querySelectorAll('.faq-list .faq-item')).toHaveLength(3);
+    expect(container.querySelectorAll('.faq-list .faq-item')).toHaveLength(5);
     expectNoUnapprovedCommercialClaims(container);
   });
 });

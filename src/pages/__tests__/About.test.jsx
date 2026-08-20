@@ -83,9 +83,15 @@ describe('About page', () => {
 
     expect(
       within(section).getAllByRole('heading', { level: 3 }).map((item) => item.textContent),
-    ).toEqual(['What we are', 'What we are building towards', 'How we work']);
-    expect(within(section).queryByText('Vision')).not.toBeInTheDocument();
-    expect(within(section).queryByText('Mission')).not.toBeInTheDocument();
+    ).toEqual(['Where we are going', 'What we do', 'How we work']);
+    expect(within(section).getByText('Vision')).toBeInTheDocument();
+    expect(within(section).getByText('Mission')).toBeInTheDocument();
+    expect(within(section).getByText('Values')).toBeInTheDocument();
+    expect(
+      within(section).getByText(
+        'Build a focused portfolio of consumer brands supported by disciplined commercial systems.',
+      ),
+    ).toBeInTheDocument();
   });
 
   it('starts the company record with the verified incorporation milestone', () => {
@@ -96,24 +102,31 @@ describe('About page', () => {
     expect(years).toEqual(['2022', '2023', '2024', '2025', '2026']);
     expect(within(journey).getByText(/incorporated on 28 July 2022/i)).toBeInTheDocument();
     expect(within(journey).getByAltText('Dashapatmaja Solutions Pvt Ltd')).toBeInTheDocument();
-    expect(within(journey).getByText('GoK Bioincubator, Manipal')).toBeInTheDocument();
+    expect(within(journey).getByText('MUTBI / MAHE, Manipal')).toBeInTheDocument();
+    expect(within(journey).getByText(/Incubated at MUTBI, MAHE, Manipal, where we established our base\./i)).toBeInTheDocument();
+    expect(within(journey).queryByText(/GoK Bioincubator/i)).not.toBeInTheDocument();
     expect(within(journey).getByAltText('Raw Radicles')).toBeInTheDocument();
-    expect(within(journey).getByAltText('Manipal Universal Technology Business Incubator'))
-      .toBeInTheDocument();
+    expect(within(journey).getByText(/infused with Ayurveda/i)).toBeInTheDocument();
     expect(within(journey).getByAltText('NIDHI PRAYAS')).toBeInTheDocument();
     expect(within(journey).getByText('DSPL services')).toBeInTheDocument();
+    expect(within(journey).getByText(/Signed a Memorandum of Understanding with Amruthanjali Ayurveda for manufacturing\./i)).toBeInTheDocument();
     expect(within(journey).queryByText(/grant amount|client count/i)).not.toBeInTheDocument();
   });
 
-  it('preserves six verified team records with substantiated biographies', () => {
+  it('preserves five verified team records with substantiated biographies', () => {
     const { container } = renderAbout();
     const team = screen.getByRole('heading', { name: 'Meet our team' }).closest('section');
 
-    expect(within(team).getAllByRole('link', { name: /LinkedIn Profile/ })).toHaveLength(6);
-    expect(container.querySelectorAll('.team-card')).toHaveLength(6);
-    expect(container.querySelectorAll('.member-bio')).toHaveLength(6);
-    expect(screen.getByText(/Provides corporate governance and strategic guidance/i)).toBeInTheDocument();
-    expect(screen.getByText(/Leads executive management, company operations/i)).toBeInTheDocument();
+    expect(within(team).getAllByRole('link', { name: /LinkedIn Profile/ })).toHaveLength(5);
+    expect(container.querySelectorAll('.team-card')).toHaveLength(5);
+    expect(screen.getByText('Provides corporate governance and strategic direction across DSPL.')).toBeInTheDocument();
+    expect(screen.getByText('Leads executive management, business operations, and project delivery.')).toBeInTheDocument();
+    expect(screen.getByText('Dr. Shreepathy Rangabhatta B')).toBeInTheDocument();
+    expect(screen.getByText('Dr. Dasharathraj K Shetty')).toBeInTheDocument();
+    expect(screen.getByText('Chairman & Director')).toBeInTheDocument();
+    expect(screen.getByText('Managing Director')).toBeInTheDocument();
+    expect(screen.getByText(/Our leadership brings together experience across healthcare, management, technology, and consumer brand development\./i)).toBeInTheDocument();
+    expect(screen.queryByText('Dr. Balakrishna S. Maddodi')).not.toBeInTheDocument();
   });
 
   it('adds remote-delivery scope and work DSPL does not take on', () => {

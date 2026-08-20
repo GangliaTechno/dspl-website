@@ -44,7 +44,7 @@ describe('Contact', () => {
 
     expect(screen.getByText(/respond within one working day/i)).toBeInTheDocument();
     expect(screen.getByText(/Room No\. 12, 4th Floor, MUTBI, Advanced Research Center, Madhava Nagar, Manipal.*576104/i)).toBeInTheDocument();
-    expect(screen.getByText(/Office days: Monday to Saturday/i)).toBeInTheDocument();
+    expect(screen.getByText(/Monday – Saturday: 9:00 AM – 6:00 PM IST/i)).toBeInTheDocument();
     expect(screen.getByText('New enquiries')).toBeInTheDocument();
     expect(screen.getByText(/for new business, partnerships, and general questions/i)).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'Call +91 88619 42440' })).toHaveAttribute('href', 'tel:+918861942440');
@@ -52,8 +52,10 @@ describe('Contact', () => {
     expect(screen.getByText(/for reviews, delivery questions, and active workstreams/i)).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'Call +91 90725 56665' })).toHaveAttribute('href', 'tel:+919072556665');
     expect(screen.getByRole('link', { name: 'director@dashapatmaja.in' })).toHaveAttribute('href', 'mailto:director@dashapatmaja.in');
-    expect(container.querySelectorAll('.contact-info-icon')).toHaveLength(3);
-    expect(container).not.toHaveTextContent(/WhatsApp|gmail\.com/i);
+    expect(screen.getByRole('link', { name: 'dsplmanipal@gmail.com' })).toHaveAttribute('href', 'mailto:dsplmanipal@gmail.com');
+    expect(container.querySelectorAll('.contact-info-card')).toHaveLength(3);
+    expect(container.querySelectorAll('.contact-info-icon')).toHaveLength(0);
+    expect(container).not.toHaveTextContent(/WhatsApp/i);
   });
 
   it('directs detailed briefs to the Start page and exposes every enquiry field', () => {

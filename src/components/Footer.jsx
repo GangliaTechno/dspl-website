@@ -1,6 +1,5 @@
 import './Footer.css';
 import { Link, useLocation } from 'react-router';
-import { CalendarDays, Mail, MapPin, Phone } from 'lucide-react';
 import logoImg from '../assets/icon_orange.webp';
 import PhoneObfuscated from './PhoneObfuscated';
 import { getFooterCta } from '../content/footerCtas';
@@ -105,46 +104,46 @@ const Footer = () => {
           </div>
 
           <section className="footer-contact-panel" aria-labelledby="footer-contact-title">
-            <ul className="footer-meta-rail" aria-label="Company registration and support details">
-              <li><span>Incorporated</span><strong>{COMPANY_FACTS.incorporationDate}</strong></li>
-              <li><span>CIN</span><strong>{COMPANY_FACTS.cin}</strong></li>
-              <li><span>Incubated at</span><strong>MUTBI/MAHE</strong></li>
-              <li><span>Supported through</span><strong>{COMPANY_FACTS.incubation.support}</strong></li>
-            </ul>
-            <h2 id="footer-contact-title" className="footer-contact-title">Contact details</h2>
-            <ul className="footer-contact-list footer-contact-rail">
-              <li>
+            <h2 id="footer-contact-title" className="sr-only">Contact and office details</h2>
+            <div className="footer-contact-rail">
+              <div className="footer-contact-group">
+                <span className="footer-contact-label">Email</span>
                 <a href={`mailto:${COMPANY_FACTS.contacts.directorEmail}`} className="contact-item">
-                  <Mail size={16} className="contact-icon" aria-hidden="true" />
-                  <span>{COMPANY_FACTS.contacts.directorEmail}</span>
+                  {COMPANY_FACTS.contacts.directorEmail}
                 </a>
-              </li>
-              <li>
+                <a href={`mailto:${COMPANY_FACTS.contacts.projectEmail}`} className="contact-item">
+                  {COMPANY_FACTS.contacts.projectEmail}
+                </a>
+              </div>
+              <div className="footer-contact-group">
+                <span className="footer-contact-label">Phone</span>
                 <PhoneObfuscated
                   number={COMPANY_FACTS.contacts.primaryPhone}
                   className="contact-item"
-                  icon={<Phone size={16} className="contact-icon" aria-hidden="true" />}
                 />
-              </li>
-              <li>
+                <PhoneObfuscated
+                  number={COMPANY_FACTS.contacts.secondaryPhone}
+                  className="contact-item"
+                />
+              </div>
+              <div className="footer-contact-group">
+                <span className="footer-contact-label">Office</span>
                 <a
                   href="https://maps.google.com/?q=MUTBI+Advanced+Research+Center+Manipal"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="contact-item"
                 >
-                  <MapPin size={16} className="contact-icon" aria-hidden="true" />
-                  <span>
-                    Room No. 12, 4th Floor, MUTBI, Advanced Research Center,
-                    Madhava Nagar, Manipal 576104
-                  </span>
+                  {COMPANY_FACTS.registeredOffice.fullAddress}
                 </a>
-              </li>
-              <li className="contact-item footer-hours">
-                <CalendarDays size={16} className="contact-icon" aria-hidden="true" />
-                <span>Office days: Monday to Saturday</span>
-              </li>
-            </ul>
+              </div>
+              <div className="footer-contact-group">
+                <span className="footer-contact-label">Hours</span>
+                <span className="contact-item">
+                  {COMPANY_FACTS.contacts.operatingHours}
+                </span>
+              </div>
+            </div>
           </section>
 
           <div className="footer-bottom">

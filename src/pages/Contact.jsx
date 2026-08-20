@@ -4,9 +4,6 @@ import { Link } from 'react-router';
 import {
   AlertCircle,
   CheckCircle2,
-  ClipboardCheck,
-  MapPin,
-  MessageCircle,
   Send,
 } from 'lucide-react';
 import PhoneObfuscated from '../components/PhoneObfuscated';
@@ -153,28 +150,26 @@ const Contact = () => {
           <h2 id="contact-details-title" className="sr-only">Contact details</h2>
           <div className="contact-info-grid">
             <article className="contact-info-card">
-              <span className="contact-info-icon" aria-hidden="true"><MapPin size={20} /></span>
-              <h3>Office</h3>
-              <p className="contact-info-summary">Manipal office</p>
+              <span className="contact-info-eyebrow">Office</span>
+              <h3 className="contact-info-summary">Manipal office</h3>
               <p>{COMPANY_FACTS.registeredOffice.fullAddress}</p>
-              <p>Office days: Monday to Saturday</p>
+              <p>{COMPANY_FACTS.contacts.operatingHours}</p>
             </article>
 
             <article className="contact-info-card">
-              <span className="contact-info-icon" aria-hidden="true"><MessageCircle size={20} /></span>
-              <h3>New enquiries</h3>
-              <p className="contact-info-summary">Start a conversation</p>
+              <span className="contact-info-eyebrow">New enquiries</span>
+              <h3 className="contact-info-summary">Start a conversation</h3>
               <p>For new business, partnerships, and general questions.</p>
               <p><PhoneObfuscated number={COMPANY_FACTS.contacts.primaryPhone} /></p>
               <p><a href={`mailto:${COMPANY_FACTS.contacts.directorEmail}`}>{COMPANY_FACTS.contacts.directorEmail}</a></p>
             </article>
 
             <article className="contact-info-card">
-              <span className="contact-info-icon" aria-hidden="true"><ClipboardCheck size={20} /></span>
-              <h3>Existing projects</h3>
-              <p className="contact-info-summary">Project coordination</p>
+              <span className="contact-info-eyebrow">Existing projects</span>
+              <h3 className="contact-info-summary">Project coordination</h3>
               <p>For reviews, delivery questions, and active workstreams.</p>
               <p><PhoneObfuscated number={COMPANY_FACTS.contacts.secondaryPhone} /></p>
+              <p><a href={`mailto:${COMPANY_FACTS.contacts.projectEmail}`}>{COMPANY_FACTS.contacts.projectEmail}</a></p>
             </article>
           </div>
         </div>

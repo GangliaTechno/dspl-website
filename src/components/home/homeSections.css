@@ -158,13 +158,15 @@
 }
 
 .process-section {
-  background: var(--bg-secondary);
+  background: var(--card-bg, #FFFDF8);
   border-block: 1px solid var(--border-color);
+  padding-block: 4.5rem 4.5rem;
 }
 
 .process-header {
   text-align: left;
   margin-inline: 0;
+  margin-bottom: 2rem;
 }
 
 .process-list {
@@ -177,17 +179,24 @@
 }
 
 .process-step {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 1.25rem;
+  display: flex;
+  flex-direction: column;
   min-height: 12rem;
-  padding: 2rem;
+  padding: 2.25rem 1.75rem 2.5rem;
   border-right: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
+  background: var(--card-bg, #FFFDF8);
 }
 
 .process-step:nth-child(3n) {
   border-right: 0;
+}
+
+.process-step-header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.85rem;
+  margin-bottom: 0.9rem;
 }
 
 .process-step-number {
@@ -199,27 +208,31 @@
 }
 
 .process-step-title {
-  margin-bottom: 0.75rem;
+  margin: 0;
   color: var(--text-heading);
-  font-size: 1.15rem;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
 }
 
 .process-step-description {
   color: var(--text-secondary);
-  font-size: 0.925rem;
+  font-size: 0.95rem;
   line-height: 1.65;
+  margin-bottom: 1.4rem;
+  max-width: 18rem;
 }
 
 .process-step-details {
   display: grid;
-  gap: 0.75rem;
-  margin: 1.25rem 0 0;
+  gap: 1rem;
+  margin: auto 0 0 0;
 }
 
 .process-step-details > div {
-  display: grid;
-  grid-template-columns: 5rem 1fr;
-  gap: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
 }
 
 .process-step-details dt {
@@ -228,12 +241,13 @@
   font-weight: 800;
   letter-spacing: 0.06em;
   text-transform: uppercase;
+  margin-bottom: 0.3rem;
 }
 
 .process-step-details dd {
   margin: 0;
   color: var(--text-secondary);
-  font-size: 0.85rem;
+  font-size: 0.875rem;
   line-height: 1.5;
 }
 

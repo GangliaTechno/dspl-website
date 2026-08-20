@@ -45,7 +45,7 @@ describe('Brands page', () => {
     ]) {
       expect(screen.getByText(fact)).toBeInTheDocument();
     }
-    expect(screen.getByRole('link', { name: 'View the Raw Radicles project overview' }))
+    expect(screen.getByRole('link', { name: 'Explore our brands here' }))
       .toHaveAttribute('href', '/brands/raw-radicles');
   });
 

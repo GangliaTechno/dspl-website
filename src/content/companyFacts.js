@@ -25,7 +25,6 @@ export const COMPANY_FACTS = Object.freeze({
   incubation: Object.freeze({
     incubator: 'Manipal Universal Technology Business Incubator (MUTBI)',
     institution: 'Manipal Academy of Higher Education (MAHE)',
-    centre: 'GoK Bioincubator, Manipal',
     support: 'DST-NIDHI PRAYAS',
   }),
   contacts: Object.freeze({
@@ -34,6 +33,7 @@ export const COMPANY_FACTS = Object.freeze({
     secondaryPhone: '+91 90725 56665',
     secondaryPhoneDigits: '+919072556665',
     directorEmail: 'director@dashapatmaja.in',
+    projectEmail: 'dsplmanipal@gmail.com',
     operatingHours: 'Monday – Saturday: 9:00 AM – 6:00 PM IST',
   }),
   socials: Object.freeze({

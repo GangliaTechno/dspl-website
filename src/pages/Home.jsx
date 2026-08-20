@@ -113,7 +113,7 @@ const Home = () => {
             <p className="hero-subhead">
               Dashapatmaja Solutions Pvt Ltd develops its own consumer brands
               and supports businesses with coordinated branding, marketing,
-              e-commerce, and compliance-support work.
+              e-commerce, and compliance support.
             </p>
             <div className="home-hero-actions">
               <Link className="btn btn-primary" to="/start">
@@ -141,36 +141,40 @@ const Home = () => {
           <div className="services-intro">
             <div>
               <h2 className="section-title" id="services-title">
-                One growth system, not three disconnected vendors
+                Brand, market, and commerce — coordinated as one system.
               </h2>
             </div>
             <p className="section-title-description">
-              Start with the capability you need now. Keep strategy, market
-              activity, and commerce aligned as the business grows.
+              Start with the capability you need now, then connect strategy,
+              market activity, and commerce as the business grows.
             </p>
           </div>
 
           <div className="service-evidence-grid">
             {services.map((service) => (
-              <article className="service-evidence-card" key={service.title}>
+              <Link
+                to={service.link}
+                className="service-evidence-card"
+                key={service.title}
+              >
                 <h3>{service.title}</h3>
                 <p>{service.text}</p>
-                <Link to={service.link}>
+                <span className="service-evidence-link">
                   Explore {service.title}
                   <ArrowRight size={15} aria-hidden="true" />
-                </Link>
-              </article>
+                </span>
+              </Link>
             ))}
           </div>
 
           <aside className="compliance-support-strip" aria-labelledby="compliance-support-title">
-            <div>
+            <div className="compliance-support-header">
               <span className="section-subtitle">Supporting capability</span>
               <h3 id="compliance-support-title">Compliance coordination</h3>
             </div>
-            <p>
-              Practical coordination for packaging, labelling, listings, and commerce
-              declarations, with regulated advice retained by qualified advisers.
+            <p className="compliance-support-text">
+              Packaging, labelling, listing, and commerce requirements coordinated
+              into the work, with regulated advice retained by qualified advisers.
             </p>
             <div className="compliance-support-links">
               <Link to="/branding#compliance">Branding compliance <ArrowRight size={15} aria-hidden="true" /></Link>

@@ -1,28 +1,29 @@
 :root {
-  --bg-primary: #F5F3EE;           /* Warm Off-White page background */
-  --bg-secondary: #FFF8E7;         /* Cream tint background */
-  --bg-tertiary: #F5EFEB;          /* Alternate warm beige tint */
-  --text-primary: #1A1A1A;         /* Rich Black for body copy */
-  --text-heading: #111111;         /* Rich Black for headers */
-  --text-secondary: #555555;       /* Slate Secondary for details */
-  --accent: #F5A800;               /* Hero Gold */
-  --accent-light: #FFC107;         /* Bright light gold */
-  --accent-dark: #b87c00;          /* High contrast gold for text */
-  --accent-text: #8A5B00;          /* Accessible bronze for small text */
-  --accent-gold: #F5A800;          /* Hero Gold */
+  --bg-primary: #F7F4ED;           /* Warm Ivory page background */
+  --bg-secondary: #FFF7E6;         /* Cream gold tint background */
+  --bg-tertiary: #EFEAE0;          /* Alternate warm beige tint */
+  --text-primary: #171A22;         /* Deep navy-charcoal for body copy */
+  --text-heading: #171A22;         /* Deep navy-charcoal for headers */
+  --text-secondary: #5E5B55;       /* Slate Secondary for details */
+  --accent: #E6A000;               /* DSPL Gold for large accents and buttons */
+  --accent-light: #F5AF19;         /* Bright light gold */
+  --accent-dark: #8A5B00;          /* High contrast bronze for text */
+  --accent-text: #8A5B00;          /* Accessible bronze for small text & links */
+  --accent-gold: #E6A000;          /* DSPL Gold */
   --accent-red: #C0392B;           /* Minimal Red Accent */
   --accent-orange: #f97316;        /* Orange Accent */
-  --accent-gradient: linear-gradient(135deg, #F5A800 0%, #FFC107 100%);
-  --accent-gradient-hover: linear-gradient(135deg, #FFC107 0%, #F5A800 100%);
-  --border-color: rgba(26, 26, 26, 0.08);
+  --accent-gradient: linear-gradient(135deg, #E6A000 0%, #F5AF19 100%);
+  --accent-gradient-hover: linear-gradient(135deg, #F5AF19 0%, #E6A000 100%);
+  --border-color: #DDD7CC;
+  --border-subtle: #ECE7DE;
   --glass-bg: rgba(255, 255, 255, 0.90);
   --glass-border: rgba(26, 26, 26, 0.06);
-  --card-bg: #ffffff;
-  --card-hover-bg: #FFF8E7;
-  --accent-glow: rgba(245, 168, 0, 0.04);
-  --accent-border-alpha: rgba(245, 168, 0, 0.2);
-  --accent-shadow: rgba(245, 168, 0, 0.06);
-  --accent-shadow-hover: rgba(245, 168, 0, 0.12);
+  --card-bg: #FFFDF8;
+  --card-hover-bg: #FFF9EC;
+  --accent-glow: rgba(230, 160, 0, 0.04);
+  --accent-border-alpha: rgba(230, 160, 0, 0.2);
+  --accent-shadow: rgba(230, 160, 0, 0.06);
+  --accent-shadow-hover: rgba(230, 160, 0, 0.12);
   --shadow-lg: 0 10px 30px -10px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.02);
   --space-1: 0.5rem;
   --space-2: 1rem;
@@ -34,7 +35,7 @@
   --radius-card: 12px;
   --shadow-surface: 0 10px 30px -10px rgba(0, 0, 0, 0.06),
     0 1px 3px rgba(0, 0, 0, 0.02);
-  --container-width: 1200px;
+  --container-width: 1160px;
   --focus-ring: 3px solid var(--accent-text);
   --font-sans: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -112,7 +113,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 p {
-  line-height: 1.625;
+  line-height: 1.65;
   color: var(--text-secondary);
 }
 
@@ -212,8 +213,8 @@ p {
 
 .btn-primary {
   background: var(--accent);
-  color: #111111;
-  box-shadow: 0 4px 14px 0 rgba(245, 168, 0, 0.15);
+  color: #171A22;
+  box-shadow: 0 4px 14px 0 rgba(230, 160, 0, 0.2);
 }
 
 .btn-secondary {
@@ -225,9 +226,9 @@ p {
 @media (hover: hover) and (pointer: fine) {
   .btn-primary:hover {
     background: var(--accent-light);
-    color: #111111;
+    color: #171A22;
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px 0 rgba(245, 168, 0, 0.25);
+    box-shadow: 0 6px 20px 0 rgba(230, 160, 0, 0.3);
   }
 
   .btn-secondary:hover {

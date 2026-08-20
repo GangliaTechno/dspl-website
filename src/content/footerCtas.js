@@ -17,7 +17,7 @@ export const footerCtas = Object.freeze({
     eyebrow: 'Owned brand experience',
     title: 'See how DSPL built Raw Radicles.',
     text: 'Explore the operating work behind our first owned consumer brand.',
-    label: 'View the project overview',
+    label: 'Explore Raw Radicles',
     href: '/brands/raw-radicles',
   },
   '/branding': {

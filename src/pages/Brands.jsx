@@ -56,7 +56,7 @@ const Brands = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={mt({ duration: 0.8, ease: 'easeOut' })}
           >
-            <span className="section-subtitle">DSPL Brands</span>
+            <span className="section-subtitle">Our Brands</span>
             <h1 className="brands-title">We develop and operate consumer brands.</h1>
             <p className="brands-tagline">From product development to market execution.</p>
           </motion.div>
@@ -156,7 +156,7 @@ const Brands = () => {
 
                   <div className="brand-cta-block">
                     <Link to="/brands/raw-radicles" className="btn btn-primary rr-cta-btn">
-                      View the Raw Radicles project overview <ArrowRight size={16} aria-hidden="true" />
+                      Explore our brands here <ArrowRight size={16} aria-hidden="true" />
                     </Link>
                   </div>
                 </div>

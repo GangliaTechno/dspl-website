@@ -86,33 +86,40 @@
 
 /* Direction Framework */
 .direction-section {
-  padding: 6.5rem 0;
+  padding-block: 4.5rem 2rem;
+  background: var(--bg-primary);
 }
 
 #direction-title {
-  margin-bottom: 3rem;
-  font-size: clamp(2.5rem, 4vw, 3.25rem);
+  margin-bottom: 2.5rem;
+  font-size: clamp(2.25rem, 3.5vw, 3rem);
 }
 
 .direction-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.75rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
   margin: 0 auto;
 }
 
 .direction-card {
-  padding: 2.5rem;
-  border-radius: 4px;
-  border: 1px solid var(--border-color);
-  background: #ffffff;
+  padding: 2.4rem 1.75rem 2.25rem;
+  border: 0;
+  border-right: 1px solid var(--border-color);
+  border-radius: 0;
+  background: transparent;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   text-align: left;
-  gap: 0.75rem;
   height: 100%;
   box-sizing: border-box;
+}
+
+.direction-card:last-child {
+  border-right: 0;
 }
 
 .direction-label {
@@ -122,18 +129,30 @@
   font-weight: 800;
   letter-spacing: 0.04em;
   text-transform: uppercase;
+  margin-bottom: 0.6rem;
 }
 
 .direction-title {
-  font-size: 1.5rem;
+  font-size: 1.375rem;
   font-weight: 700;
   color: var(--text-heading);
+  margin-bottom: 0.65rem;
 }
 
 .direction-text {
-  font-size: 0.975rem;
-  line-height: 1.6;
+  font-size: 0.95rem;
+  line-height: 1.65;
   color: var(--text-secondary);
+  margin: 0;
+}
+
+.about-delivery-section {
+  padding-top: 2.25rem;
+  padding-bottom: 4.5rem;
+}
+
+.about-boundaries-section {
+  padding-block: 4.5rem;
 }
 
 .about-scope-grid {
@@ -148,10 +167,11 @@
 }
 
 .about-scope-grid > p {
+  max-width: 26rem;
   margin: 0;
   color: var(--text-secondary);
   font-size: 1.05rem;
-  line-height: 1.75;
+  line-height: 1.7;
 }
 
 /* Timeline Styles */
@@ -278,6 +298,34 @@
 .team-section {
   position: relative;
   overflow: hidden;
+  padding: 4.25rem 0 4.75rem;
+  background-color: #F7F4ED;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.team-section .section-header {
+  margin-bottom: 2.125rem;
+}
+
+.team-section .section-subtitle {
+  color: #8A5B00;
+  font-size: 0.8125rem;
+  letter-spacing: 0.08em;
+  text-indent: 0;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.team-section .section-title {
+  color: #171A22;
+  margin-bottom: 0.75rem;
+}
+
+.team-section .section-title-description {
+  color: #5A5751;
+  max-width: 580px;
+  margin: 0 auto;
 }
 
 .team-section::before {
@@ -291,7 +339,7 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  opacity: 0.22; /* Increased opacity to 22% for better display visibility */
+  opacity: 0.13;
   z-index: 1;
   pointer-events: none;
 }
@@ -302,33 +350,48 @@
 }
 
 .team-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2.5rem;
-  max-width: 1000px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.75rem;
+  max-width: 1200px;
   margin: 0 auto;
-  align-items: stretch;
+}
+
+.team-grid > * {
+  flex: 0 0 calc((100% - 2 * 1.75rem) / 3);
+  max-width: calc((100% - 2 * 1.75rem) / 3);
+  width: calc((100% - 2 * 1.75rem) / 3);
+  display: flex;
 }
 
 .team-card {
   position: relative;
-  background: #ffffff;
-  border: 1px solid var(--border-color);
-  padding: 40px 24px 32px;
+  background: #FFFDF8;
+  border: 1px solid #E1DBD0;
+  padding: 1.7rem 1.8rem;
   border-radius: 4px;
-  text-align: center;
-  height: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: flex-start;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.team-card-header {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  min-height: 5.625rem;
+  margin-bottom: 0;
 }
 
 .team-avatar-wrapper {
   position: relative;
-  width: 8rem;
-  height: 8rem;
-  margin: 0 auto 1.5rem;
+  width: 5.5rem;
+  height: 5.5rem;
+  flex-shrink: 0;
+  margin: 0;
 }
 
 .team-avatar-container {
@@ -336,42 +399,76 @@
   height: 100%;
   border-radius: 50%;
   overflow: hidden;
-  border: 1px solid var(--border-color);
+  border: 1px solid #E1DBD0;
   background: var(--avatar-background, #f3f1ec);
-  box-shadow: 0 2px 8px rgba(17, 17, 17, 0.08);
+  box-shadow: 0 2px 5px rgba(17, 17, 17, 0.04);
+}
+
+.team-identity {
+  flex: 1;
+  min-width: 0;
+  min-height: 5.625rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-right: 1.75rem;
+}
+
+.member-name {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-heading);
+  margin: 0;
+  line-height: 1.25;
+}
+
+.member-role {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #7B5100;
+  margin: 0.35rem 0 0;
+  line-height: 1.35;
+}
+
+.member-bio {
+  border-top: 1px solid #E1DBD0;
+  padding-top: 0.95rem;
+  margin: 0.95rem 0 0;
+  font-size: 0.925rem;
+  line-height: 1.6;
+  color: #5A5751;
 }
 
 .team-linkedin-link {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
-  width: 2.25rem;
-  height: 2.25rem;
-  background: #ffffff;
-  border-radius: 4px;
-  display: flex;
+  top: 1.35rem;
+  right: 1.35rem;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+  min-width: 44px;
+  min-height: 44px;
+  margin: -10px -10px 0 0;
   color: #0a66c2;
-  transition: transform 180ms ease-out, background-color 180ms ease-out,
-    box-shadow 180ms ease-out;
-  z-index: 3;
-  border: 1px solid #e0e0e0;
+  background: transparent;
+  border-radius: 4px;
+  flex-shrink: 0;
+  opacity: 0.72;
+  transition: opacity 180ms ease-out, color 180ms ease-out, transform 180ms ease-out;
 }
 
 .team-linkedin-link:hover,
 .team-linkedin-link:focus-visible {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18);
-  background: #f5f5f5;
+  opacity: 1;
+  color: #004182;
+  transform: translateY(-1px);
   outline: var(--focus-ring);
   outline-offset: 2px;
 }
 
 .team-linkedin-icon {
-  width: 18px;
-  height: 18px;
+  width: 17px;
+  height: 17px;
 }
 
 .team-avatar-image {
@@ -396,36 +493,56 @@
 
 .avatar-initial {
   font-family: var(--font-heading);
-  font-size: 2.5rem;
+  font-size: 1.5rem;
   font-weight: 800;
   color: #ffffff;
 }
 
-.member-name {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--text-heading);
-  margin-bottom: 0.25rem;
-  min-height: 50px;
-  align-items: flex-start;
-  justify-content: center;
-}
+@media (max-width: 1024px) {
+  .team-grid {
+    gap: 1.5rem;
+    max-width: 760px;
+  }
 
-.member-role {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--accent-text);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-top: 8px;
+  .team-grid > * {
+    flex: 0 0 calc((100% - 1.5rem) / 2);
+    max-width: calc((100% - 1.5rem) / 2);
+    width: calc((100% - 1.5rem) / 2);
+  }
+
+  .team-card {
+    padding: 1.5rem 1.4rem;
+  }
+
+  .team-card-header {
+    min-height: 5.25rem;
+  }
+
+  .team-identity {
+    min-height: 5.25rem;
+  }
+
+  .team-avatar-wrapper {
+    width: 5rem;
+    height: 5rem;
+  }
+
+  .member-name {
+    font-size: 1.1rem;
+  }
 }
 
 @media (max-width: 900px) {
   .direction-grid {
     grid-template-columns: 1fr;
   }
-  .team-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .direction-card {
+    border-right: 0;
+    border-bottom: 1px solid var(--border-color);
+    padding: 2rem 0;
+  }
+  .direction-card:last-child {
+    border-bottom: 0;
   }
   .about-scope-grid {
     grid-template-columns: 1fr;
@@ -464,8 +581,40 @@
   .journey-story-copy {
     max-width: none;
   }
+}
+
+@media (max-width: 640px) {
   .team-grid {
-    grid-template-columns: 1fr;
-    max-width: 320px;
+    gap: 1.25rem;
+    max-width: 480px;
+  }
+
+  .team-grid > * {
+    flex: 0 0 100%;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .team-card {
+    padding: 1.35rem 1.25rem;
+  }
+
+  .team-avatar-wrapper {
+    width: 4.5rem;
+    height: 4.5rem;
+  }
+
+  .team-card-header {
+    gap: 1rem;
+    min-height: 4.5rem;
+  }
+
+  .team-identity {
+    min-height: 4.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .member-name {
+    font-size: 1.05rem;
   }
 }

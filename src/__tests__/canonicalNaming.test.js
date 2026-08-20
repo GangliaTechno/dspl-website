@@ -69,9 +69,11 @@ describe('canonical naming', () => {
     expect(COMPANY_FACTS.cin).toMatch(/^U\d{5}[A-Z]{2}\d{4}PTC\d{6}$/);
     expect(COMPANY_FACTS.incorporationDate).toBe('28 July 2022');
     expect(COMPANY_FACTS.contacts.primaryPhone).toBe('+91 88619 42440');
+    expect(COMPANY_FACTS.contacts.secondaryPhone).toBe('+91 90725 56665');
     expect(COMPANY_FACTS.contacts.directorEmail).toBe('director@dashapatmaja.in');
+    expect(COMPANY_FACTS.contacts.projectEmail).toBe('dsplmanipal@gmail.com');
     expect(COMPANY_FACTS.registeredOffice.fullAddress).toContain('Manipal, Karnataka 576104');
-    expect('Dr. Shreepathy Rangabhatta R').not.toContain(' Ranga Bhatta');
+    expect('Dr. Shreepathy Rangabhatta B').not.toContain(' Ranga Bhatta');
     expect('Dr. Anusha Pai').toMatch(/^Dr\./);
   });
 

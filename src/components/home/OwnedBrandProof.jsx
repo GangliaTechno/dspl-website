@@ -35,8 +35,8 @@ const OwnedBrandProof = ({ logoSrc }) => (
           plan and structure client work.
         </p>
         <div className="owned-brand-actions">
-          <Link to="/brands/raw-radicles" className="btn btn-primary">
-            View the project overview <ArrowRight size={16} aria-hidden="true" />
+          <Link to="/brands" className="btn btn-primary">
+            Explore our brands <ArrowRight size={16} aria-hidden="true" />
           </Link>
         </div>
       </div>

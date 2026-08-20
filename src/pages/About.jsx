@@ -11,12 +11,10 @@ import { COMPANY_FACTS } from '../content/companyFacts';
 
 import dsplLogo from '../assets/icon_orange.webp';
 import rawRadiclesLogo from '../assets/raw-radicles-logo-official.webp';
-import mutbiLogo from '../assets/supporter-mutbi-marquee.png';
 import nidhiPrayasLogo from '../assets/supporter-nidhi-prayas-marquee.png';
 import manuImg from '../assets/manu_pro_fixed.webp';
 import sreeImg from '../assets/sree_pro_extended.webp';
 import drImg from '../assets/dr_pro.webp';
-import balakrishnaImg from '../assets/balakrishna_pro_extended.webp';
 import anushaImg from '../assets/Anusha-mam_pro.webp';
 import nameshImg from '../assets/ceo_pro.webp';
 import aboutTeam01960 from '../assets/about-team-01-960.webp';
@@ -61,11 +59,11 @@ const journeyMilestones = [
     image: journey2023Img,
     width: 1536,
     height: 1024,
-    alt: 'Early food-technology prototype in a university-linked incubator workspace',
+    alt: 'MUTBI incubation center at MAHE Manipal campus',
     items: [
-      'Incubated at GoK Bioincubator, Manipal, where we set up our base.',
+      'Incubated at MUTBI, MAHE, Manipal, where we established our base.',
     ],
-    references: [{ text: 'GoK Bioincubator, Manipal' }],
+    references: [{ text: 'MUTBI / MAHE, Manipal' }],
   },
   {
     year: '2024',
@@ -75,7 +73,7 @@ const journeyMilestones = [
     height: 1024,
     alt: 'Finished chocolate, Ayurvedic botanicals, and premium packaging prepared for brand launch',
     items: [
-      'Launched Raw Radicles, a premium chocolate brand with Ayurveda inside.',
+      'Launched Raw Radicles, a premium chocolate brand infused with Ayurveda.',
       'Built the product, packaging, and supply chain from the ground up.',
     ],
     references: [
@@ -84,30 +82,28 @@ const journeyMilestones = [
   },
   {
     year: '2025',
-    title: 'MUTBI incubation and national grant',
+    title: 'NIDHI-PRAYAS support',
     image: journey2025Img,
     width: 1536,
     height: 1024,
     alt: 'Consumer-product prototype undergoing institutional validation and manufacturing handoff',
     items: [
-      'Joined MUTBI at MAHE, Manipal, for technical and academic support.',
       'Won a government grant under the NIDHI-PRAYAS scheme.',
-      'Signed a Memorandum of Understanding with Amruthanjali Ayurveda for manufacturing.',
     ],
     references: [
-      { src: mutbiLogo, alt: 'Manipal Universal Technology Business Incubator', width: 300, height: 96 },
       { src: nidhiPrayasLogo, alt: 'NIDHI PRAYAS', width: 113, height: 96 },
     ],
   },
   {
     year: '2026',
-    title: 'Services arm',
+    title: 'Services and manufacturing partnership',
     image: journey2026Img,
     width: 1536,
     height: 1024,
     alt: 'Integrated branding, marketing, e-commerce, and fulfilment services studio',
     items: [
       'Opened our branding, marketing, and e-commerce services to outside clients.',
+      'Signed a Memorandum of Understanding with Amruthanjali Ayurveda for manufacturing.',
     ],
     references: [{ text: 'DSPL services' }],
   },
@@ -115,19 +111,19 @@ const journeyMilestones = [
 
 const directionCards = [
   {
-    label: 'Company and operating team',
-    title: 'What we are',
-    text: 'A private limited company developing and operating consumer brands while providing coordinated branding, marketing, e-commerce, and compliance-support services.',
+    label: 'Vision',
+    title: 'Where we are going',
+    text: 'Build a focused portfolio of consumer brands supported by disciplined commercial systems.',
   },
   {
-    label: 'Long-term direction',
-    title: 'What we are building towards',
-    text: 'A focused portfolio of consumer brands and an operating team able to support businesses from brand decisions through market and commerce execution.',
+    label: 'Mission',
+    title: 'What we do',
+    text: 'Develop and operate DSPL-owned brands while helping businesses coordinate branding, marketing, e-commerce, and implementation through clearly defined scopes.',
   },
   {
-    label: 'Operating principles',
+    label: 'Values',
     title: 'How we work',
-    text: 'We define scope, responsibilities, dependencies, and evidence clearly; coordinate the agreed work; and communicate decisions without overstating what the evidence can support.',
+    text: 'Clarity, evidence, accountability, and practical coordination guide how we make decisions, define responsibilities, and deliver work.',
   },
 ];
 
@@ -162,8 +158,8 @@ const About = () => {
   const team = [
     {
       name: 'Dr. Manu Sudhi',
-      role: 'Chairman and Director',
-      bio: "Provides corporate governance and strategic guidance across DSPL's business operations.",
+      role: 'Chairman & Director',
+      bio: 'Provides corporate governance and strategic direction across DSPL.',
       initial: 'MS',
       image: manuImg,
       width: 1024,
@@ -174,9 +170,22 @@ const About = () => {
       transformOrigin: '50% 42%',
     },
     {
-      name: 'Dr. Shreepathy Rangabhatta R',
+      name: 'Dr. Dasharathraj K Shetty',
+      role: 'Mentor',
+      bio: 'Advises on innovation, management systems, and enterprise development.',
+      initial: 'DS',
+      image: drImg,
+      width: 358,
+      height: 354,
+      linkedin: 'https://www.linkedin.com/in/dasharathraj/',
+      objectPosition: 'center',
+      scale: 1.06,
+      transformOrigin: '50% 40%',
+    },
+    {
+      name: 'Dr. Shreepathy Rangabhatta B',
       role: 'Managing Director',
-      bio: 'Leads executive management, company operations, and project delivery.',
+      bio: 'Leads executive management, business operations, and project delivery.',
       initial: 'SR',
       image: sreeImg,
       width: 640,
@@ -189,7 +198,7 @@ const About = () => {
     {
       name: 'Dr. Anusha Pai',
       role: 'Director',
-      bio: 'Contributes healthcare and product guidance for consumer brand development.',
+      bio: 'Guides healthcare and product decisions across consumer brand development.',
       initial: 'AP',
       image: anushaImg,
       width: 302,
@@ -200,22 +209,9 @@ const About = () => {
       transformOrigin: '50% 40%',
     },
     {
-      name: 'Dr. Balakrishna S. Maddodi',
-      role: 'Mentor',
-      bio: 'Provides academic mentorship and guidance in environmental management and sustainability.',
-      initial: 'BM',
-      image: balakrishnaImg,
-      width: 640,
-      height: 640,
-      linkedin: 'https://www.linkedin.com/in/dr-balakrishna-srinivas-maddodi-68874218/',
-      objectPosition: 'center',
-      scale: 1.45,
-      transformOrigin: '50% 37%',
-    },
-    {
       name: 'Mr. Namesh Malarout',
       role: 'Director',
-      bio: 'Oversees technology strategy and digital systems architecture.',
+      bio: 'Leads technology strategy, digital systems, and technical architecture.',
       initial: 'NM',
       image: nameshImg,
       width: 332,
@@ -224,19 +220,6 @@ const About = () => {
       objectPosition: 'center',
       scale: 1.9,
       transformOrigin: '50% 28%',
-    },
-    {
-      name: 'Dr. Dasharathraj K Shetty',
-      role: 'Mentor',
-      bio: 'Provides mentorship in innovation, management systems, and enterprise development.',
-      initial: 'DS',
-      image: drImg,
-      width: 358,
-      height: 354,
-      linkedin: 'https://www.linkedin.com/in/dasharathraj/',
-      objectPosition: 'center',
-      scale: 1.06,
-      transformOrigin: '50% 40%',
     },
   ];
 
@@ -269,7 +252,7 @@ const About = () => {
         </motion.div>
       </section>
 
-      <section className="section direction-section bg-alt" aria-labelledby="direction-title">
+      <section className="section direction-section" aria-labelledby="direction-title">
         <div className="container">
           <h2 id="direction-title" className="section-title">What guides our work</h2>
           <div className="direction-grid">
@@ -393,13 +376,13 @@ const About = () => {
       </section>
 
       {/* Team Section */}
-      <section id="team" className="section team-section bg-alt">
+      <section id="team" className="section team-section">
         <div className="container">
           <div className="section-header">
             <span className="section-subtitle">Leadership and Guidance</span>
             <h2 className="section-title">Meet our team</h2>
             <p className="section-title-description">
-              Our team builds the brands and runs the work. We bring together people from healthcare, engineering, management, and technology.
+              Our leadership brings together experience across healthcare, management, technology, and consumer brand development.
             </p>
           </div>
 
@@ -412,7 +395,7 @@ const About = () => {
                 viewport={{ once: true, amount: 0.2 }}
                 transition={getAboutRevealTransition(prefersReducedMotion, idx)}
               >
-                <div className="team-card glass">
+                <div className="team-card">
                   {member.linkedin && (
                     <a
                       href={member.linkedin}
@@ -431,37 +414,41 @@ const About = () => {
                       </svg>
                     </a>
                   )}
-                  <div className="team-avatar-wrapper">
-                    <div
-                      className="team-avatar-container"
-                      style={{
-                        '--avatar-position': member.objectPosition,
-                        '--avatar-scale': member.scale,
-                        '--avatar-origin': member.transformOrigin,
-                        '--avatar-y': member.offsetY || '0px',
-                        '--avatar-background':
-                          member.background || '#f3f1ec',
-                      }}
-                    >
-                      {member.image ? (
-                        <img
-                          src={member.image}
-                          alt={member.name}
-                          className="team-avatar-image"
-                          width={member.width}
-                          height={member.height}
-                          loading="lazy"
-                          decoding="async"
-                        />
-                      ) : (
-                        <div className="team-avatar-gradient">
-                          <span className="avatar-initial">{member.initial}</span>
-                        </div>
-                      )}
+                  <div className="team-card-header">
+                    <div className="team-avatar-wrapper">
+                      <div
+                        className="team-avatar-container"
+                        style={{
+                          '--avatar-position': member.objectPosition,
+                          '--avatar-scale': member.scale,
+                          '--avatar-origin': member.transformOrigin,
+                          '--avatar-y': member.offsetY || '0px',
+                          '--avatar-background':
+                            member.background || '#f3f1ec',
+                        }}
+                      >
+                        {member.image ? (
+                          <img
+                            src={member.image}
+                            alt={member.name}
+                            className="team-avatar-image"
+                            width={member.width}
+                            height={member.height}
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        ) : (
+                          <div className="team-avatar-gradient">
+                            <span className="avatar-initial">{member.initial}</span>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                    <div className="team-identity">
+                      <h3 className="member-name">{member.name}</h3>
+                      <p className="member-role">{member.role}</p>
                     </div>
                   </div>
-                  <h3 className="member-name">{member.name}</h3>
-                  <p className="member-role">{member.role}</p>
                   {member.bio && <p className="member-bio">{member.bio}</p>}
                 </div>
               </motion.div>

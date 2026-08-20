@@ -36,7 +36,7 @@ describe('Header Component', () => {
       within(desktopNav).getAllByRole('link').map((link) => link.textContent),
     ).toEqual([
       'About',
-      'Brands',
+      'Our Brands',
       'Marketing',
       'Branding',
       'E-commerce',
