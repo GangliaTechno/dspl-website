@@ -173,7 +173,7 @@ const Header = () => {
           <nav className="desktop-nav" aria-label="Main Navigation">
             {navItems.map((item) => {
               const currentPath = normalizePath(location.pathname);
-              const active = currentPath === item.to;
+              const active = currentPath === item.to || (item.to === '/blogs' && currentPath.startsWith('/blogs/'));
               return (
                 <Link
                   key={item.to}
@@ -189,7 +189,11 @@ const Header = () => {
 
           {/* Right Side: Action Button */}
           <div className="desktop-right-controls">
-            <Link to="/start" className="btn btn-primary header-cta">
+            <Link
+              to="/start"
+              className="btn btn-primary header-cta"
+              data-umami-event="cta_start_project"
+            >
               Start a Project
             </Link>
           </div>
@@ -242,7 +246,7 @@ const Header = () => {
         <nav className="mobile-nav" aria-label="Mobile Navigation">
           {navItems.map((item) => {
             const currentPath = normalizePath(location.pathname);
-            const active = currentPath === item.to;
+            const active = currentPath === item.to || (item.to === '/blogs' && currentPath.startsWith('/blogs/'));
             return (
               <Link
                 key={item.to}
@@ -259,6 +263,7 @@ const Header = () => {
             to="/start"
             className="btn btn-primary mobile-cta"
             onClick={handleLinkClick}
+            data-umami-event="cta_start_project"
           >
             Start a Project
           </Link>

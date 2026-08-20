@@ -84,18 +84,19 @@ const PrivacyPolicy = () => {
         </section>
 
         <section className="privacy-section">
-          <h2>5. Optional Google Analytics</h2>
+          <h2>5. Optional website analytics (Umami)</h2>
           <p>
-            Google Analytics remains off unless you select Allow analytics. If
-            allowed, it may use cookies and identifiers to distinguish visits and
-            report page views and selected website interactions. {COMPANY_FACTS.shortName} does not
-            send form-field contents as analytics events.
+            Website analytics remains off unless you select Allow analytics. If
+            allowed, {COMPANY_FACTS.shortName} uses Umami Analytics—a privacy-focused,
+            cookie-free analytics tool—to measure aggregate page views, referrer
+            sources, general device categories, and Core Web Vitals performance.
+            Umami does not track visitors across other websites and does not use
+            cookies. {COMPANY_FACTS.shortName} never sends form-field contents,
+            names, emails, phone numbers, or personal messages as analytics events.
           </p>
           <p>
-            You can change your choice below. Google also provides a{' '}
-            <a href="https://support.google.com/analytics/answer/181881" target="_blank" rel="noreferrer">
-              Google Analytics opt-out browser add-on
-            </a>.
+            The analytics tracker respects your browser&apos;s &ldquo;Do Not Track&rdquo; signal.
+            You can change or revoke your analytics preference at any time below.
           </p>
           <div className="privacy-consent-controls" aria-label="Analytics consent controls">
             <p aria-live="polite">

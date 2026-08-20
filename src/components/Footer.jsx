@@ -108,10 +108,20 @@ const Footer = () => {
             <div className="footer-contact-rail">
               <div className="footer-contact-group">
                 <span className="footer-contact-label">Email</span>
-                <a href={`mailto:${COMPANY_FACTS.contacts.directorEmail}`} className="contact-item">
+                <a
+                  href={`mailto:${COMPANY_FACTS.contacts.directorEmail}`}
+                  className="contact-item"
+                  data-umami-event="contact_method_select"
+                  data-umami-event-method="email"
+                >
                   {COMPANY_FACTS.contacts.directorEmail}
                 </a>
-                <a href={`mailto:${COMPANY_FACTS.contacts.projectEmail}`} className="contact-item">
+                <a
+                  href={`mailto:${COMPANY_FACTS.contacts.projectEmail}`}
+                  className="contact-item"
+                  data-umami-event="contact_method_select"
+                  data-umami-event-method="email"
+                >
                   {COMPANY_FACTS.contacts.projectEmail}
                 </a>
               </div>

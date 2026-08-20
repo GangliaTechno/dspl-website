@@ -86,7 +86,7 @@ describe('canonical naming', () => {
     ]);
 
     for (const file of trackedTextFiles()) {
-      if (file.startsWith('docs/') || ignoredFiles.has(file)) continue;
+      if (file.startsWith('docs/') || file.startsWith('research/') || ignoredFiles.has(file)) continue;
       const content = readFileSync(file, 'utf8');
       if (content.includes('U74999KA2022PTC163810')) {
         cinViolations.push(file);

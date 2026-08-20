@@ -127,6 +127,11 @@ const ProjectPlannerForm = ({
       if (!response.ok || !data.success) {
         setSubmitError(FORM_SUBMISSION_ERROR);
         setIsSubmitting(false);
+        trackEvent('lead_form_submit_error', {
+          form: 'project_planner',
+          source,
+          error: 'submission_failed',
+        });
         return;
       }
 
@@ -135,14 +140,18 @@ const ProjectPlannerForm = ({
       setFormData(createInitialLeadForm());
       setSelectedFile(null);
       onSuccess?.(data);
-      trackEvent({
-        category: 'project_planner',
-        action: 'generate_lead',
-        label: source,
+      trackEvent('lead_form_submit_success', {
+        form: 'project_planner',
+        source,
       });
     } catch {
       setSubmitError(FORM_SUBMISSION_ERROR);
       setIsSubmitting(false);
+      trackEvent('lead_form_submit_error', {
+        form: 'project_planner',
+        source,
+        error: 'network_error',
+      });
     }
   };
 

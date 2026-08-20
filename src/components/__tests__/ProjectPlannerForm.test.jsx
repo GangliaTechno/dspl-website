@@ -89,10 +89,9 @@ describe('ProjectPlannerForm', () => {
     const payload = fetchMock.mock.calls[0][1].body;
     expect(payload.get('source')).toBe('start-page');
     expect(payload.get('services')).toBe('Compliance');
-    expect(trackEvent).toHaveBeenCalledWith({
-      category: 'project_planner',
-      action: 'generate_lead',
-      label: 'start-page',
+    expect(trackEvent).toHaveBeenCalledWith('lead_form_submit_success', {
+      form: 'project_planner',
+      source: 'start-page',
     });
   });
 

@@ -6,10 +6,10 @@ import RawRadicles from '../RawRadicles';
 import StartProject from '../StartProject';
 import TermsOfUse from '../TermsOfUse';
 
-const renderPage = (Page, path) =>
+const renderPage = (Page, path, props = {}) =>
   render(
     <MemoryRouter initialEntries={[path]}>
-      <Page />
+      <Page {...props} />
     </MemoryRouter>,
   );
 
@@ -18,7 +18,7 @@ describe('new route page shells', () => {
     [RawRadicles, '/brands/raw-radicles', 'Raw Radicles'],
     [StartProject, '/start', 'Start a Project'],
     [TermsOfUse, '/terms', 'Terms of Use'],
-    [Blogs, '/blogs', 'Insights from building and supporting brands'],
+    [Blogs, '/blogs', 'Insights'],
   ])('renders one accessible heading for %s', (Page, path, heading) => {
     renderPage(Page, path);
 
@@ -26,8 +26,8 @@ describe('new route page shells', () => {
     expect(screen.getAllByRole('heading', { level: 1 })).toHaveLength(1);
   });
 
-  it('keeps the staged Blog honest while no posts are approved', () => {
-    renderPage(Blogs, '/blogs');
+  it('keeps the staged Blog honest when no posts are provided', () => {
+    renderPage(Blogs, '/blogs', { posts: [] });
 
     expect(
       screen.getByText(/We are preparing evidence-backed articles/i),

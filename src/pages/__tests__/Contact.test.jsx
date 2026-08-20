@@ -158,10 +158,9 @@ describe('Contact', () => {
     fireEvent.click(screen.getByRole('button', { name: /Send Message/i }));
 
     expect(await screen.findByRole('heading', { name: 'Message received' })).toBeInTheDocument();
-    expect(trackEvent).toHaveBeenCalledWith({
-      category: 'contact_form',
-      action: 'generate_lead',
-      label: 'Compliance',
+    expect(trackEvent).toHaveBeenCalledWith('lead_form_submit_success', {
+      form: 'contact',
+      help_type: 'Compliance',
     });
 
     fireEvent.click(screen.getByRole('button', { name: 'Send Another Message' }));

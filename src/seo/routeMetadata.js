@@ -1,5 +1,7 @@
 import { COMPANY_FACTS } from '../content/companyFacts';
 import { SITE_CONFIG } from '../content/siteConfig';
+import { blogsEnabled, getBlogPostSummary } from '../content/publication';
+import { createBlogPostMetadata, normalizeBlogSlug } from '../pages/blogPostModel';
 
 const SITE_URL = SITE_CONFIG.siteUrl;
 const DEFAULT_IMAGE = SITE_CONFIG.defaultOgImage;
@@ -129,7 +131,7 @@ routeMetadata['/blogs'] = Object.freeze({
   canonical: '/blogs',
   image: DEFAULT_IMAGE,
   type: 'website',
-  robots: 'noindex, follow',
+  robots: blogsEnabled ? 'index, follow' : 'noindex, follow',
   structuredData: organizationStructuredData,
 });
 
@@ -151,4 +153,32 @@ export function getRouteMetadata(pathname) {
   }
 
   return metadata;
+}
+
+/**
+ * Resolves metadata for any pathname during static prerendering or dynamic routing.
+ *
+ * @param {string} pathname
+ * @returns {object}
+ */
+export function resolveMetadataForPath(pathname) {
+  const normalized = pathname.length > 1 ? pathname.replace(/\/+$/, '') : pathname;
+
+  if (normalized === '/404.html' || normalized === '/404') {
+    return NOT_FOUND_METADATA;
+  }
+
+  if (routeMetadata[normalized]) {
+    return getRouteMetadata(normalized);
+  }
+
+  if (normalized.startsWith('/blogs/')) {
+    const slug = normalizeBlogSlug(normalized.replace('/blogs/', ''));
+    const post = getBlogPostSummary(slug);
+    if (post) {
+      return createBlogPostMetadata(post, blogsEnabled);
+    }
+  }
+
+  return NOT_FOUND_METADATA;
 }

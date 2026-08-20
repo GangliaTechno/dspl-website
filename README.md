@@ -67,7 +67,9 @@ Vite serves the development site on the configured local port, currently
 | Variable | Used for |
 |---|---|
 | `VITE_WEB3FORMS_ACCESS_KEY` | Web3Forms browser submissions from the contact and Work With Us forms |
-| `VITE_GA_MEASUREMENT_ID` | Google Analytics 4 measurement ID |
+| `VITE_UMAMI_SCRIPT_URL` | Umami tracker script URL (e.g. `https://cloud.umami.is/script.js` or self-hosted tracker) |
+| `VITE_UMAMI_WEBSITE_ID` | Umami website ID UUID |
+| `VITE_UMAMI_DOMAINS` | Comma-separated allowed production domains for tracking (e.g. `dashapatmaja.in,www.dashapatmaja.in`) |
 
 Copy `.env.example` to `.env` and set local values there. Never commit `.env`
 or place private server credentials in a `VITE_*` variable: Vite variables are

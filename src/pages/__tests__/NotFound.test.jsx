@@ -5,7 +5,10 @@ import NotFound from '../NotFound';
 
 const { trackEvent } = vi.hoisted(() => ({ trackEvent: vi.fn() }));
 
-vi.mock('../../utils/analytics', () => ({ trackEvent }));
+vi.mock('../../utils/analytics', () => ({
+  trackEvent,
+  sanitizePath: (p) => p,
+}));
 
 describe('NotFound Page Component', () => {
   it('renders recovery actions, popular routes, and 404 analytics for an unknown pathname', () => {
@@ -35,10 +38,8 @@ describe('NotFound Page Component', () => {
     expect(document.querySelector('meta[name="robots"]'))
       .toHaveAttribute('content', 'noindex, follow');
 
-    expect(trackEvent).toHaveBeenCalledWith({
-      category: 'navigation',
-      action: '404_not_found',
-      label: '/missing-page'
+    expect(trackEvent).toHaveBeenCalledWith('page_not_found', {
+      path: '/missing-page',
     });
   });
 });

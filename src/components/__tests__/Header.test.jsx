@@ -10,7 +10,7 @@ afterEach(() => {
 });
 
 describe('Header Component', () => {
-  it('renders logo and main navigation links', () => {
+  it('renders logo and main navigation links including Blogs when enabled', () => {
     render(
       <BrowserRouter>
         <Header />
@@ -26,7 +26,7 @@ describe('Header Component', () => {
     for (const link of screen.getAllByRole('link', { name: 'Start a Project' })) {
       expect(link).toHaveAttribute('href', '/start');
     }
-    expect(screen.queryByRole('link', { name: 'Blogs' })).not.toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Blogs' })).toHaveAttribute('href', '/blogs');
     expect(
       screen.queryByRole('button', { name: /work with us/i }),
     ).not.toBeInTheDocument();
@@ -40,6 +40,7 @@ describe('Header Component', () => {
       'Marketing',
       'Branding',
       'E-commerce',
+      'Blogs',
       'Contact',
     ]);
   });

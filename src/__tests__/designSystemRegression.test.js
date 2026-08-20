@@ -128,7 +128,6 @@ describe('approved design-system corrections', () => {
       'src/App.jsx',
       'src/AppRoutes.jsx',
       'src/entry-prerender.jsx',
-      'src/components/AnalyticsTracker.jsx',
       'src/components/Footer.jsx',
       'src/components/Header.jsx',
       'src/components/ScrollToTop.jsx',
@@ -778,8 +777,8 @@ describe('approved design-system corrections', () => {
     ]) {
       expect(viteConfig).toContain(`'${route}'`);
     }
-    expect(viteConfig).not.toContain("'/blogs'");
-    expect(prerenderEntry).toContain('NOT_FOUND_METADATA');
+    expect(viteConfig).toContain('dynamicBlogRoutes');
+    expect(prerenderEntry).toContain('resolveMetadataForPath');
     expect(prerenderEntry).toContain("name: 'robots'");
     expect(verifier).toContain("path.join('dist', '404.html')");
     expect(verifier).toContain('prerendered public routes and a production 404 page.');

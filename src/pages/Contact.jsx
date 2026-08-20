@@ -79,20 +79,27 @@ const Contact = () => {
       if (!response.ok || !data.success) {
         setSubmitError(FORM_SUBMISSION_ERROR);
         setIsSubmitting(false);
+        trackEvent('lead_form_submit_error', {
+          form: 'contact',
+          error: 'submission_failed',
+        });
         return;
       }
 
       setSubmitted(true);
       setIsSubmitting(false);
       setFormData(createInitialContact());
-      trackEvent({
-        category: 'contact_form',
-        action: 'generate_lead',
-        label: formData.helpType || 'general',
+      trackEvent('lead_form_submit_success', {
+        form: 'contact',
+        help_type: formData.helpType || 'general',
       });
     } catch {
       setSubmitError(FORM_SUBMISSION_ERROR);
       setIsSubmitting(false);
+      trackEvent('lead_form_submit_error', {
+        form: 'contact',
+        error: 'network_error',
+      });
     }
   };
 
@@ -161,7 +168,15 @@ const Contact = () => {
               <h3 className="contact-info-summary">Start a conversation</h3>
               <p>For new business, partnerships, and general questions.</p>
               <p><PhoneObfuscated number={COMPANY_FACTS.contacts.primaryPhone} /></p>
-              <p><a href={`mailto:${COMPANY_FACTS.contacts.directorEmail}`}>{COMPANY_FACTS.contacts.directorEmail}</a></p>
+              <p>
+                <a
+                  href={`mailto:${COMPANY_FACTS.contacts.directorEmail}`}
+                  data-umami-event="contact_method_select"
+                  data-umami-event-method="email"
+                >
+                  {COMPANY_FACTS.contacts.directorEmail}
+                </a>
+              </p>
             </article>
 
             <article className="contact-info-card">
@@ -169,7 +184,15 @@ const Contact = () => {
               <h3 className="contact-info-summary">Project coordination</h3>
               <p>For reviews, delivery questions, and active workstreams.</p>
               <p><PhoneObfuscated number={COMPANY_FACTS.contacts.secondaryPhone} /></p>
-              <p><a href={`mailto:${COMPANY_FACTS.contacts.projectEmail}`}>{COMPANY_FACTS.contacts.projectEmail}</a></p>
+              <p>
+                <a
+                  href={`mailto:${COMPANY_FACTS.contacts.projectEmail}`}
+                  data-umami-event="contact_method_select"
+                  data-umami-event-method="email"
+                >
+                  {COMPANY_FACTS.contacts.projectEmail}
+                </a>
+              </p>
             </article>
           </div>
         </div>

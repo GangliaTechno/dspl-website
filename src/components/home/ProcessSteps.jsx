@@ -1,10 +1,12 @@
 const ProcessSteps = ({ steps }) => (
   <section className="section process-section" aria-labelledby="process-title">
     <div className="container">
-      <div className="section-header process-header">
-        <h2 className="section-title" id="process-title">
-          How We Work With You
-        </h2>
+      <div className="process-intro">
+        <div>
+          <h2 className="section-title" id="process-title">
+            How We Work With You
+          </h2>
+        </div>
         <p className="section-title-description">
           One accountable path from the first audit to measurement and
           iteration.

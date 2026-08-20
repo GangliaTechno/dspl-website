@@ -1,7 +1,12 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const routes = [
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const rootDir = path.resolve(__dirname, '..');
+
+const baseRoutes = [
   { route: '', heading: 'We build consumer brands.' },
   { route: 'about', heading: 'About Dashapatmaja Solutions Pvt Ltd' },
   { route: 'brands', heading: 'We develop and operate consumer brands.' },
@@ -14,6 +19,35 @@ const routes = [
   { route: 'privacy', heading: 'Privacy Policy' },
   { route: 'terms', heading: 'Terms of Use' },
 ];
+
+const dynamicBlogRoutes = [];
+const manifestPath = path.join(rootDir, 'src', 'generated', 'blogManifest.json');
+
+if (fs.existsSync(manifestPath)) {
+  try {
+    const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+    if (manifest.blogsEnabled && Array.isArray(manifest.posts)) {
+      dynamicBlogRoutes.push({
+        route: 'blogs',
+        heading: 'Insights',
+        type: 'website',
+      });
+
+      for (const post of manifest.posts) {
+        dynamicBlogRoutes.push({
+          route: `blogs/${post.slug}`,
+          heading: post.title,
+          type: 'article',
+          post,
+        });
+      }
+    }
+  } catch (err) {
+    console.warn('⚠ Could not read blogManifest.json for prerender verification:', err.message);
+  }
+}
+
+const routes = [...baseRoutes, ...dynamicBlogRoutes];
 
 const titles = [];
 const failures = [];
@@ -85,7 +119,41 @@ const verifyOrganizationSchema = (html, label) => {
   }
 };
 
-for (const { route, heading } of routes) {
+const verifyBlogPostingSchema = (html, label, post) => {
+  const schemas = Array.from(
+    html.matchAll(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi),
+    (match) => match[1],
+  );
+
+  if (!schemas.length) {
+    failures.push(`${label}: missing JSON-LD`);
+    return;
+  }
+
+  let hasBlogPosting = false;
+  for (const source of schemas) {
+    try {
+      const data = JSON.parse(source);
+      if (
+        data['@type'] === 'BlogPosting'
+        && data.headline === post.title
+        && data.datePublished === post.publishedAt
+        && (data.dateModified === (post._updatedAt || post.publishedAt))
+        && data.publisher?.name === 'Dashapatmaja Solutions Pvt Ltd'
+      ) {
+        hasBlogPosting = true;
+      }
+    } catch {
+      failures.push(`${label}: invalid JSON-LD`);
+    }
+  }
+
+  if (!hasBlogPosting) {
+    failures.push(`${label}: missing valid BlogPosting JSON-LD schema with matching headline, datePublished, dateModified, and publisher`);
+  }
+};
+
+for (const { route, heading, type, post } of routes) {
   const htmlPath = route
     ? path.join('dist', route, 'index.html')
     : path.join('dist', 'index.html');
@@ -107,7 +175,7 @@ for (const { route, heading } of routes) {
     failures.push(`${label}: missing non-empty <main>`);
   }
   if (!h1Text.includes(heading)) {
-    failures.push(`${label}: expected h1 containing "${heading}"`);
+    failures.push(`${label}: expected h1 containing "${heading}", got "${h1Text}"`);
   }
   if (!/<link\b[^>]*rel=["']canonical["'][^>]*>/i.test(html)) {
     failures.push(`${label}: missing canonical link`);
@@ -115,12 +183,19 @@ for (const { route, heading } of routes) {
   if (!/<meta\b[^>]*name=["']robots["'][^>]*content=["']index, follow["'][^>]*>/i.test(html)) {
     failures.push(`${label}: missing index, follow robots metadata`);
   }
+  if (type === 'article') {
+    if (!/<meta\b[^>]*property=["']og:type["'][^>]*content=["']article["'][^>]*>/i.test(html)) {
+      failures.push(`${label}: missing og:type="article"`);
+    }
+    verifyBlogPostingSchema(html, label, post);
+  } else {
+    verifyOrganizationSchema(html, label);
+  }
   if (!title) {
     failures.push(`${label}: missing title`);
   } else {
     titles.push({ label, title });
   }
-  verifyOrganizationSchema(html, label);
   verifyHeadUniqueness(html, label);
 }
 

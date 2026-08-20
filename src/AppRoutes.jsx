@@ -1,13 +1,13 @@
 import './App.css';
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { Route, Routes } from 'react-router';
-import AnalyticsTracker from './components/AnalyticsTracker';
 import CookieNotice from './components/CookieNotice';
 import ErrorBoundary from './components/ErrorBoundary';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import PageLoader from './components/PageLoader';
 import ScrollToTop from './components/ScrollToTop';
+import { initAnalytics } from './utils/analytics';
 
 const Home = lazy(() => import('./pages/Home'));
 const About = lazy(() => import('./pages/About'));
@@ -40,10 +40,13 @@ const AppRoutes = ({ pages = {} }) => {
   const BlogPostRoute = pages.BlogPost || BlogPost;
   const NotFoundRoute = pages.NotFound || NotFound;
 
+  useEffect(() => {
+    initAnalytics();
+  }, []);
+
   return (
     <>
       <ScrollToTop />
-      <AnalyticsTracker />
       {/* Skip Navigation — WCAG 2.4.1 Bypass Blocks */}
       <a href="#main-content" className="skip-link">Skip to main content</a>
       <div id="app-root">

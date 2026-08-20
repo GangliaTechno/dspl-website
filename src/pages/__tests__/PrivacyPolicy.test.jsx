@@ -21,16 +21,16 @@ describe('Privacy Policy', () => {
     expect(container).toHaveTextContent(/Web3Forms/i);
     expect(container).toHaveTextContent(/United States US-East Region/i);
     expect(container).toHaveTextContent(/server logs.*deleted periodically/i);
-    expect(container).toHaveTextContent(/Google Analytics.*cookies.*identifiers/i);
+    expect(container).toHaveTextContent(/Umami Analytics/i);
+    expect(container).toHaveTextContent(/cookie-free/i);
+    expect(container).not.toHaveTextContent(/Google Analytics/i);
   });
 
-  it('links processor documentation, Google opt-out, and the company contact', () => {
+  it('links processor documentation and the company contact', () => {
     render(<PrivacyPolicy />);
 
     expect(screen.getByRole('link', { name: 'Web3Forms privacy documentation' }))
       .toHaveAttribute('href', 'https://docs.web3forms.com/getting-started/faq');
-    expect(screen.getByRole('link', { name: 'Google Analytics opt-out browser add-on' }))
-      .toHaveAttribute('href', 'https://support.google.com/analytics/answer/181881');
     expect(screen.getByRole('link', { name: 'director@dashapatmaja.in' }))
       .toHaveAttribute('href', 'mailto:director@dashapatmaja.in');
     expect(screen.getByRole('link', { name: 'Call +91 88619 42440' }))

@@ -15,6 +15,8 @@ const PhoneObfuscated = ({
       href={`tel:${telNumber}`}
       aria-label={label || `Call ${visibleNumber}`}
       className={className}
+      data-umami-event="contact_method_select"
+      data-umami-event-method="call"
     >
       {icon}
       <span>{visibleNumber}</span>

@@ -58,7 +58,7 @@ describe('loadHydrationPage', () => {
 });
 
 describe('shouldHydratePrerenderedPage', () => {
-  it('hydrates known prerendered routes', () => {
+  it('hydrates known public and published blog routes', () => {
     expect(
       shouldHydratePrerenderedPage(true, { Home: () => null }, '/'),
     ).toBe(true);
@@ -67,6 +67,20 @@ describe('shouldHydratePrerenderedPage', () => {
         true,
         { StartProject: () => null },
         '/start',
+      ),
+    ).toBe(true);
+    expect(
+      shouldHydratePrerenderedPage(
+        true,
+        { Blogs: () => null },
+        '/blogs',
+      ),
+    ).toBe(true);
+    expect(
+      shouldHydratePrerenderedPage(
+        true,
+        { BlogPost: () => null },
+        '/blogs/coordinating-brand-market-commerce',
       ),
     ).toBe(true);
   });
@@ -79,21 +93,11 @@ describe('shouldHydratePrerenderedPage', () => {
         '/missing-evidence-route',
       ),
     ).toBe(false);
-  });
-
-  it('client-renders staged Blog routes because they are not prerendered', () => {
-    expect(
-      shouldHydratePrerenderedPage(
-        true,
-        { Blogs: () => null },
-        '/blogs',
-      ),
-    ).toBe(false);
     expect(
       shouldHydratePrerenderedPage(
         true,
         { BlogPost: () => null },
-        '/blogs/example',
+        '/blogs/unknown-slug',
       ),
     ).toBe(false);
   });

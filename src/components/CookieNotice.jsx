@@ -27,7 +27,7 @@ const CookieNotice = () => {
       <div className="cookie-notice-copy">
         <h2>Optional website analytics</h2>
         <p>
-          With your permission, Google Analytics helps us understand which pages
+          With your permission, privacy-friendly website analytics helps us understand which pages
           are useful. It stays off unless you allow it. Read our{' '}
           <Link to="/privacy">Privacy Policy</Link>.
         </p>

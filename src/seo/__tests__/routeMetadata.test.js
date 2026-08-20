@@ -4,11 +4,13 @@ import {
   NOT_FOUND_METADATA,
   organizationStructuredData,
   PUBLIC_ROUTES,
+  resolveMetadataForPath,
 } from '../routeMetadata';
 
 describe('route metadata', () => {
-  it('keeps the exact public route set separate from the staged Blog', () => {
+  it('defines the core public route set and activates /blogs when enabled', () => {
     expect(PUBLIC_ROUTES).toEqual([
+      '/',
       '/',
       '/about',
       '/brands',
@@ -20,11 +22,12 @@ describe('route metadata', () => {
       '/start',
       '/privacy',
       '/terms',
-    ]);
-    expect(PUBLIC_ROUTES).not.toContain('/blogs');
+    ].filter((v, i, a) => a.indexOf(v) === i));
+
     expect(getRouteMetadata('/blogs')).toMatchObject({
       canonical: '/blogs',
-      robots: 'noindex, follow',
+      robots: 'index, follow',
+      title: 'Dashapatmaja Solutions Pvt Ltd | Insights',
     });
   });
 
@@ -56,6 +59,23 @@ describe('route metadata', () => {
     expect(organizationStructuredData.sameAs).toContain(
       'https://www.linkedin.com/company/dashapatmaja-solutions-private-limited/',
     );
+  });
+
+  it('resolves dynamic article metadata and fallbacks seamlessly', () => {
+    const articleMeta = resolveMetadataForPath('/blogs/coordinating-brand-market-commerce');
+    expect(articleMeta).toMatchObject({
+      title: 'Coordinating Brand, Market, and Commerce as One System | Dashapatmaja Solutions Pvt Ltd',
+      canonical: '/blogs/coordinating-brand-market-commerce',
+      type: 'article',
+      robots: 'index, follow',
+    });
+    expect(articleMeta.structuredData['@type']).toBe('BlogPosting');
+
+    const unknownMeta = resolveMetadataForPath('/blogs/nonexistent-slug');
+    expect(unknownMeta).toEqual(NOT_FOUND_METADATA);
+
+    const notFoundMeta = resolveMetadataForPath('/404.html');
+    expect(notFoundMeta).toEqual(NOT_FOUND_METADATA);
   });
 
   it('defines indexable metadata for every new public route', () => {

@@ -1,4 +1,5 @@
 import { PUBLIC_ROUTES } from './seo/routeMetadata';
+import { isPublishedBlogRoute } from './content/publication';
 
 const defaultLoaders = {
   Home: () => import('./pages/Home'),
@@ -50,11 +51,14 @@ export async function loadHydrationPage(pathname, loaders = defaultLoaders) {
 
 export function shouldHydratePrerenderedPage(hasMarkup, pages, pathname) {
   const normalizedPath = normalizePath(pathname);
+  const isPrerendered =
+    PUBLIC_ROUTES.includes(normalizedPath) ||
+    isPublishedBlogRoute(normalizedPath);
 
   return Boolean(
     hasMarkup &&
     pages &&
     !pages.NotFound &&
-    PUBLIC_ROUTES.includes(normalizedPath),
+    isPrerendered,
   );
 }

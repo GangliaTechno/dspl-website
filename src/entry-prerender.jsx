@@ -13,28 +13,19 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import RawRadicles from './pages/RawRadicles';
 import StartProject from './pages/StartProject';
 import TermsOfUse from './pages/TermsOfUse';
+import Blogs from './pages/Blogs';
+import BlogPost from './pages/BlogPost';
 import { SITE_CONFIG } from './content/siteConfig';
 import {
-  getRouteMetadata,
-  NOT_FOUND_METADATA,
   PUBLIC_ROUTES,
+  resolveMetadataForPath,
 } from './seo/routeMetadata';
+import {
+  blogsEnabled,
+  getPublishedBlogPaths,
+} from './content/publication';
 
 const SITE_URL = SITE_CONFIG.siteUrl;
-const pages = {
-  About,
-  Branding,
-  Brands,
-  Contact,
-  Ecommerce,
-  Home,
-  Marketing,
-  NotFound,
-  PrivacyPolicy,
-  RawRadicles,
-  StartProject,
-  TermsOfUse,
-};
 
 const releaseReactServerMessagePort = () => {
   // The plugin bundles React's browser server renderer, whose MessagePort
@@ -42,6 +33,14 @@ const releaseReactServerMessagePort = () => {
   for (const handle of globalThis.process?._getActiveHandles?.() ?? []) {
     if (handle.constructor?.name === 'MessagePort') handle.unref?.();
   }
+};
+
+const eagerArticles = import.meta.glob('./generated/blog/*.json', { eager: true });
+
+const getEagerArticleContent = (slug = '') => {
+  const normalized = slug.trim().toLowerCase();
+  const key = `./generated/blog/${normalized}.json`;
+  return eagerArticles[key]?.default || eagerArticles[key] || null;
 };
 
 const createHeadElements = (metadata) =>
@@ -117,7 +116,7 @@ const createHeadElements = (metadata) =>
       type: 'script',
       props: {
         type: 'application/ld+json',
-        'data-dspl-schema': 'organization',
+        'data-dspl-schema': metadata.type === 'article' ? 'blog-posting' : 'organization',
       },
       children: JSON.stringify(metadata.structuredData),
     },
@@ -125,9 +124,35 @@ const createHeadElements = (metadata) =>
 
 export async function prerender(data) {
   const pathname = new URL(data.url, SITE_URL).pathname;
-  const metadata = pathname === '/404.html'
-    ? NOT_FOUND_METADATA
-    : getRouteMetadata(pathname);
+  const metadata = resolveMetadataForPath(pathname);
+
+  let initialArticle = null;
+  if (pathname.startsWith('/blogs/')) {
+    const slug = pathname.replace('/blogs/', '').replace(/\/$/, '').toLowerCase();
+    initialArticle = getEagerArticleContent(slug);
+  }
+
+  const BlogPostPrerender = (props) => (
+    <BlogPost initialArticle={initialArticle} {...props} />
+  );
+
+  const pages = {
+    About,
+    Branding,
+    Brands,
+    Contact,
+    Ecommerce,
+    Home,
+    Marketing,
+    NotFound,
+    PrivacyPolicy,
+    RawRadicles,
+    StartProject,
+    TermsOfUse,
+    Blogs,
+    BlogPost: BlogPostPrerender,
+  };
+
   const html = renderToString(
     <StaticRouter location={pathname}>
       <AppRoutes pages={pages} />
@@ -135,9 +160,14 @@ export async function prerender(data) {
   );
   releaseReactServerMessagePort();
 
+  const allPrerenderLinks = [
+    ...PUBLIC_ROUTES,
+    ...(blogsEnabled ? ['/blogs', ...getPublishedBlogPaths()] : []),
+  ];
+
   return {
     html,
-    links: new Set(PUBLIC_ROUTES),
+    links: new Set(allPrerenderLinks),
     head: {
       lang: 'en',
       title: metadata.title,

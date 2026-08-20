@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { Link, useLocation } from 'react-router';
 import { Home, ArrowLeft, Mail } from 'lucide-react';
 import useSEO from '../hooks/useSEO';
-import { trackEvent } from '../utils/analytics';
+import { sanitizePath, trackEvent } from '../utils/analytics';
 import { NOT_FOUND_METADATA } from '../seo/routeMetadata';
 
 const NotFound = () => {
@@ -12,10 +12,8 @@ const NotFound = () => {
   useSEO(NOT_FOUND_METADATA);
 
   useEffect(() => {
-    trackEvent({
-      category: 'navigation',
-      action: '404_not_found',
-      label: location.pathname
+    trackEvent('page_not_found', {
+      path: sanitizePath(location.pathname),
     });
   }, [location.pathname]);
 

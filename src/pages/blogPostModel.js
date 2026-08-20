@@ -1,13 +1,49 @@
-import { getRouteMetadata } from '../seo/routeMetadata';
+import { getRouteMetadata, organizationStructuredData } from '../seo/routeMetadata';
 import { SITE_CONFIG } from '../content/siteConfig';
 
 export const normalizeBlogSlug = (value = '') => value.trim().toLowerCase();
 
-export const createBlogPostMetadata = (post, isBlogOpen = true) => ({
-  ...getRouteMetadata('/blogs'),
-  title: `${post.title} | ${SITE_CONFIG.siteName}`,
-  description: post.description,
-  canonical: `/blogs/${post.slug}`,
-  type: 'article',
-  robots: isBlogOpen ? 'index, follow' : 'noindex, follow',
-});
+/**
+ * Creates dynamic SEO metadata and BlogPosting JSON-LD structured data for an article.
+ *
+ * @param {object} post - The post summary or full document
+ * @param {boolean} [isBlogOpen=true]
+ * @returns {object}
+ */
+export const createBlogPostMetadata = (post, isBlogOpen = true) => {
+  const siteUrl = SITE_CONFIG.siteUrl;
+  const canonicalPath = `/blogs/${post.slug}`;
+  const title = post.seo?.metaTitle
+    ? `${post.seo.metaTitle} | ${SITE_CONFIG.siteName}`
+    : `${post.title} | ${SITE_CONFIG.siteName}`;
+  const description = post.seo?.metaDescription || post.description;
+  const image = post.seo?.ogImage || post.mainImage?.asset?.url || SITE_CONFIG.defaultOgImage;
+
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    description: post.description,
+    datePublished: post.publishedAt,
+    dateModified: post._updatedAt || post.publishedAt,
+    url: `${siteUrl}${canonicalPath}`,
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `${siteUrl}${canonicalPath}`,
+    },
+    articleSection: post.category,
+    publisher: organizationStructuredData,
+    image: image.startsWith('http') ? image : `${siteUrl}${image}`,
+  };
+
+  return {
+    ...getRouteMetadata('/blogs'),
+    title,
+    description,
+    canonical: canonicalPath,
+    type: 'article',
+    image,
+    robots: isBlogOpen ? 'index, follow' : 'noindex, follow',
+    structuredData,
+  };
+};
