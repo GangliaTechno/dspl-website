@@ -14,6 +14,7 @@ describe('Privacy Policy', () => {
     const { container } = render(<PrivacyPolicy />);
 
     expect(screen.getByRole('heading', { level: 1, name: 'Privacy Policy' })).toBeInTheDocument();
+    expect(container).toHaveTextContent('Last updated: 20 August 2026');
     expect(container).toHaveTextContent('Digital Personal Data Protection Act, 2023');
     expect(container).toHaveTextContent(/as applicable provisions take effect/i);
     expect(container).toHaveTextContent(/Contact form/i);
@@ -21,9 +22,12 @@ describe('Privacy Policy', () => {
     expect(container).toHaveTextContent(/Web3Forms/i);
     expect(container).toHaveTextContent(/United States US-East Region/i);
     expect(container).toHaveTextContent(/server logs.*deleted periodically/i);
+    expect(container).toHaveTextContent(/Optional website analytics/i);
     expect(container).toHaveTextContent(/Umami Analytics/i);
     expect(container).toHaveTextContent(/cookie-free/i);
-    expect(container).not.toHaveTextContent(/Google Analytics/i);
+    expect(container).toHaveTextContent(/Google Analytics 4/i);
+    expect(container).toHaveTextContent(/approximate location/i);
+    expect(container).toHaveTextContent(/_ga/i);
   });
 
   it('links processor documentation and the company contact', () => {

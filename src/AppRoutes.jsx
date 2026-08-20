@@ -1,13 +1,13 @@
 import './App.css';
 import { lazy, Suspense, useEffect } from 'react';
-import { Route, Routes } from 'react-router';
+import { Route, Routes, useLocation } from 'react-router';
 import CookieNotice from './components/CookieNotice';
 import ErrorBoundary from './components/ErrorBoundary';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import PageLoader from './components/PageLoader';
 import ScrollToTop from './components/ScrollToTop';
-import { initAnalytics } from './utils/analytics';
+import { initAnalytics, trackPageView } from './utils/analytics';
 
 const Home = lazy(() => import('./pages/Home'));
 const About = lazy(() => import('./pages/About'));
@@ -25,6 +25,7 @@ const BlogPost = lazy(() => import('./pages/BlogPost'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 const AppRoutes = ({ pages = {} }) => {
+  const location = useLocation();
   const HomeRoute = pages.Home || Home;
   const AboutRoute = pages.About || About;
   const BrandsRoute = pages.Brands || Brands;
@@ -43,6 +44,10 @@ const AppRoutes = ({ pages = {} }) => {
   useEffect(() => {
     initAnalytics();
   }, []);
+
+  useEffect(() => {
+    trackPageView(location.pathname);
+  }, [location.pathname]);
 
   return (
     <>

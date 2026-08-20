@@ -19,7 +19,7 @@ const PrivacyPolicy = () => {
     <div className="privacy-page-container">
       <article className="privacy-content glass">
         <h1 className="privacy-title">Privacy Policy</h1>
-        <p className="privacy-updated">Last updated: 19 August 2026</p>
+        <p className="privacy-updated">Last updated: 20 August 2026</p>
 
         <section className="privacy-section">
           <h2>1. Scope and legal context</h2>
@@ -84,19 +84,31 @@ const PrivacyPolicy = () => {
         </section>
 
         <section className="privacy-section">
-          <h2>5. Optional website analytics (Umami)</h2>
+          <h2>5. Optional website analytics</h2>
           <p>
-            Website analytics remains off unless you select Allow analytics. If
-            allowed, {COMPANY_FACTS.shortName} uses Umami Analytics—a privacy-focused,
-            cookie-free analytics tool—to measure aggregate page views, referrer
-            sources, general device categories, and Core Web Vitals performance.
-            Umami does not track visitors across other websites and does not use
-            cookies. {COMPANY_FACTS.shortName} never sends form-field contents,
-            names, emails, phone numbers, or personal messages as analytics events.
+            Website analytics remains completely off unless you select Allow analytics. If
+            allowed, {COMPANY_FACTS.shortName} uses Umami Analytics and Google Analytics (GA4)
+            to understand how visitors use the website and improve site performance.
           </p>
           <p>
-            The analytics tracker respects your browser&apos;s &ldquo;Do Not Track&rdquo; signal.
-            You can change or revoke your analytics preference at any time below.
+            <strong>Umami Analytics:</strong> Umami is a privacy-focused, cookie-free analytics
+            tool used to measure aggregate page views, referrer sources, general device categories,
+            and Core Web Vitals performance. Umami does not track visitors across other websites
+            and does not use cookies.
+          </p>
+          <p>
+            <strong>Google Analytics 4 (GA4):</strong> Google states that GA4 uses IP addresses
+            at collection time to derive approximate location information and discards those IP
+            addresses before analytics data is logged. GA4 uses first-party cookies including{' '}
+            <code>_ga</code> and <code>_ga_&lt;container-id&gt;</code> only after analytics consent
+            is granted. Advertising storage, ad personalisation, and cross-site remarketing
+            signals remain permanently denied.
+          </p>
+          <p>
+            {COMPANY_FACTS.shortName} never sends form-field contents, names, emails, phone numbers,
+            or personal messages as analytics events. The analytics trackers respect your
+            browser&apos;s &ldquo;Do Not Track&rdquo; signal. You can change or revoke your analytics
+            preference at any time below.
           </p>
           <div className="privacy-consent-controls" aria-label="Analytics consent controls">
             <p aria-live="polite">
