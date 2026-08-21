@@ -4,6 +4,87 @@ import { blogPosts, hasPublishableBlog } from '../content/publication';
 import useSEO from '../hooks/useSEO';
 import { getRouteMetadata } from '../seo/routeMetadata';
 import { formatPublicationDate } from '../utils/publicationUtils';
+import brandMarketCommerce640 from '../assets/insights-brand-market-commerce-640.webp';
+import brandMarketCommerce960 from '../assets/insights-brand-market-commerce-960.webp';
+import brandMarketCommerce1440 from '../assets/insights-brand-market-commerce-1440.webp';
+import packagingToPurchase640 from '../assets/insights-packaging-to-purchase-640.webp';
+import packagingToPurchase960 from '../assets/insights-packaging-to-purchase-960.webp';
+import packagingToPurchase1440 from '../assets/insights-packaging-to-purchase-1440.webp';
+
+const editorialArtworkBySlug = Object.freeze({
+  'coordinating-brand-market-commerce': {
+    alt: 'Abstract signal geometry connecting brand, market, and commerce systems',
+    src: brandMarketCommerce1440,
+    srcSet: `${brandMarketCommerce640} 640w, ${brandMarketCommerce960} 960w, ${brandMarketCommerce1440} 1440w`,
+  },
+  'from-packaging-to-purchase': {
+    alt: 'Abstract signal geometry tracing a consumer-brand launch from packaging to purchase',
+    src: packagingToPurchase960,
+    srcSet: `${packagingToPurchase640} 640w, ${packagingToPurchase960} 960w, ${packagingToPurchase1440} 1440w`,
+  },
+});
+
+const BlogStory = ({ post, index, variant }) => {
+  const artwork = editorialArtworkBySlug[post.slug];
+  const isFeature = variant === 'feature';
+  const titleClassName = isFeature ? 'blog-feature-title' : 'blog-supporting-title';
+  const descriptionClassName = isFeature
+    ? 'blog-feature-description'
+    : 'blog-supporting-description';
+
+  return (
+    <article className={isFeature ? 'blog-feature-story' : 'blog-supporting-story'}>
+      <Link
+        to={`/blogs/${post.slug}`}
+        className="blog-story-link-wrapper"
+        aria-label={`Read ${post.title}`}
+      >
+        {artwork && (
+          <div className="blog-story-artwork">
+            <img
+              src={artwork.src}
+              srcSet={artwork.srcSet}
+              sizes={isFeature
+                ? '(max-width: 900px) calc(100vw - 3rem), 640px'
+                : '(max-width: 900px) calc(100vw - 3rem), 440px'}
+              alt={artwork.alt}
+              width="1440"
+              height="810"
+              loading={isFeature ? 'eager' : 'lazy'}
+              fetchPriority={isFeature ? 'high' : undefined}
+              decoding="async"
+            />
+          </div>
+        )}
+
+        <div className="blog-story-header">
+          <span className="blog-story-index" aria-hidden="true">
+            {String(index).padStart(2, '0')}
+          </span>
+          <p className="blog-story-meta">
+            <span className="blog-story-category">{post.category}</span>
+            <span className="blog-story-meta-divider">·</span>
+            <span className="blog-story-reading-time">
+              {post.readingTime?.text || '5 min read'}
+            </span>
+          </p>
+        </div>
+
+        <h2 className={titleClassName}>{post.title}</h2>
+        <p className={descriptionClassName}>{post.description}</p>
+
+        <div className="blog-story-footer">
+          <time className="blog-story-date" dateTime={post.publishedAt}>
+            {formatPublicationDate(post.publishedAt)}
+          </time>
+          <span className="blog-story-action">
+            Read article <span className="blog-story-arrow" aria-hidden="true">→</span>
+          </span>
+        </div>
+      </Link>
+    </article>
+  );
+};
 
 const Blogs = ({ posts = blogPosts }) => {
   const isOpen = hasPublishableBlog(posts);
@@ -23,9 +104,11 @@ const Blogs = ({ posts = blogPosts }) => {
       <section className="section blogs-hero">
         <div className="container blogs-container">
           <header className="blogs-header">
-            <span className="section-subtitle">Publication</span>
-            <h1 className="blogs-title">Insights</h1>
-            <p className="blogs-tagline">Thinking from the work of building brands.</p>
+            <div className="blogs-heading-group">
+              <span className="section-subtitle">Publication</span>
+              <h1 className="blogs-title">Insights</h1>
+              <p className="blogs-tagline">Thinking from the work of building brands.</p>
+            </div>
             <p className="blogs-intro">
               Notes on branding, market execution, commerce, and the operating decisions that connect them.
             </p>
@@ -33,120 +116,13 @@ const Blogs = ({ posts = blogPosts }) => {
 
           {isOpen ? (
             <div className="blogs-editorial-grid">
-              {/* Feature Article (Dominant) */}
-              {featurePost && (
-                <article className="blog-feature-story" key={featurePost.slug}>
-                  <Link
-                    to={`/blogs/${featurePost.slug}`}
-                    className="blog-story-link-wrapper"
-                    aria-label={`Read ${featurePost.title}`}
-                  >
-                    <div className="blog-story-header">
-                      <span className="blog-story-index" aria-hidden="true">
-                        01
-                      </span>
-                      <p className="blog-story-meta">
-                        <span className="blog-story-category">{featurePost.category}</span>
-                        <span className="blog-story-meta-divider">·</span>
-                        <span className="blog-story-reading-time">
-                          {featurePost.readingTime?.text || '5 min read'}
-                        </span>
-                      </p>
-                    </div>
+              {featurePost && <BlogStory post={featurePost} index={1} variant="feature" />}
+              {supportingPost && <BlogStory post={supportingPost} index={2} variant="supporting" />}
 
-                    <h2 className="blog-feature-title">{featurePost.title}</h2>
-                    <p className="blog-feature-description">{featurePost.description}</p>
-
-                    <div className="blog-story-footer">
-                      <time
-                        className="blog-story-date"
-                        dateTime={featurePost.publishedAt}
-                      >
-                        {formatPublicationDate(featurePost.publishedAt)}
-                      </time>
-                      <span className="blog-story-action">
-                        Read article <span className="blog-story-arrow" aria-hidden="true">→</span>
-                      </span>
-                    </div>
-                  </Link>
-                </article>
-              )}
-
-              {/* Supporting Article */}
-              {supportingPost && (
-                <article className="blog-supporting-story" key={supportingPost.slug}>
-                  <Link
-                    to={`/blogs/${supportingPost.slug}`}
-                    className="blog-story-link-wrapper"
-                    aria-label={`Read ${supportingPost.title}`}
-                  >
-                    <div className="blog-story-header">
-                      <span className="blog-story-index" aria-hidden="true">
-                        02
-                      </span>
-                      <p className="blog-story-meta">
-                        <span className="blog-story-category">{supportingPost.category}</span>
-                        <span className="blog-story-meta-divider">·</span>
-                        <span className="blog-story-reading-time">
-                          {supportingPost.readingTime?.text || '5 min read'}
-                        </span>
-                      </p>
-                    </div>
-
-                    <h2 className="blog-supporting-title">{supportingPost.title}</h2>
-                    <p className="blog-supporting-description">{supportingPost.description}</p>
-
-                    <div className="blog-story-footer">
-                      <time
-                        className="blog-story-date"
-                        dateTime={supportingPost.publishedAt}
-                      >
-                        {formatPublicationDate(supportingPost.publishedAt)}
-                      </time>
-                      <span className="blog-story-action">
-                        Read article <span className="blog-story-arrow" aria-hidden="true">→</span>
-                      </span>
-                    </div>
-                  </Link>
-                </article>
-              )}
-
-              {/* Scalability for future 3+ articles */}
               {remainingPosts.length > 0 && (
                 <div className="blogs-additional-grid">
                   {remainingPosts.map((post, idx) => (
-                    <article className="blog-supporting-story" key={post.slug}>
-                      <Link
-                        to={`/blogs/${post.slug}`}
-                        className="blog-story-link-wrapper"
-                        aria-label={`Read ${post.title}`}
-                      >
-                        <div className="blog-story-header">
-                          <span className="blog-story-index" aria-hidden="true">
-                            {String(idx + 3).padStart(2, '0')}
-                          </span>
-                          <p className="blog-story-meta">
-                            <span className="blog-story-category">{post.category}</span>
-                            <span className="blog-story-meta-divider">·</span>
-                            <span className="blog-story-reading-time">
-                              {post.readingTime?.text || '5 min read'}
-                            </span>
-                          </p>
-                        </div>
-
-                        <h2 className="blog-supporting-title">{post.title}</h2>
-                        <p className="blog-supporting-description">{post.description}</p>
-
-                        <div className="blog-story-footer">
-                          <time className="blog-story-date" dateTime={post.publishedAt}>
-                            {formatPublicationDate(post.publishedAt)}
-                          </time>
-                          <span className="blog-story-action">
-                            Read article <span className="blog-story-arrow" aria-hidden="true">→</span>
-                          </span>
-                        </div>
-                      </Link>
-                    </article>
+                    <BlogStory key={post.slug} post={post} index={idx + 3} variant="supporting" />
                   ))}
                 </div>
               )}

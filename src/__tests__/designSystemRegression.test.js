@@ -203,6 +203,42 @@ describe('approved design-system corrections', () => {
     );
   });
 
+  it('keeps the rebuilt header navigation semantic, compact, and motion restrained', () => {
+    const navigation = readSource('src/content/headerNavigation.js');
+    const header = readSource('src/components/Header.jsx');
+    const css = readSource('src/components/Header.css');
+    const design = readSource('DESIGN.md');
+    const panelBlock = css.match(/\.desktop-disclosure-panel\s*{[^}]*}/s)?.[0] ?? '';
+
+    expect(navigation).toContain("label: 'Company'");
+    expect(navigation).toContain("label: 'Capabilities'");
+    expect(navigation).toContain("label: 'Insights'");
+    expect(header).not.toMatch(/role\s*=\s*["']menu/);
+    expect(header).not.toMatch(/onMouse(?:Enter|Over)/);
+    expect(panelBlock).toMatch(/width:\s*360px;/);
+    expect(panelBlock).toMatch(/background:\s*rgba\(255,\s*255,\s*255,\s*0\.988\)/);
+    expect(panelBlock).not.toContain('backdrop-filter');
+    expect(css).toContain('animation: desktop-disclosure-enter 160ms');
+    expect(css).toMatch(/@keyframes desktop-disclosure-enter\s*{[\s\S]*?opacity:\s*0;[\s\S]*?translateY\(-6px\)/);
+    expect(css).toMatch(/\.nav-panel-description\s*{[^}]*white-space:\s*nowrap;/s);
+    expect(css).toMatch(/\.nav-disclosure-button:hover\s*{[^}]*color:\s*var\(--accent-text\);/s);
+    expect(css).toMatch(/\.nav-panel-link:hover\s*{[^}]*background-color:/s);
+    expect(css).toMatch(/\.mobile-group-button\s*{[^}]*min-height:\s*44px;/s);
+    expect(css).toMatch(
+      /@media\s*\(prefers-reduced-motion:\s*reduce\)\s*{[\s\S]*?\.desktop-disclosure-panel,[\s\S]*?\.mobile-sublist[\s\S]*?animation:\s*none;/s,
+    );
+    expect(css).toMatch(
+      /@media\s*\(prefers-reduced-motion:\s*reduce\)\s*{[\s\S]*?\.nav-disclosure-caret[\s\S]*?transition:\s*none;/s,
+    );
+    expect(design).not.toContain('"Work With Us" primary CTA');
+    expect(design).toContain('Company/Capabilities click disclosures');
+    expect(design).toContain('direct Insights/Contact');
+    expect(design).toContain('360px opaque editorial panels');
+    expect(design).toContain('shared mobile accordions');
+    expect(design).toContain('hierarchical current states');
+    expect(design).toContain('160ms');
+  });
+
   it('uses numbers only for the named Home process sequence', () => {
     const homePage = readSource('src/pages/Home.jsx');
     const processSteps = readSource('src/components/home/ProcessSteps.jsx');

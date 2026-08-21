@@ -6,6 +6,7 @@ opinion.
 
 | Production files | Method | Provider | Date | Prompt or source | Rights review | Approval |
 | --- | --- | --- | --- | --- | --- | --- |
+| `insights-brand-market-commerce-{640,960,1440}.webp`, `insights-packaging-to-purchase-{640,960,1440}.webp` | Deterministic centre-cropped responsive derivatives created locally with Sharp from the approved Signal Geometry PNG masters; Lanczos 3, WebP quality 86, effort 6, no upscaling | Local Sharp processing; approved source masters generated with OpenAI built-in image generation | 2026-08-21 | `docs/assets/insights-concepts/insights-brand-market-commerce-signal-geometry-v1.png` and approved `insights-packaging-to-purchase-signal-geometry-v2.png` | Reviewed source pair for editorial fit, crop-safe geometry, no readable text, logos, watermark, people, or disallowed visual motifs; rejected Packaging v1 retained as history only | Approved for the Insights editorial listing |
 | `dspl-home-editorial-{960,1440,1920}.webp`, `dspl-home-editorial-mobile.webp` | Generated original; responsive derivatives created locally from `dspl-home-editorial-source.png` | OpenAI built-in image generation | 2026-07-29 | Prompt recorded below | Reviewed: no recognizable people or third-party trademarks; packaging is generic; faint non-readable decorative marks only; no watermark | Approved for branch review |
 | `dspl-marketing-editorial-{960,1440,1920}.webp`, `dspl-marketing-editorial-mobile.webp` | Generated original; responsive derivatives created locally from `dspl-marketing-editorial-source.png` | OpenAI built-in image generation | 2026-07-29 | Prompt recorded below | Reviewed: no people, trademarks, recognizable brands, billboards, or watermark; charts and planning sheets contain abstract non-readable shapes | Approved for branch review |
 | `brands-hero-editorial-{768,1200,1672}.webp`, `brands-hero-editorial-mobile.webp` | Generated original; locally cropped and optimized responsive family | OpenAI built-in image generation | 2026-07-30 | Premium brand-development studio with center-safe composition and generic packaging | Reviewed: no people, readable brand names, third-party trademarks, or watermark | Superseded by the explicit portfolio-scene direction at `f022b1c` |
@@ -28,6 +29,21 @@ opinion.
 | `brands-portfolio-{01,02}-{960,1440,mobile}.webp` | Generated masters `docs/assets/hero-masters/brands-portfolio-{01,02}.png`; deterministic local crops | OpenAI built-in image generation | 2026-08-11 | Approved refresh prompts below; desktop focal `0.50,0.50`; mobile focal `01: 0.50,0.50`, `02: 0.46,0.50` | First `02` draft rejected for synthetic label-like marks; selected families use fictional blank packaging with no readable text, logos, trademarks, people, malformed products, or watermark | Approved by user; final live crop QA required |
 | `branding-workshop-{01,02}-{960,1440,mobile}.webp` | Generated masters `docs/assets/hero-masters/branding-workshop-{01,02}.png`; deterministic local crops | OpenAI built-in image generation | 2026-08-11 | Approved refresh prompts below; desktop focal `0.50,0.50`; mobile focal `01: 0.52,0.50`, `02: 0.50,0.50` | First `01` draft rejected for synthetic label-like marks; selected scenes use fictional adults and abstract geometric identity applications with no readable text, real logos, trademarks, public figures, named DSPL employees, malformed anatomy, or watermark | Approved by user; final live crop QA required |
 | `dr_pro.webp`, `Anusha-mam_pro.webp`, `ceo_pro.webp` | Lossy WebP delivery derivatives of the existing approved team portraits; original PNG files retained | Local Sharp conversion | 2026-08-13 | Original pixel dimensions preserved; WebP quality 82, effort 6 | Portrait content and crop unchanged; delivery format only | Approved source imagery; responsive delivery optimization |
+
+## 2026-08-21 Insights editorial signal derivatives
+
+The PNG masters remain unchanged in `docs/assets/insights-concepts/`. Each
+delivery derivative is an exact 16:9 WebP output with intrinsic dimensions
+declared by the listing markup as `1440 x 810` and selected via `srcset`.
+
+| File | Dimensions | Bytes | SHA-256 |
+| --- | ---: | ---: | --- |
+| `src/assets/insights-brand-market-commerce-640.webp` | 640 × 360 | 9,094 | `AF53CB0A408DF6222C8DC5E46B5F1DF89E4F9435A39B147396DE096AC62D03DC` |
+| `src/assets/insights-brand-market-commerce-960.webp` | 960 × 540 | 15,584 | `A209BB773C45186C4CF1A867A10B46C4969F4804B21E7D05E76128284A68DC27` |
+| `src/assets/insights-brand-market-commerce-1440.webp` | 1,440 × 810 | 27,294 | `5087454E142799F2220A2D36A78958E5730BDD3BACA58101D27BD8E889B48370` |
+| `src/assets/insights-packaging-to-purchase-640.webp` | 640 × 360 | 7,946 | `929AFB7D41603ABB377CD4478FB0497EBCDBE967371770D2239B23D10AE9E9EA` |
+| `src/assets/insights-packaging-to-purchase-960.webp` | 960 × 540 | 13,522 | `8BD58EFA5EBA9E5C900E64B094E60EEC917F8A373DB51110F222040C7D88C2FC` |
+| `src/assets/insights-packaging-to-purchase-1440.webp` | 1,440 × 810 | 23,460 | `63FB35ADFCA7C4E7A632E4AAFC532120E7D9DEFF991610E428CBB59547EAE6C3` |
 
 ## 2026-08-14 About journey v2 prompt set
 

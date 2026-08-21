@@ -140,7 +140,7 @@ The system relies primarily on clean surface boundary definition and subtle tona
 - **Focus:** Hero Gold border highlight with `0 0 0 4px rgba(245, 168, 0, 0.04)` glow ring.
 
 ### Navigation
-- **Header Shell:** Sticky frosted glass header (`backdrop-filter: blur(12px)`), logo, clean page navigation links, and "Work With Us" primary CTA button.
+- **Header Shell:** Persistent floating shell that keeps the logo and a clear "Start a project" CTA visible. Desktop uses Company/Capabilities click disclosures with native buttons and ordinary nested lists, plus direct Insights/Contact links. Disclosure panels are 360px opaque editorial panels; mobile shares the same content model through shared mobile accordions; hierarchical current states use `page`/`location`, and entry motion is 160ms with reduced-motion fallbacks.
 
 ## 6. Do's and Don'ts
 
