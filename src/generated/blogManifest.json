@@ -1,13 +1,13 @@
 {
-  "syncedAt": "2026-08-21T05:36:30.092Z",
+  "sourceUpdatedAt": "2026-08-24T04:44:50.000Z",
   "blogsEnabled": true,
   "minimumPosts": 2,
   "totalPosts": 2,
   "posts": [
     {
       "_id": "seed-post-coordinating-brand-market-commerce",
-      "_createdAt": "2026-08-20T08:00:00.000Z",
-      "_updatedAt": "2026-08-20T08:00:00.000Z",
+      "_createdAt": "2026-08-24T04:44:50.000Z",
+      "_updatedAt": "2026-08-24T04:44:50.000Z",
       "slug": "coordinating-brand-market-commerce",
       "title": "Coordinating Brand, Market, and Commerce as One System",
       "category": "Branding",
@@ -61,8 +61,8 @@
     },
     {
       "_id": "seed-post-from-packaging-to-purchase",
-      "_createdAt": "2026-08-20T08:00:00.000Z",
-      "_updatedAt": "2026-08-20T08:00:00.000Z",
+      "_createdAt": "2026-08-24T04:44:50.000Z",
+      "_updatedAt": "2026-08-24T04:44:50.000Z",
       "slug": "from-packaging-to-purchase",
       "title": "From Packaging to Purchase: Why Consumer-Brand Launch Handoffs Matter",
       "category": "E-commerce",

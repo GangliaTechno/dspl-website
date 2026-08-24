@@ -1,23 +1,22 @@
 # DSPL Website Project Context
 
-Updated: 2026-08-21 IST
+Updated: 2026-08-24 IST
 Repository: `E:\For website\dspl website`
 Branch at snapshot: `release/v1.0-production`
-HEAD at snapshot: `8a6838e2a81dda1311e3c1b7c978df19745b68ac`
+HEAD at snapshot: `454f9206608027fce9f9f907921031d6e543f3b9`
 
 This is a handoff ledger, not proof of current state. Refresh Git status and rerun
 validation before relying on it. Current code and fresh evidence win on conflict.
 
 ## Orchestration Artifact State
 
-All Codex-native orchestration artifacts are currently untracked and therefore
-current-working-tree-only: `AGENTS.md`, `.codex/config.toml`,
+All Codex-native orchestration artifacts are tracked in the current branch:
+`AGENTS.md`, `.codex/config.toml`,
 `.codex/agents/evidence-mapper.toml`, `.codex/agents/project-planner.toml`,
 `.codex/agents/bounded-implementer.toml`,
 `.codex/agents/independent-reviewer.toml`, `docs/agent/PROJECT_CONTEXT.md`,
 and `docs/superpowers/plans/2026-08-21-codex-project-orchestration.md`.
-They are not yet durable or portable across new worktrees or clones. An
-explicitly authorized commit is required before describing them as portable.
+They are durable across worktrees and clones that contain those commits.
 
 ## Stable Decisions
 - Product truth: `PRODUCT.md`.
@@ -37,50 +36,34 @@ explicitly authorized commit is required before describing them as portable.
 
 ## Active Protected Work
 
-### Header navigation rebuild
-Status: implemented as uncommitted local work; preserve pending fresh review and handoff.
-Plan: `docs/superpowers/plans/2026-08-21-dspl-header-navigation.md`
+### Sanity-backed Insights publication
 
-Protected active paths:
-- `DESIGN.md`
-- `src/__tests__/designSystemRegression.test.js`
-- `src/components/Header.css`
-- `src/components/Header.jsx`
-- `src/components/__tests__/Header.test.jsx`
-- `src/content/headerNavigation.js`
-- `src/content/__tests__/headerNavigation.test.js`
-- `docs/superpowers/plans/2026-08-21-dspl-header-navigation.md`
+Status: implemented and release-gated as uncommitted local work; fresh Sol/high
+holistic review approved with no P0-P3 findings.
 
-User-owned generated change:
-- `src/generated/blogManifest.json`
-- Snapshot SHA-256: `065BB53CA26002C24B65631636CD7809ACBE7F187357DEC2056303175CFF22D9`
-- Do not run `build`, `build:fallback`, `content:sync`, or `sync:fallback` during unrelated work.
-- Use `npm.cmd run build:site` when the active plan requires a build without content sync.
+Design: `docs/superpowers/specs/2026-08-21-dspl-sanity-insights-setup-design.md`
 
-The header plan checkboxes are stale and must not be interpreted as evidence that the
-existing implementation should be repeated.
+Plan: `docs/superpowers/plans/2026-08-21-dspl-sanity-insights-setup.md`
 
-### Insights Editorial Signals redesign
-Status: implemented as uncommitted local work; fresh Sol/high code and visual review approved.
-Plan: `docs/superpowers/plans/2026-08-21-insights-editorial-signals-redesign.md`
-
-Task-owned paths:
-- `src/pages/Blogs.jsx`
-- `src/pages/Blogs.css`
-- `src/pages/__tests__/Blogs.test.jsx`
-- `docs/assets/insights-concepts/`
-- `docs/ASSET_PROVENANCE.md`
-- `src/assets/insights-brand-market-commerce-{640,960,1440}.webp`
-- `src/assets/insights-packaging-to-purchase-{640,960,1440}.webp`
-
-Selected masters are Brand/Market/Commerce v1 and Packaging-to-Purchase v2.
-Packaging-to-Purchase v1 remains rejected provenance history. Keep the public
-name `Insights`, retain `/blogs`, and do not add filters or other publication
-chrome until the content library has enough depth to justify it.
+Current contract:
+- Sanity project and dataset selection are explicit; strict live sync requires
+  the authoritative build trio and the `production` dataset before any fetch or
+  filesystem write.
+- Bootstrap defaults to dry-run, creates only missing approved documents, and
+  performs no transaction when both documents already exist.
+- Publication output is deterministic, path-contained, stale-file reconciled,
+  and limited to the two approved published article snapshots plus the manifest.
+- `.env.local` is ignored and untracked. It contains the five expected local
+  configuration keys and no API token.
+- The local Vite previews are concurrent user-owned processes. Do not terminate
+  or restart them unless the user asks.
+- The 21 Sanity implementation/config/generated/docs paths recorded in the final
+  report remain unstaged and uncommitted. Preserve them as one task boundary.
 
 ## Pending Decision
-- The Insights redesign is ready for user visual review in the current worktree.
-- Commit, push, merge, and deployment remain separate approvals.
+
+- The Sanity-backed Insights setup is ready for commit/push/deployment only
+  after explicit user authorization for those release actions.
 
 ## Last Verification
 Record only fresh evidence:
@@ -89,10 +72,12 @@ Record only fresh evidence:
 |---|---|---|---|---|
 | 2026-08-21 IST | Pre-setup snapshot | `git status --short`; `git rev-parse HEAD`; SHA-256 of `src/generated/blogManifest.json` | Snapshot observed; tests not run during this setup pass | `8a6838e2a81dda1311e3c1b7c978df19745b68ac`; manifest `065BB53CA26002C24B65631636CD7809ACBE7F187357DEC2056303175CFF22D9` |
 | 2026-08-21 IST | Insights Editorial Signals | Focused Blogs test; focused ESLint; direct Vite build; `verify:html`; asset metadata/hash validation; `git diff --check`; browser QA at 1440x900 and 390x844 | 6/6 tests; lint clean; 15 pages prerendered; 14 routes plus 404 verified; six exact WebPs; zero public `.map`; no viewport overflow or console errors; fresh Sol/high review approved | HEAD unchanged; manifest `065BB53CA26002C24B65631636CD7809ACBE7F187357DEC2056303175CFF22D9`; work remains uncommitted |
+| 2026-08-24 IST | Sanity-backed Insights setup | Exact six-file recovery gate; full lint; full tests; strict live build; `verify:html`; manifest/sitemap/security/scope audits; fresh Sol/high holistic review | 197 focused tests; lint clean; 42 files / 393 tests; exact two live posts with no fallback; deterministic generated digest; 14 routes plus 404; three Insights HTML files; zero public `.map`; review approved with no P0-P3 findings | `454f9206608027fce9f9f907921031d6e543f3b9`; 21 Sanity paths remained unstaged before this ledger update; no Sanity-task commit/push/deploy |
 
 ## Next Authorized Action
-- Present the local Insights redesign for user review.
-- Do not commit, push, merge, deploy, or change branches without explicit authorization.
+
+- Hand back the approved local Sanity setup and wait for explicit authorization
+  before any commit, push, merge, deployment, or branch change.
 
 ## Update Contract
 - Coordinator updates this file after an accepted plan, completed task, review, or changed blocker.

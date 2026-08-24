@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import {
   BLOG_MINIMUM_POSTS,
   approvedTestimonials,
+  blogManifest,
   blogPosts,
   blogsEnabled,
   getBlogPostSummary,
@@ -9,10 +10,30 @@ import {
   getPublishedBlogPosts,
   hasPublishableBlog,
   isPublishedBlogRoute,
+  normalizeBlogManifest,
   packagingItems,
 } from '../publication';
 
 describe('publication gates', () => {
+  it('normalizes imported artifacts without requiring a null provenance', () => {
+    expect(blogManifest.sourceUpdatedAt === null || typeof blogManifest.sourceUpdatedAt === 'string').toBe(true);
+    expect(blogManifest).not.toHaveProperty('syncedAt');
+
+    const legacy = normalizeBlogManifest({ syncedAt: 'legacy', posts: [] });
+    expect(legacy).toMatchObject({ sourceUpdatedAt: null, posts: [] });
+    expect(legacy).not.toHaveProperty('syncedAt');
+
+    const deterministic = normalizeBlogManifest({
+      syncedAt: 'legacy',
+      sourceUpdatedAt: '2026-08-24T10:00:00.000Z',
+      posts: [],
+    });
+    expect(deterministic.sourceUpdatedAt).toBe('2026-08-24T10:00:00.000Z');
+    expect(deterministic).not.toHaveProperty('syncedAt');
+
+    expect(normalizeBlogManifest({ sourceUpdatedAt: 'not-a-timestamp' }).sourceUpdatedAt).toBeNull();
+  });
+
   it('exposes the publication gate constants and approved evidence states', () => {
     expect(BLOG_MINIMUM_POSTS).toBe(2);
     expect(approvedTestimonials).toEqual([]);

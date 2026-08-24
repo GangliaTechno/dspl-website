@@ -23,16 +23,23 @@ outcome claims.
 | `/` | Evidence-led overview, coordinated services, process, and owned-brand proof |
 | `/about` | Company story, milestones, and leadership |
 | `/brands` | Raw Radicles and the owned-brand pipeline |
+| `/brands/raw-radicles` | Raw Radicles owned-brand detail and operating experience |
 | `/marketing` | Marketing, SEO, paid media, analytics, and content services |
 | `/branding` | Brand strategy, identity, story, and design systems |
 | `/ecommerce` | Store, conversion, marketplace, payment, and delivery services |
 | `/contact` | Contact details and direct enquiry form |
-| `/privacy` | Privacy policy and terms |
+| `/start` | Detailed project brief and start-a-project flow |
+| `/privacy` | Privacy policy |
+| `/terms` | Terms of use |
+| `/blogs` | Insights index for published articles |
+| `/blogs/:slug` | One published Insights article route per manifest entry |
 | all other paths | Accessible 404 page |
 
-The eight public routes are prerendered into route-specific HTML during the
-production build. The client then hydrates that markup and continues as a React
-application.
+The production build prerenders 11 static routes, the Insights index, and one
+article route per published manifest entry. With the currently verified
+two-article dataset, that produces 14 public route documents; the total changes
+with the published manifest. The client then hydrates that markup and continues
+as a React application.
 
 ## Technology
 
@@ -54,9 +61,9 @@ application.
 ```powershell
 git clone https://github.com/GangliaTechno/dspl-website.git
 Set-Location dspl-website
-npm ci
+npm.cmd ci
 Copy-Item .env.example .env
-npm run dev
+npm.cmd run dev
 ```
 
 Vite serves the development site on the configured local port, currently
@@ -71,10 +78,23 @@ Vite serves the development site on the configured local port, currently
 | `VITE_UMAMI_WEBSITE_ID` | Umami website ID UUID |
 | `VITE_UMAMI_DOMAINS` | Comma-separated allowed production domains for tracking (e.g. `dashapatmaja.in,www.dashapatmaja.in`) |
 | `VITE_GA_MEASUREMENT_ID` | Google Analytics 4 Measurement ID (e.g. `G-XXXXXXXXXX`) |
+| `SANITY_STUDIO_PROJECT_ID` | Browser-visible Sanity project identifier used by local Studio; never a secret |
+| `SANITY_STUDIO_DATASET` | Dataset used by local Studio (`production`) |
+| `SANITY_PROJECT_ID` | Server/build-time Sanity project identifier used by content sync |
+| `SANITY_DATASET` | Build-time content dataset (`production`) |
+| `SANITY_API_VERSION` | Pinned Sanity API date (`2026-08-20`) |
 
-Copy `.env.example` to `.env` and set local values there. Never commit `.env`
-or place private server credentials in a `VITE_*` variable: Vite variables are
-compiled into browser-visible JavaScript.
+`SANITY_STUDIO_*` values are bundled into Studio and must never contain secrets;
+the public dataset needs no read token; Sanity login sessions and any optional
+token stay outside Git.
+
+Copy `.env.example` to `.env` for the Vite values; the `VITE_*` values may remain
+in this ignored `.env`. Copy the five Sanity values from `.env.example` into
+ignored `.env.local`, and populate all five there before running
+`npm.cmd run content:sync:strict`, `npm.cmd run build`, or the complete local
+quality gate below. Never commit `.env` or `.env.local`, or place private server
+credentials in a `VITE_*` variable: Vite variables are compiled into
+browser-visible JavaScript.
 
 Credential note: `.env` was historically tracked in this repository. Removing
 it from current tracking does not erase Git history. Treat the historical
@@ -84,34 +104,90 @@ Web3Forms key as exposed and rotate it in Web3Forms before production use.
 
 | Command | Purpose |
 |---|---|
-| `npm ci` | Install the exact locked dependency graph |
-| `npm run dev` | Start the Vite development server |
-| `npm test` | Run the Vitest suite once |
-| `npm run lint` | Run ESLint across the repository |
-| `npm run build` | Build and prerender all public routes into `dist` |
-| `npm run verify:html` | Validate headings, unique titles, canonicals, and JSON-LD in built route HTML |
-| `npm run preview` | Preview the production build locally |
+| `npm.cmd ci` | Install the exact locked dependency graph |
+| `npm.cmd run dev` | Start the Vite development server using bundled fallback content |
+| `npm.cmd run dev:cms` | Start the Vite development server after syncing published Sanity content; warn and use bundled seed content if Sanity is unavailable |
+| `npm.cmd run studio` | Start the local Sanity Studio at `http://localhost:3333` |
+| `npm.cmd run sanity:bootstrap` | Default authenticated missing-only dry-run for the two approved articles; submits zero transactions when both fixed IDs already exist |
+| `npm.cmd run sanity:bootstrap -- --apply` | Explicit authenticated live form; creates only missing approved documents |
+| `npm.cmd run content:sync` | Sync published Sanity content into deterministic generated snapshots, with local fallback when unavailable |
+| `npm.cmd run content:sync:strict` | Strictly sync published Sanity content and fail if Sanity is missing or inaccessible |
+| `npm.cmd run build` | Strictly sync published Sanity content, then build and prerender all public routes into `dist` |
+| `npm.cmd run build:fallback` | Run the explicit offline build from bundled seed content |
+| `npm.cmd test` | Run the Vitest suite once |
+| `npm.cmd run lint` | Run ESLint across the repository |
+| `npm.cmd run verify:html` | Validate headings, unique titles, canonicals, and JSON-LD in built route HTML |
+| `npm.cmd run preview` | Preview the production build locally |
 
 Run the complete local quality gate before review:
 
 ```powershell
-npm run lint
-npm test
-npm run build
-npm run verify:html
+npm.cmd run lint
+npm.cmd test
+npm.cmd run build
+npm.cmd run verify:html
 ```
 
-`verify:html` expects a fresh `dist`, so run it after `npm run build`. GitHub
+`verify:html` expects a fresh `dist`, so run it after `npm.cmd run build`. GitHub
 Actions runs the same gate for pushes to `main` and `pawan/**`, and for pull
 requests targeting `main`.
+
+## Sanity Insights authoring
+
+The repository root is the Sanity Studio workspace. Copy the five Sanity values
+from `.env.example` into ignored `.env.local`, then authenticate and start Studio:
+
+```powershell
+npm.cmd exec -- sanity login
+npm.cmd run studio
+```
+
+Studio runs at `http://localhost:3333` and edits the public `production` dataset.
+The website never writes to Sanity and never receives an editor credential.
+
+The initial two-article bootstrap uses an authenticated direct-document preflight
+and is intentionally missing-only:
+
+```powershell
+npm.cmd run sanity:bootstrap
+```
+
+The default command is a dry-run. To apply it, use the explicit npm argument
+forwarding form:
+
+```powershell
+npm.cmd run sanity:bootstrap -- --apply
+```
+
+The runner checks the two fixed document IDs through the direct `getDocuments`
+API preflight, defaults to a dry-run, and accepts the explicit `-- --apply` form
+for live execution. It creates only missing records in at most one
+`createIfNotExists` transaction and submits zero transactions when both records
+already exist. It never replaces editor changes, streams seed NDJSON, or uses
+the retired bulk importer.
+
+Public pages continue to use deterministic generated snapshots whose provenance
+is `sourceUpdatedAt`, not a wall-clock `syncedAt`. `npm.cmd run build` performs a
+strict published-perspective sync before the static site build and fails if
+Sanity is missing or inaccessible. `npm.cmd run build:fallback` is the explicit
+offline build. Local `npm.cmd run dev:cms` may warn and use bundled seed content
+if Sanity is unavailable.
+
+Hosted Studio deployment, webhooks, image migration, and live preview are not part
+of this setup. See the official Sanity documentation for
+[CLI initialization](https://www.sanity.io/docs/cli-reference/init),
+[CORS](https://www.sanity.io/docs/cli-reference/cors-in-cli),
+[dataset import](https://www.sanity.io/docs/cli-reference/cli-datasets), and
+[document validation](https://www.sanity.io/docs/cli-reference/documents).
 
 ## Architecture
 
 - `src/App.jsx` owns the browser router.
 - `src/AppRoutes.jsx` owns the shared shell and route table. Client routes are
   lazy; the prerender entry injects eagerly resolved pages.
-- `src/entry-prerender.jsx` renders the eight public routes and supplies their
-  head elements to `vite-prerender-plugin`.
+- `src/entry-prerender.jsx` renders the 11 static routes, the Insights index,
+  and one article route per published manifest entry, then supplies their head
+  elements to `vite-prerender-plugin`.
 - `src/seo/routeMetadata.js` is the canonical route-title, description,
   canonical-path, and Organization-schema source.
 - `src/hooks/useSEO.js` maintains a single canonical link and JSON-LD script

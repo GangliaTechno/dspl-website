@@ -1,10 +1,9 @@
-import process from 'node:process';
 import { defineConfig } from 'sanity';
 import { structureTool } from 'sanity/structure';
 import { blogPost } from './sanity/schemas/blogPost';
+import { readSanityEnvironment } from './sanity/env.js';
 
-const projectId = process.env.SANITY_STUDIO_PROJECT_ID || 'dummy-project-id';
-const dataset = process.env.SANITY_STUDIO_DATASET || 'production';
+const { projectId, dataset } = readSanityEnvironment();
 
 export default defineConfig({
   name: 'dspl-insights',

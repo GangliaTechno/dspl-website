@@ -43,6 +43,7 @@ import fallbackManifest from '../generated/blogManifest.json' with { type: 'json
  */
 
 export const BLOG_MINIMUM_POSTS = 2;
+const RFC3339_TIMESTAMP_PATTERN = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(\.\d+)?(Z|[+-]\d{2}:\d{2})$/;
 
 /** @type {readonly TestimonialRecord[]} */
 export const approvedTestimonials = Object.freeze([]);
@@ -59,13 +60,65 @@ export const packagingItems = Object.freeze([]);
 export const hasPublishableBlog = (posts = []) =>
   Array.isArray(posts) && posts.length >= BLOG_MINIMUM_POSTS;
 
-export const blogManifest = fallbackManifest || {
-  syncedAt: '',
+const isLeapYear = (year) => year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
+
+const daysInMonth = (year, month) => {
+  if (month === 2) return isLeapYear(year) ? 29 : 28;
+  return [4, 6, 9, 11].includes(month) ? 30 : 31;
+};
+
+const isStrictRfc3339Timestamp = (value) => {
+  const match = typeof value === 'string' ? value.match(RFC3339_TIMESTAMP_PATTERN) : null;
+  if (!match) return false;
+
+  const [, yearText, monthText, dayText, hourText, minuteText, secondText, , offset] = match;
+  const year = Number(yearText);
+  const month = Number(monthText);
+  const day = Number(dayText);
+  const hour = Number(hourText);
+  const minute = Number(minuteText);
+  const second = Number(secondText);
+  const offsetMatch = offset === 'Z' ? null : offset.match(/^[+-](\d{2}):(\d{2})$/);
+  const offsetHour = offsetMatch ? Number(offsetMatch[1]) : 0;
+  const offsetMinute = offsetMatch ? Number(offsetMatch[2]) : 0;
+
+  if (
+    month < 1 || month > 12
+    || day < 1 || day > daysInMonth(year, month)
+    || hour > 23
+    || minute > 59
+    || second > 59
+    || offset === '-00:00'
+    || (offsetMatch && (offsetHour > 23 || offsetMinute > 59))
+  ) {
+    return false;
+  }
+
+  return !Number.isNaN(Date.parse(value));
+};
+
+export const normalizeBlogManifest = (manifest) => {
+  const source = manifest && typeof manifest === 'object' && !Array.isArray(manifest)
+    ? manifest
+    : {};
+  const withoutLegacyTimestamp = Object.fromEntries(
+    Object.entries(source).filter(([key]) => key !== 'syncedAt'),
+  );
+
+  return {
+    ...withoutLegacyTimestamp,
+    sourceUpdatedAt: isStrictRfc3339Timestamp(source.sourceUpdatedAt)
+      ? source.sourceUpdatedAt
+      : null,
+  };
+};
+
+export const blogManifest = normalizeBlogManifest(fallbackManifest || {
   blogsEnabled: false,
   minimumPosts: BLOG_MINIMUM_POSTS,
   totalPosts: 0,
   posts: [],
-};
+});
 
 /** @type {readonly BlogPostSummary[]} */
 export const blogPosts = Object.freeze(blogManifest.posts || []);

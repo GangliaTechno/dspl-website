@@ -25,7 +25,7 @@
 - Do not commit, push, merge, deploy, or change branches without explicit authorization.
 - Read-only, review, research, diagnosis, and planning requests do not authorize source edits.
 - Do not edit generated content or run content-sync commands unless the active plan explicitly authorizes them.
-- The Codex-native orchestration artifacts are currently untracked and current-working-tree-only: `AGENTS.md`, `.codex/config.toml`, the four `.codex/agents/*.toml` files, `docs/agent/PROJECT_CONTEXT.md`, and `docs/superpowers/plans/2026-08-21-codex-project-orchestration.md`. Do not describe them as durable or portable across new worktrees/clones until an explicitly authorized commit makes them portable.
+- The Codex-native orchestration artifacts are tracked and portable in worktrees/clones containing their commits: `AGENTS.md`, `.codex/config.toml`, the four `.codex/agents/*.toml` files, `docs/agent/PROJECT_CONTEXT.md`, and `docs/superpowers/plans/2026-08-21-codex-project-orchestration.md`.
 
 ## Package and Validation
 - Use npm through `npm.cmd` on Windows. Node.js must satisfy `>=22.22.0`.
@@ -33,7 +33,7 @@
 - Focused lint: `npm.cmd exec -- eslint path/to/file`
 - Full gate when authorized: `npm.cmd run lint`, `npm.cmd test`, approved build command, `npm.cmd run verify:html`, and `git diff --check`.
 - Follow the active plan when its safe build command differs from the general gate.
-- `git diff --check` covers tracked diffs only. For the eight currently untracked orchestration artifacts, run the active plan's explicit untracked-aware trailing-whitespace/format check as well.
+- `git diff --check` covers tracked orchestration artifacts, while any other untracked task artifacts need an explicit untracked-aware whitespace/format check.
 
 ## Commit Attribution
 - No commit without explicit approval. Before an approved commit, inspect the complete worktree.
