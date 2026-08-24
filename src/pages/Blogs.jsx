@@ -24,63 +24,128 @@ const editorialArtworkBySlug = Object.freeze({
   },
 });
 
-const BlogStory = ({ post, index, variant }) => {
+const StoryKicker = ({ category, readingTime }) => (
+  <p className="blog-story-meta">
+    <span className="blog-story-category">{category}</span>
+    <span className="blog-story-meta-divider">·</span>
+    <span className="blog-story-reading-time">
+      {readingTime?.text || '5 min read'}
+    </span>
+  </p>
+);
+
+const StoryFooter = ({ publishedAt }) => (
+  <div className="blog-story-footer">
+    <time className="blog-story-date" dateTime={publishedAt}>
+      {formatPublicationDate(publishedAt)}
+    </time>
+    <span className="blog-story-action">
+      Read article <span className="blog-story-arrow" aria-hidden="true">→</span>
+    </span>
+  </div>
+);
+
+const FeaturedStory = ({ post }) => {
   const artwork = editorialArtworkBySlug[post.slug];
-  const isFeature = variant === 'feature';
-  const titleClassName = isFeature ? 'blog-feature-title' : 'blog-supporting-title';
-  const descriptionClassName = isFeature
-    ? 'blog-feature-description'
-    : 'blog-supporting-description';
 
   return (
-    <article className={isFeature ? 'blog-feature-story' : 'blog-supporting-story'}>
+    <article className="blog-feature-story">
       <Link
         to={`/blogs/${post.slug}`}
         className="blog-story-link-wrapper"
         aria-label={`Read ${post.title}`}
       >
         {artwork && (
-          <div className="blog-story-artwork">
+          <div className="blog-feature-artwork">
             <img
               src={artwork.src}
               srcSet={artwork.srcSet}
-              sizes={isFeature
-                ? '(max-width: 900px) calc(100vw - 3rem), 640px'
-                : '(max-width: 900px) calc(100vw - 3rem), 440px'}
+              sizes="(max-width: 900px) calc(100vw - 3rem), 680px"
               alt={artwork.alt}
               width="1440"
               height="810"
-              loading={isFeature ? 'eager' : 'lazy'}
-              fetchPriority={isFeature ? 'high' : undefined}
+              loading="eager"
+              fetchPriority="high"
               decoding="async"
             />
           </div>
         )}
 
-        <div className="blog-story-header">
-          <span className="blog-story-index" aria-hidden="true">
-            {String(index).padStart(2, '0')}
-          </span>
-          <p className="blog-story-meta">
-            <span className="blog-story-category">{post.category}</span>
-            <span className="blog-story-meta-divider">·</span>
-            <span className="blog-story-reading-time">
-              {post.readingTime?.text || '5 min read'}
-            </span>
-          </p>
+        <div className="blog-feature-body">
+          <StoryKicker category={post.category} readingTime={post.readingTime} />
+          <h2 className="blog-feature-title">{post.title}</h2>
+          <p className="blog-feature-description">{post.description}</p>
+          <StoryFooter publishedAt={post.publishedAt} />
         </div>
+      </Link>
+    </article>
+  );
+};
 
-        <h2 className={titleClassName}>{post.title}</h2>
-        <p className={descriptionClassName}>{post.description}</p>
+const SupportingStory = ({ post }) => {
+  const artwork = editorialArtworkBySlug[post.slug];
 
-        <div className="blog-story-footer">
-          <time className="blog-story-date" dateTime={post.publishedAt}>
-            {formatPublicationDate(post.publishedAt)}
-          </time>
-          <span className="blog-story-action">
-            Read article <span className="blog-story-arrow" aria-hidden="true">→</span>
-          </span>
-        </div>
+  return (
+    <article className="blog-supporting-story">
+      <Link
+        to={`/blogs/${post.slug}`}
+        className="blog-story-link-wrapper"
+        aria-label={`Read ${post.title}`}
+      >
+        <StoryKicker category={post.category} readingTime={post.readingTime} />
+        <h2 className="blog-supporting-title">{post.title}</h2>
+
+        {artwork && (
+          <div className="blog-supporting-artwork">
+            <img
+              src={artwork.src}
+              srcSet={artwork.srcSet}
+              sizes="(max-width: 900px) calc(100vw - 3rem), 1160px"
+              alt={artwork.alt}
+              width="1440"
+              height="810"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+        )}
+
+        <p className="blog-supporting-description">{post.description}</p>
+        <StoryFooter publishedAt={post.publishedAt} />
+      </Link>
+    </article>
+  );
+};
+
+const ArchiveStory = ({ post }) => {
+  const artwork = editorialArtworkBySlug[post.slug];
+
+  return (
+    <article className="blog-archive-story">
+      <Link
+        to={`/blogs/${post.slug}`}
+        className="blog-story-link-wrapper"
+        aria-label={`Read ${post.title}`}
+      >
+        {artwork && (
+          <div className="blog-archive-artwork">
+            <img
+              src={artwork.src}
+              srcSet={artwork.srcSet}
+              sizes="(max-width: 900px) calc(100vw - 3rem), 440px"
+              alt={artwork.alt}
+              width="1440"
+              height="810"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+        )}
+
+        <StoryKicker category={post.category} readingTime={post.readingTime} />
+        <h2 className="blog-supporting-title">{post.title}</h2>
+        <p className="blog-supporting-description">{post.description}</p>
+        <StoryFooter publishedAt={post.publishedAt} />
       </Link>
     </article>
   );
@@ -105,9 +170,8 @@ const Blogs = ({ posts = blogPosts }) => {
         <div className="container blogs-container">
           <header className="blogs-header">
             <div className="blogs-heading-group">
-              <span className="section-subtitle">Publication</span>
-              <h1 className="blogs-title">Insights</h1>
-              <p className="blogs-tagline">Thinking from the work of building brands.</p>
+              <span className="section-subtitle">Insights</span>
+              <h1 className="blogs-title">Thinking from the work of building brands.</h1>
             </div>
             <p className="blogs-intro">
               Notes on branding, market execution, commerce, and the operating decisions that connect them.
@@ -115,14 +179,14 @@ const Blogs = ({ posts = blogPosts }) => {
           </header>
 
           {isOpen ? (
-            <div className="blogs-editorial-grid">
-              {featurePost && <BlogStory post={featurePost} index={1} variant="feature" />}
-              {supportingPost && <BlogStory post={supportingPost} index={2} variant="supporting" />}
+            <div className="blogs-editorial-flow">
+              {featurePost && <FeaturedStory post={featurePost} />}
+              {supportingPost && <SupportingStory post={supportingPost} />}
 
               {remainingPosts.length > 0 && (
                 <div className="blogs-additional-grid">
-                  {remainingPosts.map((post, idx) => (
-                    <BlogStory key={post.slug} post={post} index={idx + 3} variant="supporting" />
+                  {remainingPosts.map((post) => (
+                    <ArchiveStory key={post.slug} post={post} />
                   ))}
                 </div>
               )}

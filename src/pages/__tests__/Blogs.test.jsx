@@ -41,7 +41,7 @@ describe('Blogs (Insights) Page', () => {
   );
 
   it('renders the editorial Insights publication with 2 launch articles in asymmetric layout', () => {
-    renderBlogs([
+    const testPosts = [
       mockPost(
         'coordinating-brand-market-commerce',
         'Branding',
@@ -52,30 +52,30 @@ describe('Blogs (Insights) Page', () => {
         'E-commerce',
         'From Packaging to Purchase: Why Consumer-Brand Launch Handoffs Matter',
       ),
-    ]);
+    ];
+    renderBlogs(testPosts);
 
-    expect(screen.getByRole('heading', { level: 1, name: 'Insights' })).toBeInTheDocument();
-    expect(screen.getByText('Thinking from the work of building brands.')).toBeInTheDocument();
-    const masthead = screen.getByRole('banner');
-    const headingGroup = masthead.querySelector('.blogs-heading-group');
-    expect(headingGroup).not.toBeNull();
-    expect(within(headingGroup).getByText('Publication')).toBeInTheDocument();
-    expect(within(headingGroup).getByRole('heading', { level: 1, name: 'Insights' })).toBeInTheDocument();
-    expect(within(headingGroup).getByText('Thinking from the work of building brands.')).toBeInTheDocument();
-    expect(masthead.querySelector('.blogs-intro')).not.toBe(headingGroup);
-    expect(masthead.querySelector('.blogs-intro')).toHaveTextContent(
-      'Notes on branding, market execution, commerce, and the operating decisions that connect them.',
-    );
+    expect(
+      screen.getByRole('heading', { level: 1, name: 'Thinking from the work of building brands.' }),
+    ).toBeInTheDocument();
+    expect(screen.getByText('Insights')).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        'Notes on branding, market execution, commerce, and the operating decisions that connect them.',
+      ),
+    ).toBeInTheDocument();
 
     const articles = screen.getAllByRole('article');
     expect(articles).toHaveLength(2);
 
     // Feature article
     const feature = articles[0];
-    expect(within(feature).getByText('01')).toBeInTheDocument();
+    expect(within(feature).queryByText('01')).not.toBeInTheDocument();
     expect(within(feature).getByText('Branding')).toBeInTheDocument();
-    expect(within(feature).getByText('5 min read')).toBeInTheDocument();
-    expect(within(feature).getByText('Coordinating Brand, Market, and Commerce as One System')).toBeInTheDocument();
+    expect(within(feature).getByText(testPosts[0].readingTime.text)).toBeInTheDocument();
+    expect(
+      within(feature).getByText('Coordinating Brand, Market, and Commerce as One System'),
+    ).toBeInTheDocument();
     expect(within(feature).getByText('August 20, 2026')).toBeInTheDocument();
     expect(within(feature).getByRole('link', { name: /Coordinating Brand/i })).toHaveAttribute(
       'href',
@@ -84,9 +84,14 @@ describe('Blogs (Insights) Page', () => {
 
     // Supporting article
     const supporting = articles[1];
-    expect(within(supporting).getByText('02')).toBeInTheDocument();
+    expect(within(supporting).queryByText('02')).not.toBeInTheDocument();
     expect(within(supporting).getByText('E-commerce')).toBeInTheDocument();
-    expect(within(supporting).getByText('From Packaging to Purchase: Why Consumer-Brand Launch Handoffs Matter')).toBeInTheDocument();
+    expect(within(supporting).getByText(testPosts[1].readingTime.text)).toBeInTheDocument();
+    expect(
+      within(supporting).getByText(
+        'From Packaging to Purchase: Why Consumer-Brand Launch Handoffs Matter',
+      ),
+    ).toBeInTheDocument();
     expect(within(supporting).getByRole('link', { name: /From Packaging to Purchase/i })).toHaveAttribute(
       'href',
       '/blogs/from-packaging-to-purchase',
@@ -144,7 +149,7 @@ describe('Blogs (Insights) Page', () => {
     expect(featureImage).toHaveAttribute('decoding', 'async');
     expect(featureImage).toHaveAttribute(
       'sizes',
-      '(max-width: 900px) calc(100vw - 3rem), 640px',
+      '(max-width: 900px) calc(100vw - 3rem), 680px',
     );
 
     const supporting = screen
@@ -175,7 +180,7 @@ describe('Blogs (Insights) Page', () => {
     expect(supportingImage).toHaveAttribute('decoding', 'async');
     expect(supportingImage).toHaveAttribute(
       'sizes',
-      '(max-width: 900px) calc(100vw - 3rem), 440px',
+      '(max-width: 900px) calc(100vw - 3rem), 1160px',
     );
   });
 

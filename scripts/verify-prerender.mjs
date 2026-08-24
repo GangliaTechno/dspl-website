@@ -29,7 +29,7 @@ if (fs.existsSync(manifestPath)) {
     if (manifest.blogsEnabled && Array.isArray(manifest.posts)) {
       dynamicBlogRoutes.push({
         route: 'blogs',
-        heading: 'Insights',
+        heading: 'Thinking from the work of building brands.',
         type: 'website',
       });
 

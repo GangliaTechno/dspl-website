@@ -22,7 +22,7 @@ describe('Footer', () => {
     expect(getFooterCta('/start')).toBeNull();
     expect(getFooterCta('/privacy')).toBeNull();
     expect(getFooterCta('/terms')).toBeNull();
-    expect(getFooterCta('/blogs')).toBeNull();
+    expect(getFooterCta('/blogs').href).toBe('/start');
   });
 
   it('renders the Home CTA before verified corporate information', () => {
