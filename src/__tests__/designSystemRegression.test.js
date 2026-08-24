@@ -733,17 +733,41 @@ describe('approved design-system corrections', () => {
   it('balances incomplete service-card rows instead of leaving accidental gaps', () => {
     const serviceCss = readSource('src/components/ServicePage.css');
 
+    // Desktop: 5-item row-balancing selectors must exist
     expect(serviceCss).toMatch(
-      /\.offers-grid\[data-count="5"\] > :nth-child\(4\)\s*{[^}]*grid-column:\s*2 \/ span 2;/s,
+      /\.offers-grid\[data-count="5"\] > :nth-child\(4\)\s*\{[^}]*grid-column:\s*2 \/ span 2;/s,
     );
     expect(serviceCss).toMatch(
-      /\.offers-grid\[data-count="5"\] > :nth-child\(5\)\s*{[^}]*grid-column:\s*4 \/ span 2;/s,
+      /\.offers-grid\[data-count="5"\] > :nth-child\(5\)\s*\{[^}]*grid-column:\s*4 \/ span 2;/s,
     );
     expect(serviceCss).toMatch(
-      /\.service-detail-grid\s*{[^}]*grid-template-columns:\s*repeat\(6,\s*minmax\(0,\s*1fr\)\);/s,
+      /\.service-detail-grid\s*\{[^}]*grid-template-columns:\s*repeat\(6,\s*minmax\(0,\s*1fr\)\);/s,
     );
     expect(serviceCss).toMatch(
-      /\.service-detail-grid\[data-count="5"\] > :nth-child\(4\)\s*{[^}]*grid-column:\s*2 \/ span 2;/s,
+      /\.service-detail-grid\[data-count="5"\] > :nth-child\(4\)\s*\{[^}]*grid-column:\s*2 \/ span 2;/s,
+    );
+
+    // Tablet (769px–900px): editorial grid gets matching-specificity overrides;
+    // breakpoint must NOT start at 621px (that would overlap with mobile ≤768px)
+    expect(serviceCss).toContain('@media (min-width: 769px) and (max-width: 900px)');
+    expect(serviceCss).not.toContain('@media (max-width: 900px) and (min-width: 621px)');
+    expect(serviceCss).toMatch(
+      /@media \(min-width: 769px\) and \(max-width: 900px\)[\s\S]*?\.offers-grid--editorial \.offer-entry,[\s\S]*?\.offers-grid--editorial\[data-count="5"\] > :nth-child\(4\),[\s\S]*?\.offers-grid--editorial\[data-count="5"\] > :nth-child\(5\)\s*\{[^}]*grid-column:\s*auto;/s,
+    );
+    // Desktop :nth-child(3n) border rule must not leak: odd items get border back at tablet
+    expect(serviceCss).toMatch(
+      /@media \(min-width: 769px\) and \(max-width: 900px\)[\s\S]*?\.offers-grid--editorial \.offer-entry:nth-child\(odd\)\s*\{[^}]*border-right:\s*1px solid var\(--border-color\);/s,
+    );
+    expect(serviceCss).toMatch(
+      /@media \(min-width: 769px\) and \(max-width: 900px\)[\s\S]*?\.offers-grid--editorial \.offer-entry:nth-child\(even\)\s*\{[^}]*border-right:\s*0;/s,
+    );
+
+    // Mobile (≤768px): editorial items 4 and 5 must occupy the full row
+    expect(serviceCss).toMatch(
+      /@media \(max-width: 768px\)[\s\S]*?\.offers-grid--editorial \.offer-entry,[\s\S]*?\.offers-grid--editorial\[data-count="5"\] > :nth-child\(4\),[\s\S]*?\.offers-grid--editorial\[data-count="5"\] > :nth-child\(5\)\s*\{[^}]*grid-column:\s*1 \/ -1;/s,
+    );
+    expect(serviceCss).toMatch(
+      /@media \(max-width: 768px\)[\s\S]*?\.offers-grid--editorial \.offer-entry,[\s\S]*?\.offers-grid--editorial\[data-count="5"\] > :nth-child\(4\),[\s\S]*?\.offers-grid--editorial\[data-count="5"\] > :nth-child\(5\)\s*\{[^}]*border-right:\s*0;/s,
     );
   });
 

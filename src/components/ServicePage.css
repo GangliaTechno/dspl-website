@@ -278,11 +278,15 @@
   }
 }
 
-@media (max-width: 900px) and (min-width: 621px) {
+/* Tablet: 769px–900px — editorial grid becomes 2-column.
+   Selectors match or exceed desktop editorial specificity (0,2,0) to
+   prevent leakage from the desktop .offers-grid--editorial rules. */
+@media (min-width: 769px) and (max-width: 900px) {
   .offers-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  /* Non-editorial: reset placement for all offer-entry items */
   .offer-entry,
   .offers-grid[data-count="5"] > :nth-child(4),
   .offers-grid[data-count="5"] > :nth-child(5) {
@@ -293,6 +297,34 @@
     grid-column: 1 / -1;
     width: calc((100% - 1rem) / 2);
     justify-self: center;
+  }
+
+  /* Editorial: reset desktop placement with matching specificity */
+  .offers-grid--editorial .offer-entry,
+  .offers-grid--editorial[data-count="5"] > :nth-child(4),
+  .offers-grid--editorial[data-count="5"] > :nth-child(5) {
+    grid-column: auto;
+    width: auto;
+  }
+
+  /* Re-establish 2-column border rhythm.
+     Explicitly restore odd-item right borders first so the desktop
+     :nth-child(3n) rule (which removes borders every 3rd item) cannot
+     leave card 03 without a divider on the 2-column tablet layout. */
+  .offers-grid--editorial .offer-entry:nth-child(odd) {
+    border-right: 1px solid var(--border-color);
+  }
+
+  .offers-grid--editorial .offer-entry:nth-child(even) {
+    border-right: 0;
+  }
+
+  /* 5-item layout: item 5 is centred on its own final row */
+  .offers-grid--editorial[data-count="5"] > :last-child {
+    grid-column: 1 / -1;
+    width: 50%;
+    justify-self: center;
+    border-right: 0;
   }
 
   .service-detail-grid {
@@ -331,12 +363,29 @@
     grid-template-columns: 1fr;
   }
 
+  /* Non-editorial mobile resets */
   .offer-entry,
   .offers-grid[data-count="5"] > :nth-child(4),
   .offers-grid[data-count="5"] > :nth-child(5),
   .offers-grid[data-count="5"] > :last-child {
     grid-column: auto;
     width: 100%;
+  }
+
+  /* Editorial mobile: force 1-column layout.
+     Selector specificity (0,2,0) matches the desktop editorial rules so
+     these resets reliably win over .offers-grid--editorial .offer-entry. */
+  .offers-grid--editorial {
+    grid-template-columns: 1fr;
+  }
+
+  .offers-grid--editorial .offer-entry,
+  .offers-grid--editorial[data-count="5"] > :nth-child(4),
+  .offers-grid--editorial[data-count="5"] > :nth-child(5) {
+    grid-column: 1 / -1;
+    width: 100%;
+    min-width: 0;
+    border-right: 0;
   }
 }
 

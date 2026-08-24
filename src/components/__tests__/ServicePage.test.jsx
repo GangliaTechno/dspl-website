@@ -1,10 +1,14 @@
 import { act, render, screen, within } from '@testing-library/react';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { describe, expect, it, vi } from 'vitest';
 import ServicePage from '../ServicePage';
 
 vi.mock('../../hooks/useSEO', () => ({
   default: vi.fn(),
 }));
+
+const readSource = (relativePath) => readFileSync(resolve(relativePath), 'utf8');
 
 const props = {
   seoMetadata: { title: 'Test service' },
@@ -139,5 +143,64 @@ describe('ServicePage', () => {
     rendered.unmount();
     vi.clearAllTimers();
     vi.useRealTimers();
+  });
+});
+
+describe('ServicePage responsive CSS contract', () => {
+  const css = readSource('src/components/ServicePage.css');
+
+  it('keeps desktop 5-item editorial balancing selectors', () => {
+    expect(css).toMatch(
+      /\.offers-grid--editorial\[data-count="5"\] > :nth-child\(4\)\s*\{[^}]*grid-column:\s*2 \/ span 2;/s,
+    );
+    expect(css).toMatch(
+      /\.offers-grid--editorial\[data-count="5"\] > :nth-child\(5\)\s*\{[^}]*grid-column:\s*4 \/ span 2;/s,
+    );
+  });
+
+  it('uses a 769px lower bound for the tablet breakpoint to avoid overlap with mobile', () => {
+    expect(css).toContain('@media (min-width: 769px) and (max-width: 900px)');
+    expect(css).not.toContain('@media (max-width: 900px) and (min-width: 621px)');
+  });
+
+  it('overrides editorial placement at tablet with matching specificity', () => {
+    expect(css).toMatch(
+      /@media \(min-width: 769px\) and \(max-width: 900px\)[\s\S]*?\.offers-grid--editorial \.offer-entry,[\s\S]*?\.offers-grid--editorial\[data-count="5"\] > :nth-child\(4\),[\s\S]*?\.offers-grid--editorial\[data-count="5"\] > :nth-child\(5\)\s*\{[^}]*grid-column:\s*auto;/s,
+    );
+  });
+
+  it('restores odd-item right borders before removing even-item borders at tablet', () => {
+    // Guards against the desktop :nth-child(3n) rule leaving card 03 without a divider
+    expect(css).toMatch(
+      /@media \(min-width: 769px\) and \(max-width: 900px\)[\s\S]*?\.offers-grid--editorial \.offer-entry:nth-child\(odd\)\s*\{[^}]*border-right:\s*1px solid var\(--border-color\);/s,
+    );
+    // Even-column items have no right border
+    expect(css).toMatch(
+      /@media \(min-width: 769px\) and \(max-width: 900px\)[\s\S]*?\.offers-grid--editorial \.offer-entry:nth-child\(even\)\s*\{[^}]*border-right:\s*0;/s,
+    );
+  });
+
+  it('centres the 5th editorial item at 50% width with no right border at tablet', () => {
+    expect(css).toMatch(
+      /@media \(min-width: 769px\) and \(max-width: 900px\)[\s\S]*?\.offers-grid--editorial\[data-count="5"\] > :last-child\s*\{[^}]*grid-column:\s*1 \/ -1;[^}]*width:\s*50%;[^}]*justify-self:\s*center;[^}]*border-right:\s*0;/s,
+    );
+  });
+
+  it('forces editorial capability grid to 1-column on mobile', () => {
+    expect(css).toMatch(
+      /@media \(max-width: 768px\)[\s\S]*?\.offers-grid--editorial\s*\{[^}]*grid-template-columns:\s*1fr;/s,
+    );
+  });
+
+  it('resets editorial items 4 and 5 to full row on mobile with correct specificity', () => {
+    expect(css).toMatch(
+      /@media \(max-width: 768px\)[\s\S]*?\.offers-grid--editorial \.offer-entry,[\s\S]*?\.offers-grid--editorial\[data-count="5"\] > :nth-child\(4\),[\s\S]*?\.offers-grid--editorial\[data-count="5"\] > :nth-child\(5\)\s*\{[^}]*grid-column:\s*1 \/ -1;[^}]*width:\s*100%;/s,
+    );
+  });
+
+  it('removes right borders from all editorial capability items on mobile', () => {
+    expect(css).toMatch(
+      /@media \(max-width: 768px\)[\s\S]*?\.offers-grid--editorial \.offer-entry,[\s\S]*?\.offers-grid--editorial\[data-count="5"\] > :nth-child\(4\),[\s\S]*?\.offers-grid--editorial\[data-count="5"\] > :nth-child\(5\)\s*\{[^}]*border-right:\s*0;/s,
+    );
   });
 });
