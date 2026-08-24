@@ -1,10 +1,8 @@
-import process from 'node:process';
-
 const hasOwn = (value, key) => Object.prototype.hasOwnProperty.call(value, key);
 
 const trimEnvironmentValue = (value) => (typeof value === 'string' ? value.trim() : '');
 
-export function readSanityEnvironment(env = process.env, options = {}) {
+export function readSanityEnvironment(env = {}, options = {}) {
   const projectId = trimEnvironmentValue(env.SANITY_STUDIO_PROJECT_ID);
   const dataset = trimEnvironmentValue(env.SANITY_STUDIO_DATASET);
   const missing = [

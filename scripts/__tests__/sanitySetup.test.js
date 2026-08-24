@@ -12,6 +12,9 @@ import {
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const packageJson = JSON.parse(fs.readFileSync(path.join(rootDir, 'package.json'), 'utf8'));
 const envExample = fs.readFileSync(path.join(rootDir, '.env.example'), 'utf8');
+const sanityConfigSource = fs.readFileSync(path.join(rootDir, 'sanity.config.js'), 'utf8');
+const sanityEnvironmentSource = fs.readFileSync(path.join(rootDir, 'sanity', 'env.js'), 'utf8');
+const sanityCliSource = fs.readFileSync(path.join(rootDir, 'sanity.cli.js'), 'utf8');
 
 describe('Sanity setup contract', () => {
   it('requires the two Studio identifiers with an actionable local-env error', () => {
@@ -73,6 +76,20 @@ describe('Sanity setup contract', () => {
       .toThrow(/match|disagree/i);
     expect(() => readSanityEnvironment(studio, { buildDataset: 'staging' }))
       .toThrow(/match|disagree|production/i);
+  });
+
+  it('keeps hosted Studio environment references static and pins its deployment app', () => {
+    expect(sanityConfigSource).toMatch(
+      /SANITY_STUDIO_PROJECT_ID:\s*process\.env\.SANITY_STUDIO_PROJECT_ID/,
+    );
+    expect(sanityConfigSource).toMatch(
+      /SANITY_STUDIO_DATASET:\s*process\.env\.SANITY_STUDIO_DATASET/,
+    );
+    expect(sanityEnvironmentSource).not.toContain("from 'node:process'");
+    expect(sanityEnvironmentSource).not.toMatch(/env\s*=\s*process\.env/);
+    expect(sanityCliSource).toContain("import process from 'node:process';");
+    expect(sanityCliSource).toContain('readSanityEnvironment(process.env)');
+    expect(sanityCliSource).toContain("appId: 'j2rcsz1kc9nebl9n1ga0o01j'");
   });
 
   it('converts only the two approved seeds to stable import documents', () => {
