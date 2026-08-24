@@ -194,7 +194,7 @@ Replace only the current three-card block inside `.details-column` with:
     <MapPin className="detail-icon" aria-hidden="true" />
     <div className="detail-info">
       <h3>Address</h3>
-      <p>Room No. 12, 4th Floor, MUTBI, Advanced Research Center, Madhava Nagar, Manipal 576104</p>
+      <p>#12, 4th Floor, MUTBI, Advanced Research Center, Madhava Nagar, Manipal 576104</p>
     </div>
   </div>
 

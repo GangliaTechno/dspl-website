@@ -13,14 +13,14 @@ export const COMPANY_FACTS = Object.freeze({
   roc: 'ROC Bangalore',
   natureOfBusiness: 'Brand development, operating company, and commercial capability services',
   registeredOffice: Object.freeze({
-    line1: 'Room No. 12, 4th Floor, MUTBI',
+    line1: '#12, 4th Floor, MUTBI',
     line2: 'Advanced Research Center, Madhava Nagar',
     locality: 'Manipal',
     region: 'Karnataka',
     postalCode: '576104',
     country: 'India',
     countryCode: 'IN',
-    fullAddress: 'Room No. 12, 4th Floor, MUTBI, Advanced Research Center, Madhava Nagar, Manipal, Karnataka 576104',
+    fullAddress: '#12, 4th Floor, MUTBI, Advanced Research Center, Madhava Nagar, Manipal, Karnataka 576104',
   }),
   incubation: Object.freeze({
     incubator: 'Manipal Universal Technology Business Incubator (MUTBI)',

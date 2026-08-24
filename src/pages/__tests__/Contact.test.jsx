@@ -43,7 +43,7 @@ describe('Contact', () => {
     const { container } = renderContact();
 
     expect(screen.getByText(/respond within one working day/i)).toBeInTheDocument();
-    expect(screen.getByText(/Room No\. 12, 4th Floor, MUTBI, Advanced Research Center, Madhava Nagar, Manipal.*576104/i)).toBeInTheDocument();
+    expect(screen.getByText(/#12, 4th Floor, MUTBI, Advanced Research Center, Madhava Nagar, Manipal.*576104/i)).toBeInTheDocument();
     expect(screen.getByText(/Monday – Saturday: 9:00 AM – 6:00 PM IST/i)).toBeInTheDocument();
     expect(screen.getByText('New enquiries')).toBeInTheDocument();
     expect(screen.getByText(/for new business, partnerships, and general questions/i)).toBeInTheDocument();
