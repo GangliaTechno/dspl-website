@@ -100,6 +100,24 @@ describe('publicationUtils', () => {
         wordCount: 500,
       });
     });
+
+    it('extracts text from dataTable blocks for word count and reading time', () => {
+      const tableBlock = {
+        _type: 'dataTable',
+        caption: 'Table Summary',
+        headers: ['Column One', 'Column Two'],
+        rows: [
+          { cells: ['Value A', 'Value B'] },
+          { cells: ['Value C', 'Value D'] },
+        ],
+      };
+      // 'Table Summary Column One Column Two Value A Value B Value C Value D' = 14 words
+      expect(calculateReadingTime([tableBlock])).toEqual({
+        minutes: 1,
+        text: '1 min read',
+        wordCount: 14,
+      });
+    });
   });
 
   describe('formatPublicationDate', () => {

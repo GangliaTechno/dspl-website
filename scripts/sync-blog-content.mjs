@@ -235,7 +235,7 @@ export function resolveSyncPolicy({ argv = [], env = {} } = {}) {
   return { fallbackMode, strictMode };
 }
 
-const ALLOWED_CATEGORIES = new Set(['Branding', 'Marketing', 'E-commerce']);
+const ALLOWED_CATEGORIES = new Set(['Branding', 'Marketing', 'E-commerce', 'Compliance']);
 const BLOG_MINIMUM_POSTS = 2;
 const RFC3339_TIMESTAMP_PATTERN = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(\.\d+)?(Z|[+-]\d{2}:\d{2})$/;
 
@@ -438,13 +438,64 @@ async function fetchFromSanity(target, env = process.env) {
     category,
     publishedAt,
     description,
-    mainImage,
+    authors[]{ _key, name, role },
+    readingTimeMinutes,
+    faqs[]{ _key, question, answer },
+    references[]{ _key, text, url },
+    closingCta{ heading, text, label, href },
+    mainImage{
+      alt,
+      caption,
+      asset->{
+        _id,
+        url,
+        metadata{ dimensions{ width, height } }
+      }
+    },
     body,
-    seo
+    seo{
+      metaTitle,
+      metaDescription,
+      ogImage{
+        alt,
+        asset->{
+          _id,
+          url
+        }
+      }
+    }
   }`;
 
   const now = new Date().toISOString();
   return client.fetch(query, { now });
+}
+
+function normalizeSeoOgImage(seo) {
+  if (!seo) return null;
+  const rawOg = seo.ogImage;
+  const url = typeof rawOg === 'string' ? rawOg : rawOg?.asset?.url || null;
+  return {
+    ...seo,
+    ogImage: url,
+  };
+}
+
+function resolveReadingTime(raw, body) {
+  const override = raw.readingTimeMinutes;
+  if (override === undefined || override === null) {
+    return calculateReadingTime(body);
+  }
+  if (!Number.isInteger(override) || override <= 0) {
+    throw new Error(
+      `Invalid readingTimeMinutes for post "${raw.title || 'unknown'}": expected a positive integer, got ${JSON.stringify(override)}.`,
+    );
+  }
+  const auto = calculateReadingTime(body);
+  return {
+    minutes: override,
+    text: `${override} min read`,
+    wordCount: auto.wordCount,
+  };
 }
 
 export function validateAndProcessPosts(rawPosts) {
@@ -494,11 +545,74 @@ export function validateAndProcessPosts(rawPosts) {
       throw new Error(`Article "${title}" has an empty or invalid body.`);
     }
 
+    // Validate dataTable row cell counts against header count
+    for (const block of raw.body) {
+      if (block?._type === 'dataTable') {
+        const headerCount = Array.isArray(block.headers) ? block.headers.length : 0;
+        if (Array.isArray(block.rows)) {
+          block.rows.forEach((row, ri) => {
+            const cellCount = Array.isArray(row.cells) ? row.cells.length : 0;
+            if (cellCount !== headerCount) {
+              throw new Error(
+                `Article "${title}": dataTable row ${ri} has ${cellCount} cells but headers define ${headerCount} columns.`,
+              );
+            }
+          });
+        }
+      }
+    }
+
+    // Validate authors when present
+    if (raw.authors !== undefined && raw.authors !== null) {
+      if (!Array.isArray(raw.authors) || raw.authors.length === 0) {
+        throw new Error(`Article "${title}": authors must be a non-empty array when present.`);
+      }
+      for (let i = 0; i < raw.authors.length; i += 1) {
+        const author = raw.authors[i];
+        if (!author || typeof author.name !== 'string' || !author.name.trim()) {
+          throw new Error(`Article "${title}": author at index ${i} must have a non-empty name.`);
+        }
+      }
+    }
+
+    // Validate closingCta.href when present
+    if (raw.closingCta?.href !== undefined && raw.closingCta?.href !== null) {
+      if (typeof raw.closingCta.href !== 'string' || !raw.closingCta.href.startsWith('/')) {
+        throw new Error(`Article "${title}": closingCta.href must be an internal path starting with /.`);
+      }
+    }
+
+    // Validate faqs when present
+    if (raw.faqs !== undefined && raw.faqs !== null) {
+      if (!Array.isArray(raw.faqs)) {
+        throw new Error(`Article "${title}": faqs must be an array.`);
+      }
+      for (let i = 0; i < raw.faqs.length; i += 1) {
+        const faq = raw.faqs[i];
+        if (!faq?.question?.trim() || !faq?.answer?.trim()) {
+          throw new Error(`Article "${title}": faqs[${i}] must have non-empty question and answer.`);
+        }
+      }
+    }
+
+    // Validate references when present
+    if (raw.references !== undefined && raw.references !== null) {
+      if (!Array.isArray(raw.references)) {
+        throw new Error(`Article "${title}": references must be an array.`);
+      }
+      for (let i = 0; i < raw.references.length; i += 1) {
+        const ref = raw.references[i];
+        if (!ref?.text?.trim()) {
+          throw new Error(`Article "${title}": references[${i}] must have non-empty text.`);
+        }
+      }
+    }
+
     if (raw.mainImage?.asset && !raw.mainImage.alt) {
       throw new Error(`Article "${title}" has a main image without alternative text.`);
     }
 
-    const readingTime = calculateReadingTime(raw.body);
+    const readingTime = resolveReadingTime(raw, raw.body);
     const headings = extractHeadingsFromBlocks(raw.body);
 
     const summaryRecord = {
@@ -512,13 +626,17 @@ export function validateAndProcessPosts(rawPosts) {
       description,
       readingTime,
       headings,
+      authors: raw.authors?.length ? raw.authors : null,
       mainImage: raw.mainImage || null,
-      seo: raw.seo || null,
+      seo: normalizeSeoOgImage(raw.seo),
     };
 
     const fullArticleRecord = {
       ...summaryRecord,
       body: raw.body,
+      ...(raw.faqs?.length ? { faqs: raw.faqs } : {}),
+      ...(raw.references?.length ? { references: raw.references } : {}),
+      ...(raw.closingCta ? { closingCta: raw.closingCta } : {}),
     };
 
     processedPosts.push(summaryRecord);

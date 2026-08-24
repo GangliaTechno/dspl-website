@@ -92,31 +92,53 @@ describe('Sanity setup contract', () => {
     expect(sanityCliSource).toContain("appId: 'j2rcsz1kc9nebl9n1ga0o01j'");
   });
 
-  it('converts only the two approved seeds to stable import documents', () => {
+  it('converts the four approved seeds to stable import documents', () => {
     const documents = createSanityImportDocuments(seedBlogPosts);
 
     expect(documents.map(({ _id }) => _id)).toEqual([
+      'seed-post-fssai-labelling-requirements-checklist-2026',
+      'seed-post-legal-metrology-packaged-commodity-rules-india',
       'seed-post-coordinating-brand-market-commerce',
       'seed-post-from-packaging-to-purchase',
     ]);
     expect(documents.map(({ slug }) => slug.current)).toEqual([
+      'fssai-labelling-requirements-checklist-2026',
+      'legal-metrology-packaged-commodity-rules-india',
       'coordinating-brand-market-commerce',
       'from-packaging-to-purchase',
     ]);
     expect(documents.every(({ _type }) => _type === 'blogPost')).toBe(true);
     for (const document of documents) {
-      expect(Object.keys(document).sort()).toEqual([
-        '_id', '_type', 'body', 'category', 'description', 'publishedAt', 'slug', 'title',
-      ]);
       expect(document).not.toHaveProperty('_createdAt');
       expect(document).not.toHaveProperty('_updatedAt');
       expect(document).not.toHaveProperty('_rev');
       expect(document).not.toHaveProperty('mainImage');
     }
 
+    // Verify compliance documents include Phase 2 fields
+    const fssaiDoc = documents.find((d) => d.slug.current === 'fssai-labelling-requirements-checklist-2026');
+    expect(fssaiDoc.authors).toHaveLength(2);
+    expect(fssaiDoc.readingTimeMinutes).toBe(14);
+    expect(fssaiDoc.faqs).toHaveLength(7);
+    expect(fssaiDoc.references).toHaveLength(15);
+    expect(fssaiDoc.closingCta.href).toBe('/start');
+    expect(fssaiDoc.seo.metaTitle).toBe('FSSAI Labelling Requirements 2026: A Practical Checklist');
+
     const lines = serializeSanityImport(seedBlogPosts).trimEnd().split('\n');
-    expect(lines).toHaveLength(2);
+    expect(lines).toHaveLength(4);
     expect(lines.map(JSON.parse)).toEqual(documents);
+  });
+
+  it('rejects an unapproved or incomplete set of import documents', () => {
+    expect(() => createSanityImportDocuments(seedBlogPosts.slice(0, 2))).toThrow(
+      /Bootstrap must contain exactly the four approved Insights articles/,
+    );
+    expect(() =>
+      createSanityImportDocuments([
+        ...seedBlogPosts.slice(0, 3),
+        { ...seedBlogPosts[0], slug: { current: 'unapproved-slug' } },
+      ]),
+    ).toThrow(/Bootstrap must contain exactly the four approved Insights articles/);
   });
 
   it('uses the authenticated transaction bootstrap and documents non-secret variables', () => {

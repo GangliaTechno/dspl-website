@@ -326,14 +326,18 @@ describe('CMS slug and article snapshot path boundary', () => {
     );
   });
 
-  it('keeps both existing seed CMS documents processable with their canonical slugs', () => {
+  it('keeps all approved seed CMS documents processable with their canonical slugs', () => {
     const result = validateAndProcessPosts(seedBlogPosts);
 
     expect(result.processedPosts.map(({ slug }) => slug)).toEqual([
+      'fssai-labelling-requirements-checklist-2026',
+      'legal-metrology-packaged-commodity-rules-india',
       'coordinating-brand-market-commerce',
       'from-packaging-to-purchase',
     ]);
     expect(Array.from(result.fullArticleMap.keys())).toEqual([
+      'fssai-labelling-requirements-checklist-2026',
+      'legal-metrology-packaged-commodity-rules-india',
       'coordinating-brand-market-commerce',
       'from-packaging-to-purchase',
     ]);
@@ -838,5 +842,182 @@ describe('deterministic blog manifest provenance', () => {
       posts: [],
     });
     expect(manifest).not.toHaveProperty('syncedAt');
+  });
+});
+
+describe('Phase 2 content model and validation pipeline', () => {
+  it('accepts Compliance category and rejects unapproved categories', () => {
+    const validCompliance = makePost('compliance-test');
+    validCompliance.category = 'Compliance';
+    expect(() => validateAndProcessPosts([validCompliance])).not.toThrow();
+
+    const invalidCategory = makePost('fashion-test');
+    invalidCategory.category = 'Fashion';
+    expect(() => validateAndProcessPosts([invalidCategory])).toThrow(/invalid category "Fashion"/);
+  });
+
+  it('validates and propagates authors array with optional roles', () => {
+    const postWithAuthors = makePost('authors-test');
+    postWithAuthors.authors = [
+      { _key: 'a1', name: 'Namesh Malarout', role: 'Director, Dashapatmaja Solutions Pvt Ltd' },
+      { _key: 'a2', name: 'Pawan Shetty' },
+    ];
+
+    const { processedPosts, fullArticleMap } = validateAndProcessPosts([postWithAuthors]);
+    expect(processedPosts[0].authors).toEqual([
+      { _key: 'a1', name: 'Namesh Malarout', role: 'Director, Dashapatmaja Solutions Pvt Ltd' },
+      { _key: 'a2', name: 'Pawan Shetty' },
+    ]);
+    expect(fullArticleMap.get('authors-test').authors).toEqual(processedPosts[0].authors);
+  });
+
+  it('allows absent authors for backward compatibility with legacy articles', () => {
+    const legacyPost = makePost('legacy-post');
+    delete legacyPost.authors;
+    const { processedPosts } = validateAndProcessPosts([legacyPost]);
+    expect(processedPosts[0].authors).toBeNull();
+  });
+
+  it('rejects an empty authors array or author without a name', () => {
+    const emptyAuthors = makePost('empty-authors');
+    emptyAuthors.authors = [];
+    expect(() => validateAndProcessPosts([emptyAuthors])).toThrow(/authors must be a non-empty array/);
+
+    const missingName = makePost('missing-name');
+    missingName.authors = [{ role: 'Director' }];
+    expect(() => validateAndProcessPosts([missingName])).toThrow(/must have a non-empty name/);
+  });
+
+  it('strictly validates readingTimeMinutes overrides', () => {
+    const post = makePost('reading-override');
+    post.body = [
+      { _type: 'block', children: [{ _type: 'span', text: 'Five words in this block' }] },
+    ];
+
+    // Valid override: sets minutes and text, retains body word count
+    post.readingTimeMinutes = 14;
+    const { processedPosts } = validateAndProcessPosts([post]);
+    expect(processedPosts[0].readingTime).toEqual({
+      minutes: 14,
+      text: '14 min read',
+      wordCount: 5,
+    });
+
+    // Invalid: 0
+    post.readingTimeMinutes = 0;
+    expect(() => validateAndProcessPosts([post])).toThrow(/Invalid readingTimeMinutes/);
+
+    // Invalid: negative
+    post.readingTimeMinutes = -3;
+    expect(() => validateAndProcessPosts([post])).toThrow(/Invalid readingTimeMinutes/);
+
+    // Invalid: non-integer
+    post.readingTimeMinutes = 'fourteen';
+    expect(() => validateAndProcessPosts([post])).toThrow(/Invalid readingTimeMinutes/);
+
+    // Absent: calculates automatically
+    delete post.readingTimeMinutes;
+    const autoResult = validateAndProcessPosts([post]);
+    expect(autoResult.processedPosts[0].readingTime).toEqual({
+      minutes: 1,
+      text: '1 min read',
+      wordCount: 5,
+    });
+  });
+
+  it('validates closingCta.href to ensure it is an internal path', () => {
+    const post = makePost('cta-test');
+    post.closingCta = {
+      heading: 'Ready for print?',
+      text: 'Tell us your launch.',
+      label: 'Start',
+      href: '/start',
+    };
+
+    const { fullArticleMap } = validateAndProcessPosts([post]);
+    expect(fullArticleMap.get('cta-test').closingCta).toEqual(post.closingCta);
+
+    // External href must be rejected
+    post.closingCta.href = 'https://external.com/start';
+    expect(() => validateAndProcessPosts([post])).toThrow(/closingCta.href must be an internal path starting with \//);
+  });
+
+  it('validates faqs and references non-empty constraints', () => {
+    const post = makePost('faq-ref-test');
+    post.faqs = [{ _key: 'f1', question: 'Q?', answer: 'A.' }];
+    post.references = [{ _key: 'r1', text: 'Reference citation' }];
+
+    const { fullArticleMap } = validateAndProcessPosts([post]);
+    expect(fullArticleMap.get('faq-ref-test').faqs).toHaveLength(1);
+    expect(fullArticleMap.get('faq-ref-test').references).toHaveLength(1);
+
+    // Empty FAQ answer
+    post.faqs = [{ question: 'Q?', answer: '   ' }];
+    expect(() => validateAndProcessPosts([post])).toThrow(/faqs\[0\] must have non-empty question and answer/);
+
+    // Empty reference text
+    post.faqs = [{ question: 'Q?', answer: 'A.' }];
+    post.references = [{ text: '' }];
+    expect(() => validateAndProcessPosts([post])).toThrow(/references\[0\] must have non-empty text/);
+  });
+
+  it('validates dataTable row cell counts against header count', () => {
+    const post = makePost('table-test');
+    post.body = [
+      {
+        _type: 'dataTable',
+        headers: ['Col A', 'Col B'],
+        rows: [
+          { cells: ['Val 1', 'Val 2'] },
+        ],
+      },
+    ];
+
+    expect(() => validateAndProcessPosts([post])).not.toThrow();
+
+    // Mismatched cell count (3 cells for 2 headers)
+    post.body[0].rows = [{ cells: ['Val 1', 'Val 2', 'Extra'] }];
+    expect(() => validateAndProcessPosts([post])).toThrow(/dataTable row 0 has 3 cells but headers define 2 columns/);
+  });
+
+  it('normalizes seo.ogImage whether passed as a string or a Sanity asset object', () => {
+    const postStringOg = makePost('string-og');
+    postStringOg.seo = { metaTitle: 'Title', ogImage: 'https://example.com/og.jpg' };
+    const resString = validateAndProcessPosts([postStringOg]);
+    expect(resString.processedPosts[0].seo.ogImage).toBe('https://example.com/og.jpg');
+
+    const postObjOg = makePost('obj-og');
+    postObjOg.seo = { metaTitle: 'Title', ogImage: { asset: { url: 'https://cdn.sanity.io/og.jpg' } } };
+    const resObj = validateAndProcessPosts([postObjOg]);
+    expect(resObj.processedPosts[0].seo.ogImage).toBe('https://cdn.sanity.io/og.jpg');
+
+    const postNullOg = makePost('null-og');
+    postNullOg.seo = { metaTitle: 'Title', ogImage: null };
+    const resNull = validateAndProcessPosts([postNullOg]);
+    expect(resNull.processedPosts[0].seo.ogImage).toBeNull();
+  });
+
+  it('processes all four seed posts into a deterministic manifest with correct ordering', () => {
+    const { processedPosts, fullArticleMap } = validateAndProcessPosts(seedBlogPosts);
+    expect(processedPosts).toHaveLength(4);
+    expect(fullArticleMap.size).toBe(4);
+
+    const manifest = createBlogManifest(processedPosts);
+    expect(manifest.blogsEnabled).toBe(true);
+    expect(manifest.totalPosts).toBe(4);
+
+    // Newest publishedAt (2026-08-24) first, sorted by slug alphabetically
+    expect(manifest.posts.map((p) => p.slug)).toEqual([
+      'fssai-labelling-requirements-checklist-2026',
+      'legal-metrology-packaged-commodity-rules-india',
+      'coordinating-brand-market-commerce',
+      'from-packaging-to-purchase',
+    ]);
+
+    // Check reading times on compliance posts
+    expect(manifest.posts[0].readingTime.minutes).toBe(14);
+    expect(manifest.posts[0].readingTime.text).toBe('14 min read');
+    expect(manifest.posts[1].readingTime.minutes).toBe(15);
+    expect(manifest.posts[1].readingTime.text).toBe('15 min read');
   });
 });

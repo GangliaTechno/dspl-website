@@ -38,8 +38,18 @@ import fallbackManifest from '../generated/blogManifest.json' with { type: 'json
  * @property {string} description
  * @property {{ minutes: number, text: string, wordCount: number }} readingTime
  * @property {Array<{ blockKey: string, id: string, text: string, level: number }>} headings
+ * @property {Array<{ _key?: string, name: string, role?: string|null }>|null} [authors]
  * @property {object|null} [mainImage]
  * @property {object|null} [seo]
+ */
+
+/**
+ * @typedef {BlogPostSummary & {
+ *   body: Array<object>,
+ *   faqs?: Array<{ _key?: string, question: string, answer: string }>,
+ *   references?: Array<{ _key?: string, text: string, url?: string }>,
+ *   closingCta?: { heading: string, text: string, label: string, href: string },
+ * }} BlogPostFull
  */
 
 export const BLOG_MINIMUM_POSTS = 2;

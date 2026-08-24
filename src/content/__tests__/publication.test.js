@@ -38,7 +38,7 @@ describe('publication gates', () => {
     expect(BLOG_MINIMUM_POSTS).toBe(2);
     expect(approvedTestimonials).toEqual([]);
     expect(packagingItems).toEqual([]);
-    expect(blogPosts).toHaveLength(2);
+    expect(blogPosts).toHaveLength(4);
     expect(blogsEnabled).toBe(true);
   });
 
@@ -67,10 +67,14 @@ describe('publication gates', () => {
     expect(getBlogPostSummary('unknown-slug')).toBeUndefined();
 
     const paths = getPublishedBlogPaths();
+    expect(paths).toContain('/blogs/fssai-labelling-requirements-checklist-2026');
+    expect(paths).toContain('/blogs/legal-metrology-packaged-commodity-rules-india');
     expect(paths).toContain('/blogs/coordinating-brand-market-commerce');
     expect(paths).toContain('/blogs/from-packaging-to-purchase');
 
     expect(isPublishedBlogRoute('/blogs')).toBe(true);
+    expect(isPublishedBlogRoute('/blogs/fssai-labelling-requirements-checklist-2026')).toBe(true);
+    expect(isPublishedBlogRoute('/blogs/legal-metrology-packaged-commodity-rules-india')).toBe(true);
     expect(isPublishedBlogRoute('/blogs/coordinating-brand-market-commerce')).toBe(true);
     expect(isPublishedBlogRoute('/blogs/from-packaging-to-purchase')).toBe(true);
     expect(isPublishedBlogRoute('/blogs/missing-article')).toBe(false);

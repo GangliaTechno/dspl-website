@@ -134,14 +134,17 @@ const verifyBlogPostingSchema = (html, label, post) => {
   for (const source of schemas) {
     try {
       const data = JSON.parse(source);
-      if (
-        data['@type'] === 'BlogPosting'
-        && data.headline === post.title
-        && data.datePublished === post.publishedAt
-        && (data.dateModified === (post._updatedAt || post.publishedAt))
-        && data.publisher?.name === 'Dashapatmaja Solutions Pvt Ltd'
-      ) {
-        hasBlogPosting = true;
+      const items = Array.isArray(data['@graph']) ? data['@graph'] : [data];
+      for (const item of items) {
+        if (
+          item['@type'] === 'BlogPosting'
+          && item.headline === post.title
+          && item.datePublished === post.publishedAt
+          && (item.dateModified === (post._updatedAt || post.publishedAt))
+          && item.publisher?.name === 'Dashapatmaja Solutions Pvt Ltd'
+        ) {
+          hasBlogPosting = true;
+        }
       }
     } catch {
       failures.push(`${label}: invalid JSON-LD`);

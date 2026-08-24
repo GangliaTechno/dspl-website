@@ -24,6 +24,26 @@ const editorialArtworkBySlug = Object.freeze({
   },
 });
 
+function resolveArtwork(post) {
+  if (post?.mainImage?.asset?.url) {
+    const dimensions = post.mainImage.asset.metadata?.dimensions;
+    return {
+      src: post.mainImage.asset.url,
+      alt: post.mainImage.alt || '',
+      width: dimensions?.width || null,
+      height: dimensions?.height || null,
+    };
+  }
+  if (post?.slug && editorialArtworkBySlug[post.slug]) {
+    return {
+      ...editorialArtworkBySlug[post.slug],
+      width: 1440,
+      height: 810,
+    };
+  }
+  return null;
+}
+
 const StoryKicker = ({ category, readingTime }) => (
   <p className="blog-story-meta">
     <span className="blog-story-category">{category}</span>
@@ -46,7 +66,7 @@ const StoryFooter = ({ publishedAt }) => (
 );
 
 const FeaturedStory = ({ post }) => {
-  const artwork = editorialArtworkBySlug[post.slug];
+  const artwork = resolveArtwork(post);
 
   return (
     <article className="blog-feature-story">
@@ -60,10 +80,10 @@ const FeaturedStory = ({ post }) => {
             <img
               src={artwork.src}
               srcSet={artwork.srcSet}
-              sizes="(max-width: 960px) calc(100vw - 3rem), 680px"
+              sizes={artwork.srcSet ? '(max-width: 960px) calc(100vw - 3rem), 680px' : undefined}
               alt={artwork.alt}
-              width="1440"
-              height="810"
+              width={artwork.width || 1440}
+              height={artwork.height || 810}
               loading="eager"
               fetchPriority="high"
               decoding="async"
@@ -83,7 +103,7 @@ const FeaturedStory = ({ post }) => {
 };
 
 const SupportingStory = ({ post }) => {
-  const artwork = editorialArtworkBySlug[post.slug];
+  const artwork = resolveArtwork(post);
 
   return (
     <article className="blog-supporting-story">
@@ -100,10 +120,10 @@ const SupportingStory = ({ post }) => {
             <img
               src={artwork.src}
               srcSet={artwork.srcSet}
-              sizes="(max-width: 960px) calc(100vw - 3rem), 1160px"
+              sizes={artwork.srcSet ? '(max-width: 960px) calc(100vw - 3rem), 1160px' : undefined}
               alt={artwork.alt}
-              width="1440"
-              height="810"
+              width={artwork.width || 1440}
+              height={artwork.height || 810}
               loading="lazy"
               decoding="async"
             />
@@ -118,7 +138,7 @@ const SupportingStory = ({ post }) => {
 };
 
 const ArchiveStory = ({ post }) => {
-  const artwork = editorialArtworkBySlug[post.slug];
+  const artwork = resolveArtwork(post);
 
   return (
     <article className="blog-archive-story">
@@ -132,10 +152,10 @@ const ArchiveStory = ({ post }) => {
             <img
               src={artwork.src}
               srcSet={artwork.srcSet}
-              sizes="(max-width: 960px) calc(100vw - 3rem), 440px"
+              sizes={artwork.srcSet ? '(max-width: 960px) calc(100vw - 3rem), 440px' : undefined}
               alt={artwork.alt}
-              width="1440"
-              height="810"
+              width={artwork.width || 1440}
+              height={artwork.height || 810}
               loading="lazy"
               decoding="async"
             />

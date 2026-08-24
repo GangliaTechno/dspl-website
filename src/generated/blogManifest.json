@@ -1,13 +1,225 @@
 {
-  "sourceUpdatedAt": "2026-08-24T04:44:50.000Z",
+  "sourceUpdatedAt": "2026-08-24T08:00:00.000Z",
   "blogsEnabled": true,
   "minimumPosts": 2,
-  "totalPosts": 2,
+  "totalPosts": 4,
   "posts": [
     {
+      "_id": "seed-post-fssai-labelling-requirements-checklist-2026",
+      "_createdAt": "2026-08-24T08:00:00.000Z",
+      "_updatedAt": "2026-08-24T08:00:00.000Z",
+      "slug": "fssai-labelling-requirements-checklist-2026",
+      "title": "FSSAI Labelling Requirements for Packaged Food",
+      "category": "Compliance",
+      "publishedAt": "2026-08-24T08:00:00.000Z",
+      "description": "Every mandatory declaration on an Indian food label in 2026, the font sizes, the allergen rules, the 2027 changes, and the mistakes that cost brands a reprint.",
+      "readingTime": {
+        "minutes": 14,
+        "text": "14 min read",
+        "wordCount": 3508
+      },
+      "headings": [
+        {
+          "blockKey": "fb-h2-01",
+          "id": "which-laws-actually-apply-to-your-label",
+          "text": "Which laws actually apply to your label",
+          "level": 2
+        },
+        {
+          "blockKey": "fb-h2-02",
+          "id": "the-compliance-calendar-you-should-have-on-the-wall",
+          "text": "The compliance calendar you should have on the wall",
+          "level": 2
+        },
+        {
+          "blockKey": "fb-h2-03",
+          "id": "the-checklist-fourteen-things-every-pack-must-carry",
+          "text": "The checklist: fourteen things every pack must carry",
+          "level": 2
+        },
+        {
+          "blockKey": "fb-h2-04",
+          "id": "font-size-the-table-that-decides-your-artwork",
+          "text": "Font size: the table that decides your artwork",
+          "level": 2
+        },
+        {
+          "blockKey": "fb-h2-05",
+          "id": "claims-the-area-that-generates-the-most-enforcement",
+          "text": "Claims: the area that generates the most enforcement",
+          "level": 2
+        },
+        {
+          "blockKey": "fb-h2-06",
+          "id": "what-changes-on-1-july-2027",
+          "text": "What changes on 1 July 2027",
+          "level": 2
+        },
+        {
+          "blockKey": "fb-h2-07",
+          "id": "front-of-pack-labelling-what-is-coming-and-when",
+          "text": "Front-of-pack labelling: what is coming, and when",
+          "level": 2
+        },
+        {
+          "blockKey": "fb-h2-08",
+          "id": "the-penalties-and-who-pays-them",
+          "text": "The penalties, and who pays them",
+          "level": 2
+        },
+        {
+          "blockKey": "fb-h2-09",
+          "id": "the-pre-print-checklist",
+          "text": "The pre-print checklist",
+          "level": 2
+        },
+        {
+          "blockKey": "fb-h2-10",
+          "id": "why-this-is-worth-doing-properly",
+          "text": "Why this is worth doing properly",
+          "level": 2
+        }
+      ],
+      "authors": [
+        {
+          "_key": "author-namesh-malarout",
+          "name": "Namesh Malarout",
+          "role": "Director, Dashapatmaja Solutions Pvt Ltd"
+        },
+        {
+          "_key": "author-pawan-shetty",
+          "name": "Pawan Shetty"
+        }
+      ],
+      "mainImage": null,
+      "seo": {
+        "metaTitle": "FSSAI Labelling Requirements 2026: A Practical Checklist",
+        "metaDescription": "Every mandatory declaration on an Indian food label in 2026, the font sizes, the allergen rules, the 2027 changes, and the mistakes that cost brands a reprint.",
+        "ogImage": null
+      }
+    },
+    {
+      "_id": "seed-post-legal-metrology-packaged-commodity-rules-india",
+      "_createdAt": "2026-08-24T08:00:00.000Z",
+      "_updatedAt": "2026-08-24T08:00:00.000Z",
+      "slug": "legal-metrology-packaged-commodity-rules-india",
+      "title": "Legal Metrology Packaged Commodity Rules",
+      "category": "Compliance",
+      "publishedAt": "2026-08-24T08:00:00.000Z",
+      "description": "The nine mandatory declarations under the Legal Metrology Packaged Commodities Rules, where each one must sit, the font sizes, and what changed in 2026.",
+      "readingTime": {
+        "minutes": 15,
+        "text": "15 min read",
+        "wordCount": 3249
+      },
+      "headings": [
+        {
+          "blockKey": "lb-h2-01",
+          "id": "what-the-rules-actually-cover",
+          "text": "What the rules actually cover",
+          "level": 2
+        },
+        {
+          "blockKey": "lb-h2-02",
+          "id": "the-nine-mandatory-declarations",
+          "text": "The nine mandatory declarations",
+          "level": 2
+        },
+        {
+          "blockKey": "lb-h2-03",
+          "id": "where-the-declarations-go-the-principal-display-panel",
+          "text": "Where the declarations go: the principal display panel",
+          "level": 2
+        },
+        {
+          "blockKey": "lb-h2-04",
+          "id": "how-big-the-font-size-table",
+          "text": "How big: the font size table",
+          "level": 2
+        },
+        {
+          "blockKey": "lb-h2-05",
+          "id": "net-quantity",
+          "text": "Net quantity",
+          "level": 2
+        },
+        {
+          "blockKey": "lb-h2-06",
+          "id": "maximum-retail-price",
+          "text": "Maximum retail price",
+          "level": 2
+        },
+        {
+          "blockKey": "lb-h2-07",
+          "id": "unit-sale-price",
+          "text": "Unit sale price",
+          "level": 2
+        },
+        {
+          "blockKey": "lb-h2-08",
+          "id": "date-marking",
+          "text": "Date marking",
+          "level": 2
+        },
+        {
+          "blockKey": "lb-h2-09",
+          "id": "e-commerce-your-listing-is-a-regulated-surface",
+          "text": "E-commerce: your listing is a regulated surface",
+          "level": 2
+        },
+        {
+          "blockKey": "lb-h2-10",
+          "id": "registration-under-rule-27",
+          "text": "Registration under Rule 27",
+          "level": 2
+        },
+        {
+          "blockKey": "lb-h2-11",
+          "id": "where-legal-metrology-and-fssai-overlap",
+          "text": "Where Legal Metrology and FSSAI overlap",
+          "level": 2
+        },
+        {
+          "blockKey": "lb-h2-12",
+          "id": "penalties-and-how-enforcement-changed-in-2026",
+          "text": "Penalties, and how enforcement changed in 2026",
+          "level": 2
+        },
+        {
+          "blockKey": "lb-h2-13",
+          "id": "the-pre-print-checklist",
+          "text": "The pre-print checklist",
+          "level": 2
+        },
+        {
+          "blockKey": "lb-h2-14",
+          "id": "why-this-is-cheaper-to-fix-at-artwork-stage",
+          "text": "Why this is cheaper to fix at artwork stage",
+          "level": 2
+        }
+      ],
+      "authors": [
+        {
+          "_key": "author-namesh-malarout",
+          "name": "Namesh Malarout",
+          "role": "Director, Dashapatmaja Solutions Pvt Ltd"
+        },
+        {
+          "_key": "author-pawan-shetty",
+          "name": "Pawan Shetty"
+        }
+      ],
+      "mainImage": null,
+      "seo": {
+        "metaTitle": "Legal Metrology Rules: What Goes on Your Pack and Where",
+        "metaDescription": "The nine mandatory declarations under the Legal Metrology Packaged Commodities Rules, where each one must sit, the font sizes, and what changed in 2026.",
+        "ogImage": null
+      }
+    },
+    {
       "_id": "seed-post-coordinating-brand-market-commerce",
-      "_createdAt": "2026-08-24T04:44:50.000Z",
-      "_updatedAt": "2026-08-24T04:44:50.000Z",
+      "_createdAt": "2026-08-20T08:00:00.000Z",
+      "_updatedAt": "2026-08-20T08:00:00.000Z",
       "slug": "coordinating-brand-market-commerce",
       "title": "Coordinating Brand, Market, and Commerce as One System",
       "category": "Branding",
@@ -56,13 +268,14 @@
           "level": 2
         }
       ],
+      "authors": null,
       "mainImage": null,
       "seo": null
     },
     {
       "_id": "seed-post-from-packaging-to-purchase",
-      "_createdAt": "2026-08-24T04:44:50.000Z",
-      "_updatedAt": "2026-08-24T04:44:50.000Z",
+      "_createdAt": "2026-08-20T08:00:00.000Z",
+      "_updatedAt": "2026-08-20T08:00:00.000Z",
       "slug": "from-packaging-to-purchase",
       "title": "From Packaging to Purchase: Why Consumer-Brand Launch Handoffs Matter",
       "category": "E-commerce",
@@ -111,6 +324,7 @@
           "level": 2
         }
       ],
+      "authors": null,
       "mainImage": null,
       "seo": null
     }

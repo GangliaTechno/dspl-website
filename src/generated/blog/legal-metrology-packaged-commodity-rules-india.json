@@ -1,0 +1,2023 @@
+{
+  "_id": "seed-post-legal-metrology-packaged-commodity-rules-india",
+  "_createdAt": "2026-08-24T08:00:00.000Z",
+  "_updatedAt": "2026-08-24T08:00:00.000Z",
+  "slug": "legal-metrology-packaged-commodity-rules-india",
+  "title": "Legal Metrology Packaged Commodity Rules",
+  "category": "Compliance",
+  "publishedAt": "2026-08-24T08:00:00.000Z",
+  "description": "The nine mandatory declarations under the Legal Metrology Packaged Commodities Rules, where each one must sit, the font sizes, and what changed in 2026.",
+  "readingTime": {
+    "minutes": 15,
+    "text": "15 min read",
+    "wordCount": 3249
+  },
+  "headings": [
+    {
+      "blockKey": "lb-h2-01",
+      "id": "what-the-rules-actually-cover",
+      "text": "What the rules actually cover",
+      "level": 2
+    },
+    {
+      "blockKey": "lb-h2-02",
+      "id": "the-nine-mandatory-declarations",
+      "text": "The nine mandatory declarations",
+      "level": 2
+    },
+    {
+      "blockKey": "lb-h2-03",
+      "id": "where-the-declarations-go-the-principal-display-panel",
+      "text": "Where the declarations go: the principal display panel",
+      "level": 2
+    },
+    {
+      "blockKey": "lb-h2-04",
+      "id": "how-big-the-font-size-table",
+      "text": "How big: the font size table",
+      "level": 2
+    },
+    {
+      "blockKey": "lb-h2-05",
+      "id": "net-quantity",
+      "text": "Net quantity",
+      "level": 2
+    },
+    {
+      "blockKey": "lb-h2-06",
+      "id": "maximum-retail-price",
+      "text": "Maximum retail price",
+      "level": 2
+    },
+    {
+      "blockKey": "lb-h2-07",
+      "id": "unit-sale-price",
+      "text": "Unit sale price",
+      "level": 2
+    },
+    {
+      "blockKey": "lb-h2-08",
+      "id": "date-marking",
+      "text": "Date marking",
+      "level": 2
+    },
+    {
+      "blockKey": "lb-h2-09",
+      "id": "e-commerce-your-listing-is-a-regulated-surface",
+      "text": "E-commerce: your listing is a regulated surface",
+      "level": 2
+    },
+    {
+      "blockKey": "lb-h2-10",
+      "id": "registration-under-rule-27",
+      "text": "Registration under Rule 27",
+      "level": 2
+    },
+    {
+      "blockKey": "lb-h2-11",
+      "id": "where-legal-metrology-and-fssai-overlap",
+      "text": "Where Legal Metrology and FSSAI overlap",
+      "level": 2
+    },
+    {
+      "blockKey": "lb-h2-12",
+      "id": "penalties-and-how-enforcement-changed-in-2026",
+      "text": "Penalties, and how enforcement changed in 2026",
+      "level": 2
+    },
+    {
+      "blockKey": "lb-h2-13",
+      "id": "the-pre-print-checklist",
+      "text": "The pre-print checklist",
+      "level": 2
+    },
+    {
+      "blockKey": "lb-h2-14",
+      "id": "why-this-is-cheaper-to-fix-at-artwork-stage",
+      "text": "Why this is cheaper to fix at artwork stage",
+      "level": 2
+    }
+  ],
+  "authors": [
+    {
+      "_key": "author-namesh-malarout",
+      "name": "Namesh Malarout",
+      "role": "Director, Dashapatmaja Solutions Pvt Ltd"
+    },
+    {
+      "_key": "author-pawan-shetty",
+      "name": "Pawan Shetty"
+    }
+  ],
+  "mainImage": null,
+  "seo": {
+    "metaTitle": "Legal Metrology Rules: What Goes on Your Pack and Where",
+    "metaDescription": "The nine mandatory declarations under the Legal Metrology Packaged Commodities Rules, where each one must sit, the font sizes, and what changed in 2026.",
+    "ogImage": null
+  },
+  "body": [
+    {
+      "_key": "lb-01",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-01-span",
+          "_type": "span",
+          "text": "Most founders learn about Legal Metrology the day a state inspector picks up a pack from a shelf in a town they have never visited.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-02",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-02-span",
+          "_type": "span",
+          "text": "The rules are not obscure. They are just administered by a different ministry from the one most food and consumer brands watch. FSSAI sits under the Ministry of Health and Family Welfare. The Legal Metrology (Packaged Commodities) Rules, 2011 sit under the Department of Consumer Affairs. Both are enforced against the same physical pack, by different officers, under different statutes.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-03",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-03-span",
+          "_type": "span",
+          "text": "The scale is not small. In 2024-25 alone, 516 cases were booked for declaration violations on e-commerce platforms. Of those, 364 were compounded, and around Rs 11 crore was recovered in compounding fees. Those figures come from the Department of Consumer Affairs Round Table Conference on Ease of Doing Business and Protection of Consumer Rights.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-04",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-04-span",
+          "_type": "span",
+          "text": "The offence numbers on the physical side are larger still. Working from PIB records, an Economic Advisory Council to the Prime Minister working paper found first offences booked under the Legal Metrology Act at 1,13,745 in 2018-19, 1,26,409 in 2019-20, 82,279 in 2020-21 and 74,721 in 2021-22. Second offences across the whole four-year period totalled eight.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-05",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-05-span",
+          "_type": "span",
+          "text": "Read that ratio again. Roughly one lakh first offences a year, and almost nobody ever booked twice. Enforcement is wide, shallow and constant. It is not a rare event you can plan around. It is background weather.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-06",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [
+        {
+          "_key": "lb-06-link",
+          "_type": "link",
+          "href": "/brands/raw-radicles"
+        }
+      ],
+      "children": [
+        {
+          "_key": "lb-06-s1",
+          "_type": "span",
+          "text": "We took ",
+          "marks": []
+        },
+        {
+          "_key": "lb-06-s2",
+          "_type": "span",
+          "text": "six SKUs we took to market",
+          "marks": [
+            "lb-06-link"
+          ]
+        },
+        {
+          "_key": "lb-06-s3",
+          "_type": "span",
+          "text": " through both regimes ourselves. This is what we learned about the Legal Metrology half.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-07",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-07-span",
+          "_type": "span",
+          "text": "A note before you read on. This is general guidance, not legal advice. Check every point against the current rule text before you send artwork to a printer.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-h2-01",
+      "_type": "block",
+      "style": "h2",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-h2-01-span",
+          "_type": "span",
+          "text": "What the rules actually cover",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-08",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-08-span",
+          "_type": "span",
+          "text": "The Legal Metrology Act, 2009 governs weights, measures and the declarations that accompany goods sold by weight, measure or number. The Legal Metrology (Packaged Commodities) Rules, 2011 are made under it.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-09",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-09-span",
+          "_type": "span",
+          "text": "A pre-packaged commodity is a commodity placed in a package without the purchaser being present, so that the contents have a pre-determined quantity. The seal does not matter. The pre-determination does.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-10",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-10-span",
+          "_type": "span",
+          "text": "That definition is broader than most founders assume. It catches your retail pack, your gift box, your combo pack and your subscription pouch. It does not catch loose goods weighed in front of the customer, and it does not catch something you wrapped only for transport and intend to sell by number. The Rules apply equally to imported packages and Indian-made ones. For imports, the registered Indian importer carries the responsibility.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-11",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-11-span",
+          "_type": "span",
+          "text": "Exemptions worth knowing: Rule 26 exempts packages of 10 g or 10 ml or less, drugs covered under the Drugs and Cosmetics Act, and fast food items packed by a restaurant or hotel. Wholesale packages and packages sold to institutional or industrial consumers marked “not for retail sale” follow a lighter set of declarations.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-h2-02",
+      "_type": "block",
+      "style": "h2",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-h2-02-span",
+          "_type": "span",
+          "text": "The nine mandatory declarations",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-12",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-12-span",
+          "_type": "span",
+          "text": "Rule 6 sets out what must appear on every pre-packaged commodity meant for retail sale:",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-md1",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-md1-span",
+          "_type": "span",
+          "text": "Name and address of the manufacturer, or of the packer and the manufacturer where these differ, or of the importer.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-md2",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-md2-span",
+          "_type": "span",
+          "text": "Country of origin, for imported goods.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-md3",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-md3-span",
+          "_type": "span",
+          "text": "The common or generic name of the commodity.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-md4",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-md4-span",
+          "_type": "span",
+          "text": "Net quantity, in the standard unit of weight or measure, or the number of items in the package.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-md5",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-md5-span",
+          "_type": "span",
+          "text": "Retail sale price, declared as Maximum Retail Price, inclusive of all taxes, in Indian currency.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-md6",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-md6-span",
+          "_type": "span",
+          "text": "Unit sale price, in effect since 1 October 2022.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-md7",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-md7-span",
+          "_type": "span",
+          "text": "Month and year of manufacture.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-md8",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-md8-span",
+          "_type": "span",
+          "text": "Best before or use by date, month and year, where the commodity becomes unfit for consumption over time.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-md9",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-md9-span",
+          "_type": "span",
+          "text": "Consumer care details, including a name or designation, a complete address, a telephone number and an email address.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-13",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-13-span",
+          "_type": "span",
+          "text": "The email address is mandatory. It is one of the most common omissions on packs designed by studios that have never worked on a regulated product.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-h2-03",
+      "_type": "block",
+      "style": "h2",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-h2-03-span",
+          "_type": "span",
+          "text": "Where the declarations go: the principal display panel",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-14",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-14-span",
+          "_type": "span",
+          "text": "Rule 7 governs placement. This is the part that constrains your artwork more than anything else in the Rules. The principal display panel is the part of the package on which the mandatory declarations appear. You have two permitted layouts:",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-pdp-l1",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-pdp-l1-span",
+          "_type": "span",
+          "text": "Group all the information together in one place, or",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-pdp-l2",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-pdp-l2-span",
+          "_type": "span",
+          "text": "Group the pre-printed information in one place, and the online-printed information (batch, date, MRP applied at the line) in another.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-15",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-15-span",
+          "_type": "span",
+          "text": "You may not scatter declarations around the pack. Calculating the panel area: Exclude the top, the bottom, the flange at the top and bottom of cans, and the shoulders and neck of bottles and jars. Then:",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-pdp-c1",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-pdp-c1-span",
+          "_type": "span",
+          "text": "Rectangular package, where one full side can properly be treated as the principal display panel: the height multiplied by the width of that side.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-pdp-c2",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-pdp-c2-span",
+          "_type": "span",
+          "text": "Cylindrical or nearly cylindrical package: 40 per cent of the height multiplied by the circumference.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-pdp-c3",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-pdp-c3-span",
+          "_type": "span",
+          "text": "Any other shape: 40 per cent of the total surface of the package, or the area otherwise considered to be the principal display panel.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-16",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-16-span",
+          "_type": "span",
+          "text": "Two clarifications from the Department of Consumer Affairs FAQ that save a lot of argument with designers: You do not need a label physically covering the full 40 per cent. The 40 per cent defines the area within which the mandatory declarations must sit, not a sticker size. You may use the leftover space in that area for other content. The Rules set where mandatory declarations go. They do not reserve the rest of the panel.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-17",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-17-span",
+          "_type": "span",
+          "text": "For very small packages, a package with a capacity of five cubic centimetres or less may carry the principal display panel on a card or tape firmly affixed to the package.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-h2-04",
+      "_type": "block",
+      "style": "h2",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-h2-04-span",
+          "_type": "span",
+          "text": "How big: the font size table",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-18",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-18-span",
+          "_type": "span",
+          "text": "This is Table I. Print it and keep it next to the artwork.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "legmet-table-font-size",
+      "_type": "dataTable",
+      "caption": "Table I — Minimum type height by principal display panel area",
+      "headers": [
+        "Area of principal display panel (A), in cm²",
+        "Minimum height of numerals and letters, mm",
+        "Minimum height when blown, formed or moulded on the container, mm"
+      ],
+      "rows": [
+        {
+          "_key": "lfs-r1",
+          "cells": [
+            "A less than 50",
+            "1.0",
+            "2.0"
+          ]
+        },
+        {
+          "_key": "lfs-r2",
+          "cells": [
+            "50 to 100",
+            "1.5",
+            "3.0"
+          ]
+        },
+        {
+          "_key": "lfs-r3",
+          "cells": [
+            "100 to 500",
+            "2.5",
+            "4.0"
+          ]
+        },
+        {
+          "_key": "lfs-r4",
+          "cells": [
+            "500 to 2500",
+            "4.0",
+            "6.0"
+          ]
+        },
+        {
+          "_key": "lfs-r5",
+          "cells": [
+            "Above 2500",
+            "6.0",
+            "6.0"
+          ]
+        }
+      ]
+    },
+    {
+      "_key": "lb-19",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [
+        {
+          "_key": "lb-19-link",
+          "_type": "link",
+          "href": "/blogs/fssai-labelling-requirements-checklist-2026"
+        }
+      ],
+      "children": [
+        {
+          "_key": "lb-19-s1",
+          "_type": "span",
+          "text": "Note how this differs from the FSSAI table in the ",
+          "marks": []
+        },
+        {
+          "_key": "lb-19-s2",
+          "_type": "span",
+          "text": "FSSAI labelling checklist",
+          "marks": [
+            "lb-19-link"
+          ]
+        },
+        {
+          "_key": "lb-19-s3",
+          "_type": "span",
+          "text": ". The bands are not identical. On a mid-sized pack, Legal Metrology can be the stricter of the two. Design to whichever is larger for each declaration, because both inspectors will visit.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-20",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-20-span",
+          "_type": "span",
+          "text": "The white space rule that catches everyone. The area surrounding the net quantity declaration must be free of other printed matter:",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-ws1",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-ws1-span",
+          "_type": "span",
+          "text": "Above and below, by a space equal to the height of the numeral in the quantity declaration.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-ws2",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-ws2-span",
+          "_type": "span",
+          "text": "To the left and right, by a space equal to double the height of that numeral.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-21",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-21-span",
+          "_type": "span",
+          "text": "On a 4 mm numeral, that is 4 mm clear above and below, and 8 mm clear on each side. Designers who have never read the Rules will place the net weight neatly under a tagline. That pack is non-compliant even though every declaration is present and correctly sized.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-22",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-22-span",
+          "_type": "span",
+          "text": "Two further points on type. For MRP, the size requirement applies to the printed value, not to the prefix “MRP Rs.” or the suffix “inclusive of all taxes”. For consumer care details, all the letters and numerals must meet the size requirement, not just the phone number.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-h2-05",
+      "_type": "block",
+      "style": "h2",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-h2-05-span",
+          "_type": "span",
+          "text": "Net quantity",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-23",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-23-span",
+          "_type": "span",
+          "text": "Declare in the standard unit of weight or measure, or by number where the commodity is sold by count. Net quantity excludes the packaging and any wrapper. Rule 11 is explicit on this. Where a product sits in a liquid medium, the drained weight matters as well.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-24",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-24-span",
+          "_type": "span",
+          "text": "Since the Second Schedule was omitted, commodities no longer have to be packed in prescribed standard quantities. You may pack 87 g if 87 g is what your format demands. The old requirement to declare a pack as a “non-standard size” is gone with it.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-25",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-25-span",
+          "_type": "span",
+          "text": "That change removed a real constraint on product design. Use it deliberately rather than by accident, because odd pack weights complicate unit sale price arithmetic and marketplace listing filters.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-h2-06",
+      "_type": "block",
+      "style": "h2",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-h2-06-span",
+          "_type": "span",
+          "text": "Maximum retail price",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-26",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-26-span",
+          "_type": "span",
+          "text": "The MRP is the maximum price at which the commodity may be sold to the ultimate consumer. It must be printed as “Maximum Retail Price”, in Indian currency, inclusive of all taxes. Four rules that follow from it:",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-mrp1",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-mrp1-span",
+          "_type": "span",
+          "text": "You may sell below MRP: Rule 6(3) permits it.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-mrp2",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-mrp2-span",
+          "_type": "span",
+          "text": "You may not sell above MRP: Rule 18(2) prohibits any sale above the declared retail sale price, by a retail dealer or by anyone else, including the manufacturer, packer, importer and wholesale dealer.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-mrp3",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-mrp3-span",
+          "_type": "span",
+          "text": "You may not alter a printed price: Sub-rules (5) and (6) of Rule 18 prohibit changing the price once printed.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-mrp4",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-mrp4-span",
+          "_type": "span",
+          "text": "You may not sticker individual declarations: Under Rule 6(2), giving a single mandatory declaration such as date of manufacture or MRP by affixing an individual sticker is prohibited. All the required information may be printed on the package or given on one label affixed to it. The one exception is a sticker declaring a reduced MRP, provided it does not cover the manufacturer’s original MRP declaration.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-27",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-27-span",
+          "_type": "span",
+          "text": "That last exception is why revised-price stickers appear after a tax change. When GST rates were revised in September 2025, the Department of Consumer Affairs issued a circular under Rule 33 permitting manufacturers, packers and importers to declare a revised retail sale price voluntarily on unsold stock, and waived the newspaper advertisement requirement under Rule 18(3).",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-h2-07",
+      "_type": "block",
+      "style": "h2",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-h2-07-span",
+          "_type": "span",
+          "text": "Unit sale price",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-28",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-28-span",
+          "_type": "span",
+          "text": "Introduced by the 2021 amendment and in effect since 1 October 2022. It is the sale price, inclusive of all taxes, per specified unit of weight, measure or number, and it goes on the principal display panel. The unit follows the size of the pack:",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-usp1",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-usp1-span",
+          "_type": "span",
+          "text": "Per gram where net quantity is under one kilogram; per kilogram where it is above.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-usp2",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-usp2-span",
+          "_type": "span",
+          "text": "Per millilitre where net volume is under one litre; per litre where it is above.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-usp3",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-usp3-span",
+          "_type": "span",
+          "text": "Per centimetre where net length is under one metre; per metre where it is above.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-usp4",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-usp4-span",
+          "_type": "span",
+          "text": "Per number or unit where the item is sold by count.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-29",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-29-span",
+          "_type": "span",
+          "text": "Round to the nearest two decimal places. Where the unit sale price is a whole number, decimals may be dropped. When you do not need it: Where the retail sale price equals the unit sale price; On wholesale packages, as defined under Rule 2(r); On retail packs of 10 ml or 10 g or less, aligning with the Rule 26 exemption; On the inner package, where the outer package carries all required declarations under the proviso to Rule 9(3); In advertisements, as Rule 31(1) requires net quantity alongside MRP in an advertisement, not unit sale price.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-30",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-30-span",
+          "_type": "span",
+          "text": "Promotional packs: Where you give extra quantity free inside the pack, declare the unit sale price but exclude the free quantity from the computation. Where a separate free pack rides along, declare the unit sale price on the pack intended for sale, exclude the free pack’s value, and put nothing on the free pack.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-h2-08",
+      "_type": "block",
+      "style": "h2",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-h2-08-span",
+          "_type": "span",
+          "text": "Date marking",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-31",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-31-span",
+          "_type": "span",
+          "text": "Month and year of manufacture is required. The 2021 amendment removed the alternative of declaring the month and year of pre-packing or import, so a single date basis now applies. Where the commodity may become unfit for human consumption over time, the best before or use by date, month and year must also appear.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-32",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-32-span",
+          "_type": "span",
+          "text": "Rule 4(da) defines both. Best before marks the end of the period, under stated storage conditions, during which the product remains fully marketable and retains the qualities claimed for it. Beyond that date it may still be safe. Use by marks the end of the period after which the product no longer has the quality attributes consumers normally expect, and after which it should not be regarded as marketable.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-33",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-33-span",
+          "_type": "span",
+          "text": "A “when packed” declaration is permitted for a narrow list: all kinds of soaps, lotions, creams and camphor.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-h2-09",
+      "_type": "block",
+      "style": "h2",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-h2-09-span",
+          "_type": "span",
+          "text": "E-commerce: your listing is a regulated surface",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-34",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-34-span",
+          "_type": "span",
+          "text": "Under Rule 6(10), an e-commerce entity must ensure that the mandatory declarations specified in Rule 6(1) are displayed on the digital and electronic network used for the transaction, with one exception: the month and year of manufacture or packing need not be shown. Unit sale price is not required on the listing either.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-35",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [
+        {
+          "_key": "lb-35-link",
+          "_type": "link",
+          "href": "/ecommerce#compliance"
+        }
+      ],
+      "children": [
+        {
+          "_key": "lb-35-s1",
+          "_type": "span",
+          "text": "That still leaves the name and address, generic name, net quantity, MRP, country of origin, and consumer care details, all of which have to match the physical pack. When they do not match, you have created a documentary contradiction that any inspector can screenshot. Coordinated ",
+          "marks": []
+        },
+        {
+          "_key": "lb-35-s2",
+          "_type": "span",
+          "text": "marketplace listings",
+          "marks": [
+            "lb-35-link"
+          ]
+        },
+        {
+          "_key": "lb-35-s3",
+          "_type": "span",
+          "text": " ensure compliance data stays aligned with physical stock.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-36",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-36-span",
+          "_type": "span",
+          "text": "Two 2026 changes matter here:",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-ecom1",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-ecom1-span",
+          "_type": "span",
+          "text": "Legal Metrology (Packaged Commodities) Amendment Rules, 2026 were notified on 13 February 2026 as G.S.R. 128(E) and came into force on 1 July 2026. They insert Rule 6(10A), requiring every e-commerce entity selling imported products to provide those listings through a searchable and sortable filter specifying the country of origin.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-ecom2",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-ecom2-span",
+          "_type": "span",
+          "text": "Legal Metrology (Packaged Commodities) Second Amendment Rules, 2026, notified 27 April 2026, substitute Rule 6(10A) with effect from 1 July 2027.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-37",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-37-span",
+          "_type": "span",
+          "text": "This is a shift worth naming. Compliance has moved from what is printed on a pack to how a platform is built. A filter either exists or it does not, and it can be tested from a browser in seconds. Enforcement against that kind of obligation is cheap, which usually means it happens. The commercial context makes it likely. Online retail in India crossed INR 12.2 trillion in 2024 and was expanding at roughly 18.7 per cent annually, and the packaged food market alone is worth around USD 137 billion in 2026. Regulators follow volume.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-h2-10",
+      "_type": "block",
+      "style": "h2",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-h2-10-span",
+          "_type": "span",
+          "text": "Registration under Rule 27",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-38",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-38-span",
+          "_type": "span",
+          "text": "Every manufacturer, packer and importer of pre-packaged commodities must register with the Director of Legal Metrology or the Controller of the state. The timeline is within ninety days from the date on which pre-packing commences. Founders frequently miss this because it is a registration rather than a licence, and because it does not appear on any pack. It is checked. If you are contract-manufacturing, confirm which entity holds the registration, and register yourself if you are the packer or importer of record.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-h2-11",
+      "_type": "block",
+      "style": "h2",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-h2-11-span",
+          "_type": "span",
+          "text": "Where Legal Metrology and FSSAI overlap",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-39",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-39-span",
+          "_type": "span",
+          "text": "For food products governed by FSSAI, the Department of Consumer Affairs FAQ is direct about the split. Three declarations follow the Legal Metrology (Packaged Commodities) Rules:",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-ov1",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-ov1-span",
+          "_type": "span",
+          "text": "Maximum Retail Price",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-ov2",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-ov2-span",
+          "_type": "span",
+          "text": "Net weight",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-ov3",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-ov3-span",
+          "_type": "span",
+          "text": "Consumer care details",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-40",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [
+        {
+          "_key": "lb-40-link",
+          "_type": "link",
+          "href": "/branding#compliance"
+        }
+      ],
+      "children": [
+        {
+          "_key": "lb-40-s1",
+          "_type": "span",
+          "text": "Everything else on a food pack, the ingredient list, nutrition panel, allergen statement, veg and non-veg mark, FSSAI logo and licence number, follows the FSS (Labelling and Display) Regulations, 2020. In practice this means you are designing one panel against two font tables and two sets of placement rules. The workable method is to build a single declaration sheet listing every mandatory item, the rule it comes from, the minimum type height under each regime, and the panel it must sit on. Then coordinate your ",
+          "marks": []
+        },
+        {
+          "_key": "lb-40-s2",
+          "_type": "span",
+          "text": "artwork and pack design",
+          "marks": [
+            "lb-40-link"
+          ]
+        },
+        {
+          "_key": "lb-40-s3",
+          "_type": "span",
+          "text": " against the stricter figure for each row.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-41",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-41-span",
+          "_type": "span",
+          "text": "Adding information beyond the mandatory set is not a violation. Omitting or shrinking a mandatory one is.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-h2-12",
+      "_type": "block",
+      "style": "h2",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-h2-12-span",
+          "_type": "span",
+          "text": "Penalties, and how enforcement changed in 2026",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-42",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-42-span",
+          "_type": "span",
+          "text": "Under Section 36 of the Legal Metrology Act, 2009, selling, manufacturing, packing, importing, distributing or possessing for sale a pre-packaged commodity that does not conform to the declarations required by the Act attracts a fine which may extend to Rs 25,000 for a first offence, Rs 50,000 for a second, and not less than Rs 50,000 and up to Rs 1,00,000 for subsequent offences, or imprisonment.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-43",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-43-span",
+          "_type": "span",
+          "text": "Offences under the Packaged Commodities Rules are compoundable under Section 48. Compounding is how the overwhelming majority of these matters end, which is what the 2024-25 e-commerce figures reflect: 516 cases booked, 364 compounded, around Rs 11 crore recovered. Two waves of reform have reshaped this:",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-jv1",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-jv1-span",
+          "_type": "span",
+          "text": "The Jan Vishwas (Amendment of Provisions) Act, 2023 amended 42 Central Acts and decriminalised 183 provisions, replacing imprisonment with monetary penalties in several places. The Legal Metrology amendments were brought into force on 1 October 2023 by notification S.O. 4128(E) dated 19 September 2023.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-jv2",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-jv2-span",
+          "_type": "span",
+          "text": "The Jan Vishwas (Amendment of Provisions) Act, 2026 went considerably further. It was passed by the Lok Sabha on 1 April 2026 and the Rajya Sabha the following day, and amends around 79 Central Acts across 23 ministries, covering 784 provisions. Its structure rests on four ideas: monetary penalties instead of imprisonment for minor offences, a warning before punishment for first-time lapses, penalties calibrated to severity, and adjudicating officers and appellate authorities instead of criminal courts.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-44",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-44-span",
+          "_type": "span",
+          "text": "For Legal Metrology specifically, it introduces the improvement notice. A new clause (ea) in Section 2 of the Act defines it, and it allows a Legal Metrology Officer to issue a notice for specified first-time procedural or regulatory non-compliances, giving the business a reasonable opportunity to correct the deficiency before penal proceedings begin. The Ministry of Consumer Affairs notified the Legal Metrology provisions on 27 April 2026, and they came into force on 1 May 2026.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-45",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-45-span",
+          "_type": "span",
+          "text": "Do not misread this as a relaxation. The Department of Consumer Affairs has stated that the mechanism is limited to specified first-time procedural and regulatory non-compliances, and that strict action continues against fraud, repeated violations, tampering and anything that adversely affects consumer interests. The practical reading for a brand: your first procedural slip may now come back as a notice rather than a prosecution. Your second will not. Because penalty structures and enforcement provisions were revised by the 2026 Act, verify the current consolidated text of the Act rather than relying on the figures above or on any secondary summary, including this one.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-h2-13",
+      "_type": "block",
+      "style": "h2",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-h2-13-span",
+          "_type": "span",
+          "text": "The pre-print checklist",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-46",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-46-span",
+          "_type": "span",
+          "text": "Run this alongside your FSSAI check, not after it.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-chk01",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-chk01-span",
+          "_type": "span",
+          "text": "Principal display panel area calculated using the correct formula for your pack shape, with tops, bottoms, flanges, shoulders and necks excluded.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-chk02",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-chk02-span",
+          "_type": "span",
+          "text": "Minimum type height read off Table I, and compared against the FSSAI requirement for the same declaration. Larger figure applied.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-chk03",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-chk03-span",
+          "_type": "span",
+          "text": "All mandatory declarations grouped in one place, or split correctly into pre-printed and online-printed groups.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-chk04",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-chk04-span",
+          "_type": "span",
+          "text": "Name and complete address of manufacturer, or packer and manufacturer, or importer.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-chk05",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-chk05-span",
+          "_type": "span",
+          "text": "Common or generic name of the commodity present, distinct from the brand name.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-chk06",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-chk06-span",
+          "_type": "span",
+          "text": "Net quantity in the correct standard unit, excluding packaging.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-chk07",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-chk07-span",
+          "_type": "span",
+          "text": "Clear space around the net quantity declaration: one numeral height above and below, two numeral heights left and right.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-chk08",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-chk08-span",
+          "_type": "span",
+          "text": "MRP declared as Maximum Retail Price, in Indian currency, inclusive of all taxes.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-chk09",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-chk09-span",
+          "_type": "span",
+          "text": "Unit sale price declared on the principal display panel in the correct unit, rounded to two decimal places, unless an exemption applies.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-chk10",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-chk10-span",
+          "_type": "span",
+          "text": "Month and year of manufacture.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-chk11",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-chk11-span",
+          "_type": "span",
+          "text": "Best before or use by date, month and year, where the product can become unfit over time.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-chk12",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-chk12-span",
+          "_type": "span",
+          "text": "Clean printing field reserved for batch, date and any line-applied MRP.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-chk13",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-chk13-span",
+          "_type": "span",
+          "text": "Consumer care name or designation, complete address, telephone number and email address, all at the required type height.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-chk14",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-chk14-span",
+          "_type": "span",
+          "text": "Country of origin, where imported.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-chk15",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-chk15-span",
+          "_type": "span",
+          "text": "No mandatory declaration delivered by individual sticker.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-chk16",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-chk16-span",
+          "_type": "span",
+          "text": "Rule 27 registration confirmed for whichever entity is the manufacturer, packer or importer of record.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-chk17",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-chk17-span",
+          "_type": "span",
+          "text": "Marketplace listing fields generated from the approved pack artwork, covering everything in Rule 6(1) except month and year of manufacture.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-chk18",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-chk18-span",
+          "_type": "span",
+          "text": "Country-of-origin filter in place on the platform, where imported products are listed.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-h2-14",
+      "_type": "block",
+      "style": "h2",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-h2-14-span",
+          "_type": "span",
+          "text": "Why this is cheaper to fix at artwork stage",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-47",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-47-span",
+          "_type": "span",
+          "text": "A label review before printing costs a fraction of a print run. A print run costs a fraction of a recall. And a compounding fee, while survivable, arrives with an inspection record attached to your brand in a state you may not be operating in yet.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "lb-48",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "lb-48-span",
+          "_type": "span",
+          "text": "The declarations are not difficult. They are just administered by a department most consumer brands are not watching, against a font table most designers have never seen, with a white-space rule that is invisible until someone measures it. Measure it before the printer does.",
+          "marks": []
+        }
+      ]
+    }
+  ],
+  "faqs": [
+    {
+      "_key": "legmet-faq-01",
+      "question": "Do Legal Metrology rules apply if I already comply with FSSAI?",
+      "answer": "Yes. They are separate regimes enforced by separate officers. For food products, three declarations follow Legal Metrology specifically: MRP, net weight and consumer care details. Everything else on the food label follows the FSS (Labelling and Display) Regulations, 2020."
+    },
+    {
+      "_key": "legmet-faq-02",
+      "question": "What is the principal display panel, and how much of the pack does it have to be?",
+      "answer": "It is the area where mandatory declarations must appear. For a rectangular pack it is the height multiplied by the width of the side treated as the display panel. For cylindrical packs it is 40 per cent of height multiplied by circumference. For other shapes it is 40 per cent of total surface area. You do not have to cover that area with a label; you have to place the declarations within it."
+    },
+    {
+      "_key": "legmet-faq-03",
+      "question": "Can I put my MRP on a sticker?",
+      "answer": "Not as an individual declaration. Rule 6(2) prohibits giving mandatory declarations such as MRP or date of manufacture by individual sticker. The one exception is a sticker declaring a reduced MRP, provided it does not cover the original MRP declaration."
+    },
+    {
+      "_key": "legmet-faq-04",
+      "question": "Do I need to declare unit sale price on every pack?",
+      "answer": "No. It is not required where the retail sale price equals the unit sale price, on wholesale packages, on retail packs of 10 g or 10 ml or less, on inner packages where the outer pack carries all declarations, or on e-commerce listings."
+    },
+    {
+      "_key": "legmet-faq-05",
+      "question": "Are small packs exempt?",
+      "answer": "Packages of 10 g or 10 ml or less are exempt under Rule 26, along with drugs covered by the Drugs and Cosmetics Act and fast food packed by a restaurant or hotel."
+    },
+    {
+      "_key": "legmet-faq-06",
+      "question": "When do I have to register under Rule 27?",
+      "answer": "Within ninety days of commencing pre-packing, as manufacturer, packer or importer. Confirm which entity in your supply chain holds the registration if you contract-manufacture."
+    },
+    {
+      "_key": "legmet-faq-07",
+      "question": "What has changed in 2026?",
+      "answer": "Three things. Rule 6(10A) took effect on 1 July 2026, requiring a searchable and sortable country-of-origin filter for imported products on e-commerce platforms. The Second Amendment Rules, 2026 substitute that sub-rule with effect from 1 July 2027. And the Jan Vishwas (Amendment of Provisions) Act, 2026 introduced an improvement notice mechanism under the Legal Metrology Act, in force from 1 May 2026, allowing correction of specified first-time procedural lapses before penal proceedings."
+    },
+    {
+      "_key": "legmet-faq-08",
+      "question": "Does an improvement notice mean I will not be penalised?",
+      "answer": "Only for specified first-time procedural or regulatory non-compliances. The Department of Consumer Affairs has been explicit that strict action continues for fraud, repeat violations, tampering and anything harming consumer interests."
+    }
+  ],
+  "references": [
+    {
+      "_key": "legmet-ref-01",
+      "text": "Legal Metrology Act, 2009 (Act No. 1 of 2010), Sections 2, 36 and 48. India Code.",
+      "url": "https://www.indiacode.nic.in/bitstream/123456789/2102/1/2009l.pdf"
+    },
+    {
+      "_key": "legmet-ref-02",
+      "text": "Legal Metrology (Packaged Commodities) Rules, 2011, Rules 2, 4, 5, 6, 7, 9, 11, 18, 26, 27, 31 and 33. Department of Consumer Affairs."
+    },
+    {
+      "_key": "legmet-ref-03",
+      "text": "Department of Consumer Affairs, FAQs on the Legal Metrology (Packaged Commodities) Rules, 2011, including Table I on the size of numerals and letters."
+    },
+    {
+      "_key": "legmet-ref-04",
+      "text": "Legal Metrology (Packaged Commodities) Amendment Rules, 2021, notified 2 November 2021, introducing unit sale price and removing the pre-packing and import date alternative."
+    },
+    {
+      "_key": "legmet-ref-05",
+      "text": "Legal Metrology (Packaged Commodities) Amendment Rules, 2022, notified 28 March 2022, effective 1 October 2022, clarifying unit sale price computation and omitting the Second Schedule of standard pack quantities."
+    },
+    {
+      "_key": "legmet-ref-06",
+      "text": "Legal Metrology (Packaged Commodities) Amendment Rules, 2026, G.S.R. 128(E) dated 13 February 2026, inserting Rule 6(10A), in force 1 July 2026."
+    },
+    {
+      "_key": "legmet-ref-07",
+      "text": "Legal Metrology (Packaged Commodities) Second Amendment Rules, 2026, notified 27 April 2026, in force 1 July 2027."
+    },
+    {
+      "_key": "legmet-ref-08",
+      "text": "Jan Vishwas (Amendment of Provisions) Act, 2023; Legal Metrology provisions brought into force by S.O. 4128(E) dated 19 September 2023, effective 1 October 2023."
+    },
+    {
+      "_key": "legmet-ref-09",
+      "text": "Jan Vishwas (Amendment of Provisions) Act, 2026; Legal Metrology provisions notified 27 April 2026, in force 1 May 2026. Press Information Bureau.",
+      "url": "https://www.pib.gov.in/PressNoteDetails.aspx?NoteId=158002&ModuleId=3&reg=48&lang=2"
+    },
+    {
+      "_key": "legmet-ref-10",
+      "text": "PRS Legislative Research, The Jan Vishwas (Amendment of Provisions) Bill, 2026.",
+      "url": "https://prsindia.org/billtrack/the-jan-vishwas-amendment-of-provisions-bill-2026"
+    },
+    {
+      "_key": "legmet-ref-11",
+      "text": "Press Information Bureau, Round Table Conference on Ease of Doing Business and Protection of Consumer Rights, Department of Consumer Affairs, reporting 516 e-commerce declaration cases in 2024-25, 364 compounded and around Rs 11 crore in compounding fees.",
+      "url": "https://www.pib.gov.in/PressReleseDetailm.aspx?PRID=2124376"
+    },
+    {
+      "_key": "legmet-ref-12",
+      "text": "Economic Advisory Council to the Prime Minister, Working Paper EAC-PM/WP/23/2023, Reforming the Legal Metrology Regime, on first and second offence data 2018-19 to 2021-22.",
+      "url": "https://eacpm.gov.in/wp-content/uploads/2023/09/EAC-PM-Working-Paper-Reforming-the-Legal-Metrology-Regime.pdf"
+    },
+    {
+      "_key": "legmet-ref-13",
+      "text": "Department of Consumer Affairs circular dated 18 September 2025 under Rule 33, on revised MRP declaration following GST rate changes."
+    },
+    {
+      "_key": "legmet-ref-14",
+      "text": "Food Safety and Standards (Labelling and Display) Regulations, 2020, for the parallel FSSAI requirements."
+    },
+    {
+      "_key": "legmet-ref-15",
+      "text": "Mordor Intelligence, India Food and Beverage Packaging Market, on online retail value and growth."
+    },
+    {
+      "_key": "legmet-ref-16",
+      "text": "IMARC Group, India Packaged Food Market report, 2026."
+    }
+  ],
+  "closingCta": {
+    "heading": "One pack, two regimes, one artwork file",
+    "text": "We have taken six food SKUs through FSSAI labelling and Legal Metrology packaging requirements, from lab report to print-ready artwork. If you want a pack checked against both before it goes to the printer, tell us what you are launching.",
+    "label": "Start a project",
+    "href": "/start"
+  }
+}

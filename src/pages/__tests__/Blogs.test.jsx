@@ -249,4 +249,53 @@ describe('Blogs (Insights) Page', () => {
       '/blogs/future-unmapped-post',
     );
   });
+
+  it('renders 4 published stories across feature, supporting, and archive grid', () => {
+    const testPosts = [
+      mockPost('fssai', 'Compliance', 'FSSAI Labelling Requirements'),
+      mockPost('legal', 'Compliance', 'Legal Metrology Rules'),
+      mockPost('brand', 'Branding', 'Coordinating Brand'),
+      mockPost('packaging', 'E-commerce', 'From Packaging to Purchase'),
+    ];
+    renderBlogs(testPosts);
+
+    const articles = screen.getAllByRole('article');
+    expect(articles).toHaveLength(4);
+
+    expect(articles[0]).toHaveClass('blog-feature-story');
+    expect(articles[1]).toHaveClass('blog-supporting-story');
+    expect(articles[2]).toHaveClass('blog-archive-story');
+    expect(articles[3]).toHaveClass('blog-archive-story');
+
+    expect(within(articles[0]).getByText('FSSAI Labelling Requirements')).toBeInTheDocument();
+    expect(within(articles[1]).getByText('Legal Metrology Rules')).toBeInTheDocument();
+    expect(within(articles[2]).getByText('Coordinating Brand')).toBeInTheDocument();
+    expect(within(articles[3]).getByText('From Packaging to Purchase')).toBeInTheDocument();
+  });
+
+  it('resolves content-first artwork with real asset dimensions when mainImage is present', () => {
+    const postWithSanityImage = {
+      ...mockPost('custom-artwork-post', 'Branding', 'Custom Artwork Post'),
+      mainImage: {
+        alt: 'Custom art photography',
+        asset: {
+          url: 'https://cdn.sanity.io/images/proj/dataset/custom.jpg',
+          metadata: {
+            dimensions: { width: 1200, height: 630 },
+          },
+        },
+      },
+    };
+    const secondPost = mockPost('second-post', 'Marketing', 'Second Post');
+
+    renderBlogs([postWithSanityImage, secondPost]);
+
+    const feature = screen.getByRole('heading', { name: /Custom Artwork Post/i }).closest('article');
+    const image = within(feature).getByRole('img', { name: 'Custom art photography' });
+
+    expect(image).toHaveAttribute('src', 'https://cdn.sanity.io/images/proj/dataset/custom.jpg');
+    expect(image).toHaveAttribute('width', '1200');
+    expect(image).toHaveAttribute('height', '630');
+    expect(image).not.toHaveAttribute('srcset');
+  });
 });

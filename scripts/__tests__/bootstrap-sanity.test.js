@@ -16,6 +16,8 @@ const targetEnvironment = {
 };
 
 const bootstrapIds = [
+  'seed-post-fssai-labelling-requirements-checklist-2026',
+  'seed-post-legal-metrology-packaged-commodity-rules-india',
   'seed-post-coordinating-brand-market-commerce',
   'seed-post-from-packaging-to-purchase',
 ];
@@ -28,9 +30,14 @@ function createFakeClient({
   },
   response = {
     transactionId: 'must-never-be-printed',
-    results: [{ operation: 'create' }, { operation: 'create' }],
+    results: [
+      { operation: 'create' },
+      { operation: 'create' },
+      { operation: 'create' },
+      { operation: 'create' },
+    ],
   },
-  documents = [null, null],
+  documents = [null, null, null, null],
 } = {}) {
   const transaction = {
     createIfNotExists: vi.fn(() => transaction),
@@ -66,8 +73,10 @@ describe('Sanity transaction bootstrap', () => {
     expect(client.getDocuments).toHaveBeenCalledTimes(1);
     expect(client.getDocuments).toHaveBeenCalledWith(bootstrapIds);
     expect(client.transaction).toHaveBeenCalledTimes(1);
-    expect(transaction.createIfNotExists).toHaveBeenCalledTimes(2);
+    expect(transaction.createIfNotExists).toHaveBeenCalledTimes(4);
     expect(transaction.createIfNotExists.mock.calls.map(([document]) => document.slug.current)).toEqual([
+      'fssai-labelling-requirements-checklist-2026',
+      'legal-metrology-packaged-commodity-rules-india',
       'coordinating-brand-market-commerce',
       'from-packaging-to-purchase',
     ]);
@@ -78,16 +87,16 @@ describe('Sanity transaction bootstrap', () => {
     });
     expect(summary).toEqual({
       mode,
-      requested: 2,
+      requested: 4,
       existingCount: 0,
-      missingCount: 2,
-      resultCount: 2,
+      missingCount: 4,
+      resultCount: 4,
       transactionSubmitted: true,
       transactionAccepted: true,
     });
   });
 
-  it('returns without a transaction when both fixed documents already exist', async () => {
+  it('returns without a transaction when all four fixed documents already exist', async () => {
     const existingDocuments = bootstrapIds.map((_id) => ({
       _id,
       _type: 'blogPost',
@@ -110,8 +119,8 @@ describe('Sanity transaction bootstrap', () => {
     expect(transaction.commit).not.toHaveBeenCalled();
     expect(summary).toEqual({
       mode: 'apply',
-      requested: 2,
-      existingCount: 2,
+      requested: 4,
+      existingCount: 4,
       missingCount: 0,
       resultCount: 0,
       transactionSubmitted: false,
@@ -119,12 +128,21 @@ describe('Sanity transaction bootstrap', () => {
     });
   });
 
-  it('submits only the one missing document for a partial direct state', async () => {
+  it('submits only the missing documents for a partial direct state', async () => {
     const { client, transaction } = createFakeClient({
-      documents: [{ _id: bootstrapIds[0], _type: 'blogPost' }, null],
+      documents: [
+        { _id: bootstrapIds[0], _type: 'blogPost' },
+        null,
+        null,
+        null,
+      ],
       response: {
         transactionId: 'must-never-be-printed',
-        results: [{ operation: 'create' }],
+        results: [
+          { operation: 'create' },
+          { operation: 'create' },
+          { operation: 'create' },
+        ],
       },
     });
 
@@ -135,16 +153,18 @@ describe('Sanity transaction bootstrap', () => {
     });
 
     expect(client.transaction).toHaveBeenCalledTimes(1);
-    expect(transaction.createIfNotExists).toHaveBeenCalledTimes(1);
-    expect(transaction.createIfNotExists.mock.calls[0][0].slug.current).toBe(
+    expect(transaction.createIfNotExists).toHaveBeenCalledTimes(3);
+    expect(transaction.createIfNotExists.mock.calls.map(([d]) => d.slug.current)).toEqual([
+      'legal-metrology-packaged-commodity-rules-india',
+      'coordinating-brand-market-commerce',
       'from-packaging-to-purchase',
-    );
+    ]);
     expect(summary).toEqual({
       mode: 'dry-run',
-      requested: 2,
+      requested: 4,
       existingCount: 1,
-      missingCount: 1,
-      resultCount: 1,
+      missingCount: 3,
+      resultCount: 3,
       transactionSubmitted: true,
       transactionAccepted: true,
     });
@@ -153,10 +173,15 @@ describe('Sanity transaction bootstrap', () => {
   it.each([
     ['a malformed result length', { documents: [null] }],
     ['an undefined result', { documents: undefined }],
-    ['an undefined entry', { documents: [undefined, null] }],
-    ['a sparse result', { documents: new Array(2) }],
+    ['an undefined entry', { documents: [undefined, null, null, null] }],
+    ['a sparse result', { documents: new Array(4) }],
     ['a mismatched result ID', {
-      documents: [{ _id: 'wrong-document-id', _type: 'blogPost' }, null],
+      documents: [
+        { _id: 'wrong-document-id', _type: 'blogPost' },
+        null,
+        null,
+        null,
+      ],
     }],
   ])('stops before a transaction when direct preflight returns %s', async (_label, options) => {
     const { client } = createFakeClient(options);
@@ -202,10 +227,20 @@ describe('Sanity transaction bootstrap', () => {
 
   it('rejects an overcounted partial response with a count-neutral internal error', async () => {
     const { client } = createFakeClient({
-      documents: [{ _id: bootstrapIds[0], _type: 'blogPost' }, null],
+      documents: [
+        { _id: bootstrapIds[0], _type: 'blogPost' },
+        null,
+        null,
+        null,
+      ],
       response: {
         transactionId: 'redacted',
-        results: [{ operation: 'create' }, { operation: 'create' }],
+        results: [
+          { operation: 'create' },
+          { operation: 'create' },
+          { operation: 'create' },
+          { operation: 'create' },
+        ],
       },
     });
 
@@ -231,10 +266,10 @@ describe('Sanity transaction bootstrap', () => {
     expect(getClient).toHaveBeenCalledWith({ apiVersion: '2026-08-20' });
     expect(JSON.parse(output)).toEqual({
       mode: 'dry-run',
-      requested: 2,
+      requested: 4,
       existingCount: 0,
-      missingCount: 2,
-      resultCount: 2,
+      missingCount: 4,
+      resultCount: 4,
       transactionSubmitted: true,
       transactionAccepted: true,
     });
@@ -266,5 +301,15 @@ describe('Sanity transaction bootstrap', () => {
     expect(`${stdout}${stderr}`).not.toMatch(
       /sentinel-project|sentinel-document|sentinel-transaction|sentinel-token/,
     );
+  });
+
+  it('rejects an invalid document count in runBootstrap contract check', async () => {
+    const { client } = createFakeClient();
+    await expect(runBootstrap({
+      client,
+      env: targetEnvironment,
+      documents: [{ _id: 'seed-1', _type: 'blogPost' }, { _id: 'seed-2', _type: 'blogPost' }],
+      mode: 'dry-run',
+    })).rejects.toThrow(/Sanity bootstrap contract is invalid/);
   });
 });

@@ -121,6 +121,55 @@ describe('BlogPost', () => {
     expect(useSEO).toHaveBeenCalledWith(createBlogPostMetadata(postRecord, true));
   });
 
+  it('renders authors byline, FAQs, references, and article closing CTA when present', () => {
+    const compliancePost = {
+      ...mockPost('compliance-article'),
+      category: 'Compliance',
+      title: 'FSSAI Labelling Requirements',
+      authors: [
+        { _key: 'a1', name: 'Namesh Malarout', role: 'Director, Dashapatmaja Solutions Pvt Ltd' },
+        { _key: 'a2', name: 'Pawan Shetty' },
+      ],
+      faqs: [
+        { _key: 'f1', question: 'Do I need FSSAI approval before printing?', answer: 'No, FSSAI does not pre-approve labels.' },
+      ],
+      references: [
+        { _key: 'r1', text: 'FSSAI Labelling Regulations 2020', url: 'https://www.fssai.gov.in' },
+        { _key: 'r2', text: 'Supreme Court Case 2023' },
+      ],
+      closingCta: {
+        heading: 'Getting a pack ready for print?',
+        text: 'We have taken six food SKUs through compliance.',
+        label: 'Get pack reviewed',
+        href: '/start',
+      },
+    };
+
+    const secondPost = mockPost('second-post');
+    const { container } = renderPost('compliance-article', [compliancePost, secondPost]);
+
+    // Authors byline
+    expect(container.querySelector('.blog-post-byline-line')).toHaveTextContent('By Namesh Malarout and Pawan Shetty');
+    expect(container.querySelector('.blog-post-author-name')).toHaveTextContent('Namesh Malarout');
+    expect(container.querySelector('.blog-post-author-role')).toHaveTextContent('Director, Dashapatmaja Solutions Pvt Ltd');
+
+    // FAQs section
+    expect(screen.getByRole('heading', { level: 2, name: 'Frequently asked questions' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Do I need FSSAI approval before printing?' })).toBeInTheDocument();
+
+    // References section
+    expect(screen.getByRole('heading', { level: 2, name: 'References' })).toBeInTheDocument();
+    const linkRef = screen.getByRole('link', { name: 'FSSAI Labelling Regulations 2020' });
+    expect(linkRef).toHaveAttribute('href', 'https://www.fssai.gov.in');
+    expect(linkRef).toHaveAttribute('target', '_blank');
+    expect(screen.getByText('Supreme Court Case 2023')).toBeInTheDocument();
+
+    // Article closing CTA
+    expect(screen.getByRole('heading', { level: 3, name: 'Getting a pack ready for print?' })).toBeInTheDocument();
+    expect(screen.getByText('We have taken six food SKUs through compliance.')).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Get pack reviewed' })).toHaveAttribute('href', '/start');
+  });
+
   it('creates canonical article metadata with BlogPosting schema including dateModified', () => {
     const metadata = createBlogPostMetadata(mockPost('brand-systems'), true);
 
@@ -138,5 +187,45 @@ describe('BlogPost', () => {
         }),
       }),
     );
+  });
+
+  it('creates @graph structured data with FAQPage and Person authors for compliance articles', () => {
+    const post = {
+      ...mockPost('fssai-post'),
+      authors: [
+        { name: 'Namesh Malarout', role: 'Director, Dashapatmaja Solutions Pvt Ltd' },
+        { name: 'Pawan Shetty' },
+      ],
+      faqs: [
+        { question: 'Q1?', answer: 'A1.' },
+      ],
+    };
+
+    const metadata = createBlogPostMetadata(post, true);
+    const structuredData = metadata.structuredData;
+
+    expect(structuredData).toHaveProperty('@graph');
+    expect(structuredData['@graph']).toHaveLength(2);
+
+    const [blogPosting, faqPage] = structuredData['@graph'];
+    expect(blogPosting['@type']).toBe('BlogPosting');
+    expect(blogPosting.author).toEqual([
+      { '@type': 'Person', name: 'Namesh Malarout', jobTitle: 'Director, Dashapatmaja Solutions Pvt Ltd' },
+      { '@type': 'Person', name: 'Pawan Shetty' },
+    ]);
+
+    expect(faqPage).toEqual({
+      '@type': 'FAQPage',
+      mainEntity: [
+        {
+          '@type': 'Question',
+          name: 'Q1?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'A1.',
+          },
+        },
+      ],
+    });
   });
 });

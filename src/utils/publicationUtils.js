@@ -39,6 +39,21 @@ export function slugifyHeading(text = '', existingIds = new Set()) {
 function extractBlockText(block) {
   if (!block) return '';
   if (typeof block === 'string') return block;
+
+  if (block._type === 'dataTable') {
+    const headers = Array.isArray(block.headers)
+      ? block.headers.join(' ')
+      : '';
+
+    const rows = Array.isArray(block.rows)
+      ? block.rows
+          .flatMap((row) => row.cells || [])
+          .join(' ')
+      : '';
+
+    return `${block.caption || ''} ${headers} ${rows}`.trim();
+  }
+
   if (Array.isArray(block.children)) {
     return block.children
       .map((child) => (typeof child === 'string' ? child : child?.text || ''))

@@ -11,6 +11,7 @@ import useSEO from '../hooks/useSEO';
 import NotFound from './NotFound';
 import { createBlogPostMetadata, normalizeBlogSlug } from './blogPostModel';
 import PortableTextBody from '../components/blog/PortableTextBody';
+import FAQAccordion from '../components/FAQAccordion';
 import {
   formatPublicationDate,
   buildHeadingMap,
@@ -38,22 +39,24 @@ const BlogPost = ({ posts = blogPosts, initialArticle = null }) => {
     };
   }, [normalizedSlug, summary, initialArticle]);
 
-  useSEO(
-    summary && isBlogOpen ? createBlogPostMetadata(summary, true) : null,
-  );
-
-  if (!isBlogOpen || !summary) {
-    return <NotFound />;
-  }
-
   const effectiveArticle =
     (initialArticle?.slug === normalizedSlug ? initialArticle : null) ||
     (summary?.body ? summary : null) ||
     (loadedArticle?.slug === normalizedSlug ? loadedArticle : null) ||
     summary;
 
+  useSEO(
+    effectiveArticle && isBlogOpen
+      ? createBlogPostMetadata(effectiveArticle, true)
+      : null,
+  );
+
+  if (!isBlogOpen || !summary) {
+    return <NotFound />;
+  }
+
   const headings = summary.headings || [];
-  const { keyToId } = buildHeadingMap(effectiveArticle.body || []);
+  const { keyToId } = buildHeadingMap(effectiveArticle?.body || []);
 
   const relatedPost = posts.find(
     (p) => normalizeBlogSlug(p.slug) !== normalizedSlug,
@@ -78,6 +81,34 @@ const BlogPost = ({ posts = blogPosts, initialArticle = null }) => {
           <header className="blog-post-header">
             <h1 className="blog-post-title">{summary.title}</h1>
             <p className="blog-post-lead">{summary.description}</p>
+
+            {effectiveArticle?.authors?.length > 0 && (
+              <div className="blog-post-byline">
+                <p className="blog-post-byline-line">
+                  {'By '}
+                  {effectiveArticle.authors.map((a, i, arr) => (
+                    <span key={a.name}>
+                      {i > 0 && (i === arr.length - 1 ? ' and ' : ', ')}
+                      {a.name}
+                    </span>
+                  ))}
+                </p>
+                {effectiveArticle.authors.some((a) => a.role) && (
+                  <ul className="blog-post-byline-roles">
+                    {effectiveArticle.authors
+                      .filter((a) => a.role)
+                      .map((a) => (
+                        <li key={a.name} className="blog-post-byline-role">
+                          <span className="blog-post-author-name">{a.name}</span>
+                          {' · '}
+                          <span className="blog-post-author-role">{a.role}</span>
+                        </li>
+                      ))}
+                  </ul>
+                )}
+              </div>
+            )}
+
             <div className="blog-post-meta">
               <time
                 className="blog-post-date"
@@ -117,9 +148,49 @@ const BlogPost = ({ posts = blogPosts, initialArticle = null }) => {
             {/* Reading Column */}
             <div className="blog-reading-column">
               <PortableTextBody
-                value={effectiveArticle.body || []}
+                value={effectiveArticle?.body || []}
                 keyToId={keyToId}
               />
+
+              {/* FAQs Section */}
+              {effectiveArticle?.faqs?.length > 0 && (
+                <section className="blog-faq-section" aria-labelledby="blog-faq-heading">
+                  <h2 id="blog-faq-heading" className="blog-body-h2">
+                    Frequently asked questions
+                  </h2>
+                  <FAQAccordion
+                    faqs={effectiveArticle.faqs.map((f) => ({ q: f.question, a: f.answer }))}
+                    namespace={`article-faq-${normalizedSlug}`}
+                  />
+                </section>
+              )}
+
+              {/* References Section */}
+              {effectiveArticle?.references?.length > 0 && (
+                <section className="blog-references-section" aria-labelledby="blog-refs-heading">
+                  <h2 id="blog-refs-heading" className="blog-body-h2">
+                    References
+                  </h2>
+                  <ol className="blog-references-list">
+                    {effectiveArticle.references.map((ref, i) => (
+                      <li key={ref._key || i} className="blog-reference-item">
+                        {ref.url ? (
+                          <a
+                            href={ref.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="blog-body-link"
+                          >
+                            {ref.text}
+                          </a>
+                        ) : (
+                          ref.text
+                        )}
+                      </li>
+                    ))}
+                  </ol>
+                </section>
+              )}
 
               {/* End of Article: Continue Reading & Start Project */}
               <footer className="blog-post-footer">
@@ -150,14 +221,20 @@ const BlogPost = ({ posts = blogPosts, initialArticle = null }) => {
                 <div className="blog-start-project-bridge">
                   <div className="blog-bridge-copy">
                     <span className="section-subtitle">Start a project</span>
-                    <h3 className="blog-bridge-title">Ready to coordinate your growth system?</h3>
+                    <h3 className="blog-bridge-title">
+                      {effectiveArticle?.closingCta?.heading || 'Ready to coordinate your growth system?'}
+                    </h3>
                     <p className="blog-bridge-text">
-                      Share your brand, marketing, e-commerce, or compliance-coordination context with our team.
+                      {effectiveArticle?.closingCta?.text ||
+                        'Share your brand, marketing, e-commerce, or compliance-coordination context with our team.'}
                     </p>
                   </div>
                   <div className="blog-bridge-action">
-                    <Link to="/start" className="btn btn-primary">
-                      Start a project
+                    <Link
+                      to={effectiveArticle?.closingCta?.href || '/start'}
+                      className="btn btn-primary"
+                    >
+                      {effectiveArticle?.closingCta?.label || 'Start a project'}
                     </Link>
                   </div>
                 </div>
