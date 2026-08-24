@@ -60,7 +60,7 @@ const FeaturedStory = ({ post }) => {
             <img
               src={artwork.src}
               srcSet={artwork.srcSet}
-              sizes="(max-width: 900px) calc(100vw - 3rem), 680px"
+              sizes="(max-width: 960px) calc(100vw - 3rem), 680px"
               alt={artwork.alt}
               width="1440"
               height="810"
@@ -100,7 +100,7 @@ const SupportingStory = ({ post }) => {
             <img
               src={artwork.src}
               srcSet={artwork.srcSet}
-              sizes="(max-width: 900px) calc(100vw - 3rem), 1160px"
+              sizes="(max-width: 960px) calc(100vw - 3rem), 1160px"
               alt={artwork.alt}
               width="1440"
               height="810"
@@ -132,7 +132,7 @@ const ArchiveStory = ({ post }) => {
             <img
               src={artwork.src}
               srcSet={artwork.srcSet}
-              sizes="(max-width: 900px) calc(100vw - 3rem), 440px"
+              sizes="(max-width: 960px) calc(100vw - 3rem), 440px"
               alt={artwork.alt}
               width="1440"
               height="810"

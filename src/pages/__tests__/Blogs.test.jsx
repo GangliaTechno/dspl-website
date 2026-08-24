@@ -149,7 +149,7 @@ describe('Blogs (Insights) Page', () => {
     expect(featureImage).toHaveAttribute('decoding', 'async');
     expect(featureImage).toHaveAttribute(
       'sizes',
-      '(max-width: 900px) calc(100vw - 3rem), 680px',
+      '(max-width: 960px) calc(100vw - 3rem), 680px',
     );
 
     const supporting = screen
@@ -180,7 +180,7 @@ describe('Blogs (Insights) Page', () => {
     expect(supportingImage).toHaveAttribute('decoding', 'async');
     expect(supportingImage).toHaveAttribute(
       'sizes',
-      '(max-width: 900px) calc(100vw - 3rem), 1160px',
+      '(max-width: 960px) calc(100vw - 3rem), 1160px',
     );
   });
 

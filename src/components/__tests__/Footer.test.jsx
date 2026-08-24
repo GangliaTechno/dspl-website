@@ -94,6 +94,24 @@ describe('Footer', () => {
     expect(screen.queryByLabelText('Closing call to action')).not.toBeInTheDocument();
   });
 
+  it('renders the centralized Insights CTA on the /blogs route', () => {
+    renderFooter('/blogs');
+
+    expect(screen.getByText('From insight to execution')).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', {
+        level: 2,
+        name: 'Have a brand, market or commerce challenge worth working through?',
+      }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText('Bring the context, constraints, and outcome you are working towards.'),
+    ).toBeInTheDocument();
+
+    const startLinks = screen.getAllByRole('link', { name: 'Start a project' });
+    expect(startLinks.some((link) => link.classList.contains('footer-cta-btn'))).toBe(true);
+  });
+
   it('keeps the back-to-top action available', () => {
     const scrollTo = vi.spyOn(window, 'scrollTo').mockImplementation(() => {});
 
