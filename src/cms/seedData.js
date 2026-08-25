@@ -18,6 +18,11 @@ export const seedBlogPosts = [
     "description": "Every mandatory declaration on an Indian food label in 2026, the font sizes, the allergen rules, the 2027 changes, and the mistakes that cost brands a reprint.",
     "authors": [
       {
+        "_key": "author-namesh-malarout",
+        "name": "Namesh Malarout",
+        "role": "Director, Dashapatmaja Solutions Pvt Ltd"
+      },
+      {
         "_key": "author-pawan-shetty",
         "name": "Pawan Shetty"
       }
@@ -2302,6 +2307,11 @@ export const seedBlogPosts = [
     "readingTimeMinutes": 15,
     "description": "The nine mandatory declarations under the Legal Metrology Packaged Commodities Rules, where each one must sit, the font sizes, and what changed in 2026.",
     "authors": [
+      {
+        "_key": "author-namesh-malarout",
+        "name": "Namesh Malarout",
+        "role": "Director, Dashapatmaja Solutions Pvt Ltd"
+      },
       {
         "_key": "author-pawan-shetty",
         "name": "Pawan Shetty"

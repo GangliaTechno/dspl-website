@@ -8,61 +8,28 @@ import { getRouteMetadata } from '../seo/routeMetadata';
 
 const offers = [
   {
-    title: 'Store Setup and Build',
-    text: 'Storefront planning and implementation for Shopify, WooCommerce, or React-based commerce, with responsive behaviour and a clear content structure.',
+    title: 'Store setup and build',
+    text: 'Shopify, WooCommerce or React-based commerce. Catalogue structure, content architecture, responsive build, and a admin your team can run without a developer for routine changes.',
   },
   {
-    title: 'Catalogue and Product Content',
-    text: 'Product data, collection structure, imagery requirements, and content ownership organised for the selected channels.',
+    title: 'Conversion rate optimisation',
+    text: 'Review of discovery, product detail, cart and checkout journeys to find measurable friction, then a prioritised list of changes with a test plan. We fix what the data supports, not what looks dated.',
   },
   {
-    title: 'Conversion Journey Review',
-    text: 'Product discovery, product detail, cart, and checkout journeys reviewed to identify measurable friction and testable improvements.',
+    title: 'Marketplace and multi-channel selling',
+    text: 'Amazon and Flipkart setup, catalogue preparation, listing content, variant structure, inventory and pricing workflow, plus quick-commerce and social channels where they fit.',
   },
   {
-    title: 'Marketplace Operations',
-    text: 'Marketplace setup and workflow planning for agreed channels, including catalogue, inventory, pricing, and review responsibilities.',
-  },
-  {
-    title: 'Payments, Delivery, and Returns',
-    text: 'Payment, fulfilment, delivery, and returns workflows configured around the selected platform, providers, and operating model.',
-  },
-  {
-    title: 'Commerce Analytics and Reconciliation',
-    text: 'Tracking, channel reporting, settlement inputs, and operating checks designed around named data owners and review cadence.',
+    title: 'Payments and delivery setup',
+    text: 'Payment gateway and delivery integrations configured to your platform, providers, fulfilment model and internal process, with COD, prepaid and returns flows tested before launch.',
   },
 ];
 
 const compliance = {
-  title: 'Commerce compliance coordination',
-  intro: 'Commerce implementation includes the practical configuration and declaration inputs agreed for the project.',
-  items: [
-    {
-      title: 'GST configuration',
-      text: 'Tax settings are configured from information approved by the client and their qualified tax adviser.',
-    },
-    {
-      title: 'HSN mapping',
-      text: 'Approved HSN mapping can be organised across catalogue and commerce records.',
-    },
-    {
-      title: 'Settlement reconciliation',
-      text: 'Marketplace and payment-settlement inputs can be mapped into a documented reconciliation workflow.',
-    },
-    {
-      title: 'E-way-bill process',
-      text: 'Operational handoffs for the e-way-bill process can be documented against the selected fulfilment flow.',
-    },
-    {
-      title: 'Returns policies',
-      text: 'Approved returns policies can be implemented consistently across storefront and marketplace touchpoints.',
-    },
-    {
-      title: 'Listing declarations',
-      text: 'Required listing declarations are coordinated from client-approved product and compliance records.',
-    },
-  ],
-  disclaimer: 'DSPL coordinates implementation; tax and legal advice remains with the client’s qualified advisers.',
+  title: 'Listing and marketplace compliance',
+  intro: 'Marketplace listing rejections almost always come from the same place: the pack says one thing and the catalogue says another. Net quantity, ingredient statements, manufacturer details, country of origin, FSSAI licence number and expiry format all have to match between the physical label and the digital record. We prepare catalogue data from the approved label artwork so the two agree from the start, and we structure product information so it can be pushed to a new channel without re-entry. For food and nutraceutical sellers we handle FSSAI licence details, mandatory declarations and marketplace-specific category requirements.',
+  items: [],
+  disclaimer: 'Regulated legal opinions stay with qualified advisers; the preparation and the paperwork sit with us.',
 };
 
 const faqs = ECOMMERCE_FAQS;
@@ -85,17 +52,17 @@ const Ecommerce = () => (
     pageTypeClass="ecommerce-page"
     contextLabel="E-commerce services"
     heroTitle="E-commerce"
-    heroTagline="Connect storefront, marketplace, payment, fulfilment, and operating responsibilities."
+    heroTagline="Storefronts, marketplaces, payments and delivery, built to run on a normal Tuesday without anyone calling support."
     heroImages={heroImages}
-    scopeTitle="Commerce aligned with day-to-day operations"
-    scopeText="Storefront and marketplace work is planned alongside catalogue ownership, payment setup, inventory, fulfilment, compliance inputs, and reporting. This keeps the customer journey and operational responsibilities within one documented scope."
-    offersTitle="E-commerce capabilities"
-    offersDescription="Implementation and support are scoped to the platforms, integrations, and operating responsibilities agreed for the project."
+    scopeTitle="Commerce built around how you actually operate"
+    scopeText="A storefront is only as good as the operation behind it. We plan the build alongside catalogue ownership, payment setup, inventory, dispatch and reporting, so the customer journey and the internal workflow are designed at the same time by the same people. We list, price and ship our own product through these systems, which is why the questions we ask early are about your warehouse and your returns policy, not only your homepage."
+    offersTitle="What we do"
+    offersDescription="Built to the platforms, integrations and operating responsibilities agreed for your project."
     offers={offers}
     compliance={compliance}
     testimonials={approvedTestimonials}
     faqsTitle="E-commerce engagement questions"
-    faqsDescription="Platforms, existing stores, and ongoing support."
+    faqsDescription="Platforms, integrations, timelines, and operations."
     faqs={faqs}
   />
 );

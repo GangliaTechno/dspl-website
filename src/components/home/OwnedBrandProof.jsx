@@ -29,11 +29,12 @@ const OwnedBrandProof = ({ logoSrc }) => (
           Chocolate, reimagined through Ayurveda.
         </p>
         <p className="owned-brand-description">
-          Raw Radicles is DSPL's first owned consumer brand: six 60 g bars
-          across three collections. Building it has required us to coordinate
-          formulation briefs, packaging, compliance inputs, photography,
-          pricing, and route-to-market decisions ourselves. That operating
-          experience shapes how we scope client work.
+          Six 60 g bars across three collections, built with real cacao and
+          Ayurvedic botanicals. We wrote the formulation brief, designed the
+          packs, cleared FSSAI and Legal Metrology labelling, shot the
+          product, set the pricing and planned the route to market. We own the
+          brand, so we carry the consequences of every one of those decisions.
+          That is what shapes how we scope client work.
         </p>
         <div className="owned-brand-actions">
           <Link to="/brands" className="btn btn-primary">

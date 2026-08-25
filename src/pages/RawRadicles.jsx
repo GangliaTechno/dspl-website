@@ -11,28 +11,28 @@ import smartSinPack from '../assets/raw-radicles-smart-sin.webp';
 
 const workstreams = [
   {
-    title: 'Formulation briefing',
-    text: 'Defining the product brief and coordinating it with the formulation partner.',
+    title: 'Formulation brief',
+    text: 'Defined botanical targets, dosing levels and taste profiles for Holy Sin, Wrath Relief and Smart Sin, matching traditional Ayurvedic principles to consumer confectionery.',
   },
   {
-    title: 'Packaging',
-    text: 'Developing the pack system and the information required for production-ready artwork.',
+    title: 'Packaging and identity',
+    text: 'Designed six 60 g wrapper artworks, inner foil branding and outer display cartons, ensuring visual distinction across milk and dark variants while maintaining brand cohesion.',
   },
   {
-    title: 'Compliance coordination',
-    text: 'Coordinating labelling and packaging inputs with the relevant qualified partners.',
+    title: 'FSSAI and Legal Metrology labelling',
+    text: 'Prepared complete label panels, nutritional tables, statutory declarations and allergen warnings to comply with FSSAI (Labelling and Display) Regulations and Legal Metrology (Packaged Commodities) Rules.',
   },
   {
-    title: 'Photography',
-    text: 'Planning product imagery for brand, retail, and digital-commerce use.',
+    title: 'Commercial photography',
+    text: 'Planned, directed and shot studio product photography, lifestyle imagery and packaging renders for e-commerce listings, marketing collateral and retail presentations.',
   },
   {
-    title: 'Pricing',
-    text: 'Bringing product, channel, and operating inputs into the commercial decision.',
+    title: 'Pricing and margins',
+    text: 'Modelled cost of goods, distributor margins, marketplace commissions, logistics overheads and retail price points to build sustainable unit economics across all six SKUs.',
   },
   {
     title: 'Route to market',
-    text: 'Preparing how the product is presented and made available through selected channels.',
+    text: 'Designed channel strategy across direct-to-consumer storefront, Amazon India, quick-commerce platforms and selective retail distribution in South India.',
   },
 ];
 
@@ -48,11 +48,10 @@ const RawRadicles = () => {
         </picture>
         <div className="container raw-radicles-hero-grid">
           <div className="raw-radicles-hero-copy">
-            <span className="section-subtitle">A DSPL-owned consumer brand</span>
+            <span className="section-subtitle">A {COMPANY_FACTS.shortName}-owned consumer brand</span>
             <h1 className="domain-title">Raw Radicles</h1>
             <p className="domain-subtitle">
-              How Dashapatmaja Solutions Pvt Ltd developed a focused chocolate
-              portfolio from formulation brief to route to market.
+              How we took an Ayurvedic chocolate range from a one-line idea to six compliant, production-ready SKUs.
             </p>
           </div>
           <div className="raw-radicles-hero-products">
@@ -67,19 +66,15 @@ const RawRadicles = () => {
         <div className="container raw-radicles-split">
           <div>
             <h2 id="raw-overview-title" className="section-title">
-              Owned by {COMPANY_FACTS.legalName}
+              We own it, so we carry every decision
             </h2>
           </div>
           <div className="raw-radicles-copy">
             <p>
-              {COMPANY_FACTS.shortName} was incorporated on {COMPANY_FACTS.incorporationDate} and owns Raw Radicles. The
-              brand provides the company with direct operating experience across
-              product, packaging, compliance inputs, market presentation,
-              and commerce decisions.
+              Raw Radicles is not a client case study. It is our brand. We funded the development, briefed the formulation, designed the packs, cleared the regulatory approvals, commissioned the photography, set the pricing and built the sales channels.
             </p>
             <p>
-              That direct operating experience shapes how DSPL scopes branding,
-              marketing, e-commerce, and compliance-support work for clients.
+              When a packaging run has a defect, we pay for the reprint. When an FSSAI declaration is ambiguous, our launch is delayed. That direct exposure is what makes our advice practical: we only recommend what we have tested with our own money.
             </p>
           </div>
         </div>
@@ -134,8 +129,7 @@ const RawRadicles = () => {
             <article>
               <h3>Manufacturing partnership in Ernakulam, Keralam</h3>
               <p>
-                Chocolate production is carried out through a manufacturing
-                partnership in Keralam.
+                Dedicated bean-to-bar chocolate manufacturing partner chosen for ability to handle botanical inclusions and maintain strict temperature controls.
               </p>
             </article>
           </div>
@@ -145,9 +139,9 @@ const RawRadicles = () => {
       <section className="section bg-alt" aria-labelledby="raw-work-title">
         <div className="container">
           <div className="section-header">
-            <span className="section-subtitle">DSPL workstreams</span>
+            <span className="section-subtitle">What the work involved</span>
             <h2 id="raw-work-title" className="section-title">
-              Coordinating the work around the product
+              Six workstreams, one product
             </h2>
           </div>
           <div className="raw-radicles-workstreams">
@@ -164,16 +158,14 @@ const RawRadicles = () => {
       <section className="section" aria-labelledby="raw-next-title">
         <div className="container raw-radicles-split">
           <div>
-            <span className="section-subtitle">Owned operating experience</span>
+            <span className="section-subtitle">What it gives us</span>
             <h2 id="raw-next-title" className="section-title">
-              Built through direct operating experience
+              We learned this by doing it, not by reading about it
             </h2>
           </div>
           <div className="raw-radicles-copy">
             <p>
-              Raw Radicles gives DSPL first-hand experience of the decisions and
-              handoffs involved in taking a consumer brand from product brief to
-              customer-facing channels.
+              Every recommendation we give clients on packaging, compliance, photography, pricing or marketplace setup comes from having solved the same problem on Raw Radicles.
             </p>
             <div className="raw-radicles-actions">
               <Link className="btn btn-secondary" to="/brands">Explore our brands</Link>

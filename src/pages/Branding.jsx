@@ -11,53 +11,28 @@ import { getRouteMetadata } from '../seo/routeMetadata';
 
 const offers = [
   {
-    title: 'Positioning and Brand Strategy',
-    text: 'Audience, category, competitor, offer, and business context translated into a clear position and decision framework.',
+    title: 'Brand positioning and strategy',
+    text: 'Where the brand sits in the market, who it is for, why it exists, and how it differs from alternatives. We write the brand brief that guides every creative and commercial decision.',
   },
   {
-    title: 'Naming and Brand Architecture',
-    text: 'Naming criteria, shortlist development, portfolio relationships, and practical checks coordinated with the client and appointed advisers.',
+    title: 'Visual identity system',
+    text: 'Logo files, colour palette, typography hierarchy, icon style and graphic devices, organised in formats your team, agencies and vendors can use without asking for help.',
   },
   {
-    title: 'Visual Identity Systems',
-    text: 'Logo, colour, typography, image direction, and application rules designed for consistent use across priority touchpoints.',
+    title: 'Packaging design and production',
+    text: 'Primary packs, cartons, shipping boxes, labels and inserts. We design for the print process you are actually using and coordinate directly with your packaging vendor on proofs.',
   },
   {
-    title: 'Brand Story and Voice',
-    text: 'Narrative, voice, core messages, and examples for common customer-facing contexts without unsupported product claims.',
-  },
-  {
-    title: 'Packaging and Application Assets',
-    text: 'Packaging systems, templates, organised source files, and handover guidance for internal and partner teams.',
+    title: 'Brand voice and messaging',
+    text: 'Tone of voice rules, boilerplate copy, headline formulas, product descriptions and communication templates for web, social, email and customer support.',
   },
 ];
 
 const compliance = {
-  title: 'Packaging and brand compliance coordination',
-  intro: 'We coordinate practical brand and packaging inputs while regulated advice, approvals, and filings remain with the appropriate qualified parties.',
-  items: [
-    {
-      title: 'Food labelling coordination',
-      text: 'Packaging work can be checked against inputs required under the Food Safety and Standards (Labelling and Display) Regulations, 2020.',
-    },
-    {
-      title: 'Pack declarations',
-      text: 'Required declaration inputs can be coordinated with reference to the Legal Metrology (Packaged Commodities) Rules, 2011.',
-    },
-    {
-      title: 'Claims review',
-      text: 'Marketing and pack claims are routed for evidence review so the artwork does not outrun the available support.',
-    },
-    {
-      title: 'Trademark coordination',
-      text: 'Naming and identity files can be organised for review and filing by the appointed trademark professional.',
-    },
-    {
-      title: 'Barcode and GTIN coordination',
-      text: 'SKU, barcode and GTIN inputs can be mapped into the packaging and catalogue workflow.',
-    },
-  ],
-  disclaimer: 'DSPL coordinates implementation and does not act as a regulator, licensing authority, or legal adviser.',
+  title: 'Packaging compliance for food and consumer products',
+  intro: 'If you are launching a packaged product in India, the brand on the box is only half the job. The label has to comply with FSSAI regulations, Legal Metrology rules, and marketplace listing standards. We review your label content, coordinate nutritional analysis, and build compliance directly into your artwork files.',
+  items: [],
+  disclaimer: 'Regulated legal opinions stay with qualified advisers; the preparation and the paperwork sit with us.',
 };
 
 const faqs = BRANDING_FAQS;
@@ -89,17 +64,17 @@ const Branding = () => (
     pageTypeClass="branding-page"
     contextLabel="Branding services"
     heroTitle="Branding"
-    heroTagline="Build a clear brand system that people can apply consistently."
+    heroTagline="Brand positioning, identity, packaging and voice for Indian businesses, built for print, marketplaces, websites and WhatsApp."
     heroImages={heroImages}
-    scopeTitle="A brand system built for application"
-    scopeText="The work starts with the business, audience, category, and competitive context. The resulting system connects positioning and language with visual identity, packaging, application rules, and assets that internal and external teams can use consistently."
-    offersTitle="Branding capabilities"
-    offersDescription="The scope is shaped around the decisions and applications the business needs."
+    scopeTitle="A brand system built to be used, not admired"
+    scopeText="Most brand projects end with a 100-page PDF that nobody opens after the invoice is paid. Your designer cannot find the vector logo, your ads agency uses the wrong colours, and your printer cannot work with the files. We build brand systems for application. You get production-ready packaging files, clear guidelines for your marketing team, and digital assets prepared for the formats you actually publish to."
+    offersTitle="What we do"
+    offersDescription="Scope is built around the decisions you need to make, not sold as a fixed package."
     offers={offers}
     compliance={compliance}
     testimonials={approvedTestimonials}
     faqsTitle="Branding engagement questions"
-    faqsDescription="Scope, existing brands, and handover."
+    faqsDescription="Scope, deliverables, timelines, and handover."
     faqs={faqs}
   />
 );

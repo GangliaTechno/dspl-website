@@ -12,7 +12,7 @@ const HOMEPAGE_OG_IMAGE_ALT =
 const baseRoutes = [
   { route: '', heading: 'We build consumer brands.' },
   { route: 'about', heading: 'About Dashapatmaja Solutions Pvt Ltd' },
-  { route: 'brands', heading: 'We develop and operate consumer brands.' },
+  { route: 'brands', heading: 'We develop and operate our own consumer brands.' },
   { route: 'brands/raw-radicles', heading: 'Raw Radicles' },
   { route: 'marketing', heading: 'Marketing' },
   { route: 'branding', heading: 'Branding' },

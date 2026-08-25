@@ -42,7 +42,7 @@ describe('Contact', () => {
   it('publishes verified response, office, and direct-contact details only', () => {
     const { container } = renderContact();
 
-    expect(screen.getByText(/respond within one working day/i)).toBeInTheDocument();
+    expect(screen.getByText(/reply within one working day/i)).toBeInTheDocument();
     expect(screen.getByText(/#12, 4th Floor, MUTBI, Advanced Research Center, Madhava Nagar, Manipal.*576104/i)).toBeInTheDocument();
     expect(screen.getByText(/Monday – Saturday: 9:00 AM – 6:00 PM IST/i)).toBeInTheDocument();
     expect(screen.getByText('New enquiries')).toBeInTheDocument();
@@ -62,7 +62,7 @@ describe('Contact', () => {
     renderContact();
 
     expect(screen.getByRole('heading', { level: 1, name: 'Start a conversation.' })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'Start a detailed project brief' })).toHaveAttribute('href', '/start');
+    expect(screen.getByRole('link', { name: 'project planner' })).toHaveAttribute('href', '/start');
     expect(screen.getByLabelText('First Name')).toBeRequired();
     expect(screen.getByLabelText('Last Name (optional)')).not.toBeRequired();
     expect(screen.getByLabelText('Email Address')).toBeRequired();

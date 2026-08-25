@@ -11,24 +11,20 @@ import { getRouteMetadata } from '../seo/routeMetadata';
 
 const offers = [
   {
-    title: 'Audience and Market Planning',
-    text: 'Current position, customer context, channel evidence, and commercial priorities translated into an agreed marketing plan.',
+    title: 'Search engine optimisation',
+    text: 'Technical audit, search intent research, on-page structure, internal linking and a content plan built around terms you can realistically win, not head terms that will never convert. Monthly reporting on rankings, qualified sessions and enquiries.',
   },
   {
-    title: 'Search Engine Optimisation (SEO)',
-    text: 'Technical review, search-intent research, on-page structure, and content planning designed to improve qualified organic visibility over time.',
+    title: 'Paid campaign management',
+    text: 'Google Search, Google Shopping, Meta and marketplace ads. Campaign structure, creative briefing, budget pacing and weekly optimisation, with spend reviewed against agreed cost-per-enquiry or ROAS targets.',
   },
   {
-    title: 'Paid Campaign Management',
-    text: 'Campaign planning and management across Google, Meta, and relevant commerce channels, with budgets reviewed against agreed measures.',
+    title: 'Analytics and reporting',
+    text: 'GA4 and conversion tracking configured before launch, not after. Traffic, spend, enquiries and revenue reported monthly against definitions agreed in writing at the start.',
   },
   {
-    title: 'Content and Copywriting',
-    text: 'Landing pages, articles, product copy, and campaign messaging aligned with search intent and the brand voice. Content is currently scoped in English.',
-  },
-  {
-    title: 'Analytics and Performance Tracking',
-    text: 'Tracking and reporting for traffic, campaign spend, enquiries, and commercial outcomes, with measurement definitions agreed before launch.',
+    title: 'Content and copywriting',
+    text: 'Landing pages, articles, product copy and campaign messaging written to search intent and to your brand voice, by people who have written for a product they had to sell themselves.',
   },
 ];
 
@@ -91,18 +87,18 @@ const Marketing = () => (
     pageTypeClass="marketing-page"
     contextLabel="Marketing services"
     heroTitle="Marketing"
-    heroTagline="Build a measurable marketing programme around clear audiences and accountable execution."
+    heroTagline="Search, paid media, content and reporting, run against a number you agree before we spend anything."
     heroImages={heroImages}
-    scopeTitle="A coordinated marketing programme"
-    scopeText="Engagements begin with the current market position, audience, channel performance, and measurement setup. From there, we agree channel responsibilities, campaign cadence, reporting measures, and the work required to improve decisions over time."
-    offersTitle="Marketing capabilities"
-    offersDescription="The mix is selected against the brief; it is not a fixed package."
+    scopeTitle="Marketing you can hold us to"
+    scopeText="Every engagement starts with the same four questions: where does traffic come from today, what does it cost, what does it convert at, and what would a good month look like. We answer those in the audit, agree the measures, and report against them monthly. We market our own consumer brand in the same market you are competing in, which is why we will tell you when paid spend is the wrong answer."
+    offersTitle="What we do"
+    offersDescription="The mix is chosen against your brief. It is not a package."
     offers={offers}
     proof={proof}
     engagements={engagements}
     testimonials={approvedTestimonials}
     faqsTitle="Marketing engagement questions"
-    faqsDescription="Scope, measurement, commitments, and collaboration."
+    faqsDescription="Scope, measurement, channels, and reporting."
     faqs={faqs}
   />
 );

@@ -6,15 +6,15 @@ import { getRouteMetadata } from '../seo/routeMetadata';
 const briefingPoints = [
   {
     label: 'Context',
-    text: 'Where the business, brand, or project stands today.',
+    text: 'Where the business, brand or product stands today.',
   },
   {
     label: 'Need',
-    text: 'The decision, capability, or operating problem that needs support.',
+    text: 'The decision or capability that is currently blocking you.',
   },
   {
     label: 'Outcome',
-    text: 'What a useful result would make easier for your team.',
+    text: 'What a good result would make possible for your team.',
   },
 ];
 
@@ -29,8 +29,8 @@ const StartProject = () => {
             <span className="section-subtitle">Project planner</span>
             <h1 className="start-project-title">Start a Project</h1>
             <p className="start-project-subtitle">
-              Share the context we need to review your project and prepare a
-              useful first conversation.
+              Five minutes here saves an hour of back and forth later. Tell us
+              where you stand, what you need and what a good outcome looks like.
             </p>
             <ul className="start-project-briefing-points" aria-label="What to include in your brief">
               {briefingPoints.map((point, index) => (

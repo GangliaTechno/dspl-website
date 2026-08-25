@@ -14,22 +14,22 @@ const renderFooter = (path = '/') =>
 describe('Footer', () => {
   it('selects route-specific CTAs and suppresses transactional/legal routes', () => {
     expect(getFooterCta('/').href).toBe('/start');
-    expect(getFooterCta('/brands').href).toBe('/brands/raw-radicles');
-    expect(getFooterCta('/branding').href).toBe('/start');
-    expect(getFooterCta('/marketing').href).toBe('/start');
-    expect(getFooterCta('/ecommerce').href).toBe('/start');
+    expect(getFooterCta('/brands').href).toBe('/contact');
+    expect(getFooterCta('/branding').href).toBe('/contact');
+    expect(getFooterCta('/marketing').href).toBe('/contact');
+    expect(getFooterCta('/ecommerce').href).toBe('/contact');
     expect(getFooterCta('/about')).toEqual({
-      eyebrow: 'Work with DSPL',
-      title: 'Bring us the context. We will help define the next step.',
+      eyebrow: 'Build with us',
+      title: 'Ready to build with fewer unknowns?',
       text: 'Tell us what you are building, where you need support and what a good next step looks like.',
-      label: 'Start a project',
-      href: '/start',
+      label: 'Contact DSPL',
+      href: '/contact',
     });
     expect(getFooterCta('/contact')).toBeNull();
     expect(getFooterCta('/start')).toBeNull();
     expect(getFooterCta('/privacy')).toBeNull();
     expect(getFooterCta('/terms')).toBeNull();
-    expect(getFooterCta('/blogs').href).toBe('/start');
+    expect(getFooterCta('/blogs').href).toBe('/contact');
   });
 
   it('renders the Home CTA before verified corporate information', () => {
@@ -49,12 +49,12 @@ describe('Footer', () => {
     expect(
       screen.getByRole('heading', {
         level: 2,
-        name: 'Bring us the context. We will help define the next step.',
+        name: 'Turn a promising idea into a working project.',
       }),
     ).toBeInTheDocument();
     expect(
       screen.getByText(
-        'Share where the business stands, what needs support, and what a useful outcome looks like. We reply within one working day.',
+        'Tell us the context, the constraint and the outcome you need. We reply within one working day.',
       ),
     ).toBeInTheDocument();
     for (const link of screen.getAllByRole('link', { name: 'Start a project' })) {
@@ -115,19 +115,18 @@ describe('Footer', () => {
   it('renders the centralized Insights CTA on the /blogs route', () => {
     renderFooter('/blogs');
 
-    expect(screen.getByText('From insight to execution')).toBeInTheDocument();
     expect(
       screen.getByRole('heading', {
         level: 2,
-        name: 'Have a brand, market or commerce challenge worth working through?',
+        name: 'Ready to build with fewer unknowns?',
       }),
     ).toBeInTheDocument();
     expect(
-      screen.getByText('Bring the context, constraints, and outcome you are working towards.'),
+      screen.getByText('Tell us what you are building, where you need support and what a good next step looks like.'),
     ).toBeInTheDocument();
 
-    const startLinks = screen.getAllByRole('link', { name: 'Start a project' });
-    expect(startLinks.some((link) => link.classList.contains('footer-cta-btn'))).toBe(true);
+    const contactLinks = screen.getAllByRole('link', { name: 'Contact DSPL' });
+    expect(contactLinks.some((link) => link.classList.contains('footer-cta-btn'))).toBe(true);
   });
 
   it('keeps the back-to-top action available', () => {

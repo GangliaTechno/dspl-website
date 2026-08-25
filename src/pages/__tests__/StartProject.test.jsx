@@ -13,7 +13,7 @@ describe('StartProject', () => {
 
     expect(screen.getByRole('heading', { level: 1, name: 'Start a Project' })).toBeInTheDocument();
     expect(screen.getAllByRole('heading', { level: 1 })).toHaveLength(1);
-    expect(screen.getByText(/prepare a useful first conversation/i)).toBeInTheDocument();
+    expect(screen.getByText(/Five minutes here saves an hour of back and forth later/i)).toBeInTheDocument();
     expect(screen.getByRole('heading', { level: 2, name: 'What happens next' })).toBeInTheDocument();
     expect(screen.getByText(/respond within one working day/i)).toBeInTheDocument();
     expect(screen.getByRole('heading', { level: 2, name: 'Tell us enough to begin well' })).toBeInTheDocument();

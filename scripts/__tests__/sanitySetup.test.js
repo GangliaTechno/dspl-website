@@ -113,7 +113,7 @@ describe('Sanity setup contract', () => {
 
     // Verify compliance documents include Phase 2 fields
     const fssaiDoc = documents.find((d) => d.slug.current === 'fssai-labelling-requirements-checklist-2026');
-    expect(fssaiDoc.authors).toHaveLength(1);
+    expect(fssaiDoc.authors).toHaveLength(2);
     expect(fssaiDoc.readingTimeMinutes).toBe(14);
     expect(fssaiDoc.faqs).toHaveLength(7);
     expect(fssaiDoc.references).toHaveLength(15);

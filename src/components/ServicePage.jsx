@@ -89,15 +89,19 @@ const ServicePage = ({
               </h2>
               <p className="section-title-description">{compliance.intro}</p>
             </div>
-            <div className="service-detail-grid service-detail-grid--supporting" data-count={compliance.items.length}>
-              {compliance.items.map((item) => (
-                <article key={item.title}>
-                  <h3>{item.title}</h3>
-                  <p>{item.text}</p>
-                </article>
-              ))}
-            </div>
-            <p className="service-detail-disclaimer">{compliance.disclaimer}</p>
+            {compliance.items && compliance.items.length > 0 && (
+              <div className="service-detail-grid service-detail-grid--supporting" data-count={compliance.items.length}>
+                {compliance.items.map((item) => (
+                  <article key={item.title}>
+                    <h3>{item.title}</h3>
+                    <p>{item.text}</p>
+                  </article>
+                ))}
+              </div>
+            )}
+            {compliance.disclaimer && (
+              <p className="service-detail-disclaimer">{compliance.disclaimer}</p>
+            )}
           </div>
         </section>
       )}

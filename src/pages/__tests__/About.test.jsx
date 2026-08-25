@@ -94,17 +94,17 @@ describe('About page', () => {
     expect(within(section).getByText('Values')).toBeInTheDocument();
     expect(
       within(section).getByText(
-        'Build a focused portfolio of consumer brands and a disciplined operating system that can also help other businesses move from idea to market.',
+        'To build a portfolio of Indian consumer brands that earn shelf space on quality, and to give other founders the same operating support we built for ourselves.',
       ),
     ).toBeInTheDocument();
     expect(
       within(section).getByText(
-        'Develop and operate DSPL-owned brands while providing clearly scoped branding, marketing, e-commerce, and compliance coordination to businesses that need practical execution.',
+        'We run our own brands end to end, from formulation brief to marketplace listing. We use that experience to scope, price and deliver branding, marketing, e-commerce and compliance work for clients who are building something similar.',
       ),
     ).toBeInTheDocument();
     expect(
       within(section).getByText(
-        'Work with clarity, evidence, and accountability: define scope before starting, keep responsibilities visible, and make decisions that can be explained and reviewed.',
+        'We quote what the work costs, not what the client hopes it costs. We put scope, ownership and measures in writing before we start. We tell clients when an idea will not work, including when it is our own.',
       ),
     ).toBeInTheDocument();
   });
@@ -144,13 +144,13 @@ describe('About page', () => {
 
     expect(within(team).getAllByRole('link', { name: /LinkedIn Profile/ })).toHaveLength(5);
     expect(container.querySelectorAll('.team-card')).toHaveLength(5);
-    expect(screen.getByText('Provides corporate governance and strategic direction across DSPL.')).toBeInTheDocument();
+    expect(screen.getByText(/Dr\. Sudhi chairs the board and guides the company's clinical and product direction/i)).toBeInTheDocument();
     expect(screen.getByText('Leads executive management, business operations, and project delivery.')).toBeInTheDocument();
     expect(screen.getByText('Dr. Shreepathy Rangabhatta B')).toBeInTheDocument();
     expect(screen.getByText('Dr. Dasharathraj K Shetty')).toBeInTheDocument();
     expect(screen.getByText('Chairman & Director')).toBeInTheDocument();
     expect(screen.getByText('Managing Director')).toBeInTheDocument();
-    expect(screen.getByText(/We work across healthcare, engineering, management and technology, with practical experience taking a food product from formulation brief to print-ready pack\./i)).toBeInTheDocument();
+    expect(screen.getByText(/Two doctors, four doctorates, two mentors and an operating team/i)).toBeInTheDocument();
     expect(screen.queryByText('Dr. Balakrishna S. Maddodi')).not.toBeInTheDocument();
   });
 

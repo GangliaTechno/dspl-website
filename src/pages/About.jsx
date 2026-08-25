@@ -114,17 +114,17 @@ const directionCards = [
   {
     label: 'Long-term direction',
     title: 'Vision',
-    text: 'Build a focused portfolio of consumer brands and a disciplined operating system that can also help other businesses move from idea to market.',
+    text: 'To build a portfolio of Indian consumer brands that earn shelf space on quality, and to give other founders the same operating support we built for ourselves.',
   },
   {
     label: 'Our mandate',
     title: 'Mission',
-    text: 'Develop and operate DSPL-owned brands while providing clearly scoped branding, marketing, e-commerce, and compliance coordination to businesses that need practical execution.',
+    text: 'We run our own brands end to end, from formulation brief to marketplace listing. We use that experience to scope, price and deliver branding, marketing, e-commerce and compliance work for clients who are building something similar.',
   },
   {
     label: 'Operating principles',
     title: 'Values',
-    text: 'Work with clarity, evidence, and accountability: define scope before starting, keep responsibilities visible, and make decisions that can be explained and reviewed.',
+    text: 'We quote what the work costs, not what the client hopes it costs. We put scope, ownership and measures in writing before we start. We tell clients when an idea will not work, including when it is our own.',
   },
 ];
 
@@ -369,7 +369,7 @@ const About = () => {
             <span className="section-subtitle">Our team</span>
             <h2 className="section-title">Meet our team</h2>
             <p className="section-title-description">
-              We work across healthcare, engineering, management and technology, with practical experience taking a food product from formulation brief to print-ready pack.
+              Two doctors, four doctorates, two mentors and an operating team. We work across healthcare, engineering, management and technology, with practical experience taking a food product from formulation brief to print-ready pack.
             </p>
           </div>
 

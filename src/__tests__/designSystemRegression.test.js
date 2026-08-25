@@ -262,10 +262,10 @@ describe('approved design-system corrections', () => {
     expect(aboutPage).toContain("label: 'Our mandate'");
     expect(aboutPage).toContain("label: 'Operating principles'");
     expect(aboutPage).toContain(
-      'Build a focused portfolio of consumer brands and a disciplined operating system',
+      'To build a portfolio of Indian consumer brands that earn shelf space on quality',
     );
     expect(aboutPage).toContain(
-      'Work with clarity, evidence, and accountability: define scope before starting',
+      'We quote what the work costs, not what the client hopes it costs',
     );
     expect(aboutPage).toContain('directionCards.map((card, index)');
     expect(aboutPage).not.toContain('card.items');
@@ -568,7 +568,7 @@ describe('approved design-system corrections', () => {
     ].join('\n');
 
     expect(homeAndAbout).not.toContain('We deliver disciplined market execution.');
-    expect(homeAndAbout).toContain('One accountable path from the first audit to measurement and iteration');
+    expect(homeAndAbout).toContain('One accountable path, from audit to launch');
   });
 
   it('keeps the About journey inside the approved editorial section', () => {
@@ -651,8 +651,8 @@ describe('approved design-system corrections', () => {
     expect(brandsPage).toContain(
       'className="btn btn-primary rr-cta-btn"',
     );
-    expect(brandsPage).toContain('to="/brands/raw-radicles"');
-    expect(brandsPage).toContain('Explore Raw Radicles');
+    expect(brandsPage).toContain('to="/contact"');
+    expect(brandsPage).toContain('Contact us about Raw Radicles');
     expect(brandsPage).not.toContain('Raw%20Radicles%20Inquiry');
   });
 
@@ -759,8 +759,8 @@ describe('approved design-system corrections', () => {
     expect(brands).not.toContain('openWorkModal');
     expect(home).not.toContain('openWorkModal');
     expect(servicePage).not.toContain('openWorkModal');
-    expect(brands).toContain('to="/brands/raw-radicles"');
-    expect(brands).toContain('Explore Raw Radicles');
+    expect(brands).toContain('to="/contact"');
+    expect(brands).toContain('Contact us about Raw Radicles');
   });
 
   it('balances incomplete service-card rows instead of leaving accidental gaps', () => {
@@ -891,16 +891,12 @@ describe('approved design-system corrections', () => {
     const prerenderVerification = readSource('scripts/verify-prerender.mjs');
 
     expect(brandsPage).toContain('Our Brands');
-    expect(brandsPage).toContain('We develop and operate consumer brands.');
+    expect(brandsPage).toContain('We develop and operate our own consumer brands.');
     expect(brandsPage).not.toContain(
       'We work across product development, packaging, compliance, market positioning, and commerce. Raw Radicles is our first flagship consumer brand, with additional concepts in development.',
     );
-    expect(brandsPage).toContain('Raw Radicles is owned and developed by Dashapatmaja Solutions Pvt Ltd');
-    expect(brandsPage).toMatch(/trademark\s+application has been filed/);
-    expect(brandsPage).not.toContain('the mark is not described as registered');
-    expect(brandsPage).toContain('Brand owner and services operator');
-    expect(brandsPage).not.toContain('Portfolio in development');
-    expect(brandsPage).not.toContain('Additional consumer-brand concepts');
+    expect(brandsPage).toContain('Portfolio in development');
+    expect(brandsPage).toContain('A second consumer brand is in early development');
     expect(brandsPage).not.toContain('Packaging record');
     expect(brandsPage).not.toContain('Sparkles');
     expect(brandsPage).not.toContain('Cookie');
@@ -927,9 +923,9 @@ describe('approved design-system corrections', () => {
     expect(footer).not.toContain('openWorkModal');
     expect(footer).not.toContain('Get in Touch');
     expect(footer).toContain('className="footer-cta-strip"');
-    expect(footerCtas).toContain('Bring us the context. We will help define the next step.');
-    expect(footerCtas).toContain('See how DSPL built Raw Radicles.');
-    expect(footerCtas).toContain('Explore Raw Radicles');
+    expect(footerCtas).toContain('Turn a promising idea into a working project.');
+    expect(footerCtas).toContain('Ready to build with fewer unknowns?');
+    expect(footerCtas).toContain('Contact DSPL');
     expect(footerCtas).toContain('Start a project');
     expect(footer).toMatch(
       /Dashapatmaja Solutions Pvt Ltd develops consumer brands and\s+provides branding, marketing, and e-commerce services\./,

@@ -11,7 +11,7 @@ describe('Raw Radicles project overview', () => {
       </MemoryRouter>,
     );
 
-    expect(screen.getByText(/owned by Dashapatmaja Solutions Pvt Ltd/i)).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 2, name: 'We own it, so we carry every decision' })).toBeInTheDocument();
     const hero = container.querySelector('.raw-radicles-hero');
     for (const product of ['Wrath Relief', 'Holy Sin', 'Smart Sin']) {
       expect(
@@ -27,20 +27,20 @@ describe('Raw Radicles project overview', () => {
       /real cacao/i,
       /Ayurvedic botanical/i,
       /formulation partnership in Thrissur/i,
-      /manufacturing partnership in Keralam/i,
-      /formulation briefing/i,
-      /packaging/i,
-      /compliance coordination/i,
-      /photography/i,
-      /pricing/i,
-      /route to market/i,
+      /manufacturing partnership in Ernakulam/i,
+      /Formulation brief/i,
+      /Packaging and identity/i,
+      /FSSAI and Legal Metrology labelling/i,
+      /Commercial photography/i,
+      /Pricing and margins/i,
+      /Route to market/i,
     ]) {
       expect(screen.getAllByText(fact).length).toBeGreaterThan(0);
     }
 
     expect(screen.getByRole('link', { name: 'Explore our brands' })).toHaveAttribute('href', '/brands');
     expect(screen.getByRole('link', { name: 'Start a project' })).toHaveAttribute('href', '/start');
-    expect(screen.getByRole('heading', { name: 'Built through direct operating experience' }))
+    expect(screen.getByRole('heading', { name: 'We learned this by doing it, not by reading about it' }))
       .toBeInTheDocument();
     expect(container).not.toHaveTextContent(
       /evidence boundary|confirmed facts|approved evidence|does not claim|owner approval/i,

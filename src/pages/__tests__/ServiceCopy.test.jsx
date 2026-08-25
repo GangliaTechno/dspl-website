@@ -14,65 +14,47 @@ const expectNoUnapprovedCommercialClaims = (container) => {
 };
 
 describe('Branding service copy', () => {
-  it('renders five capabilities, compliance coordination, and five approved FAQs', () => {
+  it('renders four capabilities, packaging compliance, and ten approved FAQs', () => {
     const { container } = render(<Branding />);
 
-    expect(container.querySelectorAll('article.offer-entry')).toHaveLength(5);
-    expect(container.querySelector('.offers-grid')).toHaveAttribute('data-count', '5');
+    expect(container.querySelectorAll('article.offer-entry')).toHaveLength(4);
+    expect(container.querySelector('.offers-grid')).toHaveAttribute('data-count', '4');
     const compliance = container.querySelector('#compliance');
-    expect(compliance.querySelector('.service-detail-grid')).toHaveAttribute('data-count', '5');
     expect(compliance).toBeInTheDocument();
-    for (const text of [
-      /Food Safety and Standards \(Labelling and Display\) Regulations, 2020/i,
-      /Legal Metrology \(Packaged Commodities\) Rules, 2011/i,
-      /claims review/i,
-      /trademark coordination/i,
-      /barcode and GTIN/i,
-    ]) {
-      expect(within(compliance).getAllByText(text).length).toBeGreaterThan(0);
-    }
-    expect(container.querySelectorAll('.faq-list .faq-item')).toHaveLength(5);
+    expect(within(compliance).getByText(/Packaging compliance for food and consumer products/i)).toBeInTheDocument();
+    expect(within(compliance).getByText(/FSSAI regulations/i)).toBeInTheDocument();
+    expect(container.querySelectorAll('.faq-list .faq-item')).toHaveLength(10);
     expectNoUnapprovedCommercialClaims(container);
   });
 });
 
 describe('Marketing service copy', () => {
-  it('renders English-only scope, owned proof, three engagement shapes, and five FAQs', () => {
+  it('renders four capabilities, owned proof, three engagement shapes, and ten FAQs', () => {
     const { container } = render(<Marketing />);
 
-    expect(container.querySelectorAll('article.offer-entry')).toHaveLength(5);
-    expect(container.querySelector('.offers-grid')).toHaveAttribute('data-count', '5');
-    expect(screen.getByText(/content is currently scoped in English/i)).toBeInTheDocument();
+    expect(container.querySelectorAll('article.offer-entry')).toHaveLength(4);
+    expect(container.querySelector('.offers-grid')).toHaveAttribute('data-count', '4');
     expect(screen.getByRole('heading', { name: 'What Raw Radicles teaches us about marketing operations' })).toBeInTheDocument();
     for (const heading of ['Audit and plan', 'Monthly programme', 'Launch sprint']) {
       expect(screen.getByRole('heading', { name: heading })).toBeInTheDocument();
     }
-    expect(container.querySelectorAll('.faq-list .faq-item')).toHaveLength(5);
-    expect(screen.getByText(/cannot guarantee rankings, leads, or sales/i)).toBeInTheDocument();
-    expect(screen.getByText(/minimum initial commitment of three months/i)).toBeInTheDocument();
+    expect(container.querySelectorAll('.faq-list .faq-item')).toHaveLength(10);
+    expect(screen.getByText(/Three months for retained work/i)).toBeInTheDocument();
     expectNoUnapprovedCommercialClaims(container);
   });
 });
 
 describe('E-commerce service copy', () => {
-  it('renders six capabilities, commerce compliance, and five approved FAQs', () => {
+  it('renders four capabilities, marketplace compliance, and ten approved FAQs', () => {
     const { container } = render(<Ecommerce />);
 
-    expect(container.querySelectorAll('article.offer-entry')).toHaveLength(6);
+    expect(container.querySelectorAll('article.offer-entry')).toHaveLength(4);
+    expect(container.querySelector('.offers-grid')).toHaveAttribute('data-count', '4');
     const compliance = container.querySelector('#compliance');
-    expect(compliance.querySelector('.service-detail-grid')).toHaveAttribute('data-count', '6');
-    for (const text of [
-      /GST configuration/i,
-      /HSN mapping/i,
-      /settlement reconciliation/i,
-      /e-way-bill process/i,
-      /returns policies/i,
-      /listing declarations/i,
-      /qualified advisers/i,
-    ]) {
-      expect(within(compliance).getAllByText(text).length).toBeGreaterThan(0);
-    }
-    expect(container.querySelectorAll('.faq-list .faq-item')).toHaveLength(5);
+    expect(compliance).toBeInTheDocument();
+    expect(within(compliance).getByText(/Listing and marketplace compliance/i)).toBeInTheDocument();
+    expect(within(compliance).getByText(/Marketplace listing rejections/i)).toBeInTheDocument();
+    expect(container.querySelectorAll('.faq-list .faq-item')).toHaveLength(10);
     expectNoUnapprovedCommercialClaims(container);
   });
 });

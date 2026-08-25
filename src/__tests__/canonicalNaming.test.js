@@ -28,6 +28,10 @@ const approvedRootCompanyCopy = new Map([
     'src/pages/__tests__/Home.test.jsx',
     /Dashapatmaja Solutions is a Manipal-based company that develops its own consumer brands and delivers branding, marketing, e-commerce and product compliance support to businesses across Karnataka and India\./,
   ],
+  [
+    'src/pages/Brands.jsx',
+    /Dashapatmaja Solutions built it end to end\./,
+  ],
 ]);
 const approvedSeoMetadataPatterns = [
   /About Dashapatmaja Solutions: Brand Builders in Manipal/g,

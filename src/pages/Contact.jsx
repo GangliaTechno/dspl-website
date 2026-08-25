@@ -141,13 +141,13 @@ const Contact = () => {
           <span className="section-subtitle">Contact</span>
           <h1 className="contact-title">Start a conversation.</h1>
           <p className="contact-description">
-            Share context, timelines, and outcomes for your project. We respond
-            within one working day with scope considerations or a focused
-            follow-up call. For detailed scopes, use our{' '}
+            For a quick question, use the form below. For a project you want
+            scoped, use the{' '}
             <Link to="/start" className="contact-hero-link">
-              Start a detailed project brief
+              project planner
             </Link>
-            .
+            ; it takes about five minutes and gets you a better first
+            conversation. Either way, we reply within one working day.
           </p>
         </div>
       </section>

@@ -3,14 +3,13 @@ const ProcessSteps = ({ steps }) => (
     <div className="container">
       <div className="process-intro">
         <div>
-          <span className="section-subtitle">How We Work With You</span>
+          <span className="section-subtitle">How We Deliver</span>
           <h2 className="section-title" id="process-title">
-            One accountable path from the first audit to measurement and iteration
+            One accountable path, from audit to launch
           </h2>
         </div>
         <p className="section-title-description">
-          Each stage has a clear purpose, agreed responsibilities, and a defined
-          handoff before the next begins.
+          Three stages, fixed outputs, agreed timelines. You know what arrives and when.
         </p>
       </div>
 

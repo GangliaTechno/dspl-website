@@ -21,41 +21,39 @@ describe('Brands page', () => {
 
   afterEach(() => vi.unstubAllGlobals());
 
-  it('states ownership and the filed trademark status without overclaiming', () => {
+  it('states ownership and brand development with exact Copy Deck text', () => {
     const { container } = renderBrands();
-    const ownership = screen.getByText(/Raw Radicles is owned and developed by Dashapatmaja Solutions Pvt Ltd/i);
-    const hero = container.querySelector('.brands-hero');
-
-    expect(hero.compareDocumentPosition(ownership.closest('section')) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
-    expect(screen.getByText(/trademark application has been filed/i)).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 1, name: 'We develop and operate our own consumer brands.' })).toBeInTheDocument();
+    expect(screen.getByText(/From formulation brief to marketplace listing, we build the brands rather than advise on them/i)).toBeInTheDocument();
+    expect(screen.getByText('Flagship consumer brand')).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 2, name: 'Raw Radicles' })).toBeInTheDocument();
+    expect(screen.getByText('Chocolate, reimagined through Ayurveda.')).toBeInTheDocument();
     expect(container).not.toHaveTextContent(/not described as registered|without implying ownership/i);
     expect(container).not.toHaveTextContent(/registered trademark/i);
-    expect(container).not.toHaveTextContent(/FSSAI licensed/i);
   });
 
-  it('explains the brand-owner and services-arm relationship with confirmed product facts', () => {
+  it('renders exact four proof stats and contact CTA', () => {
     renderBrands();
 
-    expect(screen.getByRole('heading', { name: 'Brand owner and services operator' })).toBeInTheDocument();
     for (const fact of [
-      'Six 60 g bars across three collections',
-      'Real cacao with selected Ayurvedic botanicals',
-      'Chocolate production partnership in Keralam',
-      'Formulation partnership in Thrissur',
+      'Six 60 g bars, three collections, milk and dark',
+      'Real cacao with Ashwagandha, Brahmi and Chyawanprash',
+      'Chocolate production partnership in Kerala',
+      'Formulation partnership in Thrissur, Kerala',
     ]) {
       expect(screen.getByText(fact)).toBeInTheDocument();
     }
-    expect(screen.getByRole('link', { name: 'Explore Raw Radicles' }))
-      .toHaveAttribute('href', '/brands/raw-radicles');
+    expect(screen.getByRole('link', { name: /Contact us about Raw Radicles/i }))
+      .toHaveAttribute('href', '/contact');
   });
 
-  it('withholds unapproved packaging records and removes the vague pipeline', () => {
+  it('includes the approved Portfolio in development section', () => {
     renderBrands();
 
-    expect(screen.queryByRole('heading', { name: /Approved packaging views/i })).not.toBeInTheDocument();
-    expect(screen.queryByText(/Packaging imagery will be added/i)).not.toBeInTheDocument();
-    expect(screen.queryByRole('heading', { name: 'Portfolio in development' })).not.toBeInTheDocument();
-    expect(screen.queryByText(/additional consumer-brand concepts/i)).not.toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Portfolio in development' })).toBeInTheDocument();
+    expect(screen.getByText(/A second consumer brand is in early development/i)).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /Contact us about a brand partnership/i }))
+      .toHaveAttribute('href', '/contact');
   });
 
   it('mounts the selected portfolio hero images in order', () => {
