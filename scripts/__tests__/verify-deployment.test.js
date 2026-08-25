@@ -631,7 +631,7 @@ describe('deployment smoke verification (offline unit tests)', () => {
       status: 200,
       html: createMockHtml({
         title: 'Dashapatmaja Solutions Pvt Ltd | Consumer Brand Building & Growth',
-        h1: 'We build consumer brands.',
+        h1: HOMEPAGE_H1,
         canonical: `${VALID_ORIGIN}/`,
       }),
       url: `${VALID_ORIGIN}/blogs`,
@@ -725,7 +725,7 @@ describe('deployment smoke verification (offline unit tests)', () => {
         status: 200,
         html: createMockHtml({
           title: 'Dashapatmaja Solutions Pvt Ltd | Consumer Brand Building & Growth',
-          h1: 'We build consumer brands.',
+          h1: HOMEPAGE_H1,
           canonical: `${VALID_ORIGIN}/`,
         }),
         url: `${VALID_ORIGIN}${article.path}`,
@@ -867,7 +867,7 @@ describe('deployment smoke verification (offline unit tests)', () => {
       status: 200,
       html: createMockHtml({
         title: 'Dashapatmaja Solutions Pvt Ltd | Consumer Brand Building & Growth',
-        h1: 'We build consumer brands.',
+        h1: HOMEPAGE_H1,
       }),
       url: `${VALID_ORIGIN}/does-not-exist`,
     });
@@ -1075,6 +1075,24 @@ describe('HSTS directive parser unit tests', () => {
     expect(resultValueless.message).toMatch(/missing value/i);
   });
 
+  it('rejects duplicate max-age directives in any order', () => {
+    const result1 = parseHstsHeader('max-age=0; max-age=31536000');
+    expect(result1.valid).toBe(false);
+    expect(result1.message).toMatch(/duplicate max-age directives/i);
+
+    const result2 = parseHstsHeader('max-age=31536000; max-age=0');
+    expect(result2.valid).toBe(false);
+    expect(result2.message).toMatch(/duplicate max-age directives/i);
+
+    const result3 = parseHstsHeader('max-age=31536000; includeSubDomains; max-age=31536000');
+    expect(result3.valid).toBe(false);
+    expect(result3.message).toMatch(/duplicate max-age directives/i);
+
+    const result4 = parseHstsHeader('max-age=31536000; max-age=31536000');
+    expect(result4.valid).toBe(false);
+    expect(result4.message).toMatch(/duplicate max-age directives/i);
+  });
+
   it('handles null, undefined, empty, or whitespace strings safely', () => {
     expect(parseHstsHeader(null).valid).toBe(false);
     expect(parseHstsHeader(undefined).valid).toBe(false);
@@ -1266,6 +1284,122 @@ describe('Phase 3 Round 2 regressions', () => {
   });
 });
 
+describe('Phase 3 Round 3 regressions', () => {
+  it('Finding 1: Rejects single-part H1 ("We build consumer brands.") alone on homepage verification', async () => {
+    const routeMap = createPassingRouteMap();
+    routeMap.set(`${VALID_ORIGIN}/`, {
+      ...routeMap.get(`${VALID_ORIGIN}/`),
+      html: createMockHtml({
+        title: 'Dashapatmaja Solutions Pvt Ltd | Consumer Brand Building & Growth',
+        h1: 'We build consumer brands.',
+        canonical: `${VALID_ORIGIN}/`,
+      }),
+    });
+    const fetch = createMockFetch(routeMap);
+
+    const result = await verifyDeployment({
+      origin: VALID_ORIGIN,
+      fetch,
+    });
+
+    expect(result.ok).toBe(false);
+    const homeH1Check = result.failures.find((f) => f.name === 'Homepage heading identity');
+    expect(homeH1Check).toBeDefined();
+    expect(homeH1Check?.path).toBe('/');
+    expect(homeH1Check?.message).toMatch(/Expected homepage H1 "We build consumer brands\. We help businesses build theirs\.", got "We build consumer brands\."/);
+  });
+
+  it('Finding 1: Accepts complete combined H1 ("We build consumer brands. We help businesses build theirs.") on homepage verification', async () => {
+    const routeMap = createPassingRouteMap();
+    routeMap.set(`${VALID_ORIGIN}/`, {
+      ...routeMap.get(`${VALID_ORIGIN}/`),
+      html: createMockHtml({
+        title: 'Dashapatmaja Solutions Pvt Ltd | Consumer Brand Building & Growth',
+        h1: 'We build consumer brands. We help businesses build theirs.',
+        canonical: `${VALID_ORIGIN}/`,
+      }),
+    });
+    const fetch = createMockFetch(routeMap);
+
+    const result = await verifyDeployment({
+      origin: VALID_ORIGIN,
+      fetch,
+    });
+
+    expect(result.ok).toBe(true);
+    const homeH1Check = result.checks.find((c) => c.name === 'Homepage heading identity');
+    expect(homeH1Check?.passed).toBe(true);
+    expect(homeH1Check?.message).toMatch(/Homepage heading verified/);
+  });
+
+  it('Finding 2: parseHstsHeader rejects duplicate max-age directives in any order and retains valid single-directive case', () => {
+    const dup1 = parseHstsHeader('max-age=0; max-age=31536000');
+    expect(dup1.valid).toBe(false);
+    expect(dup1.message).toMatch(/duplicate max-age directives/i);
+
+    const dup2 = parseHstsHeader('max-age=31536000; max-age=0');
+    expect(dup2.valid).toBe(false);
+    expect(dup2.message).toMatch(/duplicate max-age directives/i);
+
+    const dup3 = parseHstsHeader('includeSubDomains; max-age=31536000; max-age=31536000; preload');
+    expect(dup3.valid).toBe(false);
+    expect(dup3.message).toMatch(/duplicate max-age directives/i);
+
+    // Retain valid single-directive case
+    const single = parseHstsHeader('max-age=31536000; includeSubDomains');
+    expect(single.valid).toBe(true);
+    expect(single.maxAge).toBe(31536000);
+  });
+
+  it('Finding 2: verifyDeployment rejects HTTPS responses with duplicate max-age in HSTS header in any order', async () => {
+    // Order 1: max-age=0; max-age=31536000
+    const routeMap1 = createPassingRouteMap();
+    routeMap1.set(`${VALID_ORIGIN}/`, {
+      ...routeMap1.get(`${VALID_ORIGIN}/`),
+      headers: {
+        'content-security-policy': "default-src 'self'",
+        'strict-transport-security': 'max-age=0; max-age=31536000',
+        'x-frame-options': 'DENY',
+      },
+    });
+    const fetch1 = createMockFetch(routeMap1);
+    const result1 = await verifyDeployment({ origin: VALID_ORIGIN, fetch: fetch1 });
+    expect(result1.ok).toBe(false);
+    expect(result1.failures).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          path: '/',
+          name: 'Security Header: Strict-Transport-Security',
+          message: expect.stringMatching(/duplicate max-age directives/i),
+        }),
+      ]),
+    );
+
+    // Order 2: max-age=31536000; max-age=0
+    const routeMap2 = createPassingRouteMap();
+    routeMap2.set(`${VALID_ORIGIN}/`, {
+      ...routeMap2.get(`${VALID_ORIGIN}/`),
+      headers: {
+        'content-security-policy': "default-src 'self'",
+        'strict-transport-security': 'max-age=31536000; max-age=0',
+        'x-frame-options': 'DENY',
+      },
+    });
+    const fetch2 = createMockFetch(routeMap2);
+    const result2 = await verifyDeployment({ origin: VALID_ORIGIN, fetch: fetch2 });
+    expect(result2.ok).toBe(false);
+    expect(result2.failures).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          path: '/',
+          name: 'Security Header: Strict-Transport-Security',
+          message: expect.stringMatching(/duplicate max-age directives/i),
+        }),
+      ]),
+    );
+  });
+});
+
 describe('Helper functions and constants unit tests', () => {
   it('extractTitle and extractH1 extract and decode text properly', () => {
     const html = '<html><head><title>Test &amp; Example</title></head><body><h1>Heading &lt;1&gt;</h1></body></html>';
@@ -1273,9 +1407,10 @@ describe('Helper functions and constants unit tests', () => {
     expect(extractH1(html)).toBe('Heading <1>');
   });
 
-  it('isHomepageHeading verifies combined H1 and individual heading variations', () => {
+  it('isHomepageHeading verifies combined H1 and rejects single-part heading', () => {
     expect(isHomepageHeading(HOMEPAGE_H1)).toBe(true);
-    expect(isHomepageHeading('We build consumer brands.')).toBe(true);
+    expect(isHomepageHeading('We build consumer brands.')).toBe(false);
+    expect(isHomepageHeading('We help businesses build theirs.')).toBe(false);
     expect(isHomepageHeading('We build consumer brands. We help businesses build theirs.')).toBe(true);
     expect(isHomepageHeading('Unrelated Heading')).toBe(false);
     expect(isHomepageHeading(null)).toBe(false);

@@ -126,8 +126,7 @@ export const isHomepageHeading = (h1) => {
   return (
     normalized === HOMEPAGE_H1 ||
     (normalized.includes('We build consumer brands.') &&
-      normalized.includes('We help businesses build theirs.')) ||
-    normalized === 'We build consumer brands.'
+      normalized.includes('We help businesses build theirs.'))
   );
 };
 
@@ -158,7 +157,7 @@ export const parseHstsHeader = (headerValue = '') => {
 
   const directives = headerValue.split(';').map((d) => d.trim()).filter(Boolean);
   let maxAge = null;
-  let hasMaxAgeDirective = false;
+  let maxAgeCount = 0;
 
   for (const directive of directives) {
     const eqIdx = directive.indexOf('=');
@@ -166,7 +165,14 @@ export const parseHstsHeader = (headerValue = '') => {
       const name = directive.slice(0, eqIdx).trim().toLowerCase();
       const value = directive.slice(eqIdx + 1).trim();
       if (name === 'max-age') {
-        hasMaxAgeDirective = true;
+        maxAgeCount += 1;
+        if (maxAgeCount > 1) {
+          return {
+            valid: false,
+            maxAge: null,
+            message: `Strict-Transport-Security header contains duplicate max-age directives (got: "${headerValue}")`,
+          };
+        }
         if (!/^\d+$/.test(value)) {
           return {
             valid: false,
@@ -179,7 +185,14 @@ export const parseHstsHeader = (headerValue = '') => {
     } else {
       const name = directive.trim().toLowerCase();
       if (name === 'max-age') {
-        hasMaxAgeDirective = true;
+        maxAgeCount += 1;
+        if (maxAgeCount > 1) {
+          return {
+            valid: false,
+            maxAge: null,
+            message: `Strict-Transport-Security header contains duplicate max-age directives (got: "${headerValue}")`,
+          };
+        }
         return {
           valid: false,
           maxAge: null,
@@ -189,7 +202,7 @@ export const parseHstsHeader = (headerValue = '') => {
     }
   }
 
-  if (!hasMaxAgeDirective) {
+  if (maxAgeCount === 0) {
     return {
       valid: false,
       maxAge: null,
