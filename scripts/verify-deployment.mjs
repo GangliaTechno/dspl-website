@@ -3,17 +3,20 @@ import process from 'node:process';
 import { fileURLToPath } from 'node:url';
 
 export const DEFAULT_UNKNOWN_PATH = '/does-not-exist';
+export const DEFAULT_TIMEOUT_MS = 10000;
 
 export const EXPECTED_ARTICLES = [
   {
     slug: 'fssai-labelling-requirements-checklist-2026',
     path: '/blogs/fssai-labelling-requirements-checklist-2026',
     titleSubstring: 'FSSAI',
+    expectedHeadline: 'FSSAI Labelling Requirements for Packaged Food',
   },
   {
     slug: 'legal-metrology-packaged-commodity-rules-india',
     path: '/blogs/legal-metrology-packaged-commodity-rules-india',
     titleSubstring: 'Legal Metrology',
+    expectedHeadline: 'Legal Metrology Packaged Commodity Rules',
   },
 ];
 
@@ -34,12 +37,12 @@ const decodeHtmlEntities = (value = '') =>
     .replace(/&quot;/g, '"')
     .replace(/&#39;/g, "'");
 
-const extractTitle = (html) => {
+const extractTitle = (html = '') => {
   const match = html.match(/<title\b[^>]*>([\s\S]*?)<\/title>/i);
   return match ? decodeHtmlEntities(match[1].trim()) : null;
 };
 
-const extractH1 = (html) => {
+const extractH1 = (html = '') => {
   const match = html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/i);
   if (!match) return null;
   return decodeHtmlEntities(
@@ -47,17 +50,17 @@ const extractH1 = (html) => {
   );
 };
 
-const extractCanonical = (html) => {
+const extractCanonical = (html = '') => {
   const match = html.match(/<link\b(?=[^>]*rel=["']canonical["'])(?=[^>]*href=["']([^"']*)["'])[^>]*>/i);
   return match ? match[1].trim() : null;
 };
 
-const extractOgType = (html) => {
+const extractOgType = (html = '') => {
   const match = html.match(/<meta\b(?=[^>]*property=["']og:type["'])(?=[^>]*content=["']([^"']*)["'])[^>]*>/i);
   return match ? match[1].trim() : null;
 };
 
-const extractJsonLdObjects = (html) => {
+const extractJsonLdObjects = (html = '') => {
   const matches = html.matchAll(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi);
   const objects = [];
   for (const match of matches) {
@@ -71,60 +74,170 @@ const extractJsonLdObjects = (html) => {
         objects.push(parsed);
       }
     } catch {
-      // Ignored malformed JSON-LD handled in check
+      // Malformed JSON-LD handled gracefully
     }
   }
   return objects;
 };
 
 export function parseCliArgs(argv = process.argv.slice(2)) {
-  let origin = null;
+  let rawOrigin = null;
   let unknownPath = DEFAULT_UNKNOWN_PATH;
+  let timeoutMs = DEFAULT_TIMEOUT_MS;
 
   for (let i = 0; i < argv.length; i += 1) {
     const arg = argv[i];
     if (arg === '--origin') {
-      origin = argv[i + 1] ?? null;
+      rawOrigin = argv[i + 1] ?? null;
       i += 1;
     } else if (arg.startsWith('--origin=')) {
-      origin = arg.slice('--origin='.length);
+      rawOrigin = arg.slice('--origin='.length);
     } else if (arg === '--unknown-path') {
       unknownPath = argv[i + 1] ?? DEFAULT_UNKNOWN_PATH;
       i += 1;
     } else if (arg.startsWith('--unknown-path=')) {
       unknownPath = arg.slice('--unknown-path='.length);
+    } else if (arg === '--timeout' || arg === '--timeout-ms') {
+      const val = Number.parseInt(argv[i + 1], 10);
+      if (!Number.isNaN(val) && val > 0) {
+        timeoutMs = val;
+      }
+      i += 1;
+    } else if (arg.startsWith('--timeout=') || arg.startsWith('--timeout-ms=')) {
+      const val = Number.parseInt(arg.split('=')[1], 10);
+      if (!Number.isNaN(val) && val > 0) {
+        timeoutMs = val;
+      }
     }
   }
 
-  if (!origin || !origin.trim()) {
+  if (!rawOrigin || !rawOrigin.trim()) {
     throw new Error('Missing required --origin argument (e.g. --origin https://dashapatmaja.in).');
   }
 
-  origin = origin.trim().replace(/\/+$/, '');
-
+  const trimmed = rawOrigin.trim();
+  let parsedUrl;
   try {
-    const parsedUrl = new URL(origin);
-    if (!['http:', 'https:'].includes(parsedUrl.protocol)) {
-      throw new Error('Invalid protocol');
-    }
+    parsedUrl = new URL(trimmed);
   } catch {
-    throw new Error(`Invalid --origin URL: "${origin}". Expected valid HTTP or HTTPS origin.`);
+    throw new Error('Invalid --origin URL. Expected a valid HTTP or HTTPS origin.');
   }
 
-  return { origin, unknownPath };
+  if (!['http:', 'https:'].includes(parsedUrl.protocol)) {
+    throw new Error(`Invalid --origin protocol: "${parsedUrl.protocol}". Expected http: or https:.`);
+  }
+
+  if (parsedUrl.username || parsedUrl.password) {
+    throw new Error('Invalid --origin: credentials (username/password) are not allowed.');
+  }
+
+  const normalizedPathname = parsedUrl.pathname.replace(/\/+$/, '');
+  if (normalizedPathname !== '') {
+    throw new Error(`Invalid --origin: path "${parsedUrl.pathname}" is not allowed. Expected origin without path.`);
+  }
+
+  if (parsedUrl.search) {
+    throw new Error('Invalid --origin: query parameters are not allowed.');
+  }
+
+  if (parsedUrl.hash) {
+    throw new Error('Invalid --origin: fragments are not allowed.');
+  }
+
+  const origin = `${parsedUrl.protocol}//${parsedUrl.host}`;
+  return { origin, unknownPath, timeoutMs };
+}
+
+function verifySecurityHeaders({
+  response,
+  path: reqPath,
+  isHttps,
+  recordCheck,
+}) {
+  const headers = response?.headers;
+  const cspHeader = headers?.get ? headers.get('content-security-policy') : headers?.['content-security-policy'];
+  const hstsHeader = headers?.get ? headers.get('strict-transport-security') : headers?.['strict-transport-security'];
+  const xfoHeader = headers?.get ? headers.get('x-frame-options') : headers?.['x-frame-options'];
+
+  const hasCsp = Boolean(cspHeader && cspHeader.trim());
+  recordCheck({
+    name: 'Security Header: Content-Security-Policy',
+    path: reqPath,
+    passed: hasCsp,
+    message: hasCsp
+      ? 'Content-Security-Policy header present'
+      : 'Missing required Content-Security-Policy response header',
+  });
+
+  if (isHttps) {
+    let hasValidHsts = false;
+    let hstsMessage = '';
+    if (!hstsHeader || !hstsHeader.trim()) {
+      hstsMessage = 'Missing required Strict-Transport-Security response header for HTTPS origin';
+    } else {
+      const maxAgeMatch = hstsHeader.match(/max-age\s*=\s*(\d+)/i);
+      if (!maxAgeMatch) {
+        hstsMessage = `Strict-Transport-Security header missing max-age directive (got: "${hstsHeader}")`;
+      } else {
+        const maxAge = Number.parseInt(maxAgeMatch[1], 10);
+        if (maxAge > 0) {
+          hasValidHsts = true;
+          hstsMessage = `Strict-Transport-Security header valid (max-age=${maxAge})`;
+        } else {
+          hstsMessage = `Strict-Transport-Security max-age must be strictly positive (got: max-age=${maxAge})`;
+        }
+      }
+    }
+
+    recordCheck({
+      name: 'Security Header: Strict-Transport-Security',
+      path: reqPath,
+      passed: hasValidHsts,
+      message: hstsMessage,
+    });
+  }
+
+  const isValidXfo = Boolean(xfoHeader && /^(DENY|SAMEORIGIN)$/i.test(xfoHeader.trim()));
+
+  let isRestrictiveFrameAncestors = false;
+  if (cspHeader) {
+    const directives = cspHeader.split(';').map((d) => d.trim());
+    const frameAncestorsDirective = directives.find((d) => /^frame-ancestors\b/i.test(d));
+    if (frameAncestorsDirective) {
+      const sources = frameAncestorsDirective.replace(/^frame-ancestors\s*/i, '').trim();
+      const hasWildcard = /(^|\s)\*(?=\s|$)/.test(sources);
+      if (sources.length > 0 && !hasWildcard) {
+        isRestrictiveFrameAncestors = true;
+      }
+    }
+  }
+
+  const hasEffectiveFrameProtection = isValidXfo || isRestrictiveFrameAncestors;
+  recordCheck({
+    name: 'Security Header: Frame protection (X-Frame-Options or frame-ancestors)',
+    path: reqPath,
+    passed: hasEffectiveFrameProtection,
+    message: hasEffectiveFrameProtection
+      ? (isValidXfo
+          ? `Frame protection verified via X-Frame-Options (${xfoHeader.trim()})`
+          : 'Frame protection verified via restrictive CSP frame-ancestors directive')
+      : 'Missing or ineffective frame protection header (expected X-Frame-Options: DENY/SAMEORIGIN or restrictive CSP frame-ancestors without "*")',
+  });
 }
 
 export async function verifyDeployment({
   origin,
   fetch = globalThis.fetch,
   unknownPath = DEFAULT_UNKNOWN_PATH,
+  timeoutMs = DEFAULT_TIMEOUT_MS,
 } = {}) {
   if (!origin) {
     throw new Error('Origin is required for verification.');
   }
 
-  const normalizedOrigin = origin.trim().replace(/\/+$/, '');
-  const isHttps = normalizedOrigin.startsWith('https:');
+  const urlObj = new URL(origin);
+  const normalizedOrigin = `${urlObj.protocol}//${urlObj.host}`;
+  const isHttps = urlObj.protocol === 'https:';
   const checks = [];
   const failures = [];
 
@@ -137,12 +250,37 @@ export async function verifyDeployment({
 
   const safeFetch = async (targetPath, options = {}) => {
     const targetUrl = `${normalizedOrigin}${targetPath}`;
+    let signal = options.signal;
+    if (!signal && typeof AbortSignal?.timeout === 'function') {
+      signal = AbortSignal.timeout(timeoutMs);
+    }
     try {
-      const response = await fetch(targetUrl, options);
+      const response = await fetch(targetUrl, {
+        ...options,
+        ...(signal ? { signal } : {}),
+      });
       const html = await response.text();
-      return { response, html, error: null };
+      const finalUrl = response.url || targetUrl;
+      return {
+        response,
+        html,
+        url: finalUrl,
+        redirected: Boolean(response.redirected),
+        error: null,
+      };
     } catch (err) {
-      return { response: null, html: null, error: err };
+      const isTimeout = err?.name === 'TimeoutError' || err?.name === 'AbortError' || err?.code === 23;
+      const errorMessage = isTimeout
+        ? `Request to ${targetPath} timed out after ${timeoutMs}ms`
+        : `Failed to fetch ${targetPath}: ${err.message || String(err)}`;
+      return {
+        response: null,
+        html: null,
+        url: null,
+        redirected: false,
+        error: err,
+        errorMessage,
+      };
     }
   };
 
@@ -153,10 +291,10 @@ export async function verifyDeployment({
       name: 'Homepage request',
       path: '/',
       passed: false,
-      message: `Failed to fetch homepage: ${homeResult.error.message}`,
+      message: homeResult.errorMessage,
     });
   } else {
-    const { response, html } = homeResult;
+    const { response, html, url: finalUrl } = homeResult;
     recordCheck({
       name: 'Homepage HTTP 200 status',
       path: '/',
@@ -164,41 +302,32 @@ export async function verifyDeployment({
       message: `Homepage returned status ${response.status} (expected 200)`,
     });
 
-    const cspHeader = response.headers?.get('content-security-policy');
-    const hstsHeader = response.headers?.get('strict-transport-security');
-    const xfoHeader = response.headers?.get('x-frame-options');
-
+    const isHomeFinalUrl = (finalUrl === `${normalizedOrigin}/` || finalUrl === normalizedOrigin);
     recordCheck({
-      name: 'Security Header: Content-Security-Policy',
+      name: 'Homepage final URL',
       path: '/',
-      passed: Boolean(cspHeader && cspHeader.trim()),
-      message: cspHeader
-        ? 'Content-Security-Policy header present'
-        : 'Missing required Content-Security-Policy response header',
+      passed: isHomeFinalUrl,
+      message: isHomeFinalUrl
+        ? `Homepage resolved to root URL (${finalUrl})`
+        : `Expected final URL "${normalizedOrigin}/", got "${finalUrl}"`,
     });
 
-    if (isHttps) {
-      recordCheck({
-        name: 'Security Header: Strict-Transport-Security',
-        path: '/',
-        passed: Boolean(hstsHeader && hstsHeader.trim()),
-        message: hstsHeader
-          ? 'Strict-Transport-Security header present'
-          : 'Missing required Strict-Transport-Security response header for HTTPS origin',
-      });
-    }
-
-    const hasFrameProtection = Boolean(
-      (xfoHeader && /DENY|SAMEORIGIN/i.test(xfoHeader)) ||
-      (cspHeader && /frame-ancestors/i.test(cspHeader)),
-    );
-    recordCheck({
-      name: 'Security Header: Frame protection (X-Frame-Options or frame-ancestors)',
+    verifySecurityHeaders({
+      response,
       path: '/',
-      passed: hasFrameProtection,
-      message: hasFrameProtection
-        ? 'Frame protection header present'
-        : 'Missing frame protection header (expected X-Frame-Options: DENY/SAMEORIGIN or CSP frame-ancestors directive)',
+      isHttps,
+      recordCheck,
+    });
+
+    const h1 = extractH1(html);
+    const hasHomeH1 = h1 === 'We build consumer brands.';
+    recordCheck({
+      name: 'Homepage heading identity',
+      path: '/',
+      passed: hasHomeH1,
+      message: hasHomeH1
+        ? 'Homepage heading verified ("We build consumer brands.")'
+        : `Expected homepage H1 "We build consumer brands.", got "${h1 ?? 'missing'}"`,
     });
   }
 
@@ -209,15 +338,32 @@ export async function verifyDeployment({
       name: 'Insights listing request',
       path: '/blogs',
       passed: false,
-      message: `Failed to fetch /blogs: ${blogsResult.error.message}`,
+      message: blogsResult.errorMessage,
     });
   } else {
-    const { response, html } = blogsResult;
+    const { response, html, url: finalUrl } = blogsResult;
     recordCheck({
       name: 'Insights listing HTTP 200 status',
       path: '/blogs',
       passed: response.status === 200,
       message: `/blogs returned status ${response.status} (expected 200)`,
+    });
+
+    const isBlogsFinalUrl = (finalUrl === `${normalizedOrigin}/blogs`);
+    recordCheck({
+      name: 'Insights listing final URL',
+      path: '/blogs',
+      passed: isBlogsFinalUrl,
+      message: isBlogsFinalUrl
+        ? `Insights listing resolved to slashless URL (${finalUrl})`
+        : `Expected final URL "${normalizedOrigin}/blogs", got "${finalUrl}"`,
+    });
+
+    verifySecurityHeaders({
+      response,
+      path: '/blogs',
+      isHttps,
+      recordCheck,
     });
 
     const title = extractTitle(html);
@@ -227,22 +373,37 @@ export async function verifyDeployment({
     const isHomepageFallback = (
       canonical === `${normalizedOrigin}/` ||
       canonical === normalizedOrigin ||
-      h1 === 'We build consumer brands.'
+      h1 === 'We build consumer brands.' ||
+      title?.includes('We build consumer brands.')
     );
 
-    const hasInsightsIdentity = (
-      !isHomepageFallback &&
-      (title?.includes('Insights') || title?.includes('Dashapatmaja')) &&
-      (h1?.includes('Thinking from the work of building brands.') || h1?.includes('Insights') || html.includes('Insights'))
+    const hasInsightsTitle = Boolean(
+      title &&
+      /insights/i.test(title) &&
+      /dashapatmaja/i.test(title) &&
+      !isHomepageFallback,
     );
-
     recordCheck({
-      name: 'Insights listing identity',
+      name: 'Insights listing title',
       path: '/blogs',
-      passed: hasInsightsIdentity && !isHomepageFallback,
-      message: isHomepageFallback
-        ? '/blogs returned homepage fallback instead of Insights listing'
-        : (hasInsightsIdentity ? 'Insights listing identity verified' : 'Missing Insights listing identity in /blogs HTML'),
+      passed: hasInsightsTitle,
+      message: hasInsightsTitle
+        ? `Title "${title}" matches Insights listing identity`
+        : `Expected Insights listing title, got "${title ?? 'missing'}"`,
+    });
+
+    const hasInsightsH1 = Boolean(
+      h1 &&
+      (h1.includes('Thinking from the work of building brands.') || h1.trim() === 'Thinking from the work of building brands.') &&
+      !isHomepageFallback,
+    );
+    recordCheck({
+      name: 'Insights listing H1 heading',
+      path: '/blogs',
+      passed: hasInsightsH1,
+      message: hasInsightsH1
+        ? `H1 "${h1}" matches expected Insights heading`
+        : `Expected H1 "Thinking from the work of building brands.", got "${h1 ?? 'missing'}"`,
     });
 
     const isSlashlessCanonical = canonical === `${normalizedOrigin}/blogs`;
@@ -255,7 +416,6 @@ export async function verifyDeployment({
         : `Expected slashless canonical "${normalizedOrigin}/blogs", got "${canonical ?? 'missing'}"`,
     });
 
-    // Check for presence of current article links
     for (const article of EXPECTED_ARTICLES) {
       const hasArticleLink = html.includes(article.path) || html.includes(article.slug);
       recordCheck({
@@ -268,7 +428,6 @@ export async function verifyDeployment({
       });
     }
 
-    // Check absence of stale removed articles
     for (const removedSlug of REMOVED_ARTICLES) {
       const hasRemovedArticle = html.includes(removedSlug);
       recordCheck({
@@ -290,17 +449,34 @@ export async function verifyDeployment({
         name: `Article ${article.slug} request`,
         path: article.path,
         passed: false,
-        message: `Failed to fetch ${article.path}: ${articleResult.error.message}`,
+        message: articleResult.errorMessage,
       });
       continue;
     }
 
-    const { response, html } = articleResult;
+    const { response, html, url: finalUrl } = articleResult;
     recordCheck({
       name: `Article ${article.slug} HTTP 200 status`,
       path: article.path,
       passed: response.status === 200,
       message: `${article.path} returned status ${response.status} (expected 200)`,
+    });
+
+    const isArticleFinalUrl = (finalUrl === `${normalizedOrigin}${article.path}`);
+    recordCheck({
+      name: `Article ${article.slug} final URL`,
+      path: article.path,
+      passed: isArticleFinalUrl,
+      message: isArticleFinalUrl
+        ? `Article resolved to slashless URL (${finalUrl})`
+        : `Expected final URL "${normalizedOrigin}${article.path}", got "${finalUrl}"`,
+    });
+
+    verifySecurityHeaders({
+      response,
+      path: article.path,
+      isHttps,
+      recordCheck,
     });
 
     const title = extractTitle(html);
@@ -360,19 +536,38 @@ export async function verifyDeployment({
         : `Expected meta property="og:type" content="article", got "${ogType ?? 'missing'}"`,
     });
 
-    const hasBlogPostingSchema = jsonLdObjects.some((item) => {
-      const type = item['@type'];
+    const matchingBlogPosting = jsonLdObjects.find((item) => {
+      const type = item?.['@type'];
       const types = Array.isArray(type) ? type : [type];
-      return types.includes('BlogPosting');
+      if (!types.includes('BlogPosting')) return false;
+
+      const headline = typeof item.headline === 'string'
+        ? item.headline
+        : (typeof item.name === 'string' ? item.name : '');
+      const headlineMatches = headline.toLowerCase().includes(article.titleSubstring.toLowerCase()) ||
+        (article.expectedHeadline && headline.toLowerCase().includes(article.expectedHeadline.toLowerCase()));
+      if (!headlineMatches) return false;
+
+      const itemUrl = typeof item.url === 'string' ? item.url : null;
+      const mainEntity = item.mainEntityOfPage;
+      const mainEntityUrl = typeof mainEntity === 'string'
+        ? mainEntity
+        : (typeof mainEntity?.['@id'] === 'string' ? mainEntity['@id'] : null);
+
+      const targetAbsoluteUrl = `${normalizedOrigin}${article.path}`;
+      const matchesUrl = (itemUrl === targetAbsoluteUrl || itemUrl === article.path);
+      const matchesMainEntity = (mainEntityUrl === targetAbsoluteUrl || mainEntityUrl === article.path);
+
+      return Boolean(matchesUrl || matchesMainEntity);
     });
 
     recordCheck({
       name: `Article ${article.slug} BlogPosting JSON-LD schema`,
       path: article.path,
-      passed: hasBlogPostingSchema,
-      message: hasBlogPostingSchema
-        ? 'BlogPosting JSON-LD schema verified'
-        : `Missing required BlogPosting JSON-LD schema on ${article.path}`,
+      passed: Boolean(matchingBlogPosting),
+      message: matchingBlogPosting
+        ? 'BlogPosting JSON-LD schema verified with matching headline and route URL'
+        : `Missing valid BlogPosting JSON-LD matching headline "${article.titleSubstring}" and URL "${normalizedOrigin}${article.path}"`,
     });
   }
 
@@ -383,7 +578,7 @@ export async function verifyDeployment({
       name: 'Unknown route request',
       path: unknownPath,
       passed: false,
-      message: `Failed to fetch unknown path ${unknownPath}: ${unknownResult.error.message}`,
+      message: unknownResult.errorMessage,
     });
   } else {
     const { response, html } = unknownResult;
@@ -394,7 +589,7 @@ export async function verifyDeployment({
       path: unknownPath,
       passed: is404,
       message: is404
-        ? `Unknown path correctly returned HTTP 404`
+        ? 'Unknown path correctly returned HTTP 404'
         : `Expected HTTP 404, got ${response.status} (SPA fallback defect: unknown route does not return 404)`,
     });
 
@@ -413,12 +608,46 @@ export async function verifyDeployment({
         ? 'Unknown route returned homepage HTML body instead of 404 page'
         : 'Unknown route does not return homepage body',
     });
+
+    const hasNotFoundIdentity = Boolean(
+      html &&
+      html.trim().length > 20 &&
+      !isHomepageHtml &&
+      ((title && /page not found|not found|404/i.test(title)) || (h1 && /page not found|not found|404/i.test(h1))),
+    );
+
+    recordCheck({
+      name: 'Unknown route Not Found page identity',
+      path: unknownPath,
+      passed: hasNotFoundIdentity,
+      message: hasNotFoundIdentity
+        ? 'Not Found page identity verified (title/H1)'
+        : `Unknown route missing Not Found identity (expected "Page Not Found", got title "${title ?? 'missing'}", H1 "${h1 ?? 'missing'}")`,
+    });
   }
 
   // 5. Check Trailing-Slash Subpath Policy
   const trailingSlashResult = await safeFetch('/blogs/');
-  if (!trailingSlashResult.error && trailingSlashResult.html) {
-    const canonical = extractCanonical(trailingSlashResult.html);
+  if (trailingSlashResult.error) {
+    recordCheck({
+      name: 'Trailing slash /blogs/ request',
+      path: '/blogs/',
+      passed: false,
+      message: trailingSlashResult.errorMessage,
+    });
+  } else {
+    const { url: finalUrl, html } = trailingSlashResult;
+    const isSlashlessFinalUrl = (finalUrl === `${normalizedOrigin}/blogs`);
+    recordCheck({
+      name: 'Trailing slash /blogs/ resolves to slashless URL',
+      path: '/blogs/',
+      passed: isSlashlessFinalUrl,
+      message: isSlashlessFinalUrl
+        ? `Trailing slash URL resolved to slashless URL (${finalUrl})`
+        : `Expected final URL "${normalizedOrigin}/blogs", got "${finalUrl}"`,
+    });
+
+    const canonical = extractCanonical(html);
     const isSlashlessCanonical = canonical === `${normalizedOrigin}/blogs`;
     recordCheck({
       name: 'Trailing slash /blogs/ canonical policy',
@@ -445,12 +674,12 @@ export async function main({
   writeOut = (msg) => process.stdout.write(msg),
   writeErr = (msg) => process.stderr.write(msg),
 } = {}) {
-  const { origin, unknownPath } = parseCliArgs(argv);
+  const { origin, unknownPath, timeoutMs } = parseCliArgs(argv);
 
   writeOut(`Starting deployment smoke verification against: ${origin}\n`);
-  const result = await verifyDeployment({ origin, fetch, unknownPath });
+  const result = await verifyDeployment({ origin, fetch, unknownPath, timeoutMs });
 
-  writeOut(`\n--- Verification Results ---\n`);
+  writeOut('\n--- Verification Results ---\n');
   for (const check of result.checks) {
     const mark = check.passed ? '✓' : '✗';
     const loc = check.path ? ` [${check.path}]` : '';
