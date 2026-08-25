@@ -1,9 +1,9 @@
 # DSPL Website Project Context
 
-Updated: 2026-08-24 IST
+Updated: 2026-08-25 IST
 Repository: `E:\For website\dspl website`
 Branch at snapshot: `release/v1.0-production`
-HEAD at snapshot: `454f9206608027fce9f9f907921031d6e543f3b9`
+HEAD at snapshot: `c9ecb4a05732e74f54319ff2f1cfc65879ead8b6`
 
 This is a handoff ledger, not proof of current state. Refresh Git status and rerun
 validation before relying on it. Current code and fresh evidence win on conflict.
@@ -36,34 +36,41 @@ They are durable across worktrees and clones that contain those commits.
 
 ## Active Protected Work
 
-### Sanity-backed Insights publication
+### Release-integrated Insights publication
 
-Status: implemented and release-gated as uncommitted local work; fresh Sol/high
-holistic review approved with no P0-P3 findings.
+Status: Insights publication Phases 1-3 are merged into and pushed on
+`release/v1.0-production`; fresh Sol/high review approved the staged merge with
+no P0-P3 findings.
 
 Design: `docs/superpowers/specs/2026-08-21-dspl-sanity-insights-setup-design.md`
 
 Plan: `docs/superpowers/plans/2026-08-21-dspl-sanity-insights-setup.md`
 
 Current contract:
-- Sanity project and dataset selection are explicit; strict live sync requires
-  the authoritative build trio and the `production` dataset before any fetch or
-  filesystem write.
-- Bootstrap defaults to dry-run, creates only missing approved documents, and
-  performs no transaction when both documents already exist.
-- Publication output is deterministic, path-contained, stale-file reconciled,
-  and limited to the two approved published article snapshots plus the manifest.
-- `.env.local` is ignored and untracked. It contains the five expected local
-  configuration keys and no API token.
+- Production and ordinary development use the fallback/generated publication
+  pipeline with exactly the two approved compliance articles.
+- Hosting must use `npm run build:fallback` while Sanity is dormant. The default
+  `npm run build` intentionally remains the strict Sanity path and must not be
+  selected by the host during this stage.
+- Sanity schema, sync, bootstrap, and package integration remain in the
+  repository for migration safety but are operationally dormant. Do not upload
+  or configure article content in Sanity during this stage.
+- `.sanity/` is ignored generated Studio runtime state. `.env.local` remains
+  ignored and untracked.
+- The homepage social-preview card is `public/og-home-2026.jpg`; its generator
+  and byte-parity check are `npm run generate:og` and `npm run verify:og`.
 - The local Vite previews are concurrent user-owned processes. Do not terminate
   or restart them unless the user asks.
-- The 21 Sanity implementation/config/generated/docs paths recorded in the final
-  report remain unstaged and uncommitted. Preserve them as one task boundary.
+- A future Strapi adapter must preserve the current CMS -> normalization/sync ->
+  generated publication -> React boundary and should be developed separately.
 
 ## Pending Decision
 
-- The Sanity-backed Insights setup is ready for commit/push/deployment only
-  after explicit user authorization for those release actions.
+- Deployment remains a separate action. Before deployment, configure the host
+  branch as `release/v1.0-production`, build command as `npm run build:fallback`,
+  output directory as `dist`, and Node.js as `>=22.22.0`.
+- Branch deletion/remote cleanup remains pending explicit branch-by-branch
+  confirmation. The Phase 3 branch is checked out in a host-owned worktree.
 
 ## Last Verification
 Record only fresh evidence:
@@ -73,11 +80,12 @@ Record only fresh evidence:
 | 2026-08-21 IST | Pre-setup snapshot | `git status --short`; `git rev-parse HEAD`; SHA-256 of `src/generated/blogManifest.json` | Snapshot observed; tests not run during this setup pass | `8a6838e2a81dda1311e3c1b7c978df19745b68ac`; manifest `065BB53CA26002C24B65631636CD7809ACBE7F187357DEC2056303175CFF22D9` |
 | 2026-08-21 IST | Insights Editorial Signals | Focused Blogs test; focused ESLint; direct Vite build; `verify:html`; asset metadata/hash validation; `git diff --check`; browser QA at 1440x900 and 390x844 | 6/6 tests; lint clean; 15 pages prerendered; 14 routes plus 404 verified; six exact WebPs; zero public `.map`; no viewport overflow or console errors; fresh Sol/high review approved | HEAD unchanged; manifest `065BB53CA26002C24B65631636CD7809ACBE7F187357DEC2056303175CFF22D9`; work remains uncommitted |
 | 2026-08-24 IST | Sanity-backed Insights setup | Exact six-file recovery gate; full lint; full tests; strict live build; `verify:html`; manifest/sitemap/security/scope audits; fresh Sol/high holistic review | 197 focused tests; lint clean; 42 files / 393 tests; exact two live posts with no fallback; deterministic generated digest; 14 routes plus 404; three Insights HTML files; zero public `.map`; review approved with no P0-P3 findings | `454f9206608027fce9f9f907921031d6e543f3b9`; 21 Sanity paths remained unstaged before this ledger update; no Sanity-task commit/push/deploy |
+| 2026-08-25 IST | Phase 1-3 release merge and homepage social preview | Full tests; full lint; `build:fallback`; `verify:og`; `verify:html`; public-map audit; `git diff --check`; fresh Sol/high merge review | 43 files / 434 tests; lint clean; exact two fallback compliance articles; 15 prerendered pages; 14 routes plus 404 verified; six exact responsive WebPs; zero public `.map`; 1200x630 OG card parity verified; review approved with no P0-P3 findings | Merge `c9ecb4a05732e74f54319ff2f1cfc65879ead8b6` pushed to `origin/release/v1.0-production`; no deployment performed |
 
 ## Next Authorized Action
 
-- Hand back the approved local Sanity setup and wait for explicit authorization
-  before any commit, push, merge, deployment, or branch change.
+- Keep Sanity dormant and use the fallback build path. Wait for explicit
+  authorization before deployment or branch/worktree deletion.
 
 ## Update Contract
 - Coordinator updates this file after an accepted plan, completed task, review, or changed blocker.
