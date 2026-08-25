@@ -1400,6 +1400,17 @@ describe('Phase 3 Round 3 regressions', () => {
   });
 });
 
+describe('Phase 3 Round 4 regressions', () => {
+  it('Finding 1: rejects a reversed homepage H1 phrase order', () => {
+    expect(isHomepageHeading('We help businesses build theirs. We build consumer brands.')).toBe(false);
+  });
+
+  it('Finding 1: rejects unrelated prefixes and suffixes around the homepage H1', () => {
+    expect(isHomepageHeading(`Our work: ${HOMEPAGE_H1}`)).toBe(false);
+    expect(isHomepageHeading(`${HOMEPAGE_H1} Learn more.`)).toBe(false);
+  });
+});
+
 describe('Helper functions and constants unit tests', () => {
   it('extractTitle and extractH1 extract and decode text properly', () => {
     const html = '<html><head><title>Test &amp; Example</title></head><body><h1>Heading &lt;1&gt;</h1></body></html>';

@@ -123,11 +123,7 @@ export const extractJsonLdObjects = (html = '') => {
 export const isHomepageHeading = (h1) => {
   if (!h1 || typeof h1 !== 'string') return false;
   const normalized = h1.replace(/\s+/g, ' ').trim();
-  return (
-    normalized === HOMEPAGE_H1 ||
-    (normalized.includes('We build consumer brands.') &&
-      normalized.includes('We help businesses build theirs.'))
-  );
+  return normalized === HOMEPAGE_H1;
 };
 
 export const isHomepageFallbackHtml = ({ html, canonical, normalizedOrigin } = {}) => {
