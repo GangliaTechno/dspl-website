@@ -939,7 +939,11 @@ describe('Phase 2 content model and validation pipeline', () => {
 
     // External href must be rejected
     post.closingCta.href = 'https://external.com/start';
-    expect(() => validateAndProcessPosts([post])).toThrow(/closingCta.href must be an internal path starting with \//);
+    expect(() => validateAndProcessPosts([post])).toThrow(/closingCta.href must be an internal path starting with \/ and not \/\//);
+
+    // Protocol-relative href must be rejected
+    post.closingCta.href = '//example.com/start';
+    expect(() => validateAndProcessPosts([post])).toThrow(/closingCta.href must be an internal path starting with \/ and not \/\//);
   });
 
   it('validates faqs and references non-empty constraints', () => {

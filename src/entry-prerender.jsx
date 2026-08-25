@@ -15,6 +15,7 @@ import StartProject from './pages/StartProject';
 import TermsOfUse from './pages/TermsOfUse';
 import Blogs from './pages/Blogs';
 import BlogPost from './pages/BlogPost';
+import { createBlogPostMetadata } from './pages/blogPostModel';
 import { SITE_CONFIG } from './content/siteConfig';
 import {
   PUBLIC_ROUTES,
@@ -124,13 +125,16 @@ const createHeadElements = (metadata) =>
 
 export async function prerender(data) {
   const pathname = new URL(data.url, SITE_URL).pathname;
-  const metadata = resolveMetadataForPath(pathname);
 
   let initialArticle = null;
   if (pathname.startsWith('/blogs/')) {
     const slug = pathname.replace('/blogs/', '').replace(/\/$/, '').toLowerCase();
     initialArticle = getEagerArticleContent(slug);
   }
+
+  const metadata = initialArticle
+    ? createBlogPostMetadata(initialArticle, blogsEnabled)
+    : resolveMetadataForPath(pathname);
 
   const BlogPostPrerender = (props) => (
     <BlogPost initialArticle={initialArticle} {...props} />

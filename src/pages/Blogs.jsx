@@ -72,7 +72,9 @@ const FeaturedStory = ({ post }) => {
     <article className="blog-feature-story">
       <Link
         to={`/blogs/${post.slug}`}
-        className="blog-story-link-wrapper"
+        className={`blog-story-link-wrapper ${
+          !artwork ? 'blog-story-link-wrapper--text-only' : ''
+        }`}
         aria-label={`Read ${post.title}`}
       >
         {artwork && (

@@ -577,8 +577,12 @@ export function validateAndProcessPosts(rawPosts) {
 
     // Validate closingCta.href when present
     if (raw.closingCta?.href !== undefined && raw.closingCta?.href !== null) {
-      if (typeof raw.closingCta.href !== 'string' || !raw.closingCta.href.startsWith('/')) {
-        throw new Error(`Article "${title}": closingCta.href must be an internal path starting with /.`);
+      if (
+        typeof raw.closingCta.href !== 'string'
+        || !raw.closingCta.href.startsWith('/')
+        || raw.closingCta.href.startsWith('//')
+      ) {
+        throw new Error(`Article "${title}": closingCta.href must be an internal path starting with / and not //.`);
       }
     }
 

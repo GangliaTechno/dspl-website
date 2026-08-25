@@ -280,7 +280,9 @@ export const blogPost = defineType({
           validation: (Rule) =>
             Rule.required().custom((href) => {
               if (!href) return 'Button URL is required.';
-              if (!href.startsWith('/')) return 'Button URL must be an internal path starting with /.';
+              if (!href.startsWith('/') || href.startsWith('//')) {
+                return 'Button URL must be an internal path starting with / and not //.';
+              }
               return true;
             }),
         }),

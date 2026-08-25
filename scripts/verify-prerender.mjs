@@ -34,11 +34,16 @@ if (fs.existsSync(manifestPath)) {
       });
 
       for (const post of manifest.posts) {
+        const fullArticlePath = path.join(rootDir, 'src', 'generated', 'blog', `${post.slug}.json`);
+        const fullPost = fs.existsSync(fullArticlePath)
+          ? JSON.parse(fs.readFileSync(fullArticlePath, 'utf8'))
+          : post;
+
         dynamicBlogRoutes.push({
           route: `blogs/${post.slug}`,
           heading: post.title,
           type: 'article',
-          post,
+          post: fullPost,
         });
       }
     }
@@ -131,6 +136,8 @@ const verifyBlogPostingSchema = (html, label, post) => {
   }
 
   let hasBlogPosting = false;
+  let hasValidFaqPage = !post.faqs || post.faqs.length === 0;
+
   for (const source of schemas) {
     try {
       const data = JSON.parse(source);
@@ -144,6 +151,25 @@ const verifyBlogPostingSchema = (html, label, post) => {
           && item.publisher?.name === 'Dashapatmaja Solutions Pvt Ltd'
         ) {
           hasBlogPosting = true;
+          if (post.authors?.length > 0) {
+            const authors = Array.isArray(item.author) ? item.author : [item.author];
+            const authorNames = authors.map((a) => a?.name).filter(Boolean);
+            const expectedNames = post.authors.map((a) => a.name);
+            if (JSON.stringify(authorNames) !== JSON.stringify(expectedNames)) {
+              failures.push(`${label}: BlogPosting author names ${JSON.stringify(authorNames)} do not match expected ${JSON.stringify(expectedNames)}`);
+            }
+          }
+        }
+
+        if (item['@type'] === 'FAQPage' && Array.isArray(post.faqs) && post.faqs.length > 0) {
+          const mainEntity = Array.isArray(item.mainEntity) ? item.mainEntity : [];
+          if (mainEntity.length === post.faqs.length) {
+            const actualQuestions = mainEntity.map((q) => q?.name);
+            const expectedQuestions = post.faqs.map((f) => f.question);
+            if (JSON.stringify(actualQuestions) === JSON.stringify(expectedQuestions)) {
+              hasValidFaqPage = true;
+            }
+          }
         }
       }
     } catch {
@@ -153,6 +179,10 @@ const verifyBlogPostingSchema = (html, label, post) => {
 
   if (!hasBlogPosting) {
     failures.push(`${label}: missing valid BlogPosting JSON-LD schema with matching headline, datePublished, dateModified, and publisher`);
+  }
+
+  if (!hasValidFaqPage) {
+    failures.push(`${label}: missing valid FAQPage JSON-LD schema matching the article's ${post.faqs?.length} FAQs in @graph`);
   }
 };
 

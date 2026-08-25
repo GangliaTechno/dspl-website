@@ -359,6 +359,7 @@
 
 .blog-data-table {
   width: 100%;
+  min-width: 32rem;
   border-collapse: collapse;
   font-size: 0.9rem;
   line-height: 1.5;

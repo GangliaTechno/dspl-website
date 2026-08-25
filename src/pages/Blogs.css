@@ -76,6 +76,10 @@
   text-decoration: none;
 }
 
+.blog-feature-story .blog-story-link-wrapper--text-only {
+  grid-template-columns: minmax(0, 48rem);
+}
+
 .blog-feature-artwork {
   width: 100%;
   aspect-ratio: 16 / 9;
