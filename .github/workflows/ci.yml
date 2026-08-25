@@ -42,7 +42,7 @@ jobs:
         run: npm test
 
       - name: Build and prerender
-        run: npm run build
+        run: npm run build:fallback
 
       - name: Verify prerendered HTML
         run: npm run verify:html
