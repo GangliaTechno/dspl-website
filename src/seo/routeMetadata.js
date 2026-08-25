@@ -59,9 +59,9 @@ export const organizationStructuredData = {
 
 const routeMetadata = {
   '/': {
-    title: 'Dashapatmaja Solutions Pvt Ltd | Consumer Brand Building & Growth',
+    title: 'Branding, Marketing & E-commerce Company in Manipal, Karnataka',
     description:
-      'DSPL builds its own consumer brands and helps businesses grow through coordinated branding, marketing, e-commerce and compliance support.',
+      'We build our own consumer brands and help Indian businesses build theirs. Branding, marketing, e-commerce and FSSAI compliance support from Manipal.',
   },
   '/about': {
     title: 'Dashapatmaja Solutions Pvt Ltd | About Us',

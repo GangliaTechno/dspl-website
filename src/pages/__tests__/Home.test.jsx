@@ -27,9 +27,14 @@ describe('Home page', () => {
     expect(
       screen.getByRole('link', { name: /see how we built raw radicles/i }),
     ).toHaveAttribute('href', '/brands/raw-radicles');
+    expect(
+      screen.getByText(
+        'Dashapatmaja Solutions is a Manipal-based company that develops its own consumer brands and delivers branding, marketing, e-commerce and product compliance support to businesses across Karnataka and India.',
+      ),
+    ).toBeInTheDocument();
   });
 
-  it('labels verified supporters and exposes three coordinated services and compliance strip', () => {
+  it('labels verified supporters and exposes three services and compliance strip', () => {
     const { container } = renderHome();
     const supporterRegion = screen.getByRole('region', {
       name: 'Recognised and supported by',
@@ -59,18 +64,35 @@ describe('Home page', () => {
     expect(
       screen.getByRole('heading', {
         level: 2,
-        name: /Brand, market, and commerce.*Coordinated as one system/i,
+        name: /Brand, market and commerce\.Run as one system\./i,
       }),
     ).toBeInTheDocument();
-    expect(
-      screen.queryByText(/Start with the capability you need now/i),
-    ).not.toBeInTheDocument();
     expect(container.querySelectorAll('.service-evidence-card')).toHaveLength(3);
-    expect(screen.getByRole('heading', { name: 'Compliance coordination' }))
+    expect(
+      screen.getByText(
+        'Positioning, identity, packaging and voice, delivered as a system your team can actually apply. You receive logo files, colour and type rules, packaging artwork templates and a written messaging guide.',
+      ),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        'SEO, paid campaigns on Google and Meta, content and reporting, planned against a defined audience and a monthly number you agree before we start.',
+      ),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        'Shopify, WooCommerce and custom storefronts, plus Amazon and Flipkart listings, payments and delivery setup, built to run without daily hand-holding.',
+      ),
+    ).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'FSSAI and Legal Metrology support' }))
       .toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /branding compliance/i }))
+    expect(
+      screen.getByText(
+        'Packaging, labelling, listing, and commerce inputs can be prepared as part of the work, with regulated legal opinions retained by qualified advisers.',
+      ),
+    ).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /branding and packaging compliance/i }))
       .toHaveAttribute('href', '/branding#compliance');
-    expect(screen.getByRole('link', { name: /e-commerce compliance/i }))
+    expect(screen.getByRole('link', { name: /marketplace and listing compliance/i }))
       .toHaveAttribute('href', '/ecommerce#compliance');
   });
 
@@ -78,6 +100,12 @@ describe('Home page', () => {
     const { container } = renderHome();
     expect(screen.queryByRole('heading', { name: 'Owned experience informs the work' }))
       .not.toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', {
+        level: 2,
+        name: 'One accountable path, from audit to launch',
+      }),
+    ).toBeInTheDocument();
     expect(container.querySelectorAll('.process-column')).toHaveLength(3);
     expect(screen.getAllByText('Timing')).toHaveLength(3);
     expect(screen.getAllByText('Output')).toHaveLength(3);
@@ -88,28 +116,34 @@ describe('Home page', () => {
 
     const steps = container.querySelectorAll('.process-column');
     expect(steps[0].querySelector('.process-step-description').textContent)
-      .toBe('Understand the current position, priorities and constraints.');
+      .toBe(
+        'We review where the business, brand and channels stand today, and what is actually blocking growth.',
+      );
     expect(steps[0].querySelector('.process-step-details .process-meta-row:nth-child(1) dd').textContent)
       .toBe('Initial scope review');
     expect(steps[0].querySelector('.process-step-details .process-meta-row:nth-child(2) dd').textContent)
-      .toBe('Priority audit and brief');
+      .toBe('Written audit and a prioritised project brief');
 
     expect(steps[1].querySelector('.process-step-description').textContent)
-      .toBe('Create and coordinate the agreed system.');
+      .toBe(
+        'We create the agreed system: identity, campaigns, storefront, packaging, or the combination you need.',
+      );
     expect(steps[1].querySelector('.process-step-details .process-meta-row:nth-child(1) dd').textContent)
       .toBe('Approved roadmap');
     expect(steps[1].querySelector('.process-step-details .process-meta-row:nth-child(2) dd').textContent)
-      .toBe('Launch-ready system');
+      .toBe('Launch-ready assets and documented handover');
 
     expect(steps[2].querySelector('.process-step-description').textContent)
-      .toBe('Launch, measure and improve around evidence.');
+      .toBe(
+        'We launch, measure against the numbers set in stage one, and improve on a fixed monthly cycle.',
+      );
     expect(steps[2].querySelector('.process-step-details .process-meta-row:nth-child(1) dd').textContent)
       .toBe('Engagement cadence');
     expect(steps[2].querySelector('.process-step-details .process-meta-row:nth-child(2) dd').textContent)
-      .toBe('Review and next priorities');
+      .toBe('Monthly performance report and next-cycle priorities');
 
     expect(screen.getByRole('heading', { name: 'Raw Radicles' })).toBeInTheDocument();
-    expect(screen.getByText(/informs how we plan and structure client work/i))
+    expect(screen.getByText(/that is what shapes how we scope client work/i))
       .toBeInTheDocument();
   });
 
@@ -118,7 +152,7 @@ describe('Home page', () => {
 
     expect(screen.getByRole('heading', { name: 'Raw Radicles' })).toBeInTheDocument();
     expect(
-      screen.getByText(/formulation briefing, packaging, compliance inputs, photography, pricing, and route to market/i),
+      screen.getByText(/six 60 g bars across three collections, built with real cacao and Ayurvedic botanicals/i),
     ).toBeInTheDocument();
     expect(
       screen.queryByRole('region', { name: /what collaborators say/i }),

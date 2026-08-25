@@ -39,6 +39,17 @@ describe('Footer', () => {
       screen.queryByRole('button', { name: /get in touch/i }),
     ).not.toBeInTheDocument();
     expect(screen.getByText('Build with us')).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', {
+        level: 2,
+        name: 'Turn a promising idea into a working project.',
+      }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        'Tell us the context, the constraint and the outcome you need. We reply within one working day.',
+      ),
+    ).toBeInTheDocument();
     for (const link of screen.getAllByRole('link', { name: 'Start a project' })) {
       expect(link).toHaveAttribute('href', '/start');
     }

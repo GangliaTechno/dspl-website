@@ -5,11 +5,12 @@ const ProcessSteps = ({ steps }) => (
         <div>
           <span className="section-subtitle">How We Deliver</span>
           <h2 className="section-title" id="process-title">
-            How We Work With You
+            One accountable path, from audit to launch
           </h2>
         </div>
         <p className="section-title-description">
-          One accountable path from audit through launch and iteration.
+          Three stages, fixed outputs, agreed timelines. You know what arrives
+          and when.
         </p>
       </div>
 

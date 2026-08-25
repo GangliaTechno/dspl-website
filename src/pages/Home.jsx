@@ -26,17 +26,17 @@ const supporters = [
 const services = [
   {
     title: 'Branding',
-    text: 'Positioning, identity, voice, and reusable brand assets designed for consistent use across customer-facing channels.',
+    text: 'Positioning, identity, packaging and voice, delivered as a system your team can actually apply. You receive logo files, colour and type rules, packaging artwork templates and a written messaging guide.',
     link: '/branding',
   },
   {
     title: 'Marketing',
-    text: 'Search, paid media, content, measurement, and reporting planned around defined audiences and commercial priorities.',
+    text: 'SEO, paid campaigns on Google and Meta, content and reporting, planned against a defined audience and a monthly number you agree before we start.',
     link: '/marketing',
   },
   {
     title: 'E-commerce',
-    text: 'Storefront, marketplace, payment, and delivery systems scoped around the selected platform and operating workflow.',
+    text: 'Shopify, WooCommerce and custom storefronts, plus Amazon and Flipkart listings, payments and delivery setup, built to run without daily hand-holding.',
     link: '/ecommerce',
   },
 ];
@@ -45,23 +45,26 @@ const processSteps = [
   {
     number: '01',
     title: 'Audit',
-    description: 'Understand the current position, priorities and constraints.',
+    description:
+      'We review where the business, brand and channels stand today, and what is actually blocking growth.',
     timing: 'Initial scope review',
-    output: 'Priority audit and brief',
+    output: 'Written audit and a prioritised project brief',
   },
   {
     number: '02',
     title: 'Build',
-    description: 'Create and coordinate the agreed system.',
+    description:
+      'We create the agreed system: identity, campaigns, storefront, packaging, or the combination you need.',
     timing: 'Approved roadmap',
-    output: 'Launch-ready system',
+    output: 'Launch-ready assets and documented handover',
   },
   {
     number: '03',
     title: 'Grow',
-    description: 'Launch, measure and improve around evidence.',
+    description:
+      'We launch, measure against the numbers set in stage one, and improve on a fixed monthly cycle.',
     timing: 'Engagement cadence',
-    output: 'Review and next priorities',
+    output: 'Monthly performance report and next-cycle priorities',
   },
 ];
 
@@ -100,9 +103,10 @@ const Home = () => {
               </span>
             </h1>
             <p className="hero-subhead">
-              DSPL builds its own consumer brands and helps businesses grow
-              through coordinated branding, marketing, e-commerce and
-              compliance support.
+              Dashapatmaja Solutions is a Manipal-based company that develops
+              its own consumer brands and delivers branding, marketing,
+              e-commerce and product compliance support to businesses across
+              Karnataka and India.
             </p>
             <div className="home-hero-actions">
               <Link className="btn btn-primary" to="/start">
@@ -131,9 +135,9 @@ const Home = () => {
           <div className="services-intro">
             <span className="section-subtitle services-eyebrow">Capabilities</span>
             <h2 className="services-title" id="services-title">
-              <span className="services-title-primary">Brand, market, and commerce</span>
+              <span className="services-title-primary">Brand, market and commerce.</span>
               <span className="services-title-secondary">
-                Coordinated as one system.
+                Run as one system.
               </span>
             </h2>
           </div>
@@ -158,15 +162,16 @@ const Home = () => {
           <aside className="compliance-support-strip" aria-labelledby="compliance-support-title">
             <div className="compliance-support-header">
               <span className="section-subtitle">Supporting capability</span>
-              <h3 id="compliance-support-title">Compliance coordination</h3>
+              <h3 id="compliance-support-title">FSSAI and Legal Metrology support</h3>
             </div>
             <p className="compliance-support-text">
-              Packaging, labelling, listing, and commerce requirements coordinated
-              into the work, with regulated advice retained by qualified advisers.
+              Packaging, labelling, listing, and commerce inputs can be prepared
+              as part of the work, with regulated legal opinions retained by
+              qualified advisers.
             </p>
             <div className="compliance-support-links">
-              <Link to="/branding#compliance">Branding compliance <ArrowRight size={15} aria-hidden="true" /></Link>
-              <Link to="/ecommerce#compliance">E-commerce compliance <ArrowRight size={15} aria-hidden="true" /></Link>
+              <Link to="/branding#compliance">Branding and packaging compliance <ArrowRight size={15} aria-hidden="true" /></Link>
+              <Link to="/ecommerce#compliance">Marketplace and listing compliance <ArrowRight size={15} aria-hidden="true" /></Link>
             </div>
           </aside>
         </div>

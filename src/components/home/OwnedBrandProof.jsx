@@ -29,10 +29,12 @@ const OwnedBrandProof = ({ logoSrc }) => (
           Chocolate, reimagined through Ayurveda.
         </p>
         <p className="owned-brand-description">
-          DSPL coordinates formulation briefing, packaging, compliance
-          inputs, photography, pricing, and route to market for a
-          consumer brand it owns and operates. That experience informs how we
-          plan and structure client work.
+          Six 60 g bars across three collections, built with real cacao and
+          Ayurvedic botanicals. We wrote the formulation brief, designed the
+          packs, organised compliance inputs, shot the product, set the
+          pricing and planned the route to market. We own the brand, so we
+          carry the consequences of every one of those decisions. That is
+          what shapes how we scope client work.
         </p>
         <div className="owned-brand-actions">
           <Link to="/brands" className="btn btn-primary">

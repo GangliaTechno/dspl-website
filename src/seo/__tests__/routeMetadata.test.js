@@ -96,10 +96,11 @@ describe('route metadata', () => {
     });
   });
 
-  it('defines the approved Home description without a geographic qualifier', () => {
+  it('defines the approved Home metadata', () => {
     expect(getRouteMetadata('/')).toMatchObject({
+      title: 'Branding, Marketing & E-commerce Company in Manipal, Karnataka',
       description:
-        'DSPL builds its own consumer brands and helps businesses grow through coordinated branding, marketing, e-commerce and compliance support.',
+        'We build our own consumer brands and help Indian businesses build theirs. Branding, marketing, e-commerce and FSSAI compliance support from Manipal.',
     });
   });
 
@@ -112,9 +113,9 @@ describe('route metadata', () => {
       defaultOgImageHeight: 630,
     });
     expect(getRouteMetadata('/')).toMatchObject({
-      title: 'Dashapatmaja Solutions Pvt Ltd | Consumer Brand Building & Growth',
+      title: 'Branding, Marketing & E-commerce Company in Manipal, Karnataka',
       description:
-        'DSPL builds its own consumer brands and helps businesses grow through coordinated branding, marketing, e-commerce and compliance support.',
+        'We build our own consumer brands and help Indian businesses build theirs. Branding, marketing, e-commerce and FSSAI compliance support from Manipal.',
       image: SITE_CONFIG.defaultOgImage,
       imageAlt: SITE_CONFIG.defaultOgImageAlt,
       imageWidth: 1200,
@@ -123,7 +124,7 @@ describe('route metadata', () => {
   });
 
   it('keeps public-route descriptions free of India geographic qualifiers', () => {
-    const descriptions = PUBLIC_ROUTES.map(
+    const descriptions = PUBLIC_ROUTES.filter((route) => route !== '/').map(
       (route) => getRouteMetadata(route).description,
     );
 
