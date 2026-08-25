@@ -21,6 +21,7 @@
     "build": "npm run content:sync:strict && npm run build:site",
     "build:fallback": "npm run sync:fallback && npm run build:site",
     "verify:html": "npm run verify:og && node scripts/verify-prerender.mjs",
+    "verify:deployment": "node scripts/verify-deployment.mjs",
     "lint": "eslint .",
     "test": "vitest run",
     "preview": "vite preview"
