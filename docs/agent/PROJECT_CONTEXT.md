@@ -69,10 +69,12 @@ Current contract:
 - Deployment remains a separate action. Before deployment, configure the host
   branch as `main`, build command as `npm run build:fallback`,
   output directory as `dist`, and Node.js as `>=22.22.0`.
-- All merged local and remote branches were removed after `main` was verified at
-  the release SHA. Unmerged local `codex/finished-site-polish` and remote
-  `gaurang` remain pending the required explicit discard confirmation. The former
-  Phase 3 host-owned worktree is preserved in detached state.
+- `main` is the only local and remote branch. All merged branches were removed,
+  and the user explicitly discarded the two remaining unmerged refs. The former
+  Phase 3 host-owned worktree is preserved in detached state and owns no branch.
+- Pre-cleanup refs are recoverable from
+  `C:\Users\Pawan\.codex\backups\dspl-website-before-single-main-20260825-132821.bundle`
+  (SHA-256 `2ABDF1BAE387E990E549CF7F1B6E6CA9F05D66EA341187A3E5D23DF08AC4D7A2`).
 
 ## Last Verification
 Record only fresh evidence:
@@ -82,13 +84,12 @@ Record only fresh evidence:
 | 2026-08-21 IST | Pre-setup snapshot | `git status --short`; `git rev-parse HEAD`; SHA-256 of `src/generated/blogManifest.json` | Snapshot observed; tests not run during this setup pass | `8a6838e2a81dda1311e3c1b7c978df19745b68ac`; manifest `065BB53CA26002C24B65631636CD7809ACBE7F187357DEC2056303175CFF22D9` |
 | 2026-08-21 IST | Insights Editorial Signals | Focused Blogs test; focused ESLint; direct Vite build; `verify:html`; asset metadata/hash validation; `git diff --check`; browser QA at 1440x900 and 390x844 | 6/6 tests; lint clean; 15 pages prerendered; 14 routes plus 404 verified; six exact WebPs; zero public `.map`; no viewport overflow or console errors; fresh Sol/high review approved | HEAD unchanged; manifest `065BB53CA26002C24B65631636CD7809ACBE7F187357DEC2056303175CFF22D9`; work remains uncommitted |
 | 2026-08-24 IST | Sanity-backed Insights setup | Exact six-file recovery gate; full lint; full tests; strict live build; `verify:html`; manifest/sitemap/security/scope audits; fresh Sol/high holistic review | 197 focused tests; lint clean; 42 files / 393 tests; exact two live posts with no fallback; deterministic generated digest; 14 routes plus 404; three Insights HTML files; zero public `.map`; review approved with no P0-P3 findings | `454f9206608027fce9f9f907921031d6e543f3b9`; 21 Sanity paths remained unstaged before this ledger update; no Sanity-task commit/push/deploy |
-| 2026-08-25 IST | Phase 1-3 release merge and homepage social preview | Full tests; full lint; `build:fallback`; `verify:og`; `verify:html`; public-map audit; `git diff --check`; fresh Sol/high merge review | 43 files / 434 tests; lint clean; exact two fallback compliance articles; 15 prerendered pages; 14 routes plus 404 verified; six exact responsive WebPs; zero public `.map`; 1200x630 OG card parity verified; review approved with no P0-P3 findings | Merge `c9ecb4a05732e74f54319ff2f1cfc65879ead8b6` promoted through final context commit `09c9016cc56361287a13ba4ca81dd7bee500d9aa` to `origin/main`; merged branches removed; no deployment performed |
+| 2026-08-25 IST | Phase 1-3 release merge and homepage social preview | Full tests; full lint; `build:fallback`; `verify:og`; `verify:html`; public-map audit; `git diff --check`; fresh Sol/high merge review | 43 files / 434 tests; lint clean; exact two fallback compliance articles; 15 prerendered pages; 14 routes plus 404 verified; six exact responsive WebPs; zero public `.map`; 1200x630 OG card parity verified; review approved with no P0-P3 findings | Merge `c9ecb4a05732e74f54319ff2f1cfc65879ead8b6` promoted to `origin/main`; final pre-cleanup context commit `d50b3477913bd6f60b3ce62404146b98f379078d`; one local/remote branch remains; no deployment performed |
 
 ## Next Authorized Action
 
 - Keep Sanity dormant and use the fallback build path. Wait for explicit
-  authorization before deployment. Delete the two remaining unmerged refs only
-  after the required exact discard confirmation.
+  authorization before deployment.
 
 ## Update Contract
 - Coordinator updates this file after an accepted plan, completed task, review, or changed blocker.
