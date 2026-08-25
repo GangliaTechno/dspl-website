@@ -40,7 +40,7 @@ export async function runBootstrap({
   ) {
     throw new Error('Sanity bootstrap target configuration does not match.');
   }
-  if (!['dry-run', 'apply'].includes(mode) || !Array.isArray(documents) || documents.length !== 4) {
+  if (!['dry-run', 'apply'].includes(mode) || !Array.isArray(documents) || documents.length !== 2) {
     throw new Error('Sanity bootstrap contract is invalid.');
   }
 

@@ -92,20 +92,16 @@ describe('Sanity setup contract', () => {
     expect(sanityCliSource).toContain("appId: 'j2rcsz1kc9nebl9n1ga0o01j'");
   });
 
-  it('converts the four approved seeds to stable import documents', () => {
+  it('converts the two approved compliance seeds to stable import documents', () => {
     const documents = createSanityImportDocuments(seedBlogPosts);
 
     expect(documents.map(({ _id }) => _id)).toEqual([
       'seed-post-fssai-labelling-requirements-checklist-2026',
       'seed-post-legal-metrology-packaged-commodity-rules-india',
-      'seed-post-coordinating-brand-market-commerce',
-      'seed-post-from-packaging-to-purchase',
     ]);
     expect(documents.map(({ slug }) => slug.current)).toEqual([
       'fssai-labelling-requirements-checklist-2026',
       'legal-metrology-packaged-commodity-rules-india',
-      'coordinating-brand-market-commerce',
-      'from-packaging-to-purchase',
     ]);
     expect(documents.every(({ _type }) => _type === 'blogPost')).toBe(true);
     for (const document of documents) {
@@ -125,20 +121,20 @@ describe('Sanity setup contract', () => {
     expect(fssaiDoc.seo.metaTitle).toBe('FSSAI Labelling Requirements 2026: A Practical Checklist');
 
     const lines = serializeSanityImport(seedBlogPosts).trimEnd().split('\n');
-    expect(lines).toHaveLength(4);
+    expect(lines).toHaveLength(2);
     expect(lines.map(JSON.parse)).toEqual(documents);
   });
 
   it('rejects an unapproved or incomplete set of import documents', () => {
-    expect(() => createSanityImportDocuments(seedBlogPosts.slice(0, 2))).toThrow(
-      /Bootstrap must contain exactly the four approved Insights articles/,
+    expect(() => createSanityImportDocuments(seedBlogPosts.slice(0, 1))).toThrow(
+      /Bootstrap must contain exactly the two approved Insights compliance articles/,
     );
     expect(() =>
       createSanityImportDocuments([
-        ...seedBlogPosts.slice(0, 3),
+        ...seedBlogPosts,
         { ...seedBlogPosts[0], slug: { current: 'unapproved-slug' } },
       ]),
-    ).toThrow(/Bootstrap must contain exactly the four approved Insights articles/);
+    ).toThrow(/Bootstrap must contain exactly the two approved Insights compliance articles/);
   });
 
   it('uses the authenticated transaction bootstrap and documents non-secret variables', () => {

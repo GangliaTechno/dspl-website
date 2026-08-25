@@ -24,6 +24,11 @@ export const createBlogPostMetadata = (post, isBlogOpen = true) => {
     || post.mainImage?.asset?.url
     || SITE_CONFIG.defaultOgImage;
 
+  // Ensure image is always an absolute URL for og:image and JSON-LD
+  const absoluteImage = typeof image === 'string' && image.startsWith('/')
+    ? `${siteUrl}${image}`
+    : image;
+
   const blogPosting = {
     '@type': 'BlogPosting',
     headline: post.title,
@@ -37,7 +42,7 @@ export const createBlogPostMetadata = (post, isBlogOpen = true) => {
     },
     articleSection: post.category,
     publisher: organizationStructuredData,
-    image: image.startsWith('http') ? image : `${siteUrl}${image}`,
+    image: absoluteImage,
     ...(post.authors?.length > 0 && {
       author: post.authors.map((author) => ({
         '@type': 'Person',
@@ -76,7 +81,7 @@ export const createBlogPostMetadata = (post, isBlogOpen = true) => {
     description,
     canonical: canonicalPath,
     type: 'article',
-    image,
+    image: absoluteImage,
     robots: isBlogOpen ? 'index, follow' : 'noindex, follow',
     structuredData,
   };

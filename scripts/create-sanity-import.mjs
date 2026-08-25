@@ -3,11 +3,14 @@ import { fileURLToPath } from 'node:url';
 import { seedBlogPosts } from '../src/cms/seedData.js';
 
 const APPROVED_SLUGS = new Set([
-  'coordinating-brand-market-commerce',
-  'from-packaging-to-purchase',
   'fssai-labelling-requirements-checklist-2026',
   'legal-metrology-packaged-commodity-rules-india',
 ]);
+
+/** Returns true only for genuine Sanity image asset references. */
+function isSanityAssetRef(ref) {
+  return typeof ref === 'string' && ref.startsWith('image-');
+}
 
 export function createSanityImportDocuments(posts = seedBlogPosts) {
   const slugs = posts.map((post) => post.slug?.current);
@@ -18,7 +21,7 @@ export function createSanityImportDocuments(posts = seedBlogPosts) {
     || uniqueSlugs.size !== APPROVED_SLUGS.size
     || [...APPROVED_SLUGS].some((slug) => !uniqueSlugs.has(slug))
   ) {
-    throw new Error('Bootstrap must contain exactly the four approved Insights articles.');
+    throw new Error('Bootstrap must contain exactly the two approved Insights compliance articles.');
   }
 
   const ids = new Set();
@@ -52,7 +55,9 @@ export function createSanityImportDocuments(posts = seedBlogPosts) {
     if (references?.length) doc.references = references;
     if (closingCta) doc.closingCta = closingCta;
     if (seo) doc.seo = seo;
-    if (mainImage) doc.mainImage = mainImage;
+    // Only import mainImage when backed by a genuine Sanity asset reference.
+    // Local fallback objects with asset.url pointing to /insights/... are omitted.
+    if (mainImage && isSanityAssetRef(mainImage?.asset?._ref)) doc.mainImage = mainImage;
 
     return doc;
   });

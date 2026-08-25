@@ -4,44 +4,21 @@ import { blogPosts, hasPublishableBlog } from '../content/publication';
 import useSEO from '../hooks/useSEO';
 import { getRouteMetadata } from '../seo/routeMetadata';
 import { formatPublicationDate } from '../utils/publicationUtils';
-import brandMarketCommerce640 from '../assets/insights-brand-market-commerce-640.webp';
-import brandMarketCommerce960 from '../assets/insights-brand-market-commerce-960.webp';
-import brandMarketCommerce1440 from '../assets/insights-brand-market-commerce-1440.webp';
-import packagingToPurchase640 from '../assets/insights-packaging-to-purchase-640.webp';
-import packagingToPurchase960 from '../assets/insights-packaging-to-purchase-960.webp';
-import packagingToPurchase1440 from '../assets/insights-packaging-to-purchase-1440.webp';
-
-const editorialArtworkBySlug = Object.freeze({
-  'coordinating-brand-market-commerce': {
-    alt: 'Abstract signal geometry connecting brand, market, and commerce systems',
-    src: brandMarketCommerce1440,
-    srcSet: `${brandMarketCommerce640} 640w, ${brandMarketCommerce960} 960w, ${brandMarketCommerce1440} 1440w`,
-  },
-  'from-packaging-to-purchase': {
-    alt: 'Abstract signal geometry tracing a consumer-brand launch from packaging to purchase',
-    src: packagingToPurchase960,
-    srcSet: `${packagingToPurchase640} 640w, ${packagingToPurchase960} 960w, ${packagingToPurchase1440} 1440w`,
-  },
-});
-
 function resolveArtwork(post) {
-  if (post?.mainImage?.asset?.url) {
-    const dimensions = post.mainImage.asset.metadata?.dimensions;
-    return {
-      src: post.mainImage.asset.url,
-      alt: post.mainImage.alt || '',
-      width: dimensions?.width || null,
-      height: dimensions?.height || null,
-    };
-  }
-  if (post?.slug && editorialArtworkBySlug[post.slug]) {
-    return {
-      ...editorialArtworkBySlug[post.slug],
-      width: 1440,
-      height: 810,
-    };
-  }
-  return null;
+  const mi = post?.mainImage;
+  if (!mi?.asset?.url) return null;
+  const dimensions = mi.asset.metadata?.dimensions;
+  const responsive = mi.responsive;
+  const srcSet = responsive
+    ? `${responsive['640']} 640w, ${responsive['960']} 960w, ${responsive['1440']} 1440w`
+    : undefined;
+  return {
+    src: mi.asset.url,
+    alt: mi.alt || '',
+    width: dimensions?.width || 1440,
+    height: dimensions?.height || 810,
+    srcSet,
+  };
 }
 
 const StoryKicker = ({ category, readingTime }) => (

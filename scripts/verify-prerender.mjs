@@ -269,6 +269,18 @@ for (const { label, title } of duplicateTitles) {
   failures.push(`${label}: duplicate title "${title}"`);
 }
 
+// Verify removed articles are absent from the dist output.
+const REMOVED_BLOG_ROUTES = [
+  'blogs/coordinating-brand-market-commerce',
+  'blogs/from-packaging-to-purchase',
+];
+for (const removedRoute of REMOVED_BLOG_ROUTES) {
+  const removedPath = path.join('dist', removedRoute, 'index.html');
+  if (fs.existsSync(removedPath)) {
+    failures.push(`/${removedRoute}: removed article was found in dist output and must not be prerendered`);
+  }
+}
+
 if (failures.length) {
   console.error(`Prerender verification failed:\n- ${failures.join('\n- ')}`);
   process.exit(1);

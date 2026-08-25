@@ -38,7 +38,7 @@ describe('publication gates', () => {
     expect(BLOG_MINIMUM_POSTS).toBe(2);
     expect(approvedTestimonials).toEqual([]);
     expect(packagingItems).toEqual([]);
-    expect(blogPosts).toHaveLength(4);
+    expect(blogPosts).toHaveLength(2);
     expect(blogsEnabled).toBe(true);
   });
 
@@ -54,14 +54,14 @@ describe('publication gates', () => {
   it('provides deterministic lookup and route helpers', () => {
     expect(getPublishedBlogPosts()).toEqual(blogPosts);
 
-    const firstPost = getBlogPostSummary('coordinating-brand-market-commerce');
+    const firstPost = getBlogPostSummary('fssai-labelling-requirements-checklist-2026');
     expect(firstPost).toMatchObject({
-      slug: 'coordinating-brand-market-commerce',
-      title: 'Coordinating Brand, Market, and Commerce as One System',
-      category: 'Branding',
+      slug: 'fssai-labelling-requirements-checklist-2026',
+      title: 'FSSAI Labelling Requirements for Packaged Food',
+      category: 'Compliance',
     });
 
-    const caseInsensitive = getBlogPostSummary('COORDINATING-BRAND-MARKET-COMMERCE');
+    const caseInsensitive = getBlogPostSummary('fssai-labelling-requirements-checklist-2026');
     expect(caseInsensitive).toEqual(firstPost);
 
     expect(getBlogPostSummary('unknown-slug')).toBeUndefined();
@@ -69,14 +69,10 @@ describe('publication gates', () => {
     const paths = getPublishedBlogPaths();
     expect(paths).toContain('/blogs/fssai-labelling-requirements-checklist-2026');
     expect(paths).toContain('/blogs/legal-metrology-packaged-commodity-rules-india');
-    expect(paths).toContain('/blogs/coordinating-brand-market-commerce');
-    expect(paths).toContain('/blogs/from-packaging-to-purchase');
 
     expect(isPublishedBlogRoute('/blogs')).toBe(true);
     expect(isPublishedBlogRoute('/blogs/fssai-labelling-requirements-checklist-2026')).toBe(true);
     expect(isPublishedBlogRoute('/blogs/legal-metrology-packaged-commodity-rules-india')).toBe(true);
-    expect(isPublishedBlogRoute('/blogs/coordinating-brand-market-commerce')).toBe(true);
-    expect(isPublishedBlogRoute('/blogs/from-packaging-to-purchase')).toBe(true);
     expect(isPublishedBlogRoute('/blogs/missing-article')).toBe(false);
   });
 });

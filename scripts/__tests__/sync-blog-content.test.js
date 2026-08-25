@@ -39,8 +39,8 @@ const makeManifest = () => ({
 });
 
 const makeArticleMap = () => new Map([
-  ['coordinating-brand-market-commerce', { slug: 'coordinating-brand-market-commerce', body: [] }],
-  ['from-packaging-to-purchase', { slug: 'from-packaging-to-purchase', body: [] }],
+  ['fssai-labelling-requirements-checklist-2026', { slug: 'fssai-labelling-requirements-checklist-2026', body: [] }],
+  ['legal-metrology-packaged-commodity-rules-india', { slug: 'legal-metrology-packaged-commodity-rules-india', body: [] }],
 ]);
 
 const validSanityEnv = {
@@ -302,8 +302,8 @@ describe('CMS slug and article snapshot path boundary', () => {
   });
 
   it.each([
-    'coordinating-brand-market-commerce',
-    'from-packaging-to-purchase',
+    'fssai-labelling-requirements-checklist-2026',
+    'legal-metrology-packaged-commodity-rules-india',
   ])('preserves approved slug %s and resolves it to one exact child file', (slug) => {
     const normalized = normalizeBlogSlug(slug);
     const resolved = resolveArticleSnapshotPath(generatedBlogDir, slug);
@@ -315,14 +315,14 @@ describe('CMS slug and article snapshot path boundary', () => {
   });
 
   it('trims and lowercases uppercase CMS slugs consistently', () => {
-    const rawSlug = '  FROM-PACKAGING-TO-PURCHASE  ';
+    const rawSlug = '  legal-metrology-packaged-commodity-rules-india  ';
 
-    expect(normalizeBlogSlug(rawSlug)).toBe('from-packaging-to-purchase');
+    expect(normalizeBlogSlug(rawSlug)).toBe('legal-metrology-packaged-commodity-rules-india');
     expect(resolveArticleSnapshotPath(generatedBlogDir, rawSlug)).toBe(
-      path.join(generatedBlogDir, 'from-packaging-to-purchase.json'),
+      path.join(generatedBlogDir, 'legal-metrology-packaged-commodity-rules-india.json'),
     );
     expect(validateAndProcessPosts([makePost(rawSlug)]).processedPosts[0].slug).toBe(
-      'from-packaging-to-purchase',
+      'legal-metrology-packaged-commodity-rules-india',
     );
   });
 
@@ -332,14 +332,10 @@ describe('CMS slug and article snapshot path boundary', () => {
     expect(result.processedPosts.map(({ slug }) => slug)).toEqual([
       'fssai-labelling-requirements-checklist-2026',
       'legal-metrology-packaged-commodity-rules-india',
-      'coordinating-brand-market-commerce',
-      'from-packaging-to-purchase',
     ]);
     expect(Array.from(result.fullArticleMap.keys())).toEqual([
       'fssai-labelling-requirements-checklist-2026',
       'legal-metrology-packaged-commodity-rules-india',
-      'coordinating-brand-market-commerce',
-      'from-packaging-to-purchase',
     ]);
   });
 
@@ -441,7 +437,7 @@ describe('preflight-first article snapshot writes', () => {
   ])('preflights every map entry for %s before any sink call', (_label, invalidSlug) => {
     const sink = makeSink();
     const fullArticleMap = new Map([
-      ['coordinating-brand-market-commerce', { slug: 'coordinating-brand-market-commerce' }],
+      ['fssai-labelling-requirements-checklist-2026', { slug: 'fssai-labelling-requirements-checklist-2026' }],
       [invalidSlug, { slug: invalidSlug }],
     ]);
 
@@ -471,14 +467,14 @@ describe('preflight-first article snapshot writes', () => {
     expect(sink.writeFileSync).toHaveBeenCalledTimes(3);
     expect(sink.writeFileSync).toHaveBeenNthCalledWith(
       1,
-      path.join(generatedBlogDir, 'coordinating-brand-market-commerce.json'),
-      JSON.stringify(fullArticleMap.get('coordinating-brand-market-commerce'), null, 2),
+      path.join(generatedBlogDir, 'fssai-labelling-requirements-checklist-2026.json'),
+      JSON.stringify(fullArticleMap.get('fssai-labelling-requirements-checklist-2026'), null, 2),
       'utf8',
     );
     expect(sink.writeFileSync).toHaveBeenNthCalledWith(
       2,
-      path.join(generatedBlogDir, 'from-packaging-to-purchase.json'),
-      JSON.stringify(fullArticleMap.get('from-packaging-to-purchase'), null, 2),
+      path.join(generatedBlogDir, 'legal-metrology-packaged-commodity-rules-india.json'),
+      JSON.stringify(fullArticleMap.get('legal-metrology-packaged-commodity-rules-india'), null, 2),
       'utf8',
     );
     expect(sink.writeFileSync).toHaveBeenNthCalledWith(
@@ -496,10 +492,10 @@ describe('preflight-first article snapshot writes', () => {
     const sink = makeSink();
     const events = [];
     sink.readdirSync.mockReturnValue([
-      makeDirent('from-packaging-to-purchase.json'),
+      makeDirent('legal-metrology-packaged-commodity-rules-india.json'),
       makeDirent('obsolete-zeta.json'),
       makeDirent('notes.txt'),
-      makeDirent('coordinating-brand-market-commerce.json'),
+      makeDirent('fssai-labelling-requirements-checklist-2026.json'),
       makeDirent('obsolete-alpha.json'),
     ]);
     sink.mkdirSync.mockImplementation(() => events.push('mkdir'));
@@ -516,8 +512,8 @@ describe('preflight-first article snapshot writes', () => {
 
     expect(events).toEqual([
       'mkdir',
-      'write:coordinating-brand-market-commerce.json',
-      'write:from-packaging-to-purchase.json',
+      'write:fssai-labelling-requirements-checklist-2026.json',
+      'write:legal-metrology-packaged-commodity-rules-india.json',
       'unlink:obsolete-alpha.json',
       'unlink:obsolete-zeta.json',
       'write:blogManifest.json',
@@ -615,15 +611,15 @@ describe('preflight-first article snapshot writes', () => {
     })).toThrow('unlink failed');
     expect(sink.writeFileSync).toHaveBeenCalledTimes(2);
     expect(sink.writeFileSync.mock.calls.map(([target]) => path.basename(target))).toEqual([
-      'coordinating-brand-market-commerce.json',
-      'from-packaging-to-purchase.json',
+      'fssai-labelling-requirements-checklist-2026.json',
+      'legal-metrology-packaged-commodity-rules-india.json',
     ]);
   });
 
   it.each([
     ['cyclic manifest', (() => { const value = {}; value.self = value; return value; })()],
     ['BigInt article', new Map([
-      ['coordinating-brand-market-commerce', { slug: 'coordinating-brand-market-commerce', value: 1n }],
+      ['fssai-labelling-requirements-checklist-2026', { slug: 'fssai-labelling-requirements-checklist-2026', value: 1n }],
     ])],
   ])('rejects %s before any mutation', (_label, value) => {
     const sink = makeSink();
@@ -644,8 +640,8 @@ describe('preflight-first article snapshot writes', () => {
 
   it('converges on a second run using only non-call-through fake sink functions', () => {
     let inventory = [
-      'coordinating-brand-market-commerce.json',
-      'from-packaging-to-purchase.json',
+      'fssai-labelling-requirements-checklist-2026.json',
+      'legal-metrology-packaged-commodity-rules-india.json',
       'obsolete.json',
     ];
     const sink = makeSink();
@@ -670,8 +666,8 @@ describe('preflight-first article snapshot writes', () => {
     write();
 
     expect(inventory.sort()).toEqual([
-      'coordinating-brand-market-commerce.json',
-      'from-packaging-to-purchase.json',
+      'fssai-labelling-requirements-checklist-2026.json',
+      'legal-metrology-packaged-commodity-rules-india.json',
     ].sort());
     expect(sink.unlinkSync).toHaveBeenCalledTimes(1);
     expect(sink.readdirSync).toHaveBeenCalledTimes(2);
@@ -1001,21 +997,19 @@ describe('Phase 2 content model and validation pipeline', () => {
     expect(resNull.processedPosts[0].seo.ogImage).toBeNull();
   });
 
-  it('processes all four seed posts into a deterministic manifest with correct ordering', () => {
+  it('processes all two compliance seed posts into a deterministic manifest with correct ordering', () => {
     const { processedPosts, fullArticleMap } = validateAndProcessPosts(seedBlogPosts);
-    expect(processedPosts).toHaveLength(4);
-    expect(fullArticleMap.size).toBe(4);
+    expect(processedPosts).toHaveLength(2);
+    expect(fullArticleMap.size).toBe(2);
 
     const manifest = createBlogManifest(processedPosts);
     expect(manifest.blogsEnabled).toBe(true);
-    expect(manifest.totalPosts).toBe(4);
+    expect(manifest.totalPosts).toBe(2);
 
-    // Newest publishedAt (2026-08-24) first, sorted by slug alphabetically
+    // Both posts have publishedAt 2026-08-24; sorted alphabetically by slug
     expect(manifest.posts.map((p) => p.slug)).toEqual([
       'fssai-labelling-requirements-checklist-2026',
       'legal-metrology-packaged-commodity-rules-india',
-      'coordinating-brand-market-commerce',
-      'from-packaging-to-purchase',
     ]);
 
     // Check reading times on compliance posts

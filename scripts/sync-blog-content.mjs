@@ -480,6 +480,49 @@ function normalizeSeoOgImage(seo) {
   };
 }
 
+/**
+ * Normalizes a mainImage from either the fallback seed data (responsive map already present)
+ * or from Sanity GROQ output (derive CDN responsive URLs from the asset URL).
+ *
+ * Sanity CDN URLs are identified by hostname === 'cdn.sanity.io'. Transform URLs are built
+ * safely using URL/searchParams so existing query parameters are not accidentally destroyed.
+ *
+ * Returns null when no usable mainImage is present.
+ */
+export function normalizeMainImage(mainImage) {
+  if (!mainImage?.asset?.url || !mainImage.alt) return null;
+
+  const { alt, asset, responsive: existingResponsive } = mainImage;
+  const { url, metadata } = asset;
+
+  // Preserve existing responsive map (local fallback data)
+  if (existingResponsive && typeof existingResponsive === 'object') {
+    return { alt, asset: { url, metadata }, responsive: existingResponsive };
+  }
+
+  // Derive responsive map from Sanity CDN
+  let isSanityCdn = false;
+  try {
+    isSanityCdn = new URL(url).hostname === 'cdn.sanity.io';
+  } catch {
+    isSanityCdn = false;
+  }
+
+  if (isSanityCdn) {
+    const responsive = {};
+    for (const width of [640, 960, 1440]) {
+      const transformed = new URL(url);
+      transformed.searchParams.set('w', String(width));
+      transformed.searchParams.set('auto', 'format');
+      responsive[width] = transformed.toString();
+    }
+    return { alt, asset: { url, metadata }, responsive };
+  }
+
+  // Non-CDN URL with no responsive map: return as-is with no srcSet
+  return { alt, asset: { url, metadata }, responsive: null };
+}
+
 function resolveReadingTime(raw, body) {
   const override = raw.readingTimeMinutes;
   if (override === undefined || override === null) {
@@ -631,7 +674,7 @@ export function validateAndProcessPosts(rawPosts) {
       readingTime,
       headings,
       authors: raw.authors?.length ? raw.authors : null,
-      mainImage: raw.mainImage || null,
+      mainImage: normalizeMainImage(raw.mainImage),
       seo: normalizeSeoOgImage(raw.seo),
     };
 

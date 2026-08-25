@@ -85,7 +85,24 @@
       "name": "Pawan Shetty"
     }
   ],
-  "mainImage": null,
+  "mainImage": {
+    "alt": "Packaged food artwork and back-of-pack label panels arranged for a compliance review.",
+    "asset": {
+      "url": "/insights/fssai-labelling-v1-1440.webp",
+      "metadata": {
+        "dimensions": {
+          "width": 1440,
+          "height": 810,
+          "aspectRatio": 1.7777777777777777
+        }
+      }
+    },
+    "responsive": {
+      "640": "/insights/fssai-labelling-v1-640.webp",
+      "960": "/insights/fssai-labelling-v1-960.webp",
+      "1440": "/insights/fssai-labelling-v1-1440.webp"
+    }
+  },
   "seo": {
     "metaTitle": "FSSAI Labelling Requirements 2026: A Practical Checklist",
     "metaDescription": "Every mandatory declaration on an Indian food label in 2026, the font sizes, the allergen rules, the 2027 changes, and the mistakes that cost brands a reprint.",
