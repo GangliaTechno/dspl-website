@@ -4,6 +4,7 @@ import { seedBlogPosts } from '../../src/cms/seedData.js';
 import {
   createBlogManifest,
   normalizeBlogSlug,
+  normalizeMainImage,
   resolveArticleSnapshotPath,
   resolveBlogSource,
   resolveSanitySyncTarget,
@@ -995,6 +996,43 @@ describe('Phase 2 content model and validation pipeline', () => {
     postNullOg.seo = { metaTitle: 'Title', ogImage: null };
     const resNull = validateAndProcessPosts([postNullOg]);
     expect(resNull.processedPosts[0].seo.ogImage).toBeNull();
+  });
+
+  it('normalizes mainImage preserving caption, responsive map, and deriving Sanity CDN URLs', () => {
+    expect(normalizeMainImage(null)).toBeNull();
+    expect(normalizeMainImage({})).toBeNull();
+    expect(normalizeMainImage({ alt: 'Alt' })).toBeNull();
+
+    // Preserves caption and existing responsive map
+    const fallbackImage = {
+      alt: 'Test Alt',
+      caption: 'Test Caption',
+      asset: { url: '/insights/test.webp', metadata: { dimensions: { width: 1440, height: 810 } } },
+      responsive: { 640: '/insights/test-640.webp', 960: '/insights/test-960.webp', 1440: '/insights/test-1440.webp' },
+    };
+    const normFallback = normalizeMainImage(fallbackImage);
+    expect(normFallback).toEqual({
+      alt: 'Test Alt',
+      caption: 'Test Caption',
+      asset: { url: '/insights/test.webp', metadata: { dimensions: { width: 1440, height: 810 } } },
+      responsive: { 640: '/insights/test-640.webp', 960: '/insights/test-960.webp', 1440: '/insights/test-1440.webp' },
+    });
+
+    // Derives responsive map for Sanity CDN URLs and retains caption
+    const sanityImage = {
+      alt: 'Sanity Alt',
+      caption: 'Sanity Caption',
+      asset: {
+        url: 'https://cdn.sanity.io/images/project/dataset/image-abc-1440x810-webp.webp',
+        metadata: { dimensions: { width: 1440, height: 810 } },
+      },
+    };
+    const normSanity = normalizeMainImage(sanityImage);
+    expect(normSanity.alt).toBe('Sanity Alt');
+    expect(normSanity.caption).toBe('Sanity Caption');
+    expect(normSanity.responsive['640']).toBe('https://cdn.sanity.io/images/project/dataset/image-abc-1440x810-webp.webp?w=640&auto=format');
+    expect(normSanity.responsive['960']).toBe('https://cdn.sanity.io/images/project/dataset/image-abc-1440x810-webp.webp?w=960&auto=format');
+    expect(normSanity.responsive['1440']).toBe('https://cdn.sanity.io/images/project/dataset/image-abc-1440x810-webp.webp?w=1440&auto=format');
   });
 
   it('processes all two compliance seed posts into a deterministic manifest with correct ordering', () => {

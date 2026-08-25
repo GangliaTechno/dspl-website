@@ -492,12 +492,17 @@ function normalizeSeoOgImage(seo) {
 export function normalizeMainImage(mainImage) {
   if (!mainImage?.asset?.url || !mainImage.alt) return null;
 
-  const { alt, asset, responsive: existingResponsive } = mainImage;
+  const { alt, caption, asset, responsive: existingResponsive } = mainImage;
   const { url, metadata } = asset;
 
   // Preserve existing responsive map (local fallback data)
   if (existingResponsive && typeof existingResponsive === 'object') {
-    return { alt, asset: { url, metadata }, responsive: existingResponsive };
+    return {
+      alt,
+      ...(caption ? { caption } : {}),
+      asset: { url, metadata },
+      responsive: existingResponsive,
+    };
   }
 
   // Derive responsive map from Sanity CDN
@@ -516,11 +521,21 @@ export function normalizeMainImage(mainImage) {
       transformed.searchParams.set('auto', 'format');
       responsive[width] = transformed.toString();
     }
-    return { alt, asset: { url, metadata }, responsive };
+    return {
+      alt,
+      ...(caption ? { caption } : {}),
+      asset: { url, metadata },
+      responsive,
+    };
   }
 
   // Non-CDN URL with no responsive map: return as-is with no srcSet
-  return { alt, asset: { url, metadata }, responsive: null };
+  return {
+    alt,
+    ...(caption ? { caption } : {}),
+    asset: { url, metadata },
+    responsive: null,
+  };
 }
 
 function resolveReadingTime(raw, body) {

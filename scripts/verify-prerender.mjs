@@ -220,6 +220,16 @@ for (const { route, heading, type, post } of routes) {
     if (!/<meta\b[^>]*property=["']og:type["'][^>]*content=["']article["'][^>]*>/i.test(html)) {
       failures.push(`${label}: missing og:type="article"`);
     }
+    const expectedImage = post?.mainImage?.asset?.url?.startsWith('/')
+      ? `https://dashapatmaja.in${post.mainImage.asset.url}`
+      : post?.mainImage?.asset?.url;
+
+    if (
+      expectedImage &&
+      !html.includes(`property="og:image" content="${expectedImage}"`)
+    ) {
+      failures.push(`${label}: og:image does not match article mainImage`);
+    }
     verifyBlogPostingSchema(html, label, post);
   } else {
     verifyOrganizationSchema(html, label);
