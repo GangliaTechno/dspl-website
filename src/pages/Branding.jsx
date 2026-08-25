@@ -6,6 +6,7 @@ import brandingWorkshop021440 from '../assets/branding-workshop-02-1440.webp';
 import brandingWorkshop02Mobile from '../assets/branding-workshop-02-mobile.webp';
 import ServicePage from '../components/ServicePage';
 import { approvedTestimonials } from '../content/publication';
+import { BRANDING_FAQS } from '../content/serviceFaqs';
 import { getRouteMetadata } from '../seo/routeMetadata';
 
 const offers = [
@@ -59,28 +60,7 @@ const compliance = {
   disclaimer: 'DSPL coordinates implementation and does not act as a regulator, licensing authority, or legal adviser.',
 };
 
-const faqs = [
-  {
-    q: 'What can a branding engagement include?',
-    a: 'Scope can include positioning, naming, identity, voice, packaging or application guidelines, compliance coordination, and reusable assets. The proposal identifies which are required.',
-  },
-  {
-    q: 'Can you work with an existing brand?',
-    a: 'Yes. We first identify what should be retained, clarified, or replaced, then define the refresh scope against current business needs.',
-  },
-  {
-    q: 'Can branding work include packaging?',
-    a: 'Yes, when packaging is in scope. We can coordinate structure, information hierarchy, artwork application, and approved label content, while regulated advice and formal approvals remain with the appropriate qualified professionals.',
-  },
-  {
-    q: 'How do reviews and approvals work?',
-    a: 'The proposal defines review stages, decision-makers, and revision responsibilities so feedback, approvals, and handover remain controlled.',
-  },
-  {
-    q: 'What is included in the handover?',
-    a: 'We provide the agreed source files, usage guidance, templates, and a handover for the people responsible for implementation.',
-  },
-];
+const faqs = BRANDING_FAQS;
 
 const heroImages = [
   {

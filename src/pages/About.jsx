@@ -17,6 +17,7 @@ import sreeImg from '../assets/sree_pro_extended.webp';
 import drImg from '../assets/dr_pro.webp';
 import anushaImg from '../assets/Anusha-mam_pro.webp';
 import nameshImg from '../assets/ceo_pro.webp';
+import { CONFIRMED_TEAM_MEMBERS } from '../content/teamMembers';
 import aboutTeam01960 from '../assets/about-team-01-960.webp';
 import aboutTeam011440 from '../assets/about-team-01-1440.webp';
 import aboutTeam01Mobile from '../assets/about-team-01-mobile.webp';
@@ -113,17 +114,17 @@ const directionCards = [
   {
     label: 'Long-term direction',
     title: 'Vision',
-    text: 'To build a portfolio of Indian consumer brands that earn shelf space on quality, and to give other founders the same operating support we built for ourselves.',
+    text: 'Build a focused portfolio of consumer brands and a disciplined operating system that can also help other businesses move from idea to market.',
   },
   {
     label: 'Our mandate',
     title: 'Mission',
-    text: 'We run our own brands end to end, from formulation brief to marketplace listing. We use that experience to scope, price and deliver branding, marketing, e-commerce and compliance work for clients who are building something similar.',
+    text: 'Develop and operate DSPL-owned brands while providing clearly scoped branding, marketing, e-commerce, and compliance coordination to businesses that need practical execution.',
   },
   {
     label: 'Operating principles',
     title: 'Values',
-    text: 'We quote what the work costs, not what the client hopes it costs. We put scope, ownership and measures in writing before we start. We tell clients when an idea will not work, including when it is our own.',
+    text: 'Work with clarity, evidence, and accountability: define scope before starting, keep responsibilities visible, and make decisions that can be explained and reviewed.',
   },
 ];
 
@@ -148,6 +149,55 @@ const aboutHeroImages = [
   },
 ];
 
+const TEAM_PRESENTATION = {
+  'manu-sudhi': {
+    initial: 'MS',
+    image: manuImg,
+    width: 1024,
+    height: 1024,
+    objectPosition: 'center',
+    scale: 1.04,
+    transformOrigin: '50% 42%',
+  },
+  'dasharathraj-k-shetty': {
+    initial: 'DS',
+    image: drImg,
+    width: 358,
+    height: 354,
+    objectPosition: 'center',
+    scale: 1.06,
+    transformOrigin: '50% 40%',
+  },
+  'shreepathy-rangabhatta': {
+    name: 'Dr. Shreepathy Rangabhatta B',
+    initial: 'SR',
+    image: sreeImg,
+    width: 640,
+    height: 640,
+    objectPosition: 'center',
+    scale: 1.45,
+    transformOrigin: '50% 43%',
+  },
+  'anusha-pai': {
+    initial: 'AP',
+    image: anushaImg,
+    width: 302,
+    height: 302,
+    objectPosition: 'center',
+    scale: 1.08,
+    transformOrigin: '50% 40%',
+  },
+  'namesh-malarout': {
+    initial: 'NM',
+    image: nameshImg,
+    width: 332,
+    height: 327,
+    objectPosition: 'center',
+    scale: 1.9,
+    transformOrigin: '50% 28%',
+  },
+};
+
 const About = () => {
   const prefersReducedMotion = useReducedMotion();
   const revealInitial = (y) =>
@@ -155,73 +205,10 @@ const About = () => {
 
   useSEO(getRouteMetadata('/about'));
 
-  const team = [
-    {
-      name: 'Dr. Manu Sudhi',
-      role: 'Chairman & Director',
-      bio: 'Provides corporate governance and strategic direction across DSPL.',
-      initial: 'MS',
-      image: manuImg,
-      width: 1024,
-      height: 1024,
-      linkedin: 'https://www.linkedin.com/in/dr-manu-sudhi-609296167/',
-      objectPosition: 'center',
-      scale: 1.04,
-      transformOrigin: '50% 42%',
-    },
-    {
-      name: 'Dr. Dasharathraj K Shetty',
-      role: 'Mentor',
-      bio: 'Advises on innovation, management systems, and enterprise development.',
-      initial: 'DS',
-      image: drImg,
-      width: 358,
-      height: 354,
-      linkedin: 'https://www.linkedin.com/in/dasharathraj/',
-      objectPosition: 'center',
-      scale: 1.06,
-      transformOrigin: '50% 40%',
-    },
-    {
-      name: 'Dr. Shreepathy Rangabhatta B',
-      role: 'Managing Director',
-      bio: 'Leads executive management, business operations, and project delivery.',
-      initial: 'SR',
-      image: sreeImg,
-      width: 640,
-      height: 640,
-      linkedin: 'https://www.linkedin.com/in/shreepathy-ranga-bhatta-b-862a2b24a/',
-      objectPosition: 'center',
-      scale: 1.45,
-      transformOrigin: '50% 43%',
-    },
-    {
-      name: 'Dr. Anusha Pai',
-      role: 'Director',
-      bio: 'Guides healthcare and product decisions across consumer brand development.',
-      initial: 'AP',
-      image: anushaImg,
-      width: 302,
-      height: 302,
-      linkedin: 'https://www.linkedin.com/in/anusha-pai-013b0213/',
-      objectPosition: 'center',
-      scale: 1.08,
-      transformOrigin: '50% 40%',
-    },
-    {
-      name: 'Mr. Namesh Malarout',
-      role: 'Director',
-      bio: 'Leads technology strategy, digital systems, and technical architecture.',
-      initial: 'NM',
-      image: nameshImg,
-      width: 332,
-      height: 327,
-      linkedin: 'https://www.linkedin.com/in/namesh-malarout-97375697/',
-      objectPosition: 'center',
-      scale: 1.9,
-      transformOrigin: '50% 28%',
-    },
-  ];
+  const team = CONFIRMED_TEAM_MEMBERS.map((member) => ({
+    ...member,
+    ...(TEAM_PRESENTATION[member.id] || {}),
+  }));
 
   return (
     <div
@@ -247,7 +234,7 @@ const About = () => {
           <span className="section-subtitle">Our Corporate Profile</span>
           <h1 className="about-title">About Dashapatmaja Solutions Pvt Ltd</h1>
           <p className="about-subtitle">
-            A Manipal-based company that develops consumer brands and builds the branding, marketing and commerce systems behind them. Incorporated 28 July 2022. Incubated at MUTBI, MAHE, and supported under DST NIDHI-PRAYAS.
+            A Manipal-based company that develops consumer brands and builds the branding, marketing and commerce systems behind them. Incorporated 28 July 2022.
           </p>
         </motion.div>
       </section>
@@ -454,6 +441,13 @@ const About = () => {
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="about-legal-section" aria-label="Company registration">
+        <div className="container about-legal-line">
+          <span><strong>CIN</strong> {COMPANY_FACTS.cin}</span>
+          <span><strong>Registered office</strong> {COMPANY_FACTS.registeredOffice.fullAddress}</span>
         </div>
       </section>
 

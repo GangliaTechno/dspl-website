@@ -47,3 +47,7 @@ graphify-out/
 *.zip
 test-results/
 
+
+
+#Ignore vscode AI rules
+.github\instructions\codacy.instructions.md

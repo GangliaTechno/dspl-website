@@ -113,21 +113,21 @@ const Brands = () => {
             >
               <div className="brand-content-grid">
                 <div className="brand-info-side">
-                  <div className="brand-type-badge">FLAGSHIP CONSUMER BRAND</div>
+                  <div className="brand-type-badge">OWNED CONSUMER BRAND</div>
 
                   <h2 className="brand-showcase-name">
                     Raw Radicles
                   </h2>
                   <p className="brand-showcase-tagline">
-                    Chocolate, reimagined through Ayurveda.
+                    Ayurvedic chocolate, developed as an operating brand.
                   </p>
 
                   <div className="brand-body-paragraphs">
                     <p>
-                      Raw Radicles brings together real cacao and carefully selected Ayurvedic botanicals.
+                      Raw Radicles is DSPL&apos;s first owned consumer brand, built across product development, packaging, compliance coordination, photography, pricing, and route to market.
                     </p>
                     <p>
-                      Built end to end by Dashapatmaja Solutions Pvt Ltd—from formulation and packaging to compliance, storytelling and route to market.
+                      The current range includes six 60 g bars across three collections, pairing real cacao with selected Ayurvedic botanicals.
                     </p>
                   </div>
 
@@ -146,7 +146,7 @@ const Brands = () => {
                     </div>
                     <div className="proof-item">
                       <span className="proof-label">MANUFACTURING</span>
-                      <span className="proof-desc">Chocolate production partnership in Kerala</span>
+                      <span className="proof-desc">Chocolate production partnership in Keralam</span>
                     </div>
                     <div className="proof-item">
                       <span className="proof-label">AYURVEDIC EXPERTISE</span>
@@ -156,7 +156,7 @@ const Brands = () => {
 
                   <div className="brand-cta-block">
                     <Link to="/brands/raw-radicles" className="btn btn-primary rr-cta-btn">
-                      Explore our brands here <ArrowRight size={16} aria-hidden="true" />
+                      Explore Raw Radicles <ArrowRight size={16} aria-hidden="true" />
                     </Link>
                   </div>
                 </div>

@@ -21,7 +21,7 @@ const fillValidForm = () => {
   fireEvent.change(screen.getByLabelText('Company / Brand Name (optional)'), { target: { value: 'Jane Brands' } });
   fireEvent.change(screen.getByLabelText('Phone Number (optional)'), { target: { value: '+91 98765 43210' } });
   fireEvent.change(screen.getByLabelText('Website or Social Handle (optional)'), { target: { value: 'https://example.com' } });
-  fireEvent.change(screen.getByLabelText('What do you need help with?'), { target: { value: 'Compliance' } });
+  fireEvent.change(screen.getByLabelText('What do you need help with?'), { target: { value: 'Packaging and FSSAI compliance' } });
   fireEvent.change(screen.getByLabelText('Budget band (optional)'), { target: { value: 'Scope first' } });
   fireEvent.change(screen.getByLabelText('Message'), { target: { value: 'Please review the packaging workflow.' } });
 };
@@ -76,10 +76,11 @@ describe('Contact', () => {
     expect(Array.from(helpType.options, (option) => option.textContent)).toEqual([
       'Select an option...',
       'Branding',
-      'Marketing',
-      'E-commerce',
-      'Compliance',
-      'Other',
+      'Marketing and SEO',
+      'E-commerce and marketplaces',
+      'Packaging and FSSAI compliance',
+      'New consumer brand',
+      'Something else',
     ]);
     expect(screen.getByRole('link', { name: 'Privacy Policy' })).toHaveAttribute('href', '/privacy');
   });
@@ -128,7 +129,7 @@ describe('Contact', () => {
           companyName: 'Jane Brands',
           phone: '+91 98765 43210',
           website: 'https://example.com',
-          helpType: 'Compliance',
+          helpType: 'Packaging and FSSAI compliance',
           budgetBand: 'Scope first',
           message: 'Please review the packaging workflow.',
           websiteConfirm: '',
@@ -158,9 +159,10 @@ describe('Contact', () => {
     fireEvent.click(screen.getByRole('button', { name: /Send Message/i }));
 
     expect(await screen.findByRole('heading', { name: 'Message received' })).toBeInTheDocument();
+    expect(screen.getByText(/reply within one working day, Monday to Saturday/i)).toBeInTheDocument();
     expect(trackEvent).toHaveBeenCalledWith('lead_form_submit_success', {
       form: 'contact',
-      help_type: 'Compliance',
+      help_type: 'Packaging and FSSAI compliance',
     });
 
     fireEvent.click(screen.getByRole('button', { name: 'Send Another Message' }));

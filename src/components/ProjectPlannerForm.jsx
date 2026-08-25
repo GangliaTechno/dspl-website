@@ -6,6 +6,7 @@ import { AlertCircle, CheckCircle2 } from 'lucide-react';
 import {
   createInitialLeadForm,
   createLeadPayload,
+  PROJECT_BUDGET_RANGES,
   PROJECT_SERVICES,
   validateAttachment,
   validateLead,
@@ -229,6 +230,16 @@ const ProjectPlannerForm = ({
           <label className="form-label" htmlFor={id('projectGoal')}>Tell us about your project or goal</label>
           <textarea id={id('projectGoal')} name="projectGoal" className="form-input form-textarea" value={formData.projectGoal} onChange={handleInputChange} placeholder="What are you trying to achieve?" />
         </div>
+
+        <div className="form-group">
+          <label className="form-label" htmlFor={id('budgetRange')}>Budget range (optional)</label>
+          <select id={id('budgetRange')} name="budgetRange" className="form-input" value={formData.budgetRange} onChange={handleInputChange}>
+            <option value="">Select a range...</option>
+            {PROJECT_BUDGET_RANGES.map((range) => (
+              <option key={range} value={range}>{range}</option>
+            ))}
+          </select>
+        </div>
       </section>
 
       <section className="work-modal-form-section work-modal-form-section--borderless" aria-labelledby={id('preferences-title')}>
@@ -238,6 +249,7 @@ const ProjectPlannerForm = ({
           <select id={id('referralSource')} name="referralSource" className="form-input" value={formData.referralSource} onChange={handleInputChange}>
             <option value="">Select source...</option>
             <option value="Google">Google</option>
+            <option value="LinkedIn">LinkedIn</option>
             <option value="Instagram">Instagram</option>
             <option value="Referral">Referral</option>
             <option value="Other">Other</option>

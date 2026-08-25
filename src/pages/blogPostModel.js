@@ -1,5 +1,10 @@
 import { getRouteMetadata, organizationStructuredData } from '../seo/routeMetadata';
 import { SITE_CONFIG } from '../content/siteConfig';
+import {
+  createBreadcrumbSchema,
+  createFaqSchema,
+  createStructuredDataGraph,
+} from '../seo/structuredData';
 
 export const normalizeBlogSlug = (value = '') => value.trim().toLowerCase();
 
@@ -78,7 +83,9 @@ export const createBlogPostMetadata = (post, isBlogOpen = true) => {
       '@id': `${siteUrl}${canonicalPath}`,
     },
     articleSection: post.category,
-    publisher: organizationStructuredData,
+    publisher: {
+      '@id': `${siteUrl}/#organization`,
+    },
     image: absoluteImage,
     ...(post.authors?.length > 0 && {
       author: post.authors.map((author) => ({
@@ -89,28 +96,15 @@ export const createBlogPostMetadata = (post, isBlogOpen = true) => {
     }),
   };
 
-  const structuredData = post.faqs?.length > 0
-    ? {
-        '@context': 'https://schema.org',
-        '@graph': [
-          blogPosting,
-          {
-            '@type': 'FAQPage',
-            mainEntity: post.faqs.map((faq) => ({
-              '@type': 'Question',
-              name: faq.question,
-              acceptedAnswer: {
-                '@type': 'Answer',
-                text: faq.answer,
-              },
-            })),
-          },
-        ],
-      }
-    : {
-        '@context': 'https://schema.org',
-        ...blogPosting,
-      };
+  const breadcrumbs = createBreadcrumbSchema(canonicalPath, post.title);
+  const faqNode = createFaqSchema(post.faqs);
+
+  const structuredData = createStructuredDataGraph(
+    organizationStructuredData,
+    breadcrumbs,
+    blogPosting,
+    faqNode,
+  );
 
   return {
     ...metadata,

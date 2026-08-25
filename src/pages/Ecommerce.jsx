@@ -3,6 +3,7 @@ import ecommerceHero1440 from '../assets/ecommerce-primary-1440.webp';
 import ecommerceHeroMobile from '../assets/ecommerce-primary-mobile.webp';
 import ServicePage from '../components/ServicePage';
 import { approvedTestimonials } from '../content/publication';
+import { ECOMMERCE_FAQS } from '../content/serviceFaqs';
 import { getRouteMetadata } from '../seo/routeMetadata';
 
 const offers = [
@@ -64,28 +65,7 @@ const compliance = {
   disclaimer: 'DSPL coordinates implementation; tax and legal advice remains with the client’s qualified advisers.',
 };
 
-const faqs = [
-  {
-    q: 'How do you select a platform?',
-    a: 'We recommend a platform after reviewing catalogue complexity, integrations, internal capability, budget, and the expected operating model. Shopify, WooCommerce, and React-based builds are supported where appropriate.',
-  },
-  {
-    q: 'Can you improve an existing store?',
-    a: 'Yes. An audit can cover performance, catalogue structure, product journeys, checkout, analytics, compliance inputs, and operating dependencies before improvement work is scoped.',
-  },
-  {
-    q: 'Can product and catalogue setup be included?',
-    a: 'Yes, when included in scope. We can structure product data, variants, collections, content fields, and channel-ready records using approved source information.',
-  },
-  {
-    q: 'What happens after launch?',
-    a: 'Post-launch support can cover agreed fixes, analytics checks, catalogue updates, marketplace coordination, and operating handover. Ongoing support is scoped separately when required.',
-  },
-  {
-    q: 'Can marketplace and ongoing support be included?',
-    a: 'Yes, when included in the scope. The engagement defines which channels, integrations, data owners, compliance inputs, and ongoing responsibilities are covered.',
-  },
-];
+const faqs = ECOMMERCE_FAQS;
 
 const heroImages = [
   {

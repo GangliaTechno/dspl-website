@@ -64,30 +64,30 @@ describe('Home page', () => {
     expect(
       screen.getByRole('heading', {
         level: 2,
-        name: /Brand, market and commerce\.Run as one system\./i,
+        name: /Brand, market, and commerceCoordinated as one system\./i,
       }),
     ).toBeInTheDocument();
     expect(container.querySelectorAll('.service-evidence-card')).toHaveLength(3);
     expect(
       screen.getByText(
-        'Positioning, identity, packaging and voice, delivered as a system your team can actually apply. You receive logo files, colour and type rules, packaging artwork templates and a written messaging guide.',
+        'Positioning, naming, identity, voice, packaging and application assets organised into a clear system your team and partners can use consistently.',
       ),
     ).toBeInTheDocument();
     expect(
       screen.getByText(
-        'SEO, paid campaigns on Google and Meta, content and reporting, planned against a defined audience and a monthly number you agree before we start.',
+        'Audience planning, SEO, paid campaigns, content and analytics coordinated around agreed measures, responsibilities and reporting.',
       ),
     ).toBeInTheDocument();
     expect(
       screen.getByText(
-        'Shopify, WooCommerce and custom storefronts, plus Amazon and Flipkart listings, payments and delivery setup, built to run without daily hand-holding.',
+        'Storefronts, marketplaces, catalogue, payments, delivery, returns and analytics planned around the operating model behind the customer journey.',
       ),
     ).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'FSSAI and Legal Metrology support' }))
+    expect(screen.getByRole('heading', { name: 'Packaging and commerce compliance coordination' }))
       .toBeInTheDocument();
     expect(
       screen.getByText(
-        'Packaging, labelling, listing, and commerce inputs can be prepared as part of the work, with regulated legal opinions retained by qualified advisers.',
+        'For food and consumer-product projects, we can coordinate label inputs, pack declarations, claims review, marketplace listing declarations, and other implementation details within the agreed scope. Regulated advice and approvals remain with the appropriate qualified advisers.',
       ),
     ).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /branding and packaging compliance/i }))
@@ -103,7 +103,7 @@ describe('Home page', () => {
     expect(
       screen.getByRole('heading', {
         level: 2,
-        name: 'One accountable path, from audit to launch',
+        name: 'One accountable path from the first audit to measurement and iteration',
       }),
     ).toBeInTheDocument();
     expect(container.querySelectorAll('.process-column')).toHaveLength(3);
@@ -117,33 +117,33 @@ describe('Home page', () => {
     const steps = container.querySelectorAll('.process-column');
     expect(steps[0].querySelector('.process-step-description').textContent)
       .toBe(
-        'We review where the business, brand and channels stand today, and what is actually blocking growth.',
+        'We examine the current position, audience, channels, constraints and priorities before recommending scope.',
       );
     expect(steps[0].querySelector('.process-step-details .process-meta-row:nth-child(1) dd').textContent)
-      .toBe('Initial scope review');
+      .toBe('Confirmed after the initial scope review');
     expect(steps[0].querySelector('.process-step-details .process-meta-row:nth-child(2) dd').textContent)
-      .toBe('Written audit and a prioritised project brief');
+      .toBe('Priority audit and agreed brief');
 
     expect(steps[1].querySelector('.process-step-description').textContent)
       .toBe(
-        'We create the agreed system: identity, campaigns, storefront, packaging, or the combination you need.',
+        'We create and coordinate the agreed brand, market and commerce work, with review points and decision-makers defined in the roadmap.',
       );
     expect(steps[1].querySelector('.process-step-details .process-meta-row:nth-child(1) dd').textContent)
-      .toBe('Approved roadmap');
+      .toBe('Set by the approved roadmap');
     expect(steps[1].querySelector('.process-step-details .process-meta-row:nth-child(2) dd').textContent)
-      .toBe('Launch-ready assets and documented handover');
+      .toBe('Launch-ready system and operating handoffs');
 
     expect(steps[2].querySelector('.process-step-description').textContent)
       .toBe(
-        'We launch, measure against the numbers set in stage one, and improve on a fixed monthly cycle.',
+        'We launch, measure and improve the work against agreed evidence, then set the next priorities.',
       );
     expect(steps[2].querySelector('.process-step-details .process-meta-row:nth-child(1) dd').textContent)
-      .toBe('Engagement cadence');
+      .toBe('Agreed as part of the engagement');
     expect(steps[2].querySelector('.process-step-details .process-meta-row:nth-child(2) dd').textContent)
-      .toBe('Monthly performance report and next-cycle priorities');
+      .toBe('Performance review and next priorities');
 
     expect(screen.getByRole('heading', { name: 'Raw Radicles' })).toBeInTheDocument();
-    expect(screen.getByText(/that is what shapes how we scope client work/i))
+    expect(screen.getByText(/that operating experience shapes how we scope client work/i))
       .toBeInTheDocument();
   });
 
@@ -152,7 +152,7 @@ describe('Home page', () => {
 
     expect(screen.getByRole('heading', { name: 'Raw Radicles' })).toBeInTheDocument();
     expect(
-      screen.getByText(/six 60 g bars across three collections, built with real cacao and Ayurvedic botanicals/i),
+      screen.getByText(/Raw Radicles is DSPL's first owned consumer brand: six 60 g bars across three collections/i),
     ).toBeInTheDocument();
     expect(
       screen.queryByRole('region', { name: /what collaborators say/i }),

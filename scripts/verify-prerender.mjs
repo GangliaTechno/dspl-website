@@ -117,14 +117,17 @@ const verifyOrganizationSchema = (html, label) => {
   for (const source of schemas) {
     try {
       const data = JSON.parse(source);
-      const types = Array.isArray(data['@type']) ? data['@type'] : [data['@type']];
-      if (
-        types.includes('Organization')
-        && data.name === 'Dashapatmaja Solutions Pvt Ltd'
-        && data.brand?.['@type'] === 'Brand'
-        && data.brand?.name === 'Raw Radicles'
-      ) {
-        hasOrganization = true;
+      const items = Array.isArray(data['@graph']) ? data['@graph'] : [data];
+      for (const item of items) {
+        const types = Array.isArray(item['@type']) ? item['@type'] : [item['@type']];
+        if (
+          types.includes('Organization')
+          && item.name === 'Dashapatmaja Solutions Pvt Ltd'
+          && item.brand?.['@type'] === 'Brand'
+          && item.brand?.name === 'Raw Radicles'
+        ) {
+          hasOrganization = true;
+        }
       }
     } catch {
       failures.push(`${label}: invalid JSON-LD`);
@@ -160,7 +163,7 @@ const verifyBlogPostingSchema = (html, label, post) => {
           && item.headline === post.title
           && item.datePublished === post.publishedAt
           && (item.dateModified === (post._updatedAt || post.publishedAt))
-          && item.publisher?.name === 'Dashapatmaja Solutions Pvt Ltd'
+          && (item.publisher?.name === 'Dashapatmaja Solutions Pvt Ltd' || item.publisher?.['@id'] === 'https://dashapatmaja.in/#organization')
         ) {
           hasBlogPosting = true;
           if (post.authors?.length > 0) {

@@ -22,10 +22,11 @@ describe('contactFormModel', () => {
     });
     expect(CONTACT_HELP_OPTIONS).toEqual([
       'Branding',
-      'Marketing',
-      'E-commerce',
-      'Compliance',
-      'Other',
+      'Marketing and SEO',
+      'E-commerce and marketplaces',
+      'Packaging and FSSAI compliance',
+      'New consumer brand',
+      'Something else',
     ]);
   });
 
@@ -51,7 +52,7 @@ describe('contactFormModel', () => {
       ...createInitialContact(),
       firstName: 'Jane',
       email: 'jane@example.com',
-      helpType: 'Marketing',
+      helpType: 'Marketing and SEO',
       message: 'Please contact me.',
     };
 
@@ -71,7 +72,7 @@ describe('contactFormModel', () => {
       companyName: 'Jane Brands',
       phone: '+91 98765 43210',
       website: 'https://example.com',
-      helpType: 'Compliance',
+      helpType: 'Packaging and FSSAI compliance',
       budgetBand: 'Scope first',
       message: 'Please review the packaging workflow.',
       websiteConfirm: '',

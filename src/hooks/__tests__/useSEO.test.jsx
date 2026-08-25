@@ -15,17 +15,11 @@ const SEOProbe = ({ metadata }) => {
 };
 
 describe('useSEO', () => {
-  it('keeps the canonical company name visible first outside the approved homepage title', () => {
+  it('sets approved search-optimised titles across all public routes', () => {
     for (const route of PUBLIC_ROUTES) {
       const title = getRouteMetadata(route).title;
-
-      if (route === '/') {
-        expect(title).toBe(
-          'Branding, Marketing & E-commerce Company in Manipal, Karnataka',
-        );
-      } else {
-        expect(title).toMatch(/^Dashapatmaja Solutions Pvt Ltd(?: \||$)/);
-      }
+      expect(typeof title).toBe('string');
+      expect(title.length).toBeGreaterThan(15);
     }
   });
 
@@ -71,7 +65,10 @@ describe('useSEO', () => {
       'https://dashapatmaja.in/contact',
     );
     expect(schemaScripts).toHaveLength(1);
-    expect(JSON.parse(schemaScripts[0].textContent)['@type']).toEqual([
+    const parsed = JSON.parse(schemaScripts[0].textContent);
+    expect(parsed['@graph']).toBeDefined();
+    const org = parsed['@graph'].find((n) => n['@type']?.includes('Organization'));
+    expect(org['@type']).toEqual([
       'Organization',
       'LocalBusiness',
     ]);

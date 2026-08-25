@@ -92,10 +92,26 @@ const RawRadicles = () => {
               Six 60 g bars across three collections
             </h2>
           </div>
-          <p className="raw-radicles-lead">
-            The portfolio brings together real cacao and selected Ayurvedic
-            botanicals across a focused chocolate range.
-          </p>
+          <div className="raw-radicles-range-copy">
+            <p className="raw-radicles-lead">
+              Each collection pairs real cacao with one Ayurvedic botanical and
+              is developed in milk and dark variants.
+            </p>
+            <div className="raw-radicles-range-grid">
+              <article>
+                <h3>Holy Sin</h3>
+                <p>Holy Sin, with Chyawanprash. A familiar Ayurvedic preparation reworked into the Raw Radicles chocolate format.</p>
+              </article>
+              <article>
+                <h3>Wrath Relief</h3>
+                <p>Wrath Relief, with Ashwagandha. The botanical is paired with real cacao as part of the collection&apos;s chocolate formulation.</p>
+              </article>
+              <article>
+                <h3>Smart Sin</h3>
+                <p>Smart Sin, with Brahmi. The formulation balances the selected botanical with the flavour requirements of the finished chocolate.</p>
+              </article>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -108,17 +124,18 @@ const RawRadicles = () => {
           </div>
           <div className="raw-radicles-partners">
             <article>
-              <h3>Formulation partnership in Thrissur</h3>
+              <h3>Formulation partnership in Thrissur, Keralam</h3>
               <p>
-                Selected Ayurvedic botanicals and the formulation brief are
-                coordinated with specialist expertise in Thrissur.
+                The botanical selection and formulation brief were developed with
+                Ayurvedic specialists in Thrissur, working from traditional
+                preparations rather than an extract supplier&apos;s catalogue.
               </p>
             </article>
             <article>
-              <h3>Manufacturing partnership in Kerala</h3>
+              <h3>Manufacturing partnership in Ernakulam, Keralam</h3>
               <p>
                 Chocolate production is carried out through a manufacturing
-                partnership in Kerala.
+                partnership in Keralam.
               </p>
             </article>
           </div>

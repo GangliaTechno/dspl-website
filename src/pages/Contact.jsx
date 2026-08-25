@@ -211,7 +211,7 @@ const Contact = () => {
               <div className="contact-success-state" role="status" aria-live="polite">
                 <CheckCircle2 className="contact-success-icon" aria-hidden="true" />
                 <h3>Message received</h3>
-                <p>Thank you. We have received your message and will review it before contacting you.</p>
+                <p>Thanks. We have your message and will reply within one working day, Monday to Saturday.</p>
                 <button type="button" className="btn btn-primary" onClick={() => setSubmitted(false)}>
                   Send Another Message
                 </button>

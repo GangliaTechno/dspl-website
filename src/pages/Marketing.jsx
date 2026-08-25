@@ -6,6 +6,7 @@ import marketingRotation021440 from '../assets/marketing-dashboard-1440.webp';
 import marketingRotation02Mobile from '../assets/marketing-dashboard-mobile-hq.webp';
 import ServicePage from '../components/ServicePage';
 import { approvedTestimonials } from '../content/publication';
+import { MARKETING_FAQS } from '../content/serviceFaqs';
 import { getRouteMetadata } from '../seo/routeMetadata';
 
 const offers = [
@@ -61,28 +62,7 @@ const engagements = {
   ],
 };
 
-const faqs = [
-  {
-    q: 'How is the scope defined?',
-    a: 'We begin with your objectives, audience, current channels, available data, and budget. The proposal then sets out priorities, responsibilities, deliverables, and reporting cadence.',
-  },
-  {
-    q: 'How are results assessed?',
-    a: 'We agree measures before launch. These may include qualified traffic, enquiry volume, campaign efficiency, or sales data where reliable tracking is available.',
-  },
-  {
-    q: 'Can you guarantee results?',
-    a: 'No. We cannot guarantee rankings, leads, or sales. Outcomes depend on the offer, market, budget, timing, competition, operating follow-through, and data quality.',
-  },
-  {
-    q: 'How long should an ongoing programme run?',
-    a: 'Ongoing programmes use a minimum initial commitment of three months so there is time to establish the baseline, execute agreed work, and review evidence. The exact scope remains proposal-specific.',
-  },
-  {
-    q: 'Can you work with existing teams or agencies?',
-    a: 'Yes. Roles, access, review responsibilities, and hand-offs are documented so strategy, creative, media, and reporting remain coordinated.',
-  },
-];
+const faqs = MARKETING_FAQS;
 
 const heroImages = [
   {

@@ -187,10 +187,15 @@ describe('BlogPost', () => {
         imageWidth: 1200,
         imageHeight: 630,
         structuredData: expect.objectContaining({
-          '@type': 'BlogPosting',
-          headline: 'A structured brand system',
-          datePublished: '2026-08-20',
-          dateModified: '2026-08-20',
+          '@context': 'https://schema.org',
+          '@graph': expect.arrayContaining([
+            expect.objectContaining({
+              '@type': 'BlogPosting',
+              headline: 'A structured brand system',
+              datePublished: '2026-08-20',
+              dateModified: '2026-08-20',
+            }),
+          ]),
         }),
       }),
     );
@@ -225,7 +230,11 @@ describe('BlogPost', () => {
       imageWidth: 1600,
       imageHeight: 900,
       structuredData: expect.objectContaining({
-        image: 'https://cdn.example.com/brand-systems-share.jpg',
+        '@graph': expect.arrayContaining([
+          expect.objectContaining({
+            image: 'https://cdn.example.com/brand-systems-share.jpg',
+          }),
+        ]),
       }),
     });
   });
@@ -261,14 +270,22 @@ describe('BlogPost', () => {
       imageWidth: 1200,
       imageHeight: 800,
       structuredData: expect.objectContaining({
-        image: 'https://dashapatmaja.in/images/brand-systems.jpg',
+        '@graph': expect.arrayContaining([
+          expect.objectContaining({
+            image: 'https://dashapatmaja.in/images/brand-systems.jpg',
+          }),
+        ]),
       }),
     });
     expect(legacySeoImage).toMatchObject({
       image: 'https://cdn.example.com/legacy-share.jpg',
       imageAlt: 'Legacy editorial share image',
       structuredData: expect.objectContaining({
-        image: 'https://cdn.example.com/legacy-share.jpg',
+        '@graph': expect.arrayContaining([
+          expect.objectContaining({
+            image: 'https://cdn.example.com/legacy-share.jpg',
+          }),
+        ]),
       }),
     });
     expect(legacySeoImage).not.toHaveProperty('imageWidth');
@@ -287,7 +304,11 @@ describe('BlogPost', () => {
       imageWidth: 1200,
       imageHeight: 630,
       structuredData: expect.objectContaining({
-        image: 'https://dashapatmaja.in/og-home-2026.jpg',
+        '@graph': expect.arrayContaining([
+          expect.objectContaining({
+            image: 'https://dashapatmaja.in/og-home-2026.jpg',
+          }),
+        ]),
       }),
     });
   });
@@ -308,14 +329,23 @@ describe('BlogPost', () => {
     const structuredData = metadata.structuredData;
 
     expect(structuredData).toHaveProperty('@graph');
-    expect(structuredData['@graph']).toHaveLength(2);
+    expect(structuredData['@graph']).toHaveLength(4);
 
-    const [blogPosting, faqPage] = structuredData['@graph'];
+    const blogPosting = structuredData['@graph'].find((n) => n['@type'] === 'BlogPosting');
+    const faqPage = structuredData['@graph'].find((n) => n['@type'] === 'FAQPage');
+    const breadcrumbs = structuredData['@graph'].find((n) => n['@type'] === 'BreadcrumbList');
+    const org = structuredData['@graph'].find((n) => n['@type']?.includes('Organization'));
+
+    expect(org).toBeDefined();
+    expect(breadcrumbs).toBeDefined();
     expect(blogPosting['@type']).toBe('BlogPosting');
     expect(blogPosting.author).toEqual([
       { '@type': 'Person', name: 'Namesh Malarout', jobTitle: 'Director, Dashapatmaja Solutions Pvt Ltd' },
       { '@type': 'Person', name: 'Pawan Shetty' },
     ]);
+    expect(blogPosting.publisher).toEqual({
+      '@id': 'https://dashapatmaja.in/#organization',
+    });
 
     expect(faqPage).toEqual({
       '@type': 'FAQPage',

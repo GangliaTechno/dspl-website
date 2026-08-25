@@ -324,7 +324,7 @@
 
 .team-section .section-title-description {
   color: #5A5751;
-  max-width: 580px;
+  max-width: 760px;
   margin: 0 auto;
 }
 
@@ -496,6 +496,29 @@
   font-size: 1.5rem;
   font-weight: 800;
   color: #ffffff;
+}
+
+
+.about-legal-section {
+  padding: 1.25rem 0 1.5rem;
+  background: #F7F4ED;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.about-legal-line {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.65rem 1.5rem;
+  color: #5A5751;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  text-align: center;
+}
+
+.about-legal-line strong {
+  color: #171A22;
+  font-weight: 700;
 }
 
 @media (max-width: 1024px) {

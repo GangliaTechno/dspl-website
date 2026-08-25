@@ -255,17 +255,17 @@ describe('approved design-system corrections', () => {
 
     expect(aboutPage).toContain('const directionCards = [');
     expect(aboutPage).not.toContain("number: '01'");
-    expect(aboutPage).toContain("label: 'Vision'");
-    expect(aboutPage).toContain("label: 'Mission'");
-    expect(aboutPage).toContain("label: 'Values'");
-    expect(aboutPage).toContain("title: 'Where we are going'");
-    expect(aboutPage).toContain("title: 'What we do'");
-    expect(aboutPage).toContain("title: 'How we work'");
+    expect(aboutPage).toContain("title: 'Vision'");
+    expect(aboutPage).toContain("title: 'Mission'");
+    expect(aboutPage).toContain("title: 'Values'");
+    expect(aboutPage).toContain("label: 'Long-term direction'");
+    expect(aboutPage).toContain("label: 'Our mandate'");
+    expect(aboutPage).toContain("label: 'Operating principles'");
     expect(aboutPage).toContain(
-      'Build a focused portfolio of consumer brands supported by disciplined commercial systems.',
+      'Build a focused portfolio of consumer brands and a disciplined operating system',
     );
     expect(aboutPage).toContain(
-      'Clarity, evidence, accountability, and practical coordination guide how we make decisions, define responsibilities, and deliver work.',
+      'Work with clarity, evidence, and accountability: define scope before starting',
     );
     expect(aboutPage).toContain('directionCards.map((card, index)');
     expect(aboutPage).not.toContain('card.items');
@@ -568,7 +568,7 @@ describe('approved design-system corrections', () => {
     ].join('\n');
 
     expect(homeAndAbout).not.toContain('We deliver disciplined market execution.');
-    expect(homeAndAbout).toContain('One accountable path, from audit to launch');
+    expect(homeAndAbout).toContain('One accountable path from the first audit to measurement and iteration');
   });
 
   it('keeps the About journey inside the approved editorial section', () => {
@@ -652,12 +652,15 @@ describe('approved design-system corrections', () => {
       'className="btn btn-primary rr-cta-btn"',
     );
     expect(brandsPage).toContain('to="/brands/raw-radicles"');
-    expect(brandsPage).toContain('Explore our brands here');
+    expect(brandsPage).toContain('Explore Raw Radicles');
     expect(brandsPage).not.toContain('Raw%20Radicles%20Inquiry');
   });
 
   it('normalizes leadership portraits without covering faces', () => {
-    const aboutPage = readSource('src/pages/About.jsx');
+    const aboutPage =
+      readSource('src/pages/About.jsx') +
+      '\n' +
+      readSource('src/content/teamMembers.js');
     const aboutCss = readSource('src/pages/About.css');
 
     expect(aboutPage).toContain("transformOrigin: '50% 28%'");
@@ -757,7 +760,7 @@ describe('approved design-system corrections', () => {
     expect(home).not.toContain('openWorkModal');
     expect(servicePage).not.toContain('openWorkModal');
     expect(brands).toContain('to="/brands/raw-radicles"');
-    expect(brands).toContain('Explore our brands here');
+    expect(brands).toContain('Explore Raw Radicles');
   });
 
   it('balances incomplete service-card rows instead of leaving accidental gaps', () => {
@@ -924,7 +927,7 @@ describe('approved design-system corrections', () => {
     expect(footer).not.toContain('openWorkModal');
     expect(footer).not.toContain('Get in Touch');
     expect(footer).toContain('className="footer-cta-strip"');
-    expect(footerCtas).toContain('Turn a promising idea into a working project.');
+    expect(footerCtas).toContain('Bring us the context. We will help define the next step.');
     expect(footerCtas).toContain('See how DSPL built Raw Radicles.');
     expect(footerCtas).toContain('Explore Raw Radicles');
     expect(footerCtas).toContain('Start a project');
@@ -964,7 +967,7 @@ describe('approved design-system corrections', () => {
     const indexHtml = readSource('index.html');
     const header = readSource('src/components/Header.jsx');
     const footer = readSource('src/components/Footer.jsx');
-    const about = readSource('src/pages/About.jsx');
+    const about = readSource('src/pages/About.jsx') + '\n' + readSource('src/content/teamMembers.js');
     const manifest = JSON.parse(readSource('public/site.webmanifest'));
 
     expect(indexHtml).toContain('href="/favicon-16.png"');

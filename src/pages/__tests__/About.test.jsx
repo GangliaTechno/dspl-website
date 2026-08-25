@@ -9,6 +9,8 @@ import {
 } from '../aboutMotion';
 
 import ScrollToTop from '../../components/ScrollToTop';
+import { COMPANY_FACTS } from '../../content/companyFacts';
+import { getRouteMetadata } from '../../seo/routeMetadata';
 
 const renderAbout = (path = '/about') =>
   render(
@@ -92,17 +94,17 @@ describe('About page', () => {
     expect(within(section).getByText('Values')).toBeInTheDocument();
     expect(
       within(section).getByText(
-        'To build a portfolio of Indian consumer brands that earn shelf space on quality, and to give other founders the same operating support we built for ourselves.',
+        'Build a focused portfolio of consumer brands and a disciplined operating system that can also help other businesses move from idea to market.',
       ),
     ).toBeInTheDocument();
     expect(
       within(section).getByText(
-        'We run our own brands end to end, from formulation brief to marketplace listing. We use that experience to scope, price and deliver branding, marketing, e-commerce and compliance work for clients who are building something similar.',
+        'Develop and operate DSPL-owned brands while providing clearly scoped branding, marketing, e-commerce, and compliance coordination to businesses that need practical execution.',
       ),
     ).toBeInTheDocument();
     expect(
       within(section).getByText(
-        'We quote what the work costs, not what the client hopes it costs. We put scope, ownership and measures in writing before we start. We tell clients when an idea will not work, including when it is our own.',
+        'Work with clarity, evidence, and accountability: define scope before starting, keep responsibilities visible, and make decisions that can be explained and reviewed.',
       ),
     ).toBeInTheDocument();
   });
@@ -112,7 +114,7 @@ describe('About page', () => {
 
     expect(
       screen.getByText(
-        'A Manipal-based company that develops consumer brands and builds the branding, marketing and commerce systems behind them. Incorporated 28 July 2022. Incubated at MUTBI, MAHE, and supported under DST NIDHI-PRAYAS.',
+        'A Manipal-based company that develops consumer brands and builds the branding, marketing and commerce systems behind them. Incorporated 28 July 2022.',
       ),
     ).toBeInTheDocument();
   });
@@ -152,6 +154,14 @@ describe('About page', () => {
     expect(screen.queryByText('Dr. Balakrishna S. Maddodi')).not.toBeInTheDocument();
   });
 
+  it('publishes CIN and registered office at the foot of the About page', () => {
+    renderAbout();
+
+    const registration = screen.getByRole('region', { name: 'Company registration' });
+    expect(within(registration).getByText(new RegExp(COMPANY_FACTS.cin))).toBeInTheDocument();
+    expect(within(registration).getByText(new RegExp(COMPANY_FACTS.registeredOffice.locality))).toBeInTheDocument();
+  });
+
   it('adds remote-delivery scope and work DSPL does not take on', () => {
     renderAbout();
 
@@ -171,5 +181,20 @@ describe('About page', () => {
     rendered.unmount();
     vi.clearAllTimers();
     vi.useRealTimers();
+  });
+
+  it('includes 5 confirmed team members as Person schema nodes in structuredData', () => {
+    const meta = getRouteMetadata('/about');
+    expect(meta.structuredData['@graph']).toBeDefined();
+
+    const personNodes = meta.structuredData['@graph'].filter((n) => n['@type'] === 'Person');
+    expect(personNodes).toHaveLength(5);
+    expect(personNodes.map((p) => p.name)).toEqual([
+      'Dr. Manu Sudhi',
+      'Dr. Dasharathraj K Shetty',
+      'Dr. Shreepathy Rangabhatta B',
+      'Dr. Anusha Pai',
+      'Mr. Namesh Malarout',
+    ]);
   });
 });

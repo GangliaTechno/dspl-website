@@ -18,7 +18,9 @@ describe('StartProject', () => {
     expect(screen.getByText(/respond within one working day/i)).toBeInTheDocument();
     expect(screen.getByRole('heading', { level: 2, name: 'Tell us enough to begin well' })).toBeInTheDocument();
     expect(screen.getByLabelText(/Full Name/i)).toHaveAttribute('id', 'start-fullName');
-    expect(screen.getByRole('checkbox', { name: 'Compliance' })).toBeInTheDocument();
+    expect(screen.getByRole('checkbox', { name: 'Packaging and FSSAI compliance' })).toBeInTheDocument();
+    expect(screen.getByLabelText('Budget range (optional)')).toBeInTheDocument();
+    expect(screen.getByRole('option', { name: 'LinkedIn' })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'Privacy Policy' })).toHaveAttribute('href', '/privacy');
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
   });

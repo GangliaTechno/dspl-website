@@ -20,9 +20,9 @@ describe('Footer', () => {
     expect(getFooterCta('/ecommerce').href).toBe('/start');
     expect(getFooterCta('/about')).toEqual({
       eyebrow: 'Work with DSPL',
-      title: 'Ready to build with fewer unknowns?',
+      title: 'Bring us the context. We will help define the next step.',
       text: 'Tell us what you are building, where you need support and what a good next step looks like.',
-      label: 'Contact DSPL',
+      label: 'Start a project',
       href: '/start',
     });
     expect(getFooterCta('/contact')).toBeNull();
@@ -49,12 +49,12 @@ describe('Footer', () => {
     expect(
       screen.getByRole('heading', {
         level: 2,
-        name: 'Turn a promising idea into a working project.',
+        name: 'Bring us the context. We will help define the next step.',
       }),
     ).toBeInTheDocument();
     expect(
       screen.getByText(
-        'Tell us the context, the constraint and the outcome you need. We reply within one working day.',
+        'Share where the business stands, what needs support, and what a useful outcome looks like. We reply within one working day.',
       ),
     ).toBeInTheDocument();
     for (const link of screen.getAllByRole('link', { name: 'Start a project' })) {

@@ -126,7 +126,7 @@ describe('canonical naming', () => {
       'src/pages/Contact.jsx',
       'src/pages/PrivacyPolicy.jsx',
       'src/pages/TermsOfUse.jsx',
-      'src/seo/routeMetadata.js',
+      'src/seo/structuredData.js',
     ];
 
     for (const consumerPath of consumers) {

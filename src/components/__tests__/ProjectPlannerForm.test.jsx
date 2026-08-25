@@ -24,7 +24,7 @@ const fillRequiredFields = () => {
   fireEvent.change(screen.getByLabelText(/Phone \/ WhatsApp Number/i), {
     target: { value: '9876543210' },
   });
-  fireEvent.click(screen.getByRole('checkbox', { name: 'Compliance' }));
+  fireEvent.click(screen.getByRole('checkbox', { name: 'Packaging and FSSAI compliance' }));
 };
 
 describe('ProjectPlannerForm', () => {
@@ -39,7 +39,9 @@ describe('ProjectPlannerForm', () => {
     const { container } = renderForm();
 
     expect(screen.getByLabelText(/Full Name/i)).toHaveAttribute('id', 'start-fullName');
-    expect(screen.getByRole('checkbox', { name: 'Compliance' })).toBeInTheDocument();
+    expect(screen.getByRole('checkbox', { name: 'Packaging and FSSAI compliance' })).toBeInTheDocument();
+    expect(screen.getByLabelText('Budget range (optional)')).toBeInTheDocument();
+    expect(screen.getByRole('option', { name: 'LinkedIn' })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'Privacy Policy' })).toHaveAttribute('href', '/privacy');
     expect(container.querySelector('input[name="websiteConfirm"]')).toHaveAttribute('tabindex', '-1');
   });
@@ -81,6 +83,12 @@ describe('ProjectPlannerForm', () => {
     vi.stubGlobal('fetch', fetchMock);
     renderForm();
     fillRequiredFields();
+    fireEvent.change(screen.getByLabelText('Budget range (optional)'), {
+      target: { value: 'Rs 1 to 3 lakh' },
+    });
+    fireEvent.change(screen.getByLabelText('How did you hear about us?'), {
+      target: { value: 'LinkedIn' },
+    });
 
     fireEvent.click(screen.getByRole('button', { name: 'Send My Project Details' }));
 
@@ -88,7 +96,9 @@ describe('ProjectPlannerForm', () => {
     await waitFor(() => expect(fetchMock).toHaveBeenCalledOnce());
     const payload = fetchMock.mock.calls[0][1].body;
     expect(payload.get('source')).toBe('start-page');
-    expect(payload.get('services')).toBe('Compliance');
+    expect(payload.get('services')).toBe('Packaging and FSSAI compliance');
+    expect(payload.get('budgetRange')).toBe('Rs 1 to 3 lakh');
+    expect(payload.get('referralSource')).toBe('LinkedIn');
     expect(trackEvent).toHaveBeenCalledWith('lead_form_submit_success', {
       form: 'project_planner',
       source: 'start-page',
@@ -107,7 +117,7 @@ describe('ProjectPlannerForm', () => {
     fireEvent.change(screen.getByLabelText(/Email Address/i), {
       target: { value: 'asha@example.test' },
     });
-    fireEvent.click(screen.getByRole('checkbox', { name: 'Compliance' }));
+    fireEvent.click(screen.getByRole('checkbox', { name: 'Packaging and FSSAI compliance' }));
     fireEvent.click(screen.getByLabelText('Call'));
 
     fireEvent.click(screen.getByRole('button', { name: 'Send My Project Details' }));

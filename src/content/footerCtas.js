@@ -1,16 +1,16 @@
 export const footerCtas = Object.freeze({
   '/': {
     eyebrow: 'Build with us',
-    title: 'Turn a promising idea into a working project.',
-    text: 'Tell us the context, the constraint and the outcome you need. We reply within one working day.',
+    title: 'Bring us the context. We will help define the next step.',
+    text: 'Share where the business stands, what needs support, and what a useful outcome looks like. We reply within one working day.',
     label: 'Start a project',
     href: '/start',
   },
   '/about': {
     eyebrow: 'Work with DSPL',
-    title: 'Ready to build with fewer unknowns?',
+    title: 'Bring us the context. We will help define the next step.',
     text: 'Tell us what you are building, where you need support and what a good next step looks like.',
-    label: 'Contact DSPL',
+    label: 'Start a project',
     href: '/start',
   },
   '/brands': {

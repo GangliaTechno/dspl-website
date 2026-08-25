@@ -1,9 +1,15 @@
-import { COMPANY_FACTS } from '../content/companyFacts';
 import { SITE_CONFIG } from '../content/siteConfig';
+import { BRANDING_FAQS, ECOMMERCE_FAQS, MARKETING_FAQS } from '../content/serviceFaqs';
 import { blogsEnabled, getBlogPostSummary } from '../content/publication';
 import { createBlogPostMetadata, normalizeBlogSlug } from '../pages/blogPostModel';
+import {
+  createBreadcrumbSchema,
+  createFaqSchema,
+  createOrganizationSchema,
+  createPersonSchemas,
+  createStructuredDataGraph,
+} from './structuredData';
 
-const SITE_URL = SITE_CONFIG.siteUrl;
 const DEFAULT_IMAGE = SITE_CONFIG.defaultOgImage;
 const DEFAULT_IMAGE_METADATA = {
   image: DEFAULT_IMAGE,
@@ -26,36 +32,37 @@ export const PUBLIC_ROUTES = [
   '/terms',
 ];
 
-export const organizationStructuredData = {
-  '@context': 'https://schema.org',
-  '@type': ['Organization', 'LocalBusiness'],
-  name: COMPANY_FACTS.legalName,
-  url: SITE_URL,
-  logo: SITE_CONFIG.defaultLogo,
-  email: COMPANY_FACTS.contacts.directorEmail,
-  telephone: COMPANY_FACTS.contacts.primaryPhone,
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: `${COMPANY_FACTS.registeredOffice.line1}, ${COMPANY_FACTS.registeredOffice.line2}`,
-    addressLocality: COMPANY_FACTS.registeredOffice.locality,
-    addressRegion: COMPANY_FACTS.registeredOffice.region,
-    postalCode: COMPANY_FACTS.registeredOffice.postalCode,
-    addressCountry: COMPANY_FACTS.registeredOffice.countryCode,
-  },
-  geo: {
-    '@type': 'GeoCoordinates',
-    latitude: 13.3528,
-    longitude: 74.7934,
-  },
-  sameAs: [
-    COMPANY_FACTS.socials.linkedin,
-  ],
-  brand: {
-    '@type': 'Brand',
-    name: COMPANY_FACTS.brands.flagship,
-    url: `${SITE_CONFIG.siteUrl}${COMPANY_FACTS.brands.flagshipPath}`,
-  },
-};
+export const organizationStructuredData = Object.freeze(createOrganizationSchema());
+
+export function generateBreadcrumbSchema(pathname, title) {
+  return createBreadcrumbSchema(pathname, title);
+}
+
+export function generateTeamPersonSchema() {
+  return createPersonSchemas();
+}
+
+export function generateServiceFaqSchema(pathname) {
+  let faqs = null;
+  if (pathname === '/branding') faqs = BRANDING_FAQS;
+  else if (pathname === '/marketing') faqs = MARKETING_FAQS;
+  else if (pathname === '/ecommerce') faqs = ECOMMERCE_FAQS;
+
+  return createFaqSchema(faqs);
+}
+
+export function buildRouteStructuredData(pathname) {
+  const breadcrumbs = createBreadcrumbSchema(pathname);
+  const serviceFaq = generateServiceFaqSchema(pathname);
+  const teamNodes = pathname === '/about' ? createPersonSchemas() : null;
+
+  return createStructuredDataGraph(
+    organizationStructuredData,
+    breadcrumbs,
+    teamNodes,
+    serviceFaq,
+  );
+}
 
 const routeMetadata = {
   '/': {
@@ -64,44 +71,44 @@ const routeMetadata = {
       'We build our own consumer brands and help Indian businesses build theirs. Branding, marketing, e-commerce and FSSAI compliance support from Manipal.',
   },
   '/about': {
-    title: 'Dashapatmaja Solutions Pvt Ltd | About Us',
+    title: 'About Dashapatmaja Solutions Pvt Ltd: Brand Builders in Manipal',
     description:
-      'Meet the Manipal-based team developing consumer brands and delivering coordinated branding, marketing, and e-commerce services.',
+      'Dashapatmaja Solutions Pvt Ltd was incorporated in 2022 and is incubated at MUTBI, MAHE. Meet the Manipal team building consumer brands and client brand systems.',
   },
   '/brands': {
-    title: 'Dashapatmaja Solutions Pvt Ltd | Our Brands',
+    title: 'Our Consumer Brands: Raw Radicles Ayurvedic Chocolate',
     description:
-      'Explore the consumer brands built by Dashapatmaja Solutions Pvt Ltd, beginning with Raw Radicles and its Ayurveda-inspired premium chocolate range.',
+      'Raw Radicles is the first consumer brand from Dashapatmaja Solutions Pvt Ltd: six 60 g Ayurvedic chocolate bars across three collections, built end to end in India.',
   },
   '/brands/raw-radicles': {
-    title: 'Dashapatmaja Solutions Pvt Ltd | Raw Radicles Brand',
+    title: 'Raw Radicles: Ayurvedic Chocolate Built from Scratch in India',
     description:
-      'See how Dashapatmaja Solutions Pvt Ltd is developing Raw Radicles across formulation, packaging, compliance coordination, and routes to market.',
+      'Six 60 g Ayurvedic chocolate bars built from formulation brief to print-ready pack: Holy Sin, Wrath Relief and Smart Sin, by Dashapatmaja Solutions Pvt Ltd in Manipal.',
   },
   '/marketing': {
-    title: 'Dashapatmaja Solutions Pvt Ltd | Marketing & SEO',
+    title: 'Digital Marketing & SEO Agency in Manipal, Udupi',
     description:
-      'Build demand with coordinated SEO, paid media, analytics, content, and campaign execution from the team behind the Raw Radicles consumer brand.',
+      'SEO, Google and Meta campaigns, content and reporting for Indian businesses. Run by the Manipal team behind Raw Radicles. Monthly targets agreed before we start.',
   },
   '/branding': {
-    title: 'Dashapatmaja Solutions Pvt Ltd | Brand Identity & Strategy',
+    title: 'Branding & Brand Identity Agency in Manipal, Karnataka',
     description:
-      'Develop a clear brand system through positioning, identity, voice, guidelines, and reusable assets designed for consistent application.',
+      'Brand positioning, identity, packaging and voice for Indian businesses. Built by a Manipal team that designed and shipped its own consumer brand.',
   },
   '/ecommerce': {
-    title: 'Dashapatmaja Solutions Pvt Ltd | E-commerce Services',
+    title: 'E-commerce Development for D2C Brands in India',
     description:
-      'Build and improve online stores, checkout journeys, marketplace operations, payments, and delivery systems with an operator-led e-commerce team.',
+      'Shopify, WooCommerce and custom storefronts, plus Amazon and Flipkart listings, payments and delivery setup, from the Manipal team that sells its own product online.',
   },
   '/contact': {
-    title: 'Dashapatmaja Solutions Pvt Ltd | Contact',
+    title: 'Contact Dashapatmaja Solutions Pvt Ltd, Manipal, Karnataka',
     description:
-      'Talk with Dashapatmaja Solutions Pvt Ltd in Manipal about branding, marketing, e-commerce, or a new consumer brand and share your project context.',
+      'Talk to Dashapatmaja Solutions Pvt Ltd in Manipal about branding, marketing, e-commerce or a new consumer brand. We reply within one working day.',
   },
   '/start': {
-    title: 'Dashapatmaja Solutions Pvt Ltd | Start a Project',
+    title: 'Start a Project with Dashapatmaja Solutions Pvt Ltd',
     description:
-      'Share your brand, marketing, e-commerce, website, or compliance-support requirements with the Dashapatmaja Solutions Pvt Ltd project team.',
+      'Share your brand, marketing, e-commerce or compliance requirements. We review, identify the right team and reply within one working day.',
   },
   '/privacy': {
     title: 'Dashapatmaja Solutions Pvt Ltd | Privacy Policy',
@@ -114,9 +121,9 @@ const routeMetadata = {
       'Read the terms that apply when using the Dashapatmaja Solutions Pvt Ltd website and contacting the company about a potential engagement.',
   },
   '/blogs': {
-    title: 'Dashapatmaja Solutions Pvt Ltd | Insights',
+    title: 'Insights on Branding, D2C Launches & FSSAI Compliance',
     description:
-      'Insights from building consumer brands and supporting branding, marketing, e-commerce, and compliance-coordination work.',
+      'Practical writing on brand building, D2C launches, FSSAI labelling and marketplace operations, from a team that runs its own consumer brand in India.',
   },
 };
 
@@ -127,7 +134,7 @@ for (const path of PUBLIC_ROUTES) {
     ...DEFAULT_IMAGE_METADATA,
     type: 'website',
     robots: 'index, follow',
-    structuredData: organizationStructuredData,
+    structuredData: buildRouteStructuredData(path),
   });
 }
 
@@ -137,7 +144,7 @@ routeMetadata['/blogs'] = Object.freeze({
   ...DEFAULT_IMAGE_METADATA,
   type: 'website',
   robots: blogsEnabled ? 'index, follow' : 'noindex, follow',
-  structuredData: organizationStructuredData,
+  structuredData: buildRouteStructuredData('/blogs'),
 });
 
 export const NOT_FOUND_METADATA = Object.freeze({
@@ -147,7 +154,7 @@ export const NOT_FOUND_METADATA = Object.freeze({
   ...DEFAULT_IMAGE_METADATA,
   type: 'website',
   robots: 'noindex, follow',
-  structuredData: organizationStructuredData,
+  structuredData: createStructuredDataGraph(organizationStructuredData),
 });
 
 export function getRouteMetadata(pathname) {

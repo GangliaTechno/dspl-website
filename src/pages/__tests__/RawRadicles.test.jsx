@@ -19,12 +19,15 @@ describe('Raw Radicles project overview', () => {
       ).toBeInTheDocument();
     }
     expect(hero.querySelectorAll('.raw-radicles-hero-pack')).toHaveLength(3);
+    expect(screen.getByText(/Holy Sin, with Chyawanprash/i)).toBeInTheDocument();
+    expect(screen.getByText(/Wrath Relief, with Ashwagandha/i)).toBeInTheDocument();
+    expect(screen.getByText(/Smart Sin, with Brahmi/i)).toBeInTheDocument();
     for (const fact of [
       /six 60 g bars across three collections/i,
       /real cacao/i,
-      /selected Ayurvedic botanicals/i,
+      /Ayurvedic botanical/i,
       /formulation partnership in Thrissur/i,
-      /manufacturing partnership in Kerala/i,
+      /manufacturing partnership in Keralam/i,
       /formulation briefing/i,
       /packaging/i,
       /compliance coordination/i,

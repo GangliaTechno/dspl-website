@@ -5,8 +5,16 @@ export const PROJECT_SERVICES = Object.freeze([
   'Social Media',
   'Website',
   'E-commerce',
-  'Compliance',
+  'Packaging and FSSAI compliance',
   'Other',
+]);
+
+export const PROJECT_BUDGET_RANGES = Object.freeze([
+  'Under Rs 1 lakh',
+  'Rs 1 to 3 lakh',
+  'Rs 3 to 10 lakh',
+  'Above Rs 10 lakh',
+  'Not decided yet',
 ]);
 
 const ALLOWED_ATTACHMENT_EXTENSIONS = new Set([
@@ -35,6 +43,7 @@ export function createInitialLeadForm() {
     website: '',
     services: [],
     projectGoal: '',
+    budgetRange: '',
     referralSource: '',
     preferredContact: '',
     fileName: '',
@@ -130,6 +139,7 @@ export function createLeadPayload(
   payload.append('website', data.website || '');
   payload.append('services', data.services.join(', '));
   payload.append('projectGoal', data.projectGoal || '');
+  payload.append('budgetRange', data.budgetRange || '');
   payload.append('referralSource', data.referralSource || '');
   payload.append('preferredContact', data.preferredContact || '');
   payload.append('priority', classification.priority);

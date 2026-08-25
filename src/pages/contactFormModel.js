@@ -1,9 +1,10 @@
 export const CONTACT_HELP_OPTIONS = Object.freeze([
   'Branding',
-  'Marketing',
-  'E-commerce',
-  'Compliance',
-  'Other',
+  'Marketing and SEO',
+  'E-commerce and marketplaces',
+  'Packaging and FSSAI compliance',
+  'New consumer brand',
+  'Something else',
 ]);
 
 export const createInitialContact = () => ({

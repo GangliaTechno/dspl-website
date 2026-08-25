@@ -40,12 +40,12 @@ describe('Brands page', () => {
     for (const fact of [
       'Six 60 g bars across three collections',
       'Real cacao with selected Ayurvedic botanicals',
-      'Chocolate production partnership in Kerala',
+      'Chocolate production partnership in Keralam',
       'Formulation partnership in Thrissur',
     ]) {
       expect(screen.getByText(fact)).toBeInTheDocument();
     }
-    expect(screen.getByRole('link', { name: 'Explore our brands here' }))
+    expect(screen.getByRole('link', { name: 'Explore Raw Radicles' }))
       .toHaveAttribute('href', '/brands/raw-radicles');
   });
 

@@ -3,6 +3,7 @@ import {
   classifyLead,
   createInitialLeadForm,
   createLeadPayload,
+  PROJECT_BUDGET_RANGES,
   PROJECT_SERVICES,
   validateAttachment,
   validateLead,
@@ -90,6 +91,7 @@ describe('lead form model', () => {
       'website',
       'services',
       'projectGoal',
+      'budgetRange',
       'referralSource',
       'preferredContact',
     ]) {
@@ -104,17 +106,25 @@ describe('lead form model', () => {
     }
   });
 
-  it('includes Compliance in the immutable project service choices', () => {
+  it('uses the reviewed project service and budget choices', () => {
     expect(PROJECT_SERVICES).toEqual([
       'Branding',
       'Marketing',
       'Social Media',
       'Website',
       'E-commerce',
-      'Compliance',
+      'Packaging and FSSAI compliance',
       'Other',
     ]);
+    expect(PROJECT_BUDGET_RANGES).toEqual([
+      'Under Rs 1 lakh',
+      'Rs 1 to 3 lakh',
+      'Rs 3 to 10 lakh',
+      'Above Rs 10 lakh',
+      'Not decided yet',
+    ]);
     expect(Object.isFrozen(PROJECT_SERVICES)).toBe(true);
+    expect(Object.isFrozen(PROJECT_BUDGET_RANGES)).toBe(true);
   });
 
   it('rejects attachments over 5 MB and unsupported file types or disguised MIME types', () => {

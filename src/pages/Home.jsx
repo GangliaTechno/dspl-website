@@ -26,17 +26,17 @@ const supporters = [
 const services = [
   {
     title: 'Branding',
-    text: 'Positioning, identity, packaging and voice, delivered as a system your team can actually apply. You receive logo files, colour and type rules, packaging artwork templates and a written messaging guide.',
+    text: 'Positioning, naming, identity, voice, packaging and application assets organised into a clear system your team and partners can use consistently.',
     link: '/branding',
   },
   {
     title: 'Marketing',
-    text: 'SEO, paid campaigns on Google and Meta, content and reporting, planned against a defined audience and a monthly number you agree before we start.',
+    text: 'Audience planning, SEO, paid campaigns, content and analytics coordinated around agreed measures, responsibilities and reporting.',
     link: '/marketing',
   },
   {
     title: 'E-commerce',
-    text: 'Shopify, WooCommerce and custom storefronts, plus Amazon and Flipkart listings, payments and delivery setup, built to run without daily hand-holding.',
+    text: 'Storefronts, marketplaces, catalogue, payments, delivery, returns and analytics planned around the operating model behind the customer journey.',
     link: '/ecommerce',
   },
 ];
@@ -46,25 +46,25 @@ const processSteps = [
     number: '01',
     title: 'Audit',
     description:
-      'We review where the business, brand and channels stand today, and what is actually blocking growth.',
-    timing: 'Initial scope review',
-    output: 'Written audit and a prioritised project brief',
+      'We examine the current position, audience, channels, constraints and priorities before recommending scope.',
+    timing: 'Confirmed after the initial scope review',
+    output: 'Priority audit and agreed brief',
   },
   {
     number: '02',
     title: 'Build',
     description:
-      'We create the agreed system: identity, campaigns, storefront, packaging, or the combination you need.',
-    timing: 'Approved roadmap',
-    output: 'Launch-ready assets and documented handover',
+      'We create and coordinate the agreed brand, market and commerce work, with review points and decision-makers defined in the roadmap.',
+    timing: 'Set by the approved roadmap',
+    output: 'Launch-ready system and operating handoffs',
   },
   {
     number: '03',
     title: 'Grow',
     description:
-      'We launch, measure against the numbers set in stage one, and improve on a fixed monthly cycle.',
-    timing: 'Engagement cadence',
-    output: 'Monthly performance report and next-cycle priorities',
+      'We launch, measure and improve the work against agreed evidence, then set the next priorities.',
+    timing: 'Agreed as part of the engagement',
+    output: 'Performance review and next priorities',
   },
 ];
 
@@ -135,9 +135,9 @@ const Home = () => {
           <div className="services-intro">
             <span className="section-subtitle services-eyebrow">Capabilities</span>
             <h2 className="services-title" id="services-title">
-              <span className="services-title-primary">Brand, market and commerce.</span>
+              <span className="services-title-primary">Brand, market, and commerce</span>
               <span className="services-title-secondary">
-                Run as one system.
+                Coordinated as one system.
               </span>
             </h2>
           </div>
@@ -162,12 +162,13 @@ const Home = () => {
           <aside className="compliance-support-strip" aria-labelledby="compliance-support-title">
             <div className="compliance-support-header">
               <span className="section-subtitle">Supporting capability</span>
-              <h3 id="compliance-support-title">FSSAI and Legal Metrology support</h3>
+              <h3 id="compliance-support-title">Packaging and commerce compliance coordination</h3>
             </div>
             <p className="compliance-support-text">
-              Packaging, labelling, listing, and commerce inputs can be prepared
-              as part of the work, with regulated legal opinions retained by
-              qualified advisers.
+              For food and consumer-product projects, we can coordinate label inputs,
+              pack declarations, claims review, marketplace listing declarations,
+              and other implementation details within the agreed scope. Regulated
+              advice and approvals remain with the appropriate qualified advisers.
             </p>
             <div className="compliance-support-links">
               <Link to="/branding#compliance">Branding and packaging compliance <ArrowRight size={15} aria-hidden="true" /></Link>
