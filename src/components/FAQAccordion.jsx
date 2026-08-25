@@ -2,18 +2,22 @@ import './FAQAccordion.css';
 import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 
-const FAQAccordion = ({ faqs }) => {
+const FAQAccordion = ({ faqs, namespace = 'faq' }) => {
   const [openIdx, setOpenIdx] = useState(null);
 
   const toggleFaq = (idx) => {
     setOpenIdx(openIdx === idx ? null : idx);
   };
 
+  if (!Array.isArray(faqs) || faqs.length === 0) {
+    return null;
+  }
+
   return (
     <div className="faq-list faq-list--divided">
       {faqs.map((faq, idx) => {
         const isOpen = openIdx === idx;
-        const faqId = `faq-${idx}`;
+        const faqId = `${namespace}-${idx}`;
 
         return (
           <div

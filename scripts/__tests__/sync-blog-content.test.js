@@ -4,6 +4,7 @@ import { seedBlogPosts } from '../../src/cms/seedData.js';
 import {
   createBlogManifest,
   normalizeBlogSlug,
+  normalizeMainImage,
   resolveArticleSnapshotPath,
   resolveBlogSource,
   resolveSanitySyncTarget,
@@ -39,8 +40,8 @@ const makeManifest = () => ({
 });
 
 const makeArticleMap = () => new Map([
-  ['coordinating-brand-market-commerce', { slug: 'coordinating-brand-market-commerce', body: [] }],
-  ['from-packaging-to-purchase', { slug: 'from-packaging-to-purchase', body: [] }],
+  ['fssai-labelling-requirements-checklist-2026', { slug: 'fssai-labelling-requirements-checklist-2026', body: [] }],
+  ['legal-metrology-packaged-commodity-rules-india', { slug: 'legal-metrology-packaged-commodity-rules-india', body: [] }],
 ]);
 
 const validSanityEnv = {
@@ -302,8 +303,8 @@ describe('CMS slug and article snapshot path boundary', () => {
   });
 
   it.each([
-    'coordinating-brand-market-commerce',
-    'from-packaging-to-purchase',
+    'fssai-labelling-requirements-checklist-2026',
+    'legal-metrology-packaged-commodity-rules-india',
   ])('preserves approved slug %s and resolves it to one exact child file', (slug) => {
     const normalized = normalizeBlogSlug(slug);
     const resolved = resolveArticleSnapshotPath(generatedBlogDir, slug);
@@ -315,27 +316,27 @@ describe('CMS slug and article snapshot path boundary', () => {
   });
 
   it('trims and lowercases uppercase CMS slugs consistently', () => {
-    const rawSlug = '  FROM-PACKAGING-TO-PURCHASE  ';
+    const rawSlug = '  legal-metrology-packaged-commodity-rules-india  ';
 
-    expect(normalizeBlogSlug(rawSlug)).toBe('from-packaging-to-purchase');
+    expect(normalizeBlogSlug(rawSlug)).toBe('legal-metrology-packaged-commodity-rules-india');
     expect(resolveArticleSnapshotPath(generatedBlogDir, rawSlug)).toBe(
-      path.join(generatedBlogDir, 'from-packaging-to-purchase.json'),
+      path.join(generatedBlogDir, 'legal-metrology-packaged-commodity-rules-india.json'),
     );
     expect(validateAndProcessPosts([makePost(rawSlug)]).processedPosts[0].slug).toBe(
-      'from-packaging-to-purchase',
+      'legal-metrology-packaged-commodity-rules-india',
     );
   });
 
-  it('keeps both existing seed CMS documents processable with their canonical slugs', () => {
+  it('keeps all approved seed CMS documents processable with their canonical slugs', () => {
     const result = validateAndProcessPosts(seedBlogPosts);
 
     expect(result.processedPosts.map(({ slug }) => slug)).toEqual([
-      'coordinating-brand-market-commerce',
-      'from-packaging-to-purchase',
+      'fssai-labelling-requirements-checklist-2026',
+      'legal-metrology-packaged-commodity-rules-india',
     ]);
     expect(Array.from(result.fullArticleMap.keys())).toEqual([
-      'coordinating-brand-market-commerce',
-      'from-packaging-to-purchase',
+      'fssai-labelling-requirements-checklist-2026',
+      'legal-metrology-packaged-commodity-rules-india',
     ]);
   });
 
@@ -437,7 +438,7 @@ describe('preflight-first article snapshot writes', () => {
   ])('preflights every map entry for %s before any sink call', (_label, invalidSlug) => {
     const sink = makeSink();
     const fullArticleMap = new Map([
-      ['coordinating-brand-market-commerce', { slug: 'coordinating-brand-market-commerce' }],
+      ['fssai-labelling-requirements-checklist-2026', { slug: 'fssai-labelling-requirements-checklist-2026' }],
       [invalidSlug, { slug: invalidSlug }],
     ]);
 
@@ -467,14 +468,14 @@ describe('preflight-first article snapshot writes', () => {
     expect(sink.writeFileSync).toHaveBeenCalledTimes(3);
     expect(sink.writeFileSync).toHaveBeenNthCalledWith(
       1,
-      path.join(generatedBlogDir, 'coordinating-brand-market-commerce.json'),
-      JSON.stringify(fullArticleMap.get('coordinating-brand-market-commerce'), null, 2),
+      path.join(generatedBlogDir, 'fssai-labelling-requirements-checklist-2026.json'),
+      JSON.stringify(fullArticleMap.get('fssai-labelling-requirements-checklist-2026'), null, 2),
       'utf8',
     );
     expect(sink.writeFileSync).toHaveBeenNthCalledWith(
       2,
-      path.join(generatedBlogDir, 'from-packaging-to-purchase.json'),
-      JSON.stringify(fullArticleMap.get('from-packaging-to-purchase'), null, 2),
+      path.join(generatedBlogDir, 'legal-metrology-packaged-commodity-rules-india.json'),
+      JSON.stringify(fullArticleMap.get('legal-metrology-packaged-commodity-rules-india'), null, 2),
       'utf8',
     );
     expect(sink.writeFileSync).toHaveBeenNthCalledWith(
@@ -492,10 +493,10 @@ describe('preflight-first article snapshot writes', () => {
     const sink = makeSink();
     const events = [];
     sink.readdirSync.mockReturnValue([
-      makeDirent('from-packaging-to-purchase.json'),
+      makeDirent('legal-metrology-packaged-commodity-rules-india.json'),
       makeDirent('obsolete-zeta.json'),
       makeDirent('notes.txt'),
-      makeDirent('coordinating-brand-market-commerce.json'),
+      makeDirent('fssai-labelling-requirements-checklist-2026.json'),
       makeDirent('obsolete-alpha.json'),
     ]);
     sink.mkdirSync.mockImplementation(() => events.push('mkdir'));
@@ -512,8 +513,8 @@ describe('preflight-first article snapshot writes', () => {
 
     expect(events).toEqual([
       'mkdir',
-      'write:coordinating-brand-market-commerce.json',
-      'write:from-packaging-to-purchase.json',
+      'write:fssai-labelling-requirements-checklist-2026.json',
+      'write:legal-metrology-packaged-commodity-rules-india.json',
       'unlink:obsolete-alpha.json',
       'unlink:obsolete-zeta.json',
       'write:blogManifest.json',
@@ -611,15 +612,15 @@ describe('preflight-first article snapshot writes', () => {
     })).toThrow('unlink failed');
     expect(sink.writeFileSync).toHaveBeenCalledTimes(2);
     expect(sink.writeFileSync.mock.calls.map(([target]) => path.basename(target))).toEqual([
-      'coordinating-brand-market-commerce.json',
-      'from-packaging-to-purchase.json',
+      'fssai-labelling-requirements-checklist-2026.json',
+      'legal-metrology-packaged-commodity-rules-india.json',
     ]);
   });
 
   it.each([
     ['cyclic manifest', (() => { const value = {}; value.self = value; return value; })()],
     ['BigInt article', new Map([
-      ['coordinating-brand-market-commerce', { slug: 'coordinating-brand-market-commerce', value: 1n }],
+      ['fssai-labelling-requirements-checklist-2026', { slug: 'fssai-labelling-requirements-checklist-2026', value: 1n }],
     ])],
   ])('rejects %s before any mutation', (_label, value) => {
     const sink = makeSink();
@@ -640,8 +641,8 @@ describe('preflight-first article snapshot writes', () => {
 
   it('converges on a second run using only non-call-through fake sink functions', () => {
     let inventory = [
-      'coordinating-brand-market-commerce.json',
-      'from-packaging-to-purchase.json',
+      'fssai-labelling-requirements-checklist-2026.json',
+      'legal-metrology-packaged-commodity-rules-india.json',
       'obsolete.json',
     ];
     const sink = makeSink();
@@ -666,8 +667,8 @@ describe('preflight-first article snapshot writes', () => {
     write();
 
     expect(inventory.sort()).toEqual([
-      'coordinating-brand-market-commerce.json',
-      'from-packaging-to-purchase.json',
+      'fssai-labelling-requirements-checklist-2026.json',
+      'legal-metrology-packaged-commodity-rules-india.json',
     ].sort());
     expect(sink.unlinkSync).toHaveBeenCalledTimes(1);
     expect(sink.readdirSync).toHaveBeenCalledTimes(2);
@@ -838,5 +839,221 @@ describe('deterministic blog manifest provenance', () => {
       posts: [],
     });
     expect(manifest).not.toHaveProperty('syncedAt');
+  });
+});
+
+describe('Phase 2 content model and validation pipeline', () => {
+  it('accepts Compliance category and rejects unapproved categories', () => {
+    const validCompliance = makePost('compliance-test');
+    validCompliance.category = 'Compliance';
+    expect(() => validateAndProcessPosts([validCompliance])).not.toThrow();
+
+    const invalidCategory = makePost('fashion-test');
+    invalidCategory.category = 'Fashion';
+    expect(() => validateAndProcessPosts([invalidCategory])).toThrow(/invalid category "Fashion"/);
+  });
+
+  it('validates and propagates authors array with optional roles', () => {
+    const postWithAuthors = makePost('authors-test');
+    postWithAuthors.authors = [
+      { _key: 'a1', name: 'Namesh Malarout', role: 'Director, Dashapatmaja Solutions Pvt Ltd' },
+      { _key: 'a2', name: 'Pawan Shetty' },
+    ];
+
+    const { processedPosts, fullArticleMap } = validateAndProcessPosts([postWithAuthors]);
+    expect(processedPosts[0].authors).toEqual([
+      { _key: 'a1', name: 'Namesh Malarout', role: 'Director, Dashapatmaja Solutions Pvt Ltd' },
+      { _key: 'a2', name: 'Pawan Shetty' },
+    ]);
+    expect(fullArticleMap.get('authors-test').authors).toEqual(processedPosts[0].authors);
+  });
+
+  it('allows absent authors for backward compatibility with legacy articles', () => {
+    const legacyPost = makePost('legacy-post');
+    delete legacyPost.authors;
+    const { processedPosts } = validateAndProcessPosts([legacyPost]);
+    expect(processedPosts[0].authors).toBeNull();
+  });
+
+  it('rejects an empty authors array or author without a name', () => {
+    const emptyAuthors = makePost('empty-authors');
+    emptyAuthors.authors = [];
+    expect(() => validateAndProcessPosts([emptyAuthors])).toThrow(/authors must be a non-empty array/);
+
+    const missingName = makePost('missing-name');
+    missingName.authors = [{ role: 'Director' }];
+    expect(() => validateAndProcessPosts([missingName])).toThrow(/must have a non-empty name/);
+  });
+
+  it('strictly validates readingTimeMinutes overrides', () => {
+    const post = makePost('reading-override');
+    post.body = [
+      { _type: 'block', children: [{ _type: 'span', text: 'Five words in this block' }] },
+    ];
+
+    // Valid override: sets minutes and text, retains body word count
+    post.readingTimeMinutes = 14;
+    const { processedPosts } = validateAndProcessPosts([post]);
+    expect(processedPosts[0].readingTime).toEqual({
+      minutes: 14,
+      text: '14 min read',
+      wordCount: 5,
+    });
+
+    // Invalid: 0
+    post.readingTimeMinutes = 0;
+    expect(() => validateAndProcessPosts([post])).toThrow(/Invalid readingTimeMinutes/);
+
+    // Invalid: negative
+    post.readingTimeMinutes = -3;
+    expect(() => validateAndProcessPosts([post])).toThrow(/Invalid readingTimeMinutes/);
+
+    // Invalid: non-integer
+    post.readingTimeMinutes = 'fourteen';
+    expect(() => validateAndProcessPosts([post])).toThrow(/Invalid readingTimeMinutes/);
+
+    // Absent: calculates automatically
+    delete post.readingTimeMinutes;
+    const autoResult = validateAndProcessPosts([post]);
+    expect(autoResult.processedPosts[0].readingTime).toEqual({
+      minutes: 1,
+      text: '1 min read',
+      wordCount: 5,
+    });
+  });
+
+  it('validates closingCta.href to ensure it is an internal path', () => {
+    const post = makePost('cta-test');
+    post.closingCta = {
+      heading: 'Ready for print?',
+      text: 'Tell us your launch.',
+      label: 'Start',
+      href: '/start',
+    };
+
+    const { fullArticleMap } = validateAndProcessPosts([post]);
+    expect(fullArticleMap.get('cta-test').closingCta).toEqual(post.closingCta);
+
+    // External href must be rejected
+    post.closingCta.href = 'https://external.com/start';
+    expect(() => validateAndProcessPosts([post])).toThrow(/closingCta.href must be an internal path starting with \/ and not \/\//);
+
+    // Protocol-relative href must be rejected
+    post.closingCta.href = '//example.com/start';
+    expect(() => validateAndProcessPosts([post])).toThrow(/closingCta.href must be an internal path starting with \/ and not \/\//);
+  });
+
+  it('validates faqs and references non-empty constraints', () => {
+    const post = makePost('faq-ref-test');
+    post.faqs = [{ _key: 'f1', question: 'Q?', answer: 'A.' }];
+    post.references = [{ _key: 'r1', text: 'Reference citation' }];
+
+    const { fullArticleMap } = validateAndProcessPosts([post]);
+    expect(fullArticleMap.get('faq-ref-test').faqs).toHaveLength(1);
+    expect(fullArticleMap.get('faq-ref-test').references).toHaveLength(1);
+
+    // Empty FAQ answer
+    post.faqs = [{ question: 'Q?', answer: '   ' }];
+    expect(() => validateAndProcessPosts([post])).toThrow(/faqs\[0\] must have non-empty question and answer/);
+
+    // Empty reference text
+    post.faqs = [{ question: 'Q?', answer: 'A.' }];
+    post.references = [{ text: '' }];
+    expect(() => validateAndProcessPosts([post])).toThrow(/references\[0\] must have non-empty text/);
+  });
+
+  it('validates dataTable row cell counts against header count', () => {
+    const post = makePost('table-test');
+    post.body = [
+      {
+        _type: 'dataTable',
+        headers: ['Col A', 'Col B'],
+        rows: [
+          { cells: ['Val 1', 'Val 2'] },
+        ],
+      },
+    ];
+
+    expect(() => validateAndProcessPosts([post])).not.toThrow();
+
+    // Mismatched cell count (3 cells for 2 headers)
+    post.body[0].rows = [{ cells: ['Val 1', 'Val 2', 'Extra'] }];
+    expect(() => validateAndProcessPosts([post])).toThrow(/dataTable row 0 has 3 cells but headers define 2 columns/);
+  });
+
+  it('normalizes seo.ogImage whether passed as a string or a Sanity asset object', () => {
+    const postStringOg = makePost('string-og');
+    postStringOg.seo = { metaTitle: 'Title', ogImage: 'https://example.com/og.jpg' };
+    const resString = validateAndProcessPosts([postStringOg]);
+    expect(resString.processedPosts[0].seo.ogImage).toBe('https://example.com/og.jpg');
+
+    const postObjOg = makePost('obj-og');
+    postObjOg.seo = { metaTitle: 'Title', ogImage: { asset: { url: 'https://cdn.sanity.io/og.jpg' } } };
+    const resObj = validateAndProcessPosts([postObjOg]);
+    expect(resObj.processedPosts[0].seo.ogImage).toBe('https://cdn.sanity.io/og.jpg');
+
+    const postNullOg = makePost('null-og');
+    postNullOg.seo = { metaTitle: 'Title', ogImage: null };
+    const resNull = validateAndProcessPosts([postNullOg]);
+    expect(resNull.processedPosts[0].seo.ogImage).toBeNull();
+  });
+
+  it('normalizes mainImage preserving caption, responsive map, and deriving Sanity CDN URLs', () => {
+    expect(normalizeMainImage(null)).toBeNull();
+    expect(normalizeMainImage({})).toBeNull();
+    expect(normalizeMainImage({ alt: 'Alt' })).toBeNull();
+
+    // Preserves caption and existing responsive map
+    const fallbackImage = {
+      alt: 'Test Alt',
+      caption: 'Test Caption',
+      asset: { url: '/insights/test.webp', metadata: { dimensions: { width: 1440, height: 810 } } },
+      responsive: { 640: '/insights/test-640.webp', 960: '/insights/test-960.webp', 1440: '/insights/test-1440.webp' },
+    };
+    const normFallback = normalizeMainImage(fallbackImage);
+    expect(normFallback).toEqual({
+      alt: 'Test Alt',
+      caption: 'Test Caption',
+      asset: { url: '/insights/test.webp', metadata: { dimensions: { width: 1440, height: 810 } } },
+      responsive: { 640: '/insights/test-640.webp', 960: '/insights/test-960.webp', 1440: '/insights/test-1440.webp' },
+    });
+
+    // Derives responsive map for Sanity CDN URLs and retains caption
+    const sanityImage = {
+      alt: 'Sanity Alt',
+      caption: 'Sanity Caption',
+      asset: {
+        url: 'https://cdn.sanity.io/images/project/dataset/image-abc-1440x810-webp.webp',
+        metadata: { dimensions: { width: 1440, height: 810 } },
+      },
+    };
+    const normSanity = normalizeMainImage(sanityImage);
+    expect(normSanity.alt).toBe('Sanity Alt');
+    expect(normSanity.caption).toBe('Sanity Caption');
+    expect(normSanity.responsive['640']).toBe('https://cdn.sanity.io/images/project/dataset/image-abc-1440x810-webp.webp?w=640&auto=format');
+    expect(normSanity.responsive['960']).toBe('https://cdn.sanity.io/images/project/dataset/image-abc-1440x810-webp.webp?w=960&auto=format');
+    expect(normSanity.responsive['1440']).toBe('https://cdn.sanity.io/images/project/dataset/image-abc-1440x810-webp.webp?w=1440&auto=format');
+  });
+
+  it('processes all two compliance seed posts into a deterministic manifest with correct ordering', () => {
+    const { processedPosts, fullArticleMap } = validateAndProcessPosts(seedBlogPosts);
+    expect(processedPosts).toHaveLength(2);
+    expect(fullArticleMap.size).toBe(2);
+
+    const manifest = createBlogManifest(processedPosts);
+    expect(manifest.blogsEnabled).toBe(true);
+    expect(manifest.totalPosts).toBe(2);
+
+    // Both posts have publishedAt 2026-08-24; sorted alphabetically by slug
+    expect(manifest.posts.map((p) => p.slug)).toEqual([
+      'fssai-labelling-requirements-checklist-2026',
+      'legal-metrology-packaged-commodity-rules-india',
+    ]);
+
+    // Check reading times on compliance posts
+    expect(manifest.posts[0].readingTime.minutes).toBe(14);
+    expect(manifest.posts[0].readingTime.text).toBe('14 min read');
+    expect(manifest.posts[1].readingTime.minutes).toBe(15);
+    expect(manifest.posts[1].readingTime.text).toBe('15 min read');
   });
 });

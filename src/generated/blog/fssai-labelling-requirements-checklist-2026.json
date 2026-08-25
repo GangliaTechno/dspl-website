@@ -1,0 +1,2353 @@
+{
+  "_id": "seed-post-fssai-labelling-requirements-checklist-2026",
+  "_createdAt": "2026-08-24T08:00:00.000Z",
+  "_updatedAt": "2026-08-24T08:00:00.000Z",
+  "slug": "fssai-labelling-requirements-checklist-2026",
+  "title": "FSSAI Labelling Requirements for Packaged Food",
+  "category": "Compliance",
+  "publishedAt": "2026-08-24T08:00:00.000Z",
+  "description": "Every mandatory declaration on an Indian food label in 2026, the font sizes, the allergen rules, the 2027 changes, and the mistakes that cost brands a reprint.",
+  "readingTime": {
+    "minutes": 14,
+    "text": "14 min read",
+    "wordCount": 3508
+  },
+  "headings": [
+    {
+      "blockKey": "fb-h2-01",
+      "id": "which-laws-actually-apply-to-your-label",
+      "text": "Which laws actually apply to your label",
+      "level": 2
+    },
+    {
+      "blockKey": "fb-h2-02",
+      "id": "the-compliance-calendar-you-should-have-on-the-wall",
+      "text": "The compliance calendar you should have on the wall",
+      "level": 2
+    },
+    {
+      "blockKey": "fb-h2-03",
+      "id": "the-checklist-fourteen-things-every-pack-must-carry",
+      "text": "The checklist: fourteen things every pack must carry",
+      "level": 2
+    },
+    {
+      "blockKey": "fb-h2-04",
+      "id": "font-size-the-table-that-decides-your-artwork",
+      "text": "Font size: the table that decides your artwork",
+      "level": 2
+    },
+    {
+      "blockKey": "fb-h2-05",
+      "id": "claims-the-area-that-generates-the-most-enforcement",
+      "text": "Claims: the area that generates the most enforcement",
+      "level": 2
+    },
+    {
+      "blockKey": "fb-h2-06",
+      "id": "what-changes-on-1-july-2027",
+      "text": "What changes on 1 July 2027",
+      "level": 2
+    },
+    {
+      "blockKey": "fb-h2-07",
+      "id": "front-of-pack-labelling-what-is-coming-and-when",
+      "text": "Front-of-pack labelling: what is coming, and when",
+      "level": 2
+    },
+    {
+      "blockKey": "fb-h2-08",
+      "id": "the-penalties-and-who-pays-them",
+      "text": "The penalties, and who pays them",
+      "level": 2
+    },
+    {
+      "blockKey": "fb-h2-09",
+      "id": "the-pre-print-checklist",
+      "text": "The pre-print checklist",
+      "level": 2
+    },
+    {
+      "blockKey": "fb-h2-10",
+      "id": "why-this-is-worth-doing-properly",
+      "text": "Why this is worth doing properly",
+      "level": 2
+    }
+  ],
+  "authors": [
+    {
+      "_key": "author-namesh-malarout",
+      "name": "Namesh Malarout",
+      "role": "Director, Dashapatmaja Solutions Pvt Ltd"
+    },
+    {
+      "_key": "author-pawan-shetty",
+      "name": "Pawan Shetty"
+    }
+  ],
+  "mainImage": {
+    "alt": "Packaged food artwork and back-of-pack label panels arranged for a compliance review.",
+    "asset": {
+      "url": "/insights/fssai-labelling-v1-1440.webp",
+      "metadata": {
+        "dimensions": {
+          "width": 1440,
+          "height": 810,
+          "aspectRatio": 1.7777777777777777
+        }
+      }
+    },
+    "responsive": {
+      "640": "/insights/fssai-labelling-v1-640.webp",
+      "960": "/insights/fssai-labelling-v1-960.webp",
+      "1440": "/insights/fssai-labelling-v1-1440.webp"
+    }
+  },
+  "seo": {
+    "metaTitle": "FSSAI Labelling Requirements 2026: A Practical Checklist",
+    "metaDescription": "Every mandatory declaration on an Indian food label in 2026, the font sizes, the allergen rules, the 2027 changes, and the mistakes that cost brands a reprint.",
+    "ogImage": null
+  },
+  "body": [
+    {
+      "_key": "fb-01",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-01-span",
+          "_type": "span",
+          "text": "Nearly one in five food samples tested in India last year failed. In 2025-26, central and state food safety authorities analysed 2,23,808 samples and found 40,023 of them non-conforming. Inspections crossed 5.2 lakh, up from 4.01 lakh the year before and 3.57 lakh the year before that. FSSAI imposed Rs 154.87 crore in penalties for misbranding and substandard products, decided 23,580 adjudication cases and secured 1,756 criminal convictions.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-02",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-02-span",
+          "_type": "span",
+          "text": "Those figures come from written replies tabled in the Lok Sabha in July 2026 by the Ministry of Health and Family Welfare.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-03",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-03-span",
+          "_type": "span",
+          "text": "Here is the part most founders miss. A large share of those failures are not adulteration. In 2023-24, of 33,808 non-conforming samples, 22,603 were sub-standard, 6,782 were unsafe, and 4,423 were labelling defects. Roughly one in eight failures was a label problem. Nothing wrong with the food. Something wrong with the printed panel.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-04",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [
+        {
+          "_key": "fb-04-link",
+          "_type": "link",
+          "href": "/brands/raw-radicles"
+        }
+      ],
+      "children": [
+        {
+          "_key": "fb-04-s1",
+          "_type": "span",
+          "text": "We have taken ",
+          "marks": []
+        },
+        {
+          "_key": "fb-04-s2",
+          "_type": "span",
+          "text": "six SKUs of our own",
+          "marks": [
+            "fb-04-link"
+          ]
+        },
+        {
+          "_key": "fb-04-s3",
+          "_type": "span",
+          "text": " through this process, from lab report to print-ready artwork. This is the checklist we use.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-05",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-05-span",
+          "_type": "span",
+          "text": "A note before you read on. This is general guidance, not legal advice. Verify every point against the current gazette text before you send artwork to a printer.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-h2-01",
+      "_type": "block",
+      "style": "h2",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-h2-01-span",
+          "_type": "span",
+          "text": "Which laws actually apply to your label",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-06",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-06-span",
+          "_type": "span",
+          "text": "Three separate regimes govern a single Indian food pack. They are enforced by two different ministries, and inspectors check both.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-07",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-07-span",
+          "_type": "span",
+          "text": "Food Safety and Standards (Labelling and Display) Regulations, 2020. The main instrument. Notified 17 November 2020, brought into force 1 January 2023. Made under Section 23 of the Food Safety and Standards Act, 2006. Governs product name, ingredients, nutrition, allergens, date marking, veg and non-veg marks, and the FSSAI logo and licence number.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-08",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-08-span",
+          "_type": "span",
+          "text": "Legal Metrology (Packaged Commodities) Rules, 2011. Administered by the Department of Consumer Affairs, not FSSAI. Governs maximum retail price, net quantity declaration, name and address of manufacturer or packer or importer, country of origin, consumer care details and the month and year of packing.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-09",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-09-span",
+          "_type": "span",
+          "text": "Food Safety and Standards (Advertising and Claims) Regulations, 2018. Governs anything on your pack that is a claim. This is where most enforcement action against brands now lands.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-10",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-10-span",
+          "_type": "span",
+          "text": "The rules are amended constantly. FSSAI has amended the 2020 Labelling Regulations five times: 10 September 2021, 9 September 2022, 11 October 2022, 8 August 2025 and 24 March 2026.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-11",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-11-span",
+          "_type": "span",
+          "text": "Since January 2025, FSSAI has standardised the annual enforcement date. Any amendment to labelling requirements comes into force on 1 July, and must be notified at least 180 days beforehand. The Department of Consumer Affairs runs a parallel rule for Legal Metrology, with amendments taking effect on 1 January or 1 July after 180 days’ notice.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-12",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-12-span",
+          "_type": "span",
+          "text": "This matters for your print planning. You now have a predictable window. Use it.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-h2-02",
+      "_type": "block",
+      "style": "h2",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-h2-02-span",
+          "_type": "span",
+          "text": "The compliance calendar you should have on the wall",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fssai-table-compliance-calendar",
+      "_type": "dataTable",
+      "caption": "Key dates for labelling compliance",
+      "headers": [
+        "Date",
+        "What happens"
+      ],
+      "rows": [
+        {
+          "_key": "fcc-r1",
+          "cells": [
+            "1 July 2026",
+            "Legal Metrology Amendment Rules, 2026 (G.S.R. 128(E), 13 February 2026) take effect. New Rule 6(10A) requires every e-commerce entity selling imported products to provide a searchable and sortable country-of-origin filter."
+          ]
+        },
+        {
+          "_key": "fcc-r2",
+          "cells": [
+            "22 July 2026",
+            "FSSAI issues a direction keeping the coffee-chicory mixture labelling requirements of the 8 August 2025 amendment in abeyance."
+          ]
+        },
+        {
+          "_key": "fcc-r3",
+          "cells": [
+            "10 September 2026",
+            "Supreme Court lists the front-of-pack labelling matter (3S and Our Health Society) for further hearing."
+          ]
+        },
+        {
+          "_key": "fcc-r4",
+          "cells": [
+            "1 July 2027",
+            "FSS (Labelling and Display) Amendment Regulations, 2026, notified 24 March 2026, come into force."
+          ]
+        },
+        {
+          "_key": "fcc-r5",
+          "cells": [
+            "1 July 2027",
+            "Legal Metrology (Packaged Commodities) Second Amendment Rules, 2026, notified 27 April 2026, come into force."
+          ]
+        }
+      ]
+    },
+    {
+      "_key": "fb-h2-03",
+      "_type": "block",
+      "style": "h2",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-h2-03-span",
+          "_type": "span",
+          "text": "The checklist: fourteen things every pack must carry",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-13",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-13-span",
+          "_type": "span",
+          "text": "Work through these in order. Each one has the rule, then the mistake we see most often.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-14",
+      "_type": "block",
+      "style": "h3",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-14-span",
+          "_type": "span",
+          "text": "1. Name of the food",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-15",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-15-span",
+          "_type": "span",
+          "text": "Use the standard name where FSSAI has prescribed one. Where it has not, use a descriptive name that tells the buyer what the product actually is. The name must reflect the nature of the food, not the brand. “Choco Blast” is a brand. “Milk chocolate bar with almonds” is a name. The common mistake: calling something a “fruit juice” when it is a fruit drink, or letting the brand name do the work the food name is supposed to do.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-16",
+      "_type": "block",
+      "style": "h3",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-16-span",
+          "_type": "span",
+          "text": "2. List of ingredients",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-17",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-17-span",
+          "_type": "span",
+          "text": "In descending order of composition by weight or volume at the time of manufacture. Not required for single-ingredient foods. Compound ingredients need their own sub-list if they cross the threshold. Additives must be declared by class name followed by the INS number, not by trade name. The common mistake: listing an additive as “Nature Identical Flavouring Substances” without the class, or using a supplier’s product code instead of the INS number.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-18",
+      "_type": "block",
+      "style": "h3",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-18-span",
+          "_type": "span",
+          "text": "3. Declaration on food additives",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-19",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-19-span",
+          "_type": "span",
+          "text": "Class name plus INS number. This is separate from the ingredient list requirement, and inspectors check it separately.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-20",
+      "_type": "block",
+      "style": "h3",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-20-span",
+          "_type": "span",
+          "text": "4. Allergen declaration",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-21",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-21-span",
+          "_type": "span",
+          "text": "FSSAI names eight categories that must be declared whenever present as an ingredient:",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-a1",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-a1-span",
+          "_type": "span",
+          "text": "Cereals containing gluten",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-a2",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-a2-span",
+          "_type": "span",
+          "text": "Crustaceans and crustacean products",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-a3",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-a3-span",
+          "_type": "span",
+          "text": "Milk and milk products",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-a4",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-a4-span",
+          "_type": "span",
+          "text": "Eggs and egg products",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-a5",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-a5-span",
+          "_type": "span",
+          "text": "Fish and fish products",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-a6",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-a6-span",
+          "_type": "span",
+          "text": "Peanuts and tree nuts",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-a7",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-a7-span",
+          "_type": "span",
+          "text": "Soybeans and soybean products",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-a8",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-a8-span",
+          "_type": "span",
+          "text": "Sulphites at 10 mg/kg or more",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-22",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-22-span",
+          "_type": "span",
+          "text": "The declaration goes adjacent to or immediately after the ingredient list, worded as “Contains” followed by the allergen names. Where cross-contact in production cannot be eliminated, a separate “May contain” statement is permitted. That statement should rest on a documented hazard analysis, not on caution alone.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-23",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-23-span",
+          "_type": "span",
+          "text": "Two exemptions to know. Raw agricultural commodities are outside the requirement. So are oils derived from these ingredients. The common mistake: putting the allergen statement on the back of the pack, far from the ingredient list, in the same weight as body copy. It has to be findable by someone scanning quickly, because that is the entire point of it.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-24",
+      "_type": "block",
+      "style": "h3",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-24-span",
+          "_type": "span",
+          "text": "5. Nutritional information",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-25",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-25-span",
+          "_type": "span",
+          "text": "This is where the 2026 audit pressure sits. You must declare, per 100 g or per 100 ml and per serving:",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-n1",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-n1-span",
+          "_type": "span",
+          "text": "Energy in kcal",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-n2",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-n2-span",
+          "_type": "span",
+          "text": "Protein, carbohydrate, total sugars and added sugars in grams",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-n3",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-n3-span",
+          "_type": "span",
+          "text": "Total fat, saturated fat and trans fat in grams",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-n4",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-n4-span",
+          "_type": "span",
+          "text": "Cholesterol in milligrams",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-n5",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-n5-span",
+          "_type": "span",
+          "text": "Sodium in milligrams",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-n6",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-n6-span",
+          "_type": "span",
+          "text": "Any nutrient for which a claim is made",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-n7",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-n7-span",
+          "_type": "span",
+          "text": "Any nutrient added for fortification",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-26",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-26-span",
+          "_type": "span",
+          "text": "You must also declare the percentage contribution to Recommended Dietary Allowance per serve, and the number of servings per pack. Serving size is not a marketing lever. Under Regulation 5, the declared serving must reflect real usage. A serving size chosen to make the sugar figure look smaller is a false representation of the nature of the food, which brings it inside the definition of misbranded food under Section 3(zf)(iii) of the FSS Act.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-27",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-27-span",
+          "_type": "span",
+          "text": "The common mistake: declaring a 60 g bar as three servings of 20 g so the sugar number reads better. That is exactly the practice the rule was written to stop. Get your numbers from an NABL-accredited or FSSAI-notified laboratory. Keep the report mapped to the batch and the artwork version. When a Food Safety Officer draws a sample under Section 36, the lab report is your defence.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-28",
+      "_type": "block",
+      "style": "h3",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-28-span",
+          "_type": "span",
+          "text": "6. Declaration of veg or non-veg",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-29",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-29-span",
+          "_type": "span",
+          "text": "Green filled circle inside a green square outline for vegetarian. Brown filled circle inside a brown square outline for non-vegetarian. On the principal display panel, in contrast to the background, close to the name of the food. The common mistake: a green circle without the square, or a symbol reproduced in a brand colour instead of the prescribed colour.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-30",
+      "_type": "block",
+      "style": "h3",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-30-span",
+          "_type": "span",
+          "text": "7. FSSAI logo and licence number",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-31",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-31-span",
+          "_type": "span",
+          "text": "The logo and licence number of the brand owner go on the label. If the manufacturer, marketer, packer or bottler is a different entity from the brand owner, that licence number goes on too. For imported products, the importer displays the logo, licence number, and name and address. Both must be in contrast to the background. The common mistake: printing only the contract manufacturer’s licence number because that is who owns the plant. The brand owner’s number is the one that has to be there.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-32",
+      "_type": "block",
+      "style": "h3",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-32-span",
+          "_type": "span",
+          "text": "8. Net quantity",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-33",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-33-span",
+          "_type": "span",
+          "text": "Grams or kilograms for solids. Millilitres or litres for liquids. By number where the product is sold by count. Where the food sits in a liquid medium, the drained weight goes on as well. This one is Legal Metrology territory, and it has its own font-size rules based on the area of the principal display panel.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-34",
+      "_type": "block",
+      "style": "h3",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-34-span",
+          "_type": "span",
+          "text": "9. Lot, code or batch number",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-35",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-35-span",
+          "_type": "span",
+          "text": "Must allow traceability back to a production run. Prefixed appropriately.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-36",
+      "_type": "block",
+      "style": "h3",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-36-span",
+          "_type": "span",
+          "text": "10. Date marking",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-37",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-37-span",
+          "_type": "span",
+          "text": "Date of manufacture or packing, plus a “Best Before” or “Use By” or expiry date, depending on the product. Under Legal Metrology Rule 4(da), “best before” marks the end of the period during which the product stays fully marketable and retains the qualities claimed for it. “Use by” marks the point after which it should not be regarded as marketable at all. The common mistake: printing the date only on the pouch by inkjet and leaving no printed field for it on the artwork, so the code lands on top of a design element and becomes unreadable. Leave a clean, light box for the coder.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-38",
+      "_type": "block",
+      "style": "h3",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-38-span",
+          "_type": "span",
+          "text": "11. Country of origin",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-39",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-39-span",
+          "_type": "span",
+          "text": "Mandatory for imported food. Now also mandatory as a searchable and sortable filter on e-commerce listings of imported products, under Rule 6(10A) of the Legal Metrology (Packaged Commodities) Rules.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-40",
+      "_type": "block",
+      "style": "h3",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-40-span",
+          "_type": "span",
+          "text": "12. Instructions for use",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-41",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-41-span",
+          "_type": "span",
+          "text": "Where the product needs preparation, reconstitution, or a specific handling step.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-42",
+      "_type": "block",
+      "style": "h3",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-42-span",
+          "_type": "span",
+          "text": "13. Storage conditions",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-43",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-43-span",
+          "_type": "span",
+          "text": "Including conditions after opening, where the product needs them.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-44",
+      "_type": "block",
+      "style": "h3",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-44-span",
+          "_type": "span",
+          "text": "14. Name and address, plus consumer care",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-45",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [
+        {
+          "_key": "fb-45-link",
+          "_type": "link",
+          "href": "/branding#compliance"
+        }
+      ],
+      "children": [
+        {
+          "_key": "fb-45-s1",
+          "_type": "span",
+          "text": "Manufactured by, or Packed by, or Marketed by, or Imported by, with the complete address. Consumer care details, including an email address and a phone number. These details connect your ",
+          "marks": []
+        },
+        {
+          "_key": "fb-45-s2",
+          "_type": "span",
+          "text": "packaging and label artwork",
+          "marks": [
+            "fb-45-link"
+          ]
+        },
+        {
+          "_key": "fb-45-s3",
+          "_type": "span",
+          "text": " to physical operations and support channels.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-h2-04",
+      "_type": "block",
+      "style": "h2",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-h2-04-span",
+          "_type": "span",
+          "text": "Font size: the table that decides your artwork",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-46",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-46-span",
+          "_type": "span",
+          "text": "The minimum height of numerals and letters on the principal display panel is set against the area of that panel.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fssai-table-font-size",
+      "_type": "dataTable",
+      "caption": "Minimum letter height by principal display panel area",
+      "headers": [
+        "Area of the display panel (length × height)",
+        "Minimum height, normal print",
+        "Minimum height when blown, formed, moulded or perforated"
+      ],
+      "rows": [
+        {
+          "_key": "ffs-r1",
+          "cells": [
+            "Up to 100 cm²",
+            "1 mm",
+            "2 mm"
+          ]
+        },
+        {
+          "_key": "ffs-r2",
+          "cells": [
+            "Above 100 cm² up to 500 cm²",
+            "2 mm",
+            "4 mm"
+          ]
+        },
+        {
+          "_key": "ffs-r3",
+          "cells": [
+            "Above 500 cm² up to 2500 cm²",
+            "4 mm",
+            "6 mm"
+          ]
+        },
+        {
+          "_key": "ffs-r4",
+          "cells": [
+            "Above 2500 cm²",
+            "6 mm",
+            "8 mm"
+          ]
+        }
+      ]
+    },
+    {
+      "_key": "fb-47",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-47-span",
+          "_type": "span",
+          "text": "There is a narrower rule for very small packs. Where the surface area is up to 30 cm² and the product contains a caloric or non-caloric sweetener, the declarations specified in Schedule II must not be smaller than 1 mm, measured on the letter “l”.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-48",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-48-span",
+          "_type": "span",
+          "text": "The principal display panel itself has a minimum size:",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-pdp1",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-pdp1-span",
+          "_type": "span",
+          "text": "Rectangular packages: 40% of the height multiplied by the width",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-pdp2",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-pdp2-span",
+          "_type": "span",
+          "text": "Cylindrical, round or oval packages: 40% of the height multiplied by the average circumference",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-pdp3",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-pdp3-span",
+          "_type": "span",
+          "text": "Other shapes: 20% of the total surface area",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-49",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-49-span",
+          "_type": "span",
+          "text": "Design against this table before you design anything else. We have watched a pack go back to the studio three times because the nutrition panel was laid out at 1.6 mm on a 240 cm² panel that required 2 mm. The design was finished. The design was also illegal.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-50",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-50-span",
+          "_type": "span",
+          "text": "Two more rules that constrain layout. The label language must be English or Hindi in Devanagari script. A regional language may be added, but cannot replace either. And every declaration must be clear, prominent, indelible and readable by an ordinary consumer.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-h2-05",
+      "_type": "block",
+      "style": "h2",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-h2-05-span",
+          "_type": "span",
+          "text": "Claims: the area that generates the most enforcement",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-51",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-51-span",
+          "_type": "span",
+          "text": "Under Regulation 4 of the Advertising and Claims Regulations, 2018, you may make a nutritional or health claim only if FSSAI has notified it on the approved list, or you hold scientific evidence for it that has been submitted to FSSAI. “Immunity booster”, “gut friendly”, “aids digestion” and “guilt free” are all health or nutritional claims. Founders treat them as copywriting. FSSAI treats them as regulated statements requiring substantiation.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-52",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [
+        {
+          "_key": "fb-52-link",
+          "_type": "link",
+          "href": "/ecommerce#compliance"
+        }
+      ],
+      "children": [
+        {
+          "_key": "fb-52-s1",
+          "_type": "span",
+          "text": "Your listing is part of your label. Where a health claim appears in an Amazon product description or an Instagram ad but not on the physical pack, you attract liability twice: under Section 52 for misbranding, and under Section 53 for misleading advertisement. Keep your ",
+          "marks": []
+        },
+        {
+          "_key": "fb-52-s2",
+          "_type": "span",
+          "text": "marketplace listing data",
+          "marks": [
+            "fb-52-link"
+          ]
+        },
+        {
+          "_key": "fb-52-s3",
+          "_type": "span",
+          "text": " and your printed panel derived from one approved source.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-53",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-53-span",
+          "_type": "span",
+          "text": "A trademark is not a defence. The ORS matter settles this. FSSAI has held that products using “ORS” in the name or branding are misbranded, because ORS is a WHO-prescribed drug composition regulated by the Drugs Controller General of India. In JNTL Consumer Health India (P) Ltd. v. FSSAI, 2025 SCC OnLine Del 10553, the Delhi High Court refused to permit sale of existing mislabelled stock, holding public health above commercial loss. In Dr. Reddy’s Laboratories Ltd. v. Union of India, 2025 SCC OnLine Del 7909, the court clarified that an earlier interim stay was not a blanket permission to keep the label. Decades of sale and trademark registration did not save the name.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-54",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-54-span",
+          "_type": "span",
+          "text": "Avoid these on-pack claims unless you can substantiate them:",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-c1",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-c1-span",
+          "_type": "span",
+          "text": "“100% natural” where any ingredient is reconstituted, refined or synthesised",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-c2",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-c2-span",
+          "_type": "span",
+          "text": "“No preservatives” where INS 202 or INS 211 appears in the ingredient list",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-c3",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-c3-span",
+          "_type": "span",
+          "text": "“Sugar free” without meeting the prescribed threshold",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-c4",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-c4-span",
+          "_type": "span",
+          "text": "“Rich in” or “high in” any nutrient without the analytical report to support it",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-c5",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-c5-span",
+          "_type": "span",
+          "text": "Any reference to treating, preventing or curing a condition",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-h2-06",
+      "_type": "block",
+      "style": "h2",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-h2-06-span",
+          "_type": "span",
+          "text": "What changes on 1 July 2027",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-55",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-55-span",
+          "_type": "span",
+          "text": "The FSS (Labelling and Display) Amendment Regulations, 2026 were notified on 24 March 2026 and come into force on 1 July 2027. That gives you a printing runway, not a reason to defer. The reported changes include:",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-ch1",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-ch1-span",
+          "_type": "span",
+          "text": "Small pack relief: Packages with a surface area up to 100 cm² will not need to display the FSSAI logo. The information must still appear on the multi-unit pack. If you sell sachets or trial sizes, this changes your pack architecture.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-ch2",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-ch2-span",
+          "_type": "span",
+          "text": "Infant nutrition products: Manufacturers will not be required to provide the per-serve percentage contribution to RDA or the number of servings per pack.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-ch3",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-ch3-span",
+          "_type": "span",
+          "text": "Minimally processed foods: A definition is introduced for foods that have been only slightly altered.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-ch4",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-ch4-span",
+          "_type": "span",
+          "text": "Non-retail containers: B2B containers must carry product name, licence number, batch details and manufacturer information, and must be marked “Non Retail Container” or “Not for Direct Sale to Consumer”. Where space is short, some information may travel in accompanying documents, but traceability cannot break.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-ch5",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-ch5-span",
+          "_type": "span",
+          "text": "Fortification and declaration norms: Further changes apply.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-56",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-56-span",
+          "_type": "span",
+          "text": "Read the gazette text before you rely on any summary, including this one.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-h2-07",
+      "_type": "block",
+      "style": "h2",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-h2-07-span",
+          "_type": "span",
+          "text": "Front-of-pack labelling: what is coming, and when",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-57",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-57-span",
+          "_type": "span",
+          "text": "This is the biggest pending change to Indian pack design, and it is currently being decided in court rather than in a consultation room. The history is long. FSSAI notified a draft in September 2022 proposing the Indian Nutrition Rating, a half-star to five-star system scoring energy, sugar, salt, saturated fat, protein and fibre. The draft drew more than 14,000 public comments. An expert committee reviewed them. No consensus emerged and the proposal was deferred.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-58",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-58-span",
+          "_type": "span",
+          "text": "In July 2024, at its 44th meeting, the Food Authority approved a proposal to display total sugar, salt and saturated fat in bold letters at increased font size. A draft followed in February 2025 requiring the percentage contribution to RDA for added sugar, saturated fat and sodium in bold and larger type, along with a mandatory logo for milk and milk products.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-59",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-59-span",
+          "_type": "span",
+          "text": "The Supreme Court has since taken over the pace of the matter. Hearing a public interest petition filed by 3S and Our Health Society, the court on 10 February 2026 urged FSSAI to consider mandating front-of-pack warning labels for products high in sugar, sodium or saturated fat, together with a positive logo for healthier products, observing that the exercise so far had not produced concrete results.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-60",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-60-span",
+          "_type": "span",
+          "text": "In an affidavit dated 3 August 2026, FSSAI proposed a different approach: displaying the government’s recommended daily limits for added sugar, saturated fat and salt alongside the product’s nutrient content per 100 grams and its serving size, rather than using warning symbols.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-61",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-61-span",
+          "_type": "span",
+          "text": "On 13 August 2026, a bench of Justices J.B. Pardiwala and K. Vinod Chandran pulled up the regulator for the delay, said such labelling is necessary given children’s exposure to packaged food, and directed the government to consult experts and decide within two weeks. The court cited the UNICEF Child Nutrition Report 2025, which records overweight school-age children and adolescents rising from 2 per cent to 10 per cent between 2000 and 2022, and noted that while around 80 per cent of food available inside schools is freshly cooked, close to 80 per cent of what is sold around schools is packaged snacks. The matter is listed for 10 September 2026.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-62",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-62-span",
+          "_type": "span",
+          "text": "Separately, in July 2026, the Parliamentary Standing Committee on Consumer Affairs, Food and Public Distribution recommended that FSSAI notify interpretative front-of-pack labels soon, including colour-coded indicators for sugar levels, in a readable tabular format with a prescribed minimum font size.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-63",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-63-span",
+          "_type": "span",
+          "text": "What to do about it now: Leave clear space on your front panel. Whichever format lands, warning symbols or a limits table, it will occupy real estate on the principal display panel that most current Indian pack designs do not have spare. Brands that designed a full-bleed front panel with the logo at optical centre will be reprinting. Brands that left a clean lower band will be adding a sticker for one cycle and a printed panel for the next.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-h2-08",
+      "_type": "block",
+      "style": "h2",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-h2-08-span",
+          "_type": "span",
+          "text": "The penalties, and who pays them",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-64",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-64-span",
+          "_type": "span",
+          "text": "Under Section 3(zf) of the FSS Act, food is misbranded if it is sold as another type of food, if the label carries a false or misleading statement or design, if it is not labelled in accordance with the Act or the Rules, or if it claims to conform to a standard and does not. Note the third limb. A label that is simply incorrect is misbranded. Intent is not required.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-pen1",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-pen1-span",
+          "_type": "span",
+          "text": "Section 52: up to Rs 3,00,000 per violation for misbranded food.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-pen2",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-pen2-span",
+          "_type": "span",
+          "text": "Section 53: up to Rs 10,00,000 for misleading advertisement.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-pen3",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-pen3-span",
+          "_type": "span",
+          "text": "Each SKU is a separate violation: A brand with 12 non-compliant SKUs faces up to Rs 36,00,000 under Section 52 alone, before recall costs, licence action and retailer delisting.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-pen4",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-pen4-span",
+          "_type": "span",
+          "text": "Section 66: where the food business operator is a company, management is personally liable. Courts have applied this to directors and key managerial personnel.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-65",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-65-span",
+          "_type": "span",
+          "text": "The Supreme Court settled the governing provision in Manik Hiru Jhangiani v. State of M.P., 2023 SCC OnLine SC 1678, decided 14 December 2023. Section 52 of the FSS Act overrides the repealed Prevention of Food Adulteration Act for acts of misbranding, and penalising the same act under both would offend Article 20(2) of the Constitution.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-66",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-66-span",
+          "_type": "span",
+          "text": "Adjudication runs through officers appointed by the State Government under Section 68, usually Additional District Magistrates. Under Section 49, the adjudicating officer weighs the gravity of the offence, the damage to the consumer, the operator’s history, and whether the violation was careless or wilful. Appeals go to the Food Safety Appellate Tribunal, then to a single judge of the High Court under Section 71(6).",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-h2-09",
+      "_type": "block",
+      "style": "h2",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-h2-09-span",
+          "_type": "span",
+          "text": "The pre-print checklist",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-67",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-67-span",
+          "_type": "span",
+          "text": "Run this before artwork goes to the printer. Not after.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-chk01",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-chk01-span",
+          "_type": "span",
+          "text": "Principal display panel area calculated, and minimum font height confirmed against the table.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-chk02",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-chk02-span",
+          "_type": "span",
+          "text": "Food name is a standard or descriptive name, not the brand name.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-chk03",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-chk03-span",
+          "_type": "span",
+          "text": "Ingredients in descending order by weight, with compound ingredients broken out.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-chk04",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-chk04-span",
+          "_type": "span",
+          "text": "Additives declared by class name plus INS number.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-chk05",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-chk05-span",
+          "_type": "span",
+          "text": "“Contains” allergen statement placed adjacent to the ingredient list, checked against all eight categories.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-chk06",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-chk06-span",
+          "_type": "span",
+          "text": "“May contain” statement, if used, supported by a documented hazard analysis.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-chk07",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-chk07-span",
+          "_type": "span",
+          "text": "Nutrition panel per 100 g or 100 ml and per serving, with %RDA per serve and servings per pack.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-chk08",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-chk08-span",
+          "_type": "span",
+          "text": "Serving size reflects realistic consumption, and matches the pack format.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-chk09",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-chk09-span",
+          "_type": "span",
+          "text": "Lab report from an NABL-accredited or FSSAI-notified laboratory, dated, mapped to this artwork version.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-chk10",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-chk10-span",
+          "_type": "span",
+          "text": "Veg or non-veg symbol in the prescribed colour and shape, on the principal display panel.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-chk11",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-chk11-span",
+          "_type": "span",
+          "text": "FSSAI logo and brand owner licence number present, plus manufacturer or packer licence if different.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-chk12",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-chk12-span",
+          "_type": "span",
+          "text": "Net quantity declared in the correct unit, meeting Legal Metrology font rules.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-chk13",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-chk13-span",
+          "_type": "span",
+          "text": "Clean printing field reserved for batch number, date of manufacture and best before or use by date.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-chk14",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-chk14-span",
+          "_type": "span",
+          "text": "MRP inclusive of all taxes, in Indian currency.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-chk15",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-chk15-span",
+          "_type": "span",
+          "text": "Name and complete address of manufacturer, packer, marketer or importer.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-chk16",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-chk16-span",
+          "_type": "span",
+          "text": "Consumer care email and phone number.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-chk17",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-chk17-span",
+          "_type": "span",
+          "text": "Country of origin where imported.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-chk18",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-chk18-span",
+          "_type": "span",
+          "text": "Storage conditions, including after opening where relevant.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-chk19",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-chk19-span",
+          "_type": "span",
+          "text": "Every on-pack claim mapped to either the FSSAI approved list or a substantiation file.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-chk20",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-chk20-span",
+          "_type": "span",
+          "text": "Marketplace listing copy generated from the approved label content, not written separately.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-chk21",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-chk21-span",
+          "_type": "span",
+          "text": "Front panel has clear space reserved for a front-of-pack panel.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-chk22",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-chk22-span",
+          "_type": "span",
+          "text": "Language is English or Hindi in Devanagari, with any regional language added rather than substituted.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-h2-10",
+      "_type": "block",
+      "style": "h2",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-h2-10-span",
+          "_type": "span",
+          "text": "Why this is worth doing properly",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-68",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-68-span",
+          "_type": "span",
+          "text": "India’s packaged food market is worth roughly USD 137 billion in 2026 and is forecast to keep compounding through the next decade, with growth concentrated in exactly the segments new brands enter: health-led products, millet-based formats, functional ingredients and quick-commerce-native labels.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-69",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-69-span",
+          "_type": "span",
+          "text": "That growth is the reason enforcement is tightening, not a reason to expect leniency. Inspections rose 45 per cent in two years. Penalties rose from Rs 74.12 crore in civil cases in 2023-24 to Rs 109.11 crore in 2025-26.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_key": "fb-70",
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_key": "fb-70-span",
+          "_type": "span",
+          "text": "The economics are simple. A label review before printing costs a fraction of a print run. A print run costs a fraction of a recall. A recall costs a fraction of a delisting from the platform that was going to carry your launch. Fix it at artwork stage.",
+          "marks": []
+        }
+      ]
+    }
+  ],
+  "faqs": [
+    {
+      "_key": "fssai-faq-01",
+      "question": "Do I need FSSAI approval for my label before printing?",
+      "answer": "No. FSSAI does not pre-approve labels for standardised products. The responsibility to comply sits with the food business operator. Approval requirements apply to product categories such as proprietary and novel foods, not to artwork generally. That is precisely why a pre-print review matters; nobody is going to catch the error for you."
+    },
+    {
+      "_key": "fssai-faq-02",
+      "question": "How often do the labelling rules change?",
+      "answer": "The 2020 Labelling Regulations have been amended five times since notification. Since 2025, amendments take effect on 1 July each year with a minimum 180-day notice period, which makes the change cycle predictable for the first time."
+    },
+    {
+      "_key": "fssai-faq-03",
+      "question": "Is front-of-pack labelling mandatory yet?",
+      "answer": "Not as of August 2026. The Indian Nutrition Rating draft was deferred after more than 14,000 public comments produced no consensus. The Supreme Court is actively pushing FSSAI to decide, with the matter listed for 10 September 2026. Design your front panel with space for it."
+    },
+    {
+      "_key": "fssai-faq-04",
+      "question": "What is the penalty for a wrong label?",
+      "answer": "Up to Rs 3,00,000 per violation under Section 52 of the FSS Act for misbranded food, and up to Rs 10,00,000 under Section 53 for misleading advertisement. Each SKU counts as a separate violation, and under Section 66 company management can be held personally liable."
+    },
+    {
+      "_key": "fssai-faq-05",
+      "question": "Do small packs get an exemption?",
+      "answer": "Some. Packs up to 30 cm² containing sweeteners have a 1 mm minimum type size for Schedule II declarations. From 1 July 2027, packs with a surface area up to 100 cm² will not need to display the FSSAI logo, provided the information appears on the multi-unit pack."
+    },
+    {
+      "_key": "fssai-faq-06",
+      "question": "Which allergens must I declare in India?",
+      "answer": "Eight categories: cereals containing gluten, crustaceans, milk and milk products, eggs and egg products, fish and fish products, peanuts and tree nuts, soybeans, and sulphites at 10 mg/kg or more. Raw agricultural commodities are exempt, as are oils derived from these ingredients."
+    },
+    {
+      "_key": "fssai-faq-07",
+      "question": "Does my Amazon listing need to match my pack?",
+      "answer": "Yes, and this is a common source of double liability. A health claim in a listing that does not appear on the physical label can attract both misbranding and misleading-advertisement liability. Generate listing content from the approved label file."
+    }
+  ],
+  "references": [
+    {
+      "_key": "fssai-ref-01",
+      "text": "Food Safety and Standards (Labelling and Display) Regulations, 2020, and amendments. Food Safety and Standards Authority of India.",
+      "url": "https://www.fssai.gov.in/cms/amendment-fss-labelling-display.php"
+    },
+    {
+      "_key": "fssai-ref-02",
+      "text": "Food Safety and Standards Act, 2006, Sections 3(zf), 23, 36, 49, 52, 53, 66, 68 and 71(6)."
+    },
+    {
+      "_key": "fssai-ref-03",
+      "text": "Food Safety and Standards (Advertising and Claims) Regulations, 2018, Regulation 4."
+    },
+    {
+      "_key": "fssai-ref-04",
+      "text": "Legal Metrology (Packaged Commodities) Rules, 2011, and the Amendment Rules, 2026 (G.S.R. 128(E), 13 February 2026) and Second Amendment Rules, 2026 (27 April 2026). Department of Consumer Affairs."
+    },
+    {
+      "_key": "fssai-ref-05",
+      "text": "Ministry of Health and Family Welfare, replies to Lok Sabha unstarred questions on food adulteration, July 2026, reporting 2,23,808 samples analysed and 40,023 non-conforming in 2025-26."
+    },
+    {
+      "_key": "fssai-ref-06",
+      "text": "Ministry of Consumer Affairs, Food and Public Distribution, Lok Sabha reply, March 2025, reporting 1,70,513 samples analysed in 2023-24 with 4,423 labelling defects."
+    },
+    {
+      "_key": "fssai-ref-07",
+      "text": "Manik Hiru Jhangiani v. State of M.P., 2023 SCC OnLine SC 1678."
+    },
+    {
+      "_key": "fssai-ref-08",
+      "text": "JNTL Consumer Health India (P) Ltd. v. FSSAI, 2025 SCC OnLine Del 10553."
+    },
+    {
+      "_key": "fssai-ref-09",
+      "text": "Dr. Reddy's Laboratories Ltd. v. Union of India, 2025 SCC OnLine Del 7909."
+    },
+    {
+      "_key": "fssai-ref-10",
+      "text": "3S and Our Health Society v. Union of India, Supreme Court of India, orders dated 10 February 2026 and 13 August 2026; matter listed for 10 September 2026."
+    },
+    {
+      "_key": "fssai-ref-11",
+      "text": "UNICEF Child Nutrition Report 2025, as cited by the Supreme Court."
+    },
+    {
+      "_key": "fssai-ref-12",
+      "text": "Parliamentary Standing Committee on Consumer Affairs, Food and Public Distribution, report on front-of-pack nutrition labelling, tabled July 2026."
+    },
+    {
+      "_key": "fssai-ref-13",
+      "text": "Press Information Bureau and FSSAI statement on the 44th meeting of the Food Authority, July 2024, on bold and increased font size for total sugar, salt and saturated fat."
+    },
+    {
+      "_key": "fssai-ref-14",
+      "text": "FSSAI press release on standardised labelling enforcement dates, January 2025."
+    },
+    {
+      "_key": "fssai-ref-15",
+      "text": "IMARC Group, India Packaged Food Market report, 2026."
+    }
+  ],
+  "closingCta": {
+    "heading": "Getting a pack ready for print?",
+    "text": "We have taken six food SKUs through FSSAI labelling and Legal Metrology requirements, from lab report to print-ready artwork. If you want a label reviewed before it goes to the printer, tell us what you are launching.",
+    "label": "Start a project",
+    "href": "/start"
+  }
+}

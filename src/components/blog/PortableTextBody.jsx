@@ -81,6 +81,45 @@ export default function PortableTextBody({ value = [], keyToId = {} }) {
         );
       },
     },
+    types: {
+      dataTable: ({ value: tableValue }) => {
+        if (!tableValue) return null;
+        const headers = Array.isArray(tableValue.headers) ? tableValue.headers : [];
+        const rows = Array.isArray(tableValue.rows) ? tableValue.rows : [];
+
+        return (
+          <div className="blog-table-scroll">
+            <table className="blog-data-table">
+              {tableValue.caption && (
+                <caption className="blog-table-caption">{tableValue.caption}</caption>
+              )}
+              {headers.length > 0 && (
+                <thead>
+                  <tr>
+                    {headers.map((header, idx) => (
+                      <th key={idx} scope="col" className="blog-table-th">
+                        {header}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+              )}
+              <tbody>
+                {rows.map((row, ri) => (
+                  <tr key={row?._key || ri} className="blog-table-row">
+                    {(row?.cells || []).map((cell, ci) => (
+                      <td key={ci} className="blog-table-td">
+                        {cell}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        );
+      },
+    },
   };
 
   return (

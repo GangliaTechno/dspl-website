@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from 'vitest';
+﻿import { describe, expect, it, vi } from 'vitest';
 import {
   loadHydrationPage,
   shouldHydratePrerenderedPage,
@@ -80,7 +80,7 @@ describe('shouldHydratePrerenderedPage', () => {
       shouldHydratePrerenderedPage(
         true,
         { BlogPost: () => null },
-        '/blogs/coordinating-brand-market-commerce',
+        '/blogs/fssai-labelling-requirements-checklist-2026',
       ),
     ).toBe(true);
   });

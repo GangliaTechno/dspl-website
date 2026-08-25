@@ -32,16 +32,21 @@ if (fs.existsSync(manifestPath)) {
     if (manifest.blogsEnabled && Array.isArray(manifest.posts)) {
       dynamicBlogRoutes.push({
         route: 'blogs',
-        heading: 'Insights',
+        heading: 'Thinking from the work of building brands.',
         type: 'website',
       });
 
       for (const post of manifest.posts) {
+        const fullArticlePath = path.join(rootDir, 'src', 'generated', 'blog', `${post.slug}.json`);
+        const fullPost = fs.existsSync(fullArticlePath)
+          ? JSON.parse(fs.readFileSync(fullArticlePath, 'utf8'))
+          : post;
+
         dynamicBlogRoutes.push({
           route: `blogs/${post.slug}`,
           heading: post.title,
           type: 'article',
-          post,
+          post: fullPost,
         });
       }
     }
@@ -143,17 +148,41 @@ const verifyBlogPostingSchema = (html, label, post) => {
   }
 
   let hasBlogPosting = false;
+  let hasValidFaqPage = !post.faqs || post.faqs.length === 0;
+
   for (const source of schemas) {
     try {
       const data = JSON.parse(source);
-      if (
-        data['@type'] === 'BlogPosting'
-        && data.headline === post.title
-        && data.datePublished === post.publishedAt
-        && (data.dateModified === (post._updatedAt || post.publishedAt))
-        && data.publisher?.name === 'Dashapatmaja Solutions Pvt Ltd'
-      ) {
-        hasBlogPosting = true;
+      const items = Array.isArray(data['@graph']) ? data['@graph'] : [data];
+      for (const item of items) {
+        if (
+          item['@type'] === 'BlogPosting'
+          && item.headline === post.title
+          && item.datePublished === post.publishedAt
+          && (item.dateModified === (post._updatedAt || post.publishedAt))
+          && item.publisher?.name === 'Dashapatmaja Solutions Pvt Ltd'
+        ) {
+          hasBlogPosting = true;
+          if (post.authors?.length > 0) {
+            const authors = Array.isArray(item.author) ? item.author : [item.author];
+            const authorNames = authors.map((a) => a?.name).filter(Boolean);
+            const expectedNames = post.authors.map((a) => a.name);
+            if (JSON.stringify(authorNames) !== JSON.stringify(expectedNames)) {
+              failures.push(`${label}: BlogPosting author names ${JSON.stringify(authorNames)} do not match expected ${JSON.stringify(expectedNames)}`);
+            }
+          }
+        }
+
+        if (item['@type'] === 'FAQPage' && Array.isArray(post.faqs) && post.faqs.length > 0) {
+          const mainEntity = Array.isArray(item.mainEntity) ? item.mainEntity : [];
+          if (mainEntity.length === post.faqs.length) {
+            const actualQuestions = mainEntity.map((q) => q?.name);
+            const expectedQuestions = post.faqs.map((f) => f.question);
+            if (JSON.stringify(actualQuestions) === JSON.stringify(expectedQuestions)) {
+              hasValidFaqPage = true;
+            }
+          }
+        }
       }
     } catch {
       failures.push(`${label}: invalid JSON-LD`);
@@ -162,6 +191,10 @@ const verifyBlogPostingSchema = (html, label, post) => {
 
   if (!hasBlogPosting) {
     failures.push(`${label}: missing valid BlogPosting JSON-LD schema with matching headline, datePublished, dateModified, and publisher`);
+  }
+
+  if (!hasValidFaqPage) {
+    failures.push(`${label}: missing valid FAQPage JSON-LD schema matching the article's ${post.faqs?.length} FAQs in @graph`);
   }
 };
 
@@ -218,6 +251,25 @@ for (const { route, heading, type, post } of routes) {
     if (!/<meta\b[^>]*property=["']og:type["'][^>]*content=["']article["'][^>]*>/i.test(html)) {
       failures.push(`${label}: missing og:type="article"`);
     }
+    const expectedImage = post?.mainImage?.asset?.url?.startsWith('/')
+      ? `https://dashapatmaja.in${post.mainImage.asset.url}`
+      : post?.mainImage?.asset?.url;
+
+    if (
+      expectedImage &&
+      !html.includes(`property="og:image" content="${expectedImage}"`)
+    ) {
+      failures.push(`${label}: og:image does not match article mainImage`);
+    }
+
+    if (post?.mainImage?.asset?.url) {
+      if (!html.includes('class="blog-post-hero"')) {
+        failures.push(`${label}: missing visible <figure class="blog-post-hero"> for article with mainImage`);
+      }
+      if (!html.includes(`src="${post.mainImage.asset.url}"`)) {
+        failures.push(`${label}: visible hero img src does not match mainImage.asset.url`);
+      }
+    }
     verifyBlogPostingSchema(html, label, post);
   } else {
     verifyOrganizationSchema(html, label);
@@ -265,6 +317,18 @@ const duplicateTitles = titles.filter(
 );
 for (const { label, title } of duplicateTitles) {
   failures.push(`${label}: duplicate title "${title}"`);
+}
+
+// Verify removed articles are absent from the dist output.
+const REMOVED_BLOG_ROUTES = [
+  'blogs/coordinating-brand-market-commerce',
+  'blogs/from-packaging-to-purchase',
+];
+for (const removedRoute of REMOVED_BLOG_ROUTES) {
+  const removedPath = path.join('dist', removedRoute, 'index.html');
+  if (fs.existsSync(removedPath)) {
+    failures.push(`/${removedRoute}: removed article was found in dist output and must not be prerendered`);
+  }
 }
 
 if (failures.length) {

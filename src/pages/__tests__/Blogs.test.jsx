@@ -17,6 +17,48 @@ const mockPost = (slug, category, title = `${category} title`) => ({
   body: [{ _key: 'b1', _type: 'block', children: [{ text: 'Body paragraph' }] }],
 });
 
+const fssaiPost = () => ({
+  ...mockPost(
+    'fssai-labelling-requirements-checklist-2026',
+    'Compliance',
+    'FSSAI Labelling Requirements for Packaged Food',
+  ),
+  readingTime: { minutes: 14, text: '14 min read', wordCount: 3500 },
+  mainImage: {
+    alt: 'Packaged food artwork and back-of-pack label panels arranged for a compliance review.',
+    asset: {
+      url: '/insights/fssai-labelling-v1-1440.webp',
+      metadata: { dimensions: { width: 1440, height: 810, aspectRatio: 16 / 9 } },
+    },
+    responsive: {
+      640: '/insights/fssai-labelling-v1-640.webp',
+      960: '/insights/fssai-labelling-v1-960.webp',
+      1440: '/insights/fssai-labelling-v1-1440.webp',
+    },
+  },
+});
+
+const legalPost = () => ({
+  ...mockPost(
+    'legal-metrology-packaged-commodity-rules-india',
+    'Compliance',
+    'Legal Metrology Packaged Commodity Rules',
+  ),
+  readingTime: { minutes: 15, text: '15 min read', wordCount: 3800 },
+  mainImage: {
+    alt: 'Pack artwork and packaged commodities being checked with precision measuring tools for declaration sizing.',
+    asset: {
+      url: '/insights/legal-metrology-v1-1440.webp',
+      metadata: { dimensions: { width: 1440, height: 810, aspectRatio: 16 / 9 } },
+    },
+    responsive: {
+      640: '/insights/legal-metrology-v1-640.webp',
+      960: '/insights/legal-metrology-v1-960.webp',
+      1440: '/insights/legal-metrology-v1-1440.webp',
+    },
+  },
+});
+
 const renderBlogs = (posts) =>
   render(
     <MemoryRouter initialEntries={['/blogs']}>
@@ -40,59 +82,47 @@ describe('Blogs (Insights) Page', () => {
     },
   );
 
-  it('renders the editorial Insights publication with 2 launch articles in asymmetric layout', () => {
-    renderBlogs([
-      mockPost(
-        'coordinating-brand-market-commerce',
-        'Branding',
-        'Coordinating Brand, Market, and Commerce as One System',
-      ),
-      mockPost(
-        'from-packaging-to-purchase',
-        'E-commerce',
-        'From Packaging to Purchase: Why Consumer-Brand Launch Handoffs Matter',
-      ),
-    ]);
+  it('renders the editorial Insights publication with 2 compliance articles in asymmetric layout', () => {
+    renderBlogs([fssaiPost(), legalPost()]);
 
-    expect(screen.getByRole('heading', { level: 1, name: 'Insights' })).toBeInTheDocument();
-    expect(screen.getByText('Thinking from the work of building brands.')).toBeInTheDocument();
-    const masthead = screen.getByRole('banner');
-    const headingGroup = masthead.querySelector('.blogs-heading-group');
-    expect(headingGroup).not.toBeNull();
-    expect(within(headingGroup).getByText('Publication')).toBeInTheDocument();
-    expect(within(headingGroup).getByRole('heading', { level: 1, name: 'Insights' })).toBeInTheDocument();
-    expect(within(headingGroup).getByText('Thinking from the work of building brands.')).toBeInTheDocument();
-    expect(masthead.querySelector('.blogs-intro')).not.toBe(headingGroup);
-    expect(masthead.querySelector('.blogs-intro')).toHaveTextContent(
-      'Notes on branding, market execution, commerce, and the operating decisions that connect them.',
-    );
+    expect(
+      screen.getByRole('heading', { level: 1, name: 'Thinking from the work of building brands.' }),
+    ).toBeInTheDocument();
+    expect(screen.getByText('Insights')).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        'Notes on branding, market execution, commerce, and the operating decisions that connect them.',
+      ),
+    ).toBeInTheDocument();
 
     const articles = screen.getAllByRole('article');
     expect(articles).toHaveLength(2);
 
-    // Feature article
+    // Feature article — FSSAI
     const feature = articles[0];
-    expect(within(feature).getByText('01')).toBeInTheDocument();
-    expect(within(feature).getByText('Branding')).toBeInTheDocument();
-    expect(within(feature).getByText('5 min read')).toBeInTheDocument();
-    expect(within(feature).getByText('Coordinating Brand, Market, and Commerce as One System')).toBeInTheDocument();
+    expect(within(feature).queryByText('01')).not.toBeInTheDocument();
+    expect(within(feature).getByText('Compliance')).toBeInTheDocument();
+    expect(within(feature).getByText('14 min read')).toBeInTheDocument();
+    expect(
+      within(feature).getByText('FSSAI Labelling Requirements for Packaged Food'),
+    ).toBeInTheDocument();
     expect(within(feature).getByText('August 20, 2026')).toBeInTheDocument();
-    expect(within(feature).getByRole('link', { name: /Coordinating Brand/i })).toHaveAttribute(
-      'href',
-      '/blogs/coordinating-brand-market-commerce',
-    );
+    expect(
+      within(feature).getByRole('link', { name: /FSSAI/i }),
+    ).toHaveAttribute('href', '/blogs/fssai-labelling-requirements-checklist-2026');
 
-    // Supporting article
+    // Supporting article — Legal Metrology
     const supporting = articles[1];
-    expect(within(supporting).getByText('02')).toBeInTheDocument();
-    expect(within(supporting).getByText('E-commerce')).toBeInTheDocument();
-    expect(within(supporting).getByText('From Packaging to Purchase: Why Consumer-Brand Launch Handoffs Matter')).toBeInTheDocument();
-    expect(within(supporting).getByRole('link', { name: /From Packaging to Purchase/i })).toHaveAttribute(
-      'href',
-      '/blogs/from-packaging-to-purchase',
-    );
+    expect(within(supporting).queryByText('02')).not.toBeInTheDocument();
+    expect(within(supporting).getByText('15 min read')).toBeInTheDocument();
+    expect(
+      within(supporting).getByText('Legal Metrology Packaged Commodity Rules'),
+    ).toBeInTheDocument();
+    expect(
+      within(supporting).getByRole('link', { name: /Legal Metrology/i }),
+    ).toHaveAttribute('href', '/blogs/legal-metrology-packaged-commodity-rules-india');
 
-    // Does not show unnecessary search or category filter pills for 2 posts
+    // Does not show search or category filter pills
     expect(screen.queryByRole('button', { name: 'All' })).not.toBeInTheDocument();
     expect(screen.queryByRole('searchbox')).not.toBeInTheDocument();
 
@@ -101,135 +131,49 @@ describe('Blogs (Insights) Page', () => {
     );
   });
 
-  it('maps approved artwork by canonical slug with responsive image delivery attributes', () => {
-    renderBlogs([
-      mockPost(
-        'coordinating-brand-market-commerce',
-        'Branding',
-        'Coordinating Brand, Market, and Commerce as One System',
-      ),
-      mockPost(
-        'from-packaging-to-purchase',
-        'E-commerce',
-        'From Packaging to Purchase: Why Consumer-Brand Launch Handoffs Matter',
-      ),
-    ]);
+  it('delivers a 3-entry srcSet from mainImage.responsive for featured compliance cover', () => {
+    renderBlogs([fssaiPost(), legalPost()]);
 
-    const feature = screen
-      .getByRole('heading', { name: /Coordinating Brand/i })
-      .closest('article');
-    const featureImage = within(feature).getByRole('img', {
-      name: 'Abstract signal geometry connecting brand, market, and commerce systems',
+    const featureImg = screen.getByRole('img', {
+      name: 'Packaged food artwork and back-of-pack label panels arranged for a compliance review.',
     });
-    expect(featureImage).toHaveAttribute(
-      'src',
-      expect.stringContaining('insights-brand-market-commerce-1440'),
-    );
-    expect(featureImage).toHaveAttribute(
-      'srcset',
-      expect.stringContaining('insights-brand-market-commerce-640'),
-    );
-    expect(featureImage).toHaveAttribute(
-      'srcset',
-      expect.stringContaining('insights-brand-market-commerce-960'),
-    );
-    expect(featureImage).toHaveAttribute(
-      'srcset',
-      expect.stringContaining('insights-brand-market-commerce-1440'),
-    );
-    expect(featureImage).toHaveAttribute('width', '1440');
-    expect(featureImage).toHaveAttribute('height', '810');
-    expect(featureImage).toHaveAttribute('loading', 'eager');
-    expect(featureImage).toHaveAttribute('fetchpriority', 'high');
-    expect(featureImage).toHaveAttribute('decoding', 'async');
-    expect(featureImage).toHaveAttribute(
-      'sizes',
-      '(max-width: 900px) calc(100vw - 3rem), 640px',
-    );
 
-    const supporting = screen
-      .getByRole('heading', { name: /From Packaging/i })
-      .closest('article');
-    const supportingImage = within(supporting).getByRole('img', {
-      name: 'Abstract signal geometry tracing a consumer-brand launch from packaging to purchase',
-    });
-    expect(supportingImage).toHaveAttribute(
-      'src',
-      expect.stringContaining('insights-packaging-to-purchase-960'),
-    );
-    expect(supportingImage).toHaveAttribute(
+    expect(featureImg).toHaveAttribute('src', '/insights/fssai-labelling-v1-1440.webp');
+    expect(featureImg).toHaveAttribute(
       'srcset',
-      expect.stringContaining('insights-packaging-to-purchase-640'),
+      '/insights/fssai-labelling-v1-640.webp 640w, /insights/fssai-labelling-v1-960.webp 960w, /insights/fssai-labelling-v1-1440.webp 1440w',
     );
-    expect(supportingImage).toHaveAttribute(
-      'srcset',
-      expect.stringContaining('insights-packaging-to-purchase-960'),
-    );
-    expect(supportingImage).toHaveAttribute(
-      'srcset',
-      expect.stringContaining('insights-packaging-to-purchase-1440'),
-    );
-    expect(supportingImage).toHaveAttribute('width', '1440');
-    expect(supportingImage).toHaveAttribute('height', '810');
-    expect(supportingImage).toHaveAttribute('loading', 'lazy');
-    expect(supportingImage).toHaveAttribute('decoding', 'async');
-    expect(supportingImage).toHaveAttribute(
-      'sizes',
-      '(max-width: 900px) calc(100vw - 3rem), 440px',
-    );
+    expect(featureImg).toHaveAttribute('width', '1440');
+    expect(featureImg).toHaveAttribute('height', '810');
+    expect(featureImg).toHaveAttribute('loading', 'eager');
+    expect(featureImg).toHaveAttribute('fetchpriority', 'high');
+    expect(featureImg).toHaveAttribute('decoding', 'async');
+    expect(featureImg).toHaveAttribute('sizes', '(max-width: 960px) calc(100vw - 3rem), 680px');
   });
 
-  it('keeps canonical artwork mapped correctly when launch stories are reversed', () => {
-    renderBlogs([
-      mockPost(
-        'from-packaging-to-purchase',
-        'E-commerce',
-        'From Packaging to Purchase: Why Consumer-Brand Launch Handoffs Matter',
-      ),
-      mockPost(
-        'coordinating-brand-market-commerce',
-        'Branding',
-        'Coordinating Brand, Market, and Commerce as One System',
-      ),
-    ]);
+  it('delivers a 3-entry srcSet from mainImage.responsive for supporting compliance cover', () => {
+    renderBlogs([fssaiPost(), legalPost()]);
 
-    const packagingStory = screen
-      .getByRole('heading', { name: /From Packaging to Purchase/i })
-      .closest('article');
-    expect(within(packagingStory).getByRole('img')).toHaveAttribute(
-      'alt',
-      'Abstract signal geometry tracing a consumer-brand launch from packaging to purchase',
-    );
-    expect(within(packagingStory).getByRole('img')).toHaveAttribute(
-      'src',
-      expect.stringContaining('insights-packaging-to-purchase-960'),
-    );
+    const supportingImg = screen.getByRole('img', {
+      name: 'Pack artwork and packaged commodities being checked with precision measuring tools for declaration sizing.',
+    });
 
-    const brandStory = screen
-      .getByRole('heading', { name: /Coordinating Brand/i })
-      .closest('article');
-    expect(within(brandStory).getByRole('img')).toHaveAttribute(
-      'alt',
-      'Abstract signal geometry connecting brand, market, and commerce systems',
+    expect(supportingImg).toHaveAttribute('src', '/insights/legal-metrology-v1-1440.webp');
+    expect(supportingImg).toHaveAttribute(
+      'srcset',
+      '/insights/legal-metrology-v1-640.webp 640w, /insights/legal-metrology-v1-960.webp 960w, /insights/legal-metrology-v1-1440.webp 1440w',
     );
-    expect(within(brandStory).getByRole('img')).toHaveAttribute(
-      'src',
-      expect.stringContaining('insights-brand-market-commerce-1440'),
-    );
+    expect(supportingImg).toHaveAttribute('width', '1440');
+    expect(supportingImg).toHaveAttribute('height', '810');
+    expect(supportingImg).toHaveAttribute('loading', 'lazy');
+    expect(supportingImg).toHaveAttribute('decoding', 'async');
+    expect(supportingImg).toHaveAttribute('sizes', '(max-width: 960px) calc(100vw - 3rem), 1160px');
   });
 
-  it('keeps future unmapped posts usable as text-only stories', () => {
+  it('keeps future unmapped posts usable as text-only stories in the archive grid', () => {
     renderBlogs([
-      mockPost(
-        'coordinating-brand-market-commerce',
-        'Branding',
-        'Coordinating Brand, Market, and Commerce as One System',
-      ),
-      mockPost(
-        'from-packaging-to-purchase',
-        'E-commerce',
-        'From Packaging to Purchase: Why Consumer-Brand Launch Handoffs Matter',
-      ),
+      fssaiPost(),
+      legalPost(),
       mockPost('future-unmapped-post', 'Operations', 'A future text-only insight'),
     ]);
 
@@ -243,5 +187,55 @@ describe('Blogs (Insights) Page', () => {
       'href',
       '/blogs/future-unmapped-post',
     );
+  });
+
+  it('renders 4 published stories across feature, supporting, and archive grid', () => {
+    const testPosts = [
+      fssaiPost(),
+      legalPost(),
+      mockPost('brand', 'Branding', 'Coordinating Brand'),
+      mockPost('packaging', 'E-commerce', 'From Packaging to Purchase'),
+    ];
+    renderBlogs(testPosts);
+
+    const articles = screen.getAllByRole('article');
+    expect(articles).toHaveLength(4);
+
+    expect(articles[0]).toHaveClass('blog-feature-story');
+    expect(articles[1]).toHaveClass('blog-supporting-story');
+    expect(articles[2]).toHaveClass('blog-archive-story');
+    expect(articles[3]).toHaveClass('blog-archive-story');
+
+    expect(within(articles[0]).getByText('FSSAI Labelling Requirements for Packaged Food')).toBeInTheDocument();
+    expect(within(articles[1]).getByText('Legal Metrology Packaged Commodity Rules')).toBeInTheDocument();
+    expect(within(articles[2]).getByText('Coordinating Brand')).toBeInTheDocument();
+    expect(within(articles[3]).getByText('From Packaging to Purchase')).toBeInTheDocument();
+  });
+
+  it('resolves content-first artwork with Sanity CDN src and no srcSet when no responsive map', () => {
+    const postWithSanityImage = {
+      ...mockPost('custom-artwork-post', 'Branding', 'Custom Artwork Post'),
+      mainImage: {
+        alt: 'Custom art photography',
+        asset: {
+          url: 'https://cdn.sanity.io/images/proj/dataset/custom.jpg',
+          metadata: {
+            dimensions: { width: 1200, height: 630 },
+          },
+        },
+      },
+    };
+    const secondPost = mockPost('second-post', 'Marketing', 'Second Post');
+
+    renderBlogs([postWithSanityImage, secondPost]);
+
+    const feature = screen.getByRole('heading', { name: /Custom Artwork Post/i }).closest('article');
+    const image = within(feature).getByRole('img', { name: 'Custom art photography' });
+
+    expect(image).toHaveAttribute('src', 'https://cdn.sanity.io/images/proj/dataset/custom.jpg');
+    expect(image).toHaveAttribute('width', '1200');
+    expect(image).toHaveAttribute('height', '630');
+    // No responsive map on raw mainImage → resolveArtwork returns undefined srcSet
+    expect(image).not.toHaveAttribute('srcset');
   });
 });

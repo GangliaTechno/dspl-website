@@ -22,7 +22,7 @@ describe('Footer', () => {
     expect(getFooterCta('/start')).toBeNull();
     expect(getFooterCta('/privacy')).toBeNull();
     expect(getFooterCta('/terms')).toBeNull();
-    expect(getFooterCta('/blogs')).toBeNull();
+    expect(getFooterCta('/blogs').href).toBe('/start');
   });
 
   it('renders the Home CTA before verified corporate information', () => {
@@ -92,6 +92,24 @@ describe('Footer', () => {
     renderFooter('/contact');
 
     expect(screen.queryByLabelText('Closing call to action')).not.toBeInTheDocument();
+  });
+
+  it('renders the centralized Insights CTA on the /blogs route', () => {
+    renderFooter('/blogs');
+
+    expect(screen.getByText('From insight to execution')).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', {
+        level: 2,
+        name: 'Have a brand, market or commerce challenge worth working through?',
+      }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText('Bring the context, constraints, and outcome you are working towards.'),
+    ).toBeInTheDocument();
+
+    const startLinks = screen.getAllByRole('link', { name: 'Start a project' });
+    expect(startLinks.some((link) => link.classList.contains('footer-cta-btn'))).toBe(true);
   });
 
   it('keeps the back-to-top action available', () => {

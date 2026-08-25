@@ -41,6 +41,13 @@ export const footerCtas = Object.freeze({
     label: 'Start an e-commerce project',
     href: '/start',
   },
+  '/blogs': {
+    eyebrow: 'From insight to execution',
+    title: 'Have a brand, market or commerce challenge worth working through?',
+    text: 'Bring the context, constraints, and outcome you are working towards.',
+    label: 'Start a project',
+    href: '/start',
+  },
 });
 
 const normalizePath = (path) =>

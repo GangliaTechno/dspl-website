@@ -18,7 +18,7 @@ describe('new route page shells', () => {
     [RawRadicles, '/brands/raw-radicles', 'Raw Radicles'],
     [StartProject, '/start', 'Start a Project'],
     [TermsOfUse, '/terms', 'Terms of Use'],
-    [Blogs, '/blogs', 'Insights'],
+    [Blogs, '/blogs', 'Thinking from the work of building brands.'],
   ])('renders one accessible heading for %s', (Page, path, heading) => {
     renderPage(Page, path);
 

@@ -30,4 +30,25 @@ describe('FAQAccordion', () => {
     expect(firstButton).toHaveAttribute('aria-expanded', 'false');
     expect(firstAnswer).not.toBeVisible();
   });
+
+  it('supports custom namespace for scoped accordion element IDs', () => {
+    const { container } = render(
+      <FAQAccordion faqs={faqs} namespace="article-faq-fssai" />,
+    );
+
+    const firstButton = screen.getByRole('button', { name: faqs[0].q });
+    expect(firstButton.id).toBe('article-faq-fssai-0-button');
+
+    const firstAnswer = container.querySelector('#article-faq-fssai-0-answer');
+    expect(firstAnswer).toBeInTheDocument();
+    expect(firstAnswer).toHaveAttribute('aria-labelledby', 'article-faq-fssai-0-button');
+  });
+
+  it('renders null when faqs is empty or not an array', () => {
+    const { container: c1 } = render(<FAQAccordion faqs={[]} />);
+    expect(c1).toBeEmptyDOMElement();
+
+    const { container: c2 } = render(<FAQAccordion faqs={null} />);
+    expect(c2).toBeEmptyDOMElement();
+  });
 });

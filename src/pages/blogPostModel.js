@@ -45,6 +45,7 @@ export const createBlogPostMetadata = (post, isBlogOpen = true) => {
   const mainImage = normalizeImageCandidate(post.mainImage);
   const selectedImage = seoImage || mainImage;
   const image = selectedImage?.url || SITE_CONFIG.defaultOgImage;
+  const absoluteImage = normalizeAbsoluteImageUrl(siteUrl, image);
 
   const metadata = { ...getRouteMetadata('/blogs') };
   if (image === SITE_CONFIG.defaultOgImage) {
@@ -65,8 +66,7 @@ export const createBlogPostMetadata = (post, isBlogOpen = true) => {
     if (height !== undefined) metadata.imageHeight = height;
   }
 
-  const structuredData = {
-    '@context': 'https://schema.org',
+  const blogPosting = {
     '@type': 'BlogPosting',
     headline: post.title,
     description: post.description,
@@ -79,8 +79,38 @@ export const createBlogPostMetadata = (post, isBlogOpen = true) => {
     },
     articleSection: post.category,
     publisher: organizationStructuredData,
-    image: normalizeAbsoluteImageUrl(siteUrl, image),
+    image: absoluteImage,
+    ...(post.authors?.length > 0 && {
+      author: post.authors.map((author) => ({
+        '@type': 'Person',
+        name: author.name,
+        ...(author.role ? { jobTitle: author.role } : {}),
+      })),
+    }),
   };
+
+  const structuredData = post.faqs?.length > 0
+    ? {
+        '@context': 'https://schema.org',
+        '@graph': [
+          blogPosting,
+          {
+            '@type': 'FAQPage',
+            mainEntity: post.faqs.map((faq) => ({
+              '@type': 'Question',
+              name: faq.question,
+              acceptedAnswer: {
+                '@type': 'Answer',
+                text: faq.answer,
+              },
+            })),
+          },
+        ],
+      }
+    : {
+        '@context': 'https://schema.org',
+        ...blogPosting,
+      };
 
   return {
     ...metadata,
@@ -88,7 +118,7 @@ export const createBlogPostMetadata = (post, isBlogOpen = true) => {
     description,
     canonical: canonicalPath,
     type: 'article',
-    image,
+    image: absoluteImage,
     robots: isBlogOpen ? 'index, follow' : 'noindex, follow',
     structuredData,
   };

@@ -63,10 +63,10 @@ describe('route metadata', () => {
   });
 
   it('resolves dynamic article metadata and fallbacks seamlessly', () => {
-    const articleMeta = resolveMetadataForPath('/blogs/coordinating-brand-market-commerce');
+    const articleMeta = resolveMetadataForPath('/blogs/fssai-labelling-requirements-checklist-2026');
     expect(articleMeta).toMatchObject({
-      title: 'Coordinating Brand, Market, and Commerce as One System | Dashapatmaja Solutions Pvt Ltd',
-      canonical: '/blogs/coordinating-brand-market-commerce',
+      title: 'FSSAI Labelling Requirements 2026: A Practical Checklist | Dashapatmaja Solutions Pvt Ltd',
+      canonical: '/blogs/fssai-labelling-requirements-checklist-2026',
       type: 'article',
       robots: 'index, follow',
     });
