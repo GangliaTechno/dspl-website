@@ -1,5 +1,5 @@
-import { render, screen, within } from '@testing-library/react';
-import { MemoryRouter, Route, Routes } from 'react-router';
+import { fireEvent, render, screen, within } from '@testing-library/react';
+import { MemoryRouter, Route, Routes, useNavigate } from 'react-router';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import BlogPost from '../BlogPost';
 import { createBlogPostMetadata } from '../blogPostModel';
@@ -342,5 +342,100 @@ describe('BlogPost', () => {
     expect(relatedImg).toHaveAttribute('loading', 'lazy');
     expect(relatedImg).toHaveAttribute('alt', '');
     expect(relatedImg).toHaveAttribute('sizes', '(max-width: 768px) calc(100vw - 3rem), 720px');
+  });
+
+  it('resets activeHeadingId and updates aria-current when navigating to another article', async () => {
+    const postOne = {
+      ...mockPost('article-one'),
+      title: 'Article One',
+      headings: [
+        { blockKey: 'h1', id: 'start-with-decisions', text: 'Start with decisions', level: 2 },
+        { blockKey: 'h2', id: 'make-it-usable', text: 'Make it usable', level: 2 },
+      ],
+    };
+    const postTwo = {
+      ...mockPost('article-two'),
+      title: 'Article Two',
+      headings: [
+        { blockKey: 'h1', id: 'article-two-start', text: 'Article Two Start', level: 2 },
+        { blockKey: 'h2', id: 'article-two-end', text: 'Article Two End', level: 2 },
+      ],
+      body: [
+        {
+          _key: 'h1',
+          _type: 'block',
+          style: 'h2',
+          children: [{ _key: 's1', _type: 'span', text: 'Article Two Start' }],
+        },
+        {
+          _key: 'h2',
+          _type: 'block',
+          style: 'h2',
+          children: [{ _key: 's2', _type: 'span', text: 'Article Two End' }],
+        },
+      ],
+    };
+
+    const NavButton = () => {
+      const navigate = useNavigate();
+      return <button onClick={() => navigate('/blogs/article-two')}>Switch to Two</button>;
+    };
+
+    const { container } = render(
+      <MemoryRouter initialEntries={['/blogs/article-one']}>
+        <NavButton />
+        <Routes>
+          <Route
+            path="/blogs/:slug"
+            element={<BlogPost posts={[postOne, postTwo]} />}
+          />
+        </Routes>
+      </MemoryRouter>,
+    );
+
+    // Initial article
+    const desktopTocOne = container.querySelector('.blog-toc-sidebar');
+    const linksOne = desktopTocOne.querySelectorAll('.blog-toc-link');
+    expect(linksOne[0]).toHaveAttribute('href', '#start-with-decisions');
+    expect(linksOne[0]).toHaveAttribute('aria-current', 'location');
+
+    // Trigger navigation
+    const switchBtn = screen.getByRole('button', { name: 'Switch to Two' });
+    fireEvent.click(switchBtn);
+
+    const desktopTocTwo = container.querySelector('.blog-toc-sidebar');
+    const linksTwo = desktopTocTwo.querySelectorAll('.blog-toc-link');
+    expect(linksTwo[0]).toHaveAttribute('href', '#article-two-start');
+    expect(linksTwo[0]).toHaveAttribute('aria-current', 'location');
+    expect(linksTwo[1]).toHaveAttribute('href', '#article-two-end');
+    expect(linksTwo[1]).not.toHaveAttribute('aria-current');
+  });
+
+  it('attaches and disconnects IntersectionObserver on mount, async update, and unmount', () => {
+    const observeMock = vi.fn();
+    const disconnectMock = vi.fn();
+
+    class MockIntersectionObserver {
+      constructor(callback) {
+        this.callback = callback;
+      }
+      observe = observeMock;
+      disconnect = disconnectMock;
+      unobserve = vi.fn();
+    }
+    vi.stubGlobal('IntersectionObserver', MockIntersectionObserver);
+
+    const post = mockPost('observer-test');
+    const secondPost = mockPost('second-post');
+
+    const { unmount } = renderPost('observer-test', [post, secondPost]);
+
+    expect(observeMock).toHaveBeenCalled();
+    expect(disconnectMock).not.toHaveBeenCalled();
+
+    unmount();
+    expect(disconnectMock).toHaveBeenCalled();
+
+    vi.unstubAllGlobals();
   });
 });

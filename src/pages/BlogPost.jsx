@@ -56,7 +56,13 @@ const BlogPost = ({ posts = blogPosts, initialArticle = null }) => {
     () => summary?.headings || [],
     [summary?.headings],
   );
+  const [prevSlug, setPrevSlug] = useState(normalizedSlug);
   const [activeHeadingId, setActiveHeadingId] = useState(headings[0]?.id || '');
+
+  if (prevSlug !== normalizedSlug) {
+    setPrevSlug(normalizedSlug);
+    setActiveHeadingId(headings[0]?.id || '');
+  }
 
   useEffect(() => {
     if (!headings.length || !effectiveArticle?.body?.length) return undefined;

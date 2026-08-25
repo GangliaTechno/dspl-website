@@ -211,7 +211,7 @@
 
 @media (max-width: 1039px) {
   .blog-post-layout {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 2.5rem;
   }
 
@@ -267,6 +267,7 @@
 .blog-reading-column {
   width: 100%;
   max-width: 45rem;
+  min-width: 0;
 }
 
 .blog-body-p {
@@ -482,6 +483,14 @@
   max-width: 32rem;
 }
 
+.blog-bridge-action {
+  flex-shrink: 0;
+}
+
+.blog-bridge-action .btn {
+  white-space: nowrap;
+}
+
 @media (max-width: 1039px) {
   .blog-start-project-bridge {
     flex-direction: column;
@@ -501,6 +510,9 @@
 
 /* Semantic Data Tables */
 .blog-table-scroll {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   margin: 2rem 0;
