@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, within } from '@testing-library/react';
+import { act, fireEvent, render, screen, within } from '@testing-library/react';
 import { MemoryRouter, Route, Routes, useNavigate } from 'react-router';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import BlogPost from '../BlogPost';
@@ -407,6 +407,43 @@ describe('BlogPost', () => {
     expect(mobileLinks).toHaveLength(2);
     expect(mobileLinks[0]).toHaveTextContent('Section One');
     expect(mobileLinks[1]).toHaveTextContent('Section Two');
+  });
+
+  it('keeps the mobile TOC active state in sync with the observed heading', () => {
+    let observerCallback;
+
+    class MockIntersectionObserver {
+      constructor(callback) {
+        observerCallback = callback;
+      }
+      observe = vi.fn();
+      disconnect = vi.fn();
+    }
+
+    vi.stubGlobal('IntersectionObserver', MockIntersectionObserver);
+
+    const postWithHeadings = {
+      ...mockPost('mobile-active-post'),
+    };
+    const secondPost = mockPost('second-post');
+    const { container } = renderPost('mobile-active-post', [postWithHeadings, secondPost]);
+
+    act(() => {
+      observerCallback([
+        {
+          isIntersecting: true,
+          target: document.getElementById('make-it-usable'),
+          boundingClientRect: { top: 100 },
+        },
+      ]);
+    });
+
+    const mobileLinks = container.querySelector('.blog-mobile-toc').querySelectorAll('.blog-toc-link');
+    expect(mobileLinks[1]).toHaveClass('is-active');
+    expect(mobileLinks[1]).toHaveAttribute('aria-current', 'location');
+    expect(mobileLinks[0]).not.toHaveAttribute('aria-current');
+
+    vi.unstubAllGlobals();
   });
 
   it('renders related article card with responsive artwork and self-contained classes', () => {

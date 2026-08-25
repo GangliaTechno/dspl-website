@@ -223,7 +223,7 @@ const BlogPost = ({ posts = blogPosts, initialArticle = null }) => {
                             href={`#${heading.id}`}
                             className={`blog-toc-link ${
                               activeHeadingId === heading.id
-                                ? 'blog-toc-link--active'
+                                ? 'blog-toc-link--active is-active'
                                 : ''
                             }`}
                             aria-current={
@@ -257,7 +257,17 @@ const BlogPost = ({ posts = blogPosts, initialArticle = null }) => {
                     <ul className="blog-toc-list">
                       {headings.map((heading) => (
                         <li key={heading.id} className="blog-toc-item">
-                          <a href={`#${heading.id}`} className="blog-toc-link">
+                          <a
+                            href={`#${heading.id}`}
+                            className={`blog-toc-link ${
+                              activeHeadingId === heading.id ? 'is-active' : ''
+                            }`}
+                            aria-current={
+                              activeHeadingId === heading.id
+                                ? 'location'
+                                : undefined
+                            }
+                          >
                             {heading.text}
                           </a>
                         </li>
