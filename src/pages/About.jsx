@@ -17,7 +17,7 @@ import sreeImg from '../assets/sree_pro_extended.webp';
 import drImg from '../assets/dr_pro.webp';
 import anushaImg from '../assets/Anusha-mam_pro.webp';
 import nameshImg from '../assets/ceo_pro.webp';
-import { CONFIRMED_TEAM_MEMBERS } from '../content/teamMembers';
+import { TEAM_MEMBERS } from '../content/teamMembers';
 import aboutTeam01960 from '../assets/about-team-01-960.webp';
 import aboutTeam011440 from '../assets/about-team-01-1440.webp';
 import aboutTeam01Mobile from '../assets/about-team-01-mobile.webp';
@@ -205,7 +205,7 @@ const About = () => {
 
   useSEO(getRouteMetadata('/about'));
 
-  const team = CONFIRMED_TEAM_MEMBERS.map((member) => ({
+  const team = TEAM_MEMBERS.map((member) => ({
     ...member,
     ...(TEAM_PRESENTATION[member.id] || {}),
   }));

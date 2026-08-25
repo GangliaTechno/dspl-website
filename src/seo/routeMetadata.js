@@ -71,19 +71,19 @@ const routeMetadata = {
       'We build our own consumer brands and help Indian businesses build theirs. Branding, marketing, e-commerce and FSSAI compliance support from Manipal.',
   },
   '/about': {
-    title: 'About Dashapatmaja Solutions Pvt Ltd: Brand Builders in Manipal',
+    title: 'About Dashapatmaja Solutions: Brand Builders in Manipal',
     description:
       'Dashapatmaja Solutions Pvt Ltd was incorporated in 2022 and is incubated at MUTBI, MAHE. Meet the Manipal team building consumer brands and client brand systems.',
   },
   '/brands': {
     title: 'Our Consumer Brands: Raw Radicles Ayurvedic Chocolate',
     description:
-      'Raw Radicles is the first consumer brand from Dashapatmaja Solutions Pvt Ltd: six 60 g Ayurvedic chocolate bars across three collections, built end to end in India.',
+      'Raw Radicles is the first consumer brand from Dashapatmaja Solutions: six 60 g Ayurvedic chocolate bars across three collections, built end to end in India.',
   },
   '/brands/raw-radicles': {
     title: 'Raw Radicles: Ayurvedic Chocolate Built from Scratch in India',
     description:
-      'Six 60 g Ayurvedic chocolate bars built from formulation brief to print-ready pack: Holy Sin, Wrath Relief and Smart Sin, by Dashapatmaja Solutions Pvt Ltd in Manipal.',
+      'Six 60 g Ayurvedic chocolate bars built from formulation brief to print-ready pack: Holy Sin, Wrath Relief and Smart Sin, by Dashapatmaja Solutions in Manipal.',
   },
   '/marketing': {
     title: 'Digital Marketing & SEO Agency in Manipal, Udupi',
@@ -101,12 +101,12 @@ const routeMetadata = {
       'Shopify, WooCommerce and custom storefronts, plus Amazon and Flipkart listings, payments and delivery setup, from the Manipal team that sells its own product online.',
   },
   '/contact': {
-    title: 'Contact Dashapatmaja Solutions Pvt Ltd, Manipal, Karnataka',
+    title: 'Contact Dashapatmaja Solutions, Manipal, Karnataka',
     description:
-      'Talk to Dashapatmaja Solutions Pvt Ltd in Manipal about branding, marketing, e-commerce or a new consumer brand. We reply within one working day.',
+      'Talk to Dashapatmaja Solutions in Manipal about branding, marketing, e-commerce or a new consumer brand. We reply within one working day.',
   },
   '/start': {
-    title: 'Start a Project with Dashapatmaja Solutions Pvt Ltd',
+    title: 'Start a Project with Dashapatmaja Solutions',
     description:
       'Share your brand, marketing, e-commerce or compliance requirements. We review, identify the right team and reply within one working day.',
   },

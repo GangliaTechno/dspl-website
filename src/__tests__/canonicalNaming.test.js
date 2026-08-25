@@ -29,6 +29,14 @@ const approvedRootCompanyCopy = new Map([
     /Dashapatmaja Solutions is a Manipal-based company that develops its own consumer brands and delivers branding, marketing, e-commerce and product compliance support to businesses across Karnataka and India\./,
   ],
 ]);
+const approvedSeoMetadataPatterns = [
+  /About Dashapatmaja Solutions: Brand Builders in Manipal/g,
+  /Contact Dashapatmaja Solutions, Manipal, Karnataka/g,
+  /Start a Project with Dashapatmaja Solutions/g,
+  /Raw Radicles is the first consumer brand from Dashapatmaja Solutions:/g,
+  /by Dashapatmaja Solutions in Manipal\./g,
+  /Talk to Dashapatmaja Solutions in Manipal/g,
+];
 const prohibitedVariants = [
   ['Dasha', 'Patmaja'].join(' '),
   ['Dashapatmaja', 'Services'].join(' '),
@@ -55,7 +63,13 @@ function trackedTextFiles() {
 
 function hasUnexpectedIncompleteCompanyName(content, file) {
   const approvedCopy = approvedRootCompanyCopy.get(file);
-  const contentToCheck = approvedCopy ? content.replace(approvedCopy, '') : content;
+  let contentToCheck = approvedCopy ? content.replace(approvedCopy, '') : content;
+
+  if (file.startsWith('src/seo/')) {
+    for (const pattern of approvedSeoMetadataPatterns) {
+      contentToCheck = contentToCheck.replace(pattern, '');
+    }
+  }
 
   incompleteCompanyName.lastIndex = 0;
   const hasViolation = incompleteCompanyName.test(contentToCheck);

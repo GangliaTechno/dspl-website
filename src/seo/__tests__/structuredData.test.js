@@ -56,12 +56,13 @@ describe('structuredData module', () => {
     ]);
   });
 
-  it('creates Person schemas for 5 confirmed team members with stable URI @ids and worksFor references', () => {
+  it('creates Person schemas for team members with stable URI @ids, worksFor references, and omitted description', () => {
     const persons = createPersonSchemas();
     expect(persons).toHaveLength(5);
     expect(persons.every((p) => p['@type'] === 'Person')).toBe(true);
     expect(persons.every((p) => p.worksFor['@id'] === 'https://dashapatmaja.in/#organization')).toBe(true);
     expect(persons.every((p) => p['@id'].startsWith('https://dashapatmaja.in/about#'))).toBe(true);
+    expect(persons.every((p) => p.description === undefined)).toBe(true);
 
     const names = persons.map((p) => p.name);
     expect(names).toEqual([

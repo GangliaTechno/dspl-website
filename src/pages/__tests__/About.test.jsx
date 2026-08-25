@@ -183,7 +183,7 @@ describe('About page', () => {
     vi.useRealTimers();
   });
 
-  it('includes 5 confirmed team members as Person schema nodes in structuredData', () => {
+  it('includes team members as Person schema nodes in structuredData', () => {
     const meta = getRouteMetadata('/about');
     expect(meta.structuredData['@graph']).toBeDefined();
 

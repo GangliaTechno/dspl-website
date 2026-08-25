@@ -1,6 +1,6 @@
 import { COMPANY_FACTS } from '../content/companyFacts';
 import { SITE_CONFIG } from '../content/siteConfig';
-import { CONFIRMED_TEAM_MEMBERS } from '../content/teamMembers';
+import { TEAM_MEMBERS } from '../content/teamMembers';
 
 const SITE_URL = SITE_CONFIG.siteUrl;
 
@@ -106,18 +106,18 @@ export function createBreadcrumbSchema(pathname, title) {
 }
 
 /**
- * Generates Person schema nodes for all confirmed team members,
+ * Generates Person schema nodes for the team members,
  * linking each person to the organization via worksFor @id.
+ * Biography description is intentionally omitted until bios are confirmed.
  *
  * @returns {Array<object>}
  */
 export function createPersonSchemas() {
-  return CONFIRMED_TEAM_MEMBERS.map((member) => ({
+  return TEAM_MEMBERS.map((member) => ({
     '@type': 'Person',
     '@id': `${SITE_URL}/about#${member.id}`,
     name: member.name,
     jobTitle: member.role,
-    description: member.bio,
     worksFor: {
       '@id': `${SITE_URL}/#organization`,
     },

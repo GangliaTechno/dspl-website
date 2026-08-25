@@ -1,4 +1,4 @@
-export const CONFIRMED_TEAM_MEMBERS = Object.freeze([
+export const TEAM_MEMBERS = Object.freeze([
   {
     id: 'manu-sudhi',
     name: 'Dr. Manu Sudhi',
