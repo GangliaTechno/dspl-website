@@ -9,7 +9,11 @@ import { getRouteMetadata } from '../seo/routeMetadata';
 const offers = [
   {
     title: 'Store setup and build',
-    text: 'Shopify, WooCommerce or React-based commerce. Catalogue structure, content architecture, responsive build, and a admin your team can run without a developer for routine changes.',
+    text: 'Shopify, WooCommerce or React-based commerce. Catalogue structure, content architecture, responsive build, and an admin your team can run without a developer for routine changes.',
+  },
+  {
+    title: 'Catalogue and product content',
+    text: 'Product data, collection structure, imagery requirements, and content ownership organised for the selected channels.',
   },
   {
     title: 'Conversion rate optimisation',
@@ -28,7 +32,28 @@ const offers = [
 const compliance = {
   title: 'Listing and marketplace compliance',
   intro: 'Marketplace listing rejections almost always come from the same place: the pack says one thing and the catalogue says another. Net quantity, ingredient statements, manufacturer details, country of origin, FSSAI licence number and expiry format all have to match between the physical label and the digital record. We prepare catalogue data from the approved label artwork so the two agree from the start, and we structure product information so it can be pushed to a new channel without re-entry. For food and nutraceutical sellers we handle FSSAI licence details, mandatory declarations and marketplace-specific category requirements.',
-  items: [],
+  items: [
+    {
+      title: 'Pack and catalogue consistency',
+      text: 'Keeping information on the physical pack and digital catalogue aligned.',
+    },
+    {
+      title: 'Catalogue data preparation',
+      text: 'Preparing product records from approved packaging and product information.',
+    },
+    {
+      title: 'Channel-ready product information',
+      text: 'Structuring product data so it can be reused across agreed commerce channels.',
+    },
+    {
+      title: 'Listing declarations',
+      text: 'Coordinating the required approved declaration information across listings.',
+    },
+    {
+      title: 'Marketplace requirements',
+      text: 'Preparing listing information for the requirements of the marketplaces/channels included in scope.',
+    },
+  ],
   disclaimer: 'Regulated legal opinions stay with qualified advisers; the preparation and the paperwork sit with us.',
 };
 
@@ -61,8 +86,8 @@ const Ecommerce = () => (
     offers={offers}
     compliance={compliance}
     testimonials={approvedTestimonials}
-    faqsTitle="E-commerce engagement questions"
-    faqsDescription="Platforms, integrations, timelines, and operations."
+    faqsTitle="Frequently asked questions about e-commerce"
+    faqsDescription="Clear answers about platforms, marketplaces, timelines, payment setup and ongoing support."
     faqs={faqs}
   />
 );

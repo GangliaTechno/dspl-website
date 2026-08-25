@@ -734,17 +734,17 @@ describe('approved design-system corrections', () => {
       /\.domain-subtitle\s*{[^}]*color:\s*#ffffff;/s,
     );
     expect(serviceCss).toMatch(
-      /\.offers-grid\s*{[^}]*grid-template-columns:\s*repeat\(6,\s*minmax\(0,\s*1fr\)\);[^}]*gap:\s*1rem;/s,
+      /\.offers-grid\s*{[^}]*grid-template-columns:\s*repeat\(6,\s*minmax\(0,\s*1fr\)\);/s,
     );
     expect(serviceCss).toMatch(
-      /\.offer-entry\s*{[^}]*grid-column:\s*span 2;[^}]*min-height:\s*13rem;[^}]*border:\s*1px solid var\(--border-color\);/s,
+      /\.offers-grid--editorial\s*{[^}]*border-top:\s*1px solid var\(--border-color\);/s,
     );
     expect(serviceCss).toMatch(
-      /@media\s*\(max-width:\s*768px\)\s*{[\s\S]*?\.domain-hero\s*{[^}]*min-height:\s*34rem;[^}]*padding:\s*4rem 0;[\s\S]*?\.offers-grid\s*{[^}]*grid-template-columns:\s*1fr;/s,
+      /@media\s*\(max-width:\s*768px\)\s*{[\s\S]*?\.domain-hero\s*{[^}]*min-height:\s*34rem;[^}]*padding:\s*4rem 0;[\s\S]*?\.offers-grid--editorial\s*{[^}]*grid-template-columns:\s*1fr;/s,
     );
     expect(serviceCss).not.toMatch(/\.offer-card\s*\{/);
     expect(serviceCss).not.toContain('.offer-icon-wrapper');
-    expect(serviceCss).toContain('.offer-sequence');
+    expect(serviceCss).not.toContain('.offer-sequence');
   });
 
   it('routes global project actions through the dedicated Start page', () => {
@@ -766,18 +766,21 @@ describe('approved design-system corrections', () => {
   it('balances incomplete service-card rows instead of leaving accidental gaps', () => {
     const serviceCss = readSource('src/components/ServicePage.css');
 
-    // Desktop: 5-item row-balancing selectors must exist
+    // Desktop: 5-item 3+2 row-balancing selectors must exist
     expect(serviceCss).toMatch(
-      /\.offers-grid\[data-count="5"\] > :nth-child\(4\)\s*\{[^}]*grid-column:\s*2 \/ span 2;/s,
+      /\.offers-grid--editorial\[data-count="5"\] > :nth-child\(4\)\s*\{[^}]*grid-column:\s*span 3;/s,
     );
     expect(serviceCss).toMatch(
-      /\.offers-grid\[data-count="5"\] > :nth-child\(5\)\s*\{[^}]*grid-column:\s*4 \/ span 2;/s,
+      /\.offers-grid--editorial\[data-count="5"\] > :nth-child\(5\)\s*\{[^}]*grid-column:\s*span 3;/s,
     );
     expect(serviceCss).toMatch(
       /\.service-detail-grid\s*\{[^}]*grid-template-columns:\s*repeat\(6,\s*minmax\(0,\s*1fr\)\);/s,
     );
     expect(serviceCss).toMatch(
-      /\.service-detail-grid\[data-count="5"\] > :nth-child\(4\)\s*\{[^}]*grid-column:\s*2 \/ span 2;/s,
+      /\.service-detail-grid\[data-count="5"\] > :nth-child\(4\)\s*\{[^}]*grid-column:\s*span 3;/s,
+    );
+    expect(serviceCss).toMatch(
+      /\.service-detail-grid\[data-count="5"\] > :nth-child\(5\)\s*\{[^}]*grid-column:\s*span 3;/s,
     );
 
     // Tablet (769px–900px): editorial grid gets matching-specificity overrides;

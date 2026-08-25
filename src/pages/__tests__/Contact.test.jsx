@@ -62,7 +62,7 @@ describe('Contact', () => {
     renderContact();
 
     expect(screen.getByRole('heading', { level: 1, name: 'Start a conversation.' })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'project planner' })).toHaveAttribute('href', '/start');
+    expect(screen.getByRole('link', { name: /project planner/i })).toHaveAttribute('href', '/start');
     expect(screen.getByLabelText('First Name')).toBeRequired();
     expect(screen.getByLabelText('Last Name (optional)')).not.toBeRequired();
     expect(screen.getByLabelText('Email Address')).toBeRequired();

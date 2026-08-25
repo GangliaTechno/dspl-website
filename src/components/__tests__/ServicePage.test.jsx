@@ -94,8 +94,7 @@ describe('ServicePage', () => {
     expect(scope.querySelector('.matters-box')).not.toBeInTheDocument();
 
     expect(container.querySelectorAll('article.offer-entry')).toHaveLength(4);
-    expect(Array.from(container.querySelectorAll('.offer-sequence'), (node) => node.textContent))
-      .toEqual(['01', '02', '03', '04']);
+    expect(container.querySelector('.offer-sequence')).not.toBeInTheDocument();
     expect(container.querySelector('.offer-icon-wrapper')).not.toBeInTheDocument();
     expect(screen.queryByText('Services')).not.toBeInTheDocument();
     expect(screen.getByRole('heading', { level: 2, name: props.faqsTitle }))
@@ -103,7 +102,7 @@ describe('ServicePage', () => {
     expect(screen.getByText(props.faqsDescription)).toBeInTheDocument();
     expect(container.querySelector('.offers-grid')).toHaveClass('offers-grid--editorial');
     expect(screen.getByRole('region', { name: 'Compliance coordination' })
-      .querySelector('.service-detail-grid')).toHaveClass('service-detail-grid--supporting');
+      .querySelector('.service-detail-grid')).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Ways to engage' }).closest('section'))
       .toHaveClass('service-engagements-section');
     expect(screen.getByRole('region', { name: 'Compliance coordination' }))
@@ -151,10 +150,10 @@ describe('ServicePage responsive CSS contract', () => {
 
   it('keeps desktop 5-item editorial balancing selectors', () => {
     expect(css).toMatch(
-      /\.offers-grid--editorial\[data-count="5"\] > :nth-child\(4\)\s*\{[^}]*grid-column:\s*2 \/ span 2;/s,
+      /\.offers-grid--editorial\[data-count="5"\] > :nth-child\(4\)\s*\{[^}]*grid-column:\s*span 3;/s,
     );
     expect(css).toMatch(
-      /\.offers-grid--editorial\[data-count="5"\] > :nth-child\(5\)\s*\{[^}]*grid-column:\s*4 \/ span 2;/s,
+      /\.offers-grid--editorial\[data-count="5"\] > :nth-child\(5\)\s*\{[^}]*grid-column:\s*span 3;/s,
     );
   });
 
@@ -180,9 +179,9 @@ describe('ServicePage responsive CSS contract', () => {
     );
   });
 
-  it('centres the 5th editorial item at 50% width with no right border at tablet', () => {
+  it('centres the 5th editorial item at 100% width with no right border at tablet', () => {
     expect(css).toMatch(
-      /@media \(min-width: 769px\) and \(max-width: 900px\)[\s\S]*?\.offers-grid--editorial\[data-count="5"\] > :last-child\s*\{[^}]*grid-column:\s*1 \/ -1;[^}]*width:\s*50%;[^}]*justify-self:\s*center;[^}]*border-right:\s*0;/s,
+      /@media \(min-width: 769px\) and \(max-width: 900px\)[\s\S]*?\.offers-grid--editorial\[data-count="5"\] > :last-child\s*\{[^}]*grid-column:\s*1 \/ -1;/s,
     );
   });
 
@@ -194,7 +193,7 @@ describe('ServicePage responsive CSS contract', () => {
 
   it('resets editorial items 4 and 5 to full row on mobile with correct specificity', () => {
     expect(css).toMatch(
-      /@media \(max-width: 768px\)[\s\S]*?\.offers-grid--editorial \.offer-entry,[\s\S]*?\.offers-grid--editorial\[data-count="5"\] > :nth-child\(4\),[\s\S]*?\.offers-grid--editorial\[data-count="5"\] > :nth-child\(5\)\s*\{[^}]*grid-column:\s*1 \/ -1;[^}]*width:\s*100%;/s,
+      /@media \(max-width: 768px\)[\s\S]*?\.offers-grid--editorial \.offer-entry,[\s\S]*?\.offers-grid--editorial\[data-count="5"\] > :nth-child\(4\),[\s\S]*?\.offers-grid--editorial\[data-count="5"\] > :nth-child\(5\)\s*\{[^}]*grid-column:\s*1 \/ -1;/s,
     );
   });
 

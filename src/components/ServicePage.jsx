@@ -61,15 +61,10 @@ const ServicePage = ({
           </div>
 
           <div className="offers-grid offers-grid--editorial" data-count={offers.length}>
-            {offers.map((offer, index) => (
+            {offers.map((offer) => (
               <article key={offer.title} className="offer-entry">
-                <span className="offer-sequence" aria-hidden="true">
-                  {String(index + 1).padStart(2, '0')}
-                </span>
-                <div>
-                  <h3 className="offer-card-title">{offer.title}</h3>
-                  <p className="offer-card-text">{offer.text}</p>
-                </div>
+                <h3 className="offer-card-title">{offer.title}</h3>
+                <p className="offer-card-text">{offer.text}</p>
               </article>
             ))}
           </div>

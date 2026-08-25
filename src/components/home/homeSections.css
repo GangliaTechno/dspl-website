@@ -187,15 +187,10 @@
   border-right: 1px solid var(--border-color);
   position: relative;
   background: var(--bg-primary, #F7F4ED);
-  transition: background-color 0.2s ease;
 }
 
 .process-column:last-child {
   border-right: 0;
-}
-
-.process-column:hover {
-  background: var(--card-hover-bg, #FFF9EC);
 }
 
 .process-column-top {
@@ -204,11 +199,13 @@
 }
 
 .process-big-numeral {
+  display: block;
   font-family: var(--font-heading);
   font-size: clamp(3.5rem, 5.5vw, 4.75rem);
   font-weight: 800;
-  line-height: 0.9;
+  line-height: 1;
   letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
   color: var(--accent-dark, #8A5B00);
   opacity: 0.28;
   margin-bottom: 0.75rem;

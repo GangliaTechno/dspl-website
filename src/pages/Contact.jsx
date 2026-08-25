@@ -3,6 +3,7 @@ import { useRef, useState } from 'react';
 import { Link } from 'react-router';
 import {
   AlertCircle,
+  ArrowRight,
   CheckCircle2,
   Send,
 } from 'lucide-react';
@@ -141,14 +142,17 @@ const Contact = () => {
           <span className="section-subtitle">Contact</span>
           <h1 className="contact-title">Start a conversation.</h1>
           <p className="contact-description">
-            For a quick question, use the form below. For a project you want
-            scoped, use the{' '}
-            <Link to="/start" className="contact-hero-link">
-              project planner
-            </Link>
-            ; it takes about five minutes and gets you a better first
-            conversation. Either way, we reply within one working day.
+            For a quick question, use the form below. Either way, we reply within one working day.
           </p>
+          <div className="contact-planner-callout">
+            <p className="contact-planner-prompt">For a project you want scoped:</p>
+            <Link to="/start" className="contact-planner-link">
+              Project planner <ArrowRight size={15} aria-hidden="true" />
+            </Link>
+            <p className="contact-planner-subtext">
+              It takes about five minutes and gets you a better first conversation.
+            </p>
+          </div>
         </div>
       </section>
 
