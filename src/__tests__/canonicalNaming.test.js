@@ -13,8 +13,21 @@ const trackedTextExtensions = new Set([
   '.md',
   '.mjs',
 ]);
-const intentionalLegacyDiscussion = new Set([
+const intentionalNonProductText = new Set([
   'docs/superpowers/specs/2026-07-29-homepage-hero-and-canonical-naming-design.md',
+  'docs/superpowers/specs/2026-08-25-dspl-sitewide-copy-decision-matrix.md',
+  'src/__tests__/canonicalNaming.test.js',
+  'scripts/__tests__/verify-deployment.test.js',
+]);
+const approvedRootCompanyCopy = new Map([
+  [
+    'src/pages/Home.jsx',
+    /Dashapatmaja Solutions is a Manipal-based company that develops\s+its own consumer brands and delivers branding, marketing,\s+e-commerce and product compliance support to businesses across\s+Karnataka and India\./s,
+  ],
+  [
+    'src/pages/__tests__/Home.test.jsx',
+    /Dashapatmaja Solutions is a Manipal-based company that develops its own consumer brands and delivers branding, marketing, e-commerce and product compliance support to businesses across Karnataka and India\./,
+  ],
 ]);
 const prohibitedVariants = [
   ['Dasha', 'Patmaja'].join(' '),
@@ -37,7 +50,17 @@ function trackedTextFiles() {
     .filter(Boolean)
     .filter((file) => existsSync(file))
     .filter((file) => trackedTextExtensions.has(extname(file)))
-    .filter((file) => !intentionalLegacyDiscussion.has(file));
+    .filter((file) => !intentionalNonProductText.has(file));
+}
+
+function hasUnexpectedIncompleteCompanyName(content, file) {
+  const approvedCopy = approvedRootCompanyCopy.get(file);
+  const contentToCheck = approvedCopy ? content.replace(approvedCopy, '') : content;
+
+  incompleteCompanyName.lastIndex = 0;
+  const hasViolation = incompleteCompanyName.test(contentToCheck);
+  incompleteCompanyName.lastIndex = 0;
+  return hasViolation;
 }
 
 describe('canonical naming', () => {
@@ -53,10 +76,9 @@ describe('canonical naming', () => {
         }
       }
 
-      if (incompleteCompanyName.test(content)) {
+      if (hasUnexpectedIncompleteCompanyName(content, file)) {
         violations.push(`${file}: incomplete company name`);
       }
-      incompleteCompanyName.lastIndex = 0;
     }
 
     expect(violations).toEqual([]);

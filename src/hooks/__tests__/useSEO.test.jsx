@@ -15,11 +15,17 @@ const SEOProbe = ({ metadata }) => {
 };
 
 describe('useSEO', () => {
-  it('keeps the canonical company name visible first in every public page title', () => {
+  it('keeps the canonical company name visible first outside the approved homepage title', () => {
     for (const route of PUBLIC_ROUTES) {
-      expect(getRouteMetadata(route).title).toMatch(
-        /^Dashapatmaja Solutions Pvt Ltd(?: \||$)/,
-      );
+      const title = getRouteMetadata(route).title;
+
+      if (route === '/') {
+        expect(title).toBe(
+          'Branding, Marketing & E-commerce Company in Manipal, Karnataka',
+        );
+      } else {
+        expect(title).toMatch(/^Dashapatmaja Solutions Pvt Ltd(?: \||$)/);
+      }
     }
   });
 

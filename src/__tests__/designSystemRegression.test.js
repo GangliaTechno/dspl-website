@@ -479,7 +479,7 @@ describe('approved design-system corrections', () => {
     expect(homePage).toContain('We build');
     expect(homePage).toContain('consumer brands.');
     expect(homePage).toContain('We help businesses build theirs.');
-    expect(homePage).toContain('compliance support.');
+    expect(homePage).toContain('product compliance support to businesses across');
     expect(homePage).toContain('id="capabilities"');
     expect(homePage).not.toContain(
       'Brand systems for Indian consumer businesses',
@@ -513,7 +513,7 @@ describe('approved design-system corrections', () => {
     expect(marketingPage).toContain('marketing-primary-mobile.webp');
     expect(marketingPage).not.toContain('Marketing_hero_section');
     expect(routeMetadata).toContain(
-      'DSPL builds its own consumer brands and helps businesses grow through coordinated branding, marketing, e-commerce and compliance support.',
+      'We build our own consumer brands and help Indian businesses build theirs. Branding, marketing, e-commerce and FSSAI compliance support from Manipal.',
     );
     expect(routeMetadata).not.toContain('Indian consumer businesses');
   });
@@ -568,7 +568,7 @@ describe('approved design-system corrections', () => {
     ].join('\n');
 
     expect(homeAndAbout).not.toContain('We deliver disciplined market execution.');
-    expect(homeAndAbout).toContain('How We Work With You');
+    expect(homeAndAbout).toContain('One accountable path, from audit to launch');
   });
 
   it('keeps the About journey inside the approved editorial section', () => {
@@ -924,7 +924,7 @@ describe('approved design-system corrections', () => {
     expect(footer).not.toContain('openWorkModal');
     expect(footer).not.toContain('Get in Touch');
     expect(footer).toContain('className="footer-cta-strip"');
-    expect(footerCtas).toContain('Turn a promising idea into a coordinated project.');
+    expect(footerCtas).toContain('Turn a promising idea into a working project.');
     expect(footerCtas).toContain('See how DSPL built Raw Radicles.');
     expect(footerCtas).toContain('Explore Raw Radicles');
     expect(footerCtas).toContain('Start a project');
