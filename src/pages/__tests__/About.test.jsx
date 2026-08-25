@@ -83,13 +83,36 @@ describe('About page', () => {
 
     expect(
       within(section).getAllByRole('heading', { level: 3 }).map((item) => item.textContent),
-    ).toEqual(['Where we are going', 'What we do', 'How we work']);
+    ).toEqual(['Vision', 'Mission', 'Values']);
+    expect(within(section).getByText('Long-term direction')).toBeInTheDocument();
+    expect(within(section).getByText('Our mandate')).toBeInTheDocument();
+    expect(within(section).getByText('Operating principles')).toBeInTheDocument();
     expect(within(section).getByText('Vision')).toBeInTheDocument();
     expect(within(section).getByText('Mission')).toBeInTheDocument();
     expect(within(section).getByText('Values')).toBeInTheDocument();
     expect(
       within(section).getByText(
-        'Build a focused portfolio of consumer brands supported by disciplined commercial systems.',
+        'To build a portfolio of Indian consumer brands that earn shelf space on quality, and to give other founders the same operating support we built for ourselves.',
+      ),
+    ).toBeInTheDocument();
+    expect(
+      within(section).getByText(
+        'We run our own brands end to end, from formulation brief to marketplace listing. We use that experience to scope, price and deliver branding, marketing, e-commerce and compliance work for clients who are building something similar.',
+      ),
+    ).toBeInTheDocument();
+    expect(
+      within(section).getByText(
+        'We quote what the work costs, not what the client hopes it costs. We put scope, ownership and measures in writing before we start. We tell clients when an idea will not work, including when it is our own.',
+      ),
+    ).toBeInTheDocument();
+  });
+
+  it('uses the approved corporate-profile introduction', () => {
+    renderAbout();
+
+    expect(
+      screen.getByText(
+        'A Manipal-based company that develops consumer brands and builds the branding, marketing and commerce systems behind them. Incorporated 28 July 2022. Incubated at MUTBI, MAHE, and supported under DST NIDHI-PRAYAS.',
       ),
     ).toBeInTheDocument();
   });
@@ -125,7 +148,7 @@ describe('About page', () => {
     expect(screen.getByText('Dr. Dasharathraj K Shetty')).toBeInTheDocument();
     expect(screen.getByText('Chairman & Director')).toBeInTheDocument();
     expect(screen.getByText('Managing Director')).toBeInTheDocument();
-    expect(screen.getByText(/Our leadership brings together experience across healthcare, management, technology, and consumer brand development\./i)).toBeInTheDocument();
+    expect(screen.getByText(/We work across healthcare, engineering, management and technology, with practical experience taking a food product from formulation brief to print-ready pack\./i)).toBeInTheDocument();
     expect(screen.queryByText('Dr. Balakrishna S. Maddodi')).not.toBeInTheDocument();
   });
 

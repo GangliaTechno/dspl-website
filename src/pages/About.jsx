@@ -111,19 +111,19 @@ const journeyMilestones = [
 
 const directionCards = [
   {
-    label: 'Vision',
-    title: 'Where we are going',
-    text: 'Build a focused portfolio of consumer brands supported by disciplined commercial systems.',
+    label: 'Long-term direction',
+    title: 'Vision',
+    text: 'To build a portfolio of Indian consumer brands that earn shelf space on quality, and to give other founders the same operating support we built for ourselves.',
   },
   {
-    label: 'Mission',
-    title: 'What we do',
-    text: 'Develop and operate DSPL-owned brands while helping businesses coordinate branding, marketing, e-commerce, and implementation through clearly defined scopes.',
+    label: 'Our mandate',
+    title: 'Mission',
+    text: 'We run our own brands end to end, from formulation brief to marketplace listing. We use that experience to scope, price and deliver branding, marketing, e-commerce and compliance work for clients who are building something similar.',
   },
   {
-    label: 'Values',
-    title: 'How we work',
-    text: 'Clarity, evidence, accountability, and practical coordination guide how we make decisions, define responsibilities, and deliver work.',
+    label: 'Operating principles',
+    title: 'Values',
+    text: 'We quote what the work costs, not what the client hopes it costs. We put scope, ownership and measures in writing before we start. We tell clients when an idea will not work, including when it is our own.',
   },
 ];
 
@@ -247,7 +247,7 @@ const About = () => {
           <span className="section-subtitle">Our Corporate Profile</span>
           <h1 className="about-title">About Dashapatmaja Solutions Pvt Ltd</h1>
           <p className="about-subtitle">
-            A multidisciplinary company focused on developing brands and building coordinated commercial capabilities.
+            A Manipal-based company that develops consumer brands and builds the branding, marketing and commerce systems behind them. Incorporated 28 July 2022. Incubated at MUTBI, MAHE, and supported under DST NIDHI-PRAYAS.
           </p>
         </motion.div>
       </section>
@@ -379,10 +379,10 @@ const About = () => {
       <section id="team" className="section team-section">
         <div className="container">
           <div className="section-header">
-            <span className="section-subtitle">Leadership and Guidance</span>
+            <span className="section-subtitle">Our team</span>
             <h2 className="section-title">Meet our team</h2>
             <p className="section-title-description">
-              Our leadership brings together experience across healthcare, management, technology, and consumer brand development.
+              We work across healthcare, engineering, management and technology, with practical experience taking a food product from formulation brief to print-ready pack.
             </p>
           </div>
 

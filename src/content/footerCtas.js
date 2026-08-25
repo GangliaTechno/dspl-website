@@ -8,9 +8,9 @@ export const footerCtas = Object.freeze({
   },
   '/about': {
     eyebrow: 'Work with DSPL',
-    title: 'Bring the right disciplines around the same brief.',
-    text: 'Tell us where your project stands and where multidisciplinary support would help.',
-    label: 'Start a project',
+    title: 'Ready to build with fewer unknowns?',
+    text: 'Tell us what you are building, where you need support and what a good next step looks like.',
+    label: 'Contact DSPL',
     href: '/start',
   },
   '/brands': {

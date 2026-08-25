@@ -18,6 +18,13 @@ describe('Footer', () => {
     expect(getFooterCta('/branding').href).toBe('/start');
     expect(getFooterCta('/marketing').href).toBe('/start');
     expect(getFooterCta('/ecommerce').href).toBe('/start');
+    expect(getFooterCta('/about')).toEqual({
+      eyebrow: 'Work with DSPL',
+      title: 'Ready to build with fewer unknowns?',
+      text: 'Tell us what you are building, where you need support and what a good next step looks like.',
+      label: 'Contact DSPL',
+      href: '/start',
+    });
     expect(getFooterCta('/contact')).toBeNull();
     expect(getFooterCta('/start')).toBeNull();
     expect(getFooterCta('/privacy')).toBeNull();
