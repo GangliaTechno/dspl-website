@@ -3,8 +3,17 @@ import {
   DEFAULT_TIMEOUT_MS,
   DEFAULT_UNKNOWN_PATH,
   EXPECTED_ARTICLES,
+  HOMEPAGE_H1,
+  HOMEPAGE_HEADINGS,
+  extractAnchorHrefs,
+  extractH1,
+  extractTitle,
+  hasArticleAnchor,
+  isHomepageFallbackHtml,
+  isHomepageHeading,
   main,
   parseCliArgs,
+  parseHstsHeader,
   runDirectExecution,
   verifyDeployment,
 } from '../verify-deployment.mjs';
@@ -13,7 +22,7 @@ const VALID_ORIGIN = 'https://dashapatmaja.in';
 
 const createMockHtml = ({
   title = 'Dashapatmaja Solutions Pvt Ltd | Consumer Brand Building & Growth',
-  h1 = 'We build consumer brands.',
+  h1 = HOMEPAGE_H1,
   canonical = `${VALID_ORIGIN}/`,
   ogType = 'website',
   jsonLd = null,
@@ -70,7 +79,7 @@ const createMockResponse = ({
 const createPassingRouteMap = (origin = VALID_ORIGIN) => {
   const homeHtml = createMockHtml({
     title: 'Dashapatmaja Solutions Pvt Ltd | Consumer Brand Building & Growth',
-    h1: 'We build consumer brands.',
+    h1: HOMEPAGE_H1,
     canonical: `${origin}/`,
   });
 
@@ -1016,5 +1025,286 @@ describe('CLI execution lifecycle', () => {
 
     expect(capturedExitCode).toBe(1);
     expect(stderr.join('')).toMatch(/Missing required --origin/);
+  });
+});
+
+describe('HSTS directive parser unit tests', () => {
+  it('parses valid max-age directive and ignores other valid directives', () => {
+    const result1 = parseHstsHeader('max-age=31536000');
+    expect(result1.valid).toBe(true);
+    expect(result1.maxAge).toBe(31536000);
+
+    const result2 = parseHstsHeader('max-age=31536000; includeSubDomains; preload');
+    expect(result2.valid).toBe(true);
+    expect(result2.maxAge).toBe(31536000);
+
+    const result3 = parseHstsHeader('includeSubDomains; max-age = 63072000 ; preload');
+    expect(result3.valid).toBe(true);
+    expect(result3.maxAge).toBe(63072000);
+  });
+
+  it('rejects near-matches such as not-max-age=31536000', () => {
+    const result = parseHstsHeader('not-max-age=31536000; includeSubDomains');
+    expect(result.valid).toBe(false);
+    expect(result.message).toMatch(/missing max-age directive/i);
+  });
+
+  it('rejects malformed max-age with non-digit suffix like max-age=31536000garbage', () => {
+    const result = parseHstsHeader('max-age=31536000garbage; includeSubDomains');
+    expect(result.valid).toBe(false);
+    expect(result.message).toMatch(/max-age directive is malformed/i);
+  });
+
+  it('rejects max-age=0 and negative values', () => {
+    const resultZero = parseHstsHeader('max-age=0; includeSubDomains');
+    expect(resultZero.valid).toBe(false);
+    expect(resultZero.message).toMatch(/strictly positive integer/i);
+
+    const resultNeg = parseHstsHeader('max-age=-100; includeSubDomains');
+    expect(resultNeg.valid).toBe(false);
+    expect(resultNeg.message).toMatch(/max-age directive is malformed/i);
+  });
+
+  it('rejects missing max-age directive or valueless max-age directive', () => {
+    const resultMissing = parseHstsHeader('includeSubDomains; preload');
+    expect(resultMissing.valid).toBe(false);
+    expect(resultMissing.message).toMatch(/missing max-age directive/i);
+
+    const resultValueless = parseHstsHeader('max-age; includeSubDomains');
+    expect(resultValueless.valid).toBe(false);
+    expect(resultValueless.message).toMatch(/missing value/i);
+  });
+
+  it('handles null, undefined, empty, or whitespace strings safely', () => {
+    expect(parseHstsHeader(null).valid).toBe(false);
+    expect(parseHstsHeader(undefined).valid).toBe(false);
+    expect(parseHstsHeader('').valid).toBe(false);
+    expect(parseHstsHeader('   ').valid).toBe(false);
+  });
+});
+
+describe('Anchor link parser unit tests', () => {
+  it('extracts anchor hrefs from HTML strings', () => {
+    const html = `
+      <div>
+        <a href="/blogs/fssai-labelling-requirements-checklist-2026">FSSAI</a>
+        <a class="btn" href="https://dashapatmaja.in/blogs/legal-metrology-packaged-commodity-rules-india" target="_blank">Legal</a>
+        <span>No link here: /blogs/coordinating-brand-market-commerce</span>
+      </div>
+    `;
+    const hrefs = extractAnchorHrefs(html);
+    expect(hrefs).toEqual([
+      '/blogs/fssai-labelling-requirements-checklist-2026',
+      'https://dashapatmaja.in/blogs/legal-metrology-packaged-commodity-rules-india',
+    ]);
+  });
+
+  it('hasArticleAnchor correctly matches relative and same-origin absolute paths', () => {
+    const html = `
+      <a href="/blogs/fssai-labelling-requirements-checklist-2026">FSSAI</a>
+      <a href="https://dashapatmaja.in/blogs/legal-metrology-packaged-commodity-rules-india/">Legal with trailing slash</a>
+    `;
+    expect(hasArticleAnchor(html, '/blogs/fssai-labelling-requirements-checklist-2026', VALID_ORIGIN)).toBe(true);
+    expect(hasArticleAnchor(html, '/blogs/legal-metrology-packaged-commodity-rules-india', VALID_ORIGIN)).toBe(true);
+  });
+
+  it('hasArticleAnchor rejects external origin anchors even with matching pathname', () => {
+    const html = '<a href="https://evil.com/blogs/fssai-labelling-requirements-checklist-2026">FSSAI</a>';
+    expect(hasArticleAnchor(html, '/blogs/fssai-labelling-requirements-checklist-2026', VALID_ORIGIN)).toBe(false);
+  });
+});
+
+describe('Phase 3 Round 2 regressions', () => {
+  it('Finding 1: Passes homepage check with actual combined H1 ("We build consumer brands. We help businesses build theirs.")', async () => {
+    const routeMap = createPassingRouteMap();
+    const fetch = createMockFetch(routeMap);
+
+    const result = await verifyDeployment({
+      origin: VALID_ORIGIN,
+      fetch,
+    });
+
+    expect(result.ok).toBe(true);
+    const homeCheck = result.checks.find((c) => c.name === 'Homepage heading identity');
+    expect(homeCheck?.passed).toBe(true);
+    expect(homeCheck?.message).toMatch(/We build consumer brands\. We help businesses build theirs\./);
+  });
+
+  it('Finding 1: Detects homepage fallback on unknown route when returning HTTP 200 or 404 with combined homepage H1', async () => {
+    const routeMap = createPassingRouteMap();
+    routeMap.set(`${VALID_ORIGIN}/does-not-exist`, {
+      status: 404,
+      html: createMockHtml({
+        title: 'Dashapatmaja Solutions Pvt Ltd | Consumer Brand Building & Growth',
+        h1: 'We build consumer brands. We help businesses build theirs.',
+        canonical: `${VALID_ORIGIN}/`,
+      }),
+      url: `${VALID_ORIGIN}/does-not-exist`,
+    });
+    const fetch = createMockFetch(routeMap);
+
+    const result = await verifyDeployment({
+      origin: VALID_ORIGIN,
+      fetch,
+    });
+
+    expect(result.ok).toBe(false);
+    expect(result.failures).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          path: '/does-not-exist',
+          name: 'Unknown route does not return homepage body',
+        }),
+        expect.objectContaining({
+          path: '/does-not-exist',
+          name: 'Unknown route Not Found page identity',
+        }),
+      ]),
+    );
+  });
+
+  it('Finding 2: Detects /blogs missing anchor links when both slugs occur in plain text/JSON/scripts without <a> href anchors', async () => {
+    const routeMap = createPassingRouteMap();
+    routeMap.set(`${VALID_ORIGIN}/blogs`, {
+      status: 200,
+      html: createMockHtml({
+        title: 'Dashapatmaja Solutions Pvt Ltd | Insights',
+        h1: 'Thinking from the work of building brands.',
+        canonical: `${VALID_ORIGIN}/blogs`,
+        bodyContent: `
+          <script>
+            const articles = [
+              "/blogs/fssai-labelling-requirements-checklist-2026",
+              "/blogs/legal-metrology-packaged-commodity-rules-india"
+            ];
+          </script>
+          <p>Read about fssai-labelling-requirements-checklist-2026 and legal-metrology-packaged-commodity-rules-india</p>
+        `,
+      }),
+      url: `${VALID_ORIGIN}/blogs`,
+    });
+    const fetch = createMockFetch(routeMap);
+
+    const result = await verifyDeployment({
+      origin: VALID_ORIGIN,
+      fetch,
+    });
+
+    expect(result.ok).toBe(false);
+    expect(result.failures).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          path: '/blogs',
+          name: 'Insights listing links to current article fssai-labelling-requirements-checklist-2026',
+          message: expect.stringMatching(/missing anchor <a href> link/i),
+        }),
+        expect.objectContaining({
+          path: '/blogs',
+          name: 'Insights listing links to current article legal-metrology-packaged-commodity-rules-india',
+          message: expect.stringMatching(/missing anchor <a href> link/i),
+        }),
+      ]),
+    );
+  });
+
+  it('Finding 3: Rejects near-match not-max-age=31536000 during verifyDeployment on HTTPS', async () => {
+    const routeMap = createPassingRouteMap();
+    routeMap.set(`${VALID_ORIGIN}/`, {
+      ...routeMap.get(`${VALID_ORIGIN}/`),
+      headers: {
+        'content-security-policy': "default-src 'self'",
+        'strict-transport-security': 'not-max-age=31536000; includeSubDomains',
+        'x-frame-options': 'DENY',
+      },
+    });
+    const fetch = createMockFetch(routeMap);
+
+    const result = await verifyDeployment({
+      origin: VALID_ORIGIN,
+      fetch,
+    });
+
+    expect(result.ok).toBe(false);
+    expect(result.failures).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          path: '/',
+          name: 'Security Header: Strict-Transport-Security',
+          message: expect.stringMatching(/missing max-age directive/i),
+        }),
+      ]),
+    );
+  });
+
+  it('Finding 3: Rejects malformed max-age=31536000garbage during verifyDeployment on HTTPS', async () => {
+    const routeMap = createPassingRouteMap();
+    routeMap.set(`${VALID_ORIGIN}/`, {
+      ...routeMap.get(`${VALID_ORIGIN}/`),
+      headers: {
+        'content-security-policy': "default-src 'self'",
+        'strict-transport-security': 'max-age=31536000garbage; includeSubDomains',
+        'x-frame-options': 'DENY',
+      },
+    });
+    const fetch = createMockFetch(routeMap);
+
+    const result = await verifyDeployment({
+      origin: VALID_ORIGIN,
+      fetch,
+    });
+
+    expect(result.ok).toBe(false);
+    expect(result.failures).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          path: '/',
+          name: 'Security Header: Strict-Transport-Security',
+          message: expect.stringMatching(/max-age directive is malformed/i),
+        }),
+      ]),
+    );
+  });
+});
+
+describe('Helper functions and constants unit tests', () => {
+  it('extractTitle and extractH1 extract and decode text properly', () => {
+    const html = '<html><head><title>Test &amp; Example</title></head><body><h1>Heading &lt;1&gt;</h1></body></html>';
+    expect(extractTitle(html)).toBe('Test & Example');
+    expect(extractH1(html)).toBe('Heading <1>');
+  });
+
+  it('isHomepageHeading verifies combined H1 and individual heading variations', () => {
+    expect(isHomepageHeading(HOMEPAGE_H1)).toBe(true);
+    expect(isHomepageHeading('We build consumer brands.')).toBe(true);
+    expect(isHomepageHeading('We build consumer brands. We help businesses build theirs.')).toBe(true);
+    expect(isHomepageHeading('Unrelated Heading')).toBe(false);
+    expect(isHomepageHeading(null)).toBe(false);
+    expect(HOMEPAGE_HEADINGS).toHaveLength(2);
+  });
+
+  it('isHomepageFallbackHtml identifies root canonical or homepage heading or title', () => {
+    expect(isHomepageFallbackHtml({
+      html: '<h1>We build consumer brands. We help businesses build theirs.</h1>',
+      canonical: `${VALID_ORIGIN}/blogs`,
+      normalizedOrigin: VALID_ORIGIN,
+    })).toBe(true);
+
+    expect(isHomepageFallbackHtml({
+      html: '<h1>Thinking from the work of building brands.</h1>',
+      canonical: `${VALID_ORIGIN}/`,
+      normalizedOrigin: VALID_ORIGIN,
+    })).toBe(true);
+
+    expect(isHomepageFallbackHtml({
+      html: '<title>Dashapatmaja Solutions Pvt Ltd | Consumer Brand Building & Growth</title><h1>Insights</h1>',
+      canonical: `${VALID_ORIGIN}/blogs`,
+      normalizedOrigin: VALID_ORIGIN,
+    })).toBe(true);
+
+    expect(isHomepageFallbackHtml({
+      html: '<title>Insights</title><h1>Insights</h1>',
+      canonical: `${VALID_ORIGIN}/blogs`,
+      normalizedOrigin: VALID_ORIGIN,
+    })).toBe(false);
   });
 });

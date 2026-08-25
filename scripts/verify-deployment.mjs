@@ -25,11 +25,13 @@ export const REMOVED_ARTICLES = [
   'from-packaging-to-purchase',
 ];
 
+export const HOMEPAGE_H1 = 'We build consumer brands. We help businesses build theirs.';
 export const HOMEPAGE_HEADINGS = [
   'We build consumer brands.',
+  'We help businesses build theirs.',
 ];
 
-const decodeHtmlEntities = (value = '') =>
+export const decodeHtmlEntities = (value = '') =>
   value
     .replace(/&amp;/g, '&')
     .replace(/&lt;/g, '<')
@@ -37,12 +39,12 @@ const decodeHtmlEntities = (value = '') =>
     .replace(/&quot;/g, '"')
     .replace(/&#39;/g, "'");
 
-const extractTitle = (html = '') => {
+export const extractTitle = (html = '') => {
   const match = html.match(/<title\b[^>]*>([\s\S]*?)<\/title>/i);
   return match ? decodeHtmlEntities(match[1].trim()) : null;
 };
 
-const extractH1 = (html = '') => {
+export const extractH1 = (html = '') => {
   const match = html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/i);
   if (!match) return null;
   return decodeHtmlEntities(
@@ -50,17 +52,55 @@ const extractH1 = (html = '') => {
   );
 };
 
-const extractCanonical = (html = '') => {
+export const extractCanonical = (html = '') => {
   const match = html.match(/<link\b(?=[^>]*rel=["']canonical["'])(?=[^>]*href=["']([^"']*)["'])[^>]*>/i);
   return match ? match[1].trim() : null;
 };
 
-const extractOgType = (html = '') => {
+export const extractOgType = (html = '') => {
   const match = html.match(/<meta\b(?=[^>]*property=["']og:type["'])(?=[^>]*content=["']([^"']*)["'])[^>]*>/i);
   return match ? match[1].trim() : null;
 };
 
-const extractJsonLdObjects = (html = '') => {
+export const extractAnchorHrefs = (html = '') => {
+  const matches = html.matchAll(/<a\b(?=[^>]*\bhref=["']([^"']*)["'])[^>]*>/gi);
+  const hrefs = [];
+  for (const match of matches) {
+    if (typeof match[1] === 'string') {
+      hrefs.push(match[1].trim());
+    }
+  }
+  return hrefs;
+};
+
+export const hasArticleAnchor = (html = '', targetPath = '', origin = '') => {
+  const hrefs = extractAnchorHrefs(html);
+  const normalizedTargetPath = targetPath.length > 1 ? targetPath.replace(/\/+$/, '') : targetPath;
+  let originObj = null;
+  if (origin) {
+    try {
+      originObj = new URL(origin);
+    } catch {
+      originObj = null;
+    }
+  }
+
+  return hrefs.some((href) => {
+    try {
+      const base = origin || 'http://localhost';
+      const parsed = new URL(href, base);
+      if (originObj && parsed.origin !== originObj.origin) {
+        return false;
+      }
+      const normalized = parsed.pathname.length > 1 ? parsed.pathname.replace(/\/+$/, '') : parsed.pathname;
+      return normalized === normalizedTargetPath;
+    } catch {
+      return false;
+    }
+  });
+};
+
+export const extractJsonLdObjects = (html = '') => {
   const matches = html.matchAll(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi);
   const objects = [];
   for (const match of matches) {
@@ -78,6 +118,98 @@ const extractJsonLdObjects = (html = '') => {
     }
   }
   return objects;
+};
+
+export const isHomepageHeading = (h1) => {
+  if (!h1 || typeof h1 !== 'string') return false;
+  const normalized = h1.replace(/\s+/g, ' ').trim();
+  return (
+    normalized === HOMEPAGE_H1 ||
+    (normalized.includes('We build consumer brands.') &&
+      normalized.includes('We help businesses build theirs.')) ||
+    normalized === 'We build consumer brands.'
+  );
+};
+
+export const isHomepageFallbackHtml = ({ html, canonical, normalizedOrigin } = {}) => {
+  const h1 = extractH1(html);
+  const title = extractTitle(html);
+  const isRootCanonical = Boolean(
+    canonical && (canonical === `${normalizedOrigin}/` || canonical === normalizedOrigin),
+  );
+  const hasHomeHeading = isHomepageHeading(h1);
+  const hasHomeTitle = Boolean(
+    title && (
+      title.includes('Consumer Brand Building & Growth') ||
+      title.includes('We build consumer brands.')
+    ),
+  );
+  return Boolean(isRootCanonical || hasHomeHeading || hasHomeTitle);
+};
+
+export const parseHstsHeader = (headerValue = '') => {
+  if (!headerValue || typeof headerValue !== 'string' || !headerValue.trim()) {
+    return {
+      valid: false,
+      maxAge: null,
+      message: 'Missing required Strict-Transport-Security response header for HTTPS origin',
+    };
+  }
+
+  const directives = headerValue.split(';').map((d) => d.trim()).filter(Boolean);
+  let maxAge = null;
+  let hasMaxAgeDirective = false;
+
+  for (const directive of directives) {
+    const eqIdx = directive.indexOf('=');
+    if (eqIdx !== -1) {
+      const name = directive.slice(0, eqIdx).trim().toLowerCase();
+      const value = directive.slice(eqIdx + 1).trim();
+      if (name === 'max-age') {
+        hasMaxAgeDirective = true;
+        if (!/^\d+$/.test(value)) {
+          return {
+            valid: false,
+            maxAge: null,
+            message: `Strict-Transport-Security max-age directive is malformed (got: "${directive}")`,
+          };
+        }
+        maxAge = Number.parseInt(value, 10);
+      }
+    } else {
+      const name = directive.trim().toLowerCase();
+      if (name === 'max-age') {
+        hasMaxAgeDirective = true;
+        return {
+          valid: false,
+          maxAge: null,
+          message: 'Strict-Transport-Security max-age directive missing value',
+        };
+      }
+    }
+  }
+
+  if (!hasMaxAgeDirective) {
+    return {
+      valid: false,
+      maxAge: null,
+      message: `Strict-Transport-Security header missing max-age directive (got: "${headerValue}")`,
+    };
+  }
+
+  if (maxAge === 0 || maxAge === null || maxAge <= 0) {
+    return {
+      valid: false,
+      maxAge,
+      message: `Strict-Transport-Security max-age must be strictly positive integer (got: max-age=${maxAge})`,
+    };
+  }
+
+  return {
+    valid: true,
+    maxAge,
+    message: `Strict-Transport-Security header valid (max-age=${maxAge})`,
+  };
 };
 
 export function parseCliArgs(argv = process.argv.slice(2)) {
@@ -170,30 +302,12 @@ function verifySecurityHeaders({
   });
 
   if (isHttps) {
-    let hasValidHsts = false;
-    let hstsMessage = '';
-    if (!hstsHeader || !hstsHeader.trim()) {
-      hstsMessage = 'Missing required Strict-Transport-Security response header for HTTPS origin';
-    } else {
-      const maxAgeMatch = hstsHeader.match(/max-age\s*=\s*(\d+)/i);
-      if (!maxAgeMatch) {
-        hstsMessage = `Strict-Transport-Security header missing max-age directive (got: "${hstsHeader}")`;
-      } else {
-        const maxAge = Number.parseInt(maxAgeMatch[1], 10);
-        if (maxAge > 0) {
-          hasValidHsts = true;
-          hstsMessage = `Strict-Transport-Security header valid (max-age=${maxAge})`;
-        } else {
-          hstsMessage = `Strict-Transport-Security max-age must be strictly positive (got: max-age=${maxAge})`;
-        }
-      }
-    }
-
+    const hstsResult = parseHstsHeader(hstsHeader);
     recordCheck({
       name: 'Security Header: Strict-Transport-Security',
       path: reqPath,
-      passed: hasValidHsts,
-      message: hstsMessage,
+      passed: hstsResult.valid,
+      message: hstsResult.message,
     });
   }
 
@@ -320,14 +434,14 @@ export async function verifyDeployment({
     });
 
     const h1 = extractH1(html);
-    const hasHomeH1 = h1 === 'We build consumer brands.';
+    const hasHomeH1 = isHomepageHeading(h1);
     recordCheck({
       name: 'Homepage heading identity',
       path: '/',
       passed: hasHomeH1,
       message: hasHomeH1
-        ? 'Homepage heading verified ("We build consumer brands.")'
-        : `Expected homepage H1 "We build consumer brands.", got "${h1 ?? 'missing'}"`,
+        ? `Homepage heading verified ("${HOMEPAGE_H1}")`
+        : `Expected homepage H1 "${HOMEPAGE_H1}", got "${h1 ?? 'missing'}"`,
     });
   }
 
@@ -370,12 +484,11 @@ export async function verifyDeployment({
     const h1 = extractH1(html);
     const canonical = extractCanonical(html);
 
-    const isHomepageFallback = (
-      canonical === `${normalizedOrigin}/` ||
-      canonical === normalizedOrigin ||
-      h1 === 'We build consumer brands.' ||
-      title?.includes('We build consumer brands.')
-    );
+    const isHomepageFallback = isHomepageFallbackHtml({
+      html,
+      canonical,
+      normalizedOrigin,
+    });
 
     const hasInsightsTitle = Boolean(
       title &&
@@ -417,14 +530,14 @@ export async function verifyDeployment({
     });
 
     for (const article of EXPECTED_ARTICLES) {
-      const hasArticleLink = html.includes(article.path) || html.includes(article.slug);
+      const hasLink = hasArticleAnchor(html, article.path, normalizedOrigin);
       recordCheck({
         name: `Insights listing links to current article ${article.slug}`,
         path: '/blogs',
-        passed: hasArticleLink,
-        message: hasArticleLink
-          ? `Listing contains link to ${article.slug}`
-          : `/blogs missing link to current article ${article.slug}`,
+        passed: hasLink,
+        message: hasLink
+          ? `Listing contains anchor link to ${article.path}`
+          : `/blogs missing anchor <a href> link to current article ${article.path}`,
       });
     }
 
@@ -485,12 +598,11 @@ export async function verifyDeployment({
     const ogType = extractOgType(html);
     const jsonLdObjects = extractJsonLdObjects(html);
 
-    const isHomepageFallback = (
-      canonical === `${normalizedOrigin}/` ||
-      canonical === normalizedOrigin ||
-      title?.includes('We build consumer brands.') ||
-      h1 === 'We build consumer brands.'
-    );
+    const isHomepageFallback = isHomepageFallbackHtml({
+      html,
+      canonical,
+      normalizedOrigin,
+    });
 
     recordCheck({
       name: `Article ${article.slug} rejects homepage fallback`,
@@ -595,10 +707,13 @@ export async function verifyDeployment({
 
     const title = extractTitle(html);
     const h1 = extractH1(html);
-    const isHomepageHtml = (
-      h1 === 'We build consumer brands.' ||
-      title?.includes('We build consumer brands.')
-    );
+    const canonical = extractCanonical(html);
+
+    const isHomepageHtml = isHomepageFallbackHtml({
+      html,
+      canonical,
+      normalizedOrigin,
+    });
 
     recordCheck({
       name: 'Unknown route does not return homepage body',
