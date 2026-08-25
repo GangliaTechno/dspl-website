@@ -130,6 +130,10 @@ describe('BlogPost', () => {
         type: 'article',
         robots: 'index, follow',
         title: 'A structured brand system | Dashapatmaja Solutions Pvt Ltd',
+        imageAlt:
+          'Dashapatmaja Solutions Pvt Ltd — consumer brand building and growth',
+        imageWidth: 1200,
+        imageHeight: 630,
         structuredData: expect.objectContaining({
           '@type': 'BlogPosting',
           headline: 'A structured brand system',
@@ -138,5 +142,101 @@ describe('BlogPost', () => {
         }),
       }),
     );
+  });
+
+  it('normalizes a projected SEO image and uses its dimensions with a truthful title alt', () => {
+    const metadata = createBlogPostMetadata(
+      {
+        ...mockPost('brand-systems'),
+        mainImage: {
+          alt: 'Packaging and product study for a consumer brand',
+          asset: {
+            url: 'https://cdn.example.com/brand-systems.jpg',
+            metadata: { dimensions: { width: 1200, height: 800 } },
+          },
+        },
+        seo: {
+          ogImage: {
+            asset: {
+              url: 'https://cdn.example.com/brand-systems-share.jpg',
+              metadata: { dimensions: { width: 1600, height: 900 } },
+            },
+          },
+        },
+      },
+      true,
+    );
+
+    expect(metadata).toMatchObject({
+      image: 'https://cdn.example.com/brand-systems-share.jpg',
+      imageAlt: 'A structured brand system',
+      imageWidth: 1600,
+      imageHeight: 900,
+      structuredData: expect.objectContaining({
+        image: 'https://cdn.example.com/brand-systems-share.jpg',
+      }),
+    });
+  });
+
+  it('uses projected main-image alt text and preserves legacy string image URLs', () => {
+    const projectedMainImage = createBlogPostMetadata(
+      {
+        ...mockPost('brand-systems'),
+        mainImage: {
+          alt: 'Packaging and product study for a consumer brand',
+          asset: {
+            url: '/images/brand-systems.jpg',
+            metadata: { dimensions: { width: 1200, height: 800 } },
+          },
+        },
+      },
+      true,
+    );
+    const legacySeoImage = createBlogPostMetadata(
+      {
+        ...mockPost('legacy-image'),
+        seo: {
+          ogImage: 'https://cdn.example.com/legacy-share.jpg',
+          ogImageAlt: 'Legacy editorial share image',
+        },
+      },
+      true,
+    );
+
+    expect(projectedMainImage).toMatchObject({
+      image: '/images/brand-systems.jpg',
+      imageAlt: 'Packaging and product study for a consumer brand',
+      imageWidth: 1200,
+      imageHeight: 800,
+      structuredData: expect.objectContaining({
+        image: 'https://dashapatmaja.in/images/brand-systems.jpg',
+      }),
+    });
+    expect(legacySeoImage).toMatchObject({
+      image: 'https://cdn.example.com/legacy-share.jpg',
+      imageAlt: 'Legacy editorial share image',
+      structuredData: expect.objectContaining({
+        image: 'https://cdn.example.com/legacy-share.jpg',
+      }),
+    });
+    expect(legacySeoImage).not.toHaveProperty('imageWidth');
+    expect(legacySeoImage).not.toHaveProperty('imageHeight');
+  });
+
+  it.each([
+    ['SEO', { seo: { ogImage: { _type: 'image', asset: { _ref: 'image-unresolved' } } } }],
+    ['main', { mainImage: { _type: 'image', asset: { _ref: 'image-unresolved' } } }],
+  ])('safely falls back to the homepage image for an unresolved %s image reference', (_label, imageFields) => {
+    const metadata = createBlogPostMetadata({ ...mockPost('unresolved-image'), ...imageFields }, true);
+
+    expect(metadata).toMatchObject({
+      image: 'https://dashapatmaja.in/og-home-2026.jpg',
+      imageAlt: 'Dashapatmaja Solutions Pvt Ltd — consumer brand building and growth',
+      imageWidth: 1200,
+      imageHeight: 630,
+      structuredData: expect.objectContaining({
+        image: 'https://dashapatmaja.in/og-home-2026.jpg',
+      }),
+    });
   });
 });

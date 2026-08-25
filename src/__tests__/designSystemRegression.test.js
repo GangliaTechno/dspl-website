@@ -513,9 +513,39 @@ describe('approved design-system corrections', () => {
     expect(marketingPage).toContain('marketing-primary-mobile.webp');
     expect(marketingPage).not.toContain('Marketing_hero_section');
     expect(routeMetadata).toContain(
-      'Dashapatmaja Solutions Pvt Ltd develops consumer brands and provides branding, marketing, and e-commerce services.',
+      'DSPL builds its own consumer brands and helps businesses grow through coordinated branding, marketing, e-commerce and compliance support.',
     );
     expect(routeMetadata).not.toContain('Indian consumer businesses');
+  });
+
+  it('keeps the homepage social-preview asset deterministic and versioned', () => {
+    const generator = readSource('scripts/generate-og-card.mjs');
+    const packageJson = JSON.parse(readSource('package.json'));
+    const siteConfig = readSource('src/content/siteConfig.js');
+    const prerenderVerifier = readSource('scripts/verify-prerender.mjs');
+
+    expect(packageJson.scripts['generate:og']).toBe('node scripts/generate-og-card.mjs');
+    expect(packageJson.scripts['verify:og']).toBe('node scripts/generate-og-card.mjs --check');
+    expect(packageJson.scripts['verify:html']).toContain('npm run verify:og');
+    expect(generator).toContain('home-rotation-03-1440.webp');
+    expect(generator).toContain("'public', 'logo.png'");
+    expect(generator).toContain('og-home-2026.jpg');
+    expect(generator).toContain('geist-latin-wght-normal.woff2');
+    expect(packageJson.devDependencies.fontkit).toBe('2.0.4');
+    expect(generator).toContain("import * as fontkit from 'fontkit'");
+    expect(generator).toContain('fontkit.create');
+    expect(generator).toContain('font.layout');
+    expect(generator).toContain('<path');
+    expect(generator).not.toContain('<text');
+    expect(generator).not.toContain('Segoe UI');
+    expect(generator).not.toContain('Arial');
+    expect(generator).toContain("process.argv.includes('--check')");
+    expect(generator).toContain('sharp');
+    expect(siteConfig).toContain('https://dashapatmaja.in/og-home-2026.jpg');
+    expect(prerenderVerifier).toContain('https://dashapatmaja.in/og-home-2026.jpg');
+    expect(prerenderVerifier).toContain('og:image:width');
+    expect(prerenderVerifier).toContain('og:image:height');
+    expect(prerenderVerifier).toContain('twitter:image:alt');
   });
 
 

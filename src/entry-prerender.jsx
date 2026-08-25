@@ -43,8 +43,41 @@ const getEagerArticleContent = (slug = '') => {
   return eagerArticles[key]?.default || eagerArticles[key] || null;
 };
 
-const createHeadElements = (metadata) =>
-  new Set([
+const createHeadElements = (metadata) => {
+  const imageAlt = metadata.imageAlt || SITE_CONFIG.defaultOgImageAlt;
+  const imageElements = [
+    {
+      type: 'meta',
+      props: { property: 'og:image', content: metadata.image },
+    },
+  ];
+
+  if (metadata.imageWidth != null) {
+    imageElements.push({
+      type: 'meta',
+      props: {
+        property: 'og:image:width',
+        content: String(metadata.imageWidth),
+      },
+    });
+  }
+
+  if (metadata.imageHeight != null) {
+    imageElements.push({
+      type: 'meta',
+      props: {
+        property: 'og:image:height',
+        content: String(metadata.imageHeight),
+      },
+    });
+  }
+
+  imageElements.push({
+    type: 'meta',
+    props: { property: 'og:image:alt', content: imageAlt },
+  });
+
+  return new Set([
     {
       type: 'link',
       props: {
@@ -81,10 +114,7 @@ const createHeadElements = (metadata) =>
         content: `${SITE_URL}${metadata.canonical}`,
       },
     },
-    {
-      type: 'meta',
-      props: { property: 'og:image', content: metadata.image },
-    },
+    ...imageElements,
     {
       type: 'meta',
       props: { property: 'og:site_name', content: SITE_CONFIG.siteName },
@@ -113,6 +143,10 @@ const createHeadElements = (metadata) =>
       props: { name: 'twitter:image', content: metadata.image },
     },
     {
+      type: 'meta',
+      props: { name: 'twitter:image:alt', content: imageAlt },
+    },
+    {
       type: 'script',
       props: {
         type: 'application/ld+json',
@@ -121,6 +155,7 @@ const createHeadElements = (metadata) =>
       children: JSON.stringify(metadata.structuredData),
     },
   ]);
+};
 
 export async function prerender(data) {
   const pathname = new URL(data.url, SITE_URL).pathname;

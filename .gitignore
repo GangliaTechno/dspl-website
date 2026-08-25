@@ -39,6 +39,9 @@ graphify-out/
 # Local Git worktrees
 .worktrees/
 
+# Sanity Studio generated runtime
+.sanity/
+
 # Tooling and archives
 .impeccable/
 *.zip

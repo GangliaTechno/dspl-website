@@ -5,6 +5,9 @@ import { fileURLToPath } from 'node:url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const rootDir = path.resolve(__dirname, '..');
+const HOMEPAGE_OG_IMAGE = 'https://dashapatmaja.in/og-home-2026.jpg';
+const HOMEPAGE_OG_IMAGE_ALT =
+  'Dashapatmaja Solutions Pvt Ltd — consumer brand building and growth';
 
 const baseRoutes = [
   { route: '', heading: 'We build consumer brands.' },
@@ -58,6 +61,15 @@ const decodeHtmlText = (value) =>
     .replace(/&gt;/g, '>')
     .replace(/&quot;/g, '"')
     .replace(/&#39;/g, "'");
+
+const escapeRegExp = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const getMetaContent = (html, attribute, value) => {
+  const pattern = new RegExp(
+    `<meta\\b(?=[^>]*${attribute}=["']${escapeRegExp(value)}["'])(?=[^>]*content=["']([^"']*)["'])[^>]*>`,
+    'i',
+  );
+  return html.match(pattern)?.[1] ?? null;
+};
 
 const verifyHeadUniqueness = (html, label) => {
   const checkSingle = (regex, tagName) => {
@@ -182,6 +194,25 @@ for (const { route, heading, type, post } of routes) {
   }
   if (!/<meta\b[^>]*name=["']robots["'][^>]*content=["']index, follow["'][^>]*>/i.test(html)) {
     failures.push(`${label}: missing index, follow robots metadata`);
+  }
+
+  if (route === '') {
+    const homepageMeta = [
+      ['property', 'og:image', HOMEPAGE_OG_IMAGE],
+      ['property', 'og:image:width', '1200'],
+      ['property', 'og:image:height', '630'],
+      ['property', 'og:image:alt', HOMEPAGE_OG_IMAGE_ALT],
+      ['name', 'twitter:image:alt', HOMEPAGE_OG_IMAGE_ALT],
+    ];
+
+    for (const [attribute, name, expected] of homepageMeta) {
+      const actual = getMetaContent(html, attribute, name);
+      if (actual !== expected) {
+        failures.push(
+          `${label}: expected ${attribute}=${name} content "${expected}", got "${actual ?? 'missing'}"`,
+        );
+      }
+    }
   }
   if (type === 'article') {
     if (!/<meta\b[^>]*property=["']og:type["'][^>]*content=["']article["'][^>]*>/i.test(html)) {

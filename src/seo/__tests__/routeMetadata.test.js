@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { SITE_CONFIG } from '../../content/siteConfig';
 import {
   getRouteMetadata,
   NOT_FOUND_METADATA,
@@ -98,7 +99,26 @@ describe('route metadata', () => {
   it('defines the approved Home description without a geographic qualifier', () => {
     expect(getRouteMetadata('/')).toMatchObject({
       description:
-        'Dashapatmaja Solutions Pvt Ltd develops consumer brands and provides branding, marketing, and e-commerce services.',
+        'DSPL builds its own consumer brands and helps businesses grow through coordinated branding, marketing, e-commerce and compliance support.',
+    });
+  });
+
+  it('defines the current homepage title and share-card defaults', () => {
+    expect(SITE_CONFIG).toMatchObject({
+      defaultOgImage: 'https://dashapatmaja.in/og-home-2026.jpg',
+      defaultOgImageAlt:
+        'Dashapatmaja Solutions Pvt Ltd — consumer brand building and growth',
+      defaultOgImageWidth: 1200,
+      defaultOgImageHeight: 630,
+    });
+    expect(getRouteMetadata('/')).toMatchObject({
+      title: 'Dashapatmaja Solutions Pvt Ltd | Consumer Brand Building & Growth',
+      description:
+        'DSPL builds its own consumer brands and helps businesses grow through coordinated branding, marketing, e-commerce and compliance support.',
+      image: SITE_CONFIG.defaultOgImage,
+      imageAlt: SITE_CONFIG.defaultOgImageAlt,
+      imageWidth: 1200,
+      imageHeight: 630,
     });
   });
 

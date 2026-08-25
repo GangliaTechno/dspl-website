@@ -3,6 +3,30 @@ import { SITE_CONFIG } from '../content/siteConfig';
 
 export const normalizeBlogSlug = (value = '') => value.trim().toLowerCase();
 
+const firstNonEmptyText = (...values) =>
+  values.find((value) => typeof value === 'string' && value.trim())?.trim();
+
+const normalizeImageCandidate = (value) => {
+  if (typeof value === 'string') {
+    const url = value.trim();
+    return url ? { url, value: null } : null;
+  }
+
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return null;
+
+  const url = typeof value.asset?.url === 'string' ? value.asset.url.trim() : '';
+  return url ? { url, value } : null;
+};
+
+const positiveDimension = (value) =>
+  typeof value === 'number' && Number.isFinite(value) && value > 0 ? value : undefined;
+
+const normalizeAbsoluteImageUrl = (siteUrl, image) => {
+  if (/^https?:\/\//i.test(image)) return image;
+  if (image.startsWith('//')) return `https:${image}`;
+  return `${siteUrl}${image.startsWith('/') ? image : `/${image}`}`;
+};
+
 /**
  * Creates dynamic SEO metadata and BlogPosting JSON-LD structured data for an article.
  *
@@ -17,7 +41,29 @@ export const createBlogPostMetadata = (post, isBlogOpen = true) => {
     ? `${post.seo.metaTitle} | ${SITE_CONFIG.siteName}`
     : `${post.title} | ${SITE_CONFIG.siteName}`;
   const description = post.seo?.metaDescription || post.description;
-  const image = post.seo?.ogImage || post.mainImage?.asset?.url || SITE_CONFIG.defaultOgImage;
+  const seoImage = normalizeImageCandidate(post.seo?.ogImage);
+  const mainImage = normalizeImageCandidate(post.mainImage);
+  const selectedImage = seoImage || mainImage;
+  const image = selectedImage?.url || SITE_CONFIG.defaultOgImage;
+
+  const metadata = { ...getRouteMetadata('/blogs') };
+  if (image === SITE_CONFIG.defaultOgImage) {
+    metadata.imageAlt = SITE_CONFIG.defaultOgImageAlt;
+    metadata.imageWidth = SITE_CONFIG.defaultOgImageWidth;
+    metadata.imageHeight = SITE_CONFIG.defaultOgImageHeight;
+  } else {
+    metadata.imageAlt = selectedImage === seoImage
+      ? firstNonEmptyText(post.seo?.ogImageAlt, post.seo?.imageAlt, post.title)
+      : firstNonEmptyText(post.mainImage?.alt, post.title);
+    delete metadata.imageWidth;
+    delete metadata.imageHeight;
+
+    const dimensions = selectedImage?.value?.asset?.metadata?.dimensions;
+    const width = positiveDimension(dimensions?.width);
+    const height = positiveDimension(dimensions?.height);
+    if (width !== undefined) metadata.imageWidth = width;
+    if (height !== undefined) metadata.imageHeight = height;
+  }
 
   const structuredData = {
     '@context': 'https://schema.org',
@@ -33,11 +79,11 @@ export const createBlogPostMetadata = (post, isBlogOpen = true) => {
     },
     articleSection: post.category,
     publisher: organizationStructuredData,
-    image: image.startsWith('http') ? image : `${siteUrl}${image}`,
+    image: normalizeAbsoluteImageUrl(siteUrl, image),
   };
 
   return {
-    ...getRouteMetadata('/blogs'),
+    ...metadata,
     title,
     description,
     canonical: canonicalPath,

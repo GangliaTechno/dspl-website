@@ -5,6 +5,12 @@ import { createBlogPostMetadata, normalizeBlogSlug } from '../pages/blogPostMode
 
 const SITE_URL = SITE_CONFIG.siteUrl;
 const DEFAULT_IMAGE = SITE_CONFIG.defaultOgImage;
+const DEFAULT_IMAGE_METADATA = {
+  image: DEFAULT_IMAGE,
+  imageAlt: SITE_CONFIG.defaultOgImageAlt,
+  imageWidth: SITE_CONFIG.defaultOgImageWidth,
+  imageHeight: SITE_CONFIG.defaultOgImageHeight,
+};
 
 export const PUBLIC_ROUTES = [
   '/',
@@ -53,10 +59,9 @@ export const organizationStructuredData = {
 
 const routeMetadata = {
   '/': {
-    title:
-      'Dashapatmaja Solutions Pvt Ltd | Branding, Marketing & E-commerce',
+    title: 'Dashapatmaja Solutions Pvt Ltd | Consumer Brand Building & Growth',
     description:
-      'Dashapatmaja Solutions Pvt Ltd develops consumer brands and provides branding, marketing, and e-commerce services.',
+      'DSPL builds its own consumer brands and helps businesses grow through coordinated branding, marketing, e-commerce and compliance support.',
   },
   '/about': {
     title: 'Dashapatmaja Solutions Pvt Ltd | About Us',
@@ -119,7 +124,7 @@ for (const path of PUBLIC_ROUTES) {
   routeMetadata[path] = Object.freeze({
     ...routeMetadata[path],
     canonical: path,
-    image: DEFAULT_IMAGE,
+    ...DEFAULT_IMAGE_METADATA,
     type: 'website',
     robots: 'index, follow',
     structuredData: organizationStructuredData,
@@ -129,7 +134,7 @@ for (const path of PUBLIC_ROUTES) {
 routeMetadata['/blogs'] = Object.freeze({
   ...routeMetadata['/blogs'],
   canonical: '/blogs',
-  image: DEFAULT_IMAGE,
+  ...DEFAULT_IMAGE_METADATA,
   type: 'website',
   robots: blogsEnabled ? 'index, follow' : 'noindex, follow',
   structuredData: organizationStructuredData,
@@ -139,7 +144,7 @@ export const NOT_FOUND_METADATA = Object.freeze({
   title: 'Dashapatmaja Solutions Pvt Ltd | Page Not Found',
   description: 'The page you are looking for does not exist or has been moved.',
   canonical: '/404.html',
-  image: DEFAULT_IMAGE,
+  ...DEFAULT_IMAGE_METADATA,
   type: 'website',
   robots: 'noindex, follow',
   structuredData: organizationStructuredData,

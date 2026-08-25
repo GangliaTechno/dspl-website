@@ -70,4 +70,54 @@ describe('useSEO', () => {
       'LocalBusiness',
     ]);
   });
+
+  it('emits share-card dimensions and alt text for the homepage', () => {
+    render(<SEOProbe metadata={getRouteMetadata('/')} />);
+
+    expect(document.querySelector('meta[property="og:image"]'))
+      .toHaveAttribute('content', 'https://dashapatmaja.in/og-home-2026.jpg');
+    expect(document.querySelector('meta[property="og:image:width"]'))
+      .toHaveAttribute('content', '1200');
+    expect(document.querySelector('meta[property="og:image:height"]'))
+      .toHaveAttribute('content', '630');
+    expect(document.querySelector('meta[property="og:image:alt"]'))
+      .toHaveAttribute(
+        'content',
+        'Dashapatmaja Solutions Pvt Ltd — consumer brand building and growth',
+      );
+    expect(document.querySelector('meta[name="twitter:image:alt"]'))
+      .toHaveAttribute(
+        'content',
+        'Dashapatmaja Solutions Pvt Ltd — consumer brand building and growth',
+      );
+  });
+
+  it('removes stale optional image dimensions when navigating to a custom article image', () => {
+    const homepageMetadata = getRouteMetadata('/');
+    const articleMetadata = {
+      ...getRouteMetadata('/blogs'),
+      canonical: '/blogs/brand-systems',
+      image: 'https://cdn.example.com/brand-systems-share.jpg',
+      imageAlt: 'Approved brand systems editorial image',
+    };
+    delete articleMetadata.imageWidth;
+    delete articleMetadata.imageHeight;
+
+    const { rerender } = render(
+      <SEOProbe metadata={homepageMetadata} />,
+    );
+    expect(document.querySelector('meta[property="og:image:width"]'))
+      .toHaveAttribute('content', '1200');
+
+    rerender(<SEOProbe metadata={articleMetadata} />);
+
+    expect(document.querySelector('meta[property="og:image"]'))
+      .toHaveAttribute('content', 'https://cdn.example.com/brand-systems-share.jpg');
+    expect(document.querySelector('meta[property="og:image:alt"]'))
+      .toHaveAttribute('content', 'Approved brand systems editorial image');
+    expect(document.querySelector('meta[property="og:image:width"]'))
+      .not.toBeInTheDocument();
+    expect(document.querySelector('meta[property="og:image:height"]'))
+      .not.toBeInTheDocument();
+  });
 });
