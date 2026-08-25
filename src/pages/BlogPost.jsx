@@ -1,5 +1,5 @@
 import './BlogPost.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useParams, Link } from 'react-router';
 import {
   blogPosts,
@@ -16,6 +16,7 @@ import {
   formatPublicationDate,
   buildHeadingMap,
 } from '../utils/publicationUtils';
+import { resolvePublicationArtwork } from '../utils/publicationArtwork';
 
 const BlogPost = ({ posts = blogPosts, initialArticle = null }) => {
   const { slug = '' } = useParams();
@@ -51,15 +52,67 @@ const BlogPost = ({ posts = blogPosts, initialArticle = null }) => {
       : null,
   );
 
+  const headings = useMemo(
+    () => summary?.headings || [],
+    [summary?.headings],
+  );
+  const [activeHeadingId, setActiveHeadingId] = useState(headings[0]?.id || '');
+
+  useEffect(() => {
+    if (!headings.length || !effectiveArticle?.body?.length) return undefined;
+    if (typeof IntersectionObserver === 'undefined') return undefined;
+
+    const headingElements = headings
+      .map((h) => document.getElementById(h.id))
+      .filter(Boolean);
+
+    if (!headingElements.length) return undefined;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleEntries = entries.filter((e) => e.isIntersecting);
+        if (visibleEntries.length > 0) {
+          const topmost = visibleEntries.reduce((prev, curr) =>
+            prev.boundingClientRect.top < curr.boundingClientRect.top ? prev : curr
+          );
+          if (topmost.target.id) {
+            setActiveHeadingId(topmost.target.id);
+          }
+        }
+      },
+      {
+        rootMargin: '-10% 0px -70% 0px',
+        threshold: 0,
+      }
+    );
+
+    for (const el of headingElements) {
+      observer.observe(el);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [normalizedSlug, effectiveArticle?.body, headings]);
+
   if (!isBlogOpen || !summary) {
     return <NotFound />;
   }
 
-  const headings = summary.headings || [];
   const { keyToId } = buildHeadingMap(effectiveArticle?.body || []);
+
+  const heroArtwork = resolvePublicationArtwork(
+    effectiveArticle?.mainImage || summary?.mainImage,
+    summary?.title,
+  );
 
   const relatedPost = posts.find(
     (p) => normalizeBlogSlug(p.slug) !== normalizedSlug,
+  );
+
+  const relatedArtwork = resolvePublicationArtwork(
+    relatedPost?.mainImage,
+    relatedPost?.title,
   );
 
   return (
@@ -123,9 +176,35 @@ const BlogPost = ({ posts = blogPosts, initialArticle = null }) => {
             </div>
           </header>
 
+          {/* Full Article Hero Artwork */}
+          {heroArtwork && (
+            <figure className="blog-post-hero">
+              <img
+                src={heroArtwork.src}
+                srcSet={heroArtwork.srcSet}
+                sizes={
+                  heroArtwork.srcSet
+                    ? '(max-width: 1199px) calc(100vw - 3rem), 1160px'
+                    : undefined
+                }
+                alt={heroArtwork.alt}
+                width={heroArtwork.width}
+                height={heroArtwork.height}
+                loading="eager"
+                fetchPriority="high"
+                decoding="async"
+              />
+              {heroArtwork.caption && (
+                <figcaption className="blog-post-hero-caption">
+                  {heroArtwork.caption}
+                </figcaption>
+              )}
+            </figure>
+          )}
+
           {/* Editorial Content Layout */}
           <div className="blog-post-layout">
-            {/* Table of Contents Sidebar (Desktop) */}
+            {/* Table of Contents Sidebar (Desktop >= 1040px) */}
             {headings.length > 0 && (
               <aside className="blog-toc-sidebar" aria-label="Table of Contents">
                 <div className="blog-toc-sticky">
@@ -134,7 +213,19 @@ const BlogPost = ({ posts = blogPosts, initialArticle = null }) => {
                     <ul className="blog-toc-list">
                       {headings.map((heading) => (
                         <li key={heading.id} className="blog-toc-item">
-                          <a href={`#${heading.id}`} className="blog-toc-link">
+                          <a
+                            href={`#${heading.id}`}
+                            className={`blog-toc-link ${
+                              activeHeadingId === heading.id
+                                ? 'blog-toc-link--active'
+                                : ''
+                            }`}
+                            aria-current={
+                              activeHeadingId === heading.id
+                                ? 'location'
+                                : undefined
+                            }
+                          >
                             {heading.text}
                           </a>
                         </li>
@@ -147,6 +238,29 @@ const BlogPost = ({ posts = blogPosts, initialArticle = null }) => {
 
             {/* Reading Column */}
             <div className="blog-reading-column">
+              {/* Native Mobile Collapsible TOC (< 1040px) */}
+              {headings.length > 0 && (
+                <details className="blog-mobile-toc">
+                  <summary className="blog-mobile-toc-summary">
+                    On this page
+                  </summary>
+                  <nav
+                    className="blog-mobile-toc-nav"
+                    aria-label="Table of Contents"
+                  >
+                    <ul className="blog-toc-list">
+                      {headings.map((heading) => (
+                        <li key={heading.id} className="blog-toc-item">
+                          <a href={`#${heading.id}`} className="blog-toc-link">
+                            {heading.text}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </nav>
+                </details>
+              )}
+
               <PortableTextBody
                 value={effectiveArticle?.body || []}
                 keyToId={keyToId}
@@ -203,16 +317,45 @@ const BlogPost = ({ posts = blogPosts, initialArticle = null }) => {
                         className="blog-related-link"
                         aria-label={`Read ${relatedPost.title}`}
                       >
-                        <p className="blog-story-meta">
-                          <span>{relatedPost.category}</span>
-                          <span>·</span>
-                          <span>{relatedPost.readingTime?.text || '5 min read'}</span>
-                        </p>
-                        <h3 className="blog-related-title">{relatedPost.title}</h3>
-                        <p className="blog-related-description">{relatedPost.description}</p>
-                        <span className="blog-story-action">
-                          Read article <span aria-hidden="true">→</span>
-                        </span>
+                        {relatedArtwork && (
+                          <div className="blog-related-artwork">
+                            <img
+                              src={relatedArtwork.src}
+                              srcSet={relatedArtwork.srcSet}
+                              sizes={
+                                relatedArtwork.srcSet
+                                  ? '(max-width: 768px) calc(100vw - 3rem), 720px'
+                                  : undefined
+                              }
+                              alt=""
+                              width={relatedArtwork.width}
+                              height={relatedArtwork.height}
+                              loading="lazy"
+                              decoding="async"
+                            />
+                          </div>
+                        )}
+                        <div className="blog-related-body">
+                          <p className="blog-related-meta">
+                            <span className="blog-related-category">
+                              {relatedPost.category}
+                            </span>
+                            <span className="blog-related-meta-divider">·</span>
+                            <span className="blog-related-readtime">
+                              {relatedPost.readingTime?.text || '5 min read'}
+                            </span>
+                          </p>
+                          <h3 className="blog-related-title">{relatedPost.title}</h3>
+                          <p className="blog-related-description">
+                            {relatedPost.description}
+                          </p>
+                          <span className="blog-related-action">
+                            Read article{' '}
+                            <span className="blog-related-arrow" aria-hidden="true">
+                              →
+                            </span>
+                          </span>
+                        </div>
                       </Link>
                     </article>
                   </div>

@@ -89,16 +89,19 @@ describe('BlogPost', () => {
     expect(screen.getAllByText('5 min read').length).toBeGreaterThanOrEqual(1);
     expect(screen.getByText('How repeatable brand decisions are documented.')).toBeInTheDocument();
 
-    // Table of Contents
-    const toc = screen.getByRole('navigation', { name: /Table of Contents/i });
-    expect(within(toc).getByRole('link', { name: 'Start with decisions' })).toHaveAttribute(
-      'href',
-      '#start-with-decisions',
-    );
-    expect(within(toc).getByRole('link', { name: 'Make it usable' })).toHaveAttribute(
-      'href',
-      '#make-it-usable',
-    );
+    // Table of Contents (both desktop and mobile navigation)
+    const tocs = screen.getAllByRole('navigation', { name: /Table of Contents/i });
+    expect(tocs).toHaveLength(2);
+    for (const toc of tocs) {
+      expect(within(toc).getByRole('link', { name: 'Start with decisions' })).toHaveAttribute(
+        'href',
+        '#start-with-decisions',
+      );
+      expect(within(toc).getByRole('link', { name: 'Make it usable' })).toHaveAttribute(
+        'href',
+        '#make-it-usable',
+      );
+    }
 
     // Reading column
     expect(screen.getByRole('heading', { level: 2, name: 'Start with decisions' })).toHaveAttribute(
@@ -227,5 +230,117 @@ describe('BlogPost', () => {
         },
       ],
     });
+  });
+
+  it('renders semantic hero figure with responsive srcSet and caption when mainImage is present', () => {
+    const postWithHero = {
+      ...mockPost('hero-post'),
+      mainImage: {
+        alt: 'Label inspection artwork',
+        caption: 'Field review checklist for packaging compliance.',
+        asset: {
+          url: '/insights/fssai-labelling-v1-1440.webp',
+          metadata: { dimensions: { width: 1440, height: 810 } },
+        },
+        responsive: {
+          640: '/insights/fssai-labelling-v1-640.webp',
+          960: '/insights/fssai-labelling-v1-960.webp',
+          1440: '/insights/fssai-labelling-v1-1440.webp',
+        },
+      },
+    };
+    const secondPost = mockPost('second-post');
+    const { container } = renderPost('hero-post', [postWithHero, secondPost]);
+
+    const hero = container.querySelector('.blog-post-hero');
+    expect(hero).toBeInTheDocument();
+
+    const img = within(hero).getByRole('img', { name: 'Label inspection artwork' });
+    expect(img).toHaveAttribute('src', '/insights/fssai-labelling-v1-1440.webp');
+    expect(img).toHaveAttribute(
+      'srcset',
+      '/insights/fssai-labelling-v1-640.webp 640w, /insights/fssai-labelling-v1-960.webp 960w, /insights/fssai-labelling-v1-1440.webp 1440w',
+    );
+    expect(img).toHaveAttribute('sizes', '(max-width: 1199px) calc(100vw - 3rem), 1160px');
+    expect(img).toHaveAttribute('loading', 'eager');
+    expect(img).toHaveAttribute('fetchpriority', 'high');
+    expect(img).toHaveAttribute('decoding', 'async');
+
+    const caption = container.querySelector('.blog-post-hero-caption');
+    expect(caption).toHaveTextContent('Field review checklist for packaging compliance.');
+  });
+
+  it('renders no hero figure when mainImage is absent', () => {
+    const postWithoutHero = mockPost('no-hero');
+    const secondPost = mockPost('second-post');
+    const { container } = renderPost('no-hero', [postWithoutHero, secondPost]);
+
+    expect(container.querySelector('.blog-post-hero')).not.toBeInTheDocument();
+  });
+
+  it('renders native mobile <details> TOC and desktop TOC with matching H2 headings and active link attributes', () => {
+    const postWithHeadings = {
+      ...mockPost('headings-post'),
+      headings: [
+        { blockKey: 'h1', id: 'section-one', text: 'Section One', level: 2 },
+        { blockKey: 'h2', id: 'section-two', text: 'Section Two', level: 2 },
+      ],
+    };
+    const secondPost = mockPost('second-post');
+    const { container } = renderPost('headings-post', [postWithHeadings, secondPost]);
+
+    // Desktop TOC
+    const desktopToc = container.querySelector('.blog-toc-sidebar');
+    expect(desktopToc).toBeInTheDocument();
+    const desktopLinks = desktopToc.querySelectorAll('.blog-toc-link');
+    expect(desktopLinks).toHaveLength(2);
+    expect(desktopLinks[0]).toHaveAttribute('href', '#section-one');
+    expect(desktopLinks[0]).toHaveAttribute('aria-current', 'location');
+    expect(desktopLinks[1]).toHaveAttribute('href', '#section-two');
+    expect(desktopLinks[1]).not.toHaveAttribute('aria-current');
+
+    // Mobile TOC
+    const mobileToc = container.querySelector('.blog-mobile-toc');
+    expect(mobileToc).toBeInTheDocument();
+    expect(mobileToc.querySelector('summary')).toHaveTextContent('On this page');
+    const mobileLinks = mobileToc.querySelectorAll('.blog-toc-link');
+    expect(mobileLinks).toHaveLength(2);
+    expect(mobileLinks[0]).toHaveTextContent('Section One');
+    expect(mobileLinks[1]).toHaveTextContent('Section Two');
+  });
+
+  it('renders related article card with responsive artwork and self-contained classes', () => {
+    const mainPost = mockPost('main-post');
+    const relatedPost = {
+      ...mockPost('related-post'),
+      title: 'Related Article Title',
+      category: 'Compliance',
+      mainImage: {
+        alt: 'Related cover image',
+        asset: {
+          url: '/insights/legal-metrology-v1-1440.webp',
+          metadata: { dimensions: { width: 1440, height: 810 } },
+        },
+        responsive: {
+          640: '/insights/legal-metrology-v1-640.webp',
+          960: '/insights/legal-metrology-v1-960.webp',
+          1440: '/insights/legal-metrology-v1-1440.webp',
+        },
+      },
+    };
+
+    const { container } = renderPost('main-post', [mainPost, relatedPost]);
+
+    const relatedCard = container.querySelector('.blog-related-card');
+    expect(relatedCard).toBeInTheDocument();
+    expect(relatedCard.querySelector('.blog-related-title')).toHaveTextContent('Related Article Title');
+    expect(relatedCard.querySelector('.blog-related-category')).toHaveTextContent('Compliance');
+
+    const relatedImg = relatedCard.querySelector('.blog-related-artwork img');
+    expect(relatedImg).toBeInTheDocument();
+    expect(relatedImg).toHaveAttribute('src', '/insights/legal-metrology-v1-1440.webp');
+    expect(relatedImg).toHaveAttribute('loading', 'lazy');
+    expect(relatedImg).toHaveAttribute('alt', '');
+    expect(relatedImg).toHaveAttribute('sizes', '(max-width: 768px) calc(100vw - 3rem), 720px');
   });
 });

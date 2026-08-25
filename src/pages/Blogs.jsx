@@ -4,22 +4,7 @@ import { blogPosts, hasPublishableBlog } from '../content/publication';
 import useSEO from '../hooks/useSEO';
 import { getRouteMetadata } from '../seo/routeMetadata';
 import { formatPublicationDate } from '../utils/publicationUtils';
-function resolveArtwork(post) {
-  const mi = post?.mainImage;
-  if (!mi?.asset?.url) return null;
-  const dimensions = mi.asset.metadata?.dimensions;
-  const responsive = mi.responsive;
-  const srcSet = responsive
-    ? `${responsive['640']} 640w, ${responsive['960']} 960w, ${responsive['1440']} 1440w`
-    : undefined;
-  return {
-    src: mi.asset.url,
-    alt: mi.alt || '',
-    width: dimensions?.width || 1440,
-    height: dimensions?.height || 810,
-    srcSet,
-  };
-}
+import { resolvePublicationArtwork } from '../utils/publicationArtwork';
 
 const StoryKicker = ({ category, readingTime }) => (
   <p className="blog-story-meta">
@@ -43,7 +28,7 @@ const StoryFooter = ({ publishedAt }) => (
 );
 
 const FeaturedStory = ({ post }) => {
-  const artwork = resolveArtwork(post);
+  const artwork = resolvePublicationArtwork(post.mainImage, post.title);
 
   return (
     <article className="blog-feature-story">
@@ -82,7 +67,7 @@ const FeaturedStory = ({ post }) => {
 };
 
 const SupportingStory = ({ post }) => {
-  const artwork = resolveArtwork(post);
+  const artwork = resolvePublicationArtwork(post.mainImage, post.title);
 
   return (
     <article className="blog-supporting-story">
@@ -117,7 +102,7 @@ const SupportingStory = ({ post }) => {
 };
 
 const ArchiveStory = ({ post }) => {
-  const artwork = resolveArtwork(post);
+  const artwork = resolvePublicationArtwork(post.mainImage, post.title);
 
   return (
     <article className="blog-archive-story">

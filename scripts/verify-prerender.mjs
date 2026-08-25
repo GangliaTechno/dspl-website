@@ -230,6 +230,15 @@ for (const { route, heading, type, post } of routes) {
     ) {
       failures.push(`${label}: og:image does not match article mainImage`);
     }
+
+    if (post?.mainImage?.asset?.url) {
+      if (!html.includes('class="blog-post-hero"')) {
+        failures.push(`${label}: missing visible <figure class="blog-post-hero"> for article with mainImage`);
+      }
+      if (!html.includes(`src="${post.mainImage.asset.url}"`)) {
+        failures.push(`${label}: visible hero img src does not match mainImage.asset.url`);
+      }
+    }
     verifyBlogPostingSchema(html, label, post);
   } else {
     verifyOrganizationSchema(html, label);
