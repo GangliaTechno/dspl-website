@@ -40,6 +40,8 @@ describe('publication gates', () => {
     expect(packagingItems).toEqual([]);
     expect(blogPosts).toHaveLength(2);
     expect(blogsEnabled).toBe(true);
+    expect(blogPosts.every((post) => Array.isArray(post.authors) && post.authors.length === 1 && post.authors[0].name === 'Pawan Shetty')).toBe(true);
+    expect(blogManifest.posts.every((post) => Array.isArray(post.authors) && post.authors.length === 1 && post.authors[0].name === 'Pawan Shetty')).toBe(true);
   });
 
   it('opens the Blog only when at least two published posts exist', () => {
@@ -59,6 +61,12 @@ describe('publication gates', () => {
       slug: 'fssai-labelling-requirements-checklist-2026',
       title: 'FSSAI Labelling Requirements for Packaged Food',
       category: 'Compliance',
+      authors: [
+        {
+          _key: 'author-pawan-shetty',
+          name: 'Pawan Shetty',
+        },
+      ],
     });
 
     const caseInsensitive = getBlogPostSummary('fssai-labelling-requirements-checklist-2026');

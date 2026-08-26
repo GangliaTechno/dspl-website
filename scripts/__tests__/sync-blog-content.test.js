@@ -1040,9 +1040,14 @@ describe('Phase 2 content model and validation pipeline', () => {
     expect(processedPosts).toHaveLength(2);
     expect(fullArticleMap.size).toBe(2);
 
+    // Both seed posts and both manifest/map records must contain exactly Pawan Shetty
+    expect(processedPosts.every((p) => Array.isArray(p.authors) && p.authors.length === 1 && p.authors[0].name === 'Pawan Shetty')).toBe(true);
+
     const manifest = createBlogManifest(processedPosts);
     expect(manifest.blogsEnabled).toBe(true);
     expect(manifest.totalPosts).toBe(2);
+    expect(manifest.posts.every((p) => Array.isArray(p.authors) && p.authors.length === 1 && p.authors[0].name === 'Pawan Shetty')).toBe(true);
+    expect(Array.from(fullArticleMap.values()).every((p) => Array.isArray(p.authors) && p.authors.length === 1 && p.authors[0].name === 'Pawan Shetty')).toBe(true);
 
     // Both posts have publishedAt 2026-08-24; sorted alphabetically by slug
     expect(manifest.posts.map((p) => p.slug)).toEqual([

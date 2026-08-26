@@ -111,14 +111,27 @@ describe('Sanity setup contract', () => {
       expect(document).not.toHaveProperty('mainImage');
     }
 
-    // Verify compliance documents include Phase 2 fields
+    // Verify compliance documents include Phase 2 fields and single approved author
     const fssaiDoc = documents.find((d) => d.slug.current === 'fssai-labelling-requirements-checklist-2026');
-    expect(fssaiDoc.authors).toHaveLength(2);
+    expect(fssaiDoc.authors).toEqual([
+      {
+        _key: 'author-pawan-shetty',
+        name: 'Pawan Shetty',
+      },
+    ]);
     expect(fssaiDoc.readingTimeMinutes).toBe(14);
     expect(fssaiDoc.faqs).toHaveLength(7);
     expect(fssaiDoc.references).toHaveLength(15);
     expect(fssaiDoc.closingCta.href).toBe('/start');
     expect(fssaiDoc.seo.metaTitle).toBe('FSSAI Labelling Requirements 2026: A Practical Checklist');
+
+    const legalDoc = documents.find((d) => d.slug.current === 'legal-metrology-packaged-commodity-rules-india');
+    expect(legalDoc.authors).toEqual([
+      {
+        _key: 'author-pawan-shetty',
+        name: 'Pawan Shetty',
+      },
+    ]);
 
     const lines = serializeSanityImport(seedBlogPosts).trimEnd().split('\n');
     expect(lines).toHaveLength(2);
