@@ -24,43 +24,36 @@ const expectNoUnapprovedCommercialClaims = (container) => {
 };
 
 describe('Branding service copy', () => {
-  it('renders five capabilities, five-item packaging compliance, and ten approved FAQs', () => {
+  it('renders four approved capabilities, prose-led packaging compliance, and safe FAQs', () => {
     const { container } = render(<Branding />);
 
-    expect(container.querySelectorAll('article.offer-entry')).toHaveLength(5);
-    expect(container.querySelector('.offers-grid')).toHaveAttribute('data-count', '5');
+    expect(container.querySelectorAll('article.offer-entry')).toHaveLength(4);
+    expect(container.querySelector('.offers-grid')).toHaveAttribute('data-count', '4');
 
-    // Check 5 capabilities
+    expect(screen.getByText('Positioning, identity, packaging and voice, developed as one practical brand system.')).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'A brand system your team can use' })).toBeInTheDocument();
+    expect(screen.getByText(/We bring positioning, identity, packaging and messaging into one clear system\./i)).toBeInTheDocument();
+
     for (const title of [
       'Brand positioning and strategy',
-      'Naming and brand architecture',
       'Visual identity system',
-      'Brand voice and messaging',
       'Packaging design and production',
+      'Brand voice and messaging',
     ]) {
       expect(screen.getByRole('heading', { name: title })).toBeInTheDocument();
     }
+    expect(screen.queryByRole('heading', { name: 'Naming and brand architecture' })).not.toBeInTheDocument();
 
     const compliance = container.querySelector('#compliance');
     expect(compliance).toBeInTheDocument();
     expect(within(compliance).getByText(/Packaging compliance for food and consumer products/i)).toBeInTheDocument();
-    expect(within(compliance).getByText(/FSSAI regulations/i)).toBeInTheDocument();
+    expect(within(compliance).getByText(/For packaged products, required information needs to be considered while the artwork is being developed\./i)).toBeInTheDocument();
     expect(within(compliance).getByText(/Regulated legal opinions stay with qualified advisers/i)).toBeInTheDocument();
 
-    // Check 5 compliance items
-    const complianceItems = compliance.querySelectorAll('.service-detail-grid article');
-    expect(complianceItems).toHaveLength(5);
-    for (const itemTitle of [
-      'Label content preparation',
-      'Mandatory declarations',
-      'Declaration placement',
-      'Artwork and revision coordination',
-      'Print-to-marketplace consistency',
-    ]) {
-      expect(within(compliance).getByRole('heading', { name: itemTitle })).toBeInTheDocument();
-    }
+    expect(compliance.querySelector('.service-detail-grid')).not.toBeInTheDocument();
 
-    expect(container.querySelectorAll('.faq-list .faq-item')).toHaveLength(10);
+    expect(container.querySelectorAll('.faq-list .faq-item')).toHaveLength(7);
+    expect(container.textContent).not.toMatch(/4 to 8 weeks|8 to 12 weeks|six of our own food SKUs|trademark searches|legal clearance|across India, mostly remotely/i);
     expectNoUnapprovedCommercialClaims(container);
   });
 });

@@ -1,43 +1,31 @@
 export const BRANDING_FAQS = Object.freeze([
   {
-    q: 'What deliverables are included in a branding project?',
-    a: 'Working source files in the original format, export-ready logo variants, a written specification for colour, type and spacing, packaging artwork in print-ready format with dielines, and a messaging guide with worked examples. Everything is yours; we do not hold source files.',
+    q: 'What does a branding engagement include?',
+    a: 'The scope can combine positioning, visual identity, packaging and brand voice. We agree the included decisions, deliverables and responsibilities before work begins.',
   },
   {
-    q: 'How long does a branding project take?',
-    a: 'A focused identity project typically takes 4 to 8 weeks. A comprehensive project that includes strategy, packaging design and vendor coordination takes 8 to 12 weeks.',
+    q: 'Can you work with an existing brand?',
+    a: 'Yes. We can review an existing system and focus the scope on the areas that need attention, such as packaging, messaging or production artwork. Existing guidelines and approved constraints become part of the brief.',
   },
   {
     q: 'Do you design packaging that is ready for the printer?',
-    a: 'Yes. Artwork is delivered with dielines, bleed, correct colour profile and all mandatory declarations placed and sized. We run revision cycles directly with your manufacturer or printer.',
+    a: 'We develop artwork around the selected format, approved product information and production requirements, then coordinate revisions with the appointed printer or packaging vendor. Final production approval remains with the client and vendor.',
   },
   {
-    q: 'Do you handle FSSAI labelling?',
-    a: 'We prepare label content and artwork against FSSAI labelling and Legal Metrology requirements, and we have done this across six of our own food SKUs. Regulated legal opinions stay with qualified advisers.',
+    q: 'How do you handle packaging compliance inputs?',
+    a: 'We organise client-approved label content, coordinate artwork revisions and help keep the production pack aligned with marketplace product information. Regulated legal opinions stay with qualified advisers.',
   },
   {
     q: 'Can you work with our in-house designer or existing agency?',
-    a: 'Yes. We can deliver the system and hand it over, or work alongside your team through implementation. Ownership and responsibilities are written down before we start.',
-  },
-  {
-    q: 'Do you work with businesses outside Karnataka?',
-    a: 'Yes. We are based in Manipal and work with clients across India, mostly remotely, with on-site visits for manufacturing and print approvals.',
+    a: 'Yes. We can define handover points and responsibilities for your team, agency and production partners, then keep the working files and decisions organised around that arrangement.',
   },
   {
     q: 'What happens after handover?',
-    a: 'Most clients move to a marketing or e-commerce engagement, or take a monthly retainer for ongoing asset production. Neither is required, and the brand system is built to work without us.',
+    a: 'We hand over the agreed working files, specifications and messaging guidance. Your team can continue using the system, and any further support can be scoped separately.',
   },
   {
-    q: 'Can you work with our existing brand guidelines?',
-    a: 'Yes. We frequently work within existing brand systems to design new packaging, collateral, or marketing campaigns while maintaining brand consistency.',
-  },
-  {
-    q: 'What formats do you deliver logo and identity files in?',
-    a: 'We deliver vector files (AI, EPS, SVG, PDF) and raster files (PNG with transparency, high-res JPEG) in full colour, reversed, and monochrome variants for both print and digital use.',
-  },
-  {
-    q: 'How do you handle trademark availability?',
-    a: 'We conduct preliminary trademark searches across relevant classes on the Indian trademark registry before finalising names and logos, and we advise clients to obtain formal legal clearance.',
+    q: 'What do you need from us before the project starts?',
+    a: 'Useful inputs include the business context, audience, product information, existing brand materials and the people who can review and approve decisions. We confirm the required inputs during scoping.',
   },
 ]);
 

@@ -734,7 +734,7 @@ describe('approved design-system corrections', () => {
       /\.domain-subtitle\s*{[^}]*color:\s*#ffffff;/s,
     );
     expect(serviceCss).toMatch(
-      /\.offers-grid\s*{[^}]*grid-template-columns:\s*repeat\(6,\s*minmax\(0,\s*1fr\)\);/s,
+      /\.offers-grid\s*{[^}]*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\);/s,
     );
     expect(serviceCss).toMatch(
       /\.offers-grid--editorial\s*{[^}]*border-top:\s*1px solid var\(--border-color\);/s,
@@ -763,47 +763,35 @@ describe('approved design-system corrections', () => {
     expect(brands).toContain('Contact us about Raw Radicles');
   });
 
-  it('balances incomplete service-card rows instead of leaving accidental gaps', () => {
+  it('keeps approved service capabilities in an even editorial grid', () => {
     const serviceCss = readSource('src/components/ServicePage.css');
 
-    // Desktop: 5-item 3+2 row-balancing selectors must exist
     expect(serviceCss).toMatch(
-      /\.offers-grid--editorial\[data-count="5"\] > :nth-child\(4\)\s*\{[^}]*grid-column:\s*span 3;/s,
+      /\.offers-grid\s*\{[^}]*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\);/s,
     );
     expect(serviceCss).toMatch(
-      /\.offers-grid--editorial\[data-count="5"\] > :nth-child\(5\)\s*\{[^}]*grid-column:\s*span 3;/s,
+      /\.offers-grid--editorial \.offer-entry\s*\{[^}]*grid-column:\s*auto;/s,
     );
-    expect(serviceCss).toMatch(
-      /\.service-detail-grid\s*\{[^}]*grid-template-columns:\s*repeat\(6,\s*minmax\(0,\s*1fr\)\);/s,
-    );
-    expect(serviceCss).toMatch(
-      /\.service-detail-grid\[data-count="5"\] > :nth-child\(4\)\s*\{[^}]*grid-column:\s*span 3;/s,
-    );
-    expect(serviceCss).toMatch(
-      /\.service-detail-grid\[data-count="5"\] > :nth-child\(5\)\s*\{[^}]*grid-column:\s*span 3;/s,
-    );
+    expect(serviceCss).not.toContain('[data-count="5"]');
 
-    // Tablet (769px–900px): editorial grid gets matching-specificity overrides;
+    // Tablet (769px–900px): the two-column layout remains explicit;
     // breakpoint must NOT start at 621px (that would overlap with mobile ≤768px)
     expect(serviceCss).toContain('@media (min-width: 769px) and (max-width: 900px)');
     expect(serviceCss).not.toContain('@media (max-width: 900px) and (min-width: 621px)');
     expect(serviceCss).toMatch(
-      /@media \(min-width: 769px\) and \(max-width: 900px\)[\s\S]*?\.offers-grid--editorial \.offer-entry,[\s\S]*?\.offers-grid--editorial\[data-count="5"\] > :nth-child\(4\),[\s\S]*?\.offers-grid--editorial\[data-count="5"\] > :nth-child\(5\)\s*\{[^}]*grid-column:\s*auto;/s,
+      /@media \(min-width: 769px\) and \(max-width: 900px\)[\s\S]*?\.offers-grid--editorial\s*\{[^}]*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\);/s,
     );
-    // Desktop :nth-child(3n) border rule must not leak: odd items get border back at tablet
+    // Odd columns keep their divider and even columns close the row.
     expect(serviceCss).toMatch(
-      /@media \(min-width: 769px\) and \(max-width: 900px\)[\s\S]*?\.offers-grid--editorial \.offer-entry:nth-child\(odd\)\s*\{[^}]*border-right:\s*1px solid var\(--border-color\);/s,
-    );
-    expect(serviceCss).toMatch(
-      /@media \(min-width: 769px\) and \(max-width: 900px\)[\s\S]*?\.offers-grid--editorial \.offer-entry:nth-child\(even\)\s*\{[^}]*border-right:\s*0;/s,
+      /\.offers-grid--editorial \.offer-entry:nth-child\(odd\)\s*\{[^}]*border-right:\s*1px solid var\(--border-color\);/s,
     );
 
-    // Mobile (≤768px): editorial items 4 and 5 must occupy the full row
+    // Mobile (≤768px): editorial items stack and lose vertical dividers
     expect(serviceCss).toMatch(
-      /@media \(max-width: 768px\)[\s\S]*?\.offers-grid--editorial \.offer-entry,[\s\S]*?\.offers-grid--editorial\[data-count="5"\] > :nth-child\(4\),[\s\S]*?\.offers-grid--editorial\[data-count="5"\] > :nth-child\(5\)\s*\{[^}]*grid-column:\s*1 \/ -1;/s,
+      /@media \(max-width: 768px\)[\s\S]*?\.offers-grid--editorial \.offer-entry\s*\{[^}]*grid-column:\s*1 \/ -1;/s,
     );
     expect(serviceCss).toMatch(
-      /@media \(max-width: 768px\)[\s\S]*?\.offers-grid--editorial \.offer-entry,[\s\S]*?\.offers-grid--editorial\[data-count="5"\] > :nth-child\(4\),[\s\S]*?\.offers-grid--editorial\[data-count="5"\] > :nth-child\(5\)\s*\{[^}]*border-right:\s*0;/s,
+      /@media \(max-width: 768px\)[\s\S]*?\.offers-grid--editorial \.offer-entry\s*\{[^}]*border-right:\s*0;/s,
     );
   });
 

@@ -15,7 +15,13 @@ describe('Footer', () => {
   it('selects route-specific CTAs and suppresses transactional/legal routes', () => {
     expect(getFooterCta('/').href).toBe('/start');
     expect(getFooterCta('/brands').href).toBe('/contact');
-    expect(getFooterCta('/branding').href).toBe('/contact');
+    expect(getFooterCta('/branding')).toEqual({
+      eyebrow: 'Build with us',
+      title: 'Ready to build with fewer unknowns?',
+      text: 'Tell us what you are building, where you need support and what a good next step looks like.',
+      label: 'Start a branding project',
+      href: '/start',
+    });
     expect(getFooterCta('/marketing').href).toBe('/contact');
     expect(getFooterCta('/ecommerce').href).toBe('/contact');
     expect(getFooterCta('/about')).toEqual({

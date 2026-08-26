@@ -143,18 +143,39 @@ describe('ServicePage', () => {
     vi.clearAllTimers();
     vi.useRealTimers();
   });
+
+  it('renders prose-only compliance without an empty supporting-item grid', () => {
+    const { container } = render(
+      <ServicePage
+        {...props}
+        compliance={{
+          ...props.compliance,
+          items: undefined,
+        }}
+      />,
+    );
+
+    const compliance = screen.getByRole('region', { name: 'Compliance coordination' });
+    expect(compliance.querySelector('.service-detail-grid')).not.toBeInTheDocument();
+    expect(within(compliance).getByText('Qualified advisers retain regulated advice.')).toBeInTheDocument();
+    expect(container.querySelectorAll('article.offer-entry')).toHaveLength(4);
+  });
 });
 
 describe('ServicePage responsive CSS contract', () => {
   const css = readSource('src/components/ServicePage.css');
 
-  it('keeps desktop 5-item editorial balancing selectors', () => {
+  it('uses a balanced two-column editorial layout for four unnumbered capabilities', () => {
     expect(css).toMatch(
-      /\.offers-grid--editorial\[data-count="5"\] > :nth-child\(4\)\s*\{[^}]*grid-column:\s*span 3;/s,
+      /\.offers-grid\s*\{[^}]*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\);/s,
     );
     expect(css).toMatch(
-      /\.offers-grid--editorial\[data-count="5"\] > :nth-child\(5\)\s*\{[^}]*grid-column:\s*span 3;/s,
+      /\.offers-grid--editorial \.offer-entry\s*\{[^}]*grid-column:\s*auto;/s,
     );
+    expect(css).not.toMatch(
+      /\.offers-grid--editorial \.offer-entry\s*\{[^}]*min-height:/s,
+    );
+    expect(css).not.toContain('[data-count="5"]');
   });
 
   it('uses a 769px lower bound for the tablet breakpoint to avoid overlap with mobile', () => {
@@ -162,9 +183,9 @@ describe('ServicePage responsive CSS contract', () => {
     expect(css).not.toContain('@media (max-width: 900px) and (min-width: 621px)');
   });
 
-  it('overrides editorial placement at tablet with matching specificity', () => {
+  it('keeps capability columns balanced at the tablet breakpoint', () => {
     expect(css).toMatch(
-      /@media \(min-width: 769px\) and \(max-width: 900px\)[\s\S]*?\.offers-grid--editorial \.offer-entry,[\s\S]*?\.offers-grid--editorial\[data-count="5"\] > :nth-child\(4\),[\s\S]*?\.offers-grid--editorial\[data-count="5"\] > :nth-child\(5\)\s*\{[^}]*grid-column:\s*auto;/s,
+      /@media \(min-width: 769px\) and \(max-width: 900px\)[\s\S]*?\.offers-grid--editorial\s*\{[^}]*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\);/s,
     );
   });
 
@@ -179,10 +200,11 @@ describe('ServicePage responsive CSS contract', () => {
     );
   });
 
-  it('centres the 5th editorial item at 100% width with no right border at tablet', () => {
+  it('keeps the final capability in the normal two-column flow at tablet', () => {
     expect(css).toMatch(
-      /@media \(min-width: 769px\) and \(max-width: 900px\)[\s\S]*?\.offers-grid--editorial\[data-count="5"\] > :last-child\s*\{[^}]*grid-column:\s*1 \/ -1;/s,
+      /\.offers-grid--editorial \.offer-entry:nth-child\(odd\)\s*\{[^}]*border-right:\s*1px solid var\(--border-color\);/s,
     );
+    expect(css).not.toContain('[data-count="5"] > :last-child');
   });
 
   it('forces editorial capability grid to 1-column on mobile', () => {
@@ -191,15 +213,15 @@ describe('ServicePage responsive CSS contract', () => {
     );
   });
 
-  it('resets editorial items 4 and 5 to full row on mobile with correct specificity', () => {
+  it('stacks all editorial capability items on mobile with correct specificity', () => {
     expect(css).toMatch(
-      /@media \(max-width: 768px\)[\s\S]*?\.offers-grid--editorial \.offer-entry,[\s\S]*?\.offers-grid--editorial\[data-count="5"\] > :nth-child\(4\),[\s\S]*?\.offers-grid--editorial\[data-count="5"\] > :nth-child\(5\)\s*\{[^}]*grid-column:\s*1 \/ -1;/s,
+      /@media \(max-width: 768px\)[\s\S]*?\.offers-grid--editorial \.offer-entry\s*\{[^}]*grid-column:\s*1 \/ -1;/s,
     );
   });
 
   it('removes right borders from all editorial capability items on mobile', () => {
     expect(css).toMatch(
-      /@media \(max-width: 768px\)[\s\S]*?\.offers-grid--editorial \.offer-entry,[\s\S]*?\.offers-grid--editorial\[data-count="5"\] > :nth-child\(4\),[\s\S]*?\.offers-grid--editorial\[data-count="5"\] > :nth-child\(5\)\s*\{[^}]*border-right:\s*0;/s,
+      /@media \(max-width: 768px\)[\s\S]*?\.offers-grid--editorial \.offer-entry\s*\{[^}]*border-right:\s*0;/s,
     );
   });
 });
