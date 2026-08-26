@@ -734,7 +734,7 @@ describe('approved design-system corrections', () => {
       /\.domain-subtitle\s*{[^}]*color:\s*#ffffff;/s,
     );
     expect(serviceCss).toMatch(
-      /\.offers-grid\s*{[^}]*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\);/s,
+      /\.offers-grid--editorial\[data-count="4"\]\s*{[^}]*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\);/s,
     );
     expect(serviceCss).toMatch(
       /\.offers-grid--editorial\s*{[^}]*border-top:\s*1px solid var\(--border-color\);/s,
@@ -763,16 +763,18 @@ describe('approved design-system corrections', () => {
     expect(brands).toContain('Contact us about Raw Radicles');
   });
 
-  it('keeps approved service capabilities in an even editorial grid', () => {
+  it('keeps four-capability placement scoped during staggered service migration', () => {
     const serviceCss = readSource('src/components/ServicePage.css');
 
     expect(serviceCss).toMatch(
-      /\.offers-grid\s*\{[^}]*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\);/s,
+      /\.offers-grid--editorial\[data-count="4"\]\s*\{[^}]*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\);/s,
     );
     expect(serviceCss).toMatch(
-      /\.offers-grid--editorial \.offer-entry\s*\{[^}]*grid-column:\s*auto;/s,
+      /\.offers-grid--editorial\[data-count="4"\] \.offer-entry\s*\{[^}]*grid-column:\s*auto;/s,
     );
-    expect(serviceCss).not.toContain('[data-count="5"]');
+    expect(serviceCss).toMatch(
+      /\.offers-grid\s*\{[^}]*grid-template-columns:\s*repeat\(6,\s*minmax\(0,\s*1fr\)\);/s,
+    );
 
     // Tablet (769px–900px): the two-column layout remains explicit;
     // breakpoint must NOT start at 621px (that would overlap with mobile ≤768px)
@@ -792,6 +794,35 @@ describe('approved design-system corrections', () => {
     );
     expect(serviceCss).toMatch(
       /@media \(max-width: 768px\)[\s\S]*?\.offers-grid--editorial \.offer-entry\s*\{[^}]*border-right:\s*0;/s,
+    );
+  });
+
+  it('keeps five-item capabilities and generic detail grids balanced', () => {
+    const serviceCss = readSource('src/components/ServicePage.css');
+
+    expect(serviceCss).toMatch(
+      /\.offers-grid--editorial\[data-count="5"\] > :nth-child\(4\)\s*\{[^}]*grid-column:\s*span 3;/s,
+    );
+    expect(serviceCss).toMatch(
+      /\.offers-grid--editorial\[data-count="5"\] > :nth-child\(5\)\s*\{[^}]*grid-column:\s*span 3;/s,
+    );
+    expect(serviceCss).toMatch(
+      /\.service-detail-grid\s*\{[^}]*grid-template-columns:\s*repeat\(6,\s*minmax\(0,\s*1fr\)\);/s,
+    );
+    expect(serviceCss).toMatch(
+      /\.service-detail-grid article\s*\{[^}]*grid-column:\s*span 2;/s,
+    );
+    expect(serviceCss).toMatch(
+      /\.service-detail-grid article:nth-child\(3n\)\s*\{[^}]*border-right:\s*0;/s,
+    );
+    expect(serviceCss).toMatch(
+      /\.service-detail-grid\[data-count="5"\] > :nth-child\(4\)\s*\{[^}]*grid-column:\s*span 3;/s,
+    );
+    expect(serviceCss).toMatch(
+      /\.service-detail-grid\[data-count="5"\] > :nth-child\(5\)\s*\{[^}]*grid-column:\s*span 3;/s,
+    );
+    expect(serviceCss).toMatch(
+      /@media \(max-width: 768px\)[\s\S]*?\.service-detail-grid\s*\{[^}]*grid-template-columns:\s*1fr;/s,
     );
   });
 

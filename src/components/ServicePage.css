@@ -114,13 +114,13 @@
   text-wrap: pretty;
 }
 
-/* ==========================================================================
-   Offers / Capabilities Grid (Editorial 2x2)
-   ========================================================================== */
+/* ============================================================================
+   Offers / Capabilities Grid
+   ============================================================================ */
 
 .offers-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 0;
   max-width: 1100px;
   margin: 0 auto;
@@ -131,7 +131,7 @@
 }
 
 .offers-grid--editorial .offer-entry {
-  grid-column: auto;
+  grid-column: span 2;
   display: flex;
   flex-direction: column;
   padding: 2.25rem 2rem;
@@ -143,11 +143,45 @@
   box-shadow: none;
 }
 
-.offers-grid--editorial .offer-entry:nth-child(odd) {
+.offers-grid--editorial .offer-entry:nth-child(3n) {
+  border-right: 0;
+}
+
+/* Desktop 5-item balanced 3+2 layout */
+.offers-grid--editorial[data-count="5"] > :nth-child(1),
+.offers-grid--editorial[data-count="5"] > :nth-child(2),
+.offers-grid--editorial[data-count="5"] > :nth-child(3) {
+  grid-column: span 2;
+}
+
+.offers-grid--editorial[data-count="5"] > :nth-child(3) {
+  border-right: 0;
+}
+
+.offers-grid--editorial[data-count="5"] > :nth-child(4) {
+  grid-column: span 3;
   border-right: 1px solid var(--border-color);
 }
 
-.offers-grid--editorial .offer-entry:nth-child(even) {
+.offers-grid--editorial[data-count="5"] > :nth-child(5) {
+  grid-column: span 3;
+  border-right: 0;
+}
+
+/* Four-capability pages use the approved balanced 2x2 editorial grid. */
+.offers-grid--editorial[data-count="4"] {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.offers-grid--editorial[data-count="4"] .offer-entry {
+  grid-column: auto;
+}
+
+.offers-grid--editorial[data-count="4"] .offer-entry:nth-child(odd) {
+  border-right: 1px solid var(--border-color);
+}
+
+.offers-grid--editorial[data-count="4"] .offer-entry:nth-child(even) {
   border-right: 0;
 }
 
@@ -176,7 +210,7 @@
 
 .service-detail-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 0;
   max-width: 1100px;
   margin: 0 auto;
@@ -184,7 +218,7 @@
 }
 
 .service-detail-grid article {
-  grid-column: auto;
+  grid-column: span 2;
   padding: clamp(1.5rem, 3vw, 2.25rem) 2rem;
   border: 0;
   border-right: 1px solid var(--border-color);
@@ -193,11 +227,28 @@
   background: transparent;
 }
 
-.service-detail-grid article:nth-child(odd) {
+.service-detail-grid article:nth-child(3n) {
+  border-right: 0;
+}
+
+/* Desktop 5-item balanced 3+2 layout for generic detail grids */
+.service-detail-grid[data-count="5"] > :nth-child(1),
+.service-detail-grid[data-count="5"] > :nth-child(2),
+.service-detail-grid[data-count="5"] > :nth-child(3) {
+  grid-column: span 2;
+}
+
+.service-detail-grid[data-count="5"] > :nth-child(3) {
+  border-right: 0;
+}
+
+.service-detail-grid[data-count="5"] > :nth-child(4) {
+  grid-column: span 3;
   border-right: 1px solid var(--border-color);
 }
 
-.service-detail-grid article:nth-child(even) {
+.service-detail-grid[data-count="5"] > :nth-child(5) {
+  grid-column: span 3;
   border-right: 0;
 }
 
@@ -259,13 +310,18 @@
    Responsive Rules
    ========================================================================== */
 
-/* Tablet: 769px–900px — retain the balanced two-column editorial grid */
+/* Tablet: 769px–900px — two-column fallback for all service grids */
 @media (min-width: 769px) and (max-width: 900px) {
   .offers-grid--editorial {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .offers-grid--editorial .offer-entry {
+  .offers-grid--editorial .offer-entry,
+  .offers-grid--editorial[data-count="5"] > :nth-child(1),
+  .offers-grid--editorial[data-count="5"] > :nth-child(2),
+  .offers-grid--editorial[data-count="5"] > :nth-child(3),
+  .offers-grid--editorial[data-count="5"] > :nth-child(4),
+  .offers-grid--editorial[data-count="5"] > :nth-child(5) {
     grid-column: auto;
     width: auto;
   }
@@ -278,11 +334,26 @@
     border-right: 0;
   }
 
+  .offers-grid--editorial[data-count="5"] > :last-child {
+    grid-column: 1 / -1;
+    width: 100%;
+    border-right: 0;
+  }
+
+  .offers-grid--editorial[data-count="5"] > :last-child .offer-card-text {
+    max-width: 38rem;
+  }
+
   .service-detail-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .service-detail-grid article {
+  .service-detail-grid article,
+  .service-detail-grid[data-count="5"] > :nth-child(1),
+  .service-detail-grid[data-count="5"] > :nth-child(2),
+  .service-detail-grid[data-count="5"] > :nth-child(3),
+  .service-detail-grid[data-count="5"] > :nth-child(4),
+  .service-detail-grid[data-count="5"] > :nth-child(5) {
     grid-column: auto;
     width: auto;
   }
@@ -293,6 +364,16 @@
 
   .service-detail-grid article:nth-child(even) {
     border-right: 0;
+  }
+
+  .service-detail-grid[data-count="5"] > :last-child {
+    grid-column: 1 / -1;
+    width: 100%;
+    border-right: 0;
+  }
+
+  .service-detail-grid[data-count="5"] > :last-child p {
+    max-width: 38rem;
   }
 
 }
@@ -324,11 +405,36 @@
     border-right: 0;
   }
 
+  .offers-grid--editorial[data-count="5"] > :nth-child(4),
+  .offers-grid--editorial[data-count="5"] > :nth-child(5) {
+    grid-column: 1 / -1;
+    width: 100%;
+    border-right: 0;
+  }
+
+  .offers-grid--editorial[data-count="4"] .offer-entry {
+    grid-column: 1 / -1;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .offers-grid--editorial[data-count="4"] .offer-entry:nth-child(odd),
+  .offers-grid--editorial[data-count="4"] .offer-entry:nth-child(even) {
+    border-right: 0;
+  }
+
   .service-detail-grid {
     grid-template-columns: 1fr;
   }
 
   .service-detail-grid article {
+    grid-column: 1 / -1;
+    width: 100%;
+    border-right: 0;
+  }
+
+  .service-detail-grid[data-count="5"] > :nth-child(4),
+  .service-detail-grid[data-count="5"] > :nth-child(5) {
     grid-column: 1 / -1;
     width: 100%;
     border-right: 0;

@@ -165,17 +165,55 @@ describe('ServicePage', () => {
 describe('ServicePage responsive CSS contract', () => {
   const css = readSource('src/components/ServicePage.css');
 
-  it('uses a balanced two-column editorial layout for four unnumbered capabilities', () => {
+  it('scopes balanced two-column placement to four unnumbered capabilities', () => {
     expect(css).toMatch(
-      /\.offers-grid\s*\{[^}]*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\);/s,
+      /\.offers-grid--editorial\[data-count="4"\]\s*\{[^}]*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\);/s,
     );
     expect(css).toMatch(
-      /\.offers-grid--editorial \.offer-entry\s*\{[^}]*grid-column:\s*auto;/s,
+      /\.offers-grid--editorial\[data-count="4"\] \.offer-entry\s*\{[^}]*grid-column:\s*auto;/s,
     );
     expect(css).not.toMatch(
       /\.offers-grid--editorial \.offer-entry\s*\{[^}]*min-height:/s,
     );
-    expect(css).not.toContain('[data-count="5"]');
+    expect(css).toMatch(
+      /\.offers-grid\s*\{[^}]*grid-template-columns:\s*repeat\(6,\s*minmax\(0,\s*1fr\)\);/s,
+    );
+  });
+
+  it('retains five-item capability balancing until route copy migrates', () => {
+    expect(css).toMatch(
+      /\.offers-grid--editorial\[data-count="5"\] > :nth-child\(1\),[\s\S]*?\.offers-grid--editorial\[data-count="5"\] > :nth-child\(3\)\s*\{[^}]*grid-column:\s*span 2;/s,
+    );
+    expect(css).toMatch(
+      /\.offers-grid--editorial\[data-count="5"\] > :nth-child\(4\)\s*\{[^}]*grid-column:\s*span 3;/s,
+    );
+    expect(css).toMatch(
+      /\.offers-grid--editorial\[data-count="5"\] > :nth-child\(5\)\s*\{[^}]*grid-column:\s*span 3;/s,
+    );
+    expect(css).toMatch(
+      /@media \(min-width: 769px\) and \(max-width: 900px\)[\s\S]*?\.offers-grid--editorial\[data-count="5"\] > :last-child\s*\{[^}]*grid-column:\s*1 \/ -1;/s,
+    );
+  });
+
+  it('retains generic three- and five-item detail-grid balancing', () => {
+    expect(css).toMatch(
+      /\.service-detail-grid\s*\{[^}]*grid-template-columns:\s*repeat\(6,\s*minmax\(0,\s*1fr\)\);/s,
+    );
+    expect(css).toMatch(
+      /\.service-detail-grid article\s*\{[^}]*grid-column:\s*span 2;/s,
+    );
+    expect(css).toMatch(
+      /\.service-detail-grid article:nth-child\(3n\)\s*\{[^}]*border-right:\s*0;/s,
+    );
+    expect(css).toMatch(
+      /\.service-detail-grid\[data-count="5"\] > :nth-child\(4\)\s*\{[^}]*grid-column:\s*span 3;/s,
+    );
+    expect(css).toMatch(
+      /\.service-detail-grid\[data-count="5"\] > :nth-child\(5\)\s*\{[^}]*grid-column:\s*span 3;/s,
+    );
+    expect(css).toMatch(
+      /@media \(min-width: 769px\) and \(max-width: 900px\)[\s\S]*?\.service-detail-grid\[data-count="5"\] > :last-child\s*\{[^}]*grid-column:\s*1 \/ -1;/s,
+    );
   });
 
   it('uses a 769px lower bound for the tablet breakpoint to avoid overlap with mobile', () => {
@@ -200,11 +238,11 @@ describe('ServicePage responsive CSS contract', () => {
     );
   });
 
-  it('keeps the final capability in the normal two-column flow at tablet', () => {
+  it('keeps the fourth capability in the normal two-column flow at tablet', () => {
     expect(css).toMatch(
-      /\.offers-grid--editorial \.offer-entry:nth-child\(odd\)\s*\{[^}]*border-right:\s*1px solid var\(--border-color\);/s,
+      /\.offers-grid--editorial\[data-count="4"\] \.offer-entry:nth-child\(odd\)\s*\{[^}]*border-right:\s*1px solid var\(--border-color\);/s,
     );
-    expect(css).not.toContain('[data-count="5"] > :last-child');
+    expect(css).not.toContain('[data-count="4"] > :last-child');
   });
 
   it('forces editorial capability grid to 1-column on mobile', () => {
@@ -222,6 +260,15 @@ describe('ServicePage responsive CSS contract', () => {
   it('removes right borders from all editorial capability items on mobile', () => {
     expect(css).toMatch(
       /@media \(max-width: 768px\)[\s\S]*?\.offers-grid--editorial \.offer-entry\s*\{[^}]*border-right:\s*0;/s,
+    );
+  });
+
+  it('stacks generic detail grids to one column on mobile', () => {
+    expect(css).toMatch(
+      /@media \(max-width: 768px\)[\s\S]*?\.service-detail-grid\s*\{[^}]*grid-template-columns:\s*1fr;/s,
+    );
+    expect(css).toMatch(
+      /@media \(max-width: 768px\)[\s\S]*?\.service-detail-grid article\s*\{[^}]*grid-column:\s*1 \/ -1;[^}]*border-right:\s*0;/s,
     );
   });
 });
