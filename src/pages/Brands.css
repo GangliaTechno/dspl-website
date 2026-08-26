@@ -28,6 +28,15 @@
   margin-bottom: 0;
 }
 
+.brands-status-section {
+  background-color: var(--bg-secondary);
+}
+
+.brands-status-heading {
+  padding-right: 2rem;
+  border-right: 1px solid var(--border-color);
+}
+
 .brands-ownership-copy,
 .brands-architecture-section .brands-ownership-grid > p {
   display: grid;
@@ -40,6 +49,10 @@
 
 .brands-ownership-copy p {
   margin: 0;
+}
+
+.brands-status-action {
+  margin-top: 1.5rem;
 }
 
 .brands-hero {
@@ -312,6 +325,11 @@
 
   .brands-ownership-grid {
     grid-template-columns: 1fr;
+  }
+
+  .brands-status-heading {
+    padding-right: 0;
+    border-right: 0;
   }
 }
 

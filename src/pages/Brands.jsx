@@ -121,8 +121,8 @@ const Brands = () => {
                   </div>
 
                   <div className="brand-cta-block">
-                    <Link to="/contact" className="btn btn-primary rr-cta-btn">
-                      Contact us about Raw Radicles <ArrowRight size={16} aria-hidden="true" />
+                    <Link to="/brands/raw-radicles" className="btn btn-primary rr-cta-btn">
+                      Explore Raw Radicles <ArrowRight size={16} aria-hidden="true" />
                     </Link>
                   </div>
                 </div>
@@ -141,18 +141,18 @@ const Brands = () => {
       </section>
 
       {/* Portfolio in Development Section */}
-      <section className="section brands-portfolio-dev-section bg-alt" aria-labelledby="portfolio-dev-title">
+      <section className="section brands-portfolio-dev-section brands-status-section bg-alt" aria-labelledby="portfolio-dev-title">
         <div className="container brands-ownership-grid">
-          <div>
+          <div className="brands-status-heading">
             <h2 id="portfolio-dev-title" className="section-title">
               Portfolio in development
             </h2>
           </div>
-          <div className="brands-ownership-copy">
+          <div className="brands-ownership-copy brands-status-copy">
             <p>
               A second consumer brand is in early development. We publish brands here once they are through formulation and compliance, not before.
             </p>
-            <div style={{ marginTop: '1.5rem' }}>
+            <div className="brands-status-action">
               <Link to="/contact" className="btn btn-secondary">
                 Contact us about a brand partnership <ArrowRight size={16} aria-hidden="true" />
               </Link>

@@ -14,7 +14,10 @@ const renderFooter = (path = '/') =>
 describe('Footer', () => {
   it('selects route-specific CTAs and suppresses transactional/legal routes', () => {
     expect(getFooterCta('/').href).toBe('/start');
-    expect(getFooterCta('/brands').href).toBe('/contact');
+    expect(getFooterCta('/brands')).toMatchObject({
+      label: 'Start a project',
+      href: '/start',
+    });
     expect(getFooterCta('/branding')).toEqual({
       eyebrow: 'Build with us',
       title: 'Ready to build with fewer unknowns?',
@@ -48,6 +51,15 @@ describe('Footer', () => {
     expect(getFooterCta('/privacy')).toBeNull();
     expect(getFooterCta('/terms')).toBeNull();
     expect(getFooterCta('/blogs').href).toBe('/contact');
+  });
+
+  it('renders the Brands CTA with the project-start destination', () => {
+    const { container } = renderFooter('/brands');
+    const cta = container.querySelector('.footer-cta-strip');
+
+    expect(cta).toBeInTheDocument();
+    expect(cta?.querySelector('.footer-cta-btn')).toHaveTextContent('Start a project');
+    expect(cta?.querySelector('.footer-cta-btn')).toHaveAttribute('href', '/start');
   });
 
   it('renders the Home CTA before verified corporate information', () => {

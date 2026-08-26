@@ -32,7 +32,7 @@ describe('Brands page', () => {
     expect(container).not.toHaveTextContent(/registered trademark/i);
   });
 
-  it('renders exact four proof stats and contact CTA', () => {
+  it('renders exact four proof stats and the Raw Radicles detail CTA', () => {
     renderBrands();
 
     for (const fact of [
@@ -43,13 +43,17 @@ describe('Brands page', () => {
     ]) {
       expect(screen.getByText(fact)).toBeInTheDocument();
     }
-    expect(screen.getByRole('link', { name: /Contact us about Raw Radicles/i }))
-      .toHaveAttribute('href', '/contact');
+    expect(screen.getByRole('link', { name: 'Explore Raw Radicles' }))
+      .toHaveAttribute('href', '/brands/raw-radicles');
   });
 
   it('includes the approved Portfolio in development section', () => {
-    renderBrands();
+    const { container } = renderBrands();
 
+    const statusSection = container.querySelector('section.brands-status-section');
+    expect(statusSection).toBeInTheDocument();
+    expect(statusSection).toHaveAttribute('aria-labelledby', 'portfolio-dev-title');
+    expect(statusSection?.querySelector('.brands-status-copy')).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Portfolio in development' })).toBeInTheDocument();
     expect(screen.getByText(/A second consumer brand is in early development/i)).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /Contact us about a brand partnership/i }))
