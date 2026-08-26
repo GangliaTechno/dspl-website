@@ -38,9 +38,9 @@ They are durable across worktrees and clones that contain those commits.
 
 ### Approved focused content and UI correction pass
 
-Status: implementation completed on 2026-08-27 and awaiting the final combined
-Sol/high review. The current branch was selectively corrected; commit `b7d4e93`
-was preserved because it contains unrelated accepted work.
+Status: implementation and the final combined Sol/high review completed on
+2026-08-27. The current branch was selectively corrected; commit `b7d4e93` was
+preserved because it contains unrelated accepted work.
 
 Design and exact service copy sheet:
 `docs/superpowers/specs/2026-08-26-dspl-focused-content-ui-corrections-design.md`
@@ -61,12 +61,13 @@ Approved corrections:
 - exactly Pawan Shetty on both generated production articles; and
 - deterministic desktop/mobile Insights TOC tracking after fast jumps.
 
-For this approved programme, the user explicitly selected Gemini 3.7 Flash High
-as the sole bounded writer and browser/visual QA agent, with Sol/high for planning
-and review and Luna/max available only as a reported fallback. One writer was
-used at a time. Per-task review was consolidated into one final combined Sol/high
-review to reduce token use. Separate commits are authorised; push, merge,
-deployment and production mutation are not.
+The first five implementation commits (`fb8d084` through `8347cda`) used the
+original approved Luna/max bounded-writer route. The user then explicitly changed
+the remaining programme route: Gemini 3.7 Flash High wrote `79ef017`, `3f24bc3`,
+`c2d00ad` and `0daf0be` and performed browser/visual QA, while Sol/high handled
+review. One writer was used at a time. Per-task review was consolidated into one
+final combined Sol/high review to reduce token use. Separate commits are
+authorised; push, merge, deployment and production mutation are not.
 
 Completed correction commits after the approved design/plan commit `335bf19`:
 - `fb8d084` and `734d0aa`: Branding and safely scoped 2x2 service layout;
@@ -230,16 +231,13 @@ Record only fresh evidence:
 | 2026-08-24 IST | Sanity-backed Insights setup | Exact six-file recovery gate; full lint; full tests; strict live build; `verify:html`; manifest/sitemap/security/scope audits; fresh Sol/high holistic review | 197 focused tests; lint clean; 42 files / 393 tests; exact two live posts with no fallback; deterministic generated digest; 14 routes plus 404; three Insights HTML files; zero public `.map`; review approved with no P0-P3 findings | `454f9206608027fce9f9f907921031d6e543f3b9`; 21 Sanity paths remained unstaged before this ledger update; no Sanity-task commit/push/deploy |
 | 2026-08-25 IST | Phase 1-3 release merge and homepage social preview | Full tests; full lint; `build:fallback`; `verify:og`; `verify:html`; public-map audit; `git diff --check`; fresh Sol/high merge review | 43 files / 434 tests; lint clean; exact two fallback compliance articles; 15 prerendered pages; 14 routes plus 404 verified; six exact responsive WebPs; zero public `.map`; 1200x630 OG card parity verified; review approved with no P0-P3 findings | Merge `c9ecb4a05732e74f54319ff2f1cfc65879ead8b6` promoted to `origin/main`; final pre-cleanup context commit `d50b3477913bd6f60b3ce62404146b98f379078d`; one local/remote branch remains; no deployment performed |
 | 2026-08-25 IST | Phase 2 production diagnosis | Read-only GET/HEAD checks against `/`, `/blogs`, both current article paths, `/does-not-exist`, slashless/trailing-slash variants, `/_headers`, and `/_redirects`; local `build:site` and `verify:html` evidence | Production served a stale old Insights artifact; article and unknown paths served homepage HTML with `200`; no observed security headers; `_headers`/`_redirects` were static downloads; `Server: nginx/1.30.2`; source/deployment divergence recorded; no mutation | Deployment owner/provider, deployed commit, build/output, and Node version not exposed publicly; EC2/Nginx remains a strong inference/confirmed boundary; mandatory STOP for user acknowledgement |
-| 2026-08-27 IST | Focused content/UI correction pass | Full lint; full tests; `build:fallback`; `verify:html`; consolidated Chromium QA across eight routes and eight viewport widths; `git diff --check` | 46 files / 523 tests; lint clean; 15 prerendered pages; 14 routes plus 404 verified; OG card verified; zero visual P0-P3 findings, overflow, or console errors; diff-check clean | `0daf0bed8268f8a481f40ea6fa022ca6c502b719`; only the protected untracked `.github/instructions/` directory remains outside task scope; final combined Sol/high review pending |
+| 2026-08-27 IST | Focused content/UI correction pass | Full lint; full tests; `build:fallback`; `verify:html`; consolidated Chromium QA across eight routes and eight viewport widths; `git diff --check`; final combined Sol/high review | 46 files / 523 tests; lint clean; 15 prerendered pages; 14 routes plus 404 verified; OG card verified; zero visual P0-P3 findings, overflow, or console errors; focused final review checks passed 101 tests and found website code clean | `0daf0bed8268f8a481f40ea6fa022ca6c502b719` before ledger commits; only the protected untracked `.github/instructions/` directory remains outside task scope; review's sole P2 ledger-provenance correction was accepted and applied |
 | 2026-08-27 IST | Dependency advisory check | `npm audit --audit-level=high`; dependency tree inspection; npm registry version check | One high and six moderate advisories remain under dormant Sanity CLI tooling through `@vercel/frameworks`/`typeid-js`; npm's automatic remedy is a breaking forced change, so no dependency mutation was made in this content/UI pass | Installed `sanity@6.10.1`; registry `sanity@6.11.0`; treat a Sanity/toolchain upgrade as a separately approved maintenance task, not a silent correction-pass change |
 
 ## Next Authorized Action
 
-- Complete one combined Sol/high review of `b7d4e93..HEAD`, including the final
-  verification evidence and the explicitly deferred Sanity CLI advisory.
-- If that review finds no correction-pass P0-P2 defects, the focused programme
-  is complete on the current branch. Do not push, merge or deploy without a new
-  explicit instruction.
+- The focused correction programme is complete on the current branch. Do not
+  push, merge or deploy without a new explicit instruction.
 - Keep Sanity dormant and use the fallback build path. Dependency maintenance
   and deployment/server correction remain separate explicitly approved actions;
   no host mutation is authorised by this ledger.
