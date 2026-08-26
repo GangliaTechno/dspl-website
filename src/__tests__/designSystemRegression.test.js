@@ -1087,4 +1087,55 @@ describe('approved design-system corrections', () => {
     expect(homeCss).toMatch(/@media\s*\(max-width:\s*900px\)[\s\S]*?\.service-evidence-grid\s*{[^}]*grid-template-columns:\s*1fr;/);
     expect(faqCss).toMatch(/\.faq-header-btn\s*{[^}]*min-height:\s*4\.5rem;/s);
   });
+
+  it('encodes safe Home process timings without fixed delivery periods', () => {
+    const homePage = readSource('src/pages/Home.jsx');
+
+    expect(homePage).toContain("timing: 'Initial scope review'");
+    expect(homePage).toContain("timing: 'Approved roadmap'");
+    expect(homePage).toContain("timing: 'Engagement cadence'");
+    expect(homePage).not.toContain('2 to 3 weeks');
+    expect(homePage).not.toContain('6 to 12 weeks');
+    expect(homePage).not.toContain('Ongoing, monthly review');
+  });
+
+  it('aligns process metadata dividers on desktop and tablet without fixed section heights', () => {
+    const homeSections = readSource('src/components/home/homeSections.css');
+
+    expect(homeSections).toMatch(
+      /\.process-framework-grid\s*{[^}]*grid-template-rows:\s*(?:subgrid|auto\s+auto)/s,
+    );
+    expect(homeSections).toMatch(
+      /\.process-column\s*{[^}]*display:\s*grid;[^}]*grid-template-rows:\s*subgrid;[^}]*grid-row:\s*span 2;/s,
+    );
+    expect(homeSections).not.toMatch(
+      /\.process-section\s*{[^}]*height:\s*\d+/s,
+    );
+    expect(homeSections).not.toMatch(
+      /\.process-column\s*{[^}]*height:\s*\d+/s,
+    );
+    expect(homeSections).toMatch(
+      /@media\s*\(max-width:\s*900px\)\s*{[\s\S]*?\.process-column\s*{[^}]*display:\s*flex;[^}]*grid-row:\s*auto;/s,
+    );
+  });
+
+  it('flows supporter rail into hero grid row 2 for intermediate viewports (901px-1039px)', () => {
+    const homeSections = readSource('src/components/home/homeSections.css');
+
+    expect(homeSections).toMatch(
+      /@media\s*\(\s*min-width:\s*901px\s*\)\s*and\s*\(\s*max-width:\s*1039px\s*\)\s*{[\s\S]*?\.supporter-rail\s*{[^}]*position:\s*relative;[^}]*grid-row:\s*2;/s,
+    );
+    expect(homeSections).toMatch(
+      /@media\s*\(\s*min-width:\s*901px\s*\)\s*and\s*\(\s*max-width:\s*1039px\s*\)\s*{[\s\S]*?\.supporter-rail\s*{[^}]*background:\s*rgba\(8,\s*10,\s*13,\s*0\.(?:7[0-9]|8[0-9]|9[0-9])\);/s,
+    );
+    expect(homeSections).toMatch(
+      /@media\s*\(\s*min-width:\s*901px\s*\)\s*and\s*\(\s*max-width:\s*1039px\s*\)\s*{[\s\S]*?\.supporter-logo-dst\s*{[^}]*height:\s*(?:4[0-8]px|clamp\([^)]+\));/s,
+    );
+    expect(homeSections).toMatch(
+      /@media\s*\(max-width:\s*900px\)\s*{[\s\S]*?\.supporter-logo-dst\s*{[^}]*height:\s*38px;/s,
+    );
+    expect(homeSections).toMatch(
+      /@media\s*\(prefers-reduced-motion:\s*reduce\)\s*{[\s\S]*?\.supporter-marquee-track\s*{[^}]*animation:\s*none/s,
+    );
+  });
 });

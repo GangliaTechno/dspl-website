@@ -47,7 +47,7 @@ const processSteps = [
     title: 'Audit',
     description:
       'We review where the business, brand and channels stand today, and what is actually blocking growth.',
-    timing: '2 to 3 weeks',
+    timing: 'Initial scope review',
     output: 'Written audit and a prioritised project brief',
   },
   {
@@ -55,7 +55,7 @@ const processSteps = [
     title: 'Build',
     description:
       'We create the agreed system: identity, campaigns, storefront, packaging, or the combination you need.',
-    timing: '6 to 12 weeks, depending on scope',
+    timing: 'Approved roadmap',
     output: 'Launch-ready assets and documented handover',
   },
   {
@@ -63,7 +63,7 @@ const processSteps = [
     title: 'Grow',
     description:
       'We launch, measure against the numbers set in stage one, and improve on a fixed monthly cycle.',
-    timing: 'Ongoing, monthly review',
+    timing: 'Engagement cadence',
     output: 'Monthly performance report and next-cycle priorities',
   },
 ];

@@ -419,6 +419,12 @@
   }
 }
 
+@media (min-width: 901px) and (max-width: 1039px) {
+  .home-hero-layout {
+    padding-bottom: clamp(2.5rem, 4vw, 3.5rem);
+  }
+}
+
 @media (max-width: 900px) {
   .home-page {
     padding-top: 4.5rem;

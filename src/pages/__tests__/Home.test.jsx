@@ -120,7 +120,7 @@ describe('Home page', () => {
         'We review where the business, brand and channels stand today, and what is actually blocking growth.',
       );
     expect(steps[0].querySelector('.process-step-details .process-meta-row:nth-child(1) dd').textContent)
-      .toBe('2 to 3 weeks');
+      .toBe('Initial scope review');
     expect(steps[0].querySelector('.process-step-details .process-meta-row:nth-child(2) dd').textContent)
       .toBe('Written audit and a prioritised project brief');
 
@@ -129,7 +129,7 @@ describe('Home page', () => {
         'We create the agreed system: identity, campaigns, storefront, packaging, or the combination you need.',
       );
     expect(steps[1].querySelector('.process-step-details .process-meta-row:nth-child(1) dd').textContent)
-      .toBe('6 to 12 weeks, depending on scope');
+      .toBe('Approved roadmap');
     expect(steps[1].querySelector('.process-step-details .process-meta-row:nth-child(2) dd').textContent)
       .toBe('Launch-ready assets and documented handover');
 
@@ -138,9 +138,13 @@ describe('Home page', () => {
         'We launch, measure against the numbers set in stage one, and improve on a fixed monthly cycle.',
       );
     expect(steps[2].querySelector('.process-step-details .process-meta-row:nth-child(1) dd').textContent)
-      .toBe('Ongoing, monthly review');
+      .toBe('Engagement cadence');
     expect(steps[2].querySelector('.process-step-details .process-meta-row:nth-child(2) dd').textContent)
       .toBe('Monthly performance report and next-cycle priorities');
+
+    expect(screen.queryByText(/2 to 3 weeks/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/6 to 12 weeks/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Ongoing, monthly review/i)).not.toBeInTheDocument();
 
     expect(screen.getByRole('heading', { name: 'Raw Radicles' })).toBeInTheDocument();
     expect(screen.getByText(/that is what shapes how we scope client work/i))
