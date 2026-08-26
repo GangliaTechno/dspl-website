@@ -32,43 +32,31 @@ export const BRANDING_FAQS = Object.freeze([
 export const MARKETING_FAQS = Object.freeze([
   {
     q: 'How is scope defined?',
-    a: 'After the audit. We review current position, channels, tracking and competition, then propose a mix, a monthly cadence and a set of measures. You approve the scope before work starts.',
+    a: 'We review your current channels, audience, tracking and priorities, then propose a focused mix, responsibilities and review measures. You approve the scope before work begins.',
   },
   {
-    q: 'How long before SEO shows results?',
-    a: 'For a site with existing authority, movement on long-tail terms in 8 to 12 weeks. For a new domain, 6 to 9 months to meaningful organic enquiries. Anyone promising faster is either buying links or counting the wrong metric.',
+    q: 'How are the measures chosen?',
+    a: 'We agree what to track before activity begins, using definitions that fit the channel, audience and business question. We keep those definitions consistent during review.',
   },
   {
-    q: 'How are results assessed?',
-    a: 'Against the measures agreed before launch, reported monthly. For most clients that is qualified enquiries and cost per enquiry, not impressions or rankings alone.',
+    q: 'Can you guarantee marketing results?',
+    a: 'No. We can agree the work, measures and review process, but outcomes depend on the audience, offer, channels, budgets, platform conditions and client inputs.',
   },
   {
-    q: 'Do you handle ad spend, or do we?',
-    a: 'You pay the platform directly and keep ownership of the ad accounts. We manage them. If we build accounts from scratch, they are created under your ownership from day one.',
+    q: 'Who owns the advertising accounts?',
+    a: 'You pay platforms directly and keep ownership of the advertising accounts. If we help set up an account, it is created under your ownership.',
   },
   {
     q: 'Can you work with our existing team or agency?',
-    a: 'Yes. We can take one channel, audit and hand over, or run the full programme. Responsibilities are documented so nothing falls between teams.',
-  },
-  {
-    q: 'Do you work with D2C and food brands specifically?',
-    a: 'Yes, and it is where we are strongest. We run our own food brand through the same marketplace, listing and advertising systems.',
-  },
-  {
-    q: 'What is the minimum commitment?',
-    a: 'Three months for retained work, because anything shorter cannot show a trend. Audits and one-off projects have no ongoing commitment.',
-  },
-  {
-    q: 'Which cities and regions do you serve?',
-    a: 'We are based in Manipal and work with clients across Karnataka, including Udupi and Mangalore, and across India remotely.',
+    a: 'Yes. We can take responsibility for agreed channels, collaborate with your team or agency, or prepare a plan for handover. Responsibilities and review points are documented.',
   },
   {
     q: 'What do we need to provide?',
-    a: 'Access to your website, ad accounts, analytics and product information, and one person on your side who can approve creative and answer questions within a working day.',
+    a: 'Useful inputs include your website and product information, access to agreed analytics or advertising accounts, existing brand materials and a person who can review decisions.',
   },
   {
-    q: 'Who creates the ad creative and copy?',
-    a: 'Our in-house team writes all ad copy, headlines, and descriptions, and designs static and motion creative tailored to each platform.',
+    q: 'How do review and reporting work?',
+    a: 'The engagement defines the reporting cadence and measures. We report what changed, what it may mean and what to review next, with questions and decisions kept visible to your team.',
   },
 ]);
 

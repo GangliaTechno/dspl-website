@@ -22,7 +22,13 @@ describe('Footer', () => {
       label: 'Start a branding project',
       href: '/start',
     });
-    expect(getFooterCta('/marketing').href).toBe('/contact');
+    expect(getFooterCta('/marketing')).toEqual({
+      eyebrow: 'Build with us',
+      title: 'Ready to build with fewer unknowns?',
+      text: 'Tell us what you are building, where you need support and what a good next step looks like.',
+      label: 'Start a marketing project',
+      href: '/start',
+    });
     expect(getFooterCta('/ecommerce').href).toBe('/contact');
     expect(getFooterCta('/about')).toEqual({
       eyebrow: 'Build with us',
