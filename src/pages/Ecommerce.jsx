@@ -9,51 +9,25 @@ import { getRouteMetadata } from '../seo/routeMetadata';
 const offers = [
   {
     title: 'Store setup and build',
-    text: 'Shopify, WooCommerce or React-based commerce. Catalogue structure, content architecture, responsive build, and an admin your team can run without a developer for routine changes.',
+    text: 'Plan and build the agreed storefront around the catalogue, content structure, customer journey and routine updates your team needs to manage.',
   },
   {
-    title: 'Catalogue and product content',
-    text: 'Product data, collection structure, imagery requirements, and content ownership organised for the selected channels.',
-  },
-  {
-    title: 'Conversion rate optimisation',
-    text: 'Review of discovery, product detail, cart and checkout journeys to find measurable friction, then a prioritised list of changes with a test plan. We fix what the data supports, not what looks dated.',
+    title: 'Conversion journey review',
+    text: 'Review discovery, product, cart and checkout journeys, identify supported points of friction and prioritise practical improvements.',
   },
   {
     title: 'Marketplace and multi-channel selling',
-    text: 'Amazon and Flipkart setup, catalogue preparation, listing content, variant structure, inventory and pricing workflow, plus quick-commerce and social channels where they fit.',
+    text: 'Prepare catalogue structure, listing content and operating responsibilities for the marketplaces and channels included in scope.',
   },
   {
-    title: 'Payments and delivery setup',
-    text: 'Payment gateway and delivery integrations configured to your platform, providers, fulfilment model and internal process, with COD, prepaid and returns flows tested before launch.',
+    title: 'Payments, delivery and returns',
+    text: 'Coordinate the agreed payment, delivery and returns flows with the selected platform and providers, then verify the customer journey before launch.',
   },
 ];
 
 const compliance = {
   title: 'Listing and marketplace compliance',
-  intro: 'Marketplace listing rejections almost always come from the same place: the pack says one thing and the catalogue says another. Net quantity, ingredient statements, manufacturer details, country of origin, FSSAI licence number and expiry format all have to match between the physical label and the digital record. We prepare catalogue data from the approved label artwork so the two agree from the start, and we structure product information so it can be pushed to a new channel without re-entry. For food and nutraceutical sellers we handle FSSAI licence details, mandatory declarations and marketplace-specific category requirements.',
-  items: [
-    {
-      title: 'Pack and catalogue consistency',
-      text: 'Keeping information on the physical pack and digital catalogue aligned.',
-    },
-    {
-      title: 'Catalogue data preparation',
-      text: 'Preparing product records from approved packaging and product information.',
-    },
-    {
-      title: 'Channel-ready product information',
-      text: 'Structuring product data so it can be reused across agreed commerce channels.',
-    },
-    {
-      title: 'Listing declarations',
-      text: 'Coordinating the required approved declaration information across listings.',
-    },
-    {
-      title: 'Marketplace requirements',
-      text: 'Preparing listing information for the requirements of the marketplaces/channels included in scope.',
-    },
-  ],
+  intro: 'Product information on the physical pack and the digital catalogue needs to remain consistent. We prepare channel-ready records from client-approved product and packaging information, organise the fields required by agreed marketplaces and coordinate updates when approved source information changes.',
   disclaimer: 'Regulated legal opinions stay with qualified advisers; the preparation and the paperwork sit with us.',
 };
 
@@ -77,17 +51,17 @@ const Ecommerce = () => (
     pageTypeClass="ecommerce-page"
     contextLabel="E-commerce services"
     heroTitle="E-commerce"
-    heroTagline="Storefronts, marketplaces, payments and delivery, built to run on a normal Tuesday without anyone calling support."
+    heroTagline="Storefronts, marketplaces, payments and delivery, planned around the way your team operates."
     heroImages={heroImages}
-    scopeTitle="Commerce built around how you actually operate"
-    scopeText="A storefront is only as good as the operation behind it. We plan the build alongside catalogue ownership, payment setup, inventory, dispatch and reporting, so the customer journey and the internal workflow are designed at the same time by the same people. We list, price and ship our own product through these systems, which is why the questions we ask early are about your warehouse and your returns policy, not only your homepage."
+    scopeTitle="Commerce built around the operating model"
+    scopeText="We plan the customer journey alongside catalogue ownership, payments, delivery, returns and reporting. That keeps the storefront and the day-to-day operating process connected, with responsibilities and dependencies agreed before the build moves forward."
     offersTitle="What we do"
-    offersDescription="Built to the platforms, integrations and operating responsibilities agreed for your project."
+    offersDescription="Four connected areas, scoped to the selected platform, channels and operating responsibilities."
     offers={offers}
     compliance={compliance}
     testimonials={approvedTestimonials}
     faqsTitle="Frequently asked questions about e-commerce"
-    faqsDescription="Clear answers about platforms, marketplaces, timelines, payment setup and ongoing support."
+    faqsDescription="Clear answers about platform choices, store operations, catalogue scope and ongoing support."
     faqs={faqs}
   />
 );

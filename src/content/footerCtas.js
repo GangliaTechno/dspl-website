@@ -38,8 +38,8 @@ export const footerCtas = Object.freeze({
     eyebrow: 'Build with us',
     title: 'Ready to build with fewer unknowns?',
     text: 'Tell us what you are building, where you need support and what a good next step looks like.',
-    label: 'Contact DSPL',
-    href: '/contact',
+    label: 'Start an e-commerce project',
+    href: '/start',
   },
   '/blogs': {
     eyebrow: 'Build with us',

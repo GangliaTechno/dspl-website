@@ -121,43 +121,62 @@ describe('Marketing service copy', () => {
 });
 
 describe('E-commerce service copy', () => {
-  it('renders five capabilities, five-item marketplace compliance, and ten approved FAQs', () => {
+  it('renders four approved capabilities, prose-led marketplace compliance, and safe FAQs', () => {
     const { container } = render(<Ecommerce />);
 
-    expect(container.querySelectorAll('article.offer-entry')).toHaveLength(5);
-    expect(container.querySelector('.offers-grid')).toHaveAttribute('data-count', '5');
+    expect(container.querySelectorAll('article.offer-entry')).toHaveLength(4);
+    expect(container.querySelector('.offers-grid')).toHaveAttribute('data-count', '4');
+    expect(container.querySelectorAll('.offer-entry .offer-number')).toHaveLength(0);
 
-    // Check 5 capabilities
-    for (const title of [
+    expect(screen.getByText('Storefronts, marketplaces, payments and delivery, planned around the way your team operates.')).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Commerce built around the operating model' })).toBeInTheDocument();
+    expect(screen.getByText('We plan the customer journey alongside catalogue ownership, payments, delivery, returns and reporting. That keeps the storefront and the day-to-day operating process connected, with responsibilities and dependencies agreed before the build moves forward.')).toBeInTheDocument();
+
+    for (const [title, text] of [
+      [
       'Store setup and build',
-      'Catalogue and product content',
-      'Conversion rate optimisation',
-      'Marketplace and multi-channel selling',
-      'Payments and delivery setup',
+        'Plan and build the agreed storefront around the catalogue, content structure, customer journey and routine updates your team needs to manage.',
+      ],
+      [
+        'Conversion journey review',
+        'Review discovery, product, cart and checkout journeys, identify supported points of friction and prioritise practical improvements.',
+      ],
+      [
+        'Marketplace and multi-channel selling',
+        'Prepare catalogue structure, listing content and operating responsibilities for the marketplaces and channels included in scope.',
+      ],
+      [
+        'Payments, delivery and returns',
+        'Coordinate the agreed payment, delivery and returns flows with the selected platform and providers, then verify the customer journey before launch.',
+      ],
     ]) {
       expect(screen.getByRole('heading', { name: title })).toBeInTheDocument();
+      expect(screen.getByText(text)).toBeInTheDocument();
     }
+    expect(screen.queryByRole('heading', { name: 'Catalogue and product content' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: 'Payments and delivery setup' })).not.toBeInTheDocument();
+    expect(screen.getByText('Four connected areas, scoped to the selected platform, channels and operating responsibilities.')).toBeInTheDocument();
 
     const compliance = container.querySelector('#compliance');
     expect(compliance).toBeInTheDocument();
-    expect(within(compliance).getByText(/Listing and marketplace compliance/i)).toBeInTheDocument();
-    expect(within(compliance).getByText(/Marketplace listing rejections/i)).toBeInTheDocument();
-    expect(within(compliance).getByText(/Regulated legal opinions stay with qualified advisers/i)).toBeInTheDocument();
+    expect(within(compliance).getByRole('heading', { name: 'Listing and marketplace compliance' })).toBeInTheDocument();
+    expect(within(compliance).getByText('Product information on the physical pack and the digital catalogue needs to remain consistent. We prepare channel-ready records from client-approved product and packaging information, organise the fields required by agreed marketplaces and coordinate updates when approved source information changes.')).toBeInTheDocument();
+    expect(within(compliance).getByText('Regulated legal opinions stay with qualified advisers; the preparation and the paperwork sit with us.')).toBeInTheDocument();
+    expect(compliance.querySelector('.service-detail-grid')).not.toBeInTheDocument();
 
-    // Check 5 compliance items
-    const complianceItems = compliance.querySelectorAll('.service-detail-grid article');
-    expect(complianceItems).toHaveLength(5);
-    for (const itemTitle of [
-      'Pack and catalogue consistency',
-      'Catalogue data preparation',
-      'Channel-ready product information',
-      'Listing declarations',
-      'Marketplace requirements',
+    expect(container.querySelectorAll('.faq-list .faq-item')).toHaveLength(7);
+    for (const question of [
+      'How do you choose a platform?',
+      'Can you improve an existing store?',
+      'How is catalogue scope defined?',
+      'Who owns the store and connected accounts?',
+      'What support is available after launch?',
+      'Which marketplaces and channels can you include?',
+      'What do you need from us before we start?',
     ]) {
-      expect(within(compliance).getByRole('heading', { name: itemTitle })).toBeInTheDocument();
+      expect(screen.getByText(question)).toBeInTheDocument();
     }
-
-    expect(container.querySelectorAll('.faq-list .faq-item')).toHaveLength(10);
+    expect(container.textContent).not.toMatch(/4 to 6 weeks|8 to 16 weeks|few hundred SKUs|monthly retainers|Razorpay|Cashfree|PhonePe|guarantee|guaranteed|legal clearance|launches? (?:in|within)|without a developer/i);
     expectNoUnapprovedCommercialClaims(container);
   });
 });
