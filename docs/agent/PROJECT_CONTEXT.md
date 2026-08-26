@@ -1,9 +1,9 @@
 # DSPL Website Project Context
 
-Updated: 2026-08-25 IST
+Updated: 2026-08-26 IST
 Repository: `E:\For website\dspl website`
-Branch at snapshot: `pawan/sitewide-insights-audit`
-HEAD at snapshot: `4ac5f4281a0084029056911a861afe85da495583`
+Branch at snapshot: `review/content-seo-pdf-reconciliation`
+HEAD at snapshot: `b7d4e93d896fe29362e636301e5a4b9c8dbba7fc`
 
 This is a handoff ledger, not proof of current state. Refresh Git status and rerun
 validation before relying on it. Current code and fresh evidence win on conflict.
@@ -35,6 +35,41 @@ They are durable across worktrees and clones that contain those commits.
 - `D:` is permanently outside project scope.
 
 ## Active Protected Work
+
+### Approved focused content and UI correction pass
+
+Status: implementation authorised on 2026-08-26. The current branch is being
+selectively corrected; commit `b7d4e93` must not be reverted wholesale because
+it contains unrelated accepted work.
+
+Design and exact service copy sheet:
+`docs/superpowers/specs/2026-08-26-dspl-focused-content-ui-corrections-design.md`
+
+Implementation plan:
+`docs/superpowers/plans/2026-08-26-dspl-focused-content-ui-corrections.md`
+
+Approved corrections:
+
+- exactly four capabilities per Branding, Marketing and E-commerce page in a
+  balanced 2×2 editorial layout;
+- prose-led Branding/E-commerce compliance bands, safe FAQs and route-owned
+  `/start` footer actions;
+- distinct Brands actions for Raw Radicles detail, portfolio partnership and
+  starting a project;
+- removal of gated Home process timings, aligned metadata dividers and a
+  non-overlapping supporter rail throughout the 901–1039px band;
+- exactly Pawan Shetty on both generated production articles; and
+- deterministic desktop/mobile Insights TOC tracking after fast jumps.
+
+Execution uses one `bounded_implementer` writer at a time, test-first behavior
+changes and a fresh `independent_reviewer` after every page group. Gemini 3.7
+Flash High is reserved for read-only browser/visual QA. Separate reviewed commits
+are authorised; push, merge, deployment and production mutation are not.
+
+Current baseline: branch `review/content-seo-pdf-reconciliation`, HEAD
+`b7d4e93d896fe29362e636301e5a4b9c8dbba7fc`, 46 test files / 510 tests passing.
+The untracked `.github/instructions/` directory is user-owned and excluded from
+all task diffs and commits.
 
 ### Approved sitewide copy, content, and Insights refinement
 
