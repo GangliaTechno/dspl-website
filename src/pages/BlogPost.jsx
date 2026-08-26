@@ -18,6 +18,27 @@ import {
 } from '../utils/publicationUtils';
 import { resolvePublicationArtwork } from '../utils/publicationArtwork';
 
+/**
+ * Distance from viewport top (in px) used as the reading anchor.
+ * Headings scrolled above or reaching this offset are considered current/active.
+ * Aligns with header height (4.75rem / ~76px) + visual reading offset (~54px) = 130px.
+ */
+const READING_ANCHOR_OFFSET_PX = 130;
+
+const resolveActiveHeadingId = (headingList) => {
+  if (!headingList || headingList.length === 0) return '';
+  let activeId = headingList[0].id;
+  for (const heading of headingList) {
+    const el = document.getElementById(heading.id);
+    if (!el) continue;
+    const rect = el.getBoundingClientRect();
+    if (rect.top <= READING_ANCHOR_OFFSET_PX) {
+      activeId = heading.id;
+    }
+  }
+  return activeId;
+};
+
 const BlogPost = ({ posts = blogPosts, initialArticle = null }) => {
   const { slug = '' } = useParams();
   const normalizedSlug = normalizeBlogSlug(slug || initialArticle?.slug || '');
@@ -56,48 +77,73 @@ const BlogPost = ({ posts = blogPosts, initialArticle = null }) => {
     () => summary?.headings || [],
     [summary?.headings],
   );
-  const [prevSlug, setPrevSlug] = useState(normalizedSlug);
-  const [activeHeadingId, setActiveHeadingId] = useState(headings[0]?.id || '');
+  const [activeHeadingId, setActiveHeadingId] = useState('');
 
-  if (prevSlug !== normalizedSlug) {
-    setPrevSlug(normalizedSlug);
-    setActiveHeadingId(headings[0]?.id || '');
-  }
+  const effectiveActiveHeadingId =
+    (activeHeadingId && headings.some((h) => h.id === activeHeadingId)
+      ? activeHeadingId
+      : headings[0]?.id) || '';
 
   useEffect(() => {
     if (!headings.length || !effectiveArticle?.body?.length) return undefined;
-    if (typeof IntersectionObserver === 'undefined') return undefined;
+    if (typeof window === 'undefined') return undefined;
 
-    const headingElements = headings
-      .map((h) => document.getElementById(h.id))
-      .filter(Boolean);
+    let rafId = null;
 
-    if (!headingElements.length) return undefined;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visibleEntries = entries.filter((e) => e.isIntersecting);
-        if (visibleEntries.length > 0) {
-          const topmost = visibleEntries.reduce((prev, curr) =>
-            prev.boundingClientRect.top < curr.boundingClientRect.top ? prev : curr
-          );
-          if (topmost.target.id) {
-            setActiveHeadingId(topmost.target.id);
-          }
-        }
-      },
-      {
-        rootMargin: '-10% 0px -70% 0px',
-        threshold: 0,
+    const updateActiveHeading = () => {
+      rafId = null;
+      const nextId = resolveActiveHeadingId(headings);
+      if (nextId) {
+        setActiveHeadingId(nextId);
       }
-    );
+    };
 
-    for (const el of headingElements) {
-      observer.observe(el);
+    const scheduleUpdate = () => {
+      if (rafId === null) {
+        rafId = window.requestAnimationFrame(updateActiveHeading);
+      }
+    };
+
+    scheduleUpdate();
+
+    window.addEventListener('scroll', scheduleUpdate, { passive: true });
+    window.addEventListener('resize', scheduleUpdate, { passive: true });
+    window.addEventListener('hashchange', scheduleUpdate);
+
+    let observer = null;
+    if (typeof IntersectionObserver !== 'undefined') {
+      const headingElements = headings
+        .map((h) => document.getElementById(h.id))
+        .filter(Boolean);
+
+      if (headingElements.length > 0) {
+        observer = new IntersectionObserver(
+          () => {
+            scheduleUpdate();
+          },
+          {
+            rootMargin: '-10% 0px -70% 0px',
+            threshold: 0,
+          },
+        );
+
+        for (const el of headingElements) {
+          observer.observe(el);
+        }
+      }
     }
 
     return () => {
-      observer.disconnect();
+      window.removeEventListener('scroll', scheduleUpdate);
+      window.removeEventListener('resize', scheduleUpdate);
+      window.removeEventListener('hashchange', scheduleUpdate);
+      if (rafId !== null) {
+        window.cancelAnimationFrame(rafId);
+        rafId = null;
+      }
+      if (observer) {
+        observer.disconnect();
+      }
     };
   }, [normalizedSlug, effectiveArticle?.body, headings]);
 
@@ -222,12 +268,12 @@ const BlogPost = ({ posts = blogPosts, initialArticle = null }) => {
                           <a
                             href={`#${heading.id}`}
                             className={`blog-toc-link ${
-                              activeHeadingId === heading.id
+                              effectiveActiveHeadingId === heading.id
                                 ? 'blog-toc-link--active is-active'
                                 : ''
                             }`}
                             aria-current={
-                              activeHeadingId === heading.id
+                              effectiveActiveHeadingId === heading.id
                                 ? 'location'
                                 : undefined
                             }
@@ -260,10 +306,10 @@ const BlogPost = ({ posts = blogPosts, initialArticle = null }) => {
                           <a
                             href={`#${heading.id}`}
                             className={`blog-toc-link ${
-                              activeHeadingId === heading.id ? 'is-active' : ''
+                              effectiveActiveHeadingId === heading.id ? 'is-active' : ''
                             }`}
                             aria-current={
-                              activeHeadingId === heading.id
+                              effectiveActiveHeadingId === heading.id
                                 ? 'location'
                                 : undefined
                             }

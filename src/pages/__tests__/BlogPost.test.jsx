@@ -1,4 +1,4 @@
-import { act, fireEvent, render, screen, within } from '@testing-library/react';
+import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import { MemoryRouter, Route, Routes, useNavigate } from 'react-router';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import BlogPost from '../BlogPost';
@@ -439,7 +439,7 @@ describe('BlogPost', () => {
     expect(mobileLinks[1]).toHaveTextContent('Section Two');
   });
 
-  it('keeps the mobile TOC active state in sync with the observed heading', () => {
+  it('keeps the mobile TOC active state in sync with the observed heading', async () => {
     let observerCallback;
 
     class MockIntersectionObserver {
@@ -468,10 +468,12 @@ describe('BlogPost', () => {
       ]);
     });
 
-    const mobileLinks = container.querySelector('.blog-mobile-toc').querySelectorAll('.blog-toc-link');
-    expect(mobileLinks[1]).toHaveClass('is-active');
-    expect(mobileLinks[1]).toHaveAttribute('aria-current', 'location');
-    expect(mobileLinks[0]).not.toHaveAttribute('aria-current');
+    await waitFor(() => {
+      const mobileLinks = container.querySelector('.blog-mobile-toc').querySelectorAll('.blog-toc-link');
+      expect(mobileLinks[1]).toHaveClass('is-active');
+      expect(mobileLinks[1]).toHaveAttribute('aria-current', 'location');
+      expect(mobileLinks[0]).not.toHaveAttribute('aria-current');
+    });
 
     vi.unstubAllGlobals();
   });
@@ -603,6 +605,155 @@ describe('BlogPost', () => {
     unmount();
     expect(disconnectMock).toHaveBeenCalled();
 
+    vi.unstubAllGlobals();
+  });
+
+  it('deterministically updates active TOC item on fast scroll using geometry resolver when IntersectionObserver does not intersect', async () => {
+    class MockIntersectionObserver {
+      observe = vi.fn();
+      disconnect = vi.fn();
+      unobserve = vi.fn();
+    }
+    vi.stubGlobal('IntersectionObserver', MockIntersectionObserver);
+
+    const getBoundingClientRectSpy = vi.spyOn(Element.prototype, 'getBoundingClientRect').mockImplementation(function () {
+      if (this.id === 'start-with-decisions') {
+        return { top: -250, bottom: -150, left: 0, right: 800, width: 800, height: 100 };
+      }
+      if (this.id === 'make-it-usable') {
+        return { top: 90, bottom: 190, left: 0, right: 800, width: 800, height: 100 };
+      }
+      return { top: 0, bottom: 0, left: 0, right: 0, width: 0, height: 0 };
+    });
+
+    const post = mockPost('fast-scroll-test');
+    const secondPost = mockPost('second-post');
+    const { container } = renderPost('fast-scroll-test', [post, secondPost]);
+
+    fireEvent.scroll(window);
+
+    await waitFor(() => {
+      const desktopLinks = container.querySelector('.blog-toc-sidebar').querySelectorAll('.blog-toc-link');
+      expect(desktopLinks[1]).toHaveAttribute('aria-current', 'location');
+      expect(desktopLinks[1]).toHaveClass('is-active');
+      expect(desktopLinks[0]).not.toHaveAttribute('aria-current');
+
+      const mobileLinks = container.querySelector('.blog-mobile-toc').querySelectorAll('.blog-toc-link');
+      expect(mobileLinks[1]).toHaveAttribute('aria-current', 'location');
+      expect(mobileLinks[1]).toHaveClass('is-active');
+      expect(mobileLinks[0]).not.toHaveAttribute('aria-current');
+    });
+
+    getBoundingClientRectSpy.mockRestore();
+    vi.unstubAllGlobals();
+  });
+
+  it('updates active TOC item on hashchange and resize events matching heading geometry', async () => {
+    class MockIntersectionObserver {
+      observe = vi.fn();
+      disconnect = vi.fn();
+      unobserve = vi.fn();
+    }
+    vi.stubGlobal('IntersectionObserver', MockIntersectionObserver);
+
+    const getBoundingClientRectSpy = vi.spyOn(Element.prototype, 'getBoundingClientRect').mockImplementation(function () {
+      if (this.id === 'start-with-decisions') {
+        return { top: -400, bottom: -300, left: 0, right: 800, width: 800, height: 100 };
+      }
+      if (this.id === 'make-it-usable') {
+        return { top: 50, bottom: 150, left: 0, right: 800, width: 800, height: 100 };
+      }
+      return { top: 0, bottom: 0, left: 0, right: 0, width: 0, height: 0 };
+    });
+
+    const post = mockPost('hashchange-resize-test');
+    const secondPost = mockPost('second-post');
+    const { container } = renderPost('hashchange-resize-test', [post, secondPost]);
+
+    fireEvent(window, new Event('hashchange'));
+    fireEvent(window, new Event('resize'));
+
+    await waitFor(() => {
+      const desktopLinks = container.querySelector('.blog-toc-sidebar').querySelectorAll('.blog-toc-link');
+      expect(desktopLinks[1]).toHaveAttribute('aria-current', 'location');
+      expect(desktopLinks[0]).not.toHaveAttribute('aria-current');
+
+      const mobileLinks = container.querySelector('.blog-mobile-toc').querySelectorAll('.blog-toc-link');
+      expect(mobileLinks[1]).toHaveAttribute('aria-current', 'location');
+      expect(mobileLinks[0]).not.toHaveAttribute('aria-current');
+    });
+
+    getBoundingClientRectSpy.mockRestore();
+    vi.unstubAllGlobals();
+  });
+
+  it('falls back to first heading when all headings are below reading anchor', async () => {
+    class MockIntersectionObserver {
+      observe = vi.fn();
+      disconnect = vi.fn();
+      unobserve = vi.fn();
+    }
+    vi.stubGlobal('IntersectionObserver', MockIntersectionObserver);
+
+    const getBoundingClientRectSpy = vi.spyOn(Element.prototype, 'getBoundingClientRect').mockImplementation(function () {
+      if (this.id === 'start-with-decisions') {
+        return { top: 350, bottom: 450, left: 0, right: 800, width: 800, height: 100 };
+      }
+      if (this.id === 'make-it-usable') {
+        return { top: 850, bottom: 950, left: 0, right: 800, width: 800, height: 100 };
+      }
+      return { top: 0, bottom: 0, left: 0, right: 0, width: 0, height: 0 };
+    });
+
+    const post = mockPost('fallback-test');
+    const secondPost = mockPost('second-post');
+    const { container } = renderPost('fallback-test', [post, secondPost]);
+
+    fireEvent.scroll(window);
+
+    await waitFor(() => {
+      const desktopLinks = container.querySelector('.blog-toc-sidebar').querySelectorAll('.blog-toc-link');
+      expect(desktopLinks[0]).toHaveAttribute('aria-current', 'location');
+      expect(desktopLinks[1]).not.toHaveAttribute('aria-current');
+
+      const mobileLinks = container.querySelector('.blog-mobile-toc').querySelectorAll('.blog-toc-link');
+      expect(mobileLinks[0]).toHaveAttribute('aria-current', 'location');
+      expect(mobileLinks[1]).not.toHaveAttribute('aria-current');
+    });
+
+    getBoundingClientRectSpy.mockRestore();
+    vi.unstubAllGlobals();
+  });
+
+  it('cleans up scroll, resize, hashchange listeners, IntersectionObserver, and scheduled animation frames on unmount', () => {
+    const removeEventListenerSpy = vi.spyOn(window, 'removeEventListener');
+    const cancelAnimationFrameSpy = vi.spyOn(window, 'cancelAnimationFrame');
+    const disconnectMock = vi.fn();
+
+    class MockIntersectionObserver {
+      observe = vi.fn();
+      disconnect = disconnectMock;
+      unobserve = vi.fn();
+    }
+    vi.stubGlobal('IntersectionObserver', MockIntersectionObserver);
+
+    const post = mockPost('cleanup-test');
+    const secondPost = mockPost('second-post');
+
+    const { unmount } = renderPost('cleanup-test', [post, secondPost]);
+
+    fireEvent.scroll(window);
+
+    unmount();
+
+    expect(removeEventListenerSpy).toHaveBeenCalledWith('scroll', expect.any(Function));
+    expect(removeEventListenerSpy).toHaveBeenCalledWith('resize', expect.any(Function));
+    expect(removeEventListenerSpy).toHaveBeenCalledWith('hashchange', expect.any(Function));
+    expect(disconnectMock).toHaveBeenCalled();
+    expect(cancelAnimationFrameSpy).toHaveBeenCalled();
+
+    removeEventListenerSpy.mockRestore();
+    cancelAnimationFrameSpy.mockRestore();
     vi.unstubAllGlobals();
   });
 });
