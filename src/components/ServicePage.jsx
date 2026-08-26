@@ -20,6 +20,7 @@ const ServicePage = ({
   proof,
   engagements,
   testimonials = [],
+  faqsEyebrow,
   faqsTitle,
   faqsDescription,
   faqs,
@@ -28,7 +29,11 @@ const ServicePage = ({
 
   return (
     <div className={`${pageTypeClass} service-page fade-in`}>
-      <section className={`section domain-hero${heroImages?.length ? ' domain-hero--picture' : ''}`}>
+      <section
+        className={`section domain-hero${
+          heroImages?.length ? ' domain-hero--picture' : ''
+        }`}
+      >
         {heroImages?.length > 0 && (
           <RotatingHeroMedia
             images={heroImages}
@@ -37,6 +42,7 @@ const ServicePage = ({
             mobileBreakpoint={767}
           />
         )}
+
         <div className="container">
           <span className="section-subtitle">{contextLabel}</span>
           <h1 className="domain-title">{heroTitle}</h1>
@@ -44,9 +50,18 @@ const ServicePage = ({
         </div>
       </section>
 
-      <section className="section service-scope-section" aria-labelledby={`${pageTypeClass}-scope-title`}>
+      <section
+        className="section service-scope-section"
+        aria-labelledby={`${pageTypeClass}-scope-title`}
+      >
         <div className="container service-scope-layout">
-          <h2 id={`${pageTypeClass}-scope-title`} className="service-scope-title">{scopeTitle}</h2>
+          <h2
+            id={`${pageTypeClass}-scope-title`}
+            className="service-scope-title"
+          >
+            {scopeTitle}
+          </h2>
+
           <p className="service-scope-text">{scopeText}</p>
         </div>
       </section>
@@ -55,12 +70,16 @@ const ServicePage = ({
         <div className="container">
           <div className="section-header">
             <h2 className="section-title">{offersTitle}</h2>
+
             <p className="section-title-description">
               {offersDescription}
             </p>
           </div>
 
-          <div className="offers-grid offers-grid--editorial" data-count={offers.length}>
+          <div
+            className="offers-grid offers-grid--editorial"
+            data-count={offers.length}
+          >
             {offers.map((offer) => (
               <article key={offer.title} className="offer-entry">
                 <h3 className="offer-card-title">{offer.title}</h3>
@@ -79,13 +98,23 @@ const ServicePage = ({
         >
           <div className="container">
             <div className="section-header">
-              <h2 id={`${pageTypeClass}-compliance-title`} className="section-title">
+              <h2
+                id={`${pageTypeClass}-compliance-title`}
+                className="section-title"
+              >
                 {compliance.title}
               </h2>
-              <p className="section-title-description">{compliance.intro}</p>
+
+              <p className="section-title-description">
+                {compliance.intro}
+              </p>
             </div>
+
             {compliance.items && compliance.items.length > 0 && (
-              <div className="service-detail-grid service-detail-grid--supporting" data-count={compliance.items.length}>
+              <div
+                className="service-detail-grid service-detail-grid--supporting"
+                data-count={compliance.items.length}
+              >
                 {compliance.items.map((item) => (
                   <article key={item.title}>
                     <h3>{item.title}</h3>
@@ -94,36 +123,69 @@ const ServicePage = ({
                 ))}
               </div>
             )}
+
             {compliance.disclaimer && (
-              <p className="service-detail-disclaimer">{compliance.disclaimer}</p>
+              <p className="service-detail-disclaimer">
+                {compliance.disclaimer}
+              </p>
             )}
           </div>
         </section>
       )}
 
       {proof && (
-        <section className="section service-proof-section" aria-labelledby={`${pageTypeClass}-proof-title`}>
+        <section
+          className="section service-proof-section"
+          aria-labelledby={`${pageTypeClass}-proof-title`}
+        >
           <div className="container service-proof-layout">
             <div>
               <span className="section-subtitle">{proof.eyebrow}</span>
-              <h2 id={`${pageTypeClass}-proof-title`} className="section-title">{proof.title}</h2>
-              <p className="section-title-description">{proof.body}</p>
+
+              <h2
+                id={`${pageTypeClass}-proof-title`}
+                className="section-title"
+              >
+                {proof.title}
+              </h2>
+
+              <p className="section-title-description">
+                {proof.body}
+              </p>
             </div>
+
             <ul className="service-proof-points">
-              {proof.points.map((point) => <li key={point}>{point}</li>)}
+              {proof.points.map((point) => (
+                <li key={point}>{point}</li>
+              ))}
             </ul>
           </div>
         </section>
       )}
 
       {engagements && (
-        <section className="section service-engagements-section bg-alt" aria-labelledby={`${pageTypeClass}-engagements-title`}>
+        <section
+          className="section service-engagements-section bg-alt"
+          aria-labelledby={`${pageTypeClass}-engagements-title`}
+        >
           <div className="container">
             <div className="section-header">
-              <h2 id={`${pageTypeClass}-engagements-title`} className="section-title">{engagements.title}</h2>
-              <p className="section-title-description">{engagements.description}</p>
+              <h2
+                id={`${pageTypeClass}-engagements-title`}
+                className="section-title"
+              >
+                {engagements.title}
+              </h2>
+
+              <p className="section-title-description">
+                {engagements.description}
+              </p>
             </div>
-            <div className="service-detail-grid" data-count={engagements.items.length}>
+
+            <div
+              className="service-detail-grid"
+              data-count={engagements.items.length}
+            >
               {engagements.items.map((item) => (
                 <article key={item.title}>
                   <h3>{item.title}</h3>
@@ -140,10 +202,19 @@ const ServicePage = ({
       <section className="section faq-section bg-alt">
         <div className="container">
           <div className="section-header">
+            {faqsEyebrow && (
+              <span className="section-subtitle">
+                {faqsEyebrow}
+              </span>
+            )}
+
             <h2 className="section-title">{faqsTitle}</h2>
-            <p className="section-title-description">
-              {faqsDescription}
-            </p>
+
+            {faqsDescription && (
+              <p className="section-title-description">
+                {faqsDescription}
+              </p>
+            )}
           </div>
 
           <FAQAccordion faqs={faqs} />

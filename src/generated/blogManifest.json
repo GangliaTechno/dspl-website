@@ -1,254 +1,120 @@
 {
-  "sourceUpdatedAt": "2026-08-24T08:00:00.000Z",
+  "sourceUpdatedAt": "2026-08-24T04:44:50.000Z",
   "blogsEnabled": true,
   "minimumPosts": 2,
   "totalPosts": 2,
   "posts": [
     {
-      "_id": "seed-post-fssai-labelling-requirements-checklist-2026",
-      "_createdAt": "2026-08-24T08:00:00.000Z",
-      "_updatedAt": "2026-08-24T08:00:00.000Z",
-      "slug": "fssai-labelling-requirements-checklist-2026",
-      "title": "FSSAI Labelling Requirements for Packaged Food",
-      "category": "Compliance",
-      "publishedAt": "2026-08-24T08:00:00.000Z",
-      "description": "Every mandatory declaration on an Indian food label in 2026, the font sizes, the allergen rules, the 2027 changes, and the mistakes that cost brands a reprint.",
+      "_id": "seed-post-coordinating-brand-market-commerce",
+      "_createdAt": "2026-08-24T04:44:50.000Z",
+      "_updatedAt": "2026-08-24T04:44:50.000Z",
+      "slug": "coordinating-brand-market-commerce",
+      "title": "Coordinating Brand, Market, and Commerce as One System",
+      "category": "Branding",
+      "publishedAt": "2026-08-20T08:00:00.000Z",
+      "description": "Why positioning, market execution, and commerce operations work better when they share context, decisions, and feedback instead of operating as disconnected handoffs.",
       "readingTime": {
-        "minutes": 14,
-        "text": "14 min read",
-        "wordCount": 3508
+        "minutes": 4,
+        "text": "4 min read",
+        "wordCount": 671
       },
       "headings": [
         {
-          "blockKey": "fb-h2-01",
-          "id": "which-laws-actually-apply-to-your-label",
-          "text": "Which laws actually apply to your label",
+          "blockKey": "h1",
+          "id": "why-the-handoffs-matter",
+          "text": "Why the handoffs matter",
           "level": 2
         },
         {
-          "blockKey": "fb-h2-02",
-          "id": "the-compliance-calendar-you-should-have-on-the-wall",
-          "text": "The compliance calendar you should have on the wall",
+          "blockKey": "h2",
+          "id": "brand-decisions-create-downstream-consequences",
+          "text": "Brand decisions create downstream consequences",
           "level": 2
         },
         {
-          "blockKey": "fb-h2-03",
-          "id": "the-checklist-fourteen-things-every-pack-must-carry",
-          "text": "The checklist: fourteen things every pack must carry",
+          "blockKey": "h3",
+          "id": "market-feedback-should-travel-backwards",
+          "text": "Market feedback should travel backwards",
           "level": 2
         },
         {
-          "blockKey": "fb-h2-04",
-          "id": "font-size-the-table-that-decides-your-artwork",
-          "text": "Font size: the table that decides your artwork",
+          "blockKey": "h4",
+          "id": "commerce-is-part-of-the-brand-experience",
+          "text": "Commerce is part of the brand experience",
           "level": 2
         },
         {
-          "blockKey": "fb-h2-05",
-          "id": "claims-the-area-that-generates-the-most-enforcement",
-          "text": "Claims: the area that generates the most enforcement",
+          "blockKey": "h5",
+          "id": "shared-operating-context-reduces-rework",
+          "text": "Shared operating context reduces rework",
           "level": 2
         },
         {
-          "blockKey": "fb-h2-06",
-          "id": "what-changes-on-1-july-2027",
-          "text": "What changes on 1 July 2027",
-          "level": 2
-        },
-        {
-          "blockKey": "fb-h2-07",
-          "id": "front-of-pack-labelling-what-is-coming-and-when",
-          "text": "Front-of-pack labelling: what is coming, and when",
-          "level": 2
-        },
-        {
-          "blockKey": "fb-h2-08",
-          "id": "the-penalties-and-who-pays-them",
-          "text": "The penalties, and who pays them",
-          "level": 2
-        },
-        {
-          "blockKey": "fb-h2-09",
-          "id": "the-pre-print-checklist",
-          "text": "The pre-print checklist",
-          "level": 2
-        },
-        {
-          "blockKey": "fb-h2-10",
-          "id": "why-this-is-worth-doing-properly",
-          "text": "Why this is worth doing properly",
+          "blockKey": "h6",
+          "id": "what-coordinated-execution-looks-like",
+          "text": "What coordinated execution looks like",
           "level": 2
         }
       ],
-      "authors": [
-        {
-          "_key": "author-namesh-malarout",
-          "name": "Namesh Malarout",
-          "role": "Director, Dashapatmaja Solutions Pvt Ltd"
-        },
-        {
-          "_key": "author-pawan-shetty",
-          "name": "Pawan Shetty"
-        }
-      ],
-      "mainImage": {
-        "alt": "Packaged food artwork and back-of-pack label panels arranged for a compliance review.",
-        "asset": {
-          "url": "/insights/fssai-labelling-v1-1440.webp",
-          "metadata": {
-            "dimensions": {
-              "width": 1440,
-              "height": 810,
-              "aspectRatio": 1.7777777777777777
-            }
-          }
-        },
-        "responsive": {
-          "640": "/insights/fssai-labelling-v1-640.webp",
-          "960": "/insights/fssai-labelling-v1-960.webp",
-          "1440": "/insights/fssai-labelling-v1-1440.webp"
-        }
-      },
-      "seo": {
-        "metaTitle": "FSSAI Labelling Requirements 2026: A Practical Checklist",
-        "metaDescription": "Every mandatory declaration on an Indian food label in 2026, the font sizes, the allergen rules, the 2027 changes, and the mistakes that cost brands a reprint.",
-        "ogImage": null
-      }
+      "authors": null,
+      "mainImage": null,
+      "seo": null
     },
     {
-      "_id": "seed-post-legal-metrology-packaged-commodity-rules-india",
-      "_createdAt": "2026-08-24T08:00:00.000Z",
-      "_updatedAt": "2026-08-24T08:00:00.000Z",
-      "slug": "legal-metrology-packaged-commodity-rules-india",
-      "title": "Legal Metrology Packaged Commodity Rules",
-      "category": "Compliance",
-      "publishedAt": "2026-08-24T08:00:00.000Z",
-      "description": "The nine mandatory declarations under the Legal Metrology Packaged Commodities Rules, where each one must sit, the font sizes, and what changed in 2026.",
+      "_id": "seed-post-from-packaging-to-purchase",
+      "_createdAt": "2026-08-24T04:44:50.000Z",
+      "_updatedAt": "2026-08-24T04:44:50.000Z",
+      "slug": "from-packaging-to-purchase",
+      "title": "From Packaging to Purchase: Why Consumer-Brand Launch Handoffs Matter",
+      "category": "E-commerce",
+      "publishedAt": "2026-08-20T08:00:00.000Z",
+      "description": "A practical look at how packaging, product information, catalogue assets, channel setup, checkout, fulfilment, and measurement connect during a consumer-brand launch.",
       "readingTime": {
-        "minutes": 15,
-        "text": "15 min read",
-        "wordCount": 3249
+        "minutes": 3,
+        "text": "3 min read",
+        "wordCount": 522
       },
       "headings": [
         {
-          "blockKey": "lb-h2-01",
-          "id": "what-the-rules-actually-cover",
-          "text": "What the rules actually cover",
+          "blockKey": "ph1",
+          "id": "a-launch-is-a-chain-not-a-moment",
+          "text": "A launch is a chain, not a moment",
           "level": 2
         },
         {
-          "blockKey": "lb-h2-02",
-          "id": "the-nine-mandatory-declarations",
-          "text": "The nine mandatory declarations",
+          "blockKey": "ph2",
+          "id": "packaging-becomes-operational-data",
+          "text": "Packaging becomes operational data",
           "level": 2
         },
         {
-          "blockKey": "lb-h2-03",
-          "id": "where-the-declarations-go-the-principal-display-panel",
-          "text": "Where the declarations go: the principal display panel",
+          "blockKey": "ph3",
+          "id": "product-information-must-survive-every-channel",
+          "text": "Product information must survive every channel",
           "level": 2
         },
         {
-          "blockKey": "lb-h2-04",
-          "id": "how-big-the-font-size-table",
-          "text": "How big: the font size table",
+          "blockKey": "ph4",
+          "id": "catalogue-and-marketplace-readiness",
+          "text": "Catalogue and marketplace readiness",
           "level": 2
         },
         {
-          "blockKey": "lb-h2-05",
-          "id": "net-quantity",
-          "text": "Net quantity",
+          "blockKey": "ph5",
+          "id": "checkout-and-fulfilment-complete-the-promise",
+          "text": "Checkout and fulfilment complete the promise",
           "level": 2
         },
         {
-          "blockKey": "lb-h2-06",
-          "id": "maximum-retail-price",
-          "text": "Maximum retail price",
-          "level": 2
-        },
-        {
-          "blockKey": "lb-h2-07",
-          "id": "unit-sale-price",
-          "text": "Unit sale price",
-          "level": 2
-        },
-        {
-          "blockKey": "lb-h2-08",
-          "id": "date-marking",
-          "text": "Date marking",
-          "level": 2
-        },
-        {
-          "blockKey": "lb-h2-09",
-          "id": "e-commerce-your-listing-is-a-regulated-surface",
-          "text": "E-commerce: your listing is a regulated surface",
-          "level": 2
-        },
-        {
-          "blockKey": "lb-h2-10",
-          "id": "registration-under-rule-27",
-          "text": "Registration under Rule 27",
-          "level": 2
-        },
-        {
-          "blockKey": "lb-h2-11",
-          "id": "where-legal-metrology-and-fssai-overlap",
-          "text": "Where Legal Metrology and FSSAI overlap",
-          "level": 2
-        },
-        {
-          "blockKey": "lb-h2-12",
-          "id": "penalties-and-how-enforcement-changed-in-2026",
-          "text": "Penalties, and how enforcement changed in 2026",
-          "level": 2
-        },
-        {
-          "blockKey": "lb-h2-13",
-          "id": "the-pre-print-checklist",
-          "text": "The pre-print checklist",
-          "level": 2
-        },
-        {
-          "blockKey": "lb-h2-14",
-          "id": "why-this-is-cheaper-to-fix-at-artwork-stage",
-          "text": "Why this is cheaper to fix at artwork stage",
+          "blockKey": "ph6",
+          "id": "measurement-closes-the-loop",
+          "text": "Measurement closes the loop",
           "level": 2
         }
       ],
-      "authors": [
-        {
-          "_key": "author-namesh-malarout",
-          "name": "Namesh Malarout",
-          "role": "Director, Dashapatmaja Solutions Pvt Ltd"
-        },
-        {
-          "_key": "author-pawan-shetty",
-          "name": "Pawan Shetty"
-        }
-      ],
-      "mainImage": {
-        "alt": "Pack artwork and packaged commodities being checked with precision measuring tools for declaration sizing.",
-        "asset": {
-          "url": "/insights/legal-metrology-v1-1440.webp",
-          "metadata": {
-            "dimensions": {
-              "width": 1440,
-              "height": 810,
-              "aspectRatio": 1.7777777777777777
-            }
-          }
-        },
-        "responsive": {
-          "640": "/insights/legal-metrology-v1-640.webp",
-          "960": "/insights/legal-metrology-v1-960.webp",
-          "1440": "/insights/legal-metrology-v1-1440.webp"
-        }
-      },
-      "seo": {
-        "metaTitle": "Legal Metrology Rules: What Goes on Your Pack and Where",
-        "metaDescription": "The nine mandatory declarations under the Legal Metrology Packaged Commodities Rules, where each one must sit, the font sizes, and what changed in 2026.",
-        "ogImage": null
-      }
+      "authors": null,
+      "mainImage": null,
+      "seo": null
     }
   ]
 }

@@ -229,7 +229,7 @@ export const blogPost = defineType({
       type: 'array',
       of: [{
         type: 'object',
-        name: 'reference',
+        name: 'referenceItem',
         fields: [
           defineField({
             name: 'text',

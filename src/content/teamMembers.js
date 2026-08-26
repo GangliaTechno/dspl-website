@@ -10,7 +10,7 @@ export const TEAM_MEMBERS = Object.freeze([
     id: 'dasharathraj-k-shetty',
     name: 'Dr. Dasharathraj K Shetty',
     role: 'Mentor',
-    bio: 'Dr. Shetty advises on research, technology and product development, and on the academic and institutional side of building from within a university incubator.',
+    bio: 'Dr. Shetty advises on research, technology and product development, and on the academic and institutional side of building.',
     linkedin: 'https://www.linkedin.com/in/dasharathraj/',
   },
   {
@@ -24,7 +24,7 @@ export const TEAM_MEMBERS = Object.freeze([
     id: 'anusha-pai',
     name: 'Dr. Anusha Pai',
     role: 'Director',
-    bio: 'Dr. Pai works across management, operations and process. She leads how engagements are scoped and measured, and how the same operating discipline is applied to the company\'s own brands.',
+    bio: 'Dr. Pai works across management, operations and marketing. She leads how engagements are scoped and measured, and how the same operating discipline is applied to the company\'s own brands.',
     linkedin: 'https://www.linkedin.com/in/anusha-pai-013b0213/',
   },
   {

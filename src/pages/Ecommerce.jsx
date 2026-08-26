@@ -11,10 +11,7 @@ const offers = [
     title: 'Store setup and build',
     text: 'Shopify, WooCommerce or React-based commerce. Catalogue structure, content architecture, responsive build, and an admin your team can run without a developer for routine changes.',
   },
-  {
-    title: 'Catalogue and product content',
-    text: 'Product data, collection structure, imagery requirements, and content ownership organised for the selected channels.',
-  },
+ 
   {
     title: 'Conversion rate optimisation',
     text: 'Review of discovery, product detail, cart and checkout journeys to find measurable friction, then a prioritised list of changes with a test plan. We fix what the data supports, not what looks dated.',

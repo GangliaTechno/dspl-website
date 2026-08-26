@@ -11,30 +11,27 @@ import { getRouteMetadata } from '../seo/routeMetadata';
 
 const offers = [
   {
-    title: 'Brand positioning and strategy',
-    text: 'Where the brand sits in the market, who it is for, why it exists, and how it differs from alternatives. We write the brand brief that guides every creative and commercial decision.',
+    title: 'Brand identity and visual systems',
+    text: 'Logo, colour, typography, packaging architecture and application rules. You receive working source files, export-ready logo variants, a colour and type specification, and templates for the formats you use most.',
   },
   {
-    title: 'Naming and brand architecture',
-    text: 'Naming criteria, shortlist development, portfolio relationships, and practical checks coordinated with the client and appointed advisers.',
+    title: 'Market positioning',
+    text: 'Audience, category and competitor analysis, resolved into a position you can defend and a set of decisions your team can apply without asking permission each time.',
   },
   {
-    title: 'Visual identity system',
-    text: 'Logo files, colour palette, typography hierarchy, icon style and graphic devices, organised in formats your team, agencies and vendors can use without asking for help.',
+    title: 'Brand story and voice',
+    text: 'A messaging document covering the brand narrative, tone, core messages and worked examples for the contexts you actually write in: product pages, ads, packaging, customer email, sales decks.',
   },
   {
-    title: 'Brand voice and messaging',
-    text: 'Tone of voice rules, boilerplate copy, headline formulas, product descriptions and communication templates for web, social, email and customer support.',
-  },
-  {
-    title: 'Packaging design and production',
-    text: 'Primary packs, cartons, shipping boxes, labels and inserts. We design for the print process you are actually using and coordinate directly with your packaging vendor on proofs.',
+    title: 'Packaging and brand assets',
+    text: 'Print-ready artwork, reusable templates, organised source files and written guidance so internal and partner teams can produce on-brand work without a designer in the loop.',
   },
 ];
 
 const compliance = {
   title: 'Packaging compliance for food and consumer products',
-  intro: 'If you are launching a packaged product in India, the brand on the box is only half the job. The label has to comply with FSSAI regulations, Legal Metrology rules, and marketplace listing standards. We review your label content, coordinate nutritional analysis, and build compliance directly into your artwork files.',
+  intro:
+    'If your pack carries a nutritional panel, an ingredient statement or a net quantity declaration, the design and the regulation are the same problem. We have taken six food SKUs through FSSAI labelling and Legal Metrology packaged commodity requirements, from lab reports through to print-ready artwork.',
   items: [
     {
       title: 'Label content preparation',
@@ -57,7 +54,8 @@ const compliance = {
       text: 'Keeping production artwork and marketplace-facing product information aligned.',
     },
   ],
-  disclaimer: 'Regulated legal opinions stay with qualified advisers; the preparation and the paperwork sit with us.',
+  disclaimer:
+    'Regulated legal opinions stay with qualified advisers; the preparation and the paperwork sit with us.',
 };
 
 const faqs = BRANDING_FAQS;
@@ -89,17 +87,18 @@ const Branding = () => (
     pageTypeClass="branding-page"
     contextLabel="Branding services"
     heroTitle="Branding"
-    heroTagline="Positioning, identity, packaging and voice, built as a working system for Indian businesses."
+    heroTagline="Positioning, identity and packaging that hold up in a print file, on a marketplace thumbnail and in a WhatsApp forward."
     heroImages={heroImages}
-    scopeTitle="A brand system your team can actually apply"
-    scopeText="Most branding projects end with a 90-page PDF that nobody opens after the invoice is paid. We build brand systems that are designed to be applied: logo assets organised by use case, typography with clear digital fallbacks, colour palettes with exact CMYK and HEX values, and packaging dielines ready for your printer. We designed, packaged and launched our own consumer brand, so we know what happens when a label spec is wrong."
-    offersTitle="What we deliver"
-    offersDescription="Every deliverable is prepared as a production file or a written document. No placeholder decks."
+    scopeTitle="A brand system built to be used, not admired"
+    scopeText="Most brand projects end with a PDF nobody opens again. We build the identity alongside the places it has to work: the pack that goes to print, the listing image that gets cropped to a square, the ad copy that a junior writes on a Tuesday. Work starts with your business, audience, category and competition. It ends with a system your team can apply without calling us. We designed and shipped our own consumer brand across six SKUs, so we build for the constraints we already know are coming."
+    offersTitle="What we do"
+    offersDescription="Scope is built around the decisions you need to make, not sold as a fixed package."
     offers={offers}
     compliance={compliance}
     testimonials={approvedTestimonials}
-    faqsTitle="Frequently asked questions about branding"
-    faqsDescription="Clear answers about timelines, deliverables, files, naming and packaging."
+    faqsEyebrow="Questions and Answers"
+    faqsTitle="Branding engagement questions"
+    faqsDescription=""
     faqs={faqs}
   />
 );

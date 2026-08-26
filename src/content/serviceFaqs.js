@@ -1,11 +1,23 @@
 export const BRANDING_FAQS = Object.freeze([
   {
-    q: 'What deliverables are included in a branding project?',
-    a: 'Working source files in the original format, export-ready logo variants, a written specification for colour, type and spacing, packaging artwork in print-ready format with dielines, and a messaging guide with worked examples. Everything is yours; we do not hold source files.',
+    q: 'What does a branding engagement include?',
+    a: 'It depends on what you already have. A full engagement covers positioning, identity, voice and application: research and competitor review, a defined position, logo and visual system, typography and colour rules, packaging or key applications, a messaging guide and organised source files. A narrower engagement might be positioning alone, or packaging alone.',
   },
   {
-    q: 'How long does a branding project take?',
-    a: 'A focused identity project typically takes 4 to 8 weeks. A comprehensive project that includes strategy, packaging design and vendor coordination takes 8 to 12 weeks.',
+    q: 'How long does it take?',
+    a: 'A positioning and identity project typically runs 6 to 10 weeks from kickoff. Packaging across multiple SKUs adds 3 to 6 weeks, more if regulatory clearance and manufacturer revisions are involved. We give a dated schedule at the end of the audit stage, not before.',
+  },
+  {
+    q: 'What does branding cost?',
+    a: 'Identity-only projects from Rs [X]; full positioning, identity and packaging systems from Rs [Y]; multi-SKU packaging priced per SKU from Rs [Z].',
+  },
+  {
+    q: 'Can you work with an existing brand?',
+    a: 'Yes, and most of our work is this. We audit what exists, keep the equity that is working, and fix the parts that break in application. We will tell you if a rebuild is not warranted.',
+  },
+  {
+    q: 'What files do we receive at handover?',
+    a: 'Working source files in the original format, export-ready logo variants, a written specification for colour, type and spacing, packaging artwork in print-ready format with dielines, and a messaging guide with worked examples. Everything is yours; we do not hold source files.',
   },
   {
     q: 'Do you design packaging that is ready for the printer?',
@@ -27,24 +39,16 @@ export const BRANDING_FAQS = Object.freeze([
     q: 'What happens after handover?',
     a: 'Most clients move to a marketing or e-commerce engagement, or take a monthly retainer for ongoing asset production. Neither is required, and the brand system is built to work without us.',
   },
-  {
-    q: 'Can you work with our existing brand guidelines?',
-    a: 'Yes. We frequently work within existing brand systems to design new packaging, collateral, or marketing campaigns while maintaining brand consistency.',
-  },
-  {
-    q: 'What formats do you deliver logo and identity files in?',
-    a: 'We deliver vector files (AI, EPS, SVG, PDF) and raster files (PNG with transparency, high-res JPEG) in full colour, reversed, and monochrome variants for both print and digital use.',
-  },
-  {
-    q: 'How do you handle trademark availability?',
-    a: 'We conduct preliminary trademark searches across relevant classes on the Indian trademark registry before finalising names and logos, and we advise clients to obtain formal legal clearance.',
-  },
 ]);
 
 export const MARKETING_FAQS = Object.freeze([
   {
     q: 'How is scope defined?',
     a: 'After the audit. We review current position, channels, tracking and competition, then propose a mix, a monthly cadence and a set of measures. You approve the scope before work starts.',
+  },
+  {
+    q: 'What does a marketing engagement cost?',
+    a: 'SEO retainers from Rs [X] per month; paid media management from Rs [Y] per month or [Z] per cent of spend, whichever is higher; one-off audits from Rs [A]. Ad spend is separate and paid directly by you to the platform.',
   },
   {
     q: 'How long before SEO shows results?',
@@ -78,16 +82,16 @@ export const MARKETING_FAQS = Object.freeze([
     q: 'What do we need to provide?',
     a: 'Access to your website, ad accounts, analytics and product information, and one person on your side who can approve creative and answer questions within a working day.',
   },
-  {
-    q: 'Who creates the ad creative and copy?',
-    a: 'Our in-house team writes all ad copy, headlines, and descriptions, and designs static and motion creative tailored to each platform.',
-  },
 ]);
 
 export const ECOMMERCE_FAQS = Object.freeze([
   {
     q: 'How do you choose a platform?',
     a: 'By catalogue size, order volume, integration needs and who will run it after launch. Shopify for most D2C brands under a few hundred SKUs, WooCommerce where you need control and already have a WordPress operation, custom React where the catalogue or the experience genuinely demands it.',
+  },
+  {
+    q: 'What does an e-commerce build cost?',
+    a: 'Shopify builds from Rs [X]; WooCommerce from Rs [Y]; custom builds quoted per project; marketplace onboarding per channel from Rs [Z]; monthly operations retainers from Rs [A]. Platform and app subscriptions are separate.',
   },
   {
     q: 'How long does a build take?',
@@ -120,9 +124,5 @@ export const ECOMMERCE_FAQS = Object.freeze([
   {
     q: 'What do we need before we start?',
     a: 'Product information, images or the budget to shoot them, GST and business registration details, a decision on your fulfilment model, and one person on your side who can approve and answer within a working day.',
-  },
-  {
-    q: 'Do you set up payment gateways and COD verification?',
-    a: 'Yes. We integrate Razorpay, Cashfree, PhonePe and other Indian gateways, configure UPI, cards, net banking, and set up COD verification to reduce RTO (return to origin).',
   },
 ]);
