@@ -651,8 +651,9 @@ describe('approved design-system corrections', () => {
     expect(brandsPage).toContain(
       'className="btn btn-primary rr-cta-btn"',
     );
+    expect(brandsPage).toContain('to="/brands/raw-radicles"');
+    expect(brandsPage).toContain('Explore Raw Radicles');
     expect(brandsPage).toContain('to="/contact"');
-    expect(brandsPage).toContain('Contact us about Raw Radicles');
     expect(brandsPage).not.toContain('Raw%20Radicles%20Inquiry');
   });
 
@@ -759,8 +760,9 @@ describe('approved design-system corrections', () => {
     expect(brands).not.toContain('openWorkModal');
     expect(home).not.toContain('openWorkModal');
     expect(servicePage).not.toContain('openWorkModal');
+    expect(brands).toContain('to="/brands/raw-radicles"');
+    expect(brands).toContain('Explore Raw Radicles');
     expect(brands).toContain('to="/contact"');
-    expect(brands).toContain('Contact us about Raw Radicles');
   });
 
   it('keeps four-capability placement scoped during staggered service migration', () => {
