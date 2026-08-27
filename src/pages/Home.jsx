@@ -106,7 +106,7 @@ const Home = () => {
               Dashapatmaja Solutions is a Manipal-based company that develops
               its own consumer brands and delivers branding, marketing,
               e-commerce and product compliance support to businesses across
-              Karnataka and India.
+              India.
             </p>
             <div className="home-hero-actions">
               <Link className="btn btn-primary" to="/start">

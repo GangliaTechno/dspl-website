@@ -114,7 +114,7 @@ describe('About page', () => {
 
     expect(
       screen.getByText(
-        'A Manipal-based company that develops consumer brands and builds the branding, marketing and commerce systems behind them. Incorporated 28 July 2022.',
+        'A Manipal-based company that develops consumer brands and builds the branding, marketing and commerce systems behind them.',
       ),
     ).toBeInTheDocument();
   });
@@ -152,14 +152,6 @@ describe('About page', () => {
     expect(screen.getByText('Managing Director')).toBeInTheDocument();
     expect(screen.getByText(/Two doctors, four doctorates, two mentors and an operating team/i)).toBeInTheDocument();
     expect(screen.queryByText('Dr. Balakrishna S. Maddodi')).not.toBeInTheDocument();
-  });
-
-  it('publishes CIN and registered office at the foot of the About page', () => {
-    renderAbout();
-
-    const registration = screen.getByRole('region', { name: 'Company registration' });
-    expect(within(registration).getByText(new RegExp(COMPANY_FACTS.cin))).toBeInTheDocument();
-    expect(within(registration).getByText(new RegExp(COMPANY_FACTS.registeredOffice.locality))).toBeInTheDocument();
   });
 
   it('adds remote-delivery scope and work DSPL does not take on', () => {

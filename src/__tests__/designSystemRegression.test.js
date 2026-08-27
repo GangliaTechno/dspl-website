@@ -302,16 +302,9 @@ describe('approved design-system corrections', () => {
     expect(contactPage).toContain('className="contact-hero"');
     expect(contactPage).toContain('className="contact-hero-picture"');
     expect(contactPage).toContain('className="contact-hero-image"');
-    expect(contactPage).toContain('className="section contact-information-section"');
-    expect(contactPage).toContain('className="contact-info-grid"');
-    expect(contactPage.match(/className="contact-info-card"/g)).toHaveLength(3);
     expect(contactPage).toContain('className="section contact-enquiry-section"');
     expect(contactPage).toContain('className="contact-enquiry-header"');
     expect(contactPage).toContain('>General enquiry</h2>');
-    expect(contactPage).toContain('>Contact details</h2>');
-    expect(contactPage).toContain('>Office</span>');
-    expect(contactPage).toContain('>New enquiries</span>');
-    expect(contactPage).toContain('>Existing projects</span>');
     expect(contactPage).toContain('Message received');
     expect(contactPage).toContain('FORM_SUBMISSION_ERROR');
     expect(contactPage).toContain('<span className="section-subtitle">Contact</span>');
@@ -332,10 +325,6 @@ describe('approved design-system corrections', () => {
     expect(contactCss).toMatch(/\.contact-hero-picture\s*{[^}]*position:\s*absolute;[^}]*inset:\s*0;/s);
     expect(contactCss).toMatch(/\.contact-hero::after\s*{[^}]*background:\s*rgba\(0,\s*0,\s*0,\s*0\.56\);/s);
     expect(contactCss).toMatch(/\.contact-title\s*{[^}]*color:\s*var\(--accent\);/s);
-    expect(contactCss).toMatch(/\.contact-information-section\s*{[^}]*padding:\s*5rem 0;/s);
-    expect(contactCss).toMatch(/\.contact-info-grid\s*{[^}]*grid-template-columns:\s*repeat\(3,\s*minmax\(0,\s*1fr\)\);[^}]*gap:\s*0;/s);
-    expect(contactCss).toMatch(/\.contact-info-card\s*{[^}]*min-height:\s*14rem;[^}]*padding:\s*2\.5rem 2rem;[^}]*border:\s*0;[^}]*background:\s*transparent;[^}]*box-shadow:\s*none;/s);
-    expect(contactCss).toMatch(/\.contact-info-summary\s*{[^}]*font-size:\s*clamp\(1\.25rem,\s*1\.8vw,\s*1\.5rem\);[^}]*font-weight:\s*800;/s);
     expect(contactCss).toMatch(/\.contact-enquiry-section\s*{[^}]*padding:\s*6rem 0;/s);
     expect(contactCss).toMatch(/\.contact-enquiry-layout\s*{[^}]*max-width:\s*800px;/s);
     expect(contactCss).toMatch(
@@ -344,7 +333,6 @@ describe('approved design-system corrections', () => {
     expect(contactCss).toMatch(/\.contact-form-panel textarea\.form-input\s*{[^}]*min-height:\s*9rem;/s);
     expect(contactCss).not.toMatch(/max-height:\s*760px/);
     expect(contactCss).not.toContain('.contact-main-section');
-    expect(contactCss).toMatch(/@media\s*\(max-width:\s*900px\)\s*{[\s\S]*?\.contact-info-grid\s*{[^}]*grid-template-columns:\s*1fr;/s);
   });
 
   it('keeps interior hero copy to one supporting line with deliberate spacing', () => {

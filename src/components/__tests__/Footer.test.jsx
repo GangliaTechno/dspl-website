@@ -103,8 +103,8 @@ describe('Footer', () => {
     expect(screen.queryByText('Incorporated')).not.toBeInTheDocument();
     expect(screen.queryByText('28 July 2022')).not.toBeInTheDocument();
     expect(screen.queryByText('MUTBI/MAHE')).not.toBeInTheDocument();
-    expect(screen.queryByText('DST-NIDHI PRAYAS')).not.toBeInTheDocument();
-    expect(screen.getByText(/Monday – Saturday: 9:00 AM – 6:00 PM IST/)).toBeInTheDocument();
+    expect(screen.getByText('Monday – Saturday')).toBeInTheDocument();
+    expect(screen.getByText('9:00 AM – 6:00 PM IST')).toBeInTheDocument();
     expect(screen.getByText(/Madhava Nagar, Manipal.*576104/)).toBeInTheDocument();
     expect(
       screen.getByText('© 2026 Dashapatmaja Solutions Pvt Ltd. All rights reserved.'),

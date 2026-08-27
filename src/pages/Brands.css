@@ -17,6 +17,10 @@
   padding: 4rem 0;
 }
 
+.brands-showcase-section .container {
+  max-width: min(98vw, 1560px);
+}
+
 .brands-ownership-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(20rem, 0.95fr);
@@ -143,7 +147,8 @@
   display: flex;
   flex-direction: column;
   gap: 4rem;
-  max-width: 1000px;
+  width: 100%;
+  max-width: 100%;
   margin: 0 auto;
 }
 
@@ -151,7 +156,7 @@
 .raw-radicles-card {
   background: var(--card-bg);
   border: 1px solid var(--border-color);
-  border-radius: 12px;
+  border-radius: clamp(8px, 2vw, 12px);
   overflow: hidden;
   padding: 0;
   position: relative;
@@ -159,13 +164,13 @@
 
 .brand-content-grid {
   display: grid;
-  grid-template-columns: 46% 54%;
+  grid-template-columns: 60% 40%;
   gap: 0;
   align-items: stretch;
 }
 
 .brand-info-side {
-  padding: 3rem 2.5rem;
+  padding: clamp(2.5rem, 4vw, 3.5rem) clamp(2rem, 3.5vw, 3rem);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -176,21 +181,25 @@
   align-items: center;
   gap: 0.5rem;
   color: var(--accent-text);
-  font-size: 0.7rem;
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   margin-bottom: 1.25rem;
 }
 
 .brand-showcase-name {
-  font-size: 2.75rem;
+  font-size: clamp(2.15rem, 3.5vw, 2.75rem);
   font-weight: 800;
   color: var(--text-heading);
   margin-bottom: 0.5rem;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
 }
 
 .brand-showcase-tagline {
-  font-size: 1.2rem;
+  font-size: clamp(1.1rem, 2vw, 1.25rem);
   font-weight: 600;
   color: var(--accent-text);
   margin-bottom: 2rem;
@@ -204,19 +213,21 @@
 }
 
 .brand-body-paragraphs p {
-  font-size: 1.05rem;
+  font-size: clamp(0.95rem, 1.5vw, 1.05rem);
   line-height: 1.65;
   color: var(--text-secondary);
   margin: 0;
 }
 
 .rr-contribution-line {
-  font-size: 0.65rem;
+  font-family: var(--font-heading);
+  font-size: clamp(0.65rem, 1.2vw, 0.7rem);
   font-weight: 700;
   letter-spacing: 0.12em;
   color: var(--accent-text);
   margin-bottom: 2.5rem;
   text-transform: uppercase;
+  line-height: 1.5;
 }
 
 .rr-proof-grid {
@@ -233,9 +244,11 @@
 
 .proof-label {
   display: block;
-  font-size: 0.65rem;
+  font-family: var(--font-heading);
+  font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: var(--accent-text);
   margin-bottom: 0.25rem;
 }
@@ -269,17 +282,15 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  padding: 2rem;
+  padding: 2.5rem 2rem;
   border-left: 1px solid var(--border-color);
 }
-
-
 
 .brand-showcase-logo-wrapper {
   position: relative;
   z-index: 3;
   width: 100%;
-  max-width: 460px;
+  max-width: clamp(240px, 32vw, 440px);
 }
 
 .brand-showcase-logo-img {
@@ -313,14 +324,14 @@
   }
 
   .rr-visual-panel {
-    padding: 2.5rem;
-    min-height: 300px;
+    padding: clamp(2rem, 6vw, 3.5rem);
+    min-height: 240px;
     border-top: 1px solid var(--border-color);
     border-left: 0;
   }
 
   .brand-info-side {
-    padding: clamp(2rem, 5vw, 4rem);
+    padding: clamp(1.75rem, 5vw, 2.75rem) clamp(1.25rem, 4vw, 2.25rem);
   }
 
   .brands-ownership-grid {
@@ -337,15 +348,16 @@
   .brands-title {
     font-size: 2.25rem;
   }
-
-  .brand-showcase-name {
-    font-size: 2rem;
-  }
 }
 
 @media (max-width: 600px) {
   .rr-proof-grid {
     grid-template-columns: 1fr;
     gap: 1rem;
+  }
+
+  .rr-cta-btn {
+    width: 100%;
+    justify-content: center;
   }
 }

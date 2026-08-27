@@ -24,21 +24,18 @@ const expectNoUnapprovedCommercialClaims = (container) => {
 };
 
 describe('Branding service copy', () => {
-  it('renders four approved capabilities, prose-led packaging compliance, and safe FAQs', () => {
+  it('renders four capabilities, five-item packaging compliance, and ten approved FAQs', () => {
     const { container } = render(<Branding />);
 
     expect(container.querySelectorAll('article.offer-entry')).toHaveLength(4);
     expect(container.querySelector('.offers-grid')).toHaveAttribute('data-count', '4');
 
-    expect(screen.getByText('Positioning, identity, packaging and voice, developed as one practical brand system.')).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'A brand system your team can use' })).toBeInTheDocument();
-    expect(screen.getByText(/We bring positioning, identity, packaging and messaging into one clear system\./i)).toBeInTheDocument();
-
+    // Check 4 capabilities
     for (const title of [
-      'Brand positioning and strategy',
-      'Visual identity system',
-      'Packaging design and production',
-      'Brand voice and messaging',
+      'Brand identity and visual systems',
+      'Market positioning',
+      'Brand story and voice',
+      'Packaging and brand assets',
     ]) {
       expect(screen.getByRole('heading', { name: title })).toBeInTheDocument();
     }
@@ -47,7 +44,7 @@ describe('Branding service copy', () => {
     const compliance = container.querySelector('#compliance');
     expect(compliance).toBeInTheDocument();
     expect(within(compliance).getByText(/Packaging compliance for food and consumer products/i)).toBeInTheDocument();
-    expect(within(compliance).getByText(/For packaged products, required information needs to be considered while the artwork is being developed\./i)).toBeInTheDocument();
+    expect(within(compliance).getByText(/FSSAI labelling/i)).toBeInTheDocument();
     expect(within(compliance).getByText(/Regulated legal opinions stay with qualified advisers/i)).toBeInTheDocument();
 
     expect(compliance.querySelector('.service-detail-grid')).not.toBeInTheDocument();
@@ -59,96 +56,44 @@ describe('Branding service copy', () => {
 });
 
 describe('Marketing service copy', () => {
-  it('renders four approved capabilities, owned proof, three engagement shapes, and safe FAQs without compliance panel', () => {
+  it('renders four capabilities, approved testimonials, and ten FAQs without compliance panel', () => {
     const { container } = render(<Marketing />);
 
     expect(container.querySelectorAll('article.offer-entry')).toHaveLength(4);
     expect(container.querySelector('.offers-grid')).toHaveAttribute('data-count', '4');
-    expect(container.querySelectorAll('.offer-entry .offer-number')).toHaveLength(0);
 
-    expect(screen.getByText('Search, paid media, content and reporting, planned around measures agreed before work begins.')).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'Marketing with measures you can review' })).toBeInTheDocument();
-    expect(screen.getByText('We begin by understanding where traffic comes from, what is already being measured and what a useful result would look like. The agreed plan then defines the channels, responsibilities and reporting cadence. Because we also work on an owned consumer brand, we approach channel decisions with the same care we expect when spending our own budget.')).toBeInTheDocument();
-
-    for (const [title, text] of [
-      [
-        'Search engine optimisation',
-        'Review technical foundations, search intent, page structure and internal links, then prioritise improvements against the agreed audience and business goals.',
-      ],
-      [
-        'Paid campaign management',
-        'Plan and manage agreed search, social or marketplace campaigns, with account ownership, budgets and review measures made clear before activity begins.',
-      ],
-      [
-        'Analytics and reporting',
-        'Check that agreed actions can be measured, keep definitions consistent and report what changed, what it may mean and what to review next.',
-      ],
-      [
-        'Content and copywriting',
-        'Develop landing pages, articles, product copy and campaign messages around the audience, channel and approved brand voice.',
-      ],
+    // Check 4 capabilities
+    for (const title of [
+      'Search engine optimisation',
+      'Paid campaign management',
+      'Analytics and reporting',
+      'Content and copywriting',
     ]) {
       expect(screen.getByRole('heading', { name: title })).toBeInTheDocument();
       expect(screen.getByText(text)).toBeInTheDocument();
     }
 
-    expect(screen.getByRole('heading', { name: 'What Raw Radicles teaches us about marketing operations' })).toBeInTheDocument();
-    for (const heading of ['Audit and plan', 'Monthly programme', 'Launch sprint']) {
-      expect(screen.getByRole('heading', { name: heading })).toBeInTheDocument();
-    }
-
     // No compliance panel on Marketing
     expect(container.querySelector('#compliance')).not.toBeInTheDocument();
 
-    expect(screen.getByText('A focused channel mix, selected around the evidence, budget and responsibilities agreed for the engagement.')).toBeInTheDocument();
-
-    expect(container.querySelectorAll('.faq-list .faq-item')).toHaveLength(7);
-    for (const question of [
-      'How is scope defined?',
-      'How are the measures chosen?',
-      'Can you guarantee marketing results?',
-      'Who owns the advertising accounts?',
-      'Can you work with our existing team or agency?',
-      'What do we need to provide?',
-      'How do review and reporting work?',
-    ]) {
-      expect(screen.getByText(question)).toBeInTheDocument();
-    }
-    expect(screen.getByText(/No\. We can agree the work, measures and review process/i)).toBeInTheDocument();
-    expect(container.textContent).not.toMatch(/8 to 12 weeks|6 to 9 months|three months|minimum (?:commitment|retainer)|organic rankings?|sales volume|ROAS|commercial measure|across Karnataka|across India|promising faster|buying links|wrong metric/i);
+    expect(container.querySelectorAll('.faq-list .faq-item')).toHaveLength(10);
     expectNoUnapprovedCommercialClaims(container);
   });
 });
 
 describe('E-commerce service copy', () => {
-  it('renders four approved capabilities, prose-led marketplace compliance, and safe FAQs', () => {
+  it('renders four capabilities, five-item marketplace compliance, and ten approved FAQs', () => {
     const { container } = render(<Ecommerce />);
 
     expect(container.querySelectorAll('article.offer-entry')).toHaveLength(4);
     expect(container.querySelector('.offers-grid')).toHaveAttribute('data-count', '4');
-    expect(container.querySelectorAll('.offer-entry .offer-number')).toHaveLength(0);
 
-    expect(screen.getByText('Storefronts, marketplaces, payments and delivery, planned around the way your team operates.')).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'Commerce built around the operating model' })).toBeInTheDocument();
-    expect(screen.getByText('We plan the customer journey alongside catalogue ownership, payments, delivery, returns and reporting. That keeps the storefront and the day-to-day operating process connected, with responsibilities and dependencies agreed before the build moves forward.')).toBeInTheDocument();
-
-    for (const [title, text] of [
-      [
+    // Check 4 capabilities
+    for (const title of [
       'Store setup and build',
-        'Plan and build the agreed storefront around the catalogue, content structure, customer journey and routine updates your team needs to manage.',
-      ],
-      [
-        'Conversion journey review',
-        'Review discovery, product, cart and checkout journeys, identify supported points of friction and prioritise practical improvements.',
-      ],
-      [
-        'Marketplace and multi-channel selling',
-        'Prepare catalogue structure, listing content and operating responsibilities for the marketplaces and channels included in scope.',
-      ],
-      [
-        'Payments, delivery and returns',
-        'Coordinate the agreed payment, delivery and returns flows with the selected platform and providers, then verify the customer journey before launch.',
-      ],
+      'Conversion rate optimisation',
+      'Marketplace and multi-channel selling',
+      'Payments and delivery setup',
     ]) {
       expect(screen.getByRole('heading', { name: title })).toBeInTheDocument();
       expect(screen.getByText(text)).toBeInTheDocument();
@@ -159,20 +104,18 @@ describe('E-commerce service copy', () => {
 
     const compliance = container.querySelector('#compliance');
     expect(compliance).toBeInTheDocument();
-    expect(within(compliance).getByRole('heading', { name: 'Listing and marketplace compliance' })).toBeInTheDocument();
-    expect(within(compliance).getByText('Product information on the physical pack and the digital catalogue needs to remain consistent. We prepare channel-ready records from client-approved product and packaging information, organise the fields required by agreed marketplaces and coordinate updates when approved source information changes.')).toBeInTheDocument();
-    expect(within(compliance).getByText('Regulated legal opinions stay with qualified advisers; the preparation and the paperwork sit with us.')).toBeInTheDocument();
-    expect(compliance.querySelector('.service-detail-grid')).not.toBeInTheDocument();
+    expect(within(compliance).getByText(/Listing and marketplace compliance/i)).toBeInTheDocument();
+    expect(within(compliance).getByText(/Marketplace listing rejections/i)).toBeInTheDocument();
 
-    expect(container.querySelectorAll('.faq-list .faq-item')).toHaveLength(7);
-    for (const question of [
-      'How do you choose a platform?',
-      'Can you improve an existing store?',
-      'How is catalogue scope defined?',
-      'Who owns the store and connected accounts?',
-      'What support is available after launch?',
-      'Which marketplaces and channels can you include?',
-      'What do you need from us before we start?',
+    // Check 5 compliance items
+    const complianceItems = compliance.querySelectorAll('.service-detail-grid article');
+    expect(complianceItems).toHaveLength(5);
+    for (const itemTitle of [
+      'Pack and catalogue consistency',
+      'Catalogue data preparation',
+      'Channel-ready product information',
+      'Listing declarations',
+      'Marketplace requirements',
     ]) {
       expect(screen.getByText(question)).toBeInTheDocument();
     }

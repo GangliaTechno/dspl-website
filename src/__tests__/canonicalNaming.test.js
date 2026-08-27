@@ -22,11 +22,11 @@ const intentionalNonProductText = new Set([
 const approvedRootCompanyCopy = new Map([
   [
     'src/pages/Home.jsx',
-    /Dashapatmaja Solutions is a Manipal-based company that develops\s+its own consumer brands and delivers branding, marketing,\s+e-commerce and product compliance support to businesses across\s+Karnataka and India\./s,
+    /Dashapatmaja Solutions is a Manipal-based company that develops\s+its own consumer brands and delivers branding, marketing,\s+e-commerce and product compliance support to businesses across\s+(?:Karnataka and )?India\./s,
   ],
   [
     'src/pages/__tests__/Home.test.jsx',
-    /Dashapatmaja Solutions is a Manipal-based company that develops its own consumer brands and delivers branding, marketing, e-commerce and product compliance support to businesses across Karnataka and India\./,
+    /Dashapatmaja Solutions is a Manipal-based company that develops its own consumer brands and delivers branding, marketing, e-commerce and product compliance support to businesses across (?:Karnataka and )?India\./,
   ],
   [
     'src/pages/Brands.jsx',
@@ -112,7 +112,7 @@ describe('canonical naming', () => {
     expect(COMPANY_FACTS.contacts.secondaryPhone).toBe('+91 90725 56665');
     expect(COMPANY_FACTS.contacts.directorEmail).toBe('director@dashapatmaja.in');
     expect(COMPANY_FACTS.contacts.projectEmail).toBe('dsplmanipal@gmail.com');
-    expect(COMPANY_FACTS.registeredOffice.fullAddress).toContain('Manipal, Karnataka 576104');
+    expect(COMPANY_FACTS.registeredOffice.fullAddress).toContain('Manipal, Karnataka, India 576104');
     expect('Dr. Shreepathy Rangabhatta B').not.toContain(' Ranga Bhatta');
     expect('Dr. Anusha Pai').toMatch(/^Dr\./);
   });
@@ -141,7 +141,6 @@ describe('canonical naming', () => {
       'src/components/Footer.jsx',
       'src/pages/About.jsx',
       'src/pages/RawRadicles.jsx',
-      'src/pages/Contact.jsx',
       'src/pages/PrivacyPolicy.jsx',
       'src/pages/TermsOfUse.jsx',
       'src/seo/structuredData.js',

@@ -225,7 +225,7 @@ const About = () => {
           imageClassName="about-hero-bg-img"
           mobileBreakpoint={767}
         />
-        <motion.div 
+        <motion.div
           className="container"
           initial={revealInitial(30)}
           animate={{ opacity: 1, y: 0 }}
@@ -234,7 +234,7 @@ const About = () => {
           <span className="section-subtitle">Our Corporate Profile</span>
           <h1 className="about-title">About Dashapatmaja Solutions Pvt Ltd</h1>
           <p className="about-subtitle">
-            A Manipal-based company that develops consumer brands and builds the branding, marketing and commerce systems behind them. Incorporated 28 July 2022.
+            A Manipal-based company that develops consumer brands and builds the branding, marketing and commerce systems behind them.
           </p>
         </motion.div>
       </section>
@@ -375,7 +375,7 @@ const About = () => {
 
           <div className="team-grid">
             {team.map((member, idx) => (
-              <motion.div 
+              <motion.div
                 key={member.name}
                 initial={revealInitial(20)}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -441,13 +441,6 @@ const About = () => {
               </motion.div>
             ))}
           </div>
-        </div>
-      </section>
-
-      <section className="about-legal-section" aria-label="Company registration">
-        <div className="container about-legal-line">
-          <span><strong>CIN</strong> {COMPANY_FACTS.cin}</span>
-          <span><strong>Registered office</strong> {COMPANY_FACTS.registeredOffice.fullAddress}</span>
         </div>
       </section>
 

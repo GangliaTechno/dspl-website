@@ -20,7 +20,7 @@ export const COMPANY_FACTS = Object.freeze({
     postalCode: '576104',
     country: 'India',
     countryCode: 'IN',
-    fullAddress: '#12, 4th Floor, MUTBI, Advanced Research Center, Madhava Nagar, Manipal, Karnataka 576104',
+    fullAddress: '#12, 4th Floor, MUTBI, Advanced Research Center, Madhava Nagar, Manipal, Karnataka, India 576104',
   }),
   incubation: Object.freeze({
     incubator: 'Manipal Universal Technology Business Incubator (MUTBI)',
@@ -35,6 +35,8 @@ export const COMPANY_FACTS = Object.freeze({
     directorEmail: 'director@dashapatmaja.in',
     projectEmail: 'dsplmanipal@gmail.com',
     operatingHours: 'Monday – Saturday: 9:00 AM – 6:00 PM IST',
+    operatingDays: 'Monday – Saturday',
+    operatingTime: '9:00 AM – 6:00 PM IST',
   }),
   socials: Object.freeze({
     linkedin: 'https://www.linkedin.com/company/dashapatmaja-solutions-private-limited/',

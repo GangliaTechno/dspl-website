@@ -7,10 +7,8 @@ import {
   CheckCircle2,
   Send,
 } from 'lucide-react';
-import PhoneObfuscated from '../components/PhoneObfuscated';
 import useSEO from '../hooks/useSEO';
 import { getRouteMetadata } from '../seo/routeMetadata';
-import { COMPANY_FACTS } from '../content/companyFacts';
 import { FORM_SUBMISSION_ERROR } from '../utils/formMessages';
 import { trackEvent } from '../utils/analytics';
 import contactHero960 from '../assets/contact-hero-960.webp';
@@ -146,58 +144,12 @@ const Contact = () => {
           </p>
           <div className="contact-planner-callout">
             <p className="contact-planner-prompt">For a project you want scoped:</p>
-            <Link to="/start" className="contact-planner-link">
-              Project planner <ArrowRight size={15} aria-hidden="true" />
+            <Link to="/start" className="btn btn-primary contact-planner-btn">
+              Project planner <ArrowRight size={16} aria-hidden="true" />
             </Link>
             <p className="contact-planner-subtext">
               It takes about five minutes and gets you a better first conversation.
             </p>
-          </div>
-        </div>
-      </section>
-
-      <section className="section contact-information-section" aria-labelledby="contact-details-title">
-        <div className="container">
-          <h2 id="contact-details-title" className="sr-only">Contact details</h2>
-          <div className="contact-info-grid">
-            <article className="contact-info-card">
-              <span className="contact-info-eyebrow">Office</span>
-              <h3 className="contact-info-summary">Manipal office</h3>
-              <p>{COMPANY_FACTS.registeredOffice.fullAddress}</p>
-              <p>{COMPANY_FACTS.contacts.operatingHours}</p>
-            </article>
-
-            <article className="contact-info-card">
-              <span className="contact-info-eyebrow">New enquiries</span>
-              <h3 className="contact-info-summary">Start a conversation</h3>
-              <p>For new business, partnerships, and general questions.</p>
-              <p><PhoneObfuscated number={COMPANY_FACTS.contacts.primaryPhone} /></p>
-              <p>
-                <a
-                  href={`mailto:${COMPANY_FACTS.contacts.directorEmail}`}
-                  data-umami-event="contact_method_select"
-                  data-umami-event-method="email"
-                >
-                  {COMPANY_FACTS.contacts.directorEmail}
-                </a>
-              </p>
-            </article>
-
-            <article className="contact-info-card">
-              <span className="contact-info-eyebrow">Existing projects</span>
-              <h3 className="contact-info-summary">Project coordination</h3>
-              <p>For reviews, delivery questions, and active workstreams.</p>
-              <p><PhoneObfuscated number={COMPANY_FACTS.contacts.secondaryPhone} /></p>
-              <p>
-                <a
-                  href={`mailto:${COMPANY_FACTS.contacts.projectEmail}`}
-                  data-umami-event="contact_method_select"
-                  data-umami-event-method="email"
-                >
-                  {COMPANY_FACTS.contacts.projectEmail}
-                </a>
-              </p>
-            </article>
           </div>
         </div>
       </section>

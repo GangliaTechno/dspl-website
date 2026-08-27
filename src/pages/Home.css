@@ -359,7 +359,7 @@
 
 .compliance-support-strip p,
 .compliance-support-text {
-  max-width: 42rem;
+  max-width: 64rem;
   margin: 0 auto;
   color: var(--text-secondary);
   font-size: 0.95rem;

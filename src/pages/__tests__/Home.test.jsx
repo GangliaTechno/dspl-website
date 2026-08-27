@@ -29,7 +29,7 @@ describe('Home page', () => {
     ).toHaveAttribute('href', '/brands/raw-radicles');
     expect(
       screen.getByText(
-        'Dashapatmaja Solutions is a Manipal-based company that develops its own consumer brands and delivers branding, marketing, e-commerce and product compliance support to businesses across Karnataka and India.',
+        'Dashapatmaja Solutions is a Manipal-based company that develops its own consumer brands and delivers branding, marketing, e-commerce and product compliance support to businesses across India.',
       ),
     ).toBeInTheDocument();
   });

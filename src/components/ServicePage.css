@@ -74,7 +74,7 @@
 }
 
 .domain-subtitle {
-  max-width: 38ch;
+  max-width: 60ch;
   margin: 0 auto 3rem;
   color: #ffffff;
   font-size: clamp(1.25rem, 2.1vw, 1.6rem);
@@ -147,6 +147,27 @@
   border-right: 0;
 }
 
+.offers-section .container {
+  max-width: min(98vw, 1560px);
+}
+
+/* Desktop 4-item 4x1 layout */
+.offers-grid--editorial[data-count="4"] {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  width: 100%;
+  max-width: 100%;
+}
+
+.offers-grid--editorial[data-count="4"] > .offer-entry {
+  grid-column: span 1;
+  padding: 2.25rem clamp(1.5rem, 2.5vw, 2.5rem);
+  border-right: 1px solid var(--border-color);
+}
+
+.offers-grid--editorial[data-count="4"] > .offer-entry:last-child {
+  border-right: 0;
+}
+
 /* Desktop 5-item balanced 3+2 layout */
 .offers-grid--editorial[data-count="5"] > :nth-child(1),
 .offers-grid--editorial[data-count="5"] > :nth-child(2),
@@ -206,6 +227,17 @@
 
 #compliance {
   scroll-margin-top: 6rem;
+}
+
+.service-detail-section .section-header {
+  max-width: min(96vw, 1200px);
+}
+
+.service-detail-section .section-title-description {
+  max-width: min(94vw, 72rem);
+  margin-inline: auto;
+  font-size: clamp(1rem, 1.2vw, 1.05rem);
+  line-height: 1.65;
 }
 
 .service-detail-grid {
@@ -326,6 +358,11 @@
     width: auto;
   }
 
+  .offers-grid--editorial[data-count="4"] > .offer-entry {
+    grid-column: auto;
+    width: auto;
+  }
+
   .offers-grid--editorial .offer-entry:nth-child(odd) {
     border-right: 1px solid var(--border-color);
   }
@@ -334,6 +371,15 @@
     border-right: 0;
   }
 
+  .offers-grid--editorial[data-count="4"] > .offer-entry:nth-child(odd) {
+    border-right: 1px solid var(--border-color);
+  }
+
+  .offers-grid--editorial[data-count="4"] > .offer-entry:nth-child(even) {
+    border-right: 0;
+  }
+
+  /* 5-item layout: item 5 occupies full width with max-width content */
   .offers-grid--editorial[data-count="5"] > :last-child {
     grid-column: 1 / -1;
     width: 100%;
@@ -420,6 +466,13 @@
 
   .offers-grid--editorial[data-count="4"] .offer-entry:nth-child(odd),
   .offers-grid--editorial[data-count="4"] .offer-entry:nth-child(even) {
+    border-right: 0;
+  }
+
+  .offers-grid--editorial[data-count="4"] > .offer-entry {
+    grid-column: 1 / -1;
+    width: 100%;
+    min-width: 0;
     border-right: 0;
   }
 

@@ -150,7 +150,10 @@ const Footer = () => {
               <div className="footer-contact-group">
                 <span className="footer-contact-label">Hours</span>
                 <span className="contact-item">
-                  {COMPANY_FACTS.contacts.operatingHours}
+                  {COMPANY_FACTS.contacts.operatingDays}
+                </span>
+                <span className="contact-item">
+                  {COMPANY_FACTS.contacts.operatingTime}
                 </span>
               </div>
             </div>
